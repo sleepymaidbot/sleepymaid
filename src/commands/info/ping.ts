@@ -1,9 +1,9 @@
 import { CommandInteraction } from 'discord.js';
 import { Message } from 'discord.js';
 import { MessageEmbed } from 'discord.js';
-import { Command } from 'discord-akairo';
+import { BotCommand } from '../../lib/extensions/BotCommand';
 
-export default class PingCommand extends Command {
+export default class PingCommand extends BotCommand {
 	constructor() {
 		super('ping', {
 			aliases: ['ping'],
