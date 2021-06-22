@@ -1,5 +1,3 @@
 import { BotClient } from './lib/extensions/BotClient';
-import * as config from './config/options';
-
-const client = new BotClient(config);
+const client = new BotClient();
 client.start();

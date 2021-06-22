@@ -6,15 +6,10 @@ import {
 } from 'discord-akairo';
 import { Intents } from 'discord.js';
 import { join } from 'path';
-
-export interface BotConfig {
-	token: string;
-}
-
+import * as config from '../../config/options';
 export class BotClient extends AkairoClient {
-	public config: BotConfig;
 	public commandHandler: CommandHandler = new CommandHandler(this, {
-		prefix: '-',
+		prefix: config.prefix,
 		commandUtil: true,
 		handleEdits: true,
 		directory: join(__dirname, '..', '..', 'commands'),
@@ -28,7 +23,9 @@ export class BotClient extends AkairoClient {
 	public inhibitorHandler: InhibitorHandler = new InhibitorHandler(this, {
 		directory: join(__dirname, '..', '..', 'inhibitors')
 	});
-	public constructor(config: BotConfig) {
+	
+	public constructor() {
+		
 		super(
 			{
 				ownerID: ['324281236728053760'],
@@ -41,7 +38,6 @@ export class BotClient extends AkairoClient {
 				intents: Intents.NON_PRIVILEGED
 			}
 		);
-		this.config = config;
 	}
 	private async _init(): Promise<void> {
 		this.commandHandler.useListenerHandler(this.listenerHandler);
@@ -70,6 +66,6 @@ export class BotClient extends AkairoClient {
 	public async start(): Promise<string> {
 		await this._init();
 
-		return this.login(this.config.token);
+		return this.login(config.token);
 	}
 }

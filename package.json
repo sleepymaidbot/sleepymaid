@@ -1,5 +1,5 @@
 {
-	"name": "akairo-template",
+	"name": "robot-antoine",
 	"version": "1.0.0",
 	"description": "",
 	"main": "dist/index.js",
@@ -10,7 +10,7 @@
 		"format": "yarn prettier --write .",
 		"start": "yarn build && node --trace-warnings -r source-map-support/register dist/index.js"
 	},
-	"author": "Tyman",
+	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
 		"@types/node": "^15.12.2",
@@ -26,8 +26,9 @@
 		"typescript": "^4.3.3"
 	},
 	"dependencies": {
-		"discord-akairo": "SkyblockDev/discord-akairo#59db80742b2bba62cdcfa5505b4522a7134e8e04",
-		"discord.js": "discordjs/discord.js#f7643f7bbe64003ad8b221006190dd15529651e9"
+		"@discordjs/voice": "^0.5.0",
+		"discord-akairo": "SkyBlockDev/discord-akairo",
+		"discord.js": "13.0.0-dev.c850ae10270076c4b2e10b130dd8f88eed4ed201"
 	},
 	"prettier": {
 		"useTabs": true,
