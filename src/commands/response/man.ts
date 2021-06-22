@@ -7,7 +7,6 @@ export default class manCommand extends BotCommand {
 		super('man', {
 			aliases: ['man'],
 			category: 'response',
-			slash: true,
 			description: {
 				content: 'man',
 				usage: 'man',
