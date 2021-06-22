@@ -161,3 +161,4 @@ temp/
 
 src/config/*
 !src/config/example-*
+!src/config/blacklist.ts
