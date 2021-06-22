@@ -1,6 +1,5 @@
 import { CommandInteraction } from 'discord.js';
-import { Message } from 'discord.js';
-import { MessageEmbed } from 'discord.js';
+import { Message, MessageEmbed  } from 'discord.js';
 import { BotCommand } from '../../lib/extensions/BotCommand';
 
 export default class PingCommand extends BotCommand {
@@ -27,7 +26,7 @@ export default class PingCommand extends BotCommand {
 		const apiLatency = `\`\`\`\n ${Math.round(
 			message.client.ws.ping
 		)}ms \`\`\``;
-		const embed = new MessageEmbed()
+		const pingEmbed = new MessageEmbed()
 			.setTitle('Pong!  🏓')
 			.addField('Bot Latency', botLatency, true)
 			.addField('API Latency', apiLatency, true)
@@ -36,10 +35,7 @@ export default class PingCommand extends BotCommand {
 				message.author.displayAvatarURL({ dynamic: true })
 			)
 			.setTimestamp();
-		await sentMessage.edit({
-			content: null,
-			embed
-		});
+		await sentMessage.edit({	content: null, embeds: [pingEmbed] });
 	}
 
 	public async execSlash(message: CommandInteraction): Promise<void> {

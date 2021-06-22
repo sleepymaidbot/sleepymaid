@@ -12,6 +12,7 @@
 			"DOM"
 		],
 		"sourceMap": false,
+		"skipLibCheck": true,
 		"inlineSourceMap": true,
 		"inlineSources": true,
 		"incremental": true,

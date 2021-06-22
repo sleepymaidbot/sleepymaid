@@ -1,12 +1,13 @@
 import { Message } from 'discord.js';
-import { Command } from 'discord-akairo';
+import { BotCommand } from '../../lib/extensions/BotCommand';
 import { CommandInteraction } from 'discord.js';
 
-export default class manCommand extends Command {
+export default class manCommand extends BotCommand {
 	constructor() {
 		super('man', {
 			aliases: ['man'],
 			category: 'response',
+			slash: true,
 			description: {
 				content: 'man',
 				usage: 'man',
@@ -16,7 +17,7 @@ export default class manCommand extends Command {
 	}
 
 	public async exec(message: Message): Promise<void> {
-		message.util.send({
+		message.channel.send({
 			files: [
 				'https://cdn.discordapp.com/attachments/436249478521946191/853683744568115220/20210425_110059.png'
 			]
@@ -28,6 +29,6 @@ export default class manCommand extends Command {
 			files: [
 				'https://cdn.discordapp.com/attachments/436249478521946191/853683744568115220/20210425_110059.png'
 			]
-		});
+		})
 	}
 }

@@ -17,5 +17,6 @@ export default class genshinCommand extends Command {
 
 	public async exec(message: Message): Promise<void> {
 		message.util.send('<@&851958560413319179>');
+		message.delete();
 	}
 }
