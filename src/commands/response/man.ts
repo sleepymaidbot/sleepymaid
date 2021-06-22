@@ -23,11 +23,11 @@ export default class manCommand extends BotCommand {
 		});
 	}
 
-	public async execSlash(message: CommandInteraction): Promise<void> {
+	/*public async execSlash(message: CommandInteraction): Promise<void> {
 		message.reply({
 			files: [
 				'https://cdn.discordapp.com/attachments/436249478521946191/853683744568115220/20210425_110059.png'
 			]
 		})
-	}
+	}*/
 }

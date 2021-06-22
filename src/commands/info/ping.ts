@@ -38,7 +38,7 @@ export default class PingCommand extends BotCommand {
 		await sentMessage.edit({	content: null, embeds: [pingEmbed] });
 	}
 
-	public async execSlash(message: CommandInteraction): Promise<void> {
+	/*public async execSlash(message: CommandInteraction): Promise<void> {
 		const timestamp1 = message.createdTimestamp;
 		await message.reply('Pong!');
 		const timestamp2 = await message
@@ -61,5 +61,5 @@ export default class PingCommand extends BotCommand {
 			content: null,
 			embeds: [embed]
 		});
-	}
+	}*/
 }
