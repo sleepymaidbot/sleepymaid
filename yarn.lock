@@ -374,7 +374,7 @@ discord-akairo@SkyBlockDev/discord-akairo:
 
 discord-api-types@^0.18.1:
   version "0.18.1"
-  resolved "https://registry.npmjs.org/discord-api-types/-/discord-api-types-0.18.1.tgz"
+  resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.18.1.tgz#5d08ed1263236be9c21a22065d0e6b51f790f492"
   integrity sha512-hNC38R9ZF4uaujaZQtQfm5CdQO58uhdkoHQAVvMfIL0LgOSZeW575W8H6upngQOuoxWd8tiRII3LLJm9zuQKYg==
 
 discord.js@13.0.0-dev.c850ae10270076c4b2e10b130dd8f88eed4ed201:
