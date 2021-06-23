@@ -370,7 +370,8 @@ dir-glob@^3.0.1:
 
 discord-akairo@SkyBlockDev/discord-akairo:
   version "8.2.2"
-  resolved "https://codeload.github.com/SkyBlockDev/discord-akairo/tar.gz/512fcb54aebfe424fa5e190177da334d6105bf71"
+  uid "3b5d4d3323e1b7f4250404d01c30e992daeddba5"
+  resolved "https://codeload.github.com/SkyBlockDev/discord-akairo/tar.gz/3b5d4d3323e1b7f4250404d01c30e992daeddba5"
 
 discord-api-types@^0.18.1:
   version "0.18.1"
