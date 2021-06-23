@@ -1,7 +1,6 @@
 import { CommandInteraction } from 'discord.js';
 import { Message, MessageEmbed  } from 'discord.js';
 import { BotCommand } from '../../lib/extensions/BotCommand';
-
 export default class PingCommand extends BotCommand {
 	constructor() {
 		super('ping', {
