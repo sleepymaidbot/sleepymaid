@@ -11,6 +11,7 @@ export default class color_message_command extends BotCommand {
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   async exec(message) {
+    if (message.guild.id != "324284116021542922") return;
     const member = message.member;
     // eslint-disable-next-line prefer-const
     let memberRole: string[] = [];
