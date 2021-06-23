@@ -1,6 +1,6 @@
 import { Message } from 'discord.js';
 import { BotCommand } from '../../lib/extensions/BotCommand';
-import { CommandInteraction } from 'discord.js';
+//import { CommandInteraction } from 'discord.js';
 
 export default class manCommand extends BotCommand {
 	constructor() {

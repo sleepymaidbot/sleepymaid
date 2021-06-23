@@ -29,10 +29,12 @@ export default class ColorRoleListener extends Listener {
 			let memberRole: string[] = [];
 			interaction.member.roles.cache.forEach((role) => {
 				memberRole.push(role.name);
-      });
+			});
 			const buttonID = interaction.customID;
 			if (memberRole.includes('Colorful')) {
-				const role = interaction.guild.roles.cache.find((role) => role.name === buttonID);
+				const role = interaction.guild.roles.cache.find(
+					(role) => role.name === buttonID
+				);
 				if (memberRole.includes(buttonID)) {
 					interaction.member.roles.remove(role);
 				} else {
@@ -53,7 +55,7 @@ export default class ColorRoleListener extends Listener {
 						interaction.member.roles.remove(rrole);
 					});
 				}
-				interaction.reply({ content: "Done!", ephemeral: true });
+				interaction.reply({ content: 'Done!', ephemeral: true });
 			}
 		}
 	}
