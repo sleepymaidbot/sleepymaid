@@ -24,9 +24,8 @@ export class BotClient extends AkairoClient {
 	public inhibitorHandler: InhibitorHandler = new InhibitorHandler(this, {
 		directory: join(__dirname, '..', '..', 'inhibitors')
 	});
-	
+
 	public constructor() {
-		
 		super(
 			{
 				ownerID: ['324281236728053760'],

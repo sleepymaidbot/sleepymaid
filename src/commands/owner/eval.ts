@@ -1,6 +1,6 @@
 import { MessageEmbed } from 'discord.js';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { MessageActionRow, MessageButton } from 'discord.js'
+import { MessageActionRow, MessageButton } from 'discord.js';
 import { inspect } from 'util';
 import { Command } from 'discord-akairo';
 import * as config from '../../config/options';
@@ -22,7 +22,15 @@ export default class evaluate extends Command {
 	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 	async exec(message, args) {
 		try {
-			if (args.codetoeval.includes(`token` || `env` || `message.channel.delete` || `message.guild.delete` || (`delete`))) {
+			if (
+				args.codetoeval.includes(
+					`token` ||
+						`env` ||
+						`message.channel.delete` ||
+						`message.guild.delete` ||
+						`delete`
+				)
+			) {
 				return message.channel.send(`no`);
 			}
 
@@ -45,25 +53,27 @@ export default class evaluate extends Command {
 
 			const output = await eval(args.codetoeval);
 
-			if (inspect(output).includes(config.token || 'message.channel.delete()')) {
+			if (
+				inspect(output).includes(config.token || 'message.channel.delete()')
+			) {
 				return message.channel.send(`no`);
 			}
 
 			const evalOutputEmbed = new MessageEmbed()
-					.setTitle('Evaluated Code')
-					.addField(
-						`:inbox_tray: **Input**`,
-						`\`\`\`js\n${args.codetoeval}\`\`\``
-					);
+				.setTitle('Evaluated Code')
+				.addField(
+					`:inbox_tray: **Input**`,
+					`\`\`\`js\n${args.codetoeval}\`\`\``
+				);
 
 			if (inspect(output, { depth: 0 }).length > 1000) {
 				return;
 			} else {
-					evalOutputEmbed.addField(
-						`:outbox_tray: **Output**`,
-						`\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``
-					);
-				}
+				evalOutputEmbed.addField(
+					`:outbox_tray: **Output**`,
+					`\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``
+				);
+			}
 
 			await message.channel.send({ embeds: [evalOutputEmbed] });
 			if (args.silent) {

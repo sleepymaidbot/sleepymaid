@@ -9,23 +9,25 @@ export default class RoleListener extends Listener {
 			emitter: 'client',
 			event: 'guildMemberUpdate'
 		});
-  };
+	}
 
-  async exec(oldMember, newMember) {
-    let oldMemberRole: string[] = [];
-    let newMemberRole: string[] = [];
-    oldMember.roles.cache.forEach(role => {
-      oldMemberRole.push(role.name);
-    });
-    newMember.roles.cache.forEach(role => {
-      newMemberRole.push(role.name);
-    });
-    const role = newMember.guild.roles.cache.find(role => role.name === 'Colorful');
-    const member = newMember
+	async exec(oldMember, newMember) {
+		let oldMemberRole: string[] = [];
+		let newMemberRole: string[] = [];
+		oldMember.roles.cache.forEach((role) => {
+			oldMemberRole.push(role.name);
+		});
+		newMember.roles.cache.forEach((role) => {
+			newMemberRole.push(role.name);
+		});
+		const role = newMember.guild.roles.cache.find(
+			(role) => role.name === 'Colorful'
+		);
+		const member = newMember;
 
-    if (oldMemberRole.length != newMemberRole.length) {
-      const response = checkUserRole(oldMemberRole, newMemberRole);
-      performRole(response, role, member);
-    };
-  };
-};
+		if (oldMemberRole.length != newMemberRole.length) {
+			const response = checkUserRole(oldMemberRole, newMemberRole);
+			performRole(response, role, member);
+		}
+	}
+}

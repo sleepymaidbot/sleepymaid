@@ -7,12 +7,12 @@ export default class ReadyListener extends Listener {
 			emitter: 'client',
 			event: 'ready'
 		});
-	};
+	}
 
 	exec() {
 		console.log(
 			`Logged in as ${this.client.user.tag} | ${this.client.guilds.cache.size} servers`
 		);
 		this.client.user.setActivity('yo allo ?', { type: 'WATCHING' });
-	};
-};
+	}
+}

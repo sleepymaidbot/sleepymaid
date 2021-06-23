@@ -1,5 +1,5 @@
 import { CommandInteraction } from 'discord.js';
-import { Message, MessageEmbed  } from 'discord.js';
+import { Message, MessageEmbed } from 'discord.js';
 import { BotCommand } from '../../lib/extensions/BotCommand';
 export default class PingCommand extends BotCommand {
 	constructor() {
@@ -34,7 +34,7 @@ export default class PingCommand extends BotCommand {
 				message.author.displayAvatarURL({ dynamic: true })
 			)
 			.setTimestamp();
-		await sentMessage.edit({	content: null, embeds: [pingEmbed] });
+		await sentMessage.edit({ content: null, embeds: [pingEmbed] });
 	}
 
 	/*public async execSlash(message: CommandInteraction): Promise<void> {
