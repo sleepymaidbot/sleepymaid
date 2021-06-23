@@ -1,8 +1,15 @@
 import { BotCommand } from '../../lib/extensions/BotCommand';
 import { MessageEmbed, MessageActionRow, MessageButton } from 'discord.js';
 
-
-const colorRole = ['Maya', 'Mikado', 'Rose', 'Lavender', 'Coral', 'Cantaloupe', 'Mint'];
+const colorRole = [
+	'Maya',
+	'Mikado',
+	'Rose',
+	'Lavender',
+	'Coral',
+	'Cantaloupe',
+	'Mint'
+];
 export default class color_message_command extends BotCommand {
 	constructor() {
 		super('color_message_setup', {
@@ -15,8 +22,8 @@ export default class color_message_command extends BotCommand {
 	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 	async exec(message) {
 		// eslint-disable-next-line prefer-const
-		let roleArray: string[] = []
-		colorRole.forEach(rolename => {
+		let roleArray: string[] = [];
+		colorRole.forEach((rolename) => {
 			const role = message.guild.roles.cache.find(
 				(role) => role.name === rolename
 			);
@@ -34,48 +41,48 @@ export default class color_message_command extends BotCommand {
 		const row1 = new MessageActionRow()
 			.addComponents(
 				new MessageButton()
-					.setCustomID('maya')
+					.setCustomID('Maya')
 					.setLabel('Maya')
 					.setStyle('PRIMARY')
 			)
 			.addComponents(
 				new MessageButton()
-					.setCustomID('mikado')
+					.setCustomID('Mikado')
 					.setLabel('Mikado')
 					.setStyle('PRIMARY')
 			)
 			.addComponents(
 				new MessageButton()
-					.setCustomID('rose')
+					.setCustomID('Rose')
 					.setLabel('Rose')
 					.setStyle('PRIMARY')
 			)
 			.addComponents(
 				new MessageButton()
-					.setCustomID('lavender')
+					.setCustomID('Lavender')
 					.setLabel('Lavender')
 					.setStyle('PRIMARY')
-		)
-		const row2 = new MessageActionRow()			
+			);
+		const row2 = new MessageActionRow()
 			.addComponents(
 				new MessageButton()
-					.setCustomID('coral')
+					.setCustomID('Coral')
 					.setLabel('Coral')
 					.setStyle('PRIMARY')
 			)
 			.addComponents(
 				new MessageButton()
-					.setCustomID('cantaloupe')
+					.setCustomID('Cantaloupe')
 					.setLabel('Cantaloupe')
 					.setStyle('PRIMARY')
-		  )
-		  .addComponents(
+			)
+			.addComponents(
 				new MessageButton()
-					.setCustomID('mint')
+					.setCustomID('Mint')
 					.setLabel('Mint')
 					.setStyle('PRIMARY')
 			);
-			
+
 		return message.channel.send({ embeds: [embed], components: [row1, row2] });
 	}
 }
