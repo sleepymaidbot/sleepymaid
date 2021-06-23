@@ -17,7 +17,7 @@ export default class color_message_command extends BotCommand {
 			ownerOnly: true,
 			channel: 'guild'
 		});
-	}
+	};
 
 	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 	async exec(message) {

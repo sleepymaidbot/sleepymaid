@@ -17,7 +17,7 @@ export default class ColorRoleListener extends Listener {
 			emitter: 'client',
 			event: 'interaction'
 		});
-	}
+  };
 
 	exec(interaction) {
 		if (!interaction.isButton()) return;
@@ -56,7 +56,7 @@ export default class ColorRoleListener extends Listener {
 					});
 				}
 				interaction.reply({ content: 'Done!', ephemeral: true });
-			}
-		}
-	}
-}
+      };
+    };
+  };
+};
