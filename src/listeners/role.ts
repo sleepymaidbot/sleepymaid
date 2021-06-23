@@ -1,6 +1,7 @@
+/* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Listener } from 'discord-akairo';
-import { checkUserRole } from '../functions/rolesyncer';
+import { checkUserRole, performRole } from '../functions/rolesyncer';
 
 export default class RoleListener extends Listener {
 	constructor() {
@@ -8,13 +9,23 @@ export default class RoleListener extends Listener {
 			emitter: 'client',
 			event: 'guildMemberUpdate'
 		});
-	}
+  };
 
-  exec(oldMember, newMember) {
-    console.log('test');
-    if (oldMember.roles != newMember.roles) {
-      console.log('test cool');
-      //checkUserRole(oldMember, newMember)
+  async exec(oldMember, newMember) {
+    let oldMemberRole: string[] = [];
+    let newMemberRole: string[] = [];
+    oldMember.roles.cache.forEach(role => {
+      oldMemberRole.push(role.name);
+    });
+    newMember.roles.cache.forEach(role => {
+      newMemberRole.push(role.name);
+    });
+    const role = newMember.guild.roles.cache.find(role => role.name === 'Colorful');
+    const member = newMember
+
+    if (oldMemberRole.length != newMemberRole.length) {
+      const response = checkUserRole(oldMemberRole, newMemberRole);
+      performRole(response, role, member);
     };
   };
 };
