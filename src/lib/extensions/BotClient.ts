@@ -7,6 +7,7 @@ import {
 import { Intents } from 'discord.js';
 import { join } from 'path';
 import * as config from '../../config/options';
+
 export class BotClient extends AkairoClient {
 	public commandHandler: CommandHandler = new CommandHandler(this, {
 		prefix: config.prefix,
@@ -29,13 +30,13 @@ export class BotClient extends AkairoClient {
 		super(
 			{
 				ownerID: ['324281236728053760'],
-				intents: Intents.NON_PRIVILEGED
+				intents: Intents.ALL
 			},
 			{
 				allowedMentions: {
 					parse: ['users'] // Disables all mentions except for users
 				},
-				intents: Intents.NON_PRIVILEGED
+				intents: Intents.ALL
 			}
 		);
 	}
