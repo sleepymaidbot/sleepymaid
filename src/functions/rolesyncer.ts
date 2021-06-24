@@ -1,16 +1,11 @@
-import { colorRole } from '../config/lists';
+import { colorRole, ColorfulNeedRole } from '../config/lists';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function checkUserRole(
 	oldMemberRole: string[],
 	newMemberRole: string[]
 ) {
-	const ColorfulNeedRole = [
-		'admin',
-		'cute',
-		'nitro booster',
-		'collaborateur serveur'
-	];
+	
 	let wasEligibleForColorfulRole = false;
 	let eligibleForColorfulRole = false;
 	oldMemberRole.forEach((role) => {

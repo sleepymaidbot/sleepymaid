@@ -7,3 +7,10 @@ export const colorRole = [
 	'Cantaloupe',
 	'Mint'
 ];
+export const ColorfulNeedRole = [
+		'admin',
+		'cute',
+		'nitro booster',
+    'collaborateur serveur',
+    'actif'
+];
