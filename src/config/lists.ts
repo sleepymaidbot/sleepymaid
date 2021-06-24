@@ -5,7 +5,9 @@ export const colorRole = [
 	'Lavender',
 	'Coral',
 	'Cantaloupe',
-	'Mint'
+	'Mint',
+	'Smoked',
+	'Weed'
 ];
 export const ColorfulNeedRole = [
 		'admin',

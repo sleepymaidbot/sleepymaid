@@ -53,7 +53,13 @@ export default class color_message_command extends BotCommand {
 					.setCustomID('Lavender')
 					.setLabel('Lavender')
 					.setStyle('PRIMARY')
-			);
+			)
+			.addComponents(
+				new MessageButton()
+					.setCustomID('Weed')
+					.setLabel('Weed')
+					.setStyle('PRIMARY')
+			)
 		const row2 = new MessageActionRow()
 			.addComponents(
 				new MessageButton()
@@ -72,6 +78,12 @@ export default class color_message_command extends BotCommand {
 					.setCustomID('Mint')
 					.setLabel('Mint')
 					.setStyle('PRIMARY')
+			)
+			.addComponents(
+					new MessageButton()
+						.setCustomID('Smoked')
+						.setLabel('Smoked')
+						.setStyle('PRIMARY')
 			);
 
 		return message.channel.send({ embeds: [embed], components: [row1, row2] });
