@@ -159,6 +159,4 @@ temp/
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,node,yarn
 
-src/config/*
-!src/config/example-*
-!src/config/blacklist.ts
+src/config/options.ts

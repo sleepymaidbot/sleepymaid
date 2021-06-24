@@ -1,15 +1,6 @@
 import { BotCommand } from '../../lib/extensions/BotCommand';
 import { MessageEmbed, MessageActionRow, MessageButton } from 'discord.js';
-
-const colorRole = [
-	'Maya',
-	'Mikado',
-	'Rose',
-	'Lavender',
-	'Coral',
-	'Cantaloupe',
-	'Mint'
-];
+import { colorRole } from '../../config/lists';
 export default class color_message_command extends BotCommand {
 	constructor() {
 		super('color_message_setup', {

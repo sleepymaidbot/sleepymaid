@@ -1,15 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Listener } from 'discord-akairo';
-
-const colorRole = [
-	'Maya',
-	'Mikado',
-	'Rose',
-	'Lavender',
-	'Coral',
-	'Cantaloupe',
-	'Mint'
-];
+import { colorRole } from '../config/lists';
 
 export default class ColorRoleListener extends Listener {
 	constructor() {
