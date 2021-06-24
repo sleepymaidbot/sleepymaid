@@ -1,3 +1,5 @@
+import { colorRole } from '../config/lists';
+
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function checkUserRole(
 	oldMemberRole: string[],
@@ -66,6 +68,11 @@ export function performRole(action: string, role, member) {
 		case 'remove':
 			try {
 				member.roles.remove(role);
+				member.roles.cache.forEach((eachRole) => {
+					if (colorRole.includes(eachRole.name)) {
+						member.roles.remove(eachRole);
+					}
+				})
 				return 'Done';
 			} catch (err) {
 				return `Error: ${err.message}`;
