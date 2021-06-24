@@ -370,7 +370,6 @@ dir-glob@^3.0.1:
 
 discord-akairo@SkyBlockDev/discord-akairo:
   version "8.2.2"
-  uid "3b5d4d3323e1b7f4250404d01c30e992daeddba5"
   resolved "https://codeload.github.com/SkyBlockDev/discord-akairo/tar.gz/3b5d4d3323e1b7f4250404d01c30e992daeddba5"
 
 discord-api-types@^0.18.1:
@@ -378,10 +377,10 @@ discord-api-types@^0.18.1:
   resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.18.1.tgz#5d08ed1263236be9c21a22065d0e6b51f790f492"
   integrity sha512-hNC38R9ZF4uaujaZQtQfm5CdQO58uhdkoHQAVvMfIL0LgOSZeW575W8H6upngQOuoxWd8tiRII3LLJm9zuQKYg==
 
-discord.js@13.0.0-dev.918921e8211fc16e9b12d2502f3168264246ea22:
-  version "13.0.0-dev.918921e8211fc16e9b12d2502f3168264246ea22"
-  resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-13.0.0-dev.918921e8211fc16e9b12d2502f3168264246ea22.tgz#660c333e2c0b6dcd570e2b036edf82e23cbd38c0"
-  integrity sha512-5luHBdny+Mx4N5TvCJofL4N+YcySNtlrHupR2tuKI0z53V1/VAN5hvba1n42JzO5r+PmeCZlU8Xg+8dMsxwt7Q==
+discord.js@13.0.0-dev.e0efcc6ab0e3f060e30438c0d990c9465c6134df:
+  version "13.0.0-dev.e0efcc6ab0e3f060e30438c0d990c9465c6134df"
+  resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-13.0.0-dev.e0efcc6ab0e3f060e30438c0d990c9465c6134df.tgz#81e71e1d173f0ab616e2e40505e4908ee28df65a"
+  integrity sha512-d12JXcpKaEgjM0rdcljbrctdR5WbPjZj+7a+9487bLXHaC+UZHy79ppOzqEnCcHriwSNmUVLuEVfcFJREScd0A==
   dependencies:
     "@discordjs/collection" "^0.1.6"
     "@discordjs/form-data" "^3.0.1"

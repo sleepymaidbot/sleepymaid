@@ -27,7 +27,7 @@
 	"dependencies": {
 		"discord-akairo": "SkyBlockDev/discord-akairo",
 		"discord-api-types": "^0.18.1",
-		"discord.js": "13.0.0-dev.918921e8211fc16e9b12d2502f3168264246ea22"
+		"discord.js": "13.0.0-dev.e0efcc6ab0e3f060e30438c0d990c9465c6134df"
 	},
 	"prettier": {
 		"useTabs": true,
