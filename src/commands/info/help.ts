@@ -20,7 +20,7 @@ export default class PingCommand extends BotCommand {
 **__US__**
 National Suicide Prevention Lifeline: 1-800-273-TALK
 Crisis Text Line: Text "START" to 741-741
-Youth-Specific services (voice/text/chat/email) from the Boys' Town National Hotline: http://www.yourlifeyourvoice.org/Pages/ways-to-get-help.aspx
+Youth-Specific services (voice/text/chat/email) from the Boys' Town National Hotline: <http://www.yourlifeyourvoice.org/Pages/ways-to-get-help.aspx>
 Spanish: 1-800-SUICIDA
 
 **__UK__**
@@ -28,6 +28,6 @@ Samaritans: 116 123
 Helplines for Men from thecalmzone.net: 0800 58 58 58
 ChildLine (childline.org.uk), for those 19 and under: 0800-11-11
 
-For other countries check https://www.reddit.com/r/SuicideWatch/wiki/hotlines`})
+For other countries check <https://www.reddit.com/r/SuicideWatch/wiki/hotlines>`})
   }
 }
