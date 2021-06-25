@@ -1,7 +1,9 @@
 import { MessageEmbed } from 'discord.js';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { MessageActionRow, MessageButton } from 'discord.js';
 import { inspect } from 'util';
 import { Command } from 'discord-akairo';
+import { exec } from 'child_process';
 
 export default class evaluate extends Command {
 	constructor() {
@@ -21,7 +23,8 @@ export default class evaluate extends Command {
 	async exec(message, args) {
 		try {
 
-      const output = await eval(`sh(${args.codetoeval})`)
+      let output = await await eval(`sh('${args.codetoeval}')`)
+
 
 			const evalOutputEmbed = new MessageEmbed()
 				.setTitle('Evaluated Code')
