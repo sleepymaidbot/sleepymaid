@@ -24,7 +24,15 @@ export default class evaluate extends Command {
 	async exec(message, args) {
 		try {
 
-      const output = await await eval(`sh('${args.codetoeval}')`)
+      let output;
+
+      exec(args.codetoeval, (err, stdout, stderr) => {
+        if (err) {
+          console.error(err)
+        } else {
+          output = stdout
+        }
+      });
 
 
 			const evalOutputEmbed = new MessageEmbed()
