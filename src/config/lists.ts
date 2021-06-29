@@ -11,6 +11,7 @@ export const colorRole = [
 ];
 export const ColorfulNeedRole = [
 	'admin',
+	'Mods',
 	'nitro booster',
     'collaborateur serveur',
 ];
