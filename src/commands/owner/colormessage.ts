@@ -133,6 +133,14 @@ export default class color_message_command extends BotCommand {
 					]),
 			);
 
-		message.channel.send({ embeds: [embed], components: [row] })
+		const remove = new MessageActionRow()
+			.addComponents(
+				new MessageButton()
+					.setCustomID('remove')
+					.setLabel('Remove my color')
+					.setStyle('DANGER')
+			);	
+
+		message.channel.send({ embeds: [embed], components: [row, remove] })
 	}
 }
