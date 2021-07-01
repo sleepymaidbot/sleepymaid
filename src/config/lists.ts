@@ -9,9 +9,10 @@ export const colorRole = [
 	'Smoked',
 	'Weed'
 ];
+
 export const ColorfulNeedRole = [
 	'admin',
 	'mods',
 	'nitro booster',
-    'collaborateur serveur',
+	'collaborateur serveur'
 ];

@@ -5,7 +5,6 @@ export function checkUserRole(
 	oldMemberRole: string[],
 	newMemberRole: string[]
 ) {
-	
 	let wasEligibleForColorfulRole = false;
 	let eligibleForColorfulRole = false;
 	oldMemberRole.forEach((role) => {
@@ -67,7 +66,7 @@ export function performRole(action: string, role, member) {
 					if (colorRole.includes(eachRole.name)) {
 						member.roles.remove(eachRole);
 					}
-				})
+				});
 				return 'Done';
 			} catch (err) {
 				return `Error: ${err.message}`;

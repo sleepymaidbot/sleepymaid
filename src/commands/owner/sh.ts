@@ -23,17 +23,15 @@ export default class evaluate extends Command {
 	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 	async exec(message, args) {
 		try {
+			let output;
 
-      let output;
-
-      exec(args.codetoeval, (err, stdout, stderr) => {
-        if (err) {
-          console.error(err)
-        } else {
-          output = stdout
-        }
-      });
-
+			exec(args.codetoeval, (err, stdout, stderr) => {
+				if (err) {
+					console.error(err);
+				} else {
+					output = stdout;
+				}
+			});
 
 			const evalOutputEmbed = new MessageEmbed()
 				.setTitle('Evaluated Code')

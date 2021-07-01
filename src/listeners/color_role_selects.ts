@@ -2,16 +2,16 @@
 import { Listener } from 'discord-akairo';
 import { colorRole } from '../config/lists';
 
-export default class ColorRoleListener extends Listener {
+export default class ColorRoleSelectsListener extends Listener {
 	constructor() {
-		super('interaction', {
+		super('ColorRoleSelects', {
 			emitter: 'client',
 			event: 'interaction'
 		});
-  };
+	}
 
 	exec(interaction) {
-		if (!interaction.isButton()) return;
+		if (!interaction.isSelectMenu()) return;
 		if (
 			interaction.guildID == '324284116021542922' &&
 			interaction.channelID == '857342694691307540'
@@ -21,8 +21,8 @@ export default class ColorRoleListener extends Listener {
 			interaction.member.roles.cache.forEach((role) => {
 				memberRole.push(role.name);
 			});
-			const buttonID = interaction.customID;
 			if (memberRole.includes('Colorful')) {
+				const buttonID = interaction.values[0]
 				const role = interaction.guild.roles.cache.find(
 					(role) => role.name === buttonID
 				);
@@ -47,7 +47,7 @@ export default class ColorRoleListener extends Listener {
 					});
 				}
 				interaction.reply({ content: 'Done!', ephemeral: true });
-      };
-    };
-  };
-};
+			}
+		}
+	}
+}
