@@ -29,7 +29,7 @@
 	"dependencies": {
 		"discord-akairo": "SkyBlockDev/discord-akairo",
 		"discord-api-types": "^0.18.1",
-		"discord.js": "13.0.0-dev.a08ce7d.1625097834",
+		"discord.js": "13.0.0-dev.fe6cc0c.1625184228",
 		"monk": "^7.3.4",
 		"yup": "^0.32.9"
 	},
