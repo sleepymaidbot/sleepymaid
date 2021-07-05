@@ -1,5 +1,10 @@
 import { BotCommand } from '../../lib/extensions/BotCommand';
-import { MessageEmbed, MessageActionRow, MessageButton, MessageSelectMenu } from 'discord.js';
+import {
+	MessageEmbed,
+	MessageActionRow,
+	MessageButton,
+	MessageSelectMenu
+} from 'discord.js';
 import { colorRole } from '../../config/lists';
 export default class color_message_command extends BotCommand {
 	constructor() {
@@ -88,59 +93,57 @@ export default class color_message_command extends BotCommand {
 
 		return message.channel.send({ embeds: [embed], components: [row1, row2] });*/
 
-		const row = new MessageActionRow()
-			.addComponents(
-				new MessageSelectMenu()
-					.setCustomID('select')
-					.setPlaceholder('Nothing selected')
-					.addOptions([
-						{
-							label: 'Maya',
-							value: 'Maya',
-						},
-						{
-							label: 'Mikado',
-							value: 'Mikado',
-						},
-						{
-							label: 'Rose',
-							value: 'Rose',
-						},
-						{
-							label: 'Lavender',
-							value: 'Lavender',
-						},
-						{
-							label: 'Coral',
-							value: 'Coral',
-						},
-						{
-							label: 'Cantaloupe',
-							value: 'Cantaloupe',
-						},
-						{
-							label: 'Mint',
-							value: 'Mint',
-						},
-						{
-							label: 'Weed',
-							value: 'Weed',
-						},
-						{
-							label: 'Smoked',
-							value: 'Smoked',
-						},
-					]),
-			);
+		const row = new MessageActionRow().addComponents(
+			new MessageSelectMenu()
+				.setCustomId('select')
+				.setPlaceholder('Nothing selected')
+				.addOptions([
+					{
+						label: 'Maya',
+						value: 'Maya'
+					},
+					{
+						label: 'Mikado',
+						value: 'Mikado'
+					},
+					{
+						label: 'Rose',
+						value: 'Rose'
+					},
+					{
+						label: 'Lavender',
+						value: 'Lavender'
+					},
+					{
+						label: 'Coral',
+						value: 'Coral'
+					},
+					{
+						label: 'Cantaloupe',
+						value: 'Cantaloupe'
+					},
+					{
+						label: 'Mint',
+						value: 'Mint'
+					},
+					{
+						label: 'Weed',
+						value: 'Weed'
+					},
+					{
+						label: 'Smoked',
+						value: 'Smoked'
+					}
+				])
+		);
 
-		const remove = new MessageActionRow()
-			.addComponents(
-				new MessageButton()
-					.setCustomID('remove')
-					.setLabel('Remove my color')
-					.setStyle('DANGER')
-			);	
+		const remove = new MessageActionRow().addComponents(
+			new MessageButton()
+				.setCustomId('remove')
+				.setLabel('Remove my color')
+				.setStyle('DANGER')
+		);
 
-		message.channel.send({ embeds: [embed], components: [row, remove] })
+		message.channel.send({ embeds: [embed], components: [row, remove] });
 	}
 }

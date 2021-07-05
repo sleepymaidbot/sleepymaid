@@ -8,16 +8,15 @@
 		"build": "yarn rimraf dist/ && yarn tsc",
 		"lint": "yarn eslint --ext js,jsx,ts,tsx src",
 		"format": "yarn prettier --write .",
-		"start": "yarn build && node --trace-warnings -r source-map-support/register dist/index.js",
-		"dev": "tsc-watch --onSuccess \"node ./dist/app.js\""
+		"start": "yarn build && node --trace-warnings -r source-map-support/register dist/index.js"
 	},
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
 		"@types/node": "^15.14.0",
 		"@types/prettier": "^2",
-		"@typescript-eslint/parser": "^4.28.1",
 		"@typescript-eslint/eslint-plugin": "^4.28.1",
+		"@typescript-eslint/parser": "^4.28.1",
 		"eslint": "^7.29.0",
 		"eslint-config-prettier": "^8.3.0",
 		"prettier": "^2.3.2",
@@ -27,9 +26,9 @@
 		"typescript": "^4.3.5"
 	},
 	"dependencies": {
-		"discord-akairo": "SkyBlockDev/discord-akairo",
+		"discord-akairo": "Le-monde-dEcorte/discord-akairo",
 		"discord-api-types": "^0.18.1",
-		"discord.js": "13.0.0-dev.fe6cc0c.1625184228",
+		"discord.js": "13.0.0-dev.fe5d56c.1625443439",
 		"monk": "^7.3.4",
 		"yup": "^0.32.9"
 	},
