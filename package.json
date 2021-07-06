@@ -28,7 +28,7 @@
 	"dependencies": {
 		"discord-akairo": "Le-monde-dEcorte/discord-akairo",
 		"discord-api-types": "^0.18.1",
-		"discord.js": "13.0.0-dev.2e078e4.1625521956",
+		"discord.js": "13.0.0-dev.2e078e4.1625529824",
 		"monk": "^7.3.4",
 		"yup": "^0.32.9"
 	},
