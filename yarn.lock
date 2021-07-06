@@ -428,7 +428,7 @@ dir-glob@^3.0.1:
 
 discord-akairo@Le-monde-dEcorte/discord-akairo:
   version "8.2.2"
-  resolved "https://codeload.github.com/Le-monde-dEcorte/discord-akairo/tar.gz/2d1dc4f101ed93613b83d53276343c69c7ce8bc1"
+  resolved "https://codeload.github.com/Le-monde-dEcorte/discord-akairo/tar.gz/8af1edebca1b91368adf9ce2accb1dd6e7c4cc20"
 
 discord-api-types@^0.18.1:
   version "0.18.1"
