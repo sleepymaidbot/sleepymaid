@@ -8,23 +8,23 @@ import { Intents } from 'discord.js';
 import { join } from 'path';
 import * as config from '../../config/options';
 
-
-const myIntents = new Intents(['GUILDS',
-'GUILD_MEMBERS',
-'GUILD_BANS',
-'GUILD_EMOJIS',
-'GUILD_INTEGRATIONS',
-'GUILD_WEBHOOKS',
-'GUILD_INVITES',
-'GUILD_VOICE_STATES',
-'GUILD_PRESENCES',
-'GUILD_MESSAGES',
-'GUILD_MESSAGE_REACTIONS',
-'GUILD_MESSAGE_TYPING',
-'DIRECT_MESSAGES',
-'DIRECT_MESSAGE_REACTIONS',
-'DIRECT_MESSAGE_TYPING']);
-
+const myIntents = new Intents([
+	'GUILDS',
+	'GUILD_MEMBERS',
+	'GUILD_BANS',
+	'GUILD_EMOJIS',
+	'GUILD_INTEGRATIONS',
+	'GUILD_WEBHOOKS',
+	'GUILD_INVITES',
+	'GUILD_VOICE_STATES',
+	'GUILD_PRESENCES',
+	'GUILD_MESSAGES',
+	'GUILD_MESSAGE_REACTIONS',
+	'GUILD_MESSAGE_TYPING',
+	'DIRECT_MESSAGES',
+	'DIRECT_MESSAGE_REACTIONS',
+	'DIRECT_MESSAGE_TYPING'
+]);
 
 export class BotClient extends AkairoClient {
 	public commandHandler: CommandHandler = new CommandHandler(this, {

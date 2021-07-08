@@ -6,11 +6,12 @@ export default class ColorRoleSelectsListener extends Listener {
 	constructor() {
 		super('ColorRoleSelects', {
 			emitter: 'client',
-			event: 'interactionCreate'
+			event: 'interaction'
 		});
 	}
 
 	exec(interaction) {
+		console.log(interaction);
 		if (interaction.isSelectMenu()) {
 			if (
 				interaction.guildID == '324284116021542922' &&

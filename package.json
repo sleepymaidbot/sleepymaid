@@ -26,9 +26,9 @@
 		"typescript": "^4.3.5"
 	},
 	"dependencies": {
-		"discord-akairo": "Le-monde-dEcorte/discord-akairo",
-		"discord-api-types": "^0.18.1",
-		"discord.js": "discordjs/discord.js",
+		"discord-akairo": "git+https://github.com/skyblockdev/discord-akairo.git",
+		"discord-api-types": "discordjs/discord-api-types",
+		"discord.js": "^13.0.0-dev.28b5ffb.1625702624",
 		"monk": "^7.3.4",
 		"yup": "^0.32.9"
 	},
