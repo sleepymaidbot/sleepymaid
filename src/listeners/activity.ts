@@ -65,7 +65,7 @@ export default class Activity extends Listener {
 			talkedRecently.add(message.author.id);
 			setTimeout(() => {
 				talkedRecently.delete(message.author.id);
-			}, 1);
+			}, 60000);
 		}
 	}
 }
