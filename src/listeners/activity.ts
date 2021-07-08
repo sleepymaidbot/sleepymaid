@@ -14,9 +14,9 @@ export default class Activity extends Listener {
 	}
 
 	async exec(message: Message): Promise<void> {
-		if (message.guild.id != '324284116021542922') return
-		if (message.author.bot) return
-		if (pointsBlacklistedChannel.includes(message.channel.id)) return
+		if (message.guild.id != '324284116021542922') return;
+		if (message.author.bot) return;
+		if (pointsBlacklistedChannel.includes(message.channel.id)) return;
 
 		if (talkedRecently.has(message.author.id)) {
 			return;
@@ -32,7 +32,10 @@ export default class Activity extends Listener {
 			} else {
 				const beforePoints = userInDb.points;
 				const afterPoints = beforePoints + 1;
-				await activity.update({ id: message.author.id }, { $set: { points: afterPoints }})
+				await activity.update(
+					{ id: message.author.id },
+					{ $set: { points: afterPoints } }
+				);
 				// Add role if needed
 
 				const userRole: string[] = [];
@@ -41,20 +44,20 @@ export default class Activity extends Listener {
 				});
 
 				if (afterPoints >= 100) {
-					if (!userRole.includes("Actif")) {
+					if (!userRole.includes('Actif')) {
 						const actifRole = message.guild.roles.cache.find(
 							(role) => role.name === 'Actif'
 						);
-						message.member.roles.add(actifRole)
+						message.member.roles.add(actifRole);
 					}
 				}
 
 				if (afterPoints <= 50) {
-					if (userRole.includes("Actif")) {
+					if (userRole.includes('Actif')) {
 						const actifRole = message.guild.roles.cache.find(
 							(role) => role.name === 'Actif'
 						);
-						message.member.roles.remove(actifRole)
+						message.member.roles.remove(actifRole);
 					}
 				}
 			}

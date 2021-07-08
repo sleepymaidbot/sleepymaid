@@ -21,4 +21,4 @@ export const pointsBlacklistedChannel = [
 	'777648765065625670', // Mudae
 	'429066457410699274', // Décompte
 	'434861245846519828' // Deleted channel
-]
+];

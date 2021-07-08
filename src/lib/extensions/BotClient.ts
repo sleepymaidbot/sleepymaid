@@ -45,7 +45,7 @@ export class BotClient extends AkairoClient {
 	});
 
 	public taskHandler: TaskHandler = new TaskHandler(this, {
-		directory: join(__dirname, '..', '..',  'tasks'),
+		directory: join(__dirname, '..', '..', 'tasks')
 	});
 
 	public constructor() {
