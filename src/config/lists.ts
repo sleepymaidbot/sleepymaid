@@ -24,3 +24,9 @@ export const pointsBlacklistedChannel = [
 	'434861245846519828', // Deleted channel
 	'439155130924007444' // bots et vocal
 ];
+
+export const pointsBlacklistedVoiceChannel = [
+	'699722283794563144', // afk
+	'787059609302073344', // rejoin
+	'792808472412553216' // ligne
+];
