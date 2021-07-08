@@ -1,6 +1,7 @@
 import { Listener } from 'discord-akairo';
 import { activity } from '../functions/db';
 import { Message } from 'discord.js';
+import { pointsBlacklistedChannel } from '../config/lists';
 
 const talkedRecently = new Set();
 
@@ -15,6 +16,7 @@ export default class Activity extends Listener {
 	async exec(message: Message): Promise<void> {
 		if (message.guild.id != '324284116021542922') return
 		if (message.author.bot) return
+		if (pointsBlacklistedChannel.includes(message.channel.id)) return
 
 		if (talkedRecently.has(message.author.id)) {
 			return;
