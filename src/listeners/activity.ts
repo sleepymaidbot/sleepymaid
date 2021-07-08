@@ -1,0 +1,66 @@
+import { Listener } from 'discord-akairo';
+import { activity } from '../functions/db';
+import { Message } from 'discord.js';
+
+const talkedRecently = new Set();
+
+export default class Activity extends Listener {
+	constructor() {
+		super('Activity', {
+			emitter: 'client',
+			event: 'message'
+		});
+	}
+
+	async exec(message: Message): Promise<void> {
+		if (message.guild.id != '324284116021542922') return
+		if (message.author.bot) return
+
+		if (talkedRecently.has(message.author.id)) {
+			return;
+		} else {
+			// Add points
+			const userInDb = await activity.findOne({ id: message.author.id });
+			if (userInDb == null) {
+				const newUser = {
+					id: message.author.id,
+					points: 1
+				};
+				await activity.insert(newUser);
+			} else {
+				const beforePoints = userInDb.points;
+				const afterPoints = beforePoints + 1;
+				await activity.update({ id: message.author.id }, { $set: { points: afterPoints }})
+				// Add role if needed
+
+				const userRole: string[] = [];
+				message.member.roles.cache.forEach((role) => {
+					userRole.push(role.name);
+				});
+
+				if (afterPoints >= 100) {
+					if (!userRole.includes("Actif")) {
+						const actifRole = message.guild.roles.cache.find(
+							(role) => role.name === 'Actif'
+						);
+						message.member.roles.add(actifRole)
+					}
+				}
+
+				if (afterPoints <= 50) {
+					if (userRole.includes("Actif")) {
+						const actifRole = message.guild.roles.cache.find(
+							(role) => role.name === 'Actif'
+						);
+						message.member.roles.remove(actifRole)
+					}
+				}
+			}
+
+			talkedRecently.add(message.author.id);
+			setTimeout(() => {
+				talkedRecently.delete(message.author.id);
+			}, 1);
+		}
+	}
+}
