@@ -445,9 +445,10 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
-"discord-akairo@git+https://github.com/Le-monde-dEcorte/discord-akairo.git":
+"discord-akairo@git+https://github.com/skyblockdev/discord-akairo.git":
   version "8.2.2"
-  resolved "git+https://github.com/Le-monde-dEcorte/discord-akairo.git#d53e670714b5ad00803978e50ac411da18aca0c4"
+  uid a6a59951b1fe256167b842a54649dba2800da343
+  resolved "git+https://github.com/skyblockdev/discord-akairo.git#a6a59951b1fe256167b842a54649dba2800da343"
 
 discord-api-types@^0.18.1, discord-api-types@discordjs/discord-api-types:
   version "0.18.1"
