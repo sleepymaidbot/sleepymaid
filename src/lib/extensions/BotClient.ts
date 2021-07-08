@@ -2,7 +2,8 @@ import {
 	AkairoClient,
 	CommandHandler,
 	InhibitorHandler,
-	ListenerHandler
+	ListenerHandler,
+	TaskHandler
 } from 'discord-akairo';
 import { Intents } from 'discord.js';
 import { join } from 'path';
@@ -43,6 +44,10 @@ export class BotClient extends AkairoClient {
 		directory: join(__dirname, '..', '..', 'inhibitors')
 	});
 
+	public taskHandler: TaskHandler = new TaskHandler(this, {
+		directory: join(__dirname, '..', '..',  'tasks'),
+	});
+
 	public constructor() {
 		super(
 			{
@@ -69,7 +74,8 @@ export class BotClient extends AkairoClient {
 		const loaders = {
 			commands: this.commandHandler,
 			listeners: this.listenerHandler,
-			inhibitors: this.inhibitorHandler
+			inhibitors: this.inhibitorHandler,
+			tasks: this.taskHandler
 		};
 		for (const loader of Object.keys(loaders)) {
 			try {
@@ -79,6 +85,7 @@ export class BotClient extends AkairoClient {
 				console.error('Unable to load ' + loader + ' with error ' + e);
 			}
 		}
+		this.taskHandler.startAll();
 	}
 
 	public async start(): Promise<string> {
