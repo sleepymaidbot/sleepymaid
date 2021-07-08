@@ -14,7 +14,8 @@ export const ColorfulNeedRole = [
 	'admin',
 	'modérateur',
 	'nitro booster',
-	'collaborateur serveur'
+	'collaborateur serveur',
+	'actif'
 ];
 
 export const pointsBlacklistedChannel = [
