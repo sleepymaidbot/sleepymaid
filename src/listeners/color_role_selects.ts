@@ -11,7 +11,6 @@ export default class ColorRoleSelectsListener extends Listener {
 	}
 
 	exec(interaction) {
-		console.log(interaction);
 		if (interaction.isSelectMenu()) {
 			if (
 				interaction.guildID == '324284116021542922' &&
