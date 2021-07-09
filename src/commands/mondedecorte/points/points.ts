@@ -1,6 +1,6 @@
-import { BotCommand } from '../../lib/extensions/BotCommand';
-import { activity } from '../../functions/db';
-import { checkActifRole } from '../../functions/actifrole';
+import { BotCommand } from '../../../lib/extensions/BotCommand';
+import { activity } from '../../../functions/db';
+import { checkActifRole } from '../../../functions/actifrole';
 import { MessageEmbed } from 'discord.js';
 
 export default class pointsCommand extends BotCommand {
