@@ -13,8 +13,8 @@ export default class ColorRoleSelectsListener extends Listener {
 	exec(interaction) {
 		if (interaction.isSelectMenu()) {
 			if (
-				interaction.guildID == '324284116021542922' &&
-				interaction.channelID == '857342694691307540'
+				interaction.guildId == '324284116021542922' &&
+				interaction.channelId == '857342694691307540'
 			) {
 				const memberRole: string[] = [];
 				interaction.member.roles.cache.forEach((role) => {
@@ -49,15 +49,15 @@ export default class ColorRoleSelectsListener extends Listener {
 			}
 		} else if (interaction.isButton()) {
 			if (
-				interaction.guildID == '324284116021542922' &&
-				interaction.channelID == '857342694691307540'
+				interaction.guildId == '324284116021542922' &&
+				interaction.channelId == '857342694691307540'
 			) {
 				const memberRole: string[] = [];
 				interaction.member.roles.cache.forEach((role) => {
 					memberRole.push(role.name);
 				});
 				if (memberRole.includes('Colorful')) {
-					if (interaction.customID == 'remove') {
+					if (interaction.customId == 'remove') {
 						const roleToRemove: string[] = [];
 						memberRole.forEach((eachRole) => {
 							if (colorRole.includes(eachRole)) {
