@@ -13,7 +13,6 @@ export default class pointsRemoveTask extends Task {
 
 		guild.members.cache.forEach(async (member) => {
 			const userInDb = await activity.findOne({ id: member.id });
-			console.log(userInDb);
 			if (userInDb != null && userInDb.points >= 1) {
 				activity.update(
 					{ id: member.id },
