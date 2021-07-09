@@ -36,30 +36,6 @@ export default class Activity extends Listener {
 					{ id: message.author.id },
 					{ $set: { points: afterPoints } }
 				);
-				// Add role if needed
-
-				const userRole: string[] = [];
-				message.member.roles.cache.forEach((role) => {
-					userRole.push(role.name);
-				});
-
-				if (afterPoints >= 100) {
-					if (!userRole.includes('Actif')) {
-						const actifRole = message.guild.roles.cache.find(
-							(role) => role.name === 'Actif'
-						);
-						message.member.roles.add(actifRole);
-					}
-				}
-
-				if (afterPoints <= 50) {
-					if (userRole.includes('Actif')) {
-						const actifRole = message.guild.roles.cache.find(
-							(role) => role.name === 'Actif'
-						);
-						message.member.roles.remove(actifRole);
-					}
-				}
 			}
 
 			talkedRecently.add(message.author.id);

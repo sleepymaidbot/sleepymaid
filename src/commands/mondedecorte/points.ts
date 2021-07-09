@@ -1,5 +1,6 @@
 import { BotCommand } from '../../lib/extensions/BotCommand';
 import { activity } from '../../functions/db';
+import { checkActifRole } from '../../functions/actifrole';
 
 export default class pointsCommand extends BotCommand {
 	constructor() {
@@ -24,6 +25,10 @@ export default class pointsCommand extends BotCommand {
 			} else {
 				message.channel.send({ content: `Tu a ${userInDB.points} points.` });
 			}
+
+			checkActifRole(message.member, message.guild, userInDB.points);
 		}
+
+		
 	}
 }
