@@ -6,7 +6,7 @@ export default class ColorRoleSelectsListener extends Listener {
 	constructor() {
 		super('ColorRoleSelects', {
 			emitter: 'client',
-			event: 'interaction'
+			event: 'interactionCreate'
 		});
 	}
 

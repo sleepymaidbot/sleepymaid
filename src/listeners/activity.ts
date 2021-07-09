@@ -10,7 +10,7 @@ export default class Activity extends Listener {
 	constructor() {
 		super('Activity', {
 			emitter: 'client',
-			event: 'message'
+			event: 'messageCreate'
 		});
 	}
 

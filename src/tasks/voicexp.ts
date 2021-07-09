@@ -17,7 +17,7 @@ export default class voiceXpTask extends Task {
 		const memberInVc = [];
 
 		guild.channels.cache.forEach(async (channel) => {
-			if (channel.type == 'voice') {
+			if (channel.type == 'GUILD_VOICE') {
 				if (pointsBlacklistedVoiceChannel.includes(channel.id)) {
 					return;
 				} else {

@@ -95,7 +95,7 @@ export default class color_message_command extends BotCommand {
 
 		const row = new MessageActionRow().addComponents(
 			new MessageSelectMenu()
-				.setCustomID('select')
+				.setCustomId('select')
 				.setPlaceholder('Nothing selected')
 				.addOptions([
 					{
@@ -139,7 +139,7 @@ export default class color_message_command extends BotCommand {
 
 		const remove = new MessageActionRow().addComponents(
 			new MessageButton()
-				.setCustomID('remove')
+				.setCustomId('remove')
 				.setLabel('Remove my color')
 				.setStyle('DANGER')
 		);
