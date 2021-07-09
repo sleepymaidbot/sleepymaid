@@ -16,8 +16,7 @@ export default class ColorRoleSelectsListener extends Listener {
 				interaction.guildID == '324284116021542922' &&
 				interaction.channelID == '857342694691307540'
 			) {
-				// eslint-disable-next-line prefer-const
-				let memberRole: string[] = [];
+				const memberRole: string[] = [];
 				interaction.member.roles.cache.forEach((role) => {
 					memberRole.push(role.name);
 				});
@@ -30,8 +29,7 @@ export default class ColorRoleSelectsListener extends Listener {
 						interaction.member.roles.remove(role);
 					} else {
 						interaction.member.roles.add(role);
-						// eslint-disable-next-line prefer-const
-						let roleToRemove: string[] = [];
+						const roleToRemove: string[] = [];
 						memberRole.forEach((eachRole) => {
 							if (eachRole == role.name) {
 								return;
@@ -54,13 +52,13 @@ export default class ColorRoleSelectsListener extends Listener {
 				interaction.guildID == '324284116021542922' &&
 				interaction.channelID == '857342694691307540'
 			) {
-				let memberRole: string[] = [];
+				const memberRole: string[] = [];
 				interaction.member.roles.cache.forEach((role) => {
 					memberRole.push(role.name);
 				});
 				if (memberRole.includes('Colorful')) {
 					if (interaction.customID == 'remove') {
-						let roleToRemove: string[] = [];
+						const roleToRemove: string[] = [];
 						memberRole.forEach((eachRole) => {
 							if (colorRole.includes(eachRole)) {
 								roleToRemove.push(eachRole);
