@@ -28,7 +28,7 @@
 	"dependencies": {
 		"discord-akairo": "git+https://github.com/skyblockdev/discord-akairo.git",
 		"discord-api-types": "discordjs/discord-api-types",
-		"discord.js": "^13.0.0-dev.28b5ffb.1625702624",
+		"discord.js": "^13.0.0-dev.5b6be0c.1625789033",
 		"monk": "^7.3.4",
 		"yup": "^0.32.9"
 	},
