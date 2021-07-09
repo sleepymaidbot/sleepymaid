@@ -2,6 +2,7 @@ import { Listener } from 'discord-akairo';
 import { activity } from '../functions/db';
 import { Message } from 'discord.js';
 import { pointsBlacklistedChannel } from '../config/lists';
+import { checkActifRole } from '../functions/actifrole';
 
 const talkedRecently = new Set();
 
@@ -36,6 +37,8 @@ export default class Activity extends Listener {
 					{ id: message.author.id },
 					{ $set: { points: afterPoints } }
 				);
+
+				checkActifRole(message.member, message.guild, afterPoints);
 			}
 
 			talkedRecently.add(message.author.id);

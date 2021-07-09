@@ -14,12 +14,15 @@ export default class voiceXpTask extends Task {
 	async exec() {
 		const guild = this.client.guilds.cache.get('324284116021542922');
 
+		const memberInVc = [];
+
 		guild.channels.cache.forEach(async (channel) => {
 			if (channel.type == 'voice') {
 				if (pointsBlacklistedVoiceChannel.includes(channel.id)) {
 					return;
 				} else {
 					channel.members.each(async (member) => {
+						memberInVc.push(member.id);
 						if (member.voice.mute || member.voice.deaf) {
 							return;
 						} else {
@@ -37,7 +40,7 @@ export default class voiceXpTask extends Task {
 									{ id: member.id },
 									{ $set: { points: afterPoints } }
 								);
-                                checkActifRole(member, guild, afterPoints)
+								checkActifRole(member, guild, afterPoints);
 							}
 						}
 					});
