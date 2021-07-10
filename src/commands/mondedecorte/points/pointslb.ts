@@ -24,22 +24,33 @@ export default class pointsLeaderboardCommand extends BotCommand {
 				return a.points - b.points;
 			});
 
-            const coolList: Array<string> = []
+			const coolList: Array<string> = [];
 
-            allPoints.reverse().forEach((user) => {
-                if (user.points == 0) {
-                    return
-                } else {
-                    coolList.push(`<@${user.id}>: ${user.points}`)
-                }
-            })
+			allPoints.reverse().forEach((user) => {
+				if (user.points == 0) {
+					return;
+				} else {
+					coolList.push(`<@${user.id}>: ${user.points} points`);
+				}
+			});
 
-            const embed = new MessageEmbed()
-					.setColor('#36393f')
-					.setAuthor("Leaderboard du serveur", message.guild.iconURL())
-					.setDescription(coolList.slice(0, 10).join('\n'))
-					.setTimestamp();
-            message.reply({ embeds: [embed] });
+			const leaderboardText = `:first_place: ${coolList[0]}
+			:second_place: ${coolList[1]}
+			:third_place: ${coolList[2]}
+			:four: ${coolList[3]}
+			:five: ${coolList[4]}
+			:six: ${coolList[5]}
+			:seven: ${coolList[6]}
+			:eight: ${coolList[7]}
+			:nine: ${coolList[8]}
+			:keycap_ten: ${coolList[9]}`;
+
+			const embed = new MessageEmbed()
+				.setColor('#36393f')
+				.setAuthor('Leaderboard du serveur', message.guild.iconURL())
+				.setDescription(leaderboardText)
+				.setTimestamp();
+			message.reply({ embeds: [embed] });
 		});
 	}
 }
