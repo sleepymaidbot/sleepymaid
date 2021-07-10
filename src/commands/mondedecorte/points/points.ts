@@ -48,8 +48,6 @@ export default class pointsCommand extends BotCommand {
 					.setTimestamp();
 				message.reply({ embeds: [embed] });
 			}
-
-			checkActifRole(message.member, message.guild, userInDB.points);
 		}
 	}
 }
