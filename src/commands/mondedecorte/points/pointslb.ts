@@ -11,11 +11,13 @@ export default class pointsLeaderboardCommand extends BotCommand {
 	constructor() {
 		super('pointsLb', {
 			aliases: ['pointslb'],
+			ownerOnly: true,
 			channel: 'guild'
 		});
 	}
 
 	exec(message: Message) {
+		if (message.guild.id != '324284116021542922') return;
 		var allPoints: Array<User>;
 		activity.find({}).then((docs) => {
 			allPoints = docs;

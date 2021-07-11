@@ -1,12 +1,12 @@
 import { BotCommand } from '../../../lib/extensions/BotCommand';
 import { activity } from '../../../functions/db';
-import { checkActifRole } from '../../../functions/actifrole';
 import { MessageEmbed } from 'discord.js';
 
 export default class pointsCommand extends BotCommand {
 	constructor() {
 		super('points', {
 			aliases: ['points', 'mypoints'],
+			ownerOnly: true,
 			channel: 'guild',
 			args: [
 				{
