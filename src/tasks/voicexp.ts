@@ -6,7 +6,7 @@ import { checkActifRole } from '../functions/actifrole';
 export default class voiceXpTask extends Task {
 	constructor() {
 		super('voiceXpTask', {
-			delay: 300000,
+			delay: 600000,
 			runOnStart: false
 		});
 	}
