@@ -4,7 +4,7 @@ import { activity } from '../functions/db';
 export default class pointsRemoveTask extends Task {
 	constructor() {
 		super('removePoints', {
-			delay: 3600000,
+			delay: 1800000,
 			runOnStart: false
 		});
 	}
