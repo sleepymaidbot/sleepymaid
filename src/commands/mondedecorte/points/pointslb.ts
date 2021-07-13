@@ -18,7 +18,7 @@ export default class pointsLeaderboardCommand extends BotCommand {
 
 	exec(message: Message) {
 		if (message.guild.id != '324284116021542922') return;
-		var allPoints: Array<User>;
+		let allPoints: Array<User>;
 		activity.find({}).then((docs) => {
 			allPoints = docs;
 
@@ -52,7 +52,7 @@ export default class pointsLeaderboardCommand extends BotCommand {
 				.setAuthor('Leaderboard du serveur', message.guild.iconURL())
 				.setDescription(leaderboardText)
 				.setTimestamp();
-			message.reply({ embeds: [embed] });
+			return message.reply({ embeds: [embed] });
 		});
 	}
 }
