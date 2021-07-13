@@ -16,6 +16,7 @@ export default class pointsLeaderboardCommand extends BotCommand {
 		});
 	}
 
+	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 	exec(message: Message) {
 		if (message.guild.id != '324284116021542922') return;
 		let allPoints: Array<User>;
