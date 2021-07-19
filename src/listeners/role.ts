@@ -3,7 +3,8 @@
 import { Listener } from 'discord-akairo';
 import { checkUserRole, performRole } from '../functions/rolesyncer';
 
-const compareArrays = (a, b) => a.length === b.length && a.every((value, index) => value === b[index]);
+const compareArrays = (a, b) =>
+	a.length === b.length && a.every((value, index) => value === b[index]);
 
 export default class RoleListener extends Listener {
 	constructor() {
