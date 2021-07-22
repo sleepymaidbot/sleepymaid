@@ -2,7 +2,7 @@ import { Message, MessageEmbed } from 'discord.js';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { MessageActionRow, MessageButton } from 'discord.js';
 import { inspect } from 'util';
-import { Argument, Command } from 'discord-akairo';
+import { Command } from 'discord-akairo';
 import * as config from '../../config/options';
 
 export default class evaluate extends Command {
@@ -19,6 +19,7 @@ export default class evaluate extends Command {
 		});
 	}
 
+	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 	async exec(message: Message, args) {
 		try {
 			if (
