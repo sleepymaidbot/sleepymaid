@@ -1,4 +1,3 @@
-
 import { Message, MessageEmbed } from 'discord.js';
 import { BotCommand } from '../../lib/extensions/BotCommand';
 

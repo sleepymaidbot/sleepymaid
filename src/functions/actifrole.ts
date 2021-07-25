@@ -13,14 +13,18 @@ export function checkActifRole(
 
 	if (points >= 100) {
 		if (!userRole.includes(actifRole)) {
-			const actifRole = guild.roles.cache.find((role) => role.name === actifRole);
+			const actifRole = guild.roles.cache.find(
+				(role) => role.name === actifRole
+			);
 			member.roles.add(actifRole);
 		}
 	}
 
 	if (points <= 50) {
 		if (userRole.includes(actifRole)) {
-			const actifRole = guild.roles.cache.find((role) => role.name === actifRole);
+			const actifRole = guild.roles.cache.find(
+				(role) => role.name === actifRole
+			);
 			member.roles.remove(actifRole);
 		}
 	}

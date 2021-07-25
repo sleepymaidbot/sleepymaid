@@ -19,7 +19,6 @@ export default class evaluate extends Command {
 		});
 	}
 
-	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 	async exec(message: Message, args) {
 		try {
 			if (
