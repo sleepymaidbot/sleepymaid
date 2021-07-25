@@ -1,4 +1,5 @@
 import { GuildMember, Guild } from 'discord.js';
+import { actifRole } from '../config/lists';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function checkActifRole(
@@ -12,15 +13,15 @@ export function checkActifRole(
 	});
 
 	if (points >= 100) {
-		if (!userRole.includes('Actif')) {
-			const actifRole = guild.roles.cache.find((role) => role.name === 'Actif');
+		if (!userRole.includes(actifRole)) {
+			const actifRole = guild.roles.cache.find((role) => role.name === actifRole);
 			member.roles.add(actifRole);
 		}
 	}
 
 	if (points <= 50) {
-		if (userRole.includes('Actif')) {
-			const actifRole = guild.roles.cache.find((role) => role.name === 'Actif');
+		if (userRole.includes(actifRole)) {
+			const actifRole = guild.roles.cache.find((role) => role.name === actifRole);
 			member.roles.remove(actifRole);
 		}
 	}
