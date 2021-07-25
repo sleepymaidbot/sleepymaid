@@ -33,65 +33,6 @@ export default class color_message_command extends BotCommand {
 				`Clique sur un bouton pour avoir\n la couleur de ton choix.\n${displayRoleString}`
 			);
 
-		/*const row1 = new MessageActionRow()
-			.addComponents(
-				new MessageButton()
-					.setCustomID('Maya')
-					.setLabel('Maya')
-					.setStyle('PRIMARY')
-			)
-			.addComponents(
-				new MessageButton()
-					.setCustomID('Mikado')
-					.setLabel('Mikado')
-					.setStyle('PRIMARY')
-			)
-			.addComponents(
-				new MessageButton()
-					.setCustomID('Rose')
-					.setLabel('Rose')
-					.setStyle('PRIMARY')
-			)
-			.addComponents(
-				new MessageButton()
-					.setCustomID('Lavender')
-					.setLabel('Lavender')
-					.setStyle('PRIMARY')
-			)
-			.addComponents(
-				new MessageButton()
-					.setCustomID('Weed')
-					.setLabel('Weed')
-					.setStyle('PRIMARY')
-			);
-		const row2 = new MessageActionRow()
-			.addComponents(
-				new MessageButton()
-					.setCustomID('Coral')
-					.setLabel('Coral')
-					.setStyle('PRIMARY')
-			)
-			.addComponents(
-				new MessageButton()
-					.setCustomID('Cantaloupe')
-					.setLabel('Cantaloupe')
-					.setStyle('PRIMARY')
-			)
-			.addComponents(
-				new MessageButton()
-					.setCustomID('Mint')
-					.setLabel('Mint')
-					.setStyle('PRIMARY')
-			)
-			.addComponents(
-				new MessageButton()
-					.setCustomID('Smoked')
-					.setLabel('Smoked')
-					.setStyle('PRIMARY')
-			);
-
-		return message.channel.send({ embeds: [embed], components: [row1, row2] });*/
-
 		const row = new MessageActionRow().addComponents(
 			new MessageSelectMenu()
 				.setCustomId('select')
