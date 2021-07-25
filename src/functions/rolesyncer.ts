@@ -1,6 +1,5 @@
 import { colorRole, ColorfulNeedRole } from '../config/lists';
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function checkUserRole(
 	oldMemberRole: string[],
 	newMemberRole: string[]
@@ -49,7 +48,6 @@ export function checkUserRole(
 	}
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function performRole(action: string, role, member) {
 	switch (action) {
 		case 'add':

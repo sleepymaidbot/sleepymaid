@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Listener } from 'discord-akairo';
 
 export default class ReadyListener extends Listener {

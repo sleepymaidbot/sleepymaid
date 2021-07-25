@@ -18,7 +18,6 @@ export default class pointsCommand extends BotCommand {
 		});
 	}
 
-	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 	async exec(message, args) {
 		if (message.guild.id != '324284116021542922') return;
 		const userInDB = await activity.findOne({ id: args.member.id });

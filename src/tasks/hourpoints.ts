@@ -8,7 +8,7 @@ export default class pointsRemoveTask extends Task {
 			runOnStart: false
 		});
 	}
-	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+
 	async exec() {
 		const guild = this.client.guilds.cache.get('324284116021542922');
 

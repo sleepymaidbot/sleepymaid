@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Listener } from "discord-akairo";
 import { Message } from "discord.js";
 

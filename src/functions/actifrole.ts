@@ -1,7 +1,6 @@
 import { GuildMember, Guild } from 'discord.js';
 import { actifRole } from '../config/lists';
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function checkActifRole(
 	member: GuildMember,
 	guild: Guild,

@@ -15,7 +15,6 @@ export default class color_message_command extends BotCommand {
 		});
 	}
 
-	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 	async exec(message) {
 		// eslint-disable-next-line prefer-const
 		let roleArray: string[] = [];
