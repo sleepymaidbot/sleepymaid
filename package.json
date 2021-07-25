@@ -32,6 +32,9 @@
 		"monk": "^7.3.4",
 		"yup": "^0.32.9"
 	},
+	"installConfig": {
+		"pnp": true
+	},
 	"prettier": {
 		"useTabs": true,
 		"quoteProps": "consistent",
