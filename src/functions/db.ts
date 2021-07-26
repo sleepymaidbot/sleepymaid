@@ -1,5 +1,30 @@
-import monk from 'monk';
 import * as config from '../config/options';
-const db = monk(config.mongodb);
-export const activity = db.get('activity');
-activity.createIndex({ id: 1 }, { unique: true });
+import { Schema, model, connect } from 'mongoose';
+import { Snowflake } from 'discord.js';
+
+interface userActivity {
+	id: Snowflake;
+	points: number;
+}
+
+const userActivitySchema = new Schema<userActivity>(
+	{
+		id: { type: String, required: true, index: true },
+		points: { type: Number, required: true, default: 0 }
+	},
+	{ collection: 'activity' }
+);
+
+export const userActivityModel = model<userActivity>(
+	'activity',
+	userActivitySchema
+);
+
+run().catch((err) => console.log(err));
+
+async function run(): Promise<void> {
+	await connect(config.mongourl, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true
+	});
+}

@@ -1,5 +1,5 @@
 import { Listener } from 'discord-akairo';
-import { activity } from '../functions/db';
+import { userActivityModel } from '../functions/db';
 import { Message } from 'discord.js';
 import { pointsBlacklistedChannel } from '../config/lists';
 import { checkActifRole } from '../functions/actifrole';
@@ -22,21 +22,18 @@ export default class Activity extends Listener {
 		if (talkedRecently.has(message.author.id)) {
 			return;
 		} else {
-			// Add points
-			const userInDb = await activity.findOne({ id: message.author.id });
-			if (userInDb == null) {
-				const newUser = {
+			const userInDB = await userActivityModel.findOne({ id: message.author.id });
+			if (userInDB == null || 0) {
+				const newUser = new userActivityModel({
 					id: message.author.id,
 					points: 1
-				};
-				await activity.insert(newUser);
+				});
+				await newUser.save();
 			} else {
-				const beforePoints = userInDb.points;
+				const beforePoints = userInDB.points;
 				const afterPoints = beforePoints + 1;
-				await activity.update(
-					{ id: message.author.id },
-					{ $set: { points: afterPoints } }
-				);
+				userInDB.points = afterPoints;
+				await userInDB.save();
 
 				checkActifRole(message.member, message.guild, afterPoints);
 			}

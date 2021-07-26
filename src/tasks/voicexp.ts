@@ -1,5 +1,5 @@
 import { Task } from 'discord-akairo';
-import { activity } from '../functions/db';
+import { userActivityModel } from '../functions/db';
 import { pointsBlacklistedVoiceChannel } from '../config/lists';
 import { checkActifRole } from '../functions/actifrole';
 
@@ -26,20 +26,18 @@ export default class voiceXpTask extends Task {
 						if (member.voice.mute || member.voice.deaf) {
 							return;
 						} else {
-							const userInDb = await activity.findOne({ id: member.id });
-							if (userInDb == null) {
-								const newUser = {
+							const userInDB = await userActivityModel.findOne({ id: member.id })
+							if (userInDB == null || 0) {
+								const newUser = new userActivityModel({
 									id: member.id,
 									points: 1
-								};
-								await activity.insert(newUser);
+								});
+								await newUser.save();
 							} else {
-								const beforePoints = userInDb.points;
+								const beforePoints = userInDB.points;
 								const afterPoints = beforePoints + 1;
-								await activity.update(
-									{ id: member.id },
-									{ $set: { points: afterPoints } }
-								);
+								userInDB.points = afterPoints;
+								await userInDB.save();
 								checkActifRole(member, guild, afterPoints);
 							}
 						}

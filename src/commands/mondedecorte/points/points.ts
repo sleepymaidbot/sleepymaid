@@ -1,5 +1,5 @@
 import { BotCommand } from '../../../lib/extensions/BotCommand';
-import { activity } from '../../../functions/db';
+import { userActivityModel } from '../../../functions/db'
 import { MessageEmbed } from 'discord.js';
 
 export default class pointsCommand extends BotCommand {
@@ -20,8 +20,7 @@ export default class pointsCommand extends BotCommand {
 
 	async exec(message, args) {
 		if (message.guild.id != '324284116021542922') return;
-		const userInDB = await activity.findOne({ id: args.member.id });
-
+		const userInDB = await userActivityModel.findOne({ id: args.member.id });
 		if (userInDB == null) {
 			const embed = new MessageEmbed()
 				.setColor('#36393f')
