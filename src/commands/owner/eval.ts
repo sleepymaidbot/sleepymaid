@@ -8,7 +8,7 @@ import {
 } from 'discord.js'
 import { inspect } from 'util'
 import { Command } from 'discord-akairo'
-import { config } from '../../config/config'
+import { config } from '../../config/config'
 
 export default class evaluate extends Command {
 	constructor() {

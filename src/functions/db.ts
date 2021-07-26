@@ -1,4 +1,4 @@
-import { config } from '../config/config'
+import { config } from '../config/config'
 import { Schema, model, connect } from 'mongoose'
 import { Snowflake } from 'discord.js'
 
