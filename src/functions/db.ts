@@ -20,11 +20,12 @@ export const userActivityModel = model<userActivity>(
 	userActivitySchema
 );
 
-run().catch((err) => console.log(err));
+startDB().catch((err) => console.log(err)).then(() => console.log('DB connected!'));
 
-async function run(): Promise<void> {
+async function startDB(): Promise<void> {
 	await connect(config.mongourl, {
 		useNewUrlParser: true,
-		useUnifiedTopology: true
+		useUnifiedTopology: true,
+    useCreateIndex: true
 	});
 }
