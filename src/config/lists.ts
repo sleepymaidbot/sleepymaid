@@ -18,7 +18,7 @@ export const ColorfulNeedRole = [
 	'actif'
 ]
 
-export const actifRoleName = 'h'
+export const actifRoleName = 'Actif'
 
 export const pointsBlacklistedChannel = [
 	'777648765065625670', // Mudae

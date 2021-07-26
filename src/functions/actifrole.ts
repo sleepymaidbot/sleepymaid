@@ -1,5 +1,6 @@
 import { GuildMember, Guild } from 'discord.js'
 import { actifRoleName } from '../config/lists'
+import { config } from '../config/config'
 
 export async function checkActifRole(
 	member: GuildMember,
@@ -16,7 +17,11 @@ export async function checkActifRole(
 			const actifRole = guild.roles.cache.find(
 				(role) => role.name === actifRoleName
 			)
-			await member.roles.add(actifRole)
+			if (config.isProduction) {
+				await member.roles.add(actifRole)
+			} else if (config.isDevelopment){
+				console.log(`${member.user.tag} (${member.id}) got actif role but not added because bot is in dev env`)
+			}
 		}
 	}
 
@@ -25,7 +30,11 @@ export async function checkActifRole(
 			const actifRole = guild.roles.cache.find(
 				(role) => role.name === actifRoleName
 			)
-			await member.roles.remove(actifRole)
+			if (config.isProduction) {
+				await member.roles.remove(actifRole)
+			} else if (config.isDevelopment){
+				console.log(`${member.user.tag} (${member.id}) got remove actif role but not remove because bot is in dev env`)
+			}
 		}
 	}
 }
