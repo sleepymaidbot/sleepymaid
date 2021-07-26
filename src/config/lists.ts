@@ -8,7 +8,7 @@ export const colorRole = [
 	'Mint',
 	'Smoked',
 	'Weed'
-];
+]
 
 export const ColorfulNeedRole = [
 	'admin',
@@ -16,7 +16,7 @@ export const ColorfulNeedRole = [
 	'nitro booster',
 	'collaborateur serveur',
 	'actif'
-];
+]
 
 export const actifRole = "Actif"
 
@@ -25,10 +25,10 @@ export const pointsBlacklistedChannel = [
 	'429066457410699274', // Décompte
 	'434861245846519828', // Deleted channel
 	'439155130924007444' // bots et vocal
-];
+]
 
 export const pointsBlacklistedVoiceChannel = [
 	'699722283794563144', // afk
 	'787059609302073344', // rejoin
 	'792808472412553216' // ligne
-];
+]

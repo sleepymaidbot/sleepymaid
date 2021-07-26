@@ -1,5 +1,5 @@
-import { Message } from 'discord.js';
-import { Command } from 'discord-akairo';
+import { Message } from 'discord.js'
+import { Command } from 'discord-akairo'
 
 export default class genshinCommand extends Command {
 	constructor() {
@@ -12,11 +12,11 @@ export default class genshinCommand extends Command {
 				usage: 'fuckgenshin',
 				examples: ['fuckgenshin']
 			}
-		});
+		})
 	}
 
 	public async exec(message: Message): Promise<void> {
-		message.util.send('<@&851958560413319179>');
-		message.delete();
+		message.util.send('<@&851958560413319179>')
+		message.delete()
 	}
 }

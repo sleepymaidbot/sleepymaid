@@ -1,1 +1,1 @@
-export const blacklist: string[] = ['000'];
+export const blacklist: string[] = ['000']

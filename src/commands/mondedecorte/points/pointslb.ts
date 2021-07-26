@@ -1,10 +1,10 @@
-import { BotCommand } from '../../../lib/extensions/BotCommand';
-import { Message, MessageEmbed } from 'discord.js';
-import { userActivityModel } from '../../../functions/db';
+import { BotCommand } from '../../../lib/extensions/BotCommand'
+import { Message, MessageEmbed } from 'discord.js'
+import { userActivityModel } from '../../../functions/db'
 
 interface User {
-	id: string;
-	points: number;
+	id: string
+	points: number
 }
 
 export default class pointsLeaderboardCommand extends BotCommand {
@@ -13,28 +13,28 @@ export default class pointsLeaderboardCommand extends BotCommand {
 			aliases: ['pointslb'],
 			ownerOnly: true,
 			channel: 'guild'
-		});
+		})
 	}
 
 	exec(message: Message) {
-		if (message.guild.id != '324284116021542922') return;
-		let allPoints: Array<User>;
+		if (message.guild.id != '324284116021542922') return
+		let allPoints: Array<User>
 		userActivityModel.find({}).then((docs) => {
-			allPoints = docs;
+			allPoints = docs
 
 			allPoints.sort((a, b) => {
-				return a.points - b.points;
-			});
+				return a.points - b.points
+			})
 
-			const coolList: Array<string> = [];
+			const coolList: Array<string> = []
 
 			allPoints.reverse().forEach((user) => {
 				if (user.points == 0) {
-					return;
+					return
 				} else {
-					coolList.push(`<@${user.id}>: ${user.points} points`);
+					coolList.push(`<@${user.id}>: ${user.points} points`)
 				}
-			});
+			})
 
 			const leaderboardText = `:first_place: ${coolList[0]}
 			:second_place: ${coolList[1]}
@@ -45,14 +45,14 @@ export default class pointsLeaderboardCommand extends BotCommand {
 			:seven: ${coolList[6]}
 			:eight: ${coolList[7]}
 			:nine: ${coolList[8]}
-			:keycap_ten: ${coolList[9]}`;
+			:keycap_ten: ${coolList[9]}`
 
 			const embed = new MessageEmbed()
 				.setColor('#36393f')
 				.setAuthor('Leaderboard du serveur', message.guild.iconURL())
 				.setDescription(leaderboardText)
-				.setTimestamp();
-			return message.reply({ embeds: [embed] });
-		});
+				.setTimestamp()
+			return message.reply({ embeds: [embed] })
+		})
 	}
 }

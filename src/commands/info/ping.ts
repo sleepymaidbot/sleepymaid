@@ -1,5 +1,5 @@
-import { Message, MessageEmbed } from 'discord.js';
-import { BotCommand } from '../../lib/extensions/BotCommand';
+import { Message, MessageEmbed } from 'discord.js'
+import { BotCommand } from '../../lib/extensions/BotCommand'
 
 export default class PingCommand extends BotCommand {
 	constructor() {
@@ -12,20 +12,18 @@ export default class PingCommand extends BotCommand {
 				usage: 'ping',
 				examples: ['ping']
 			}
-		});
+		})
 	}
 
 	public async exec(message: Message): Promise<void> {
-		const sentMessage = await message.util.send('Pong!');
+		const sentMessage = await message.util.send('Pong!')
 		const timestamp: number = message.editedTimestamp
 			? message.editedTimestamp
-			: message.createdTimestamp;
+			: message.createdTimestamp
 		const botLatency = `\`\`\`\n ${Math.floor(
 			sentMessage.createdTimestamp - timestamp
-		)}ms \`\`\``;
-		const apiLatency = `\`\`\`\n ${Math.round(
-			message.client.ws.ping
-		)}ms \`\`\``;
+		)}ms \`\`\``
+		const apiLatency = `\`\`\`\n ${Math.round(message.client.ws.ping)}ms \`\`\``
 		const pingEmbed = new MessageEmbed()
 			.setTitle('Pong!  🏓')
 			.addField('Bot Latency', botLatency, true)
@@ -34,20 +32,20 @@ export default class PingCommand extends BotCommand {
 				message.author.username,
 				message.author.displayAvatarURL({ dynamic: true })
 			)
-			.setTimestamp();
-		await sentMessage.edit({ content: null, embeds: [pingEmbed] });
+			.setTimestamp()
+		await sentMessage.edit({ content: null, embeds: [pingEmbed] })
 	}
 
 	public async execSlash(message): Promise<void> {
-		const timestamp1 = message.createdTimestamp;
-		await message.reply('Pong!');
+		const timestamp1 = message.createdTimestamp
+		await message.reply('Pong!')
 		const timestamp2 = await message
 			.fetchReply()
-			.then((m) => (m as Message).createdTimestamp);
+			.then((m) => (m as Message).createdTimestamp)
 		const botLatency = `\`\`\`\n ${Math.floor(
 			timestamp2 - timestamp1
-		)}ms \`\`\``;
-		const apiLatency = `\`\`\`\n ${Math.round(this.client.ws.ping)}ms \`\`\``;
+		)}ms \`\`\``
+		const apiLatency = `\`\`\`\n ${Math.round(this.client.ws.ping)}ms \`\`\``
 		const embed = new MessageEmbed()
 			.setTitle('Pong!  🏓')
 			.addField('Bot Latency', botLatency, true)
@@ -56,10 +54,10 @@ export default class PingCommand extends BotCommand {
 				message.user.username,
 				message.user.displayAvatarURL({ dynamic: true })
 			)
-			.setTimestamp();
+			.setTimestamp()
 		await message.editReply({
 			content: null,
 			embeds: [embed]
-		});
+		})
 	}
 }

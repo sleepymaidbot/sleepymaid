@@ -1,6 +1,6 @@
 //import { CommandInteraction } from 'discord.js';
-import { Message } from 'discord.js';
-import { BotCommand } from '../../lib/extensions/BotCommand';
+import { Message } from 'discord.js'
+import { BotCommand } from '../../lib/extensions/BotCommand'
 export default class PingCommand extends BotCommand {
 	constructor() {
 		super('help', {
@@ -12,7 +12,7 @@ export default class PingCommand extends BotCommand {
 				usage: 'help',
 				examples: ['help']
 			}
-		});
+		})
 	}
 
 	public async exec(message: Message): Promise<void> {
@@ -31,7 +31,7 @@ Helplines for Men from thecalmzone.net: 0800 58 58 58
 ChildLine (childline.org.uk), for those 19 and under: 0800-11-11
 
 For other countries check <https://www.reddit.com/r/SuicideWatch/wiki/hotlines>`
-		});
+		})
 	}
 
 	public async execSlash(message): Promise<void> {
@@ -50,6 +50,6 @@ Helplines for Men from thecalmzone.net: 0800 58 58 58
 ChildLine (childline.org.uk), for those 19 and under: 0800-11-11
 
 For other countries check <https://www.reddit.com/r/SuicideWatch/wiki/hotlines>`
-		});
+		})
 	}
 }
