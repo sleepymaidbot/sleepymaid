@@ -18,6 +18,8 @@
 		"@types/prettier": "^2",
 		"@typescript-eslint/eslint-plugin": "^4.28.1",
 		"@typescript-eslint/parser": "^4.28.1",
+		"@yarnpkg/pnpify": "^3.0.0-rc.14",
+		"discord-api-types": "next",
 		"eslint": "^7.29.0",
 		"eslint-config-prettier": "^8.3.0",
 		"prettier": "^2.3.2",
@@ -28,8 +30,7 @@
 	},
 	"dependencies": {
 		"discord-akairo": "git+https://github.com/SkyBlockDev/discord-akairo.git",
-		"discord-api-types": "next",
-		"discord.js": "dev",
+		"discord.js": "^13.0.0-dev.4886ae2.1627128182",
 		"mongoose": "^5.13.3",
 		"yup": "^0.32.9"
 	},
