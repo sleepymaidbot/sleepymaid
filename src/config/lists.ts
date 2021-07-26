@@ -18,7 +18,7 @@ export const ColorfulNeedRole = [
 	'actif'
 ]
 
-export const actifRoleName = 'Actif'
+export const actifRoleName = 'h'
 
 export const pointsBlacklistedChannel = [
 	'777648765065625670', // Mudae
@@ -32,3 +32,5 @@ export const pointsBlacklistedVoiceChannel = [
 	'787059609302073344', // rejoin
 	'792808472412553216' // ligne
 ]
+
+export const slashGuildsIds = ['324284116021542922']

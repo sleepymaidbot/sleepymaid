@@ -1,17 +1,16 @@
 //import { CommandInteraction } from 'discord.js';
 import { Message } from 'discord.js'
 import { BotCommand } from '../../lib/extensions/BotCommand'
+import { slashGuildsIds } from '../../config/lists'
+
 export default class PingCommand extends BotCommand {
 	constructor() {
 		super('help', {
 			aliases: ['help'],
 			category: 'info',
-			slash: true,
-			description: {
-				content: 'Help me',
-				usage: 'help',
-				examples: ['help']
-			}
+			slash: false,
+			slashGuilds: slashGuildsIds,
+			description: 'Help me'
 		})
 	}
 

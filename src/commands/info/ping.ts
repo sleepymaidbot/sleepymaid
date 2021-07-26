@@ -1,17 +1,15 @@
 import { Message, MessageEmbed } from 'discord.js'
 import { BotCommand } from '../../lib/extensions/BotCommand'
+import { slashGuildsIds } from '../../config/lists'
 
 export default class PingCommand extends BotCommand {
 	constructor() {
 		super('ping', {
 			aliases: ['ping'],
 			category: 'info',
-			slash: true,
-			description: {
-				content: 'Gets the latency of the bot',
-				usage: 'ping',
-				examples: ['ping']
-			}
+			slash: false,
+			slashGuilds: slashGuildsIds,
+			description: 'Gets the latency of the bot'
 		})
 	}
 
