@@ -1,3 +1,6 @@
 import { BotClient } from './lib/extensions/BotClient'
-const client = new BotClient()
+import { config } from './config/config'
+
+
+const client: BotClient = new BotClient(config)
 client.start()

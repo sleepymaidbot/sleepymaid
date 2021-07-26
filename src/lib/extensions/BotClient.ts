@@ -7,7 +7,7 @@ import {
 } from 'discord-akairo'
 import { Intents } from 'discord.js'
 import { join } from 'path'
-import * as config from '../../config/options'
+import { Config } from '../utils/config'
 
 const myIntents = new Intents([
 	'GUILDS',
@@ -20,30 +20,15 @@ const myIntents = new Intents([
 ])
 
 export class BotClient extends AkairoClient {
-	public commandHandler: CommandHandler = new CommandHandler(this, {
-		prefix: config.prefix,
-		commandUtil: true,
-		handleEdits: true,
-		directory: join(__dirname, '..', '..', 'commands'),
-		allowMention: true,
-		automateCategories: true
-	})
-	public listenerHandler: ListenerHandler = new ListenerHandler(this, {
-		directory: join(__dirname, '..', '..', 'listeners'),
-		automateCategories: true
-	})
-	public inhibitorHandler: InhibitorHandler = new InhibitorHandler(this, {
-		directory: join(__dirname, '..', '..', 'inhibitors')
-	})
-
-	public taskHandler: TaskHandler = new TaskHandler(this, {
-		directory: join(__dirname, '..', '..', 'tasks')
-	})
-
-	public constructor() {
+	public listenerHandler: ListenerHandler;
+	public inhibitorHandler: InhibitorHandler;
+	public commandHandler: CommandHandler;
+	public taskHandler: TaskHandler;
+	public config: Config;
+	public constructor(config: Config) {
 		super(
 			{
-				ownerID: ['324281236728053760'],
+				ownerID: config.owners,
 				intents: myIntents
 			},
 			{
@@ -53,6 +38,34 @@ export class BotClient extends AkairoClient {
 				intents: myIntents
 			}
 		)
+
+		this.token = config.token;
+		this.config = config;
+
+		this.listenerHandler = new ListenerHandler(this, {
+			directory: join(__dirname, '..', '..', 'listeners'),
+			automateCategories: true
+		})
+
+		this.inhibitorHandler = new InhibitorHandler(this, {
+			directory: join(__dirname, '..', '..', 'inhibitors')
+		})
+
+		this.taskHandler = new TaskHandler(this, {
+			directory: join(__dirname, '..', '..', 'tasks')
+		})
+
+		this.commandHandler = new CommandHandler(this, {
+			prefix: config.prefix,
+			commandUtil: true,
+			handleEdits: true,
+			directory: join(__dirname, '..', '..', 'commands'),
+			allowMention: true,
+			automateCategories: true,
+			autoRegisterSlashCommands: true
+		})
+
+
 	}
 	private async _init(): Promise<void> {
 		this.commandHandler.useListenerHandler(this.listenerHandler)
@@ -83,6 +96,6 @@ export class BotClient extends AkairoClient {
 	public async start(): Promise<string> {
 		await this._init()
 
-		return this.login(config.token)
+		return this.login(this.token)
 	}
 }

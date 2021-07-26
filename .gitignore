@@ -161,6 +161,6 @@ temp/
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,node,yarn
 
-src/config/options.ts
+src/config/config.ts
 *.disable
 *.exe

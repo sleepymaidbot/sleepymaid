@@ -1,4 +1,4 @@
-import * as config from '../config/options'
+import { config } from '../config/config'
 import { Schema, model, connect } from 'mongoose'
 import { Snowflake } from 'discord.js'
 
@@ -25,7 +25,7 @@ startDB()
 	.then(() => console.log('DB connected!'))
 
 async function startDB(): Promise<void> {
-	await connect(config.mongourl, {
+	await connect(config.db, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 		useCreateIndex: true
