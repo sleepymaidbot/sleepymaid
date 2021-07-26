@@ -40,7 +40,10 @@ export default class ColorRoleSelectsListener extends Listener {
 								)
 								interaction.member.roles.remove(rrole)
 							})
-							interaction.reply({ content: 'Removed all your color role!', ephemeral: true })
+							interaction.reply({
+								content: 'Removed all your color role!',
+								ephemeral: true
+							})
 						} else {
 							interaction.member.roles.add(role)
 							const roleToRemove: string[] = []
@@ -57,10 +60,12 @@ export default class ColorRoleSelectsListener extends Listener {
 								)
 								interaction.member.roles.remove(rrole)
 							})
-							interaction.reply({ content: `Gave the <@&${role.id}> role!`, ephemeral: true })
+							interaction.reply({
+								content: `Gave the <@&${role.id}> role!`,
+								ephemeral: true
+							})
 						}
 					}
-					
 				}
 			}
 		} /*else if (interaction.isButton()) {
