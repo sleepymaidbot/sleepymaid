@@ -6,7 +6,7 @@ export default class pointsRemoveTask extends Task {
 	constructor() {
 		super('removePoints', {
 			delay: 1800000,
-			runOnStart: true
+			runOnStart: false
 		})
 	}
 
