@@ -1,9 +1,5 @@
 import { BotCommand } from '../../lib/extensions/BotCommand'
-import {
-	MessageEmbed,
-	MessageActionRow,
-	MessageSelectMenu
-} from 'discord.js'
+import { MessageEmbed, MessageActionRow, MessageSelectMenu } from 'discord.js'
 import { colorRole } from '../../config/lists'
 export default class color_message_command extends BotCommand {
 	constructor() {
