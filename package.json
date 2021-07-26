@@ -30,7 +30,7 @@
 		"discord-akairo": "git+https://github.com/SkyBlockDev/discord-akairo.git",
 		"discord-api-types": "next",
 		"discord.js": "dev",
-		"monk": "^7.3.4",
+		"mongoose": "^5.13.3",
 		"yup": "^0.32.9"
 	},
 	"installConfig": {
