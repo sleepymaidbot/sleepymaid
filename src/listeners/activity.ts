@@ -37,7 +37,7 @@ export default class Activity extends Listener {
 				userInDB.points = afterPoints
 				await userInDB.save()
 
-				checkActifRole(message.member, message.guild, afterPoints)
+				await checkActifRole(message.member, message.guild, afterPoints)
 			}
 
 			talkedRecently.add(message.author.id)
