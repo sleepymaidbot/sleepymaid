@@ -1,7 +1,7 @@
 import { GuildMember, Guild } from 'discord.js'
-import { actifRole } from '../config/lists'
+import { actifRoleName } from '../config/lists'
 
-export function checkActifRole(
+export async function checkActifRole(
 	member: GuildMember,
 	guild: Guild,
 	points: number
@@ -12,20 +12,20 @@ export function checkActifRole(
 	})
 
 	if (points >= 100) {
-		if (!userRole.includes(actifRole)) {
+		if (!userRole.includes(actifRoleName)) {
 			const actifRole = guild.roles.cache.find(
-				(role) => role.name === actifRole
+				(role) => role.name === actifRoleName
 			)
-			member.roles.add(actifRole)
+			await member.roles.add(actifRole)
 		}
 	}
 
 	if (points <= 50) {
-		if (userRole.includes(actifRole)) {
+		if (userRole.includes(actifRoleName)) {
 			const actifRole = guild.roles.cache.find(
-				(role) => role.name === actifRole
+				(role) => role.name === actifRoleName
 			)
-			member.roles.remove(actifRole)
+			await member.roles.remove(actifRole)
 		}
 	}
 }
