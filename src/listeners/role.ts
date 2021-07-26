@@ -3,9 +3,6 @@
 import { Listener } from 'discord-akairo'
 import { checkUserRole, performRole } from '../functions/rolesyncer'
 
-const compareArrays = (a, b) =>
-	a.length === b.length && a.every((value, index) => value === b[index])
-
 export default class RoleListener extends Listener {
 	constructor() {
 		super('guildMemberUpdate', {
@@ -26,11 +23,10 @@ export default class RoleListener extends Listener {
 		const role = newMember.guild.roles.cache.find(
 			(role) => role.name === 'Colorful'
 		)
-		const member = newMember
 
-		if (compareArrays(oldMemberRole, newMemberRole) == false) {
+		if (oldMember.roles.cache.size != newMember.roles.cache.size) {
 			const response = checkUserRole(oldMemberRole, newMemberRole)
-			performRole(response, role, member)
+			performRole(response, role, newMember)
 		}
 	}
 }
