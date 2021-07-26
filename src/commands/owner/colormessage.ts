@@ -39,6 +39,10 @@ export default class color_message_command extends BotCommand {
 				.setPlaceholder('Nothing selected')
 				.addOptions([
 					{
+						label: 'Aucune couleur',
+						value: 'nothing'
+					},
+					{
 						label: 'Maya',
 						value: 'Maya'
 					},
@@ -76,14 +80,6 @@ export default class color_message_command extends BotCommand {
 					}
 				])
 		)
-
-		const remove = new MessageActionRow().addComponents(
-			new MessageButton()
-				.setCustomId('remove')
-				.setLabel('Remove my color')
-				.setStyle('DANGER')
-		)
-
-		message.channel.send({ embeds: [embed], components: [row, remove] })
+		message.channel.send({ embeds: [embed], components: [row] })
 	}
 }

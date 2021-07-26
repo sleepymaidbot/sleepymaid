@@ -27,26 +27,43 @@ export default class ColorRoleSelectsListener extends Listener {
 					if (memberRole.includes(buttonID)) {
 						interaction.member.roles.remove(role)
 					} else {
-						interaction.member.roles.add(role)
-						const roleToRemove: string[] = []
-						memberRole.forEach((eachRole) => {
-							if (eachRole == role.name) {
-								return
-							} else if (colorRole.includes(eachRole)) {
-								roleToRemove.push(eachRole)
-							}
-						})
-						roleToRemove.forEach((eachRole) => {
-							const rrole = interaction.guild.roles.cache.find(
-								(role) => role.name === eachRole
-							)
-							interaction.member.roles.remove(rrole)
-						})
+						if (buttonID === 'nothing') {
+							const roleToRemove: string[] = []
+							memberRole.forEach((eachRole) => {
+								if (colorRole.includes(eachRole)) {
+									roleToRemove.push(eachRole)
+								}
+							})
+							roleToRemove.forEach((eachRole) => {
+								const rrole = interaction.guild.roles.cache.find(
+									(role) => role.name === eachRole
+								)
+								interaction.member.roles.remove(rrole)
+							})
+							interaction.reply({ content: 'Removed all your color role!', ephemeral: true })
+						} else {
+							interaction.member.roles.add(role)
+							const roleToRemove: string[] = []
+							memberRole.forEach((eachRole) => {
+								if (eachRole == role.name) {
+									return
+								} else if (colorRole.includes(eachRole)) {
+									roleToRemove.push(eachRole)
+								}
+							})
+							roleToRemove.forEach((eachRole) => {
+								const rrole = interaction.guild.roles.cache.find(
+									(role) => role.name === eachRole
+								)
+								interaction.member.roles.remove(rrole)
+							})
+							interaction.reply({ content: `Gave the <@&${role.id}> role!`, ephemeral: true })
+						}
 					}
-					interaction.reply({ content: 'Done!', ephemeral: true })
+					
 				}
 			}
-		} else if (interaction.isButton()) {
+		} /*else if (interaction.isButton()) {
 			if (
 				interaction.guildId == '324284116021542922' &&
 				interaction.channelId == '857342694691307540'
@@ -73,6 +90,6 @@ export default class ColorRoleSelectsListener extends Listener {
 					}
 				}
 			}
-		}
+		}*/
 	}
 }
