@@ -145,10 +145,12 @@ temp/
 # https://yarnpkg.com/advanced/qa#which-files-should-be-gitignored
 
 .yarn/*
+!.yarn/patches
 !.yarn/releases
 !.yarn/plugins
 !.yarn/sdks
 !.yarn/versions
+.pnp.*
 
 # if you are NOT using Zero-installs, then:
 # comment the following lines
