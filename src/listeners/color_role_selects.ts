@@ -68,6 +68,6 @@ export default class ColorRoleSelectsListener extends Listener {
 					}
 				}
 			}
-		} 
+		}
 	}
 }

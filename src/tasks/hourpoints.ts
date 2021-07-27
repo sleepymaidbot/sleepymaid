@@ -1,6 +1,6 @@
 import { Task } from 'discord-akairo'
 import { TextChannel } from 'discord.js'
-import { userActivityModel } from '../functions/db'
+import { userActivityModel } from '../lib/utils/db'
 
 export default class pointsRemoveTask extends Task {
 	constructor() {
@@ -11,8 +11,6 @@ export default class pointsRemoveTask extends Task {
 	}
 
 	async exec() {
-		
-
 		await userActivityModel.find({}).then(async (docs) => {
 			docs.forEach(async (user) => {
 				const userInDB = await userActivityModel.findOne({ id: user.id })
