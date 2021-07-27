@@ -43,8 +43,16 @@ export default class MyRewards extends BotCommand {
 				hasCustomRole = '🟡'
 			}
 		}
+		let hasColorful = '❌'
+		const corole = message.guild.roles.cache.find(
+			(role) => role.name === 'Colorful'
+		)
+		if (message.member.roles.cache.has(corole.id)) {
+			hasColorful = '✅'
+		}
 
-		embed.setDescription(`Voici une liste des récompense que tu a obtenu avec des points:
+		embed.setDescription(`Voici une liste des récompense que tu a obtenu:
+		- Rôle <@&857324294791364639>: ${hasColorful}
          - Rôle <@&842387653394563074>: ${hasActifRole}
          - Rôle <@&869637334126170112>: ${hasCustomRole}`)
 
