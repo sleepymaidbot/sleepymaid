@@ -84,7 +84,7 @@ export class BotClient extends AkairoClient {
 
 		startDB()
 			.catch((err) => console.log(err))
-			.then(() => console.log('DB connected!'))
+			.then(() => console.log('Successfully loaded MongoDB.'))
 
 		for (const loader of Object.keys(loaders)) {
 			try {
