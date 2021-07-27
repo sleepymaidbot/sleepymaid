@@ -45,7 +45,4 @@ const customRoleSchema = new Schema<customRole>(
 	{ collection: 'customRole' }
 )
 
-export const customRoleModel = model<customRole>(
-	'customRole',
-	customRoleSchema
-)
+export const customRoleModel = model<customRole>('customRole', customRoleSchema)
