@@ -30,4 +30,22 @@ export const userActivityModel = model<userActivity>(
 	userActivitySchema
 )
 
+// Custom role
+
+interface customRole {
+	id: Snowflake
+	role: Snowflake
 }
+
+const customRoleSchema = new Schema<customRole>(
+	{
+		id: { type: String, required: true, index: true },
+		role: { type: String, required: true, index: true }
+	},
+	{ collection: 'customRole' }
+)
+
+export const customRoleModel = model<customRole>(
+	'customRole',
+	customRoleSchema
+)
