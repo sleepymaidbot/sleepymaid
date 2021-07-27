@@ -44,7 +44,7 @@ export default class MyRewards extends BotCommand {
 				hasCustomRole = '🟡'
 				embed.addField(
 					'Une récompense non réclamer',
-					`\`\`\`Tu n'a pas réclamer ton rôle custom. Pour le réclamer fait "${config.prefix}customrole create <nom>" <nom> étant le nom désiré du rôle.\`\`\``,
+					`\`\`\`Tu n'a pas réclamer ton rôle custom. \nPour le réclamer fait "${config.prefix}customrole create <nom>" \n<nom> étant le nom désiré du rôle.\`\`\``,
 					true
 				)
 			}
