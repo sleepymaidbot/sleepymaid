@@ -3,6 +3,7 @@ import { checkUserActivityPoints } from '../../../../functions/actifrole'
 import { BotCommand } from '../../../../lib/extensions/BotCommand'
 import { getUserCustomRoleId } from '../../../../functions/customrole'
 import { customRoleModel } from '../../../../lib/utils/db'
+import { config } from '../../../../config/config'
 
 export default class customRole extends BotCommand {
 	constructor() {
@@ -64,8 +65,8 @@ export default class customRole extends BotCommand {
 								})
 								await newRoleDb.save()
 								embed.setDescription(`Ton rôle custom a été créer <@&${role.id}>.
-                                Pour modifier le nom fait la commande  \`\`-cr name <name>\`\`
-                                Pour modifier la couleur fait la commande \`\`-cr color <color>\`\``)
+                                Pour modifier le nom fait la commande  \`\`${config.prefix}cr name <name>\`\`
+                                Pour modifier la couleur fait la commande \`\`${config.prefix}cr color <color>\`\``)
 								await message.reply({ embeds: [embed] })
 							})
 							.catch(console.error)
