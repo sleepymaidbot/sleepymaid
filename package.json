@@ -25,14 +25,12 @@
 		"prettier": "^2.3.2",
 		"rimraf": "^3.0.2",
 		"source-map-support": "^0.5.19",
-		"tsc-watch": "^4.4.0",
 		"typescript": "^4.3.5"
 	},
 	"dependencies": {
 		"discord-akairo": "git+https://github.com/SkyBlockDev/discord-akairo.git",
 		"discord.js": "^13.0.0-dev.4886ae2.1627128182",
-		"mongoose": "^5.13.3",
-		"yup": "^0.32.9"
+		"mongoose": "^5.13.3"
 	},
 	"installConfig": {
 		"pnp": true
