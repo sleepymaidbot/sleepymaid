@@ -1,4 +1,4 @@
-import { config } from '../config/config'
+import { config } from '../../config/config'
 import { Schema, model, connect } from 'mongoose'
 import { Snowflake } from 'discord.js'
 
@@ -20,11 +20,7 @@ export const userActivityModel = model<userActivity>(
 	userActivitySchema
 )
 
-startDB()
-	.catch((err) => console.log(err))
-	.then(() => console.log('DB connected!'))
-
-async function startDB(): Promise<void> {
+export async function startDB(): Promise<void> {
 	await connect(config.db, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
