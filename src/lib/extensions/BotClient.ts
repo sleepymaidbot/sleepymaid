@@ -8,6 +8,7 @@ import {
 import { Intents } from 'discord.js'
 import { join } from 'path'
 import { Config } from '../utils/config'
+import { startDB } from '../utils/db'
 
 const myIntents = new Intents([
 	'GUILDS',
@@ -20,11 +21,11 @@ const myIntents = new Intents([
 ])
 
 export class BotClient extends AkairoClient {
-	public listenerHandler: ListenerHandler;
-	public inhibitorHandler: InhibitorHandler;
-	public commandHandler: CommandHandler;
-	public taskHandler: TaskHandler;
-	public config: Config;
+	public listenerHandler: ListenerHandler
+	public inhibitorHandler: InhibitorHandler
+	public commandHandler: CommandHandler
+	public taskHandler: TaskHandler
+	public config: Config
 	public constructor(config: Config) {
 		super(
 			{
@@ -39,8 +40,8 @@ export class BotClient extends AkairoClient {
 			}
 		)
 
-		this.token = config.token;
-		this.config = config;
+		this.token = config.token
+		this.config = config
 
 		this.listenerHandler = new ListenerHandler(this, {
 			directory: join(__dirname, '..', '..', 'listeners'),
@@ -64,8 +65,6 @@ export class BotClient extends AkairoClient {
 			automateCategories: true,
 			autoRegisterSlashCommands: true
 		})
-
-
 	}
 	private async _init(): Promise<void> {
 		this.commandHandler.useListenerHandler(this.listenerHandler)
@@ -82,6 +81,11 @@ export class BotClient extends AkairoClient {
 			inhibitors: this.inhibitorHandler,
 			tasks: this.taskHandler
 		}
+
+		startDB()
+			.catch((err) => console.log(err))
+			.then(() => console.log('DB connected!'))
+
 		for (const loader of Object.keys(loaders)) {
 			try {
 				loaders[loader].loadAll()
