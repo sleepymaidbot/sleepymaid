@@ -1,6 +1,6 @@
 import { BotCommand } from '../../../lib/extensions/BotCommand'
 import { Message, MessageEmbed } from 'discord.js'
-import { userActivityModel } from '../../../functions/db'
+import { userActivityModel } from '../../../lib/utils/db'
 
 interface User {
 	id: string

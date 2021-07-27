@@ -1,5 +1,5 @@
 import { BotCommand } from '../../../lib/extensions/BotCommand'
-import { userActivityModel } from '../../../functions/db'
+import { userActivityModel } from '../../../lib/utils/db'
 import { MessageEmbed } from 'discord.js'
 
 export default class pointsCommand extends BotCommand {

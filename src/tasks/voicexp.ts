@@ -1,5 +1,5 @@
 import { Task } from 'discord-akairo'
-import { userActivityModel } from '../functions/db'
+import { userActivityModel } from '../lib/utils/db'
 import { pointsBlacklistedVoiceChannel } from '../config/lists'
 import { checkActifRole } from '../functions/actifrole'
 
