@@ -1,6 +1,7 @@
 import { BotCommand } from '../../../lib/extensions/BotCommand'
 import { userActivityModel } from '../../../lib/utils/db'
 import { MessageEmbed } from 'discord.js'
+import { checkUserActivityPoints } from '../../../functions/actifrole'
 
 export default class pointsCommand extends BotCommand {
 	constructor() {
@@ -20,8 +21,9 @@ export default class pointsCommand extends BotCommand {
 
 	async exec(message, args) {
 		if (message.guild.id != '324284116021542922') return
-		const userInDB = await userActivityModel.findOne({ id: args.member.id })
-		if (userInDB == null) {
+		//const userInDB = await userActivityModel.findOne({ id: args.member.id })
+		const userInDB = await checkUserActivityPoints(args.member)
+		if (userInDB == 0) {
 			const embed = new MessageEmbed()
 				.setColor('#36393f')
 				.setAuthor(message.author.tag, message.author.avatarURL())
@@ -31,18 +33,18 @@ export default class pointsCommand extends BotCommand {
 				.setTimestamp()
 			message.reply({ embeds: [embed] })
 		} else {
-			if (userInDB.points == 1) {
+			if (userInDB == 1) {
 				const embed = new MessageEmbed()
 					.setColor('#36393f')
 					.setAuthor(message.author.tag, message.author.avatarURL())
-					.setDescription(`<@${args.member.id}> a ${userInDB.points} point.`)
+					.setDescription(`<@${args.member.id}> a ${userInDB} point.`)
 					.setTimestamp()
 				message.reply({ embeds: [embed] })
 			} else {
 				const embed = new MessageEmbed()
 					.setColor('#36393f')
 					.setAuthor(message.author.tag, message.author.avatarURL())
-					.setDescription(`<@${args.member.id}> a ${userInDB.points} points.`)
+					.setDescription(`<@${args.member.id}> a ${userInDB} points.`)
 					.setTimestamp()
 				message.reply({ embeds: [embed] })
 			}
