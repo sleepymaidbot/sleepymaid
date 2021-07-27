@@ -21,7 +21,6 @@ export default class pointsCommand extends BotCommand {
 
 	async exec(message, args) {
 		if (message.guild.id != '324284116021542922') return
-		//const userInDB = await userActivityModel.findOne({ id: args.member.id })
 		const userInDB = await checkUserActivityPoints(args.member)
 		if (userInDB == 0) {
 			const embed = new MessageEmbed()
