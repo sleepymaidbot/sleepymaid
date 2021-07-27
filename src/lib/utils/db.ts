@@ -2,6 +2,16 @@ import { config } from '../../config/config'
 import { Schema, model, connect } from 'mongoose'
 import { Snowflake } from 'discord.js'
 
+export async function startDB(): Promise<void> {
+	await connect(config.db, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		useCreateIndex: true
+	})
+}
+
+// userActivity
+
 interface userActivity {
 	id: Snowflake
 	points: number
@@ -20,10 +30,4 @@ export const userActivityModel = model<userActivity>(
 	userActivitySchema
 )
 
-export async function startDB(): Promise<void> {
-	await connect(config.db, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-		useCreateIndex: true
-	})
 }
