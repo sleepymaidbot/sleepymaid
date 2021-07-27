@@ -1,5 +1,4 @@
 import { BotCommand } from '../../../lib/extensions/BotCommand'
-import { userActivityModel } from '../../../lib/utils/db'
 import { MessageEmbed } from 'discord.js'
 import { checkUserActivityPoints } from '../../../functions/actifrole'
 
