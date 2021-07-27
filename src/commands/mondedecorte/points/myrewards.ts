@@ -2,6 +2,7 @@ import { Message, MessageEmbed } from 'discord.js'
 import { checkUserActivityPoints } from '../../../functions/actifrole'
 import { BotCommand } from '../../../lib/extensions/BotCommand'
 import { getUserCustomRoleId } from '../../../functions/customrole'
+import { config } from '../../../config/config'
 
 export default class MyRewards extends BotCommand {
 	constructor() {
@@ -41,6 +42,11 @@ export default class MyRewards extends BotCommand {
 				}
 			} else {
 				hasCustomRole = '🟡'
+				embed.addField(
+					'Une récompense non réclamer',
+					`\`\`\`Tu n'a pas réclamer ton rôle custom. Pour le réclamer fait "${config.prefix}customrole create <nom>" <nom> étant le nom désiré du rôle.\`\`\``,
+					true
+				)
 			}
 		}
 		let hasColorful = '❌'
