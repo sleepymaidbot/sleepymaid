@@ -1,4 +1,4 @@
-import { GuildMember, Guild, } from 'discord.js'
+import { GuildMember, Guild } from 'discord.js'
 import { config } from '../config/config'
 import { userActivityModel } from '../lib/utils/db'
 
