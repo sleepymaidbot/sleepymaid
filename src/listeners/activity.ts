@@ -3,6 +3,7 @@ import { userActivityModel } from '../lib/utils/db'
 import { Message } from 'discord.js'
 import { pointsBlacklistedChannel } from '../config/lists'
 import { checkActifRole } from '../functions/actifrole'
+import { checkCustomRole } from '../functions/customrole'
 
 const talkedRecently = new Set()
 
@@ -15,6 +16,7 @@ export default class Activity extends Listener {
 	}
 
 	async exec(message: Message): Promise<void> {
+		if (message.guild == null) return
 		if (message.guild.id != '324284116021542922') return
 		if (message.author.bot) return
 		if (pointsBlacklistedChannel.includes(message.channel.id)) return
@@ -38,6 +40,7 @@ export default class Activity extends Listener {
 				await userInDB.save()
 
 				await checkActifRole(message.member, message.guild, afterPoints)
+				await checkCustomRole(message.member, message.guild, afterPoints)
 			}
 
 			talkedRecently.add(message.author.id)

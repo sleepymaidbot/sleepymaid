@@ -2,6 +2,7 @@ import { Task } from 'discord-akairo'
 import { userActivityModel } from '../lib/utils/db'
 import { pointsBlacklistedVoiceChannel } from '../config/lists'
 import { checkActifRole } from '../functions/actifrole'
+import { checkCustomRole } from '../functions/customrole'
 
 export default class voiceXpTask extends Task {
 	constructor() {
@@ -41,6 +42,7 @@ export default class voiceXpTask extends Task {
 								userInDB.points = afterPoints
 								await userInDB.save()
 								checkActifRole(member, guild, afterPoints)
+								checkCustomRole(member, guild, afterPoints)
 							}
 						}
 					})
