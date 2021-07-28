@@ -27,13 +27,9 @@ export async function checkCustomRole(
 				Voici quelques informations sur ton rôle custom:
 				\`\`\`{\n	name: "${crole.name}",\n	color: "${crole.color}"\n} \`\`\``)
 
-
 			await crole.delete()
-			await customRoleModel
-				.deleteOne({ id: member.id })
-				.catch(console.error)
-			await member.user.send({ embeds: [embed]})
-			
+			await customRoleModel.deleteOne({ id: member.id }).catch(console.error)
+			await member.user.send({ embeds: [embed] })
 		}
 	}
 }
