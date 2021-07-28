@@ -29,6 +29,7 @@ export default class customRole extends BotCommand {
 	}
 
 	async exec(message: Message, args) {
+		if (message.guild.id != '324284116021542922') return
 		const action = args.action
 		const embed = new MessageEmbed()
 			.setAuthor(
