@@ -3,6 +3,7 @@ import { checkUserActivityPoints } from '../../../functions/actifrole'
 import { BotCommand } from '../../../lib/extensions/BotCommand'
 import { getUserCustomRoleId } from '../../../functions/customrole'
 import { config } from '../../../config/config'
+import { checkUserRole, performRole } from '../../../functions/rolesyncer'
 
 export default class MyRewards extends BotCommand {
 	constructor() {
@@ -56,6 +57,17 @@ export default class MyRewards extends BotCommand {
 		if (message.member.roles.cache.has(corole.id)) {
 			hasColorful = '✅'
 		}
+		// eslint-disable-next-line prefer-const
+		let memberRole: string[] = []
+		message.member.roles.cache.forEach((role) => {
+			memberRole.push(role.name)
+		})
+		const response = checkUserRole(memberRole, memberRole)
+		message.channel.send({ content: response })
+		const role = message.guild.roles.cache.find(
+			(role) => role.name === 'Colorful'
+		)
+		performRole(response, role, message.member)
 
 		embed.setDescription(`Voici une liste des récompense que tu a obtenu:
 		- Rôle <@&857324294791364639>: ${hasColorful}
