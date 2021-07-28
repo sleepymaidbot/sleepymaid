@@ -11,20 +11,21 @@ export default class pointsRemoveTask extends Task {
 	}
 
 	async exec() {
+		const usersArray = []
 		await userActivityModel.find({}).then(async (docs) => {
-			docs.forEach(async (user) => {
+			for (const user of docs) {
 				const userInDB = await userActivityModel.findOne({ id: user.id })
 				if (userInDB != null && userInDB.points >= 1) {
 					userInDB.points = userInDB.points - 1
 					await userInDB.save()
+					usersArray.push(user.id)
 				}
-			})
+			}
 			const logChannel = this.client.channels.cache.get(
 				'863117686334554142'
 			) as TextChannel
-			const guild = this.client.guilds.cache.get('324284116021542922')
 			await logChannel.send(
-				`${guild.members.cache.size} members have been removed 1 activity points.`
+				`${usersArray.length} members have been removed 1 activity points.`
 			)
 		})
 	}
