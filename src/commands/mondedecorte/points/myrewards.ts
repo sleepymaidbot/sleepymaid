@@ -63,7 +63,6 @@ export default class MyRewards extends BotCommand {
 			memberRole.push(role.name)
 		})
 		const response = checkUserRole(memberRole, memberRole)
-		message.channel.send({ content: response })
 		const role = message.guild.roles.cache.find(
 			(role) => role.name === 'Colorful'
 		)
