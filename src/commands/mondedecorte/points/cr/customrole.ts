@@ -122,7 +122,9 @@ export default class customRole extends BotCommand {
 					.catch(console.error)
 			}
 		} else {
-			embed.setDescription('Subcommand invalid. ``["create", "delete", "name", "color"]``')
+			embed.setDescription(
+				'Subcommand invalid. ``["create", "delete", "name", "color"]``'
+			)
 			await message.reply({ embeds: [embed] })
 		}
 	}
