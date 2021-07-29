@@ -56,6 +56,7 @@ export default class customRole extends BotCommand {
 						await message.guild.roles
 							.create({
 								name: args.result,
+								position: 34,
 								reason: `Custom role created by ${message.author.tag} (${message.author.id})`
 							})
 							.then(async (role) => {
