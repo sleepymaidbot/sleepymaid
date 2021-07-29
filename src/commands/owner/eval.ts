@@ -64,12 +64,12 @@ export default class evaluate extends Command {
 				)
 			}
 
-			await message.channel.send({ embeds: [evalOutputEmbed] })
 			if (args.silent) {
 				if (args.codetoeval.includes('message.delete')) {
 					return
 				}
-				message.react(`✅`)
+			} else {
+				await message.channel.send({ embeds: [evalOutputEmbed] })
 			}
 		} catch (err) {
 			console.log(err)
