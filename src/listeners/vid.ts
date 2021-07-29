@@ -5,8 +5,6 @@ import fs from 'fs'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const execFile = util.promisify(require('child_process').execFile)
 
-const enabled = false
-
 const sites = [
 	'tiktok.com',
 	'https://redd.it',
@@ -28,7 +26,6 @@ export default class videoDL extends Listener {
 
 	async exec(message: Message) {
 		if (message.author.bot) return
-		if (!enabled) return
 
 		const argv = message.content.split(' ')
 
