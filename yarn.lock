@@ -983,9 +983,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:^13.0.0-dev.4886ae2.1627128182":
-  version: 13.0.0-dev.4886ae2.1627300977
-  resolution: "discord.js@npm:13.0.0-dev.4886ae2.1627300977"
+"discord.js@npm:^13.0.0-dev.5e433b5.1627473836":
+  version: 13.0.0-dev.5e433b5.1627473836
+  resolution: "discord.js@npm:13.0.0-dev.5e433b5.1627473836"
   dependencies:
     "@discordjs/builders": ^0.2.0
     "@discordjs/collection": ^0.1.6
@@ -996,7 +996,7 @@ __metadata:
     discord-api-types: ^0.19.0
     node-fetch: ^2.6.1
     ws: ^7.5.1
-  checksum: 89a647f4d7e93c774f5874e01efbeb7ac185b6900b425bc43b9e9a85febd9a6b23059a9d1c14e3ae4b94bf1636e62dea8029a0020918a8ac3877cb1a3a546847
+  checksum: 2e8699cc7f21de69bcd40c66d455146d3edc64ec26c70ad8709303ae12421965e52dc650cd2ca78e9d4c532987eca1843446405df6c638fb53dcaac742d40fab
   languageName: node
   linkType: hard
 
@@ -2384,7 +2384,7 @@ __metadata:
     "@yarnpkg/pnpify": ^3.0.0-rc.14
     discord-akairo: "git+https://github.com/SkyBlockDev/discord-akairo.git"
     discord-api-types: next
-    discord.js: ^13.0.0-dev.4886ae2.1627128182
+    discord.js: ^13.0.0-dev.5e433b5.1627473836
     eslint: ^7.29.0
     eslint-config-prettier: ^8.3.0
     mongoose: ^5.13.3
