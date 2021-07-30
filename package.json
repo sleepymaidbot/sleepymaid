@@ -29,7 +29,7 @@
 	},
 	"dependencies": {
 		"discord-akairo": "git+https://github.com/SkyBlockDev/discord-akairo.git",
-		"discord.js": "^13.0.0-dev.5e433b5.1627473836",
+		"discord.js": "^13.0.0-dev.2675b08.1627603447",
 		"mongoose": "^5.13.3"
 	},
 	"installConfig": {
