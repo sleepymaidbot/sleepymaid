@@ -225,13 +225,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:14.x || 15.x":
-  version: 15.14.3
-  resolution: "@types/node@npm:15.14.3"
-  checksum: 928f0e4660c1d06798b9a3d802df08272e616642526dba6906afcbb55398c15c238ff7c47759485496464ca4acac6bb47bc279b13719ec4cf17dcd0057609d85
-  languageName: node
-  linkType: hard
-
 "@types/node@npm:^13.7.0":
   version: 13.13.52
   resolution: "@types/node@npm:13.13.52"
@@ -1886,12 +1879,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongoose@npm:5.13.3, mongoose@npm:^5.13.3":
-  version: 5.13.3
-  resolution: "mongoose@npm:5.13.3"
+"mongoose@npm:5.13.5, mongoose@npm:^5.13.5":
+  version: 5.13.5
+  resolution: "mongoose@npm:5.13.5"
   dependencies:
     "@types/mongodb": ^3.5.27
-    "@types/node": 14.x || 15.x
     bson: ^1.1.4
     kareem: 2.3.2
     mongodb: 3.6.10
@@ -1899,11 +1891,12 @@ __metadata:
     mpath: 0.8.3
     mquery: 3.2.5
     ms: 2.1.2
+    optional-require: 1.0.x
     regexp-clone: 1.0.0
     safe-buffer: 5.2.1
     sift: 13.5.2
     sliced: 1.0.1
-  checksum: 3b77b9e6c6454429e681d19dcadb75f70dbac4d79c2eb1875ce45bb8f6d8100dc2c4ee5aa74c43d70ff19e2b61e1d381cafe0d396f1ae7a6c787525c7ccb7042
+  checksum: 8c8b08da0e089f959131eea708232c30ce3164292646686db2a0c7496c669d5e5151342a76b070b47ff2e9b7cccd5b7edfcc0d171c0b2d7729f7bdfdf8567377
   languageName: node
   linkType: hard
 
@@ -2006,6 +1999,13 @@ __metadata:
   dependencies:
     wrappy: 1
   checksum: c68086bafeee1e66c5913a79a9466dbdfca9f0f9c3217aae808a219eac7648f7b164da615028d04dd7642596f6d097e6ba2f4b1c97560ca26c7502dac2ad4859
+  languageName: node
+  linkType: hard
+
+"optional-require@npm:1.0.x":
+  version: 1.0.3
+  resolution: "optional-require@npm:1.0.3"
+  checksum: be8556c35b0f6f76ac3b34587f010ad8fc17f69d1afbd5198fb338c785ebbe8e3c96b5f5222a0853b2c8ab7bfe8127a4f4c795e8795d5656e31c8fd693780ba9
   languageName: node
   linkType: hard
 
@@ -2420,7 +2420,7 @@ __metadata:
     discord.js: ^13.0.0-dev.t1627906063.6e0ea02
     eslint: ^7.29.0
     eslint-config-prettier: ^8.3.0
-    mongoose: ^5.13.3
+    mongoose: ^5.13.5
     prettier: ^2.3.2
     rimraf: ^3.0.2
     source-map-support: ^0.5.19

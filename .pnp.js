@@ -47,7 +47,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["discord.js", "npm:13.0.0-dev.t1627906063.6e0ea02"],
             ["eslint", "npm:7.31.0"],
             ["eslint-config-prettier", "virtual:4c28d37fe4dfeff9976a842159f76e7e64f7854f12e41a9418b36ba2616e8ebe00b279ec716356ed4a086cc7237a3d9660e5ce9c52d115e8431b50ea41f5ce40#npm:8.3.0"],
-            ["mongoose", "npm:5.13.3"],
+            ["mongoose", "npm:5.13.5"],
             ["prettier", "npm:2.3.2"],
             ["rimraf", "npm:3.0.2"],
             ["source-map-support", "npm:0.5.19"],
@@ -306,13 +306,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-node-npm-13.13.52-95159539bb-702db7930d.zip/node_modules/@types/node/",
           "packageDependencies": [
             ["@types/node", "npm:13.13.52"]
-          ],
-          "linkType": "HARD",
-        }],
-        ["npm:15.14.3", {
-          "packageLocation": "./.yarn/cache/@types-node-npm-15.14.3-79ee7dd3b4-928f0e4660.zip/node_modules/@types/node/",
-          "packageDependencies": [
-            ["@types/node", "npm:15.14.3"]
           ],
           "linkType": "HARD",
         }],
@@ -2268,10 +2261,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:21053a0200bdaf0dbe90ba3e53af78b2d57611950406afa6acdcb695ef319075bc34d0e141b80acb886bb6f56bef24d5a666f21de3c5cee835b2d9c085c49f8e#npm:3.6.10", {
-          "packageLocation": "./.yarn/$$virtual/mongodb-virtual-aa0ce19cf1/0/cache/mongodb-npm-3.6.10-f377962fb3-259930dd39.zip/node_modules/mongodb/",
+        ["virtual:ef6baa01efe293a048f92eb5d9db5b83820e3a8d753a08b52d520bf6f7695bcb669ebb4ac5094a8aacfb46fd1b6b2da7ab8d021c61c7a885a09966865db9fa7a#npm:3.6.10", {
+          "packageLocation": "./.yarn/$$virtual/mongodb-virtual-42ca2717eb/0/cache/mongodb-npm-3.6.10-f377962fb3-259930dd39.zip/node_modules/mongodb/",
           "packageDependencies": [
-            ["mongodb", "virtual:21053a0200bdaf0dbe90ba3e53af78b2d57611950406afa6acdcb695ef319075bc34d0e141b80acb886bb6f56bef24d5a666f21de3c5cee835b2d9c085c49f8e#npm:3.6.10"],
+            ["mongodb", "virtual:ef6baa01efe293a048f92eb5d9db5b83820e3a8d753a08b52d520bf6f7695bcb669ebb4ac5094a8aacfb46fd1b6b2da7ab8d021c61c7a885a09966865db9fa7a#npm:3.6.10"],
             ["aws4", null],
             ["bl", "npm:2.2.1"],
             ["bson", "npm:1.1.6"],
@@ -2297,19 +2290,19 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["mongoose", [
-        ["npm:5.13.3", {
-          "packageLocation": "./.yarn/cache/mongoose-npm-5.13.3-21053a0200-3b77b9e6c6.zip/node_modules/mongoose/",
+        ["npm:5.13.5", {
+          "packageLocation": "./.yarn/cache/mongoose-npm-5.13.5-ef6baa01ef-8c8b08da0e.zip/node_modules/mongoose/",
           "packageDependencies": [
-            ["mongoose", "npm:5.13.3"],
+            ["mongoose", "npm:5.13.5"],
             ["@types/mongodb", "npm:3.6.20"],
-            ["@types/node", "npm:15.14.3"],
             ["bson", "npm:1.1.6"],
             ["kareem", "npm:2.3.2"],
-            ["mongodb", "virtual:21053a0200bdaf0dbe90ba3e53af78b2d57611950406afa6acdcb695ef319075bc34d0e141b80acb886bb6f56bef24d5a666f21de3c5cee835b2d9c085c49f8e#npm:3.6.10"],
-            ["mongoose-legacy-pluralize", "virtual:21053a0200bdaf0dbe90ba3e53af78b2d57611950406afa6acdcb695ef319075bc34d0e141b80acb886bb6f56bef24d5a666f21de3c5cee835b2d9c085c49f8e#npm:1.0.2"],
+            ["mongodb", "virtual:ef6baa01efe293a048f92eb5d9db5b83820e3a8d753a08b52d520bf6f7695bcb669ebb4ac5094a8aacfb46fd1b6b2da7ab8d021c61c7a885a09966865db9fa7a#npm:3.6.10"],
+            ["mongoose-legacy-pluralize", "virtual:ef6baa01efe293a048f92eb5d9db5b83820e3a8d753a08b52d520bf6f7695bcb669ebb4ac5094a8aacfb46fd1b6b2da7ab8d021c61c7a885a09966865db9fa7a#npm:1.0.2"],
             ["mpath", "npm:0.8.3"],
             ["mquery", "npm:3.2.5"],
             ["ms", "npm:2.1.2"],
+            ["optional-require", "npm:1.0.3"],
             ["regexp-clone", "npm:1.0.0"],
             ["safe-buffer", "npm:5.2.1"],
             ["sift", "npm:13.5.2"],
@@ -2326,12 +2319,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:21053a0200bdaf0dbe90ba3e53af78b2d57611950406afa6acdcb695ef319075bc34d0e141b80acb886bb6f56bef24d5a666f21de3c5cee835b2d9c085c49f8e#npm:1.0.2", {
-          "packageLocation": "./.yarn/$$virtual/mongoose-legacy-pluralize-virtual-b06b91638f/0/cache/mongoose-legacy-pluralize-npm-1.0.2-2fbdda9a5a-a1f86450b3.zip/node_modules/mongoose-legacy-pluralize/",
+        ["virtual:ef6baa01efe293a048f92eb5d9db5b83820e3a8d753a08b52d520bf6f7695bcb669ebb4ac5094a8aacfb46fd1b6b2da7ab8d021c61c7a885a09966865db9fa7a#npm:1.0.2", {
+          "packageLocation": "./.yarn/$$virtual/mongoose-legacy-pluralize-virtual-a021ee1ae0/0/cache/mongoose-legacy-pluralize-npm-1.0.2-2fbdda9a5a-a1f86450b3.zip/node_modules/mongoose-legacy-pluralize/",
           "packageDependencies": [
-            ["mongoose-legacy-pluralize", "virtual:21053a0200bdaf0dbe90ba3e53af78b2d57611950406afa6acdcb695ef319075bc34d0e141b80acb886bb6f56bef24d5a666f21de3c5cee835b2d9c085c49f8e#npm:1.0.2"],
+            ["mongoose-legacy-pluralize", "virtual:ef6baa01efe293a048f92eb5d9db5b83820e3a8d753a08b52d520bf6f7695bcb669ebb4ac5094a8aacfb46fd1b6b2da7ab8d021c61c7a885a09966865db9fa7a#npm:1.0.2"],
             ["@types/mongoose", null],
-            ["mongoose", "npm:5.13.3"]
+            ["mongoose", "npm:5.13.5"]
           ],
           "packagePeers": [
             "@types/mongoose",
@@ -2458,6 +2451,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["optional-require", [
+        ["npm:1.0.3", {
+          "packageLocation": "./.yarn/cache/optional-require-npm-1.0.3-2f124b03f7-be8556c35b.zip/node_modules/optional-require/",
+          "packageDependencies": [
+            ["optional-require", "npm:1.0.3"]
+          ],
+          "linkType": "HARD",
+        }],
         ["npm:1.1.0", {
           "packageLocation": "./.yarn/cache/optional-require-npm-1.1.0-896a8b7c60-b8fb865dc3.zip/node_modules/optional-require/",
           "packageDependencies": [
@@ -2939,7 +2939,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["discord.js", "npm:13.0.0-dev.t1627906063.6e0ea02"],
             ["eslint", "npm:7.31.0"],
             ["eslint-config-prettier", "virtual:4c28d37fe4dfeff9976a842159f76e7e64f7854f12e41a9418b36ba2616e8ebe00b279ec716356ed4a086cc7237a3d9660e5ce9c52d115e8431b50ea41f5ce40#npm:8.3.0"],
-            ["mongoose", "npm:5.13.3"],
+            ["mongoose", "npm:5.13.5"],
             ["prettier", "npm:2.3.2"],
             ["rimraf", "npm:3.0.2"],
             ["source-map-support", "npm:0.5.19"],
