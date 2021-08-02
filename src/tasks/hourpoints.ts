@@ -5,7 +5,7 @@ import { userActivityModel } from '../lib/utils/db'
 export default class pointsRemoveTask extends Task {
 	constructor() {
 		super('removePoints', {
-			delay: 1800000,
+			delay: 3600000,
 			runOnStart: false
 		})
 	}
