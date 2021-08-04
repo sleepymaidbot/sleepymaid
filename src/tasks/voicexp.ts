@@ -7,7 +7,7 @@ import { checkCustomRole } from '../functions/customrole'
 export default class voiceXpTask extends Task {
 	constructor() {
 		super('voiceXpTask', {
-			delay: 600000,
+			delay: 300000,
 			runOnStart: false
 		})
 	}
