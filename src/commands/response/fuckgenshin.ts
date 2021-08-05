@@ -7,6 +7,8 @@ export default class genshinCommand extends Command {
 			aliases: ['fuckgenshin'],
 			cooldown: 60000,
 			category: 'response',
+			slash: true,
+			slashGuilds: ['324284116021542922'],
 			description: {
 				content: 'fuckgenshin',
 				usage: 'fuckgenshin',
@@ -18,5 +20,9 @@ export default class genshinCommand extends Command {
 	public async exec(message: Message): Promise<void> {
 		message.util.send('<@&851958560413319179>')
 		message.delete()
+	}
+
+	public async execSlash(message): Promise<void> {
+		message.reply('<@&851958560413319179>')
 	}
 }

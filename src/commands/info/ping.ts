@@ -7,7 +7,7 @@ export default class PingCommand extends BotCommand {
 		super('ping', {
 			aliases: ['ping'],
 			category: 'info',
-			slash: false,
+			slash: true,
 			slashGuilds: slashGuildsIds,
 			description: 'Gets the latency of the bot'
 		})

@@ -8,7 +8,7 @@ export default class PingCommand extends BotCommand {
 		super('help', {
 			aliases: ['help'],
 			category: 'info',
-			slash: false,
+			slash: true,
 			slashGuilds: slashGuildsIds,
 			description: 'Help me'
 		})

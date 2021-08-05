@@ -4,13 +4,16 @@ import { BotCommand } from '../../../lib/extensions/BotCommand'
 import { getUserCustomRoleId } from '../../../functions/customrole'
 import { config } from '../../../config/config'
 import { checkUserRole, performRole } from '../../../functions/rolesyncer'
+import { slashGuildsIds } from '../../../config/lists' 
 
 export default class MyRewards extends BotCommand {
 	constructor() {
 		super('MyRewards', {
 			aliases: ['myrewards', 'rewards', 'mr'],
 			description: 'Show your rewards.',
-			channel: 'guild'
+			channel: 'guild',
+			slash: true,
+			slashGuilds: slashGuildsIds
 		})
 	}
 
