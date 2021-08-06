@@ -14,7 +14,8 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"volta": {
-		"node": "16.6.1"
+		"node": "16.6.1",
+		"yarn": "berry"
 	},
 	"devDependencies": {
 		"@types/node": "^16.3.0",
