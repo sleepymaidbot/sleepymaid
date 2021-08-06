@@ -13,10 +13,6 @@
 	},
 	"author": "Ecorte",
 	"license": "MIT",
-	"volta": {
-		"node": "16.6.1",
-		"yarn": "2.4.2"
-	},
 	"devDependencies": {
 		"@types/node": "^16.3.0",
 		"@types/prettier": "^2",
