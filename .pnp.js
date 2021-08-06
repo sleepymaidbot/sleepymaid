@@ -41,6 +41,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/prettier", "npm:2.3.2"],
             ["@typescript-eslint/eslint-plugin", "virtual:4c28d37fe4dfeff9976a842159f76e7e64f7854f12e41a9418b36ba2616e8ebe00b279ec716356ed4a086cc7237a3d9660e5ce9c52d115e8431b50ea41f5ce40#npm:4.29.0"],
             ["@typescript-eslint/parser", "virtual:4c28d37fe4dfeff9976a842159f76e7e64f7854f12e41a9418b36ba2616e8ebe00b279ec716356ed4a086cc7237a3d9660e5ce9c52d115e8431b50ea41f5ce40#npm:4.29.0"],
+            ["@yarnpkg/cli-dist", "npm:3.0.0"],
             ["@yarnpkg/pnpify", "npm:3.0.0-rc.14"],
             ["discord-akairo", "https://github.com/NotEnoughUpdates/discord-akairo.git#commit=27b235f72af5e05b2f048f160edd38b795ae0385"],
             ["discord-api-types", "npm:0.23.0-next.5723cc0.1628166896"],
@@ -527,6 +528,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/visitor-keys", "npm:4.29.0"],
             ["@typescript-eslint/types", "npm:4.29.0"],
             ["eslint-visitor-keys", "npm:2.1.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@yarnpkg/cli-dist", [
+        ["npm:3.0.0", {
+          "packageLocation": "./.yarn/cache/@yarnpkg-cli-dist-npm-3.0.0-0606fa9f7a-d1f5b79e1b.zip/node_modules/@yarnpkg/cli-dist/",
+          "packageDependencies": [
+            ["@yarnpkg/cli-dist", "npm:3.0.0"]
           ],
           "linkType": "HARD",
         }]
@@ -2923,6 +2933,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/prettier", "npm:2.3.2"],
             ["@typescript-eslint/eslint-plugin", "virtual:4c28d37fe4dfeff9976a842159f76e7e64f7854f12e41a9418b36ba2616e8ebe00b279ec716356ed4a086cc7237a3d9660e5ce9c52d115e8431b50ea41f5ce40#npm:4.29.0"],
             ["@typescript-eslint/parser", "virtual:4c28d37fe4dfeff9976a842159f76e7e64f7854f12e41a9418b36ba2616e8ebe00b279ec716356ed4a086cc7237a3d9660e5ce9c52d115e8431b50ea41f5ce40#npm:4.29.0"],
+            ["@yarnpkg/cli-dist", "npm:3.0.0"],
             ["@yarnpkg/pnpify", "npm:3.0.0-rc.14"],
             ["discord-akairo", "https://github.com/NotEnoughUpdates/discord-akairo.git#commit=27b235f72af5e05b2f048f160edd38b795ae0385"],
             ["discord-api-types", "npm:0.23.0-next.5723cc0.1628166896"],

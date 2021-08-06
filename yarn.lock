@@ -370,6 +370,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@yarnpkg/cli-dist@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@yarnpkg/cli-dist@npm:3.0.0"
+  bin:
+    yarn: bin/yarn.js
+    yarnpkg: bin/yarn.js
+  checksum: d1f5b79e1b377f7da3b5268502be3019bb0020f2ce4128ebde47238ecba6774207368f75bce634fb50a05360646bef834dd86a53e3ff42a061ebdc24b02c0ff4
+  languageName: node
+  linkType: hard
+
 "@yarnpkg/core@npm:^3.0.0, @yarnpkg/core@npm:^3.0.0-rc.13":
   version: 3.0.0
   resolution: "@yarnpkg/core@npm:3.0.0"
@@ -2406,6 +2416,7 @@ discord-akairo-message-util@NotEnoughUpdates/discord-akairo-message-util:
     "@types/prettier": ^2
     "@typescript-eslint/eslint-plugin": ^4.28.1
     "@typescript-eslint/parser": ^4.28.1
+    "@yarnpkg/cli-dist": ^3.0.0
     "@yarnpkg/pnpify": ^3.0.0-rc.14
     discord-akairo: "github:NotEnoughUpdates/discord-akairo"
     discord-api-types: next
