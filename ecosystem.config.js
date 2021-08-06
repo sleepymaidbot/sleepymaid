@@ -3,6 +3,9 @@ module.exports = {
       name      : 'sleepymaid-ts',
       script    : 'yarn',
       args      : 'start',
-      interpreter: '/bin/bash'
+      interpreter: '/bin/bash',
+      env: {
+        NODE_ENV: 'production'
+      }
     }]
   };
