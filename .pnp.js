@@ -42,7 +42,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/eslint-plugin", "virtual:4c28d37fe4dfeff9976a842159f76e7e64f7854f12e41a9418b36ba2616e8ebe00b279ec716356ed4a086cc7237a3d9660e5ce9c52d115e8431b50ea41f5ce40#npm:4.29.0"],
             ["@typescript-eslint/parser", "virtual:4c28d37fe4dfeff9976a842159f76e7e64f7854f12e41a9418b36ba2616e8ebe00b279ec716356ed4a086cc7237a3d9660e5ce9c52d115e8431b50ea41f5ce40#npm:4.29.0"],
             ["@yarnpkg/pnpify", "npm:3.0.0-rc.14"],
-            ["discord-akairo", "https://github.com/Le-monde-dEcorte/discord-akairo.git#commit=4e3172fcf856808a29e35bc5db5c52fd5e904d24"],
+            ["discord-akairo", "https://github.com/NotEnoughUpdates/discord-akairo.git#commit=27b235f72af5e05b2f048f160edd38b795ae0385"],
             ["discord-api-types", "npm:0.23.0-next.5723cc0.1628166896"],
             ["discord.js", "npm:13.0.0"],
             ["eslint", "npm:7.32.0"],
@@ -1210,10 +1210,20 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["discord-akairo", [
-        ["https://github.com/Le-monde-dEcorte/discord-akairo.git#commit=4e3172fcf856808a29e35bc5db5c52fd5e904d24", {
-          "packageLocation": "./.yarn/cache/discord-akairo-https-bd36d6a500-f3d278e53e.zip/node_modules/discord-akairo/",
+        ["https://github.com/NotEnoughUpdates/discord-akairo.git#commit=27b235f72af5e05b2f048f160edd38b795ae0385", {
+          "packageLocation": "./.yarn/cache/discord-akairo-https-9fa0a23760-ac71f2cf8d.zip/node_modules/discord-akairo/",
           "packageDependencies": [
-            ["discord-akairo", "https://github.com/Le-monde-dEcorte/discord-akairo.git#commit=4e3172fcf856808a29e35bc5db5c52fd5e904d24"]
+            ["discord-akairo", "https://github.com/NotEnoughUpdates/discord-akairo.git#commit=27b235f72af5e05b2f048f160edd38b795ae0385"],
+            ["discord-akairo-message-util", "https://github.com/NotEnoughUpdates/discord-akairo-message-util.git#commit=9831d4f340bc8c3452d3dfef0497f7844dee0f29"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["discord-akairo-message-util", [
+        ["https://github.com/NotEnoughUpdates/discord-akairo-message-util.git#commit=9831d4f340bc8c3452d3dfef0497f7844dee0f29", {
+          "packageLocation": "./.yarn/cache/discord-akairo-message-util-https-f21c104c03-eb169e53e6.zip/node_modules/discord-akairo-message-util/",
+          "packageDependencies": [
+            ["discord-akairo-message-util", "https://github.com/NotEnoughUpdates/discord-akairo-message-util.git#commit=9831d4f340bc8c3452d3dfef0497f7844dee0f29"]
           ],
           "linkType": "HARD",
         }]
@@ -2914,7 +2924,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/eslint-plugin", "virtual:4c28d37fe4dfeff9976a842159f76e7e64f7854f12e41a9418b36ba2616e8ebe00b279ec716356ed4a086cc7237a3d9660e5ce9c52d115e8431b50ea41f5ce40#npm:4.29.0"],
             ["@typescript-eslint/parser", "virtual:4c28d37fe4dfeff9976a842159f76e7e64f7854f12e41a9418b36ba2616e8ebe00b279ec716356ed4a086cc7237a3d9660e5ce9c52d115e8431b50ea41f5ce40#npm:4.29.0"],
             ["@yarnpkg/pnpify", "npm:3.0.0-rc.14"],
-            ["discord-akairo", "https://github.com/Le-monde-dEcorte/discord-akairo.git#commit=4e3172fcf856808a29e35bc5db5c52fd5e904d24"],
+            ["discord-akairo", "https://github.com/NotEnoughUpdates/discord-akairo.git#commit=27b235f72af5e05b2f048f160edd38b795ae0385"],
             ["discord-api-types", "npm:0.23.0-next.5723cc0.1628166896"],
             ["discord.js", "npm:13.0.0"],
             ["eslint", "npm:7.32.0"],

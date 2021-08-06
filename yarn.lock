@@ -942,10 +942,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-akairo@github:Le-monde-dEcorte/discord-akairo":
+discord-akairo-message-util@NotEnoughUpdates/discord-akairo-message-util:
+  version: 1.0.0
+  resolution: "discord-akairo-message-util@https://github.com/NotEnoughUpdates/discord-akairo-message-util.git#commit=9831d4f340bc8c3452d3dfef0497f7844dee0f29"
+  checksum: eb169e53e6dc7afb85180594382190eb904308d8282fd9d06d43ebfb5c5562e42f923245ab8c1bc536cc1bc270967c05de84a3c9f7001f55574362d904eb2c98
+  languageName: node
+  linkType: hard
+
+"discord-akairo@github:NotEnoughUpdates/discord-akairo":
   version: 8.2.2
-  resolution: "discord-akairo@https://github.com/Le-monde-dEcorte/discord-akairo.git#commit=4e3172fcf856808a29e35bc5db5c52fd5e904d24"
-  checksum: f3d278e53eb4f3a78859ef50c2cfb4e0e03786a5f5f59a6e980f12ada0d8183468031640c35192b9299c70d17d32fea3a6bef1f1e74db63f37c1c2b26a2d7fc9
+  resolution: "discord-akairo@https://github.com/NotEnoughUpdates/discord-akairo.git#commit=27b235f72af5e05b2f048f160edd38b795ae0385"
+  dependencies:
+    discord-akairo-message-util: NotEnoughUpdates/discord-akairo-message-util
+  checksum: ac71f2cf8d5749694dc318c96e9052f5a0cee3ff9ff1b3f94a25e095365ac40f52e654ba9c6f5136a4373306c12b28192ed4af3862fb7c6ded2342745b10f72b
   languageName: node
   linkType: hard
 
@@ -2398,7 +2407,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^4.28.1
     "@typescript-eslint/parser": ^4.28.1
     "@yarnpkg/pnpify": ^3.0.0-rc.14
-    discord-akairo: "github:Le-monde-dEcorte/discord-akairo"
+    discord-akairo: "github:NotEnoughUpdates/discord-akairo"
     discord-api-types: next
     discord.js: ^13.0.0
     eslint: ^7.32.0
