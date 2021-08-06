@@ -44,7 +44,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@yarnpkg/pnpify", "npm:3.0.0-rc.14"],
             ["discord-akairo", "https://github.com/Le-monde-dEcorte/discord-akairo.git#commit=4e3172fcf856808a29e35bc5db5c52fd5e904d24"],
             ["discord-api-types", "npm:0.23.0-next.5723cc0.1628166896"],
-            ["discord.js", "npm:13.0.0-dev.t1628165339.3eb4140"],
+            ["discord.js", "npm:13.0.0"],
             ["eslint", "npm:7.32.0"],
             ["eslint-config-prettier", "virtual:4c28d37fe4dfeff9976a842159f76e7e64f7854f12e41a9418b36ba2616e8ebe00b279ec716356ed4a086cc7237a3d9660e5ce9c52d115e8431b50ea41f5ce40#npm:8.3.0"],
             ["mongoose", "npm:5.13.5"],
@@ -98,14 +98,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@discordjs/builders", [
-        ["npm:0.3.0", {
-          "packageLocation": "./.yarn/cache/@discordjs-builders-npm-0.3.0-62f3e63cad-6c9c54fce4.zip/node_modules/@discordjs/builders/",
+        ["npm:0.4.0", {
+          "packageLocation": "./.yarn/cache/@discordjs-builders-npm-0.4.0-d7db6e5c11-7c8fa8d70f.zip/node_modules/@discordjs/builders/",
           "packageDependencies": [
-            ["@discordjs/builders", "npm:0.3.0"],
+            ["@discordjs/builders", "npm:0.4.0"],
             ["@sindresorhus/is", "npm:4.0.1"],
             ["discord-api-types", "npm:0.22.0"],
-            ["ow", "npm:0.26.0"],
-            ["ts-mixer", "npm:5.4.1"],
+            ["ow", "npm:0.27.0"],
+            ["ts-mixer", "npm:6.0.0"],
             ["tslib", "npm:2.3.0"]
           ],
           "linkType": "HARD",
@@ -673,16 +673,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["abort-controller", [
-        ["npm:3.0.0", {
-          "packageLocation": "./.yarn/cache/abort-controller-npm-3.0.0-2f3a9a2bcb-cc53ad8df9.zip/node_modules/abort-controller/",
-          "packageDependencies": [
-            ["abort-controller", "npm:3.0.0"],
-            ["event-target-shim", "npm:5.0.1"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
       ["acorn", [
         ["npm:7.4.1", {
           "packageLocation": "./.yarn/cache/acorn-npm-7.4.1-f450b4646c-2bde98c28c.zip/node_modules/acorn/",
@@ -1245,19 +1235,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["discord.js", [
-        ["npm:13.0.0-dev.t1628165339.3eb4140", {
-          "packageLocation": "./.yarn/cache/discord.js-npm-13.0.0-dev.t1628165339.3eb4140-4c34a018ca-4428a18f60.zip/node_modules/discord.js/",
+        ["npm:13.0.0", {
+          "packageLocation": "./.yarn/cache/discord.js-npm-13.0.0-c56b6579cd-1ca2f17276.zip/node_modules/discord.js/",
           "packageDependencies": [
-            ["discord.js", "npm:13.0.0-dev.t1628165339.3eb4140"],
-            ["@discordjs/builders", "npm:0.3.0"],
+            ["discord.js", "npm:13.0.0"],
+            ["@discordjs/builders", "npm:0.4.0"],
             ["@discordjs/collection", "npm:0.2.1"],
             ["@discordjs/form-data", "npm:3.0.1"],
             ["@sapphire/async-queue", "npm:1.1.4"],
             ["@types/ws", "npm:7.4.7"],
-            ["abort-controller", "npm:3.0.0"],
             ["discord-api-types", "npm:0.22.0"],
             ["node-fetch", "npm:2.6.1"],
-            ["ws", "virtual:4c34a018caa937ac3c340acb94d7e02ef20c7078f52d8c73372b95d949ab87f29420706c9c8da14174c4ceb5442471eca602641b068ffa77825919fae299b051#npm:7.5.3"]
+            ["ws", "virtual:c56b6579cd6ae08f2c5b04a5335298cbdff5095b5f18d70939e8fdf8fd69194dfc8987199acd7b4ba4417e07f28bc7c8f1d4972f1be262317ad0806a1a84306a#npm:7.5.3"]
           ],
           "linkType": "HARD",
         }]
@@ -1526,15 +1515,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/esutils-npm-2.0.3-f865beafd5-590b045331.zip/node_modules/esutils/",
           "packageDependencies": [
             ["esutils", "npm:2.0.3"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["event-target-shim", [
-        ["npm:5.0.1", {
-          "packageLocation": "./.yarn/cache/event-target-shim-npm-5.0.1-cb48709025-d176477a31.zip/node_modules/event-target-shim/",
-          "packageDependencies": [
-            ["event-target-shim", "npm:5.0.1"]
           ],
           "linkType": "HARD",
         }]
@@ -2483,10 +2463,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["ow", [
-        ["npm:0.26.0", {
-          "packageLocation": "./.yarn/cache/ow-npm-0.26.0-269f4b1bd7-1639b9da98.zip/node_modules/ow/",
+        ["npm:0.27.0", {
+          "packageLocation": "./.yarn/cache/ow-npm-0.27.0-fa0e7acc71-d09dddb7bd.zip/node_modules/ow/",
           "packageDependencies": [
-            ["ow", "npm:0.26.0"],
+            ["ow", "npm:0.27.0"],
             ["@sindresorhus/is", "npm:4.0.1"],
             ["callsites", "npm:3.1.0"],
             ["dot-prop", "npm:6.0.1"],
@@ -2936,7 +2916,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@yarnpkg/pnpify", "npm:3.0.0-rc.14"],
             ["discord-akairo", "https://github.com/Le-monde-dEcorte/discord-akairo.git#commit=4e3172fcf856808a29e35bc5db5c52fd5e904d24"],
             ["discord-api-types", "npm:0.23.0-next.5723cc0.1628166896"],
-            ["discord.js", "npm:13.0.0-dev.t1628165339.3eb4140"],
+            ["discord.js", "npm:13.0.0"],
             ["eslint", "npm:7.32.0"],
             ["eslint-config-prettier", "virtual:4c28d37fe4dfeff9976a842159f76e7e64f7854f12e41a9418b36ba2616e8ebe00b279ec716356ed4a086cc7237a3d9660e5ce9c52d115e8431b50ea41f5ce40#npm:8.3.0"],
             ["mongoose", "npm:5.13.5"],
@@ -3157,10 +3137,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["ts-mixer", [
-        ["npm:5.4.1", {
-          "packageLocation": "./.yarn/cache/ts-mixer-npm-5.4.1-239a24284d-8e8e843bce.zip/node_modules/ts-mixer/",
+        ["npm:6.0.0", {
+          "packageLocation": "./.yarn/cache/ts-mixer-npm-6.0.0-2312141fdd-c9e0d5e119.zip/node_modules/ts-mixer/",
           "packageDependencies": [
-            ["ts-mixer", "npm:5.4.1"]
+            ["ts-mixer", "npm:6.0.0"]
           ],
           "linkType": "HARD",
         }]
@@ -3344,10 +3324,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:4c34a018caa937ac3c340acb94d7e02ef20c7078f52d8c73372b95d949ab87f29420706c9c8da14174c4ceb5442471eca602641b068ffa77825919fae299b051#npm:7.5.3", {
-          "packageLocation": "./.yarn/$$virtual/ws-virtual-c4f3030c0d/0/cache/ws-npm-7.5.3-3a046a0b1a-77ce9a2129.zip/node_modules/ws/",
+        ["virtual:c56b6579cd6ae08f2c5b04a5335298cbdff5095b5f18d70939e8fdf8fd69194dfc8987199acd7b4ba4417e07f28bc7c8f1d4972f1be262317ad0806a1a84306a#npm:7.5.3", {
+          "packageLocation": "./.yarn/$$virtual/ws-virtual-fc29774a38/0/cache/ws-npm-7.5.3-3a046a0b1a-77ce9a2129.zip/node_modules/ws/",
           "packageDependencies": [
-            ["ws", "virtual:4c34a018caa937ac3c340acb94d7e02ef20c7078f52d8c73372b95d949ab87f29420706c9c8da14174c4ceb5442471eca602641b068ffa77825919fae299b051#npm:7.5.3"],
+            ["ws", "virtual:c56b6579cd6ae08f2c5b04a5335298cbdff5095b5f18d70939e8fdf8fd69194dfc8987199acd7b4ba4417e07f28bc7c8f1d4972f1be262317ad0806a1a84306a#npm:7.5.3"],
             ["@types/bufferutil", null],
             ["@types/utf-8-validate", null],
             ["bufferutil", null],

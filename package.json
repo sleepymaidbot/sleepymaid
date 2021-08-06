@@ -29,7 +29,7 @@
 	},
 	"dependencies": {
 		"discord-akairo": "github:Le-monde-dEcorte/discord-akairo",
-		"discord.js": "^13.0.0-dev.t1627906063.6e0ea02",
+		"discord.js": "^13.0.0",
 		"mongoose": "^5.13.5"
 	},
 	"installConfig": {
