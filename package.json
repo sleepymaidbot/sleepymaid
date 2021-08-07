@@ -9,14 +9,11 @@
 		"build": "yarn rimraf dist/ && yarn tsc",
 		"lint": "yarn eslint --ext js,jsx,ts,tsx src",
 		"format": "yarn prettier --write .",
-		"start": "yarn build && node --trace-warnings -r source-map-support/register dist/index.js"
+		"start": "yarn build && node --trace-warnings -r source-map-support/register dist/index.js",
+		"startprod": "yarn build && nodemon --trace-warnings -r source-map-support/register dist/index.js"
 	},
 	"author": "Ecorte",
 	"license": "MIT",
-	"volta": {
-		"node": "16.6.1",
-		"yarn": "1.22.11"
-	},
 	"devDependencies": {
 		"@types/node": "^16.3.0",
 		"@types/prettier": "^2",
@@ -33,9 +30,10 @@
 		"typescript": "^4.3.5"
 	},
 	"dependencies": {
-		"discord-akairo": "NotEnoughUpdates/discord-akairo",
-		"discord.js": "^13.0.0",
-		"mongoose": "^5.13.5"
+		"discord-akairo": "Le-monde-dEcorte/discord-akairo",
+		"discord.js": "^13.0.1",
+		"mongoose": "^5.13.5",
+		"nodemon": "^2.0.12"
 	},
 	"installConfig": {
 		"pnp": true
