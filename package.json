@@ -9,8 +9,7 @@
 		"build": "yarn rimraf dist/ && yarn tsc",
 		"lint": "yarn eslint --ext js,jsx,ts,tsx src",
 		"format": "yarn prettier --write .",
-		"start": "yarn build && node --trace-warnings -r source-map-support/register dist/index.js",
-		"startprod": "yarn build && nodemon --trace-warnings -r source-map-support/register dist/index.js"
+		"start": "yarn build && node --trace-warnings -r source-map-support/register dist/index.js"
 	},
 	"author": "Ecorte",
 	"license": "MIT",
@@ -89,5 +88,6 @@
 				}
 			]
 		}
-	}
+	},
+	"packageManager": "yarn@3.0.0"
 }

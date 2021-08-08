@@ -53,7 +53,9 @@ export default class customRole extends BotCommand {
 					message.reply({ embeds: [embed] })
 				} else {
 					if (args.result) {
-						const sleepyRole = message.guild.roles.cache.find((role) => role.id === '811285873458544680')
+						const sleepyRole = message.guild.roles.cache.find(
+							(role) => role.id === '811285873458544680'
+						)
 						const pos = sleepyRole.position - 1
 						await message.guild.roles
 							.create({

@@ -252,9 +252,9 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*, @types/node@npm:^16.3.0":
-  version: 16.4.12
-  resolution: "@types/node@npm:16.4.12"
-  checksum: 1489aeba890629ca2ed9b8f04fb77f185123810afd3d518cf87c2a18a43a43f7d954550ae3572f3dac7e634f7db67e259ceb7ca25cb584ba0bcc023b0bfca2c9
+  version: 16.4.13
+  resolution: "@types/node@npm:16.4.13"
+  checksum: 071e86a1d196cf72928a7109e99769dffed93db481032b9ca2f52e6f3ced432e2a179849c85e587e67409202e1ed37bffd0c7a31d38adf35a385d327dfe8bd72
   languageName: node
   linkType: hard
 
@@ -1289,9 +1289,9 @@ discord-akairo@Le-monde-dEcorte/discord-akairo:
   linkType: hard
 
 "discord-api-types@npm:next":
-  version: 0.23.0-next.5723cc0.1628166896
-  resolution: "discord-api-types@npm:0.23.0-next.5723cc0.1628166896"
-  checksum: a9370061c2622f3707e07a1cf7148404f03db4d28518cc6350292fe0cb9fa866f6b14a604312516c88a1437001d164ce8364aedd0327ef27ba2738ceab5ccbce
+  version: 0.23.0-next.8fcd0f2.1628425725
+  resolution: "discord-api-types@npm:0.23.0-next.8fcd0f2.1628425725"
+  checksum: 2f860689091b383456f05492960c4f0984acf75a840112b2cc21e8e1e04573835afd696d52e2e3b240bc83af310d0314802f11eb344909846a648485ef5d81cb
   languageName: node
   linkType: hard
 
@@ -2087,9 +2087,9 @@ fsevents@~2.3.2:
   linkType: hard
 
 "is-callable@npm:^1.1.5":
-  version: 1.2.3
-  resolution: "is-callable@npm:1.2.3"
-  checksum: 084a732afd78e14a40cd5f6f34001edd500f43bb542991c1305b88842cab5f2fb6b48f0deed4cd72270b2e71cab3c3a56c69b324e3a02d486f937824bb7de553
+  version: 1.2.4
+  resolution: "is-callable@npm:1.2.4"
+  checksum: 1a28d57dc435797dae04b173b65d6d1e77d4f16276e9eff973f994eadcfdc30a017e6a597f092752a083c1103cceb56c91e3dadc6692fedb9898dfaba701575f
   languageName: node
   linkType: hard
 
@@ -2863,11 +2863,11 @@ fsevents@~2.3.2:
   linkType: hard
 
 "optional-require@npm:^1.0.3":
-  version: 1.1.4
-  resolution: "optional-require@npm:1.1.4"
+  version: 1.1.6
+  resolution: "optional-require@npm:1.1.6"
   dependencies:
     require-at: ^1.0.6
-  checksum: 86183feb32c6f3f4ef971fe9c7825a2f576654fcf97d744e97ffbb228cee8ecfffae77e061c4224e57ada41d18a9e098c66a75ba254a18de97cc501bb2ee09b3
+  checksum: 405b1cee9f329f5cc9fe9015c487ce605dbbe7ad6b1bc0c369d7dad08a15d0373a702d59ba2ba05ec29c71f06a69b2ed592587c3b3bd0157724df2912c017bd8
   languageName: node
   linkType: hard
 

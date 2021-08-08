@@ -14,7 +14,7 @@ export default class PingCommand extends BotCommand {
 	}
 
 	public async exec(message: Message): Promise<void> {
-		const sentMessage = await message.util.send('Pong!') as Message
+		const sentMessage = await message.channel.send('Pong!') as Message
 		const timestamp: number = message.editedTimestamp
 			? message.editedTimestamp
 			: message.createdTimestamp
