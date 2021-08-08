@@ -6,7 +6,6 @@ export default class pointsCommand extends BotCommand {
 	constructor() {
 		super('points', {
 			aliases: ['points', 'mypoints'],
-			ownerOnly: true,
 			channel: 'guild',
 			args: [
 				{
@@ -20,31 +19,37 @@ export default class pointsCommand extends BotCommand {
 
 	async exec(message, args) {
 		if (message.guild.id != '324284116021542922') return
-		const userInDB = await checkUserActivityPoints(args.member)
-		if (userInDB == 0) {
-			const embed = new MessageEmbed()
-				.setColor('#36393f')
-				.setAuthor(message.author.tag, message.author.avatarURL())
-				.setDescription(
-					`<@${args.member.id}> n'a pas de points. \nCommence pas envoyer des message pour en avoir.`
-				)
-				.setTimestamp()
-			message.reply({ embeds: [embed] })
-		} else {
-			if (userInDB == 1) {
+
+		if (
+			message.member.roles.cache.has('842387653394563074') ||
+			message.member.id == '324284116021542922'
+		) {
+			const userInDB = await checkUserActivityPoints(args.member)
+			if (userInDB == 0) {
 				const embed = new MessageEmbed()
 					.setColor('#36393f')
 					.setAuthor(message.author.tag, message.author.avatarURL())
-					.setDescription(`<@${args.member.id}> a ${userInDB} point.`)
+					.setDescription(
+						`<@${args.member.id}> n'a pas de points. \nCommence pas envoyer des message pour en avoir.`
+					)
 					.setTimestamp()
 				message.reply({ embeds: [embed] })
 			} else {
-				const embed = new MessageEmbed()
-					.setColor('#36393f')
-					.setAuthor(message.author.tag, message.author.avatarURL())
-					.setDescription(`<@${args.member.id}> a ${userInDB} points.`)
-					.setTimestamp()
-				message.reply({ embeds: [embed] })
+				if (userInDB == 1) {
+					const embed = new MessageEmbed()
+						.setColor('#36393f')
+						.setAuthor(message.author.tag, message.author.avatarURL())
+						.setDescription(`<@${args.member.id}> a ${userInDB} point.`)
+						.setTimestamp()
+					message.reply({ embeds: [embed] })
+				} else {
+					const embed = new MessageEmbed()
+						.setColor('#36393f')
+						.setAuthor(message.author.tag, message.author.avatarURL())
+						.setDescription(`<@${args.member.id}> a ${userInDB} points.`)
+						.setTimestamp()
+					message.reply({ embeds: [embed] })
+				}
 			}
 		}
 	}
