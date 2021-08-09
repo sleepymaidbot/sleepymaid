@@ -7,7 +7,7 @@ export default class genshinCommand extends Command {
 			aliases: ['fuckgenshin'],
 			cooldown: 60000,
 			category: 'response',
-			slash: true,
+			slash: false,
 			slashGuilds: ['324284116021542922'],
 			description: {
 				content: 'fuckgenshin',

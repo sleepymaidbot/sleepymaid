@@ -63,6 +63,7 @@ export class BotClient extends AkairoClient {
 			directory: join(__dirname, '..', '..', 'commands'),
 			allowMention: true,
 			automateCategories: true,
+			execSlash: true,
 			autoRegisterSlashCommands: true
 		})
 	}
