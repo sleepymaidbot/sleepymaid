@@ -31,7 +31,7 @@
 	"dependencies": {
 		"discord-akairo": "Le-monde-dEcorte/discord-akairo",
 		"discord.js": "^13.0.1",
-		"mongoose": "^5.13.5",
+		"mongoose": "^5.13.6",
 		"nodemon": "^2.0.12"
 	},
 	"installConfig": {
