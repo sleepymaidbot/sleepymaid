@@ -34,7 +34,7 @@ export default class pointsCommand extends BotCommand {
 
 		if (
 			message.member.roles.cache.has('842387653394563074') ||
-			message.member.id == '324284116021542922'
+			message.member.id == '324281236728053760'
 		) {
 			const userInDB = await checkUserActivityPoints(args.member)
 			if (userInDB == 0) {
@@ -77,7 +77,7 @@ export default class pointsCommand extends BotCommand {
 
 		if (
 			message.member.roles.cache.has('842387653394563074') ||
-			message.member.id == '324284116021542922'
+			message.member.id == '324281236728053760'
 		) {
 			const userInDB = await checkUserActivityPoints(member)
 			if (userInDB == 0) {
@@ -108,7 +108,7 @@ export default class pointsCommand extends BotCommand {
 			}
 		} else {
 			message.reply({
-				content: 'Tu doit avoir le rôle acitf pour utliser cette commande',
+				content: 'Tu doit avoir le rôle actif pour utliser cette commande',
 				ephemeral: true
 			})
 		}

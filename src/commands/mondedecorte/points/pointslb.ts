@@ -24,7 +24,7 @@ export default class pointsLeaderboardCommand extends BotCommand {
 
 		if (
 			message.member.roles.cache.has('842387653394563074') ||
-			message.member.id == '324284116021542922'
+			message.member.id == '324281236728053760'
 		) {
 			let allPoints: Array<User>
 			userActivityModel.find({}).then((docs) => {
@@ -64,7 +64,7 @@ export default class pointsLeaderboardCommand extends BotCommand {
 			})
 		} else {
 			message.reply({
-				content: 'Tu doit avoir le rôle acitf pour utliser cette commande'
+				content: 'Tu doit avoir le rôle actif pour utliser cette commande'
 			})
 		}
 	}
@@ -74,7 +74,7 @@ export default class pointsLeaderboardCommand extends BotCommand {
 
 		if (
 			message.member.roles.cache.has('842387653394563074') ||
-			message.member.id == '324284116021542922'
+			message.member.id == '324281236728053760'
 		) {
 			let allPoints: Array<User>
 			userActivityModel.find({}).then((docs) => {
@@ -114,7 +114,7 @@ export default class pointsLeaderboardCommand extends BotCommand {
 			})
 		} else {
 			message.reply({
-				content: 'Tu doit avoir le rôle acitf pour utliser cette commande',
+				content: 'Tu doit avoir le rôle actif pour utliser cette commande',
 				ephemeral: true
 			})
 		}
