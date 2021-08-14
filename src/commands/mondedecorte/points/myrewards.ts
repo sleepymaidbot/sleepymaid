@@ -73,8 +73,8 @@ export default class MyRewards extends BotCommand {
 
 		embed.setDescription(`Voici une liste des récompense que tu a obtenu:
 		- Rôle <@&857324294791364639>: ${hasColorful}
-         - Rôle <@&842387653394563074>: ${hasActifRole}
-         - Rôle <@&869637334126170112>: ${hasCustomRole}`)
+		- Rôle <@&842387653394563074>: ${hasActifRole}
+		- Rôle <@&869637334126170112>: ${hasCustomRole}`)
 
 		await message.reply({ embeds: [embed] })
 	}

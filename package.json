@@ -19,7 +19,6 @@
 		"@typescript-eslint/eslint-plugin": "^4.28.1",
 		"@typescript-eslint/parser": "^4.29.1",
 		"@yarnpkg/cli-dist": "^3.0.0",
-		"@yarnpkg/pnpify": "^3.0.1",
 		"discord-api-types": "next",
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.3.0",
@@ -31,8 +30,7 @@
 	"dependencies": {
 		"discord-akairo": "Le-monde-dEcorte/discord-akairo",
 		"discord.js": "^13.1.0",
-		"mongoose": "^5.13.7",
-		"nodemon": "^2.0.12"
+		"mongoose": "^5.13.7"
 	},
 	"installConfig": {
 		"pnp": true
