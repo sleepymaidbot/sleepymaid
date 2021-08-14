@@ -22,9 +22,9 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@discordjs/builders@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@discordjs/builders/-/builders-0.4.0.tgz#bb41573ce4824aa9194a53b52c29c5219b610010"
+"@discordjs/builders@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@discordjs/builders/-/builders-0.5.0.tgz#646cbea9cc67f68639e6fb70ed1278b26dacdb14"
   dependencies:
     "@sindresorhus/is" "^4.0.1"
     discord-api-types "^0.22.0"
@@ -758,11 +758,11 @@ discord-api-types@next:
   version "0.23.0-next.8fcd0f2.1628557295"
   resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.23.0-next.8fcd0f2.1628557295.tgz#8dcfdd3022e36376010aaf2f23c004abafe2aa4b"
 
-discord.js@^13.0.1:
-  version "13.0.1"
-  resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-13.0.1.tgz#58f009706d1d7587fe9ff6c6c781e4540ae085f9"
+discord.js@^13.1.0:
+  version "13.1.0"
+  resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-13.1.0.tgz#99f6a2a8be88d31906ff0148e9b1cb603ebb2e2e"
   dependencies:
-    "@discordjs/builders" "^0.4.0"
+    "@discordjs/builders" "^0.5.0"
     "@discordjs/collection" "^0.2.1"
     "@discordjs/form-data" "^3.0.1"
     "@sapphire/async-queue" "^1.1.4"
