@@ -72,7 +72,9 @@ export default class evaluate extends Command {
 				await message.channel.send({ embeds: [evalOutputEmbed] })
 			}
 		} catch (err) {
-			console.log(err)
+			if (err.length > 10) {
+				message.channel.send(`\`\`\`js\n${err}\`\`\``)
+			} else console.error(err)
 		}
 	}
 }
