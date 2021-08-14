@@ -250,7 +250,7 @@
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@yarnpkg/cli-dist/-/cli-dist-3.0.0.tgz#ac859e2a5ce63c7ba2e5620e67a9c30a8edbdf51"
 
-"@yarnpkg/core@^3.0.0", "@yarnpkg/core@^3.0.0-rc.13":
+"@yarnpkg/core@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@yarnpkg/core/-/core-3.0.0.tgz#64d0fed65eccf1c3d3b3f34b9a903ac9206f8f3d"
   dependencies:
@@ -287,9 +287,9 @@
     tslib "^1.13.0"
     tunnel "^0.0.6"
 
-"@yarnpkg/fslib@^2.5.0", "@yarnpkg/fslib@^2.5.0-rc.13":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@yarnpkg/fslib/-/fslib-2.5.0.tgz#d0f4b0d70d89ab2de5ad3349e59cfde87a7e6c1c"
+"@yarnpkg/fslib@^2.5.0", "@yarnpkg/fslib@^2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@yarnpkg/fslib/-/fslib-2.5.1.tgz#3e99dccf48790697d52f1b1ac133dce218424521"
   dependencies:
     "@yarnpkg/libzip" "^2.2.2"
     tslib "^1.13.0"
@@ -308,7 +308,7 @@
     "@types/emscripten" "^1.38.0"
     tslib "^1.13.0"
 
-"@yarnpkg/nm@^2.4.1-rc.4":
+"@yarnpkg/nm@^2.4.1":
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/@yarnpkg/nm/-/nm-2.4.1.tgz#7c1747c14e7a0b1115080cae45c772f6b704799e"
   dependencies:
@@ -331,13 +331,13 @@
     resolve.exports "^1.0.2"
     tslib "^1.13.0"
 
-"@yarnpkg/pnpify@^3.0.0-rc.14":
-  version "3.0.0-rc.14"
-  resolved "https://registry.yarnpkg.com/@yarnpkg/pnpify/-/pnpify-3.0.0-rc.14.tgz#f407f62bb267e476817f08169877ff846ec0a33d"
+"@yarnpkg/pnpify@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@yarnpkg/pnpify/-/pnpify-3.0.1.tgz#02354429f1133c210f94f29b0cae834fefca8afc"
   dependencies:
-    "@yarnpkg/core" "^3.0.0-rc.13"
-    "@yarnpkg/fslib" "^2.5.0-rc.13"
-    "@yarnpkg/nm" "^2.4.1-rc.4"
+    "@yarnpkg/core" "^3.0.0"
+    "@yarnpkg/fslib" "^2.5.1"
+    "@yarnpkg/nm" "^2.4.1"
     clipanion "^3.0.1"
     cross-spawn "7.0.3"
     tslib "^1.13.0"
