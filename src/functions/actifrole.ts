@@ -12,6 +12,8 @@ export async function checkActifRole(
 		userRole.push(role.name)
 	})
 
+	if (member.id === guild.ownerId) return;
+
 	if (points >= 100) {
 		if (!userRole.includes('Actif')) {
 			const actifRole = guild.roles.cache.find((role) => role.name === 'Actif')
