@@ -1,10 +1,12 @@
 import { BotCommand } from '../../lib/extensions/BotCommand'
 import { MessageEmbed, MessageActionRow, MessageSelectMenu } from 'discord.js'
 import { colorRole } from '../../config/lists'
+import { config } from '../../config/config'
 export default class color_message_command extends BotCommand {
 	constructor() {
 		super('color_message_setup', {
 			aliases: ['color_message_setup'],
+			prefix: `dev.${config.prefix}`,
 			ownerOnly: true,
 			channel: 'guild'
 		})

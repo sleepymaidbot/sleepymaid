@@ -9,11 +9,11 @@ import {
 import { inspect } from 'util'
 import { Command } from 'discord-akairo'
 import { config } from '../../config/config'
-
 export default class evaluate extends Command {
 	constructor() {
 		super('eval', {
 			aliases: ['eval', 'ev', 'exec'],
+			prefix: `dev.${config.prefix}`,
 			args: [
 				{ id: 'codetoeval', type: 'string', match: 'rest' },
 				{ id: 'silent', match: 'flag', flag: '--silent' },
