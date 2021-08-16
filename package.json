@@ -32,9 +32,6 @@
 		"discord.js": "^13.1.0",
 		"mongoose": "^5.13.7"
 	},
-	"installConfig": {
-		"pnp": true
-	},
 	"prettier": {
 		"useTabs": true,
 		"quoteProps": "consistent",
