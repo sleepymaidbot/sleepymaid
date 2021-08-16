@@ -11,8 +11,7 @@ export default class PointsAdminCommand extends Command {
 			args: [
 				{
 					id: 'member',
-					type: 'member',
-					default: (message) => message.member
+					type: 'member'
 				},
 				{
 					id: 'points',
