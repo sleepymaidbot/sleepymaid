@@ -24,7 +24,8 @@ export default class customRole extends BotCommand {
 					match: 'rest'
 				}
 			],
-			channel: 'guild'
+			channel: 'guild',
+			prefix: '!'
 		})
 	}
 
