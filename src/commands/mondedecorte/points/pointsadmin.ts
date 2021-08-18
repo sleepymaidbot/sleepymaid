@@ -25,7 +25,7 @@ export default class PointsAdminCommand extends Command {
 
 	async exec(message: Message, args) {
 		const oldUser = await userActivityModel.findOne({ id: args.member.id })
-        const embed = new MessageEmbed()
+		const embed = new MessageEmbed()
 			.setColor('#36393f')
 			.setAuthor(message.author.tag, message.author.avatarURL())
 			.setDescription(`Changement des points de <@${args.member.id}>`)
