@@ -1,6 +1,6 @@
 import { BotCommand } from '../../../lib/extensions/BotCommand'
 import { Message, MessageEmbed } from 'discord.js'
-import { userActivityModel } from '../../../lib/utils/db'
+import { mondecorteModel } from '../../../lib/utils/db'
 import { slashGuildsIds } from '../../../config/lists'
 
 interface User {
@@ -27,7 +27,7 @@ export default class pointsLeaderboardCommand extends BotCommand {
 			message.member.id == '324281236728053760'
 		) {
 			let allPoints: Array<User>
-			userActivityModel.find({}).then((docs) => {
+			mondecorteModel.find({}).then((docs) => {
 				allPoints = docs
 
 				allPoints.sort((a, b) => {
@@ -77,7 +77,7 @@ export default class pointsLeaderboardCommand extends BotCommand {
 			message.member.id == '324281236728053760'
 		) {
 			let allPoints: Array<User>
-			userActivityModel.find({}).then((docs) => {
+			mondecorteModel.find({}).then((docs) => {
 				allPoints = docs
 
 				allPoints.sort((a, b) => {

@@ -1,5 +1,5 @@
 import { Task } from 'discord-akairo'
-import { userActivityModel } from '../lib/utils/db'
+import { mondecorteModel } from '../lib/utils/db'
 import { pointsBlacklistedVoiceChannel } from '../config/lists'
 import { checkActifRole } from '../functions/actifrole'
 import { checkCustomRole } from '../functions/customrole'
@@ -27,11 +27,11 @@ export default class voiceXpTask extends Task {
 						if (member.voice.mute || member.voice.deaf) {
 							return
 						} else {
-							const userInDB = await userActivityModel.findOne({
+							const userInDB = await mondecorteModel.findOne({
 								id: member.id
 							})
 							if (userInDB == null || 0) {
-								const newUser = new userActivityModel({
+								const newUser = new mondecorteModel({
 									id: member.id,
 									points: 1
 								})

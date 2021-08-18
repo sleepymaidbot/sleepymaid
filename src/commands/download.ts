@@ -11,14 +11,14 @@ export default class downloadCommand extends Command {
 			aliases: ['dl', 'download'],
 			slash: false,
 			slashGuilds: slashGuildsIds,
-            description: 'Download a video.',
-            prefix: '!',
-            args: [
-                {
-                    id: 'video',
-                    type: 'string'
-                }
-            ],
+			description: 'Download a video.',
+			prefix: '!',
+			args: [
+				{
+					id: 'video',
+					type: 'string'
+				}
+			],
 			slashOptions: [
 				{
 					name: 'video',
@@ -30,7 +30,7 @@ export default class downloadCommand extends Command {
 		})
 	}
 
-    async exec(message, args) {
+	async exec(message, args) {
 		if (!args.video) {
 			message.reply({
 				content: 'You must provide a valid video link',
@@ -90,7 +90,7 @@ export default class downloadCommand extends Command {
 		} else {
 			try {
 				let fileName
-                message.defer()
+				message.defer()
 				await execFile(
 					'youtube-dl',
 					['-o', '%(id)s.%(ext)s', '--get-filename', args.video],

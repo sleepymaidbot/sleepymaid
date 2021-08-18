@@ -46,3 +46,22 @@ const customRoleSchema = new Schema<customRole>(
 )
 
 export const customRoleModel = model<customRole>('customRole', customRoleSchema)
+
+// mondecorte
+
+interface mondecorte {
+	id: Snowflake
+	points: number
+	crole?: Snowflake
+}
+
+const mondecorteSchema = new Schema<mondecorte>(
+	{
+		id: { type: String, required: true, index: true },
+		points: { type: Number, required: true, default: 0 },
+		crole: { type: String, index: true }
+	},
+	{ collection: 'mondecorte' }
+)
+
+export const mondecorteModel = model<mondecorte>('mondecorte', mondecorteSchema)

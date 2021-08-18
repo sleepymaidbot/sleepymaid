@@ -2,7 +2,7 @@ import { Message, MessageEmbed } from 'discord.js'
 import { checkUserActivityPoints } from '../../../../functions/actifrole'
 import { BotCommand } from '../../../../lib/extensions/BotCommand'
 import { getUserCustomRoleId } from '../../../../functions/customrole'
-import { customRoleModel } from '../../../../lib/utils/db'
+import { mondecorteModel } from '../../../../lib/utils/db'
 import { config } from '../../../../config/config'
 
 export default class customRole extends BotCommand {
@@ -66,15 +66,16 @@ export default class customRole extends BotCommand {
 							})
 							.then(async (role) => {
 								message.member.roles.add(role)
-								const newRoleDb = new customRoleModel({
-									id: message.author.id,
-									role: role.id
+								const inDb = await mondecorteModel.findOne({
+									id: message.author.id
 								})
-								await newRoleDb.save()
-								embed.setDescription(`Ton rôle custom a été créer <@&${role.id}>.
-                                Pour modifier le nom fait la commande  \`\`${config.prefix}cr name <name>\`\`
-                                Pour modifier la couleur fait la commande \`\`${config.prefix}cr color <color>\`\``)
-								await message.reply({ embeds: [embed] })
+								inDb.crole = role.id
+								await inDb.save().then(async () => {
+									embed.setDescription(`Ton rôle custom a été créer <@&${role.id}>.
+									Pour modifier le nom fait la commande  \`\`${config.prefix}cr name <name>\`\`
+									Pour modifier la couleur fait la commande \`\`${config.prefix}cr color <color>\`\``)
+									await message.reply({ embeds: [embed] })
+								})
 							})
 							.catch(console.error)
 					} else {
@@ -92,11 +93,12 @@ export default class customRole extends BotCommand {
 					(role) => role.id === userCrId
 				)
 				await crole.delete()
-				await customRoleModel
-					.deleteOne({ id: message.author.id })
-					.catch(console.error)
-				embed.setDescription('Ton rôle custom a été supprimer')
-				await message.reply({ embeds: [embed] })
+				const inDb = await mondecorteModel.findOne({ id: message.author.id })
+				inDb.crole = null
+				await inDb.save().then(async () => {
+					embed.setDescription('Ton rôle custom a été supprimer')
+					await message.reply({ embeds: [embed] })
+				})
 			}
 		} else if (action === 'color') {
 			if (userCrId && userPoints >= 250) {

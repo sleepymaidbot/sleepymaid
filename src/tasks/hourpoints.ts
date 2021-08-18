@@ -1,6 +1,6 @@
 import { Task } from 'discord-akairo'
 import { TextChannel } from 'discord.js'
-import { userActivityModel } from '../lib/utils/db'
+import { mondecorteModel } from '../lib/utils/db'
 
 export default class pointsRemoveTask extends Task {
 	constructor() {
@@ -12,9 +12,9 @@ export default class pointsRemoveTask extends Task {
 
 	async exec() {
 		const usersArray = []
-		await userActivityModel.find({}).then(async (docs) => {
+		await mondecorteModel.find({}).then(async (docs) => {
 			for (const user of docs) {
-				const userInDB = await userActivityModel.findOne({ id: user.id })
+				const userInDB = await mondecorteModel.findOne({ id: user.id })
 				if (userInDB != null && userInDB.points >= 1) {
 					userInDB.points = userInDB.points - 1
 					await userInDB.save()

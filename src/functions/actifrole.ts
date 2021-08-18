@@ -1,6 +1,6 @@
 import { GuildMember, Guild } from 'discord.js'
 import { config } from '../config/config'
-import { userActivityModel } from '../lib/utils/db'
+import { mondecorteModel } from '../lib/utils/db'
 
 export async function checkActifRole(
 	member: GuildMember,
@@ -43,7 +43,7 @@ export async function checkActifRole(
 }
 
 export async function checkUserActivityPoints(user: GuildMember) {
-	const userInDb = await userActivityModel.findOne({ id: user.id })
+	const userInDb = await mondecorteModel.findOne({ id: user.id })
 	if (userInDb == null) {
 		return 0
 	} else {

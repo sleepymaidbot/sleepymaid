@@ -1,5 +1,5 @@
 import { Listener } from 'discord-akairo'
-import { userActivityModel } from '../lib/utils/db'
+import { mondecorteModel } from '../lib/utils/db'
 import { Message } from 'discord.js'
 import { pointsBlacklistedChannel } from '../config/lists'
 import { checkActifRole } from '../functions/actifrole'
@@ -24,11 +24,11 @@ export default class Activity extends Listener {
 		if (talkedRecently.has(message.author.id)) {
 			return
 		} else {
-			const userInDB = await userActivityModel.findOne({
+			const userInDB = await mondecorteModel.findOne({
 				id: message.author.id
 			})
 			if (userInDB == null || 0) {
-				const newUser = new userActivityModel({
+				const newUser = new mondecorteModel({
 					id: message.author.id,
 					points: 1
 				})

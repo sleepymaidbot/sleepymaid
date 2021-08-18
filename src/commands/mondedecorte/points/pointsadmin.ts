@@ -1,7 +1,7 @@
 import { Command } from 'discord-akairo'
 import { Message, MessageEmbed } from 'discord.js'
 import { config } from '../../../config/config'
-import { userActivityModel } from '../../../lib/utils/db'
+import { mondecorteModel } from '../../../lib/utils/db'
 
 export default class PointsAdminCommand extends Command {
 	constructor() {
@@ -24,7 +24,7 @@ export default class PointsAdminCommand extends Command {
 	}
 
 	async exec(message: Message, args) {
-		const oldUser = await userActivityModel.findOne({ id: args.member.id })
+		const oldUser = await mondecorteModel.findOne({ id: args.member.id })
 		const embed = new MessageEmbed()
 			.setColor('#36393f')
 			.setAuthor(message.author.tag, message.author.avatarURL())
