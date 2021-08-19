@@ -1,10 +1,10 @@
 import { Guild, GuildMember, MessageEmbed } from 'discord.js'
-import { customRoleModel } from '../lib/utils/db'
+import { mondecorteModel } from '../lib/utils/db'
 
 export async function getUserCustomRoleId(member: GuildMember) {
-	const inDb = await customRoleModel.findOne({ id: member.id })
+	const inDb = await mondecorteModel.findOne({ id: member.id })
 	if (inDb) {
-		return inDb.role
+		return inDb.crole
 	} else {
 		return null
 	}
@@ -28,7 +28,9 @@ export async function checkCustomRole(
 				\`\`\`{\n	name: "${crole.name}",\n	color: "${crole.color}"\n} \`\`\``)
 
 			await crole.delete()
-			await customRoleModel.deleteOne({ id: member.id }).catch(console.error)
+			const inDb = await mondecorteModel.findOne({ id: member.id })
+			inDb.crole = null
+			await inDb.save()
 			await member.user.send({ embeds: [embed] })
 		}
 	}
