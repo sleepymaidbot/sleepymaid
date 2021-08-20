@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo'
-import { slashGuildsIds } from '../config/lists'
+import { slashGuildsIds } from '../../config/lists'
 import fs from 'fs'
 import util from 'util'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
