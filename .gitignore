@@ -164,3 +164,4 @@ temp/
 src/config/config.ts
 *.disable
 *.exe
+banners/
