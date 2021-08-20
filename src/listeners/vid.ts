@@ -39,7 +39,8 @@ export default class videoDL extends Listener {
 						// eslint-disable-next-line @typescript-eslint/no-unused-vars
 						async (error, stdout, stderr) => {
 							if (error) {
-								throw error
+								console.error(error)
+								return
 							}
 							fileName = stdout.trim()
 							await execFile(
