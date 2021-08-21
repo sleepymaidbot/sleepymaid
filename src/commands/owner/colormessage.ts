@@ -6,7 +6,7 @@ export default class color_message_command extends BotCommand {
 	constructor() {
 		super('color_message_setup', {
 			aliases: ['color_message_setup'],
-			prefix: `dev.${config.prefix}`,
+			prefix: config.devprefix,
 			ownerOnly: true,
 			channel: 'guild'
 		})
