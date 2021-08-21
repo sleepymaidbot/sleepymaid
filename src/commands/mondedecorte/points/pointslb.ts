@@ -2,6 +2,7 @@ import { BotCommand } from '../../../lib/extensions/BotCommand'
 import { Message, MessageEmbed } from 'discord.js'
 import { mondecorteModel } from '../../../lib/utils/db'
 import { slashGuildsIds } from '../../../config/lists'
+import { config } from '../../../config/config'
 
 interface User {
 	id: string
