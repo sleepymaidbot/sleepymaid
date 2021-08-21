@@ -7,7 +7,7 @@ export default class PointsAdminCommand extends Command {
 	constructor() {
 		super('pointsadmin', {
 			aliases: ['pointsadmin'],
-			prefix: `dev.${config.prefix}`,
+			prefix: config.devprefix,
 			args: [
 				{
 					id: 'member',

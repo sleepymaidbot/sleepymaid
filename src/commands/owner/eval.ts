@@ -13,7 +13,7 @@ export default class evaluate extends Command {
 	constructor() {
 		super('eval', {
 			aliases: ['eval', 'ev', 'exec'],
-			prefix: `dev.${config.prefix}`,
+			prefix: config.devprefix,
 			args: [
 				{ id: 'codetoeval', type: 'string', match: 'rest' },
 				{ id: 'silent', match: 'flag', flag: '--silent' },

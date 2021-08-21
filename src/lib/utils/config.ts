@@ -4,7 +4,9 @@ export interface ConfigOptions {
 	credentials: { token: string; devToken: string }
 	environment: 'production' | 'development'
 	owners: Snowflake[]
-	prefix: string
+	prefix: string; 
+	devprefix: string; 
+	slashprefix: string
 	db: string
 }
 
@@ -13,6 +15,8 @@ export class Config {
 	public environment: 'production' | 'development'
 	public owners: Snowflake[]
 	public prefix: string
+	public devprefix: string
+	public slashprefix: string
 	public db: string
 
 	public constructor(options: ConfigOptions) {
@@ -20,6 +24,8 @@ export class Config {
 		this.environment = options.environment
 		this.owners = options.owners
 		this.prefix = options.prefix
+		this.devprefix = options.devprefix
+		this.slashprefix = options.slashprefix
 		this.db = options.db
 	}
 
