@@ -2,6 +2,7 @@ import { BotCommand } from '../../../lib/extensions/BotCommand'
 import { MessageEmbed } from 'discord.js'
 import { checkUserActivityPoints } from '../../../functions/actifrole'
 import { slashGuildsIds } from '../../../config/lists'
+import { config } from '../../../config/config'
 
 export default class pointsCommand extends BotCommand {
 	constructor() {
@@ -10,6 +11,7 @@ export default class pointsCommand extends BotCommand {
 			channel: 'guild',
 			description: 'Show your or someone points. ',
 			slash: true,
+			prefix: config.slashprefix,
 			slashGuilds: slashGuildsIds,
 			slashOptions: [
 				{

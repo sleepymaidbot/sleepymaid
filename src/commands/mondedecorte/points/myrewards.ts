@@ -12,6 +12,7 @@ export default class MyRewards extends BotCommand {
 			aliases: ['myrewards', 'rewards', 'mr'],
 			description: 'Show your rewards.',
 			channel: 'guild',
+			prefix: config.slashprefix,
 			slash: true,
 			slashGuilds: slashGuildsIds
 		})

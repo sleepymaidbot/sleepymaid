@@ -15,6 +15,7 @@ export default class pointsLeaderboardCommand extends BotCommand {
 			channel: 'guild',
 			description: 'Show the guild points leaderboard.',
 			slash: true,
+			prefix: config.slashprefix,
 			slashGuilds: slashGuildsIds
 		})
 	}
