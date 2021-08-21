@@ -7,7 +7,7 @@ export async function checkActifRole(
 	guild: Guild,
 	points: number
 ) {
-	const userRole = member.roles.cache.map(role => role.name)
+	const userRole = member.roles.cache.map((role) => role.name)
 
 	if (member.id === guild.ownerId) return
 

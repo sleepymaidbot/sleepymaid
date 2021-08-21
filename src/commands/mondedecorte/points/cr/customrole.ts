@@ -1,4 +1,4 @@
-import { Message, MessageEmbed, Role } from 'discord.js'
+import { Message, MessageEmbed } from 'discord.js'
 import { BotCommand } from '../../../../lib/extensions/BotCommand'
 import { getUserCustomRoleId, getcrole } from '../../../../functions/customrole'
 import { mondecorteModel } from '../../../../lib/utils/db'
@@ -81,7 +81,7 @@ export default class customRole extends BotCommand {
 					}
 				}
 			} else {
-				embed.setDescription('Tu n\'a pas assez de points.')
+				embed.setDescription("Tu n'a pas assez de points.")
 				await message.reply({ embeds: [embed] })
 			}
 		} else if (action === 'delete') {

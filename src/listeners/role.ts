@@ -12,8 +12,8 @@ export default class RoleListener extends Listener {
 	}
 
 	async exec(oldMember, newMember) {
-		const oldMemberRole = oldMember.roles.cache.map(r => r.name)
-		const newMemberRole = newMember.roles.cache.map(r => r.name)
+		const oldMemberRole = oldMember.roles.cache.map((r) => r.name)
+		const newMemberRole = newMember.roles.cache.map((r) => r.name)
 		const role = newMember.guild.roles.cache.find(
 			(role) => role.name === 'Colorful'
 		)

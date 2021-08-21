@@ -1,6 +1,6 @@
 import { Task } from 'discord-akairo'
 import { opendir } from 'fs/promises'
-import { config } from '../config/config'
+import { config } from '../config/config'
 
 export default class banner extends Task {
 	constructor() {

@@ -4,8 +4,8 @@ export interface ConfigOptions {
 	credentials: { token: string; devToken: string }
 	environment: 'production' | 'development'
 	owners: Snowflake[]
-	prefix: string; 
-	devprefix: string; 
+	prefix: string
+	devprefix: string
 	slashprefix: string
 	db: string
 }

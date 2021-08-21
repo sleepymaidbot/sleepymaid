@@ -14,7 +14,7 @@ export async function getUserCustomRoleId(member: GuildMember) {
 export async function getcrole(member: GuildMember) {
 	const userPoints = await checkUserActivityPoints(member)
 
-	const userrole = member.roles.cache.map(x => x.id)
+	const userrole = member.roles.cache.map((x) => x.id)
 
 	if (userPoints >= 250 || userrole.includes('869637334126170112')) {
 		return true
