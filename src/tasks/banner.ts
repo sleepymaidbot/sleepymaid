@@ -1,5 +1,6 @@
 import { Task } from 'discord-akairo'
 import { opendir } from 'fs/promises'
+import { config } from '../config/config'
 
 export default class banner extends Task {
 	constructor() {
@@ -10,6 +11,7 @@ export default class banner extends Task {
 	}
 
 	async exec() {
+		if (config.isDevelopment) return
 		try {
 			const dir = await opendir('./banners')
 			const banners = []
