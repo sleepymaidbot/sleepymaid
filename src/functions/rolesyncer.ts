@@ -7,7 +7,7 @@ export function checkUserRole(
 	let wasEligibleForColorfulRole = false
 	let eligibleForColorfulRole = false
 	oldMemberRole.forEach((role) => {
-		if (ColorfulNeedRole.includes(role)) {
+		if (ColorfulNeedRole.includes(role.toLowerCase())) {
 			wasEligibleForColorfulRole = true
 		}
 	})
