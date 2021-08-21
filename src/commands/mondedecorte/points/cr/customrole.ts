@@ -1,7 +1,6 @@
-import { Message, MessageEmbed } from 'discord.js'
-import { checkUserActivityPoints } from '../../../../functions/actifrole'
+import { Message, MessageEmbed, Role } from 'discord.js'
 import { BotCommand } from '../../../../lib/extensions/BotCommand'
-import { getUserCustomRoleId } from '../../../../functions/customrole'
+import { getUserCustomRoleId, getcrole } from '../../../../functions/customrole'
 import { mondecorteModel } from '../../../../lib/utils/db'
 import { config } from '../../../../config/config'
 
@@ -24,8 +23,7 @@ export default class customRole extends BotCommand {
 					match: 'rest'
 				}
 			],
-			channel: 'guild',
-			prefix: '!'
+			channel: 'guild'
 		})
 	}
 
@@ -41,10 +39,9 @@ export default class customRole extends BotCommand {
 			.setTimestamp()
 
 		const userCrId = await getUserCustomRoleId(message.member)
-		const userPoints = await checkUserActivityPoints(message.member)
 
 		if (action == 'create') {
-			if (userPoints >= 250) {
+			if ((await getcrole(message.member)) == true) {
 				if (userCrId) {
 					const cr = message.guild.roles.cache.find(
 						(role) => role.id === userCrId
@@ -84,7 +81,7 @@ export default class customRole extends BotCommand {
 					}
 				}
 			} else {
-				embed.setDescription("Tu n'a pas assez de points.")
+				embed.setDescription('Tu n\'a pas assez de points.')
 				await message.reply({ embeds: [embed] })
 			}
 		} else if (action === 'delete') {
@@ -101,7 +98,7 @@ export default class customRole extends BotCommand {
 				})
 			}
 		} else if (action === 'color') {
-			if (userCrId && userPoints >= 250) {
+			if (userCrId && (await getcrole(message.member)) == true) {
 				const crole = message.guild.roles.cache.find(
 					(role) => role.id === userCrId
 				)
@@ -116,7 +113,7 @@ export default class customRole extends BotCommand {
 					.catch(console.error)
 			}
 		} else if (action === 'name') {
-			if (userCrId && userPoints >= 250) {
+			if (userCrId && (await getcrole(message.member)) == true) {
 				const crole = message.guild.roles.cache.find(
 					(role) => role.id === userCrId
 				)

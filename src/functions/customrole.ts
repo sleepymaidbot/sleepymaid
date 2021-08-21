@@ -1,5 +1,6 @@
 import { Guild, GuildMember, MessageEmbed } from 'discord.js'
 import { mondecorteModel } from '../lib/utils/db'
+import { checkUserActivityPoints } from './actifrole'
 
 export async function getUserCustomRoleId(member: GuildMember) {
 	const inDb = await mondecorteModel.findOne({ id: member.id })
@@ -7,6 +8,18 @@ export async function getUserCustomRoleId(member: GuildMember) {
 		return inDb.crole
 	} else {
 		return null
+	}
+}
+
+export async function getcrole(member: GuildMember) {
+	const userPoints = await checkUserActivityPoints(member)
+
+	const userrole = member.roles.cache.map(x => x.id)
+
+	if (userPoints >= 250 || userrole.includes('869637334126170112')) {
+		return true
+	} else {
+		return false
 	}
 }
 
