@@ -16,10 +16,7 @@ export default class ColorRoleSelectsListener extends Listener {
 				interaction.channelId == '857342694691307540' &&
 				interaction.setCustomId == 'color_role_selects'
 			) {
-				const memberRole: string[] = []
-				interaction.member.roles.cache.forEach((role) => {
-					memberRole.push(role.name)
-				})
+				const memberRole = interaction.member.roles.cache.map((r) => r.name)
 				if (memberRole.includes('Colorful')) {
 					const buttonID = interaction.values[0]
 					const role = interaction.guild.roles.cache.find(
