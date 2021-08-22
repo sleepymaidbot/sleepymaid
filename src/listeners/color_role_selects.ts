@@ -14,7 +14,7 @@ export default class ColorRoleSelectsListener extends Listener {
 			if (
 				interaction.guildId == '324284116021542922' &&
 				interaction.channelId == '857342694691307540' &&
-				interaction.setCustomId == 'color_role_selects'
+				interaction.customId == 'color_role_selects'
 			) {
 				const memberRole = interaction.member.roles.cache.map((r) => r.name)
 				if (memberRole.includes('Colorful')) {

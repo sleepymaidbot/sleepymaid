@@ -22,7 +22,7 @@ export default class banner extends Task {
 			}
 
 			const banner = banners[Math.floor(Math.random() * banners.length)]
-			
+
 			guild
 				.setBanner(`./banners/${banner}`, `Changed banner to ${banner}`)
 				.catch(console.error)
