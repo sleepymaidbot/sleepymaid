@@ -27,13 +27,14 @@ export default class color_message_command extends BotCommand {
 			.setColor('#36393f')
 			.setTitle('Choix de couleur.')
 			.setDescription(
-				`Clique sur un bouton pour avoir\n la couleur de ton choix.\n${displayRoleString}`
+				'Clique sur un bouton pour avoir la couleur de ton choix.'
 			)
+			.addField('Rôle de couleur', displayRoleString, true)
 
 		const row = new MessageActionRow().addComponents(
 			new MessageSelectMenu()
 				.setCustomId('color_role_selects')
-				.setPlaceholder('Nothing selected')
+				.setPlaceholder('Aucune couleur')
 				.addOptions([
 					{
 						label: 'Aucune couleur',
