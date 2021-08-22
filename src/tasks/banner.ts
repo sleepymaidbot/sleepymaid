@@ -12,6 +12,8 @@ export default class banner extends Task {
 
 	async exec() {
 		if (config.isDevelopment) return
+		const guild = this.client.guilds.cache.get('324284116021542922')
+		if (guild.premiumSubscriptionCount < 15) return
 		try {
 			const dir = await opendir('./banners')
 			const banners = []
@@ -20,8 +22,7 @@ export default class banner extends Task {
 			}
 
 			const banner = banners[Math.floor(Math.random() * banners.length)]
-
-			const guild = this.client.guilds.cache.get('324284116021542922')
+			
 			guild
 				.setBanner(`./banners/${banner}`, `Changed banner to ${banner}`)
 				.catch(console.error)
