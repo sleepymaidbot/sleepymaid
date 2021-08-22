@@ -32,7 +32,7 @@ export default class color_message_command extends BotCommand {
 
 		const row = new MessageActionRow().addComponents(
 			new MessageSelectMenu()
-				.setCustomId('select')
+				.setCustomId('color_role_selects')
 				.setPlaceholder('Nothing selected')
 				.addOptions([
 					{

@@ -13,7 +13,8 @@ export default class ColorRoleSelectsListener extends Listener {
 		if (interaction.isSelectMenu()) {
 			if (
 				interaction.guildId == '324284116021542922' &&
-				interaction.channelId == '857342694691307540'
+				interaction.channelId == '857342694691307540' &&
+				interaction.setCustomId == 'color_role_selects'
 			) {
 				const memberRole: string[] = []
 				interaction.member.roles.cache.forEach((role) => {
