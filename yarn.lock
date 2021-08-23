@@ -1296,9 +1296,9 @@ discord-akairo@Le-monde-dEcorte/discord-akairo:
   languageName: node
   linkType: hard
 
-"mongoose@npm:5.13.7, mongoose@npm:^5.13.7":
-  version: 5.13.7
-  resolution: "mongoose@npm:5.13.7"
+"mongoose@npm:5.13.8, mongoose@npm:^5.13.8":
+  version: 5.13.8
+  resolution: "mongoose@npm:5.13.8"
   dependencies:
     "@types/mongodb": ^3.5.27
     bson: ^1.1.4
@@ -1313,7 +1313,7 @@ discord-akairo@Le-monde-dEcorte/discord-akairo:
     safe-buffer: 5.2.1
     sift: 13.5.2
     sliced: 1.0.1
-  checksum: d0184cb896fa83f4e44f928a416fc7813d4f1a63190683ef5fc1d473e8f79a12f478235dc052f5ee86d389bf4b6c1d4f7a50d7bfa164ed27d0f65a2e4eecc3d9
+  checksum: 90fdfc653ebcb1973bca727cad7c796f407d841d662a05b480969d1d1ecd71628e2aab24fe80535d9eadc22bdebab7a1aeb2d7eb601657b7f1d6855c296fb9bb
   languageName: node
   linkType: hard
 
@@ -1654,7 +1654,7 @@ discord-akairo@Le-monde-dEcorte/discord-akairo:
     discord.js: ^13.1.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
-    mongoose: ^5.13.7
+    mongoose: ^5.13.8
     prettier: ^2.3.2
     rimraf: ^3.0.2
     source-map-support: ^0.5.19
