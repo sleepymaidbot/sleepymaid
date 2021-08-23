@@ -12,8 +12,8 @@ export default class VoteHandler extends Listener {
 	async exec(interaction) {
 		if (interaction.isSelectMenu()) {
 			if (
-				//interaction.channel.id === '775820100917526548' &&
-				//interaction.guild.id === '324284116021542922' &&
+				interaction.channel.id === '775820100917526548' &&
+				interaction.guild.id === '324284116021542922' &&
 				interaction.customId === 'vote'
 			) {
 				const value = interaction.values[0]
