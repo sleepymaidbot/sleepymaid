@@ -12,7 +12,7 @@ export async function startDB(): Promise<void> {
 
 // mondecorte
 
-interface mondecorte {
+export interface mondecorte {
 	id: Snowflake
 	points: number
 	crole?: Snowflake

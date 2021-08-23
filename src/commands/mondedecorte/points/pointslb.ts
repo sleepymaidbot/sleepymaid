@@ -1,13 +1,8 @@
 import { BotCommand } from '../../../lib/extensions/BotCommand'
 import { Message, MessageEmbed } from 'discord.js'
-import { mondecorteModel } from '../../../lib/utils/db'
+import { mondecorteModel, mondecorte } from '../../../lib/utils/db'
 import { slashGuildsIds } from '../../../config/lists'
 import { config } from '../../../config/config'
-
-interface User {
-	id: string
-	points: number
-}
 
 export default class pointsLeaderboardCommand extends BotCommand {
 	constructor() {
@@ -28,7 +23,7 @@ export default class pointsLeaderboardCommand extends BotCommand {
 			message.member.roles.cache.has('842387653394563074') ||
 			message.member.id == '324281236728053760'
 		) {
-			let allPoints: Array<User>
+			let allPoints: Array<mondecorte>
 			mondecorteModel.find({}).then((docs) => {
 				allPoints = docs
 
@@ -78,7 +73,7 @@ export default class pointsLeaderboardCommand extends BotCommand {
 			message.member.roles.cache.has('842387653394563074') ||
 			message.member.id == '324281236728053760'
 		) {
-			let allPoints: Array<User>
+			let allPoints: Array<mondecorte>
 			mondecorteModel.find({}).then((docs) => {
 				allPoints = docs
 
