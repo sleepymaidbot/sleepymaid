@@ -16,7 +16,7 @@
 	"devDependencies": {
 		"@types/node": "^16.6.1",
 		"@types/prettier": "^2",
-		"@typescript-eslint/eslint-plugin": "^4.28.1",
+		"@typescript-eslint/eslint-plugin": "^4.29.3",
 		"@typescript-eslint/parser": "^4.29.1",
 		"@yarnpkg/cli-dist": "^3.0.0",
 		"discord-api-types": "next",
