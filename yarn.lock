@@ -166,9 +166,9 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*, @types/node@npm:^16.6.1":
-  version: 16.6.1
-  resolution: "@types/node@npm:16.6.1"
-  checksum: c13aa0da0c2bf9070e521d1b537ba38f64b213dd1b8aeec66c279fc21f8c0ccaf380364f6dc2ec8f84440c4cd1460b67dfe47de2cafcb6eaf4b648817cb27dc4
+  version: 16.7.1
+  resolution: "@types/node@npm:16.7.1"
+  checksum: fcf1a2c7b1f19c2201574b2110176b49c6efd824a39b2ed8ac3e6688740e2a35bef95a3334dfa345f4bd4873fd8b79d8ac8cfcc9fcd3d2f4f8f993c2c37ce4ab
   languageName: node
   linkType: hard
 
@@ -288,12 +288,12 @@ __metadata:
   linkType: hard
 
 "@yarnpkg/cli-dist@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "@yarnpkg/cli-dist@npm:3.0.0"
+  version: 3.0.1
+  resolution: "@yarnpkg/cli-dist@npm:3.0.1"
   bin:
     yarn: bin/yarn.js
     yarnpkg: bin/yarn.js
-  checksum: 0ecce26b32d4c163c0447a3d96aad7db2c8c7173c167ad876295030cc8845b8f9ca212ecad843c377451f8b92718d2e53663094ba85d6b3c790f15bd1131d5f0
+  checksum: be0f8eee2a1de9a46d14fc10ece78758276b959faa46b7b950092df279208a57a410647d0eb7e7f3a7b9a6028d6e6f8ad9b3a79f76815cdf24a646fbd4f8721c
   languageName: node
   linkType: hard
 
@@ -588,9 +588,9 @@ __metadata:
   linkType: hard
 
 "denque@npm:^1.4.1":
-  version: 1.5.0
-  resolution: "denque@npm:1.5.0"
-  checksum: 9c0d07a3a6789bccc24f7023a54c83b8850b36c8fbc3aff4bf43b01b76a93ae11c88139502913534fe913bac1b0418dbc30e487ce3d176cbbc001a7a18627c56
+  version: 1.5.1
+  resolution: "denque@npm:1.5.1"
+  checksum: 4375ad19d5cea99f90effa82a8cecdaa10f4eb261fbcd7e47cd753ff2737f037aac8f7f4e031cc77f3966314c491c86a0d3b20c128aeee57f791b4662c45108e
   languageName: node
   linkType: hard
 
@@ -628,9 +628,9 @@ discord-akairo@Le-monde-dEcorte/discord-akairo:
   linkType: hard
 
 "discord-api-types@npm:next":
-  version: 0.23.0-next.fdc1c1a.1629117774
-  resolution: "discord-api-types@npm:0.23.0-next.fdc1c1a.1629117774"
-  checksum: 4897ada8f434ffb050cc9503e1adee9a4d42da8feda8b1052db62a244e57a507749d80ab614758e84c2af78af0dd5e6a90203b93a6cfcec6248882ad420249af
+  version: 0.23.0-next.b6babf2.1629722025
+  resolution: "discord-api-types@npm:0.23.0-next.b6babf2.1629722025"
+  checksum: 770d254cbbc631e2f5cb3d422af0099c65ca0eac90b4a0bef6e9a345fbf96023f7e83a21d3f793ddfcc0963ddb27c0ba38f00cfd05a262df447c8d6029fed4a5
   languageName: node
   linkType: hard
 
@@ -898,11 +898,11 @@ discord-akairo@Le-monde-dEcorte/discord-akairo:
   linkType: hard
 
 "fastq@npm:^1.6.0":
-  version: 1.11.1
-  resolution: "fastq@npm:1.11.1"
+  version: 1.12.0
+  resolution: "fastq@npm:1.12.0"
   dependencies:
     reusify: ^1.0.4
-  checksum: 3877a63bee4f63af9277d6169a766804c9e1c7829a070b6843c5b799aa72177e71465427889c96510e5608c334dd3c912ab0b3ca70c1c8c4c1b03449d9f2c5ba
+  checksum: 486db511686b5ab28b1d87170f05c3fa6c8d769cde6861ed34cf3756cdf356950ba9c7dde0bc976ad4308b85aa9ef6214c685887f9f724be72c054a7becb642a
   languageName: node
   linkType: hard
 
