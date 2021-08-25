@@ -1,3 +1,4 @@
+import { GuildMember, Role } from 'discord.js'
 import { colorRole, ColorfulNeedRole } from '../config/lists'
 
 export function checkUserRole(
@@ -48,10 +49,12 @@ export function checkUserRole(
 	}
 }
 
-export function performRole(action: string, role, member) {
+export function performRole(action: string, role: Role, member: GuildMember) {
 	switch (action) {
 		case 'add':
 			try {
+				const userrole = member.roles.cache.map((r) => r.name)
+				if (userrole.includes('Muted')) return
 				member.roles.add(role)
 				return 'Done'
 			} catch (err) {
