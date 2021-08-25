@@ -14,7 +14,6 @@ export async function checkActifRole(
 	if (points >= 100) {
 		if (!userRole.includes('Actif')) {
 			const actifRole = guild.roles.cache.find((role) => role.name === 'Actif')
-			console.log(config.isProduction)
 			if (config.isProduction) {
 				await member.roles.add(actifRole)
 			} else if (config.isDevelopment) {
