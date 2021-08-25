@@ -31,7 +31,7 @@
 		"axios": "^0.21.1",
 		"discord-akairo": "Le-monde-dEcorte/discord-akairo",
 		"discord.js": "^13.1.0",
-		"mongoose": "^5.13.8"
+		"mongoose": "^6.0.0"
 	},
 	"prettier": {
 		"useTabs": true,
