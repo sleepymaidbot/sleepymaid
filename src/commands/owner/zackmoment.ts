@@ -13,10 +13,10 @@ export default class ZackMoment extends Command {
 
     public async exec(message: Message) {
         mondecorteModel.find({}).then(async (docs) => {
-            const role = await message.guild.roles.cache.find(r => r.id === '880950592615354429')
+            const role = await message.guild.roles.fetch('880950592615354429')
             for (const doc of docs) {
                 if (doc.vote === '632688192209944586') {
-                    const member = await message.guild.members.cache.find(m => m.id === doc.id)
+                    const member = await message.guild.members.fetch(doc.id)
                     await member.roles.add(role)
                 }
             }
