@@ -5,6 +5,6 @@ export class BotClient extends Client {
 	logger: Logger
 	constructor(opts: ClientOptions) {
 		super(opts)
-		this.logger = new Logger('SleepyMaid')
+		this.logger = new Logger('Sleepy Maid')
 	}
 }
