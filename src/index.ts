@@ -51,7 +51,7 @@ for (const file of lmeCommandFiles) {
 }
 
 for (const file of eventFiles) {
-	const event = require(`./events/${file}`)
+	const event = require(`./listeners/${file}`)
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args, client))
 	} else {

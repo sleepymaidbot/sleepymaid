@@ -1,4 +1,3 @@
-import { Message } from 'discord.js'
 import util from 'util'
 import fs from 'fs'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -19,7 +18,7 @@ module.exports = {
 	name: 'messageCreate',
 	once: false,
 
-	async execute(message: Message) {
+	async execute(message, client) {
 		if (message.author.bot) return
 
 		const argv = message.content.split(' ')
@@ -66,7 +65,7 @@ module.exports = {
 						}
 					)
 				} catch (e) {
-					console.error(e)
+					client.logger.error(e)
 				}
 			}
 		}
