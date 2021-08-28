@@ -10,7 +10,7 @@ module.exports = {
 	name: 'messageCreate',
 	once: false,
 
-	async execute(message: Message) {
+	async execute(message: Message, client) {
 		if (message.guild == null) return
 		if (message.guild.id != '324284116021542922') return
 		if (message.author.bot) return
@@ -34,7 +34,7 @@ module.exports = {
 				userInDB.points = afterPoints
 				await userInDB.save()
 
-				await checkActifRole(message.member, message.guild, afterPoints)
+				await checkActifRole(message.member, message.guild, afterPoints, client)
 				await checkCustomRole(message.member, message.guild, afterPoints)
 			}
 

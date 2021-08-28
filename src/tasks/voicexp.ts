@@ -35,7 +35,7 @@ module.exports = {
 								const afterPoints = beforePoints + 1
 								userInDB.points = afterPoints
 								await userInDB.save()
-								checkActifRole(member, guild, afterPoints)
+								checkActifRole(member, guild, afterPoints, client)
 								checkCustomRole(member, guild, afterPoints)
 							}
 						}
