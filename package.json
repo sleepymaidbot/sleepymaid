@@ -19,7 +19,7 @@
 		"@typescript-eslint/eslint-plugin": "^4.28.1",
 		"@typescript-eslint/parser": "^4.29.1",
 		"@yarnpkg/cli-dist": "^3.0.0",
-		"discord-api-types": "next",
+		"discord-api-types": "^0.22.0",
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.3.0",
 		"prettier": "^2.3.2",
@@ -28,9 +28,12 @@
 		"typescript": "^4.3.5"
 	},
 	"dependencies": {
+		"@discordjs/builders": "^0.6.0",
+		"@discordjs/rest": "^0.1.0-canary.0",
+		"ansi-colors": "^4.1.1",
 		"axios": "^0.21.1",
-		"discord-akairo": "Le-monde-dEcorte/discord-akairo",
 		"discord.js": "^13.1.0",
+		"fs": "^0.0.1-security",
 		"mongoose": "^5.13.8"
 	},
 	"prettier": {

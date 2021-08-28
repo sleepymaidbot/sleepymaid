@@ -1,4 +1,3 @@
-import { Listener } from 'discord-akairo'
 import { mondecorteModel } from '../lib/utils/db'
 import { Message } from 'discord.js'
 import { pointsBlacklistedChannel } from '../config/lists'
@@ -7,15 +6,11 @@ import { checkCustomRole } from '../functions/customrole'
 
 const talkedRecently = new Set()
 
-export default class Activity extends Listener {
-	constructor() {
-		super('Activity', {
-			emitter: 'client',
-			event: 'messageCreate'
-		})
-	}
+module.exports = {
+	name: 'messageCreate',
+	once: false,
 
-	async exec(message: Message): Promise<void> {
+	async execute(message: Message) {
 		if (message.guild == null) return
 		if (message.guild.id != '324284116021542922') return
 		if (message.author.bot) return

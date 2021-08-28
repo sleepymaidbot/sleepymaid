@@ -1,19 +1,13 @@
-import { Task } from 'discord-akairo'
 import { mondecorteModel } from '../lib/utils/db'
 import { pointsBlacklistedVoiceChannel } from '../config/lists'
 import { checkActifRole } from '../functions/actifrole'
 import { checkCustomRole } from '../functions/customrole'
 
-export default class voiceXpTask extends Task {
-	constructor() {
-		super('voiceXpTask', {
-			delay: 300000,
-			runOnStart: false
-		})
-	}
+module.exports = {
+	interval: 300000,
 
-	async exec() {
-		const guild = this.client.guilds.cache.get('324284116021542922')
+	async execute(client) {
+		const guild = client.guilds.cache.get('324284116021542922')
 
 		const memberInVc = []
 

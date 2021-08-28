@@ -1,15 +1,10 @@
-import { Listener } from 'discord-akairo'
 import { mondecorteModel } from '../lib/utils/db'
 
-export default class VoteHandler extends Listener {
-	constructor() {
-		super('voteHandler', {
-			emitter: 'client',
-			event: 'interactionCreate'
-		})
-	}
+module.exports =  {
+	name: 'interactionCreate',
+	once: false,
 
-	async exec(interaction) {
+	async execute(interaction) {
 		if (interaction.isSelectMenu()) {
 			if (
 				interaction.channel.id === '775820100917526548' &&

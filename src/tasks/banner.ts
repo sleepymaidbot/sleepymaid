@@ -1,18 +1,12 @@
-import { Task } from 'discord-akairo'
 import { opendir } from 'fs/promises'
 import { config } from '../config/config'
 
-export default class banner extends Task {
-	constructor() {
-		super('banner', {
-			delay: 3600000,
-			runOnStart: false
-		})
-	}
+module.exports = {
+	interval: 3600000,
 
-	async exec() {
+	async execute(client) {
 		if (config.isDevelopment) return
-		const guild = this.client.guilds.cache.get('324284116021542922')
+		const guild = client.guilds.cache.get('324284116021542922')
 		if (guild.premiumSubscriptionCount < 15) return
 		try {
 			const dir = await opendir('./banners')

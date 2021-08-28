@@ -1,15 +1,8 @@
-import { ThreadChannel } from 'discord.js'
-import { BotListener } from '../lib/extensions/BotListener'
+module.exports = {
+	name: 'threadCreate',
+	once: false,
 
-export default class autoJoinThread extends BotListener {
-	constructor() {
-		super('autoJoinThread', {
-			emitter: 'client',
-			event: 'threadCreate'
-		})
-	}
-
-	async exec(thread: ThreadChannel) {
+	async execute(thread) {
 		thread.join()
 	}
 }
