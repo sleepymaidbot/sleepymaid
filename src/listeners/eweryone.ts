@@ -1,15 +1,10 @@
-import { Listener } from 'discord-akairo'
 import { Message } from 'discord.js'
 
-export default class eweryone extends Listener {
-	constructor() {
-		super('eweryone', {
-			emitter: 'client',
-			event: 'messageCreate'
-		})
-	}
+module.exports = {
+	name: 'messageCreate',
+	once: false,
 
-	async exec(message: Message) {
+	async execute(message: Message) {
 		if (message.content.match(/(@everyone)/)) {
 			if (message.member.roles.cache.has('876636031884087406')) return
 			const role = message.guild.roles.cache.find(

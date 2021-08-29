@@ -1,15 +1,9 @@
-import { Listener } from 'discord-akairo'
 import { colorRole } from '../config/lists'
 
-export default class ColorRoleSelectsListener extends Listener {
-	constructor() {
-		super('ColorRoleSelects', {
-			emitter: 'client',
-			event: 'interactionCreate'
-		})
-	}
-
-	exec(interaction) {
+module.exports = {
+	name: 'interactionCreate',
+	once: false,
+	async execute(interaction) {
 		if (interaction.isSelectMenu()) {
 			if (
 				interaction.guildId == '324284116021542922' &&

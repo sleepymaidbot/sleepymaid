@@ -1,16 +1,11 @@
-import { Task } from 'discord-akairo'
 import { TextChannel } from 'discord.js'
 import { mondecorteModel } from '../lib/utils/db'
 
-export default class pointsRemoveTask extends Task {
-	constructor() {
-		super('removePoints', {
-			delay: 3600000,
-			runOnStart: false
-		})
-	}
+module.exports = {
+	interval: 3600000,
 
-	async exec() {
+	async execute(client) {
+		client.logger.debug('Hourpoints task started')
 		const usersArray = []
 		await mondecorteModel.find({}).then(async (docs) => {
 			for (const user of docs) {
@@ -21,10 +16,13 @@ export default class pointsRemoveTask extends Task {
 					usersArray.push(user.id)
 				}
 			}
-			const logChannel = this.client.channels.cache.get(
+			const logChannel = client.channels.cache.get(
 				'863117686334554142'
 			) as TextChannel
 			await logChannel.send(
+				`${usersArray.length} members have been removed 1 activity points.`
+			)
+			client.logger.info(
 				`${usersArray.length} members have been removed 1 activity points.`
 			)
 		})

@@ -1,4 +1,3 @@
-import { Listener } from 'discord-akairo'
 import { mondecorteModel } from '../lib/utils/db'
 import { Message } from 'discord.js'
 import { pointsBlacklistedChannel } from '../config/lists'
@@ -7,15 +6,11 @@ import { checkCustomRole } from '../functions/customrole'
 
 const talkedRecently = new Set()
 
-export default class Activity extends Listener {
-	constructor() {
-		super('Activity', {
-			emitter: 'client',
-			event: 'messageCreate'
-		})
-	}
+module.exports = {
+	name: 'messageCreate',
+	once: false,
 
-	async exec(message: Message): Promise<void> {
+	async execute(message: Message, client) {
 		if (message.guild == null) return
 		if (message.guild.id != '324284116021542922') return
 		if (message.author.bot) return
@@ -23,30 +18,29 @@ export default class Activity extends Listener {
 
 		if (talkedRecently.has(message.author.id)) {
 			return
-		} else {
-			const userInDB = await mondecorteModel.findOne({
-				id: message.author.id
-			})
-			if (userInDB == null || 0) {
-				const newUser = new mondecorteModel({
-					id: message.author.id,
-					points: 1
-				})
-				await newUser.save()
-			} else {
-				const beforePoints = userInDB.points
-				const afterPoints = beforePoints + 1
-				userInDB.points = afterPoints
-				await userInDB.save()
-
-				await checkActifRole(message.member, message.guild, afterPoints)
-				await checkCustomRole(message.member, message.guild, afterPoints)
-			}
-
-			talkedRecently.add(message.author.id)
-			setTimeout(() => {
-				talkedRecently.delete(message.author.id)
-			}, 60000)
 		}
+		const userInDB = await mondecorteModel.findOne({
+			id: message.author.id
+		})
+		if (userInDB == null || 0) {
+			const newUser = new mondecorteModel({
+				id: message.author.id,
+				points: 1
+			})
+			await newUser.save()
+		} else {
+			const beforePoints = userInDB.points
+			const afterPoints = beforePoints + 1
+			userInDB.points = afterPoints
+			await userInDB.save()
+
+			await checkActifRole(message.member, message.guild, afterPoints, client)
+			await checkCustomRole(message.member, message.guild)
+		}
+
+		talkedRecently.add(message.author.id)
+		setTimeout(() => {
+			talkedRecently.delete(message.author.id)
+		}, 60000)
 	}
 }

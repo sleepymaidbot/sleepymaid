@@ -20,32 +20,28 @@ export function checkUserRole(
 	if (wasEligibleForColorfulRole && !eligibleForColorfulRole) {
 		if (newMemberRole.includes('Colorful')) {
 			return 'remove'
-		} else {
-			return 'none'
 		}
+		return 'none'
 	}
 	if (!wasEligibleForColorfulRole && eligibleForColorfulRole) {
 		if (newMemberRole.includes('Colorful')) {
 			return 'none'
-		} else {
-			return 'add'
 		}
+		return 'add'
 	}
 
 	if (!wasEligibleForColorfulRole && !eligibleForColorfulRole) {
 		if (newMemberRole.includes('Colorful')) {
 			return 'remove'
-		} else {
-			return 'none'
 		}
+		return 'none'
 	}
 
 	if (wasEligibleForColorfulRole && eligibleForColorfulRole) {
 		if (newMemberRole.includes('Colorful')) {
 			return 'none'
-		} else {
-			return 'add'
 		}
+		return 'add'
 	}
 }
 

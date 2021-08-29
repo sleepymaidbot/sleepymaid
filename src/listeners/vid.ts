@@ -1,5 +1,3 @@
-import { Listener } from 'discord-akairo'
-import { Message } from 'discord.js'
 import util from 'util'
 import fs from 'fs'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -16,15 +14,11 @@ const sites = [
 	'instagram.com'
 ]
 
-export default class videoDL extends Listener {
-	constructor() {
-		super('vid', {
-			emitter: 'client',
-			event: 'messageCreate'
-		})
-	}
+module.exports = {
+	name: 'messageCreate',
+	once: false,
 
-	async exec(message: Message) {
+	async execute(message, client) {
 		if (message.author.bot) return
 
 		const argv = message.content.split(' ')
@@ -71,7 +65,7 @@ export default class videoDL extends Listener {
 						}
 					)
 				} catch (e) {
-					console.error(e)
+					client.logger.error(e)
 				}
 			}
 		}

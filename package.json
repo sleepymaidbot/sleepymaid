@@ -7,7 +7,7 @@
 	"scripts": {
 		"test": "yarn run lint && yarn run build",
 		"build": "yarn rimraf dist/ && yarn tsc",
-		"lint": "yarn eslint --ext js,jsx,ts,tsx src",
+		"lint": "yarn eslint --fix --ext js,jsx,ts,tsx src",
 		"format": "yarn prettier --write .",
 		"start": "yarn build && node --trace-warnings -r source-map-support/register dist/index.js"
 	},
@@ -16,22 +16,25 @@
 	"devDependencies": {
 		"@types/node": "^16.6.1",
 		"@types/prettier": "^2",
-		"@typescript-eslint/eslint-plugin": "^4.28.1",
+		"@typescript-eslint/eslint-plugin": "^4.29.3",
 		"@typescript-eslint/parser": "^4.29.1",
 		"@yarnpkg/cli-dist": "^3.0.0",
-		"discord-api-types": "next",
+		"discord-api-types": "^0.22.0",
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.3.0",
 		"prettier": "^2.3.2",
 		"rimraf": "^3.0.2",
 		"source-map-support": "^0.5.19",
-		"typescript": "^4.3.5"
+		"typescript": "^4.4.2"
 	},
 	"dependencies": {
+		"@discordjs/builders": "^0.6.0",
+		"@discordjs/rest": "^0.1.0-canary.0",
+		"ansi-colors": "^4.1.1",
 		"axios": "^0.21.1",
-		"discord-akairo": "Le-monde-dEcorte/discord-akairo",
 		"discord.js": "^13.1.0",
-		"mongoose": "^5.13.8"
+		"fs": "^0.0.1-security",
+		"mongoose": "^6.0.2"
 	},
 	"prettier": {
 		"useTabs": true,
@@ -71,10 +74,10 @@
 			"no-duplicate-imports": "warn",
 			"no-empty-function": "warn",
 			"@typescript-eslint/no-empty-function": "warn",
-			"no-empty": "off",
+			"no-empty": "warn",
 			"@typescript-eslint/explicit-module-boundary-types": "off",
 			"@typescript-eslint/ban-ts-comment": [
-				"error",
+				"warn",
 				{
 					"ts-expect-error": "allow-with-description",
 					"ts-ignore": "allow-with-description",
