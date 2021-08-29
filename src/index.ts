@@ -48,7 +48,7 @@ for (const file of lmeCommandFiles) {
 }
 
 for (const file of eventFiles) {
-	const event = require(`./dist/listeners/${file}`)
+	const event = require(`./listeners/${file}`)
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args, client))
 	} else {
@@ -57,7 +57,7 @@ for (const file of eventFiles) {
 }
 
 for (const file of tasksFiles) {
-	const task = require(`./dist/tasks/${file}`)
+	const task = require(`./tasks/${file}`)
 	setInterval(() => task.execute(client), task.interval)
 }
 
@@ -80,7 +80,7 @@ client.on('interactionCreate', async (interaction) => {
 			`${interaction.guild.name} (${interaction.guild.id}) > ${interaction.member.user.username} (${interaction.member.user.id}) > /${interaction.commandName} (${interaction.commandId})`
 		)
 		try {
-			const command = require(`./dist/lmecommands/${interaction.commandName}.js`)
+			const command = require(`./lmecommands/${interaction.commandName}.js`)
 			await command.execute(interaction, client)
 		} catch (error) {
 			client.logger.error(error)
