@@ -24,10 +24,8 @@ const myIntents = new Intents([
 	'GUILDS',
 	'GUILD_MEMBERS',
 	'GUILD_BANS',
-	'GUILD_INTEGRATIONS',
 	'GUILD_VOICE_STATES',
-	'GUILD_MESSAGES',
-	'GUILD_MESSAGE_TYPING'
+	'GUILD_MESSAGES'
 ])
 
 const client: BotClient = new BotClient({

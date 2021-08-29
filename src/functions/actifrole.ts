@@ -44,7 +44,6 @@ export async function checkUserActivityPoints(user: GuildMember) {
 	const userInDb = await mondecorteModel.findOne({ id: user.id })
 	if (userInDb == null) {
 		return 0
-	} else {
-		return userInDb.points
 	}
+	return userInDb.points
 }

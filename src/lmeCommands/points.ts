@@ -166,11 +166,8 @@ module.exports = {
 						const coolList: Array<string> = []
 
 						allPoints.reverse().forEach((user) => {
-							if (user.points == 0) {
-								return
-							} else {
-								coolList.push(`<@${user.id}>: ${user.points} points`)
-							}
+							if (user.points == 0) return
+							coolList.push(`<@${user.id}>: ${user.points} points`)
 						})
 
 						const leaderboardText = `:first_place: ${coolList[0]}

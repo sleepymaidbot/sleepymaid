@@ -18,30 +18,29 @@ module.exports = {
 
 		if (talkedRecently.has(message.author.id)) {
 			return
-		} else {
-			const userInDB = await mondecorteModel.findOne({
-				id: message.author.id
-			})
-			if (userInDB == null || 0) {
-				const newUser = new mondecorteModel({
-					id: message.author.id,
-					points: 1
-				})
-				await newUser.save()
-			} else {
-				const beforePoints = userInDB.points
-				const afterPoints = beforePoints + 1
-				userInDB.points = afterPoints
-				await userInDB.save()
-
-				await checkActifRole(message.member, message.guild, afterPoints, client)
-				await checkCustomRole(message.member, message.guild)
-			}
-
-			talkedRecently.add(message.author.id)
-			setTimeout(() => {
-				talkedRecently.delete(message.author.id)
-			}, 60000)
 		}
+		const userInDB = await mondecorteModel.findOne({
+			id: message.author.id
+		})
+		if (userInDB == null || 0) {
+			const newUser = new mondecorteModel({
+				id: message.author.id,
+				points: 1
+			})
+			await newUser.save()
+		} else {
+			const beforePoints = userInDB.points
+			const afterPoints = beforePoints + 1
+			userInDB.points = afterPoints
+			await userInDB.save()
+
+			await checkActifRole(message.member, message.guild, afterPoints, client)
+			await checkCustomRole(message.member, message.guild)
+		}
+
+		talkedRecently.add(message.author.id)
+		setTimeout(() => {
+			talkedRecently.delete(message.author.id)
+		}, 60000)
 	}
 }

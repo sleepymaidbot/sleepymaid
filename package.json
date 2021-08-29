@@ -68,16 +68,21 @@
 			"dist"
 		],
 		"rules": {
-			"semi": ["error", "never"],
-        	"quotes": ["error", "single"],
-			"no-else-return"   : 1,
+			"semi": [
+				"error",
+				"never"
+			],
+			"quotes": [
+				"error",
+				"single"
+			],
 			"no-return-await": "off",
 			"@typescript-eslint/no-empty-interface": "warn",
 			"no-mixed-spaces-and-tabs": "warn",
 			"no-duplicate-imports": "warn",
 			"no-empty-function": "warn",
 			"@typescript-eslint/no-empty-function": "warn",
-			"no-empty": "off",
+			"no-empty": "warn",
 			"@typescript-eslint/explicit-module-boundary-types": "off",
 			"@typescript-eslint/ban-ts-comment": [
 				"error",

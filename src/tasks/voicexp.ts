@@ -16,32 +16,30 @@ module.exports = {
 			if (channel.type == 'GUILD_VOICE') {
 				if (pointsBlacklistedVoiceChannel.includes(channel.id)) {
 					return
-				} else {
-					channel.members.each(async (member) => {
-						memberInVc.push(member.id)
-						if (member.voice.mute || member.voice.deaf) {
-							return
-						} else {
-							const userInDB = await mondecorteModel.findOne({
-								id: member.id
-							})
-							if (userInDB == null || 0) {
-								const newUser = new mondecorteModel({
-									id: member.id,
-									points: 1
-								})
-								await newUser.save()
-							} else {
-								const beforePoints = userInDB.points
-								const afterPoints = beforePoints + 1
-								userInDB.points = afterPoints
-								await userInDB.save()
-								checkActifRole(member, guild, afterPoints, client)
-								checkCustomRole(member, guild)
-							}
-						}
-					})
 				}
+				channel.members.each(async (member) => {
+					memberInVc.push(member.id)
+					if (member.voice.mute || member.voice.deaf) {
+						return
+					}
+					const userInDB = await mondecorteModel.findOne({
+						id: member.id
+					})
+					if (userInDB == null || 0) {
+						const newUser = new mondecorteModel({
+							id: member.id,
+							points: 1
+						})
+						await newUser.save()
+					} else {
+						const beforePoints = userInDB.points
+						const afterPoints = beforePoints + 1
+						userInDB.points = afterPoints
+						await userInDB.save()
+						checkActifRole(member, guild, afterPoints, client)
+						checkCustomRole(member, guild)
+					}
+				})
 			}
 		})
 	}

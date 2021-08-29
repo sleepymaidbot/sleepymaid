@@ -38,7 +38,7 @@ module.exports = {
 					}
 				} else {
 					interaction.reply({
-						content: 'Tu n\'es pas assez actif pour voter.',
+						content: "Tu n'es pas assez actif pour voter.",
 						ephemeral: true
 					})
 				}
