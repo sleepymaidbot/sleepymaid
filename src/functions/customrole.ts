@@ -25,10 +25,9 @@ export async function getcrole(member: GuildMember) {
 
 export async function checkCustomRole(
 	member: GuildMember,
-	guild: Guild,
-	points: number
+	guild: Guild
 ) {
-	if (points < 250) {
+	if (await getcrole(member) == false) {
 		const croleId = await getUserCustomRoleId(member)
 		const crole = guild.roles.cache.find((role) => role.id === croleId)
 		if (member.roles.cache.has(croleId)) {

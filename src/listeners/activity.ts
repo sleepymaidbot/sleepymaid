@@ -35,7 +35,7 @@ module.exports = {
 				await userInDB.save()
 
 				await checkActifRole(message.member, message.guild, afterPoints, client)
-				await checkCustomRole(message.member, message.guild, afterPoints)
+				await checkCustomRole(message.member, message.guild)
 			}
 
 			talkedRecently.add(message.author.id)
