@@ -42,7 +42,7 @@ const client: BotClient = new BotClient({
 })
 
 for (const file of lmeCommandFiles) {
-	const command = require(`./dist/lmecommands/${file}`)
+	const command = require(`./dist/lmeCommands/${file}`)
 	lmeCommands.set(command.data.name, command.data.toJSON())
 	lmeCommand.push(command.data.toJSON())
 }
