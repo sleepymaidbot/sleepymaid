@@ -3,11 +3,7 @@ import { Schema, model, connect } from 'mongoose'
 import { Snowflake } from 'discord.js'
 
 export async function startDB(): Promise<void> {
-	await connect(config.db, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-		useCreateIndex: true
-	})
+	await connect(config.db)
 }
 
 // mondecorte
