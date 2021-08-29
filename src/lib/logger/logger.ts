@@ -1,4 +1,4 @@
-import { gray, blue, red, cyan, yellow, bold, italic } from 'ansi-colors'
+import { gray, blue, red, cyan } from 'ansi-colors'
 
 export enum Loglevels {
 	Debug,
