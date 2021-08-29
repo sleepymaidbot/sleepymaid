@@ -8,6 +8,7 @@
 		"test": "yarn run lint && yarn run build",
 		"build": "yarn rimraf dist/ && yarn tsc",
 		"lint": "yarn eslint --fix --ext js,jsx,ts,tsx src",
+		"testlint": "yarn eslint --ext js,jsx,ts,tsx src",
 		"format": "yarn prettier --write .",
 		"start": "yarn build && node --trace-warnings -r source-map-support/register dist/index.js"
 	},

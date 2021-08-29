@@ -33,7 +33,7 @@ jobs:
       - name: Fix config
         run: cp src/config/example-config.ts src/config/config.ts
       - name: ESLint
-        run: yarn lint
+        run: yarn testlint
       - name: Test Build
         run: yarn build
 
