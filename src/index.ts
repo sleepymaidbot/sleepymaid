@@ -78,7 +78,9 @@ client.on('interactionCreate', async (interaction) => {
 		lmeCommands.has(interaction.commandName) &&
 		interaction.guild.id === '324284116021542922'
 	) {
-		client.logger.debug(`${interaction.guild.name} (${interaction.guild.id}) > ${interaction.member.user.username} (${interaction.member.user.id}) > /${interaction.commandName} (${interaction.commandId})`)
+		client.logger.debug(
+			`${interaction.guild.name} (${interaction.guild.id}) > ${interaction.member.user.username} (${interaction.member.user.id}) > /${interaction.commandName} (${interaction.commandId})`
+		)
 		try {
 			const command = require(`./lmecommands/${interaction.commandName}.js`)
 			await command.execute(interaction, client)
