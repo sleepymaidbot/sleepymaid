@@ -100,7 +100,7 @@ const rest = new REST({ version: '9' }).setToken(config.token)
 
 		await rest.put(
 			Routes.applicationGuildCommands(
-				'599315471640297502',
+				config.envClientId,
 				'324284116021542922'
 			),
 			{ body: lmeCommand }

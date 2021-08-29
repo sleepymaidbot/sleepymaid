@@ -5,10 +5,13 @@ export const config = new Config({
 		token: 'prod_token',
 		devToken: 'dev_token'
 	},
+    clientId: {
+        prod: 'prod_client_id',
+        dev: 'dev_client_id'
+    },
 	environment: 'development',
 	owners: [''],
 	prefix: '',
 	devprefix: '',
-	slashprefix: '',
 	db: 'mongodb://localhost:27017/sleepymaid'
 })
