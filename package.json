@@ -16,7 +16,7 @@
 	"devDependencies": {
 		"@types/node": "^16.6.1",
 		"@types/prettier": "^2",
-		"@typescript-eslint/eslint-plugin": "^4.28.1",
+		"@typescript-eslint/eslint-plugin": "^4.29.3",
 		"@typescript-eslint/parser": "^4.29.1",
 		"@yarnpkg/cli-dist": "^3.0.0",
 		"discord-api-types": "^0.22.0",
@@ -68,14 +68,6 @@
 			"dist"
 		],
 		"rules": {
-			"semi": [
-				"error",
-				"never"
-			],
-			"quotes": [
-				"error",
-				"single"
-			],
 			"no-return-await": "off",
 			"@typescript-eslint/no-empty-interface": "warn",
 			"no-mixed-spaces-and-tabs": "warn",
@@ -85,7 +77,7 @@
 			"no-empty": "warn",
 			"@typescript-eslint/explicit-module-boundary-types": "off",
 			"@typescript-eslint/ban-ts-comment": [
-				"error",
+				"warn",
 				{
 					"ts-expect-error": "allow-with-description",
 					"ts-ignore": "allow-with-description",
