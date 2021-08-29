@@ -1,6 +1,6 @@
 import { mondecorteModel } from '../lib/utils/db'
 
-module.exports =  {
+module.exports = {
 	name: 'interactionCreate',
 	once: false,
 

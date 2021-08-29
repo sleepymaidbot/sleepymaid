@@ -17,7 +17,6 @@ const tasksFiles = fs
 	.readdirSync('./dist/tasks')
 	.filter((file) => file.endsWith('.js'))
 
-
 const lmeCommands = new Map()
 const lmeCommand = []
 
@@ -64,7 +63,6 @@ for (const file of tasksFiles) {
 	setInterval(() => task.execute(client), task.interval)
 }
 
-
 client.once('ready', async () => {
 	await startDB()
 		.catch((err) => client.logger.error(err))
@@ -76,19 +74,7 @@ client.once('ready', async () => {
 
 client.on('interactionCreate', async (interaction) => {
 	if (!interaction.isCommand()) return
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	/*
-     @ts-expect-error
-	const command = client.commands.get(interaction.commandName);
-
-	if (command) {
-        try {
-            await command.execute(interaction, client);
-        } catch (error) {
-            console.error(error);
-            await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-        }
-    } else */ if (
+	if (
 		lmeCommands.has(interaction.commandName) &&
 		interaction.guild.id === '324284116021542922'
 	) {

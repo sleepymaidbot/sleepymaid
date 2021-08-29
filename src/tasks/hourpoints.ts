@@ -21,7 +21,9 @@ module.exports = {
 			await logChannel.send(
 				`${usersArray.length} members have been removed 1 activity points.`
 			)
-			client.logger.info(`${usersArray.length} members have been removed 1 activity points.`)
+			client.logger.info(
+				`${usersArray.length} members have been removed 1 activity points.`
+			)
 		})
 	}
 }
