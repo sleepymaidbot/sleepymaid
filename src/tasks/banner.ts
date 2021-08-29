@@ -5,6 +5,7 @@ module.exports = {
 	interval: 3600000,
 
 	async execute(client) {
+		client.loggger.debug('Banner task started')
 		if (config.isDevelopment) return
 		const guild = client.guilds.cache.get('324284116021542922')
 		if (guild.premiumSubscriptionCount < 15) return

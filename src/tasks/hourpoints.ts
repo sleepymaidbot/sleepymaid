@@ -5,6 +5,7 @@ module.exports = {
 	interval: 3600000,
 
 	async execute(client) {
+		client.logger.debug('Hourpoints task started')
 		const usersArray = []
 		await mondecorteModel.find({}).then(async (docs) => {
 			for (const user of docs) {

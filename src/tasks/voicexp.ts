@@ -7,6 +7,7 @@ module.exports = {
 	interval: 300000,
 
 	async execute(client) {
+		client.loggger.debug('Voice xp task started')
 		const guild = client.guilds.cache.get('324284116021542922')
 
 		const memberInVc = []
