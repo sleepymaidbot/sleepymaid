@@ -99,10 +99,7 @@ const rest = new REST({ version: '9' }).setToken(config.token)
 		client.logger.info('Started refreshing application (/) commands.')
 
 		await rest.put(
-			Routes.applicationGuildCommands(
-				config.envClientId,
-				'324284116021542922'
-			),
+			Routes.applicationGuildCommands(config.envClientId, '324284116021542922'),
 			{ body: lmeCommand }
 		)
 
