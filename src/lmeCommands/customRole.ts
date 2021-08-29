@@ -104,7 +104,7 @@ module.exports = {
 							.catch(console.error)
 					}
 				} else {
-					embed.setDescription('Tu n\'est pas élibible.')
+					embed.setDescription("Tu n'est pas élibible.")
 					await interaction.reply({ embeds: [embed], ephemeral: true })
 				}
 				break
@@ -142,7 +142,7 @@ module.exports = {
 						})
 						.catch(console.error)
 				} else {
-					embed.setDescription('Tu n\'as pas de rôle custom')
+					embed.setDescription("Tu n'as pas de rôle custom")
 					await interaction.reply({ embeds: [embed], ephemeral: true })
 				}
 				break
@@ -163,7 +163,7 @@ module.exports = {
 						})
 						.catch(console.error)
 				} else {
-					embed.setDescription('Tu n\'as pas de rôle custom')
+					embed.setDescription("Tu n'as pas de rôle custom")
 					await interaction.reply({ embeds: [embed], ephemeral: true })
 				}
 				break
