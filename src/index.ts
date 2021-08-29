@@ -80,7 +80,7 @@ client.on('interactionCreate', async (interaction) => {
 			`${interaction.guild.name} (${interaction.guild.id}) > ${interaction.member.user.username} (${interaction.member.user.id}) > /${interaction.commandName} (${interaction.commandId})`
 		)
 		try {
-			const command = require(`./lmecommands/${interaction.commandName}.js`)
+			const command = require(`./lmeCommands/${interaction.commandName}.js`)
 			await command.execute(interaction, client)
 		} catch (error) {
 			client.logger.error(error)
