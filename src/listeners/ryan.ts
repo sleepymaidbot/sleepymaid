@@ -1,3 +1,5 @@
+import { mondecorteModel } from '../lib/utils/db'
+
 module.exports = {
 	name: 'messageCreate',
 	once: false,
@@ -13,6 +15,11 @@ module.exports = {
 			message.author.send('yo parle a ecorte sinon tu pu')
 
 			message.delete()
+
+			const inDb = await mondecorteModel.findOne({ id: message.author.id })
+
+			inDb.points = inDb.points - 10
+			await inDb.save()
 		}
 	}
 }
