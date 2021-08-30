@@ -18,12 +18,6 @@ export function checkUserRole(
 		}
 	})
 
-	if (newMemberRole.includes('Muted') || newMemberRole.includes('rolebanned')) {
-		if (newMemberRole.includes('Colorful')) {
-			return 'remove'
-		}
-	}
-
 	if (wasEligibleForColorfulRole && !eligibleForColorfulRole) {
 		if (newMemberRole.includes('Colorful')) {
 			return 'remove'
@@ -57,7 +51,6 @@ export function performRole(action: string, role: Role, member: GuildMember) {
 		case 'add':
 			try {
 				const userrole = member.roles.cache.map((r) => r.name)
-				if (userrole.includes('Muted')) return
 				member.roles.add(role)
 				return 'Done'
 			} catch (err) {
