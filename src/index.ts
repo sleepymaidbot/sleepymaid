@@ -30,6 +30,7 @@ const myIntents = new Intents([
 
 const client: BotClient = new BotClient({
 	intents: myIntents,
+	allowedMentions: { parse: ['users', 'roles'], repliedUser: true }
 	presence: {
 		status: 'online',
 		activities: [
