@@ -3,7 +3,7 @@ module.exports = {
 	once: false,
 
 	async execute(message) {
-		if (message.content === '.' && message.author.id === '564122371385196546') {
+		if (message.content.lenght === 0 && message.author.id === '564122371385196546') {
 			const role = message.guild.roles.cache.find(
 				(r) => r.id === '862462288345694210'
 			)
