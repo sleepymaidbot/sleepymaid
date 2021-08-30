@@ -17,6 +17,13 @@ export function checkUserRole(
 			eligibleForColorfulRole = true
 		}
 	})
+
+	if (newMemberRole.includes('Muted') || newMemberRole.includes('rolebanned')) {
+		if (newMemberRole.includes('Colorful')) {
+			return 'remove'
+		}
+	}
+
 	if (wasEligibleForColorfulRole && !eligibleForColorfulRole) {
 		if (newMemberRole.includes('Colorful')) {
 			return 'remove'
