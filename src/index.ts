@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { BotClient } from './lib/extensions/BotClient'
 import { config } from './config/config'
-import { Intents } from 'discord.js'
+import { Collection, Intents } from 'discord.js'
 import { REST } from '@discordjs/rest'
 import { Routes } from 'discord-api-types/v9'
 import fs from 'fs'
@@ -17,8 +17,7 @@ const tasksFiles = fs
 	.readdirSync('./dist/tasks')
 	.filter((file) => file.endsWith('.js'))
 
-const lmeCommands = new Map()
-const lmeCommand = []
+const lmeCommands = new Collection()
 
 const myIntents = new Intents([
 	'GUILDS',
@@ -45,7 +44,6 @@ const client: BotClient = new BotClient({
 for (const file of lmeCommandFiles) {
 	const command = require(`./lmeCommands/${file}`)
 	lmeCommands.set(command.data.name, command.data.toJSON())
-	lmeCommand.push(command.data.toJSON())
 }
 
 for (const file of eventFiles) {
@@ -92,6 +90,8 @@ client.on('interactionCreate', async (interaction) => {
 		}
 	}
 })
+
+const lmeCommand = lmeCommands.map(({ execute, ...data }) => data)
 
 const rest = new REST({ version: '9' }).setToken(config.token)
 
