@@ -1,9 +1,22 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { checkUserActivityPoints } from '../functions/actifrole'
-import { MessageEmbed } from 'discord.js'
-import { mondecorte, mondecorteModel } from '../lib/utils/db'
+import { MessageActionRow, MessageButton, MessageEmbed } from 'discord.js'
+import { mondecorteModel } from '../lib/utils/db'
 import { checkUserRole, performRole } from '../functions/rolesyncer'
 import { getUserCustomRoleId } from '../functions/customrole'
+
+const intForEmote = {
+	1: ':first_place:',
+	2: ':second_place:',
+	3: ':third_place:',
+	4: ':four:',
+	5: ':five:',
+	6: ':six:',
+	7: ':seven:',
+	8: ':eight:',
+	9: ':nine:',
+	10: ':keycap_ten:'
+}
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -24,6 +37,9 @@ module.exports = {
 			subcommand
 				.setName('leaderboard')
 				.setDescription('See the server leaderboard')
+				.addNumberOption((option) =>
+					option.setName('page').setDescription('The page').setRequired(false)
+				)
 		),
 
 	async execute(interaction) {
@@ -155,38 +171,161 @@ module.exports = {
 					interaction.member.roles.cache.has('842387653394563074') ||
 					interaction.member.id == '324281236728053760'
 				) {
-					let allPoints: Array<mondecorte>
-					mondecorteModel.find({}).then((docs) => {
-						allPoints = docs
+					mondecorteModel.find({}).then(async (docs) => {
+						const allPoints = docs
+							.sort((a, b) => {
+								return a.points - b.points
+							})
+							.reverse()
 
-						allPoints.sort((a, b) => {
-							return a.points - b.points
-						})
+						const coolUser = []
 
-						const coolList: Array<string> = []
-
-						allPoints.reverse().forEach((user) => {
+						allPoints.forEach((user) => {
 							if (user.points == 0) return
-							coolList.push(`<@${user.id}>: ${user.points} points`)
+							coolUser.push(user.id)
 						})
 
-						const leaderboardText = `:first_place: ${coolList[0]}
-						:second_place: ${coolList[1]}
-						:third_place: ${coolList[2]}
-						:four: ${coolList[3]}
-						:five: ${coolList[4]}
-						:six: ${coolList[5]}
-						:seven: ${coolList[6]}
-						:eight: ${coolList[7]}
-						:nine: ${coolList[8]}
-						:keycap_ten: ${coolList[9]}`
+						const maxPage = Math.round(coolUser.length / 10)
+
+						let page
+
+						if (interaction.options.get('page') == null) {
+							page = 1
+						} else if (interaction.options.get('page') > maxPage) {
+							page = maxPage
+						} else {
+							page = interaction.options.get('page').value
+						}
+
+						async function getLeaderboard(page) {
+							const text = []
+							const max = page * 10 - 1
+							const min = page * 10 - 10
+
+							allPoints.slice(min, max + 1).forEach((user, index) => {
+								if (user.points == 0) return
+								if (page === 1) {
+									text.push(
+										`${intForEmote[index + 1]} <@${user.id}>: ${
+											user.points
+										} points`
+									)
+								} else {
+									const math = page * 10 + index + 1 - 10
+									text.push(`${math} <@${user.id}>: ${user.points} points`)
+								}
+							})
+
+							let previousOn = false
+							let nextOn = false
+
+							if (page === 1) {
+								previousOn = true
+							}
+
+							if (page === maxPage) {
+								nextOn = true
+							}
+
+							const row = new MessageActionRow()
+								.addComponents(
+									new MessageButton()
+										.setDisabled(previousOn)
+										.setStyle('PRIMARY')
+										.setCustomId('lb:page:previous')
+										.setEmoji('◀️')
+								)
+								.addComponents(
+									new MessageButton()
+										.setDisabled(true)
+										.setStyle('PRIMARY')
+										.setCustomId('lb:label')
+										.setLabel(page.toString())
+								)
+								.addComponents(
+									new MessageButton()
+										.setDisabled(nextOn)
+										.setStyle('PRIMARY')
+										.setCustomId('lb:page:next')
+										.setEmoji('▶️')
+								)
+
+							return {
+								text: text.join('\n'),
+								row: row
+							}
+						}
+
+						const leaderboardText = await getLeaderboard(page)
 
 						const embed = new MessageEmbed()
 							.setColor('#36393f')
 							.setAuthor('Leaderboard du serveur', interaction.guild.iconURL())
-							.setDescription(leaderboardText)
+							.setDescription(leaderboardText.text)
 							.setTimestamp()
-						return interaction.reply({ embeds: [embed] })
+						await interaction.reply({
+							embeds: [embed],
+							components: [leaderboardText.row]
+						})
+
+						const filter = (i) => i.user.id === interaction.user.id
+
+						const collector =
+							interaction.channel.createMessageComponentCollector({
+								filter,
+								time: 120000
+							})
+
+						collector.on('collect', async (i) => {
+							if (i.member.id === interaction.member.id) {
+								if (i.customId === 'lb:page:previous') {
+									await i.deferUpdate()
+									page = page - 1
+
+									const lb = await getLeaderboard(page)
+									const newEmbed = new MessageEmbed()
+										.setColor('#36393f')
+										.setAuthor(
+											'Leaderboard du serveur',
+											interaction.guild.iconURL()
+										)
+										.setDescription(lb.text)
+										.setTimestamp()
+									await interaction.editReply({
+										embeds: [newEmbed],
+										components: [lb.row]
+									})
+								} else if (i.customId === 'lb:page:next') {
+									await i.deferUpdate()
+									page = page + 1
+
+									const lb = await getLeaderboard(page)
+									const newEmbed = new MessageEmbed()
+										.setColor('#36393f')
+										.setAuthor(
+											'Leaderboard du serveur',
+											interaction.guild.iconURL()
+										)
+										.setDescription(lb.text)
+										.setTimestamp()
+									await interaction.editReply({
+										embeds: [newEmbed],
+										components: [lb.row]
+									})
+								}
+							} else {
+								i.reply({
+									content: `These buttons aren't for you!`,
+									ephemeral: true
+								})
+							}
+						})
+
+						collector.on('end', () => {
+							interaction.editReply({
+								components: []
+							})
+						})
 					})
 				} else {
 					interaction.reply({
