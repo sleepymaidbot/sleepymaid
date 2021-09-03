@@ -91,6 +91,7 @@ client.on('interactionCreate', async (interaction) => {
 	}
 })
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const lmeCommand = lmeCommands.map(({ execute, ...data }) => data)
 
 const rest = new REST({ version: '9' }).setToken(config.token)

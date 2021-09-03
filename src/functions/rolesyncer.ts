@@ -50,7 +50,6 @@ export function performRole(action: string, role: Role, member: GuildMember) {
 	switch (action) {
 		case 'add':
 			try {
-				const userrole = member.roles.cache.map((r) => r.name)
 				member.roles.add(role)
 				return 'Done'
 			} catch (err) {
