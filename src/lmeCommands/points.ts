@@ -1,11 +1,6 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { checkUserActivityPoints } from '../functions/actifrole'
-import {
-	CommandInteraction,
-	MessageActionRow,
-	MessageButton,
-	MessageEmbed
-} from 'discord.js'
+import { MessageActionRow, MessageButton, MessageEmbed } from 'discord.js'
 import { mondecorteModel } from '../lib/utils/db'
 import { checkUserRole, performRole } from '../functions/rolesyncer'
 import { getUserCustomRoleId } from '../functions/customrole'
