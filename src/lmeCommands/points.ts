@@ -42,7 +42,7 @@ module.exports = {
 				)
 		),
 
-	async execute(interaction: CommandInteraction) {
+	async execute(interaction) {
 		switch (interaction.options.getSubcommand()) {
 			case 'user': {
 				const user = interaction.options.get('user')
