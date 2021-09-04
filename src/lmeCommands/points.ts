@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { checkUserActivityPoints } from '../functions/actifrole'
-import { MessageActionRow, MessageButton, MessageEmbed } from 'discord.js'
+import { CommandInteraction, MessageActionRow, MessageButton, MessageEmbed } from 'discord.js'
 import { mondecorteModel } from '../lib/utils/db'
 import { checkUserRole, performRole } from '../functions/rolesyncer'
 import { getUserCustomRoleId } from '../functions/customrole'
@@ -42,9 +42,8 @@ module.exports = {
 				)
 		),
 
-	async execute(interaction) {
-		const subcommand = interaction.options.getSubcommand()
-		switch (subcommand) {
+	async execute(interaction: CommandInteraction) {
+		switch (interaction.options.getSubcommand()) {
 			case 'user': {
 				const user = interaction.options.get('user')
 				let member
@@ -187,18 +186,18 @@ module.exports = {
 
 						const maxPage = Math.round(coolUser.length / 10)
 
-						let page
+						let page: number
 
 						if (interaction.options.get('page') == null) {
 							page = 1
-						} else if (interaction.options.get('page') > maxPage) {
+						} else if (interaction.options.get('page').value > maxPage) {
 							page = maxPage
 						} else {
 							page = interaction.options.get('page').value
 						}
 
-						async function getLeaderboard(page) {
-							const text = []
+						async function getLeaderboard(page: number) {
+							const text: Array<string> = []
 							const max = page * 10 - 1
 							const min = page * 10 - 10
 
