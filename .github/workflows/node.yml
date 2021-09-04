@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Test:
+  Test-Build:
     runs-on: ubuntu-latest
 
     steps:
