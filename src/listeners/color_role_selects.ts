@@ -7,7 +7,6 @@ module.exports = {
 		if (interaction.isSelectMenu()) {
 			if (
 				interaction.guildId == '324284116021542922' &&
-				interaction.channelId == '857342694691307540' &&
 				interaction.customId == 'color_role_selects'
 			) {
 				const memberRole = interaction.member.roles.cache.map((r) => r.name)
