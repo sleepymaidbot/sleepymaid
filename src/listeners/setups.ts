@@ -267,7 +267,7 @@ module.exports = {
 					const rolePingString = `<@&${role.id}>`
 					roleArray.push(rolePingString)
 				})
-				const displayRoleString = roleArray.join('\n')
+				const displayRoleString = roleArray.join('\n> ')
 
 				const message2 = `<:IconRole:879457634644811839> **Rôles de couleur** - (<@&857324294791364639> seulement)
 
@@ -337,7 +337,7 @@ ${displayRoleString}
 >   <@&842387550480236615> (Collaborateur Emoji) - Personne qui contribuer a la création des émojis sur le serveur.
 >   <@&721741773864435722> (IRL) - Amis IRl de Ecorte.
 >   <@&850137999479537724> (\\💜) - Amis de Ecorte.
->   <@&857324294791364639> (Colorful) - Rôle qui donne accès au salon <#857342694691307540> qui permet d'avoir un rôle de couleur.
+>   <@&857324294791364639> (Colorful) - Rôle qui permet d'avoir un rôle de couleur.
 `
 
 				await message.channel.send({ content: message3 })
