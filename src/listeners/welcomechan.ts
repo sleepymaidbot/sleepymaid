@@ -26,7 +26,7 @@ module.exports = {
 				interaction.guild.id === '324284116021542922'
 			) {
 				if (interaction.customId === 'ping_role_selects') {
-                    await interaction.deferUpdate()
+					await interaction.deferUpdate()
 					const oldRoles = []
 					const newRoles = await interaction.values
 					userRole.forEach(async (role) => {
@@ -77,13 +77,12 @@ module.exports = {
 							`${roleRemoved.join('\n')} `
 						)
 					}
-                    if (roleAdded.length !== 0 && roleRemoved.length !== 0) {
-                        await interaction.editReply({
-                            embeds: [embed],
-                            ephemeral: true
-                        })
-                    }
-                        
+					if (roleAdded.length !== 0 && roleRemoved.length !== 0) {
+						await interaction.editReply({
+							embeds: [embed],
+							ephemeral: true
+						})
+					}
 				}
 			}
 		} catch (error) {
