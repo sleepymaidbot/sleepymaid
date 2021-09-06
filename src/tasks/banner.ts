@@ -21,6 +21,8 @@ module.exports = {
 			guild
 				.setBanner(`./banners/${banner}`, `Changed banner to ${banner}`)
 				.catch(console.error)
+
+			guild.channels.cache.get('863117686334554142').send(`**Banner Rotation**\n Banner is now \`\`${banner}\`\``)
 		} catch (err) {
 			console.error(err)
 		}
