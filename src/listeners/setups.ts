@@ -353,7 +353,7 @@ Tu peux gagner des points en parlant sur le serveur. Que sa soit en vocal ou en 
 Tu perds 1 point par heure.
 
 **Comment avoir un rôle custom ?**
-Pour avoir un rôle custom tu doit avoir et rester au dessus de 250 points. Pour plus d'Information faites la commandes \`\`/myrewards\`\`.
+Pour avoir un rôle custom tu doit avoir et rester au dessus de 250 points. Pour plus d'Information faites la commandes \`\`/points rewards\`\`.
 `
 
 				await message.channel.send({ content: message4 })
