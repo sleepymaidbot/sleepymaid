@@ -272,7 +272,7 @@ module.exports = {
 				const message2 = `<:IconRole:879457634644811839> **Rôles de couleur** - (<@&857324294791364639> seulement)
 
 Voici les rôles de couleur que vous pouvez assigner à vous-même:
-${displayRoleString}
+> ${displayRoleString}
 `
 
 				const colorRow = new MessageActionRow().addComponents(
