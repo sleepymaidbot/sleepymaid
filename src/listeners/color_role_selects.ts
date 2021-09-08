@@ -57,7 +57,7 @@ module.exports = {
 							})
 						}
 					}
-				}
+				} else interaction.deferUpdate()
 			}
 		}
 	}
