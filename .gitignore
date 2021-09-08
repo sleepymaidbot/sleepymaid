@@ -166,3 +166,4 @@ src/config/config.ts
 *.exe
 banners/
 yes/
+icon.webp
