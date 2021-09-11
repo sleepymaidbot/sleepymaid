@@ -42,8 +42,5 @@ export async function checkActifRole(
 
 export async function checkUserActivityPoints(user: GuildMember) {
 	const userInDb = await mondecorteModel.findOne({ id: user.id })
-	if (userInDb == null) {
-		return 0
-	}
-	return userInDb.points
+	return userInDb?.points || 0
 }
