@@ -33,8 +33,7 @@ module.exports = {
 						// eslint-disable-next-line @typescript-eslint/no-unused-vars
 						async (error, stdout, stderr) => {
 							if (error) {
-								console.error(error)
-								return
+								return client.logger.error(error)
 							}
 							fileName = stdout.trim()
 							await execFile(
