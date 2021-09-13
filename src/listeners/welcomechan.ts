@@ -14,11 +14,18 @@ module.exports = {
 				if (interaction.customId === 'acces_role') {
 					if (userRole.includes('884149070757769227') || userRole.includes('862462288345694210')) interaction.deferUpdate()
 					else {
+						await interaction.deferUpdate()
 						const role = await interaction.guild.roles.cache.find(
 							(r) => r.id === '884149070757769227'
 						)
 						await interaction.member.roles.add(role)
-						await interaction.deferUpdate()
+
+						const ruleMessage = `:wave: **__Bienvenue sur le serveur__**`
+						
+						await interaction.followUp({
+							ephemeral: true,
+							content: ruleMessage
+						})
 					}
 				}
 			} else if (
