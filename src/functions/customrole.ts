@@ -4,7 +4,7 @@ import { checkUserActivityPoints } from './actifrole'
 
 export async function getUserCustomRoleId(member: GuildMember) {
 	const inDb = await mondecorteModel.findOne({ id: member.id })
-	return inDb.crole || null
+	return inDb?.crole
 }
 
 export async function getCRoleEligibility(member: GuildMember) {
