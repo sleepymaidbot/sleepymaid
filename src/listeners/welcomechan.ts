@@ -12,7 +12,11 @@ module.exports = {
 				interaction.guild.id === '324284116021542922'
 			) {
 				if (interaction.customId === 'acces_role') {
-					if (userRole.includes('884149070757769227') || userRole.includes('862462288345694210')) interaction.deferUpdate()
+					if (
+						userRole.includes('884149070757769227') ||
+						userRole.includes('862462288345694210')
+					)
+						interaction.deferUpdate()
 					else {
 						await interaction.deferUpdate()
 						const role = await interaction.guild.roles.cache.find(
@@ -21,7 +25,7 @@ module.exports = {
 						await interaction.member.roles.add(role)
 
 						const ruleMessage = `:wave: **__Bienvenue sur le serveur__**`
-						
+
 						await interaction.followUp({
 							ephemeral: true,
 							content: ruleMessage
@@ -50,8 +54,7 @@ module.exports = {
 					const roleAdded = []
 
 					oldRoles.forEach(async (role) => {
-						if (newRoles.includes(role))
-							return
+						if (newRoles.includes(role)) return
 						else {
 							const oldRole = interaction.guild.roles.cache.find(
 								(r) => r.id === role
@@ -71,14 +74,17 @@ module.exports = {
 						}
 					})
 
-
 					const embed = new MessageEmbed()
 						.setTitle('Rôles modifiés')
 						.setColor('#36393f')
 						.setTimestamp()
 
 					if (roleAdded.length > 0) {
-						await embed.addField('Rôles ajoutés', `${roleAdded.join('\n')} `, true)
+						await embed.addField(
+							'Rôles ajoutés',
+							`${roleAdded.join('\n')} `,
+							true
+						)
 					}
 					if (roleRemoved.length > 0) {
 						await embed.addField(
