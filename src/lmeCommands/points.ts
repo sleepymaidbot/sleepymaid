@@ -267,11 +267,8 @@ module.exports = {
 							components: [leaderboardText.row]
 						})
 
-						const filter = (i) => i.user.id === interaction.user.id
-
 						const collector =
 							interaction.channel.createMessageComponentCollector({
-								filter,
 								time: 120000
 							})
 
