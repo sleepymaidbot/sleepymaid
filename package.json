@@ -18,7 +18,7 @@
 		"@types/node": "^16.9.1",
 		"@types/prettier": "^2",
 		"@typescript-eslint/eslint-plugin": "^4.31.0",
-		"@typescript-eslint/parser": "^4.31.0",
+		"@typescript-eslint/parser": "^4.31.1",
 		"@yarnpkg/cli-dist": "^3.0.0",
 		"discord-api-types": "^0.23.1",
 		"eslint": "^7.32.0",
