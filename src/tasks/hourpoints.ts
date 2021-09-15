@@ -20,7 +20,7 @@ module.exports = {
 				'863117686334554142'
 			) as TextChannel
 			await logChannel.send(
-				`${usersArray.length} members have been removed 1 activity points.`
+				`**Hourly points**\n${usersArray.length} members have been removed 1 activity points.`
 			)
 			client.logger.info(
 				`${usersArray.length} members have been removed 1 activity points.`
