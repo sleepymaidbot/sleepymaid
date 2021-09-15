@@ -45,6 +45,7 @@ module.exports = {
 	async execute(interaction) {
 		switch (interaction.options.getSubcommand()) {
 			case 'user': {
+				await interaction.deferReply()
 				const user = interaction.options.get('user')
 				let member
 				if (user === null) {
@@ -69,7 +70,7 @@ module.exports = {
 								`<@${member.id}> n'a pas de points. \nCommence pas envoyer des message pour en avoir.`
 							)
 							.setTimestamp()
-						interaction.reply({ embeds: [embed] })
+						await interaction.editReply({ embeds: [embed] })
 					} else {
 						if (userInDB == 1) {
 							const embed = new MessageEmbed()
@@ -80,7 +81,7 @@ module.exports = {
 								)
 								.setDescription(`<@${member.id}> a ${userInDB} point.`)
 								.setTimestamp()
-							interaction.reply({ embeds: [embed] })
+							await interaction.editReply({ embeds: [embed] })
 						} else {
 							const embed = new MessageEmbed()
 								.setColor('#36393f')
@@ -90,11 +91,11 @@ module.exports = {
 								)
 								.setDescription(`<@${member.id}> a ${userInDB} points.`)
 								.setTimestamp()
-							interaction.reply({ embeds: [embed] })
+							await interaction.editReply({ embeds: [embed] })
 						}
 					}
 				} else {
-					interaction.reply({
+					await interaction.editReply({
 						content: 'Tu doit avoir le rôle actif pour utliser cette commande',
 						ephemeral: true
 					})
@@ -102,6 +103,7 @@ module.exports = {
 				break
 			}
 			case 'rewards': {
+				await interaction.deferReply()
 				const userInDb = await checkUserActivityPoints(interaction.member)
 				const embed = new MessageEmbed()
 					.setColor('#36393f')
@@ -162,10 +164,11 @@ module.exports = {
 			- Rôle <@&842387653394563074>: ${hasActifRole}
 			- Rôle <@&869637334126170112>: ${hasCustomRole}`)
 
-				await interaction.reply({ embeds: [embed] })
+				await interaction.editReply({ embeds: [embed] })
 				break
 			}
 			case 'leaderboard': {
+				await interaction.deferReply()
 				if (
 					interaction.member.roles.cache.has('842387653394563074') ||
 					interaction.member.id == '324281236728053760'
@@ -262,7 +265,7 @@ module.exports = {
 							.setAuthor('Leaderboard du serveur', interaction.guild.iconURL())
 							.setDescription(leaderboardText.text)
 							.setTimestamp()
-						await interaction.reply({
+						await interaction.editReply({
 							embeds: [embed],
 							components: [leaderboardText.row]
 						})
@@ -324,7 +327,7 @@ module.exports = {
 						})
 					})
 				} else {
-					interaction.reply({
+					interaction.editReply({
 						content: 'Tu doit avoir le rôle actif pour utliser cette commande'
 					})
 				}
