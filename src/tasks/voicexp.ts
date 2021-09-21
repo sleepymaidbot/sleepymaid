@@ -14,7 +14,9 @@ module.exports = {
 		await guild.channels.cache.forEach(async (channel) => {
 			if (channel.type == 'GUILD_VOICE') {
 				if (pointsBlacklistedVoiceChannel.includes(channel.id)) return
-				const membersInVc = await channel.members.filter(member => member.user.bot === false)
+				const membersInVc = await channel.members.filter(
+					(member) => member.user.bot === false
+				)
 				if ((await membersInVc.size) <= 1) return
 				await channel.members.each(async (member: GuildMember) => {
 					if (member.user.bot) return
