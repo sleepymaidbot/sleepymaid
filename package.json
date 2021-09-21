@@ -17,8 +17,8 @@
 	"devDependencies": {
 		"@types/node": "^16.9.1",
 		"@types/prettier": "^2",
-		"@typescript-eslint/eslint-plugin": "^4.31.1",
-		"@typescript-eslint/parser": "^4.31.1",
+		"@typescript-eslint/eslint-plugin": "^4.31.2",
+		"@typescript-eslint/parser": "^4.31.2",
 		"@yarnpkg/cli-dist": "^3.0.0",
 		"discord-api-types": "^0.23.1",
 		"eslint": "^7.32.0",
@@ -35,7 +35,7 @@
 		"axios": "^0.21.4",
 		"discord.js": "^13.1.0",
 		"fs": "^0.0.1-security",
-		"mongoose": "^6.0.6"
+		"mongoose": "^6.0.7"
 	},
 	"prettier": {
 		"useTabs": true,
