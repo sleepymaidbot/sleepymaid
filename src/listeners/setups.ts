@@ -17,7 +17,7 @@ module.exports = {
 	async execute(message) {
 		if (message.author.id !== '324281236728053760') return
 		const content = message.content.split(' ')
-		switch (content[0]) {
+		switch (config.prefix + content[0]) {
 			case 'color_message_setup': {
 				const roleArray: string[] = []
 				colorRole.forEach((rolename) => {
