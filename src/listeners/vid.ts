@@ -30,21 +30,16 @@ module.exports = {
 					await execFile(
 						'youtube-dl',
 						['-o', '%(id)s.%(ext)s', '--get-filename', arg],
-						// eslint-disable-next-line @typescript-eslint/no-unused-vars
-						async (error, stdout, stderr) => {
+						async (error, stdout) => {
 							if (error) {
-								console.error(error)
-								return
+								return client.logger.error(error)
 							}
 							fileName = stdout.trim()
 							await execFile(
 								'youtube-dl',
 								['-o', `./downloads/${fileName}`, arg],
-								// eslint-disable-next-line @typescript-eslint/no-unused-vars
-								async (error, stdout, stderr) => {
-									if (error) {
-										throw error
-									}
+								async (error) => {
+									if (error) return client.logger.error(error)
 									await message
 										.reply({
 											files: [
@@ -54,10 +49,9 @@ module.exports = {
 												}
 											]
 										})
-										// eslint-disable-next-line @typescript-eslint/no-unused-vars
-										.then((msg) => {
+										.then(() => {
 											fs.unlink(`./downloads/${fileName}`, (err) => {
-												if (err) throw err
+												if (err) return client.logger.error(err)
 											})
 										})
 								}

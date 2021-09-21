@@ -15,27 +15,27 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
-		"@types/node": "^16.7.10",
+		"@types/node": "^16.9.1",
 		"@types/prettier": "^2",
-		"@typescript-eslint/eslint-plugin": "^4.30.0",
-		"@typescript-eslint/parser": "^4.30.0",
+		"@typescript-eslint/eslint-plugin": "^4.31.1",
+		"@typescript-eslint/parser": "^4.31.1",
 		"@yarnpkg/cli-dist": "^3.0.0",
-		"discord-api-types": "^0.22.0",
+		"discord-api-types": "^0.23.1",
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.3.0",
-		"prettier": "^2.3.2",
+		"prettier": "^2.4.1",
 		"rimraf": "^3.0.2",
-		"source-map-support": "^0.5.19",
-		"typescript": "^4.4.2"
+		"source-map-support": "^0.5.20",
+		"typescript": "^4.4.3"
 	},
 	"dependencies": {
 		"@discordjs/builders": "^0.6.0",
 		"@discordjs/rest": "^0.1.0-canary.0",
 		"ansi-colors": "^4.1.1",
-		"axios": "^0.21.3",
+		"axios": "^0.21.4",
 		"discord.js": "^13.1.0",
 		"fs": "^0.0.1-security",
-		"mongoose": "^6.0.4"
+		"mongoose": "^6.0.6"
 	},
 	"prettier": {
 		"useTabs": true,

@@ -4,21 +4,13 @@ import { checkUserActivityPoints } from './actifrole'
 
 export async function getUserCustomRoleId(member: GuildMember) {
 	const inDb = await mondecorteModel.findOne({ id: member.id })
-	if (inDb) {
-		return inDb.crole
-	}
-	return null
+	return inDb?.crole
 }
 
 export async function getCRoleEligibility(member: GuildMember) {
 	const userPoints = await checkUserActivityPoints(member)
-
 	const userrole = member.roles.cache.map((x) => x.id)
-
-	if (userPoints >= 250 || userrole.includes('869637334126170112')) {
-		return true
-	}
-	return false
+	return userPoints >= 250 || userrole.includes('869637334126170112')
 }
 
 export async function checkCustomRole(member: GuildMember, guild: Guild) {

@@ -24,7 +24,7 @@ module.exports = {
 
 			guild.channels.cache
 				.get('863117686334554142')
-				.send(`**Banner Rotation**\n Banner is now \`\`${banner}\`\``)
+				.send(`**Banner Rotation**\nBanner is now \`\`${banner}\`\``)
 		} catch (err) {
 			console.error(err)
 		}

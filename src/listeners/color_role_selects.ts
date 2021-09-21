@@ -11,6 +11,7 @@ module.exports = {
 			) {
 				const memberRole = interaction.member.roles.cache.map((r) => r.name)
 				if (memberRole.includes('Colorful')) {
+					interaction.deferUpdate()
 					const buttonID = interaction.values[0]
 					const role = interaction.guild.roles.cache.find(
 						(role) => role.name === buttonID
@@ -31,7 +32,7 @@ module.exports = {
 								)
 								interaction.member.roles.remove(rrole)
 							})
-							interaction.reply({
+							interaction.followUp({
 								content: 'Removed all your color role!',
 								ephemeral: true
 							})
@@ -51,7 +52,7 @@ module.exports = {
 								)
 								interaction.member.roles.remove(rrole)
 							})
-							interaction.reply({
+							interaction.followUp({
 								content: `Gave the <@&${role.id}> role!`,
 								ephemeral: true
 							})
