@@ -1,4 +1,4 @@
-import { Client, ClientOptions, Collection } from 'discord.js'
+import { Client, Collection, Intents } from 'discord.js'
 import { Logger } from '../logger/logger'
 import fs from 'fs'
 import { REST } from '@discordjs/rest'
@@ -6,10 +6,30 @@ import { config } from '../../config/config'
 import { Routes } from 'discord-api-types/v9'
 import { startDB } from '../utils/db'
 
+const myIntents = new Intents([
+	'GUILDS',
+	'GUILD_MEMBERS',
+	'GUILD_BANS',
+	'GUILD_VOICE_STATES',
+	'GUILD_MESSAGES'
+])
+
 export class BotClient extends Client {
 	logger: Logger
-	constructor(opts: ClientOptions) {
-		super(opts)
+	constructor() {
+		super({
+			intents: myIntents,
+			allowedMentions: { parse: ['users', 'roles'], repliedUser: false },
+			presence: {
+				status: 'online',
+				activities: [
+					{
+						name: 'yo allo ?',
+						type: 'WATCHING'
+					}
+				]
+			}
+		})
 		this.logger = new Logger('Sleepy Maid')
 	}
 
