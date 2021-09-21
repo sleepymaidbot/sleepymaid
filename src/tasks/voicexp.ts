@@ -2,26 +2,23 @@ import { mondecorteModel } from '../lib/utils/db'
 import { pointsBlacklistedVoiceChannel } from '../config/lists'
 import { checkActifRole } from '../functions/actifrole'
 import { checkCustomRole } from '../functions/customrole'
+import { GuildMember } from 'discord.js'
 
 module.exports = {
 	interval: 300000,
 
 	async execute(client) {
 		client.logger.debug('Voice xp task started')
-		const guild = client.guilds.cache.get('324284116021542922')
+		const guild = await client.guilds.cache.get('324284116021542922')
 
-		const memberInVc = []
-
-		guild.channels.cache.forEach(async (channel) => {
+		await guild.channels.cache.forEach(async (channel) => {
 			if (channel.type == 'GUILD_VOICE') {
-				if (pointsBlacklistedVoiceChannel.includes(channel.id)) {
-					return
-				}
-				channel.members.each(async (member) => {
-					memberInVc.push(member.id)
-					if (member.voice.mute || member.voice.deaf) {
-						return
-					}
+				if (pointsBlacklistedVoiceChannel.includes(channel.id)) return
+				const membersInVc = await channel.members.filter(member => member.user.bot === false)
+				if ((await membersInVc.size) <= 1) return
+				await channel.members.each(async (member: GuildMember) => {
+					if (member.user.bot) return
+					if (member.voice.mute || member.voice.deaf) return
 					const userInDB = await mondecorteModel.findOne({
 						id: member.id
 					})
