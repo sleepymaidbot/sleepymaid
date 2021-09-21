@@ -12,6 +12,7 @@ export async function checkActifRole(
 	const userRole = member.roles.cache.map((role) => role.name)
 
 	if (member.id === guild.ownerId) return
+	if (member.bot) return
 
 	if (points >= 100) {
 		if (!userRole.includes('Actif')) {
