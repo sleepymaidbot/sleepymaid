@@ -14,7 +14,7 @@ module.exports = {
 	name: 'messageCreate',
 	once: false,
 
-	async execute(message) {
+	async execute(message, client) {
 		if (message.author.id !== '324281236728053760') return
 		const content = message.content.split(' ')
 		switch (config.prefix + content[0]) {
@@ -157,7 +157,7 @@ module.exports = {
 				} catch (err) {
 					if (err.length > 10) {
 						message.channel.send(`\`\`\`js\n${err}\`\`\``)
-					} else console.error(err)
+					} else client.logger.error(err)
 				}
 				break
 			}

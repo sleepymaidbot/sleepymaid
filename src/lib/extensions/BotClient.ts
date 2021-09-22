@@ -4,7 +4,7 @@ import fs from 'fs'
 import { REST } from '@discordjs/rest'
 import { config } from '../../config/config'
 import { Routes } from 'discord-api-types/v9'
-import { startDB } from '../utils/db'
+import { connect } from 'mongoose'
 
 const myIntents = new Intents([
 	'GUILDS',
@@ -33,7 +33,15 @@ export class BotClient extends Client {
 		this.logger = new Logger('Sleepy Maid')
 	}
 
-	async loadCommands() {
+	public async startBot() {
+		this.loadEvents()
+		this.loadDB()
+		this.login(config.token)
+		this.loadTasks()
+		this.loadCommands()
+	}
+
+	private async loadCommands() {
 		const lmeCommandFiles = fs
 			.readdirSync('./dist/lmeCommands')
 			.filter((file) => file.endsWith('.js'))
@@ -89,7 +97,7 @@ export class BotClient extends Client {
 		})
 	}
 
-	async loadEvents() {
+	private async loadEvents() {
 		const eventFiles = fs
 			.readdirSync('./dist/listeners')
 			.filter((file) => file.endsWith('.js'))
@@ -104,7 +112,7 @@ export class BotClient extends Client {
 		}
 	}
 
-	async loadTasks() {
+	private async loadTasks() {
 		const tasksFiles = fs
 			.readdirSync('./dist/tasks')
 			.filter((file) => file.endsWith('.js'))
@@ -115,8 +123,8 @@ export class BotClient extends Client {
 		}
 	}
 
-	async loadDB() {
-		await startDB()
+	private async loadDB() {
+		await connect(config.db)
 			.catch((err) => this.logger.error(err))
 			.then(() => this.logger.info('Successfully loaded MongoDB.'))
 	}

@@ -1,10 +1,5 @@
-import { config } from '../../config/config'
-import { Schema, model, connect } from 'mongoose'
+import { Schema, model } from 'mongoose'
 import { Snowflake } from 'discord.js'
-
-export async function startDB(): Promise<void> {
-	await connect(config.db)
-}
 
 // mondecorte
 
