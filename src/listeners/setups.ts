@@ -134,32 +134,49 @@ module.exports = {
 						return message.channel.send(`no`)
 					}
 
-					const output = await eval(codetoeval)
-
-					if (
-						inspect(output).includes(config.token || 'message.channel.delete()')
-					) {
-						return message.channel.send(`no`)
-					}
-
 					const evalOutputEmbed = new MessageEmbed()
 						.setTitle('Evaluated Code')
 						.addField(`:inbox_tray: **Input**`, `\`\`\`js\n${codetoeval}\`\`\``)
 
-					if (inspect(output, { depth: 0 }).length > 1000) {
-						return
-					} else {
-						evalOutputEmbed.addField(
-							`:outbox_tray: **Output**`,
-							`\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``
-						)
-					}
+					try {
+							const output = await eval(`(async () => {${codetoeval}})()`)
+							if (
+								await inspect(output).includes(config.token || 'message.channel.delete()')
+							) {
+								return message.channel.send(`no`)
+							}
+		
+							
+		
+							if (inspect(output, { depth: 0 }).length > 1000) {
+								return
+							} else {
+								evalOutputEmbed.addField(
+									`:outbox_tray: **Output**`,
+									`\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``
+								)
+							}
+							await message.channel.send({ embeds: [evalOutputEmbed] })
+					} catch (e) {
+						const output = e.message
+						if (
+							inspect(output).includes(config.token || 'message.channel.delete()')
+						) {
+							return message.channel.send(`no`)
+						}
 
-					await message.channel.send({ embeds: [evalOutputEmbed] })
+						if (inspect(output, { depth: 0 }).length > 1000) {
+							return
+						} else {
+							evalOutputEmbed.addField(
+								`:outbox_tray: **Error**`,
+								`\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``
+							)
+						}
+						await message.channel.send({ embeds: [evalOutputEmbed] })
+					}
 				} catch (err) {
-					if (err.length > 10) {
-						message.channel.send(`\`\`\`js\n${err}\`\`\``)
-					} else client.logger.error(err)
+					client.logger.error(err)
 				}
 				break
 			}
