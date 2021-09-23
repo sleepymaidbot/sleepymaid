@@ -17,7 +17,9 @@ module.exports = {
 	async execute(message, client) {
 		if (message.author.id !== '324281236728053760') return
 		const content = message.content.split(' ')
-		switch (config.prefix + content[0]) {
+		const cmd = content[0]
+		if (!cmd.startsWith(config.prefix)) return
+		switch (cmd.slice(1)) {
 			case 'color_message_setup': {
 				const roleArray: string[] = []
 				colorRole.forEach((rolename) => {
