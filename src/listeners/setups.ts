@@ -139,28 +139,30 @@ module.exports = {
 						.addField(`:inbox_tray: **Input**`, `\`\`\`js\n${codetoeval}\`\`\``)
 
 					try {
-							const output = await eval(`(async () => {${codetoeval}})()`)
-							if (
-								await inspect(output).includes(config.token || 'message.channel.delete()')
-							) {
-								return message.channel.send(`no`)
-							}
-		
-							
-		
-							if (inspect(output, { depth: 0 }).length > 1000) {
-								return
-							} else {
-								evalOutputEmbed.addField(
-									`:outbox_tray: **Output**`,
-									`\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``
-								)
-							}
-							await message.channel.send({ embeds: [evalOutputEmbed] })
+						const output = await eval(`(async () => {${codetoeval}})()`)
+						if (
+							await inspect(output).includes(
+								config.token || 'message.channel.delete()'
+							)
+						) {
+							return message.channel.send(`no`)
+						}
+
+						if (inspect(output, { depth: 0 }).length > 1000) {
+							return
+						} else {
+							evalOutputEmbed.addField(
+								`:outbox_tray: **Output**`,
+								`\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``
+							)
+						}
+						await message.channel.send({ embeds: [evalOutputEmbed] })
 					} catch (e) {
 						const output = e.message
 						if (
-							inspect(output).includes(config.token || 'message.channel.delete()')
+							inspect(output).includes(
+								config.token || 'message.channel.delete()'
+							)
 						) {
 							return message.channel.send(`no`)
 						}
