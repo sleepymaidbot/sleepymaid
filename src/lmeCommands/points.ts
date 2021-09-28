@@ -67,7 +67,7 @@ module.exports = {
 								interaction.member.user.avatarURL()
 							)
 							.setDescription(
-								`<@${member.id}> n'a pas de points. \nCommence pas envoyer des message pour en avoir.`
+								`${member} n'a pas de points. \nCommence par envoyer des message pour en avoir.`
 							)
 							.setTimestamp()
 						await interaction.editReply({ embeds: [embed] })
@@ -79,7 +79,7 @@ module.exports = {
 									interaction.member.user.tag,
 									interaction.member.user.avatarURL()
 								)
-								.setDescription(`<@${member.id}> a ${userInDB} point.`)
+								.setDescription(`${member} a ${userInDB} point.`)
 								.setTimestamp()
 							await interaction.editReply({ embeds: [embed] })
 						} else {
@@ -89,7 +89,7 @@ module.exports = {
 									interaction.member.user.tag,
 									interaction.member.user.avatarURL()
 								)
-								.setDescription(`<@${member.id}> a ${userInDB} points.`)
+								.setDescription(`${member} a ${userInDB} points.`)
 								.setTimestamp()
 							await interaction.editReply({ embeds: [embed] })
 						}
@@ -214,7 +214,7 @@ module.exports = {
 									)
 								} else {
 									const math = page * 10 + index + 1 - 10
-									text.push(`${math} <@${user.id}>: ${user.points} points`)
+									text.push(`${math} ${user}: ${user.points} points`)
 								}
 							})
 
