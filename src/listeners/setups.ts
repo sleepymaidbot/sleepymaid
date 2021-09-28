@@ -176,6 +176,7 @@ module.exports = {
 							)
 						}
 						await message.channel.send({ embeds: [evalOutputEmbed] })
+						await client.logger.error(e)
 					}
 				} catch (err) {
 					client.logger.error(err)

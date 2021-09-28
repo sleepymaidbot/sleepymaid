@@ -1401,6 +1401,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"murmurhash-v3@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "murmurhash-v3@npm:1.0.2"
+  checksum: 4c54e01b5da5366db9746f563f1cceff53cd15166845b8aadbdec584d86e6c01ae8795cfcd263e6f5a064cf711f40552e391321bd108871c7ec76d1a18167efc
+  languageName: node
+  linkType: hard
+
 "natural-compare@npm:^1.4.0":
   version: 1.4.0
   resolution: "natural-compare@npm:1.4.0"
@@ -1650,6 +1657,7 @@ __metadata:
     eslint-config-prettier: ^8.3.0
     fs: ^0.0.1-security
     mongoose: ^6.0.7
+    murmurhash-v3: ^1.0.2
     prettier: ^2.4.1
     rimraf: ^3.0.2
     source-map-support: ^0.5.20
