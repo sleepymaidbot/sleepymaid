@@ -80,6 +80,13 @@ module.exports = {
 						const sleepyRole = interaction.guild.roles.cache.find(
 							(role) => role.id === '811285873458544680'
 						)
+						const checkRole = interaction.guild.roles.cache.find(
+							(role) => role.name === name
+						)
+						if (checkRole === undefined) {
+							embed.setDescription('Se rôle existe déja.')
+							return await interaction.reply({ embeds: [embed], ephemeral: true })
+						}
 						const pos = sleepyRole.position - 1
 						await interaction.guild.roles
 							.create({
