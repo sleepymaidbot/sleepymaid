@@ -214,7 +214,7 @@ module.exports = {
 									)
 								} else {
 									const math = page * 10 + index + 1 - 10
-									text.push(`${math} ${user}: ${user.points} points`)
+									text.push(`${math} <@${user.id}>: ${user.points} points`)
 								}
 							})
 

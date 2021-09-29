@@ -22,12 +22,12 @@ module.exports = {
 					usersArray.push(user.id)
 				}
 			}
-			const logChannel = client.channels.cache.get(
+			const logChannel = await client.channels.cache.get(
 				'863117686334554142'
 			) as TextChannel
-			await logChannel.send(
-				`**Hourly points**\n${usersArray.length} members have been removed  activity points.`
-			)
+			await logChannel.send({
+				content: `**Hourly points**\n${usersArray.length} members have been removed activity points.`
+			})
 			client.logger.info(
 				`${usersArray.length} members have been removed activity points.`
 			)
