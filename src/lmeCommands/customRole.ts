@@ -85,7 +85,10 @@ module.exports = {
 						)
 						if (checkRole === undefined) {
 							embed.setDescription('Se rôle existe déja.')
-							return await interaction.reply({ embeds: [embed], ephemeral: true })
+							return await interaction.reply({
+								embeds: [embed],
+								ephemeral: true
+							})
 						}
 						const pos = sleepyRole.position - 1
 						await interaction.guild.roles
