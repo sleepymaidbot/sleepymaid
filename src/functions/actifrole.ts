@@ -9,14 +9,14 @@ export async function checkActifRole(
 	points: number,
 	client: BotClient
 ) {
-	const userRole = member.roles.cache.map((role) => role.name)
+	const userRole = member.roles.cache.map((role) => role.id)
 
 	if (member.id === guild.ownerId) return
 	if (member.user.bot) return
 
 	if (points >= 100) {
-		if (!userRole.includes('Actif')) {
-			const actifRole = guild.roles.cache.find((role) => role.name === 'Actif')
+		if (!userRole.includes('842387653394563074')) {
+			const actifRole = guild.roles.cache.find((role) => role.id === '842387653394563074')
 			if (config.isProduction) {
 				await member.roles.add(actifRole)
 			} else if (config.isDevelopment) {
@@ -28,8 +28,8 @@ export async function checkActifRole(
 	}
 
 	if (points <= 50) {
-		if (userRole.includes('Actif')) {
-			const actifRole = guild.roles.cache.find((role) => role.name === 'Actif')
+		if (userRole.includes('842387653394563074')) {
+			const actifRole = guild.roles.cache.find((role) => role.id === '842387653394563074')
 			if (config.isProduction) {
 				await member.roles.remove(actifRole)
 			} else if (config.isDevelopment) {
