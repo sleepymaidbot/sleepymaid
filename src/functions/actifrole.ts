@@ -16,7 +16,9 @@ export async function checkActifRole(
 
 	if (points >= 100) {
 		if (!userRole.includes('842387653394563074')) {
-			const actifRole = guild.roles.cache.find((role) => role.id === '842387653394563074')
+			const actifRole = guild.roles.cache.find(
+				(role) => role.id === '842387653394563074'
+			)
 			if (config.isProduction) {
 				await member.roles.add(actifRole)
 			} else if (config.isDevelopment) {
@@ -29,7 +31,9 @@ export async function checkActifRole(
 
 	if (points <= 50) {
 		if (userRole.includes('842387653394563074')) {
-			const actifRole = guild.roles.cache.find((role) => role.id === '842387653394563074')
+			const actifRole = guild.roles.cache.find(
+				(role) => role.id === '842387653394563074'
+			)
 			if (config.isProduction) {
 				await member.roles.remove(actifRole)
 			} else if (config.isDevelopment) {
