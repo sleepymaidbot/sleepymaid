@@ -407,6 +407,22 @@ Pour avoir accès au serveur tu doit appuyer sur le bouton ci-dessous.`
 				})
 				break
 			}
+			case 'spookyMessage': {
+				const embed = new MessageEmbed()
+					.setColor('#f4900c')
+					.setDescription('Spooky rôle.')
+				const row = new MessageActionRow().addComponents(
+					new MessageButton()
+						.setLabel('Spooky')
+						.setStyle('PRIMARY')
+						.setEmoji('🎃')
+						.setCustomId('spooky')
+				)
+
+				await message.channel.send({ embeds: [embed], components: [row] })
+
+				break
+			}
 		}
 	}
 }
