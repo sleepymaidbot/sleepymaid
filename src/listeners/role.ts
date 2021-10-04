@@ -5,10 +5,10 @@ module.exports = {
 	once: false,
 
 	async execute(oldMember, newMember) {
-		const oldMemberRole = oldMember.roles.cache.map((r) => r.name)
-		const newMemberRole = newMember.roles.cache.map((r) => r.name)
+		const oldMemberRole = oldMember.roles.cache.map((r) => r.id)
+		const newMemberRole = newMember.roles.cache.map((r) => r.id)
 		const role = newMember.guild.roles.cache.find(
-			(role) => role.name === 'Colorful'
+			(role) => role.id === '857324294791364639'
 		)
 
 		if (oldMember.roles.cache.size != newMember.roles.cache.size) {

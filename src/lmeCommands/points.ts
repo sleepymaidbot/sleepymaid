@@ -155,7 +155,7 @@ module.exports = {
 				})
 				const response = checkUserRole(memberRole, memberRole)
 				const role = interaction.guild.roles.cache.find(
-					(role) => role.name === 'Colorful'
+					(role) => role.id === '857324294791364639'
 				)
 				performRole(response, role, interaction.member)
 

@@ -19,27 +19,27 @@ export function checkUserRole(
 	})
 
 	if (wasEligibleForColorfulRole && !eligibleForColorfulRole) {
-		if (newMemberRole.includes('Colorful')) {
+		if (newMemberRole.includes('857324294791364639')) {
 			return 'remove'
 		}
 		return 'none'
 	}
 	if (!wasEligibleForColorfulRole && eligibleForColorfulRole) {
-		if (newMemberRole.includes('Colorful')) {
+		if (newMemberRole.includes('857324294791364639')) {
 			return 'none'
 		}
 		return 'add'
 	}
 
 	if (!wasEligibleForColorfulRole && !eligibleForColorfulRole) {
-		if (newMemberRole.includes('Colorful')) {
+		if (newMemberRole.includes('857324294791364639')) {
 			return 'remove'
 		}
 		return 'none'
 	}
 
 	if (wasEligibleForColorfulRole && eligibleForColorfulRole) {
-		if (newMemberRole.includes('Colorful')) {
+		if (newMemberRole.includes('857324294791364639')) {
 			return 'none'
 		}
 		return 'add'
