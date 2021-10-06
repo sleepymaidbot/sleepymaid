@@ -33,7 +33,7 @@
 		"@discordjs/rest": "^0.1.0-canary.0",
 		"ansi-colors": "^4.1.1",
 		"axios": "^0.22.0",
-		"discord.js": "^13.1.0",
+		"discord.js": "^13.2.0",
 		"fs": "^0.0.1-security",
 		"mongoose": "^6.0.8",
 		"murmurhash-v3": "^1.0.2"
