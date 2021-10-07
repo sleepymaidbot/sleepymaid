@@ -210,7 +210,7 @@ module.exports = {
 					.setAuthor(message.guild.name, message.guild.iconURL)
 					.setTitle('Élection du maire du serveur')
 					.setDescription(
-						"Va lire les candidatures dans <#877679633062064129>.\nEnsuite, sélectionner la personne que vous voulez voter.\nVous ne pouvez sélectionner qu'une fois et une personne."
+						"Va lire les candidatures dans <#895814344267403294>.\nEnsuite, sélectionner la personne que vous voulez voter.\nVous ne pouvez sélectionner qu'une fois et une personne."
 					)
 					.setTimestamp()
 
