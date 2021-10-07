@@ -26,7 +26,7 @@ export class BotClient extends Client {
 						type: 'WATCHING'
 					}
 				]
-			}/*,
+			} /*,
 			makeCache: Options.cacheWithLimits({
 				GuildMemberManager: 0,
 			})*/

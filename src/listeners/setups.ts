@@ -196,12 +196,14 @@ module.exports = {
 				]
 
 				await userslol.forEach(async (user) => {
-					await message.guild.members.fetch(user, { force: true}).then(async (member) => {
-						maire.push({
-							value: member.user.id,
-							label: member.user.tag
+					await message.guild.members
+						.fetch(user, { force: true })
+						.then(async (member) => {
+							maire.push({
+								value: member.user.id,
+								label: member.user.tag
+							})
 						})
-					})
 				})
 
 				if (maire.length === 0) message.channel.send(':poop:')
