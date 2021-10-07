@@ -1,4 +1,4 @@
-import { Client, Collection, Intents } from 'discord.js'
+import { Client, Collection, Intents, Options } from 'discord.js'
 import { Logger } from '../logger/logger'
 import fs from 'fs'
 import { REST } from '@discordjs/rest'
@@ -6,19 +6,17 @@ import { config } from '../../config/config'
 import { Routes } from 'discord-api-types/v9'
 import { connect } from 'mongoose'
 
-const myIntents = new Intents([
-	'GUILDS',
-	'GUILD_MEMBERS',
-	'GUILD_BANS',
-	'GUILD_VOICE_STATES',
-	'GUILD_MESSAGES'
-])
-
 export class BotClient extends Client {
 	logger: Logger
 	constructor() {
 		super({
-			intents: myIntents,
+			intents: new Intents([
+				'GUILDS',
+				'GUILD_MEMBERS',
+				'GUILD_BANS',
+				'GUILD_VOICE_STATES',
+				'GUILD_MESSAGES'
+			]),
 			allowedMentions: { parse: ['users', 'roles'], repliedUser: false },
 			presence: {
 				status: 'online',
@@ -28,7 +26,10 @@ export class BotClient extends Client {
 						type: 'WATCHING'
 					}
 				]
-			}
+			}/*,
+			makeCache: Options.cacheWithLimits({
+				GuildMemberManager: 0,
+			})*/
 		})
 		this.logger = new Logger('Sleepy Maid')
 	}
