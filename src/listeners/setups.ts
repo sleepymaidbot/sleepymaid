@@ -4,8 +4,7 @@ import {
 	MessageActionRow,
 	MessageButton,
 	MessageEmbed,
-	MessageSelectMenu,
-	TextChannel
+	MessageSelectMenu
 } from 'discord.js'
 import { config } from '../config/config'
 import { inspect } from 'util'
@@ -184,39 +183,34 @@ module.exports = {
 				break
 			}
 			case 'setupVote': {
-				const channel = (await message.guild.channels.fetch(
-					'877679633062064129'
-				)) as TextChannel
-
 				const maire = []
 
-				await channel.messages
-					.fetch()
-					.then((fmessage) => {
-						fmessage.forEach((msg) => {
-							if (msg.author.bot) return
-							if (msg.author.id === message.guild.ownerId) return
-							if (
-								maire.includes({
-									label: msg.author.tag,
-									value: msg.author.id
-								})
-							)
-								return
-							maire.push({
-								label: msg.author.tag,
-								value: msg.author.id
-							})
+				const userslol = [
+					'762383326018928642',
+					'307965162705649664',
+					'696613917765533746',
+					'377944202710876161',
+					'285502356811022336',
+					'302793054962581505',
+					'280056504604819457'
+				]
+
+				await userslol.forEach(async (user) => {
+					await message.guild.members.fetch(user, { force: true}).then(async (member) => {
+						maire.push({
+							value: member.user.id,
+							label: member.user.tag
 						})
 					})
-					.catch(console.error)
+				})
 
+				if (maire.length === 0) message.channel.send(':poop:')
 				const embed = new MessageEmbed()
 					.setColor('#36393f')
 					.setAuthor(message.guild.name, message.guild.iconURL)
 					.setTitle('Élection du maire du serveur')
 					.setDescription(
-						"Va lire les candidatures dans <#877679633062064129>.\nEnsuite, sélectionner la personne que vous voulez voter.\nVous ne pouvez qu'une fois et une personne."
+						"Va lire les candidatures dans <#877679633062064129>.\nEnsuite, sélectionner la personne que vous voulez voter.\nVous ne pouvez sélectionner qu'une fois et une personne."
 					)
 					.setTimestamp()
 
@@ -404,6 +398,16 @@ Pour avoir accès au serveur tu doit appuyer sur le bouton ci-dessous.`
 				await message.channel.send({
 					content: message5,
 					components: [accessButton]
+				})
+				break
+			}
+			case 'removeAllVote': {
+				await mondecorteModel.find({}).then(async (docs) => {
+					for (const doc of docs) {
+						const userInDB = await mondecorteModel.findOne({ id: doc.id })
+						userInDB.vote = null
+						await userInDB.save()
+					}
 				})
 				break
 			}
