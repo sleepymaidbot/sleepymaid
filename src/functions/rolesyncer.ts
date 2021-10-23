@@ -1,7 +1,7 @@
 import { GuildMember, Role } from 'discord.js'
 import { colorRole, ColorfulNeedRole } from '../config/lists'
 
-export function checkUserRole(
+export async function checkUserRole(
 	oldMemberRole: string[],
 	newMemberRole: string[]
 ) {
@@ -46,21 +46,21 @@ export function checkUserRole(
 	}
 }
 
-export function performRole(action: string, role: Role, member: GuildMember) {
+export async function performRole(action: string, role: Role, member: GuildMember) {
 	switch (action) {
 		case 'add':
 			try {
-				member.roles.add(role)
+				await member.roles.add(role)
 				return 'Done'
 			} catch (err) {
 				return `Error: ${err.message}`
 			}
 		case 'remove':
 			try {
-				member.roles.remove(role)
-				member.roles.cache.forEach((eachRole) => {
+				await member.roles.remove(role)
+				member.roles.cache.forEach(async (eachRole) => {
 					if (colorRole.includes(eachRole.name)) {
-						member.roles.remove(eachRole)
+						await member.roles.remove(eachRole)
 					}
 				})
 				return 'Done'
