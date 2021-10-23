@@ -195,7 +195,7 @@ module.exports = {
 					'280056504604819457'
 				]
 
-				await userslol.forEach(async (user) => {
+				userslol.forEach(async (user) => {
 					await message.guild.members
 						.fetch(user, { force: true })
 						.then(async (member) => {
