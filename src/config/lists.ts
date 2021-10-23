@@ -45,3 +45,5 @@ export const pointToRemoveForPoints = [
 	{ need: 4500, remove: 30 },
 	{ need: 5000, remove: 72 }
 ]
+
+export const pointsMultiplier = 1

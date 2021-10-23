@@ -1,5 +1,5 @@
 import { mondecorteModel } from '../lib/utils/db'
-import { pointsBlacklistedVoiceChannel } from '../config/lists'
+import { pointsBlacklistedVoiceChannel, pointsMultiplier } from '../config/lists'
 import { checkActifRole } from '../functions/actifrole'
 import { checkCustomRole } from '../functions/customrole'
 import { GuildMember } from 'discord.js'
@@ -32,7 +32,8 @@ module.exports = {
 						await newUser.save()
 					} else {
 						const beforePoints = userInDB.points
-						const afterPoints = beforePoints + 1
+						const pointsToAdd = 1 * pointsMultiplier
+						const afterPoints = beforePoints + pointsToAdd
 						userInDB.points = afterPoints
 						await userInDB.save()
 						checkActifRole(member, guild, afterPoints, client)

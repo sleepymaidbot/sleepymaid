@@ -1,6 +1,6 @@
 import { mondecorteModel } from '../lib/utils/db'
 import { Message } from 'discord.js'
-import { pointsBlacklistedChannel } from '../config/lists'
+import { pointsBlacklistedChannel, pointsMultiplier } from '../config/lists'
 import { checkActifRole } from '../functions/actifrole'
 import { checkCustomRole } from '../functions/customrole'
 
@@ -30,7 +30,8 @@ module.exports = {
 			await newUser.save()
 		} else {
 			const beforePoints = userInDB.points
-			const afterPoints = beforePoints + 1
+			const pointsToAdd = 1 * pointsMultiplier
+			const afterPoints = beforePoints + pointsToAdd
 			userInDB.points = afterPoints
 			await userInDB.save()
 
