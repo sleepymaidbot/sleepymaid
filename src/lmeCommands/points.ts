@@ -4,7 +4,7 @@ import { MessageActionRow, MessageButton, MessageEmbed } from 'discord.js'
 import { mondecorteModel } from '../lib/utils/db'
 import { checkUserRole, performRole } from '../functions/rolesyncer'
 import { getUserCustomRoleId } from '../functions/customrole'
-import { pointToRemoveForPoints } from '../config/lists' 
+import { pointToRemoveForPoints } from '../config/lists'
 
 const intForEmote = {
 	1: ':first_place:',

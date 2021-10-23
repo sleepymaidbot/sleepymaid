@@ -1,5 +1,8 @@
 import { mondecorteModel } from '../lib/utils/db'
-import { pointsBlacklistedVoiceChannel, pointsMultiplier } from '../config/lists'
+import {
+	pointsBlacklistedVoiceChannel,
+	pointsMultiplier
+} from '../config/lists'
 import { checkActifRole } from '../functions/actifrole'
 import { checkCustomRole } from '../functions/customrole'
 import { GuildMember } from 'discord.js'

@@ -46,7 +46,11 @@ export async function checkUserRole(
 	}
 }
 
-export async function performRole(action: string, role: Role, member: GuildMember) {
+export async function performRole(
+	action: string,
+	role: Role,
+	member: GuildMember
+) {
 	switch (action) {
 		case 'add':
 			try {
