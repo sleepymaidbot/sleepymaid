@@ -151,7 +151,7 @@ module.exports = {
 					if (pointsToLoose !== 1) {
 						embed.addField(
 							'Perte de points par heures',
-							`\`\`\`Tu perd ${pointsToLoose} par heure a cause que tu à ${userInDb} points.\`\`\``,
+							`\`\`\`Tu perd ${pointsToLoose} points par heure a cause que tu à ${userInDb} points.\`\`\``,
 							true
 						)
 					}
