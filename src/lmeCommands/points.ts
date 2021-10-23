@@ -163,8 +163,7 @@ module.exports = {
 				if (interaction.member.roles.cache.has(corole.id)) {
 					hasColorful = '✅'
 				}
-				// eslint-disable-next-line prefer-const
-				let memberRole: string[] = []
+				const memberRole: string[] = []
 				interaction.member.roles.cache.forEach((role) => {
 					memberRole.push(role.name)
 				})
