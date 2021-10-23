@@ -8,7 +8,7 @@ module.exports = {
 		client.logger.debug('Banner task started')
 		if (config.isDevelopment) return
 		const guild = client.guilds.cache.get('324284116021542922')
-		if (guild.premiumSubscriptionCount < 15) return
+		if (guild.premiumSubscriptionCount < 7) return
 		try {
 			const dir = await opendir('./banners')
 			const banners = []
