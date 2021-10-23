@@ -115,7 +115,7 @@ module.exports = {
 
 				let hasActifRole = '❌'
 				const arole = await interaction.guild.roles.cache.find(
-					(role) => role.name === 'Actif'
+					(role) => role.id === '842387653394563074'
 				)
 				if (interaction.member.roles.cache.has(arole.id)) {
 					hasActifRole = '✅'
@@ -143,7 +143,7 @@ module.exports = {
 				}
 				let hasColorful = '❌'
 				const corole = interaction.guild.roles.cache.find(
-					(role) => role.name === 'Colorful'
+					(role) => role.id === '857324294791364639'
 				)
 				if (interaction.member.roles.cache.has(corole.id)) {
 					hasColorful = '✅'
@@ -153,11 +153,11 @@ module.exports = {
 				interaction.member.roles.cache.forEach((role) => {
 					memberRole.push(role.name)
 				})
-				const response = checkUserRole(memberRole, memberRole)
+				const response = await checkUserRole(memberRole, memberRole)
 				const role = interaction.guild.roles.cache.find(
 					(role) => role.id === '857324294791364639'
 				)
-				performRole(response, role, interaction.member)
+				await performRole(response, role, interaction.member)
 
 				embed.setDescription(`Voici une liste des récompense que tu a obtenu:
 			- Rôle <@&857324294791364639>: ${hasColorful}
