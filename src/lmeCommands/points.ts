@@ -4,6 +4,7 @@ import { MessageActionRow, MessageButton, MessageEmbed } from 'discord.js'
 import { mondecorteModel } from '../lib/utils/db'
 import { checkUserRole, performRole } from '../functions/rolesyncer'
 import { getUserCustomRoleId } from '../functions/customrole'
+import { pointToRemoveForPoints } from '../config/lists' 
 
 const intForEmote = {
 	1: ':first_place:',
@@ -137,6 +138,20 @@ module.exports = {
 						embed.addField(
 							'Une récompense non réclamer',
 							'```Tu n\'a pas réclamer ton rôle custom. \nPour le réclamer fait "/customrole create <nom>" \n<nom> étant le nom désiré du rôle.```',
+							true
+						)
+					}
+				}
+				if (userInDb >= 500) {
+					let pointsToLoose = 1
+					pointToRemoveForPoints.forEach((e) => {
+						if (e.need <= userInDb) pointsToLoose = e.remove
+					})
+
+					if (pointsToLoose !== 1) {
+						embed.addField(
+							'Perte de points par heures',
+							`\`\`\`Tu perd ${pointsToLoose} par heure a cause que tu à ${userInDb} points.\`\`\``,
 							true
 						)
 					}
