@@ -1,4 +1,4 @@
-import { Client, Collection, Intents, Options } from 'discord.js'
+import { Client, Collection, Intents } from 'discord.js'
 import { Logger } from '../logger/logger'
 import fs from 'fs'
 import { REST } from '@discordjs/rest'
