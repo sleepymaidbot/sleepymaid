@@ -1,6 +1,4 @@
-import { GuildMember, Guild } from 'discord.js'
-import { config } from '../config/config'
-import { BotClient } from '../lib/extensions/BotClient'
+import { GuildMember } from 'discord.js'
 import { mondecorteModel } from '../lib/utils/db'
 
 export async function checkUserActivityPoints(user: GuildMember) {
