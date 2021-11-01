@@ -54,6 +54,7 @@ module.exports = {
 					member = interaction.member
 				} else {
 					member = await interaction.guild.members.fetch(user.value)
+					await rewardChecker(member, interaction.guild, client)
 				}
 
 				if (
@@ -61,7 +62,6 @@ module.exports = {
 					interaction.member.id == '324281236728053760'
 				) {
 					const userInDB = await checkUserActivityPoints(member)
-					await rewardChecker(member, interaction.guild, client)
 					if (userInDB == 0) {
 						const embed = new MessageEmbed()
 							.setColor('#36393f')
