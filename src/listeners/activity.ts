@@ -1,8 +1,8 @@
 import { mondecorteModel } from '../lib/utils/db'
 import { Message } from 'discord.js'
-import { pointsBlacklistedChannel, pointsMultiplier } from '../config/lists'
 import { checkActifRole } from '../functions/actifrole'
 import { checkCustomRole } from '../functions/customrole'
+import { pointsBlacklistedTextChannel, pointsMultiplier } from '../config/lists'
 
 const talkedRecently = new Set()
 
@@ -14,7 +14,7 @@ module.exports = {
 		if (message.guild == null) return
 		if (message.guild.id != '324284116021542922') return
 		if (message.author.bot) return
-		if (pointsBlacklistedChannel.includes(message.channel.id)) return
+		if (pointsBlacklistedTextChannel.includes(message.channel.id)) return
 
 		if (talkedRecently.has(message.author.id)) {
 			return
