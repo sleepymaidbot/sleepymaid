@@ -5,6 +5,7 @@ import { mondecorteModel } from '../lib/utils/db'
 import { checkUserRole, performRole } from '../functions/rolesyncer'
 import { getUserCustomRoleId } from '../functions/customrole'
 import { pointToRemoveForPoints } from '../config/lists'
+import { rewardChecker } from '../functions/rewardChecker'
 
 const intForEmote = {
 	1: ':first_place:',
@@ -43,7 +44,7 @@ module.exports = {
 				)
 		),
 
-	async execute(interaction) {
+	async execute(interaction, client) {
 		switch (interaction.options.getSubcommand()) {
 			case 'user': {
 				await interaction.deferReply()
@@ -60,6 +61,7 @@ module.exports = {
 					interaction.member.id == '324281236728053760'
 				) {
 					const userInDB = await checkUserActivityPoints(member)
+					await rewardChecker(member, interaction.guild, client)
 					if (userInDB == 0) {
 						const embed = new MessageEmbed()
 							.setColor('#36393f')
