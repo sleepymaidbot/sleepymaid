@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
-import { checkUserActivityPoints } from '../functions/actifrole'
+import { checkUserActivityPoints } from '../functions/pointsChecker'
 import { MessageActionRow, MessageButton, MessageEmbed } from 'discord.js'
 import { mondecorteModel } from '../lib/utils/db'
 import { checkUserRole, performRole } from '../functions/rolesyncer'

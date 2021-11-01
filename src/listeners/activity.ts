@@ -1,8 +1,7 @@
 import { mondecorteModel } from '../lib/utils/db'
 import { Message } from 'discord.js'
-import { checkActifRole } from '../functions/actifrole'
-import { checkCustomRole } from '../functions/customrole'
 import { pointsBlacklistedTextChannel, pointsMultiplier } from '../config/lists'
+import { rewardChecker } from '../functions/rewardChecker'
 
 const talkedRecently = new Set()
 
@@ -35,8 +34,7 @@ module.exports = {
 			userInDB.points = afterPoints
 			await userInDB.save()
 
-			await checkActifRole(message.member, message.guild, afterPoints, client)
-			await checkCustomRole(message.member, message.guild)
+			await rewardChecker(message.member, message.guild, client)
 		}
 
 		talkedRecently.add(message.author.id)

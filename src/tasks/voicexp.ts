@@ -3,9 +3,8 @@ import {
 	pointsBlacklistedVoiceChannel,
 	pointsMultiplier
 } from '../config/lists'
-import { checkActifRole } from '../functions/actifrole'
-import { checkCustomRole } from '../functions/customrole'
 import { GuildMember } from 'discord.js'
+import { rewardChecker } from '../functions/rewardChecker'
 
 module.exports = {
 	interval: 300000,
@@ -39,8 +38,7 @@ module.exports = {
 						const afterPoints = beforePoints + pointsToAdd
 						userInDB.points = afterPoints
 						await userInDB.save()
-						checkActifRole(member, guild, afterPoints, client)
-						checkCustomRole(member, guild)
+						await rewardChecker(member, guild, client)
 					}
 				})
 			}
