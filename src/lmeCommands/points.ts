@@ -106,7 +106,9 @@ module.exports = {
 			}
 			case 'rewards': {
 				await interaction.deferReply()
-				const userInDb = await mondecorteModel.findOne({ id: interaction.member.id })
+				const userInDb = await mondecorteModel.findOne({
+					id: interaction.member.id
+				})
 				const points = userInDb?.points || 0
 				const embed = new MessageEmbed()
 					.setColor('#36393f')
