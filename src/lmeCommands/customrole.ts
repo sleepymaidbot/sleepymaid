@@ -1,7 +1,6 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import {
-	getCRoleEligibility,
-	getUserCustomRoleId
+	getCRoleEligibility
 } from '../functions/customrole'
 import { mondecorteModel } from '../lib/utils/db'
 import { MessageEmbed } from 'discord.js'
@@ -63,7 +62,7 @@ module.exports = {
 			interaction.member,
 			inDb?.points || 0
 		)
-		const customRoleId = await getUserCustomRoleId(interaction.member)
+		const customRoleId = inDb?.crole
 		const embed = new MessageEmbed()
 			.setAuthor(
 				`Rôle custom de ${interaction.member.user.tag}`,
@@ -73,16 +72,16 @@ module.exports = {
 			.setTimestamp()
 		switch (subcommand) {
 			case 'create': {
-				const name = interaction.options.getString('name')
-				const color = interaction.options.getString('color')
+				const name = await interaction.options.getString('name')
+				const color = await interaction.options.getString('color')
 				if (isEligible) {
-					if (customRoleId !== null) {
+					if (customRoleId === null || undefined) {
 						const cr = interaction.guild.roles.cache.find(
 							(role) => role.id === customRoleId
 						)
 						await interaction.member.roles.add(cr)
 						embed.setDescription('Tu a déja un rôle custom')
-						interaction.editReply({ embeds: [embed], ephimeral: true })
+						await interaction.editReply({ embeds: [embed], ephimeral: true })
 					} else {
 						const sleepyRole = interaction.guild.roles.cache.find(
 							(role) => role.id === '811285873458544680'
