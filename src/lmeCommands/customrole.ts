@@ -1,7 +1,5 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
-import {
-	getCRoleEligibility
-} from '../functions/customrole'
+import { getCRoleEligibility } from '../functions/customrole'
 import { mondecorteModel } from '../lib/utils/db'
 import { MessageEmbed } from 'discord.js'
 
