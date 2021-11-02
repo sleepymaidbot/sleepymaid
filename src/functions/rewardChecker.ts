@@ -3,6 +3,13 @@ import { BotClient } from '../lib/extensions/BotClient'
 import { mondecorteModel } from '../lib/utils/db'
 import { config } from '../config/config'
 
+async function getCRoleEligibility(
+	userPoints: number,
+	userRole: Array<string>
+) {
+	return userPoints >= 200 || userRole.includes('869637334126170112')
+}
+
 export async function rewardChecker(
 	member: GuildMember,
 	guild: Guild,
@@ -52,8 +59,9 @@ export async function rewardChecker(
 	const cRoleId = inDb?.crole || null
 
 	if (cRoleId != null) {
-		if (points <= 200 || !userRole.includes('869637334126170112')) {
-			//if (config.isDevelopment) return
+		
+		if (await getCRoleEligibility(points, userRole) === false) {
+			if (config.isDevelopment) return
 			const cRole = guild.roles.cache.find((role) => role.id === cRoleId)
 
 			const embed = new MessageEmbed()
