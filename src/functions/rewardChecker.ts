@@ -59,8 +59,7 @@ export async function rewardChecker(
 	const cRoleId = inDb?.crole || null
 
 	if (cRoleId != null) {
-		
-		if (await getCRoleEligibility(points, userRole) === false) {
+		if ((await getCRoleEligibility(points, userRole)) === false) {
 			if (config.isDevelopment) return
 			const cRole = guild.roles.cache.find((role) => role.id === cRoleId)
 
