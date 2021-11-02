@@ -1,9 +1,7 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
-import { checkUserActivityPoints } from '../functions/pointsChecker'
 import { MessageActionRow, MessageButton, MessageEmbed } from 'discord.js'
 import { mondecorteModel } from '../lib/utils/db'
 import { checkUserRole, performRole } from '../functions/rolesyncer'
-import { getUserCustomRoleId } from '../functions/customrole'
 import { pointToRemoveForPoints } from '../config/lists'
 import { rewardChecker } from '../functions/rewardChecker'
 
@@ -61,8 +59,9 @@ module.exports = {
 					interaction.member.roles.cache.has('842387653394563074') ||
 					interaction.member.id == '324281236728053760'
 				) {
-					const userInDB = await checkUserActivityPoints(member)
-					if (userInDB == 0) {
+					const userInDB = await mondecorteModel.findOne({ userID: member.id })
+					const points = userInDB?.points || 0
+					if (points == 0) {
 						const embed = new MessageEmbed()
 							.setColor('#36393f')
 							.setAuthor(
@@ -75,14 +74,14 @@ module.exports = {
 							.setTimestamp()
 						await interaction.editReply({ embeds: [embed] })
 					} else {
-						if (userInDB == 1) {
+						if (points == 1) {
 							const embed = new MessageEmbed()
 								.setColor('#36393f')
 								.setAuthor(
 									interaction.member.user.tag,
 									interaction.member.user.avatarURL()
 								)
-								.setDescription(`${member} a ${userInDB} point.`)
+								.setDescription(`${member} a ${points} point.`)
 								.setTimestamp()
 							await interaction.editReply({ embeds: [embed] })
 						} else {
@@ -92,7 +91,7 @@ module.exports = {
 									interaction.member.user.tag,
 									interaction.member.user.avatarURL()
 								)
-								.setDescription(`${member} a ${userInDB} points.`)
+								.setDescription(`${member} a ${points} points.`)
 								.setTimestamp()
 							await interaction.editReply({ embeds: [embed] })
 						}
@@ -107,7 +106,8 @@ module.exports = {
 			}
 			case 'rewards': {
 				await interaction.deferReply()
-				const userInDb = await checkUserActivityPoints(interaction.member)
+				const userInDb = await mondecorteModel.findOne({ id: interaction.member.id })
+				const points = userInDb?.points || 0
 				const embed = new MessageEmbed()
 					.setColor('#36393f')
 					.setAuthor(
@@ -124,8 +124,8 @@ module.exports = {
 					hasActifRole = '✅'
 				}
 				let hasCustomRole = '❌'
-				const croleid = await getUserCustomRoleId(interaction.member)
-				if (userInDb >= 250) {
+				const croleid = userInDb?.crole
+				if (points >= 250) {
 					if (croleid != null) {
 						if (interaction.member.roles.cache.has(croleid)) {
 							hasCustomRole = '✅'
@@ -144,16 +144,16 @@ module.exports = {
 						)
 					}
 				}
-				if (userInDb >= 500) {
+				if (points >= 500) {
 					let pointsToLoose = 1
 					pointToRemoveForPoints.forEach((e) => {
-						if (e.need <= userInDb) pointsToLoose = e.remove
+						if (e.need <= points) pointsToLoose = e.remove
 					})
 
 					if (pointsToLoose !== 1) {
 						embed.addField(
 							'Perte de points par heures',
-							`\`\`\`Tu perds ${pointsToLoose} points par heure à cause que tu as ${userInDb} points.\`\`\``,
+							`\`\`\`Tu perds ${pointsToLoose} points par heure à cause que tu as ${points} points.\`\`\``,
 							true
 						)
 					}

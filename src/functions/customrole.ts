@@ -1,10 +1,4 @@
 import { GuildMember } from 'discord.js'
-import { mondecorteModel } from '../lib/utils/db'
-
-export async function getUserCustomRoleId(member: GuildMember) {
-	const inDb = await mondecorteModel.findOne({ id: member.id })
-	return inDb?.crole
-}
 
 export async function getCRoleEligibility(
 	member: GuildMember,
