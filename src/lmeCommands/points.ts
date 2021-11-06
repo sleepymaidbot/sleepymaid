@@ -3,7 +3,6 @@ import { MessageActionRow, MessageButton, MessageEmbed } from 'discord.js'
 import { mondecorteModel } from '../lib/utils/db'
 import { checkUserRole, performRole } from '../functions/rolesyncer'
 import { pointToRemoveForPoints } from '../config/lists'
-import { rewardChecker } from '../functions/rewardChecker'
 
 const intForEmote = {
 	1: ':first_place:',
@@ -42,25 +41,27 @@ module.exports = {
 				)
 		),
 
-	async execute(interaction, client) {
+	async execute(interaction) {
 		switch (interaction.options.getSubcommand()) {
 			case 'user': {
 				await interaction.deferReply()
 				const user = interaction.options.get('user')
 				let member
+				let points
 				if (user === null) {
-					member = interaction.member
+					member = interaction.member.id
+					const userInDB = await mondecorteModel.findOne({ id: interaction.member.id })
+					points = userInDB?.points || 0
 				} else {
-					member = await interaction.guild.members.fetch(user.value)
-					await rewardChecker(member, interaction.guild, client)
+					member = user.member.id
+					const userInDB = await mondecorteModel.findOne({ id: user.member.id })
+					points = userInDB?.points || 0
 				}
 
 				if (
 					interaction.member.roles.cache.has('842387653394563074') ||
 					interaction.member.id == '324281236728053760'
 				) {
-					const userInDB = await mondecorteModel.findOne({ userID: member.id })
-					const points = userInDB?.points || 0
 					if (points == 0) {
 						const embed = new MessageEmbed()
 							.setColor('#36393f')
@@ -69,7 +70,7 @@ module.exports = {
 								interaction.member.user.avatarURL()
 							)
 							.setDescription(
-								`${member} n'a pas de points. \nCommence par envoyer des message pour en avoir.`
+								`<@${member}> n'a pas de points. \nCommence par envoyer des message pour en avoir.`
 							)
 							.setTimestamp()
 						await interaction.editReply({ embeds: [embed] })
@@ -81,7 +82,7 @@ module.exports = {
 									interaction.member.user.tag,
 									interaction.member.user.avatarURL()
 								)
-								.setDescription(`${member} a ${points} point.`)
+								.setDescription(`<@${member}> a ${points} point.`)
 								.setTimestamp()
 							await interaction.editReply({ embeds: [embed] })
 						} else {
@@ -91,7 +92,7 @@ module.exports = {
 									interaction.member.user.tag,
 									interaction.member.user.avatarURL()
 								)
-								.setDescription(`${member} a ${points} points.`)
+								.setDescription(`<@${member}> a ${points} points.`)
 								.setTimestamp()
 							await interaction.editReply({ embeds: [embed] })
 						}
