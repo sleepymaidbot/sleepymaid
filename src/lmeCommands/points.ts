@@ -50,7 +50,9 @@ module.exports = {
 				let points
 				if (user === null) {
 					member = interaction.member.id
-					const userInDB = await mondecorteModel.findOne({ id: interaction.member.id })
+					const userInDB = await mondecorteModel.findOne({
+						id: interaction.member.id
+					})
 					points = userInDB?.points || 0
 				} else {
 					member = user.member.id
