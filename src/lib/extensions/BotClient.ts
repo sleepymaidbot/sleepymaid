@@ -99,8 +99,8 @@ export class BotClient extends Client {
 	}
 
 	private async loadEvents() {
-		const eventFiles = fs.readdirSync('./dist/listeners')
-		//.filter((file) => file.endsWith('.js'))
+		const eventFiles = fs
+			.readdirSync('./dist/listeners')
 
 		const filesToImport = []
 
