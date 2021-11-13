@@ -99,8 +99,7 @@ export class BotClient extends Client {
 	}
 
 	private async loadEvents() {
-		const eventFiles = fs
-			.readdirSync('./dist/listeners')
+		const eventFiles = fs.readdirSync('./dist/listeners')
 
 		const filesToImport = []
 

@@ -1,6 +1,9 @@
 import { mondecorteModel } from '../../lib/utils/db'
 import { Message } from 'discord.js'
-import { pointsBlacklistedTextChannel, pointsMultiplier } from '../../config/lists'
+import {
+	pointsBlacklistedTextChannel,
+	pointsMultiplier
+} from '../../config/lists'
 import { rewardChecker } from '../../functions/rewardChecker'
 
 const talkedRecently = new Set()
