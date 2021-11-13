@@ -56,7 +56,7 @@ export class BotClient extends Client {
 		}
 
 		try {
-			const lmeCommand = await lmeCommands.map(({ ...data }) => data)
+			const lmeCommand = lmeCommands.map(({ ...data }) => data)
 			const rest = new REST({ version: '9' }).setToken(config.token)
 			this.logger.info('Started refreshing application (/) commands.')
 
