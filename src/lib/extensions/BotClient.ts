@@ -114,7 +114,6 @@ export class BotClient extends Client {
 				}
 			}
 		}
-
 		for (const file of eventFiles) {
 			if (file.endsWith('.js')) {
 				filesToImport.push(file)
@@ -122,7 +121,6 @@ export class BotClient extends Client {
 				importFolder(file)
 			}
 		}
-		console.log(filesToImport)
 		for (const file of filesToImport) {
 			await import(`../../listeners/${file}`).then((event) => {
 				if (event.once) {
