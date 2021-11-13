@@ -108,7 +108,7 @@ export class BotClient extends Client {
 			for (const file of fsfolder) {
 				if (file.endsWith('.js')) {
 					filesToImport.push(`${folder}/${file}`)
-				} else if (file.endsWith('.disable')) return 
+				} else if (file.endsWith('.disable')) return
 				else {
 					importFolder(`${folder}/${file}`)
 				}
@@ -117,7 +117,7 @@ export class BotClient extends Client {
 		for (const file of eventFiles) {
 			if (file.endsWith('.js')) {
 				filesToImport.push(file)
-			} else if (file.endsWith('.disable')) return 
+			} else if (file.endsWith('.disable')) return
 			else {
 				importFolder(file)
 			}
