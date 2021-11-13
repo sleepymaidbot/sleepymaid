@@ -1,4 +1,4 @@
-import { colorRole } from '../config/lists'
+import { colorRole } from '../../config/lists'
 
 module.exports = {
 	name: 'interactionCreate',
