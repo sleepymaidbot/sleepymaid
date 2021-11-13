@@ -1,4 +1,4 @@
-import { mondecorteModel } from '../lib/utils/db'
+import { mondecorteModel } from '../../lib/utils/db'
 
 module.exports = {
 	name: 'interactionCreate',

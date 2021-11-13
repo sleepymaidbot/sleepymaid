@@ -1,12 +1,12 @@
-import { colorRole } from '../config/lists'
-import { mondecorte, mondecorteModel } from '../lib/utils/db'
+import { colorRole } from '../../config/lists'
+import { mondecorte, mondecorteModel } from '../../lib/utils/db'
 import {
 	MessageActionRow,
 	MessageButton,
 	MessageEmbed,
 	MessageSelectMenu
 } from 'discord.js'
-import { config } from '../config/config'
+import { config } from '../../config/config'
 import { inspect } from 'util'
 
 module.exports = {

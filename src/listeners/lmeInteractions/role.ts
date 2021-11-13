@@ -1,4 +1,4 @@
-import { checkUserRole, performRole } from '../functions/rolesyncer'
+import { checkUserRole, performRole } from '../../functions/rolesyncer'
 
 module.exports = {
 	name: 'guildMemberUpdate',
