@@ -5,6 +5,7 @@ module.exports = {
 	once: false,
 
 	async execute(message: Message) {
+		if (message.guild.id !== '324284116021542922') return
 		if (message.content.match(/(@everyone)/)) {
 			if (message.member.roles.cache.has('876636031884087406')) return
 			const role = message.guild.roles.cache.find(
