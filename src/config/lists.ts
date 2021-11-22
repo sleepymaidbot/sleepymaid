@@ -34,8 +34,7 @@ export const pointsBlacklistedVoiceChannel = [
 ]
 
 export const pointToRemoveForPoints = [
-	{ need: 500, remove: 2 },
-	{ need: 1000, remove: 3 },
+	{ need: 1000, remove: 2 },
 	{ need: 1500, remove: 4 },
 	{ need: 2000, remove: 6 },
 	{ need: 2500, remove: 10 },
