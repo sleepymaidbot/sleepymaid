@@ -75,7 +75,7 @@ export class BotClient extends Client {
 			await import(`../../slashCommands/${file}`).then((cmds) => {
 				cmdsForLocation[cmds.data.name] = `../../slashCommands/${file}`
 				if (cmds.guildIDs !== null) {
-					if (cmds.guildIDs.lenght <=1) {
+					if (cmds.guildIDs.lenght <= 1) {
 						const guildID = cmds.guildIDs[0]
 						if (guildCommands[guildID]) {
 							guildCommands[guildID].push(cmds.data)
@@ -101,10 +101,16 @@ export class BotClient extends Client {
 			const rest = new REST({ version: '9' }).setToken(config.token)
 			this.logger.info('Started refreshing application (/) commands.')
 
-			if (globalsCommands.length >= 1) await rest.put(Routes.applicationCommands(config.envClientId), { body: globalsCommands })
+			if (globalsCommands.length >= 1)
+				await rest.put(Routes.applicationCommands(config.envClientId), {
+					body: globalsCommands
+				})
 
 			for (const [key, value] of Object.entries(guildCommands)) {
-				await rest.put(Routes.applicationGuildCommands(config.envClientId, key), { body: value })
+				await rest.put(
+					Routes.applicationGuildCommands(config.envClientId, key),
+					{ body: value }
+				)
 			}
 
 			this.logger.info('Successfully reloaded application (/) commands.')
@@ -129,7 +135,6 @@ export class BotClient extends Client {
 					ephemeral: true
 				})
 			}
-			
 		})
 	}
 

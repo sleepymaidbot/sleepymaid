@@ -49,7 +49,8 @@ module.exports = {
 						.setDescription('The new color of your role')
 						.setRequired(true)
 				)
-		).toJSON(),
+		)
+		.toJSON(),
 
 	async execute(interaction) {
 		await interaction.deferReply({ ephemeral: true })

@@ -40,7 +40,8 @@ module.exports = {
 				.addNumberOption((option) =>
 					option.setName('page').setDescription('The page').setRequired(false)
 				)
-		).toJSON(),
+		)
+		.toJSON(),
 
 	async execute(interaction) {
 		switch (interaction.options.getSubcommand()) {
