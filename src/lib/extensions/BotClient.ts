@@ -1,4 +1,4 @@
-import { Client, Collection, Intents } from 'discord.js'
+import { Client, Intents } from 'discord.js'
 import { Logger } from '../logger/logger'
 import fs from 'fs'
 import { REST } from '@discordjs/rest'
@@ -26,10 +26,7 @@ export class BotClient extends Client {
 						type: 'WATCHING'
 					}
 				]
-			} /*,
-			makeCache: Options.cacheWithLimits({
-				GuildMemberManager: 0,
-			})*/
+			}
 		})
 		this.logger = new Logger('Sleepy Maid')
 	}
