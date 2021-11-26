@@ -1,9 +1,10 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
-import { getCRoleEligibility } from '../functions/customrole'
-import { mondecorteModel } from '../lib/utils/db'
+import { getCRoleEligibility } from '../../functions/customrole'
+import { mondecorteModel } from '../../lib/utils/db'
 import { MessageEmbed } from 'discord.js'
 
 module.exports = {
+	guildIDs: ['324284116021542922'],
 	data: new SlashCommandBuilder()
 		.setName('customrole')
 		.setDescription('Manage your custom role')
@@ -48,7 +49,7 @@ module.exports = {
 						.setDescription('The new color of your role')
 						.setRequired(true)
 				)
-		),
+		).toJSON(),
 
 	async execute(interaction) {
 		await interaction.deferReply({ ephemeral: true })

@@ -1,8 +1,8 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { MessageActionRow, MessageButton, MessageEmbed } from 'discord.js'
-import { mondecorteModel } from '../lib/utils/db'
-import { checkUserRole, performRole } from '../functions/rolesyncer'
-import { pointToRemoveForPoints } from '../config/lists'
+import { mondecorteModel } from '../../lib/utils/db'
+import { checkUserRole, performRole } from '../../functions/rolesyncer'
+import { pointToRemoveForPoints } from '../../config/lists'
 
 const intForEmote = {
 	1: ':first_place:',
@@ -18,6 +18,7 @@ const intForEmote = {
 }
 
 module.exports = {
+	guildIDs: ['324284116021542922'],
 	data: new SlashCommandBuilder()
 		.setName('points')
 		.setDescription('Points command.')
@@ -39,7 +40,7 @@ module.exports = {
 				.addNumberOption((option) =>
 					option.setName('page').setDescription('The page').setRequired(false)
 				)
-		),
+		).toJSON(),
 
 	async execute(interaction) {
 		switch (interaction.options.getSubcommand()) {
