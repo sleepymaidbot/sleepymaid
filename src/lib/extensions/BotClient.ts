@@ -43,58 +43,93 @@ export class BotClient extends Client {
 	}
 
 	private async loadCommands() {
-		const lmeCommandFiles = fs
-			.readdirSync('./dist/lmeCommands')
-			.filter((file) => file.endsWith('.js'))
+		const slashCommandFiles = fs.readdirSync('./dist/slashCommands')
 
-		const lmeCommands = new Collection()
+		const filesToImport = []
 
-		for (const file of lmeCommandFiles) {
-			await import(`../../lmeCommands/${file}`).then((command) => {
-				lmeCommands.set(command.data.name, command.data.toJSON())
+		async function importFolder(folder) {
+			const fsfolder = fs.readdirSync(`./dist/slashCommands/${folder}`)
+			for (const file of fsfolder) {
+				if (file.endsWith('.js')) {
+					filesToImport.push(`${folder}/${file}`)
+				} else if (file.endsWith('.disable')) return
+				else {
+					importFolder(`${folder}/${file}`)
+				}
+			}
+		}
+		for (const file of slashCommandFiles) {
+			if (file.endsWith('.js')) {
+				filesToImport.push(file)
+			} else if (file.endsWith('.disable')) return
+			else {
+				importFolder(file)
+			}
+		}
+
+		const globalsCommands = []
+		const guildCommands = {}
+		const cmdsForLocation = {}
+
+		for (const file of filesToImport) {
+			await import(`../../slashCommands/${file}`).then((cmds) => {
+				cmdsForLocation[cmds.data.name] = `../../slashCommands/${file}`
+				if (cmds.guildIDs !== null) {
+					if (cmds.guildIDs.lenght <=1) {
+						const guildID = cmds.guildIDs[0]
+						if (guildCommands[guildID]) {
+							guildCommands[guildID].push(cmds.data)
+						} else {
+							guildCommands[guildID] = [cmds.data]
+						}
+					} else {
+						for (const id of cmds.guildIDs) {
+							if (guildCommands[id]) {
+								guildCommands[id].push(cmds.data)
+							} else {
+								guildCommands[id] = [cmds.data]
+							}
+						}
+					}
+				} else {
+					globalsCommands.push(cmds.data)
+				}
 			})
 		}
 
 		try {
-			const lmeCommand = lmeCommands.map(({ ...data }) => data)
 			const rest = new REST({ version: '9' }).setToken(config.token)
 			this.logger.info('Started refreshing application (/) commands.')
 
-			await rest.put(
-				Routes.applicationGuildCommands(
-					config.envClientId,
-					'324284116021542922'
-				),
-				{ body: lmeCommand }
-			)
+			if (globalsCommands.length >= 1) await rest.put(Routes.applicationCommands(config.envClientId), { body: globalsCommands })
+
+			for (const [key, value] of Object.entries(guildCommands)) {
+				await rest.put(Routes.applicationGuildCommands(config.envClientId, key), { body: value })
+			}
 
 			this.logger.info('Successfully reloaded application (/) commands.')
 		} catch (error) {
 			this.logger.error(error)
 		}
 
-		this.on('interactionCreate', async (interaction) => {
-			if (!interaction.isCommand()) return
-			if (
-				lmeCommands.has(interaction.commandName) &&
-				interaction.guild.id === '324284116021542922'
-			) {
-				this.logger.debug(
-					`${interaction.guild.name} (${interaction.guild.id}) > ${interaction.member.user.username} (${interaction.member.user.id}) > /${interaction.commandName} (${interaction.commandId})`
-				)
-				try {
-					const command = await import(
-						`../../lmeCommands/${interaction.commandName}.js`
-					)
-					await command.execute(interaction, this)
-				} catch (error) {
-					this.logger.error(error)
-					await interaction.reply({
-						content: 'There was an error while executing this command!',
-						ephemeral: true
-					})
-				}
+		this.on('interactionCreate', async (i) => {
+			if (!i.isCommand()) return
+			this.logger.debug(
+				`${i.guild.name} (${i.guild.id}) > ${i.member.user.username} (${i.member.user.id}) > /${i.commandName} (${i.commandId})`
+			)
+			try {
+				const file = cmdsForLocation[i.commandName]
+				if (!file) return
+				const cmd = await import(file)
+				await cmd.execute(i, this)
+			} catch (error) {
+				this.logger.error(error)
+				await i.reply({
+					content: 'There was an error while executing this command!',
+					ephemeral: true
+				})
 			}
+			
 		})
 	}
 
