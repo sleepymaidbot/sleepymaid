@@ -14,7 +14,8 @@ module.exports = {
 				if (interaction.customId === 'acces_role') {
 					if (
 						userRole.includes('884149070757769227') ||
-						userRole.includes('862462288345694210')
+						userRole.includes('862462288345694210') ||
+						userRole.includes('403681300940193804')
 					)
 						interaction.deferUpdate()
 					else {
