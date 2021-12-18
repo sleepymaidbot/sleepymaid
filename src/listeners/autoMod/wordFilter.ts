@@ -10,11 +10,7 @@ module.exports = {
 		const str = message.content.replace(/ /g, '')
 		str.replace(/‎ /g, '')
 		if (message.author.bot) return
-		if (
-			str.match(
-				/nig|neg|nag|nég|nezg|nlg|n1g|ggr0|ni2|n!g|ngg|n¡g|niq/gim
-			)
-		) {
+		if (str.match(/nig|neg|nag|nég|nezg|nlg|n1g|ggr0|ni2|n!g|ngg|n¡g|niq/gim)) {
 			await message.delete()
 		}
 	}
