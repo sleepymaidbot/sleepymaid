@@ -12,7 +12,7 @@ module.exports = {
 		if (message.author.bot) return
 		if (
 			str.match(
-				/nig|neg|nag|nég|nezg|nlg|igg|n1g|ggr0|ni2|n!g|n?g|n*g|ngg|ng|n¡g|niq/gim
+				/nig|neg|nag|nég|nezg|nlg|n1g|ggr0|ni2|n!g|n?g|n*g|ngg|n¡g|niq/gim
 			)
 		) {
 			await message.delete()
