@@ -6,7 +6,7 @@ module.exports = {
 
 	async execute(message: Message) {
 		if (message.author.id === '324281236728053760') return
-        if (message.guild.id !== '324284116021542922') return
+		if (message.guild.id !== '324284116021542922') return
 		const str = message.content.replace(/ /g, '')
 		str.replace(/‎ /g, '')
 		if (message.author.bot) return
