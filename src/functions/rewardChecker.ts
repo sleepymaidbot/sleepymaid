@@ -61,6 +61,7 @@ export async function rewardChecker(
 	if (cRoleId != null) {
 		if ((await getCRoleEligibility(points, userRole)) === false) {
 			if (config.isDevelopment) return
+			client.logger.info(`Deleting ${member.user.tag} custom role`)
 			const cRole = await guild.roles.fetch(cRoleId)
 			await cRole.delete()
 			const inDb = await mondecorteModel.findOne({ id: member.id })
