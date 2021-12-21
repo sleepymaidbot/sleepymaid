@@ -31,7 +31,7 @@ export class BotClient extends Client {
 		this.logger = new Logger('Sleepy Maid')
 	}
 
-	public async startBot() {
+	public async startBot(): Promise<void> {
 		this.loadEvents()
 		this.loadDB()
 		this.login(config.token)
@@ -39,7 +39,7 @@ export class BotClient extends Client {
 		this.loadCommands()
 	}
 
-	private async loadCommands() {
+	private async loadCommands(): Promise<void> {
 		const slashCommandFiles = fs.readdirSync('./dist/slashCommands')
 
 		const filesToImport = []
@@ -135,7 +135,7 @@ export class BotClient extends Client {
 		})
 	}
 
-	private async loadEvents() {
+	private async loadEvents(): Promise<void> {
 		const eventFiles = fs.readdirSync('./dist/listeners')
 
 		const filesToImport = []
@@ -170,7 +170,7 @@ export class BotClient extends Client {
 		}
 	}
 
-	private async loadTasks() {
+	private async loadTasks(): Promise<void> {
 		const tasksFiles = fs
 			.readdirSync('./dist/tasks')
 			.filter((file) => file.endsWith('.js'))
@@ -181,7 +181,7 @@ export class BotClient extends Client {
 		}
 	}
 
-	private async loadDB() {
+	private async loadDB(): Promise<void> {
 		await connect(config.db)
 			.catch((err) => this.logger.error(err))
 			.then(() => this.logger.info('Successfully loaded MongoDB.'))
