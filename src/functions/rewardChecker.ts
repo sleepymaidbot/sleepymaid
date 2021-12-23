@@ -63,24 +63,29 @@ export async function rewardChecker(
 			if (config.isDevelopment) return
 			client.logger.info(`Deleting ${member.user.tag} custom role`)
 			const cRole = await guild.roles.fetch(cRoleId)
-			await cRole.delete()
-			const inDb = await mondecorteModel.findOne({ id: member.id })
-			inDb.crole = null
-			await inDb.save()
-			try {
-				const embed = new MessageEmbed()
-					.setAuthor(
-						`Rôle custom de ${member.user.tag}`,
-						member.user.avatarURL()
-					)
-					.setColor('#36393f')
-					.setTimestamp()
-					.setDescription(`Tu n'est plus éligible pour un rôle custom je t'ai donc retirer retirer ton rôle custom
-				Voici quelques informations sur ton rôle custom:
-				\`\`\`{\n	name: "${cRole.name}",\n	color: "${cRole.color}"\n} \`\`\``)
-				await member.user.send({ embeds: [embed] })
-			} catch (error) {
-				client.logger.error(error)
+			if (crole !== undefined) {
+				await cRole.delete()
+				const inDb = await mondecorteModel.findOne({ id: member.id })
+				inDb.crole = null
+				await inDb.save()
+				try {
+					const embed = new MessageEmbed()
+						.setAuthor(
+							`Rôle custom de ${member.user.tag}`,
+							member.user.avatarURL()
+						)
+						.setColor('#36393f')
+						.setTimestamp()
+						.setDescription(`Tu n'est plus éligible pour un rôle custom je t'ai donc retirer retirer ton rôle custom
+					Voici quelques informations sur ton rôle custom:
+					\`\`\`{\n	name: "${cRole.name}",\n	color: "${cRole.color}"\n} \`\`\``)
+					await member.user.send({ embeds: [embed] })
+				} catch (error) {
+					client.logger.error(error)
+				}
+			} else {
+				inDb.crole = null
+				await inDb.save()
 			}
 		}
 	}
