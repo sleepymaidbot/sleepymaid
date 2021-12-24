@@ -64,11 +64,11 @@ export async function rewardChecker(
 			client.logger.info(`Deleting ${member.user.tag} custom role`)
 			const cRole = await guild.roles.fetch(cRoleId)
 			if (cRole !== undefined) {
-				await cRole.delete()
-				const inDb = await mondecorteModel.findOne({ id: member.id })
-				inDb.crole = null
-				await inDb.save()
 				try {
+					await cRole.delete()
+					const inDb = await mondecorteModel.findOne({ id: member.id })
+					inDb.crole = null
+					await inDb.save()
 					const embed = new MessageEmbed()
 						.setAuthor(
 							`Rôle custom de ${member.user.tag}`,
