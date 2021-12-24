@@ -66,22 +66,27 @@ export async function rewardChecker(
 			if (cRole !== undefined) {
 				try {
 					await cRole.delete()
-					const inDb = await mondecorteModel.findOne({ id: member.id })
-					inDb.crole = null
-					await inDb.save()
-					const embed = new MessageEmbed()
-						.setAuthor(
-							`Rôle custom de ${member.user.tag}`,
-							member.user.avatarURL()
-						)
-						.setColor('#36393f')
-						.setTimestamp()
-						.setDescription(`Tu n'est plus éligible pour un rôle custom je t'ai donc retirer retirer ton rôle custom
+				} catch (err) {
+					client.logger.error(err)
+				}
+
+				const inDb = await mondecorteModel.findOne({ id: member.id })
+				inDb.crole = null
+				await inDb.save()
+				const embed = new MessageEmbed()
+					.setAuthor(
+						`Rôle custom de ${member.user.tag}`,
+						member.user.avatarURL()
+					)
+					.setColor('#36393f')
+					.setTimestamp()
+					.setDescription(`Tu n'est plus éligible pour un rôle custom je t'ai donc retirer retirer ton rôle custom
 					Voici quelques informations sur ton rôle custom:
 					\`\`\`{\n	name: "${cRole.name}",\n	color: "${cRole.color}"\n} \`\`\``)
+				try {
 					await member.user.send({ embeds: [embed] })
-				} catch (error) {
-					client.logger.error(error)
+				} catch (err) {
+					client.logger.error(err)
 				}
 			} else {
 				inDb.crole = null
