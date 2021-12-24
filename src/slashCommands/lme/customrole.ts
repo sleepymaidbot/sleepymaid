@@ -76,7 +76,7 @@ module.exports = {
 				const name = await interaction.options.getString('name')
 				const color = await interaction.options.getString('color')
 				if (isEligible) {
-					if (customRoleId === null || undefined) {
+					if (customRoleId !== null || undefined) {
 						const cr = interaction.guild.roles.cache.find(
 							(role) => role.id === customRoleId
 						)
