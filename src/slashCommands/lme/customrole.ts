@@ -64,10 +64,11 @@ module.exports = {
 		)
 		const customRoleId = inDb?.crole
 		const embed = new MessageEmbed()
-			.setAuthor(
-				`Rôle custom de ${interaction.member.user.tag}`,
-				interaction.member.user.avatarURL()
-			)
+		// @ts-ignore
+			.setAuthor({
+				name: `Rôle custom de ${interaction.member.user.tag}`,
+				iconURL: interaction.member.user.avatarURL()
+			})
 			.setColor('#36393f')
 			.setTimestamp()
 		switch (subcommand) {
