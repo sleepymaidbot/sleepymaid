@@ -81,7 +81,7 @@ module.exports = {
 						)
 						await interaction.member.roles.add(cr)
 						embed.setDescription('Tu a déja un rôle custom')
-						await interaction.editReply({ embeds: [embed], ephimeral: true })
+						await interaction.editReply({ embeds: [embed], ephemeral: true })
 					} else {
 						const sleepyRole = interaction.guild.roles.cache.find(
 							(role) => role.id === '811285873458544680'
