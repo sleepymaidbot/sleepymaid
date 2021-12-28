@@ -34,15 +34,15 @@ export const pointsBlacklistedVoiceChannel = [
 ]
 
 export const pointToRemoveForPoints = [
-	{ need: 1000, remove: 2 },
-	{ need: 1500, remove: 4 },
-	{ need: 2000, remove: 6 },
-	{ need: 2500, remove: 10 },
-	{ need: 3000, remove: 12 },
-	{ need: 3500, remove: 15 },
-	{ need: 4000, remove: 18 },
-	{ need: 4500, remove: 20 },
-	{ need: 5000, remove: 72 }
+	{ need: 2000, remove: 2 },
+	{ need: 3000, remove: 4 },
+	{ need: 4000, remove: 6 },
+	{ need: 5000, remove: 10 },
+	{ need: 6000, remove: 12 },
+	{ need: 7000, remove: 15 },
+	{ need: 8000, remove: 18 },
+	{ need: 9000, remove: 20 },
+	{ need: 10000, remove: 72 }
 ]
 
 export const pointsMultiplier = 1
