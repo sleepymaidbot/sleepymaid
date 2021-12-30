@@ -12,6 +12,7 @@ module.exports = {
 		if (message.author.bot) return
 		if (str.match(/nig|neg|nag|nég|nezg|nlg|n1g|ggr0|ni2|n!g|ngg|n¡g|niq/gim)) {
 			await message.delete()
+			await message.member.timeout(60 * 1000, 'Triggered word filter')
 		}
 	}
 }
