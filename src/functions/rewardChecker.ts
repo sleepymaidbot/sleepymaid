@@ -13,6 +13,15 @@ function neededRole(userPoints: number) {
 	return roles
 }
 
+function notNeededRole(userPoints: number) {
+	const roleObj = actifRoles.filter((roles) => roles.points - 50 >= userPoints)
+	const roles = []
+	for (const role of roleObj) {
+		roles.push(role.roleId)
+	}
+	return roles
+}
+
 async function getCRoleEligibility(
 	userPoints: number,
 	userRole: Array<string>
@@ -32,6 +41,7 @@ export async function rewardChecker(
 	// Check actif roles
 
 	const neededRoles = neededRole(points)
+	const notNeededRoles = notNeededRole(points)
 	const userRole = member.roles.cache.map((role) => role.id)
 	const actifRoleList = []
 	for (const role of actifRoles) {
@@ -39,7 +49,7 @@ export async function rewardChecker(
 	}
 	const toAdd = neededRoles.filter((role) => !userRole.includes(role))
 	const toRemove = actifRoleList.filter(
-		(role) => !neededRoles.includes(role) && userRole.includes(role)
+		(role) => notNeededRoles.includes(role) && userRole.includes(role)
 	)
 
 	if (config.isProduction) {
