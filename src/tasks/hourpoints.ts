@@ -1,6 +1,7 @@
 import { TextChannel } from 'discord.js'
 import { mondecorteModel } from '../lib/utils/db'
 import { pointToRemoveForPoints } from '../config/lists'
+import { rewardChecker } from '../functions/rewardChecker'
 
 module.exports = {
 	interval: 3600000,
@@ -20,6 +21,10 @@ module.exports = {
 					userInDB.points = userInDB.points - pointsToLoose
 					await userInDB.save()
 					usersArray.push(user.id)
+
+					const guild = await client.guilds.cache.get('324284116021542922')
+					const dUser = await guild.members.cache.get(user.id)
+					await rewardChecker(dUser, guild, client)
 				}
 			}
 			const logChannel = (await client.channels.cache.get(
