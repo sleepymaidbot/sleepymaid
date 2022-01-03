@@ -71,10 +71,10 @@ export async function rewardChecker(
 				inDb.crole = null
 				await inDb.save()
 				const embed = new MessageEmbed()
-					.setAuthor(
-						`Rôle custom de ${member.user.tag}`,
-						member.user.avatarURL()
-					)
+					.setAuthor({
+						name: `Rôle custom de ${member.user.tag}`,
+						iconURL: member.user.avatarURL()
+					})
 					.setColor('#36393f')
 					.setTimestamp()
 					.setDescription(`Tu n'est plus éligible pour un rôle custom je t'ai donc retirer retirer ton rôle custom

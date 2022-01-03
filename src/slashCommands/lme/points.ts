@@ -69,10 +69,10 @@ module.exports = {
 					if (points == 0) {
 						const embed = new MessageEmbed()
 							.setColor('#36393f')
-							.setAuthor(
-								interaction.member.user.tag,
-								interaction.member.user.avatarURL()
-							)
+							.setAuthor({
+								name: interaction.member.user.tag,
+								iconURL: interaction.member.user.avatarURL()
+							})
 							.setDescription(
 								`<@${member}> n'a pas de points. \nCommence par envoyer des message pour en avoir.`
 							)
@@ -82,20 +82,20 @@ module.exports = {
 						if (points == 1) {
 							const embed = new MessageEmbed()
 								.setColor('#36393f')
-								.setAuthor(
-									interaction.member.user.tag,
-									interaction.member.user.avatarURL()
-								)
+								.setAuthor({
+									name: interaction.member.user.tag,
+									iconURL: interaction.member.user.avatarURL()
+								})
 								.setDescription(`<@${member}> a ${points} point.`)
 								.setTimestamp()
 							await interaction.editReply({ embeds: [embed] })
 						} else {
 							const embed = new MessageEmbed()
 								.setColor('#36393f')
-								.setAuthor(
-									interaction.member.user.tag,
-									interaction.member.user.avatarURL()
-								)
+								.setAuthor({
+									name: interaction.member.user.tag,
+									iconURL: interaction.member.user.avatarURL()
+								})
 								.setDescription(`<@${member}> a ${points} points.`)
 								.setTimestamp()
 							await interaction.editReply({ embeds: [embed] })
@@ -117,10 +117,10 @@ module.exports = {
 				const points = userInDb?.points || 0
 				const embed = new MessageEmbed()
 					.setColor('#36393f')
-					.setAuthor(
-						`${interaction.member.user.tag} rewards`,
-						interaction.member.user.avatarURL()
-					)
+					.setAuthor({
+						name: `${interaction.member.user.tag} rewards`,
+						iconURL: interaction.member.user.avatarURL()
+					})
 					.setTimestamp()
 
 				let hasActifRole = '❌'
@@ -285,7 +285,10 @@ module.exports = {
 
 						const embed = new MessageEmbed()
 							.setColor('#36393f')
-							.setAuthor('Leaderboard du serveur', interaction.guild.iconURL())
+							.setAuthor({
+								name: 'Leaderboard du serveur',
+								iconURL: interaction.guild.iconURL()
+							})
 							.setDescription(leaderboardText.text)
 							.setTimestamp()
 						await interaction.editReply({
@@ -307,10 +310,10 @@ module.exports = {
 									const lb = await getLeaderboard(page)
 									const newEmbed = new MessageEmbed()
 										.setColor('#36393f')
-										.setAuthor(
-											'Leaderboard du serveur',
-											interaction.guild.iconURL()
-										)
+										.setAuthor({
+											name: 'Leaderboard du serveur',
+											iconURL: interaction.guild.iconURL()
+										})
 										.setDescription(lb.text)
 										.setTimestamp()
 									await interaction.editReply({
@@ -324,10 +327,10 @@ module.exports = {
 									const lb = await getLeaderboard(page)
 									const newEmbed = new MessageEmbed()
 										.setColor('#36393f')
-										.setAuthor(
-											'Leaderboard du serveur',
-											interaction.guild.iconURL()
-										)
+										.setAuthor({
+											name: 'Leaderboard du serveur',
+											iconURL: interaction.guild.iconURL()
+										})
 										.setDescription(lb.text)
 										.setTimestamp()
 									await interaction.editReply({
