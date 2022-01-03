@@ -2,6 +2,16 @@ import { Guild, GuildMember, MessageEmbed } from 'discord.js'
 import { BotClient } from '../lib/extensions/BotClient'
 import { mondecorteModel } from '../lib/utils/db'
 import { config } from '../config/config'
+import { actifRoles } from '../config/lists'
+
+function neededRole(userPoints: number) {
+	const roleObj = actifRoles.filter((roles) => roles.points <= userPoints)
+	const roles = []
+	for (const role of roleObj) {
+		roles.push(role.roleId)
+	}
+	return roles
+}
 
 async function getCRoleEligibility(
 	userPoints: number,
@@ -15,42 +25,29 @@ export async function rewardChecker(
 	guild: Guild,
 	client: BotClient
 ) {
+	if (member.user.bot) return
 	const inDb = await mondecorteModel.findOne({ id: member.id })
 	const points = inDb?.points || 0
 
-	if (member.user.bot) return
+	// Check actif roles
 
-	// Check actif role
-
+	const neededRoles = neededRole(points)
 	const userRole = member.roles.cache.map((role) => role.id)
-
-	if (points >= 100) {
-		if (!userRole.includes('842387653394563074')) {
-			const actifRole = guild.roles.cache.find(
-				(role) => role.id === '842387653394563074'
-			)
-			if (config.isProduction) {
-				await member.roles.add(actifRole)
-			} else if (config.isDevelopment) {
-				client.logger.debug(
-					`${member.user.tag} (${member.id}) got actif role but not added because bot is in dev env`
-				)
-			}
-		}
+	const actifRoleList = []
+	for (const role of actifRoles) {
+		actifRoleList.push(role.roleId)
 	}
+	const toAdd = neededRoles.filter((role) => !userRole.includes(role))
+	const toRemove = actifRoleList.filter(
+		(role) => !neededRoles.includes(role) && userRole.includes(role)
+	)
 
-	if (points <= 50) {
-		if (userRole.includes('842387653394563074')) {
-			const actifRole = guild.roles.cache.find(
-				(role) => role.id === '842387653394563074'
-			)
-			if (config.isProduction) {
-				await member.roles.remove(actifRole)
-			} else if (config.isDevelopment) {
-				client.logger.debug(
-					`${member.user.tag} (${member.id}) got remove actif role but not remove because bot is in dev env`
-				)
-			}
+	if (config.isProduction) {
+		try {
+			member.roles.remove(toRemove)
+			member.roles.add(toAdd)
+		} catch (e) {
+			client.logger.error(e)
 		}
 	}
 

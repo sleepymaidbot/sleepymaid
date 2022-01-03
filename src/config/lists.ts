@@ -45,3 +45,22 @@ export const pointToRemoveForPoints = [
 ]
 
 export const pointsMultiplier = 1
+
+export const actifRoles = [
+	{
+		roleId: '842387653394563074',
+		points: 100
+	},
+	{
+		roleId: '927331668455469077',
+		points: 500
+	},
+	{
+		roleId: '927358871939481690',
+		points: 1000
+	},
+	{
+		roleId: '927359635709628447',
+		points: 2000
+	}
+]
