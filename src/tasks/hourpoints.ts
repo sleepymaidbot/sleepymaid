@@ -22,7 +22,7 @@ module.exports = {
 					await userInDB.save()
 					usersArray.push(user.id)
 
-					try { 
+					try {
 						const guild = await client.guilds.cache.get('324284116021542922')
 						const dUser = await guild.members.cache.get(user.id)
 						await rewardChecker(dUser, guild, client)
