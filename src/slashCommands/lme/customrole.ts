@@ -64,7 +64,6 @@ module.exports = {
 		)
 		const customRoleId = inDb?.crole
 		const embed = new MessageEmbed()
-			// @ts-ignore types not updated
 			.setAuthor({
 				name: `Rôle custom de ${interaction.member.user.tag}`,
 				iconURL: interaction.member.user.avatarURL()
