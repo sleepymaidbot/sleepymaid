@@ -13,7 +13,6 @@ export const colorRole = [
 export const ColorfulNeedRole = [
 	'398478742709600256', // staff
 	'719221506047213638', // nitro booster
-	'842387744478724117', // collaborateur serveur
 	'842387653394563074', // actif
 	'874008552128249966', // big gamer
 	'797650029278920714', // perm
