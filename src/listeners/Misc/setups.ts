@@ -351,8 +351,6 @@ Voici les rôles de couleur que vous pouvez assigner à vous-même:
 
 >   <@&852883842292645919> (Modérateur) - Ils voit tout.
 >   <@&842387653394563074> (Actif) - Personne qui sont actif sur le serveur.
->   <@&842387744478724117> (Collaborateur serveur) - Personne qui contribuer a la création des différent salons, rôles, arts sur le serveur.
->   <@&842387550480236615> (Collaborateur Emoji) - Personne qui contribuer a la création des émojis sur le serveur.
 >   <@&721741773864435722> (IRL) - Amis IRl de Ecorte.
 >   <@&850137999479537724> (\\💜) - Amis de Ecorte.
 >   <@&857324294791364639> (Colorful) - Rôle qui permet d'avoir un rôle de couleur.

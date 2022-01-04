@@ -13,7 +13,6 @@ export const colorRole = [
 export const ColorfulNeedRole = [
 	'398478742709600256', // staff
 	'719221506047213638', // nitro booster
-	'842387744478724117', // collaborateur serveur
 	'842387653394563074', // actif
 	'874008552128249966', // big gamer
 	'797650029278920714', // perm
@@ -46,3 +45,22 @@ export const pointToRemoveForPoints = [
 ]
 
 export const pointsMultiplier = 1
+
+export const actifRoles = [
+	{
+		roleId: '842387653394563074',
+		points: 100
+	},
+	{
+		roleId: '927331668455469077',
+		points: 500
+	},
+	{
+		roleId: '927358871939481690',
+		points: 1000
+	},
+	{
+		roleId: '927359635709628447',
+		points: 2000
+	}
+]

@@ -52,7 +52,7 @@ module.exports = {
 		)
 		.toJSON(),
 
-	async execute(interaction) {
+	async execute(interaction, client) {
 		await interaction.deferReply({ ephemeral: true })
 		const subcommand = interaction.options.getSubcommand()
 		const inDb = await mondecorteModel.findOne({
@@ -64,7 +64,6 @@ module.exports = {
 		)
 		const customRoleId = inDb?.crole
 		const embed = new MessageEmbed()
-			// @ts-ignore types not updated
 			.setAuthor({
 				name: `Rôle custom de ${interaction.member.user.tag}`,
 				iconURL: interaction.member.user.avatarURL()
@@ -77,12 +76,16 @@ module.exports = {
 				const color = await interaction.options.getString('color')
 				if (isEligible) {
 					if (customRoleId !== null || undefined) {
-						const cr = interaction.guild.roles.cache.find(
-							(role) => role.id === customRoleId
-						)
-						await interaction.member.roles.add(cr)
-						embed.setDescription('Tu a déja un rôle custom')
-						await interaction.editReply({ embeds: [embed], ephemeral: true })
+						try {
+							const cr = interaction.guild.roles.cache.find(
+								(role) => role.id === customRoleId
+							)
+							await interaction.member.roles.add(cr)
+							embed.setDescription('Tu a déja un rôle custom')
+							await interaction.editReply({ embeds: [embed], ephemeral: true })
+						} catch (e) {
+							client.logger.info(e)
+						}
 					} else {
 						const sleepyRole = interaction.guild.roles.cache.find(
 							(role) => role.id === '811285873458544680'
@@ -126,15 +129,19 @@ module.exports = {
 			}
 			case 'delete': {
 				if (customRoleId) {
-					const crole = interaction.guild.roles.cache.find(
-						(role) => role.id === customRoleId
-					)
-					await crole.delete()
-					inDb.crole = null
-					await inDb.save().then(async () => {
-						embed.setDescription('Ton rôle custom a été supprimer')
-						await interaction.editReply({ embeds: [embed], ephemeral: true })
-					})
+					try {
+						const crole = interaction.guild.roles.cache.find(
+							(role) => role.id === customRoleId
+						)
+						await crole.delete()
+						inDb.crole = null
+						await inDb.save().then(async () => {
+							embed.setDescription('Ton rôle custom a été supprimer')
+							await interaction.editReply({ embeds: [embed], ephemeral: true })
+						})
+					} catch (e) {
+						client.logger.info(e)
+					}
 				} else {
 					embed.setDescription("Tu n'as pas de rôle custom")
 					await interaction.editReply({ embeds: [embed], ephemeral: true })
