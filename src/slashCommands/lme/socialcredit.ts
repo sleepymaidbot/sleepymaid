@@ -1,5 +1,4 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
-import { Message } from 'discord.js'
 import { mondecorteModel } from '../../lib/utils/db'
 
 module.exports = {
