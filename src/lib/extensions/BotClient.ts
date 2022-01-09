@@ -127,10 +127,20 @@ export class BotClient extends Client {
 				await cmd.execute(i, this)
 			} catch (error) {
 				this.logger.error(error)
-				await i.reply({
-					content: 'There was an error while executing this command!',
-					ephemeral: true
-				})
+				try {
+					await i.reply({
+						content: 'There was an error while executing this command!',
+						ephemeral: true
+					})
+				} catch (error) {
+					try {
+						await i.editReply({
+							content: 'There was an error while executing this command!'
+						})
+					} catch (error) {
+						this.logger.error(error)
+					}
+				}
 			}
 		})
 	}
