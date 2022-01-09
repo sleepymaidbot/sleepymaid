@@ -142,20 +142,19 @@ module.exports = {
 
 				break
 			}
-			case 'view':
-				{
-					const user = interaction.options.get('user')
-					const userInDB = await mondecorteModel.findOne({ id: user.value })
-					if (userInDB.socialcredit) {
-						await interaction.editReply(
-							`<@${user.value}> a ${userInDB.socialcredit} points socials`
-						)
-					} else {
-						userInDB.socialcredit = 500
-						await interaction.editReply(`<@${user.value}> a 500 points socials`)
-					}
-					break
+			case 'view': {
+				const user = interaction.options.get('user')
+				const userInDB = await mondecorteModel.findOne({ id: user.value })
+				if (userInDB.socialcredit) {
+					await interaction.editReply(
+						`<@${user.value}> a ${userInDB.socialcredit} points socials`
+					)
+				} else {
+					userInDB.socialcredit = 500
+					await interaction.editReply(`<@${user.value}> a 500 points socials`)
 				}
+				break
+			}
 		}
 	}
 }
