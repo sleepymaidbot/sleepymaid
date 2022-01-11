@@ -35,7 +35,7 @@
 		"axios": "^0.24.0",
 		"discord.js": "^13.5.1",
 		"fs": "^0.0.1-security",
-		"mongoose": "^6.1.5",
+		"mongoose": "^6.1.6",
 		"murmurhash-v3": "^1.0.2"
 	},
 	"prettier": {
