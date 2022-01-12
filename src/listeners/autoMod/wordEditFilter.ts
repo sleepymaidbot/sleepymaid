@@ -1,8 +1,5 @@
 import { Message } from 'discord.js'
-
-const blacklistRegex =
-	/nig|neg|nag|nég|nezg|nlg|n1g|ggr0|ni2|n!g|ngg|n¡g|niq/gim
-const whitelistRegex = /negatif|négatif|night/gim
+import { blacklistRegex, whitelistRegex } from './wordFilter'
 
 module.exports = {
 	name: 'messageUpdate',

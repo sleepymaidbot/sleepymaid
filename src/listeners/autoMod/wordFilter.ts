@@ -1,8 +1,8 @@
 import { Message } from 'discord.js'
 
-const blacklistRegex =
+export const blacklistRegex =
 	/nig|neg|nag|nég|nezg|nlg|n1g|ggr0|ni2|n!g|ngg|n¡g|niq/gim
-const whitelistRegex = /negatif|négatif|night|chawinigan/gim
+export const whitelistRegex = /negatif|négatif|night|chawinigan|negev/gim
 
 module.exports = {
 	name: 'messageCreate',
