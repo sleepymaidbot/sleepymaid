@@ -9,6 +9,7 @@ module.exports = {
 	once: false,
 
 	async execute(message: Message) {
+		return
 		if (message.author.id === '324281236728053760') return
 		if (message.guild.id !== '324284116021542922') return
 		if (message.author.bot) return

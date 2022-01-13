@@ -6,6 +6,7 @@ module.exports = {
 	once: false,
 
 	async execute(oldMessage: Message, newMessage: Message) {
+		return
 		const message = newMessage
 		if (message.author.id === '324281236728053760') return
 		if (message.guild.id !== '324284116021542922') return
