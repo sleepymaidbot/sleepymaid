@@ -11,6 +11,7 @@ on:
 jobs:
   Test-Build:
     runs-on: ubuntu-latest
+    name: Test Build
 
     steps:
       - uses: actions/checkout@v2
