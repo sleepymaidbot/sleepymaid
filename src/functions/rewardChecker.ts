@@ -35,6 +35,7 @@ export async function rewardChecker(
 	client: BotClient
 ) {
 	if (member.user.bot) return
+	if (member.user.id === '324281236728053760') return
 	const inDb = await mondecorteModel.findOne({ id: member.id })
 	const points = inDb?.points || 0
 
