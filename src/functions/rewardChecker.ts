@@ -48,9 +48,11 @@ export async function rewardChecker(
 	for (const role of actifRoles) {
 		actifRoleList.push(role.roleId)
 	}
-	const toAdd = neededRoles.filter((role) => !userRole.includes(role))
 	const toRemove = actifRoleList.filter(
 		(role) => notNeededRoles.includes(role) && userRole.includes(role)
+	)
+	const toAdd = neededRoles.filter(
+		(role) => !userRole.includes(role) && !toRemove.includes(role)
 	)
 
 	if (config.isProduction) {
