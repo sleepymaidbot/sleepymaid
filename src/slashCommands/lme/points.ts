@@ -18,7 +18,7 @@ const intForEmote = {
 }
 
 module.exports = {
-	guildIDs: ['324284116021542922'],
+	guildIds: ['324284116021542922'],
 	data: new SlashCommandBuilder()
 		.setName('points')
 		.setDescription('Points command.')

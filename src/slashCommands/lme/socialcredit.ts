@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from '@discordjs/builders'
 import { mondecorteModel } from '../../lib/utils/db'
 
 module.exports = {
-	guildIDs: ['324284116021542922'],
+	guildIds: ['324284116021542922'],
 	data: new SlashCommandBuilder()
 		.setName('socialcredit')
 		.setDescription('Affiche le nombre de points socials de la personne')

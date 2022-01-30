@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 
 module.exports = {
-	guildIDs: ['324284116021542922', '860721584373497887'],
+	guildIds: ['324284116021542922', '860721584373497887'],
 	data: new SlashCommandBuilder()
 		.setName('ratio')
 		.setDescription('Rationalise une personne')

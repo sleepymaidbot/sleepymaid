@@ -1,57 +1,67 @@
-import { Client, Intents } from 'discord.js'
+import { ApplicationCommandData, Client, ClientOptions } from 'discord.js'
 import { Logger } from '../logger/logger'
 import fs from 'fs'
-import { REST } from '@discordjs/rest'
 import { config } from '../../config/config'
-import { Routes } from 'discord-api-types/v9'
 import { connect } from 'mongoose'
+import path from 'path'
+import type {
+	botClientCommandsType,
+	BotClientOptions,
+	guildCommandsType
+} from '../../types'
+import Util from '../utils/util'
 
 export class BotClient extends Client {
-	logger: Logger
-	constructor() {
-		super({
-			intents: new Intents([
-				'GUILDS',
-				'GUILD_MEMBERS',
-				'GUILD_BANS',
-				'GUILD_VOICE_STATES',
-				'GUILD_MESSAGES'
-			]),
-			allowedMentions: { parse: ['users', 'roles'], repliedUser: false },
-			presence: {
-				status: 'online',
-				activities: [
-					{
-						name: 'yo allo ?',
-						type: 'WATCHING'
-					}
-				]
-			}
-		})
-		this.logger = new Logger('Sleepy Maid')
+	public declare botName: string
+	public declare logger: Logger
+	public declare commandFolder: string
+	public declare commands: botClientCommandsType
+	public declare eventsFolder: string
+	public declare taskFolder: string
+	constructor(djsOptions: ClientOptions, options: BotClientOptions) {
+		super(djsOptions)
+
+		const { botName, commandFolder, eventsFolder, taskFolder } = options ?? {}
+
+		this.botName = botName ?? 'Bot'
+		this.logger = new Logger(this.botName)
+		this.commandFolder = commandFolder ?? '../../commands'
+		this.commands = {}
+		this.eventsFolder = eventsFolder ?? '../../listeners'
+		this.taskFolder = taskFolder ?? '../../tasks'
 	}
 
-	public async startBot(): Promise<void> {
+	public async startAll(): Promise<void> {
+		this.login(config.token)
 		this.loadEvents()
 		this.loadDB()
-		this.login(config.token)
-		this.loadTasks()
-		this.loadCommands()
+		this.on('ready', () => {
+			this.registerApplicationCommands()
+			this.loadTask()
+		})
+		this.on('interactionCreate', (i) => {
+			if (!i.isCommand()) return
+			this.handleApplicationCommands(i)
+		})
 	}
 
-	private async loadCommands(): Promise<void> {
-		const slashCommandFiles = fs.readdirSync('./dist/slashCommands')
+	protected async registerApplicationCommands(): Promise<void> {
+		this.logger.info('Registering application commands...')
+
+		const slashCommandFiles = fs.readdirSync(
+			path.resolve(__dirname, this.commandFolder)
+		)
 
 		const filesToImport = []
 
-		async function importFolder(folder) {
-			const fsfolder = fs.readdirSync(`./dist/slashCommands/${folder}`)
+		async function importFolder(folder, commandFolder) {
+			const fsfolder = fs.readdirSync(`${__dirname}/${commandFolder}/${folder}`)
 			for (const file of fsfolder) {
 				if (file.endsWith('.js')) {
 					filesToImport.push(`${folder}/${file}`)
 				} else if (file.endsWith('.disable')) return
 				else {
-					importFolder(`${folder}/${file}`)
+					importFolder(`${folder}/${file}`, this.commandFolder)
 				}
 			}
 		}
@@ -60,27 +70,26 @@ export class BotClient extends Client {
 				filesToImport.push(file)
 			} else if (file.endsWith('.disable')) return
 			else {
-				importFolder(file)
+				importFolder(file, this.commandFolder)
 			}
 		}
 
-		const globalsCommands = []
-		const guildCommands = {}
-		const cmdsForLocation = {}
+		const globalsCommands: ApplicationCommandData[] = []
+		const guildCommands: guildCommandsType = {}
 
 		for (const file of filesToImport) {
-			await import(`../../slashCommands/${file}`).then((cmds) => {
-				cmdsForLocation[cmds.data.name] = `../../slashCommands/${file}`
-				if (cmds.guildIDs !== null) {
-					if (cmds.guildIDs.lenght <= 1) {
-						const guildID = cmds.guildIDs[0]
-						if (guildCommands[guildID]) {
-							guildCommands[guildID].push(cmds.data)
+			await import(`${this.commandFolder}/${file}`).then((cmds) => {
+				this.commands[cmds.data.name] = `${this.commandFolder}/${file}`
+				if (cmds.guildIds) {
+					if (cmds.guildIds.lenght === 1) {
+						const guildId = cmds.guildIDs[0]
+						if (guildCommands[guildId]) {
+							guildCommands[guildId].push(cmds.data)
 						} else {
-							guildCommands[guildID] = [cmds.data]
+							guildCommands[guildId] = [cmds.data]
 						}
 					} else {
-						for (const id of cmds.guildIDs) {
+						for (const id of cmds.guildIds) {
 							if (guildCommands[id]) {
 								guildCommands[id].push(cmds.data)
 							} else {
@@ -94,70 +103,139 @@ export class BotClient extends Client {
 			})
 		}
 
-		try {
-			const rest = new REST({ version: '9' }).setToken(config.token)
-			this.logger.info('Started refreshing application (/) commands.')
+		// Global commands
+		const applicationCommand = globalsCommands
+			.map((cmd) => ({
+				name: cmd.name,
+				// @ts-ignore - This is a workaround for a bug in the builder
+				description: cmd.description,
+				// @ts-ignore - This is a workaround for a bug in the builder
+				options: cmd.options,
+				defaultPermission: cmd.defaultPermission,
+				type: cmd.type
+			}))
+			.sort((a, b) => {
+				if (a.name < b.name) return -1
+				if (a.name > b.name) return 1
+				return 0
+			}) as ApplicationCommandData[]
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		const currentGlobalCommands = (await this.application?.commands.fetch())!
+			.map((value1) => ({
+				name: value1.name,
+				description: value1.description,
+				options: value1.options,
+				defaultPermission: value1.defaultPermission,
+				type: value1.type
+			}))
+			.sort((a, b) => {
+				if (a.name < b.name) return -1
+				if (a.name > b.name) return 1
+				return 0
+			}) as ApplicationCommandData[]
 
-			if (globalsCommands.length >= 1)
-				await rest.put(Routes.applicationCommands(config.envClientId), {
-					body: globalsCommands
-				})
-
-			for (const [key, value] of Object.entries(guildCommands)) {
-				await rest.put(
-					Routes.applicationGuildCommands(config.envClientId, key),
-					{ body: value }
-				)
-			}
-
-			this.logger.info('Successfully reloaded application (/) commands.')
-		} catch (error) {
-			this.logger.error(error)
+		if (!Util.deepEquals(currentGlobalCommands, applicationCommand)) {
+			this.logger.info('Global commands have changed, updating...')
+			await this.application?.commands
+				.set(globalsCommands)
+				.catch((e) => this.logger.error(e))
+		} else {
+			this.logger.info('Global commands have not changed.')
 		}
 
-		this.on('interactionCreate', async (i) => {
-			if (!i.isCommand()) return
-			this.logger.debug(
-				`${i.guild.name} (${i.guild.id}) > ${i.member.user.username} (${i.member.user.id}) > /${i.commandName} (${i.commandId})`
-			)
-			try {
-				const file = cmdsForLocation[i.commandName]
-				if (!file) return
-				const cmd = await import(file)
-				await cmd.execute(i, this)
-			} catch (error) {
-				this.logger.error(error)
-				try {
-					await i.reply({
-						content: 'There was an error while executing this command!',
-						ephemeral: true
+		// Guild commands
+		if (guildCommands) {
+			for (const [key, value] of Object.entries(guildCommands)) {
+				const guild = this.guilds.cache.get(key)
+				if (!guild) return
+
+				const sortedCommands = value
+					.map((cmd) => ({
+						name: cmd.name,
+						// @ts-ignore - This is a workaround for a bug in the builder
+						description: cmd.description,
+						// @ts-ignore - This is a workaround for a bug in the builder
+						options: cmd.options,
+						defaultPermission: cmd.defaultPermission,
+						type: cmd.type
+					}))
+					.sort((a, b) => {
+						if (a.name < b.name) return -1
+						if (a.name > b.name) return 1
+						return 0
 					})
-				} catch (error) {
-					try {
-						await i.editReply({
-							content: 'There was an error while executing this command!'
-						})
-					} catch (error) {
-						this.logger.error(error)
-					}
+
+				const currentGuildCommands = (await guild.commands.fetch())
+					.map((v1) => ({
+						name: v1.name,
+						description: v1.description,
+						options: v1.options,
+						defaultPermission: v1.defaultPermission,
+						type: v1.type
+					}))
+					.sort((a, b) => {
+						if (a.name < b.name) return -1
+						if (a.name > b.name) return 1
+						return 0
+					})
+
+				if (!Util.deepEquals(sortedCommands, currentGuildCommands)) {
+					this.logger.info(
+						`Guild commands for ${guild.name} have changed, updating...`
+					)
+					await guild.commands.set(value).catch((e) => this.logger.error(e))
+				} else {
+					this.logger.info(`Guild commands for ${guild.name} have not changed.`)
 				}
 			}
-		})
+		}
 	}
 
-	private async loadEvents(): Promise<void> {
-		const eventFiles = fs.readdirSync('./dist/listeners')
+	protected async handleApplicationCommands(i) {
+		this.logger.debug(
+			`${i.guild.name} (${i.guild.id}) > ${i.member.user.username} (${i.member.user.id}) > /${i.commandName} (${i.commandId})`
+		)
+		try {
+			const file = this.commands[i.commandName]
+			if (!file) return
+			const cmd = await import(file)
+			await cmd.execute(i, this)
+		} catch (error) {
+			this.logger.error(error)
+			try {
+				await i.reply({
+					content: 'There was an error while executing this command!',
+					ephemeral: true
+				})
+			} catch (error) {
+				try {
+					await i.editReply({
+						content: 'There was an error while executing this command!'
+					})
+				} catch (error) {
+					this.logger.error(error)
+				}
+			}
+		}
+	}
+
+	protected async loadEvents() {
+		const eventFiles = fs.readdirSync(
+			path.resolve(__dirname, this.eventsFolder)
+		)
 
 		const filesToImport = []
 
-		async function importFolder(folder) {
-			const fsfolder = fs.readdirSync(`./dist/listeners/${folder}`)
+		async function importFolder(folder, eventsFolder) {
+			const fsfolder = fs.readdirSync(
+				path.resolve(__dirname, eventsFolder + '/' + folder)
+			)
 			for (const file of fsfolder) {
 				if (file.endsWith('.js')) {
 					filesToImport.push(`${folder}/${file}`)
 				} else if (file.endsWith('.disable')) return
 				else {
-					importFolder(`${folder}/${file}`)
+					importFolder(`${folder}/${file}`, this.eventsFolder)
 				}
 			}
 		}
@@ -166,11 +244,11 @@ export class BotClient extends Client {
 				filesToImport.push(file)
 			} else if (file.endsWith('.disable')) return
 			else {
-				importFolder(file)
+				importFolder(file, this.eventsFolder)
 			}
 		}
 		for (const file of filesToImport) {
-			await import(`../../listeners/${file}`).then((event) => {
+			await import(`${this.eventsFolder}/${file}`).then((event) => {
 				if (event.once) {
 					this.once(event.name, (...args) => event.execute(...args, this))
 				} else {
@@ -180,18 +258,18 @@ export class BotClient extends Client {
 		}
 	}
 
-	private async loadTasks(): Promise<void> {
+	protected async loadTask() {
 		const tasksFiles = fs
-			.readdirSync('./dist/tasks')
+			.readdirSync(path.resolve(__dirname, this.taskFolder))
 			.filter((file) => file.endsWith('.js'))
 		for (const file of tasksFiles) {
-			await import(`../../tasks/${file}`).then((task) => {
+			await import(`${this.taskFolder}/${file}`).then((task) => {
 				setInterval(() => task.execute(this), task.interval)
 			})
 		}
 	}
 
-	private async loadDB(): Promise<void> {
+	protected async loadDB() {
 		await connect(config.db)
 			.catch((err) => this.logger.error(err))
 			.then(() => this.logger.info('Successfully loaded MongoDB.'))
