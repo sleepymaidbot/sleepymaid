@@ -4,24 +4,6 @@ import { mondecorteModel } from '../lib/utils/db'
 import { config } from '../config/config'
 import { actifRoles } from '../config/lists'
 
-function neededRole(userPoints: number) {
-	const roleObj = actifRoles.filter((roles) => roles.points <= userPoints)
-	const roles = []
-	for (const role of roleObj) {
-		roles.push(role.roleId)
-	}
-	return roles
-}
-
-function notNeededRole(userPoints: number) {
-	const roleObj = actifRoles.filter((roles) => roles.points - 50 >= userPoints)
-	const roles = []
-	for (const role of roleObj) {
-		roles.push(role.roleId)
-	}
-	return roles
-}
-
 async function getCRoleEligibility(
 	userPoints: number,
 	userRole: Array<string>
@@ -38,27 +20,25 @@ export async function rewardChecker(
 	if (member.user.id === '324281236728053760') return
 	const inDb = await mondecorteModel.findOne({ id: member.id })
 	const points = inDb?.points || 0
-
-	// Check actif roles
-
-	const neededRoles = neededRole(points)
-	const notNeededRoles = notNeededRole(points)
 	const userRole = member.roles.cache.map((role) => role.id)
-	const actifRoleList = []
-	for (const role of actifRoles) {
-		actifRoleList.push(role.roleId)
+
+	const addRoleObj = actifRoles.filter((roles) => roles.points <= points)
+	const toAddRoles = []
+	for (const role of addRoleObj) {
+		toAddRoles.push(role.roleId)
 	}
-	const toRemove = actifRoleList.filter(
-		(role) => notNeededRoles.includes(role) && userRole.includes(role)
+	const removeRoleObj = actifRoles.filter(
+		(roles) => roles.points - 50 >= points
 	)
-	const toAdd = neededRoles.filter(
-		(role) => !userRole.includes(role) && !toRemove.includes(role)
-	)
+	const toRemoveRoles = []
+	for (const role of removeRoleObj) {
+		toRemoveRoles.push(role.roleId)
+	}
 
 	if (config.isProduction) {
 		try {
-			member.roles.remove(toRemove)
-			member.roles.add(toAdd)
+			member.roles.add(toAddRoles)
+			member.roles.remove(toRemoveRoles)
 		} catch (e) {
 			client.logger.error(e)
 		}
