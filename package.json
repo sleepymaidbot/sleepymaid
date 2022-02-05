@@ -38,57 +38,5 @@
 		"murmurhash-v3": "^1.0.2",
 		"prettier": "^2.5.1"
 	},
-	"prettier": {
-		"useTabs": true,
-		"quoteProps": "consistent",
-		"singleQuote": true,
-		"semi": false,
-		"trailingComma": "none",
-		"endOfLine": "lf",
-		"bracketSpacing": true,
-		"arrowParens": "always"
-	},
-	"eslintConfig": {
-		"env": {
-			"es2021": true,
-			"node": true
-		},
-		"extends": [
-			"eslint:recommended",
-			"plugin:@typescript-eslint/recommended",
-			"prettier"
-		],
-		"parser": "@typescript-eslint/parser",
-		"parserOptions": {
-			"ecmaVersion": 12,
-			"sourceType": "module"
-		},
-		"plugins": [
-			"@typescript-eslint"
-		],
-		"ignorePatterns": [
-			"dist"
-		],
-		"rules": {
-			"no-return-await": "off",
-			"@typescript-eslint/no-empty-interface": "warn",
-			"no-mixed-spaces-and-tabs": "warn",
-			"no-duplicate-imports": "warn",
-			"no-empty-function": "warn",
-			"@typescript-eslint/no-empty-function": "warn",
-			"no-empty": "warn",
-			"@typescript-eslint/explicit-module-boundary-types": "off",
-			"@typescript-eslint/ban-ts-comment": [
-				"warn",
-				{
-					"ts-expect-error": "allow-with-description",
-					"ts-ignore": "allow-with-description",
-					"ts-nocheck": "allow-with-description",
-					"ts-check": "allow-with-description",
-					"minimumDescriptionLength": 5
-				}
-			]
-		}
-	},
 	"packageManager": "yarn@3.1.1"
 }
