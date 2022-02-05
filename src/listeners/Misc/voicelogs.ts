@@ -1,5 +1,27 @@
 import { MessageEmbed } from 'discord.js'
 
+const month = {
+	0: 'Janvier',
+	1: 'Février',
+	2: 'Mars',
+	3: 'Avril',
+	4: 'Mai',
+	5: 'Juin',
+	6: 'Juillet',
+	7: 'Août',
+	8: 'Septembre',
+	9: 'Octobre',
+	10: 'Novembre',
+	11: 'Décembre'
+}
+
+function returnCurentTime() {
+	const d = new Date()
+	return `${
+		month[d.getMonth()]
+	} ${d.getDate()} ${d.getHours()}:${d.getMinutes()} ${d.getFullYear()}`
+}
+
 module.exports = {
 	name: 'voiceStateUpdate',
 	once: false,
@@ -17,6 +39,7 @@ module.exports = {
 					`**${newState.member.user.tag}** has joined **${newState.channel.name}**.`
 				)
 				.setColor('#409400')
+				.setFooter({ text: returnCurentTime() })
 
 			try {
 				await logChannel.send({ embeds: [embed] })
@@ -35,6 +58,7 @@ module.exports = {
 					`**${newState.member.user.tag}** has left **${oldState.channel.name}**.`
 				)
 				.setColor('#409400')
+				.setFooter({ text: returnCurentTime() })
 
 			try {
 				await logChannel.send({ embeds: [embed] })
@@ -53,6 +77,7 @@ module.exports = {
 					`**${newState.member.user.tag}** has moved from **${oldState.channel.name}** to **${newState.channel.name}**.`
 				)
 				.setColor('#409400')
+				.setFooter({ text: returnCurentTime() })
 
 			try {
 				await logChannel.send({ embeds: [embed] })
