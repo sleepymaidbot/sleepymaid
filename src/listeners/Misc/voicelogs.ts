@@ -22,6 +22,8 @@ function returnCurentTime() {
 	} ${d.getDate()} ${d.getHours()}:${d.getMinutes()} ${d.getFullYear()}`
 }
 
+const logChannelId = '821509142518824991'
+
 module.exports = {
 	name: 'voiceStateUpdate',
 	once: false,
@@ -31,7 +33,7 @@ module.exports = {
 		// Join
 		if (oldState.channel == null && newState.channel != null) {
 			const guild = newState.guild
-			const logChannel = guild.channels.cache.get('821509142518824991')
+			const logChannel = guild.channels.cache.get(logChannelId)
 
 			const embed = new MessageEmbed()
 				.setTitle('Presence Update')
@@ -50,7 +52,7 @@ module.exports = {
 		// Leave
 		else if (oldState.channel != null && newState.channel == null) {
 			const guild = newState.guild
-			const logChannel = guild.channels.cache.get('821509142518824991')
+			const logChannel = guild.channels.cache.get(logChannelId)
 
 			const embed = new MessageEmbed()
 				.setTitle('Presence Update')
@@ -69,7 +71,7 @@ module.exports = {
 		// Move
 		else if (oldState.channel != newState.channel) {
 			const guild = newState.guild
-			const logChannel = guild.channels.cache.get('821509142518824991')
+			const logChannel = guild.channels.cache.get(logChannelId)
 
 			const embed = new MessageEmbed()
 				.setTitle('Presence Update')
