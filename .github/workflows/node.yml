@@ -3,8 +3,12 @@ name: Node.js CI
 on:
   push:
     branches: [main]
+    paths:
+      - packages/bot/**
   pull_request:
     branches: [main]
+    paths:
+      - packages/bot/**
 
   workflow_dispatch:
 
@@ -12,6 +16,9 @@ jobs:
   Test-Build:
     runs-on: ubuntu-latest
     name: Test Build
+    defaults:
+      run:
+        working-directory: packages/bot
 
     steps:
       - uses: actions/checkout@v2
@@ -41,6 +48,9 @@ jobs:
   Check-Formatting:
     runs-on: ubuntu-latest
     name: Check formatting
+    defaults:
+      run:
+        working-directory: packages/bot
 
     steps:
       - uses: actions/checkout@v2

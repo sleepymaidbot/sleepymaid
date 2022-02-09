@@ -161,9 +161,9 @@ temp/
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,node,yarn
 
-src/config/config.ts
+packages/bot/src/config/config.ts
 *.disable
 *.exe
-banners/
+packages/bot/banners/
 yes/
 icon.webp

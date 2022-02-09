@@ -1,0 +1,5 @@
+dist
+.git
+.yarn/**
+.pnp.*
+yes

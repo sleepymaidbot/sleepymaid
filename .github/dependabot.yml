@@ -6,3 +6,10 @@ updates:
     schedule:
       interval: daily
       time: '10:00'
+
+  - package-ecosystem: npm
+    directory: '/packages/bot'
+    open-pull-requests-limit: 100
+    schedule:
+      interval: daily
+      time: '10:00'
