@@ -359,7 +359,7 @@ Voici les rôles de couleur que vous pouvez assigner à vous-même:
 				await message.channel.send({ content: message3 })
 				const message4 = `
 
-<:IconSearch:879459997824716800> **FAQ** 
+<:IconSearch:879459997824716800> **FAQ**
 
 **A quoi servent les points ?**
 Les points servent a montrer votre activité sur le serveur. Si tu a 100 points tu gagne le rôle <@&842387653394563074> (Actif) tu le perd si tu va en bas de 50 points.
@@ -426,6 +426,31 @@ Pour avoir accès au serveur tu doit appuyer sur le bouton ci-dessous.`
 				await message.channel.send({ embeds: [embed], components: [row] })
 
 				break
+			}
+			case 'revo': {
+				const embed = new MessageEmbed()
+					.setColor('#36393f')
+					.setDescription(
+						'Certain membres du serveurs du serveur ne sont pas content du gouvernement actuel.\n\nUne révolution se prépare.\nCliquer sur le bouton vert si-dessous pour la rejoindre.'
+					)
+					.setImage(
+						'https://cdn.discordapp.com/attachments/747923748564500490/941121332819681340/erguhniilaeuhgriuhaegrierguh.png'
+					)
+					.setThumbnail(
+						'https://cdn.discordapp.com/attachments/436249478521946191/941122330749435914/2.png'
+					)
+				const row = new MessageActionRow().addComponents(
+					new MessageButton()
+						.setLabel('Rejoindre la révolution.')
+						.setStyle('SUCCESS')
+						.setEmoji('✅')
+						.setCustomId('revo:join')
+				)
+
+				await message.channel.send({
+					embeds: [embed],
+					components: [row]
+				})
 			}
 		}
 	}
