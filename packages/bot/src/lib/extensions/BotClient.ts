@@ -2,7 +2,6 @@ import { ApplicationCommandData, Client, ClientOptions } from 'discord.js'
 import { Logger } from '../logger/logger'
 import fs from 'fs'
 import { config } from '../../config/config'
-import { connect } from 'mongoose'
 import path from 'path'
 import type {
 	botClientCommandsType,
@@ -10,6 +9,7 @@ import type {
 	guildCommandsType
 } from '../../types'
 import Util from '../utils/util'
+import { PrismaClient } from '@prisma/client'
 
 export class BotClient extends Client {
 	public declare botName: string
@@ -18,6 +18,7 @@ export class BotClient extends Client {
 	public declare commands: botClientCommandsType
 	public declare eventsFolder: string
 	public declare taskFolder: string
+	public declare prisma: PrismaClient
 	constructor(djsOptions: ClientOptions, options: BotClientOptions) {
 		super(djsOptions)
 
@@ -29,12 +30,12 @@ export class BotClient extends Client {
 		this.commands = {}
 		this.eventsFolder = eventsFolder ?? '../../listeners'
 		this.taskFolder = taskFolder ?? '../../tasks'
+		this.prisma = new PrismaClient()
 	}
 
 	public async startAll(): Promise<void> {
 		this.login(config.token)
 		this.loadEvents()
-		this.loadDB()
 		this.on('ready', () => {
 			this.registerApplicationCommands()
 			this.loadTask()
@@ -267,11 +268,5 @@ export class BotClient extends Client {
 				setInterval(() => task.execute(this), task.interval)
 			})
 		}
-	}
-
-	protected async loadDB() {
-		await connect(config.db)
-			.catch((err) => this.logger.error(err))
-			.then(() => this.logger.info('Successfully loaded MongoDB.'))
 	}
 }

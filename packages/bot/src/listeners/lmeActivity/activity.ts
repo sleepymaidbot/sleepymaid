@@ -1,4 +1,3 @@
-import { mondecorteModel } from '../../lib/utils/db'
 import { Message } from 'discord.js'
 import {
 	pointsBlacklistedTextChannel,
@@ -21,21 +20,30 @@ module.exports = {
 		if (talkedRecently.has(message.author.id)) {
 			return
 		}
-		const userInDB = await mondecorteModel.findOne({
-			id: message.author.id
+		const userInDb = await client.prisma.mondecorte.findUnique({
+			where: {
+				id: message.author.id
+			}
 		})
-		if (userInDB == null || 0) {
-			const newUser = new mondecorteModel({
-				id: message.author.id,
-				points: 1
+		if (userInDb == null || 0) {
+			await client.prisma.mondecorte.create({
+				data: {
+					id: message.author.id,
+					points: 1 * pointsMultiplier
+				}
 			})
-			await newUser.save()
 		} else {
-			const beforePoints = userInDB.points
+			const beforePoints = userInDb.points
 			const pointsToAdd = 1 * pointsMultiplier
 			const afterPoints = beforePoints + pointsToAdd
-			userInDB.points = afterPoints
-			await userInDB.save()
+			await client.prisma.mondecorte.update({
+				where: {
+					id: message.author.id
+				},
+				data: {
+					points: afterPoints
+				}
+			})
 
 			await rewardChecker(message.member, message.guild, client)
 		}

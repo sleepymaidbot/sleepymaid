@@ -1,10 +1,8 @@
-import { mondecorteModel } from '../../lib/utils/db'
-
 module.exports = {
 	name: 'interactionCreate',
 	once: false,
 
-	async execute(interaction) {
+	async execute(interaction, client) {
 		if (interaction.isSelectMenu()) {
 			if (
 				interaction.channel.id === '775820100917526548' &&
@@ -12,8 +10,10 @@ module.exports = {
 				interaction.customId === 'vote'
 			) {
 				const value = interaction.values[0]
-				const inDb = await mondecorteModel.findOne({
-					id: interaction.member.id
+				const inDb = await client.prisma.mondecorte.findUnique({
+					where: {
+						id: interaction.member.id
+					}
 				})
 				if (inDb) {
 					if (inDb.vote === null) {
@@ -23,8 +23,14 @@ module.exports = {
 								ephemeral: true
 							})
 						} else {
-							inDb.vote = value
-							await inDb.save()
+							await client.prisma.mondecorte.update({
+								where: {
+									id: interaction.member.id
+								},
+								data: {
+									vote: value
+								}
+							})
 							await interaction.reply({
 								content: `Vous avez voté pour <@${value}>`,
 								ephemeral: true

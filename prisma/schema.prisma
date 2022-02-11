@@ -5,18 +5,14 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url      = "mongodb://localhost:27017/sleepymaid"
+  url      = "mongodb://root:prisma@localhost:27017/sleepymaid?authSource=admin&retryWrites=true&w=majority"
 }
 
 model mondecorte {
   id_          String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
-  v            Int?    @map("__v")
   crole        String?
-  id           String
-  points       Int
+  id           String  @unique
+  points       Int?
   socialcredit Int?
   vote         String?
-
-  @@index([id], map: "id_1")
-  @@index([crole], map: "crole_1")
 }

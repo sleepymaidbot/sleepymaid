@@ -1,5 +1,4 @@
 import { colorRole } from '../../config/lists'
-import { mondecorte, mondecorteModel } from '../../lib/utils/db'
 import {
 	MessageActionRow,
 	MessageButton,
@@ -101,21 +100,18 @@ module.exports = {
 					}
 				}
 
-				mondecorteModel.find({}).then((docs: Array<mondecorte>) => {
-					docs.forEach(async (doc) => {
-						if (doc.vote) {
-							if (userVote[doc.vote]) {
-								userVote[doc.vote] = userVote[doc.vote] + 1
-							} else {
-								userVote[doc.vote] = 1
-							}
+				const docs = await client.prisma.mondecorte.findMany()
+				docs.forEach(async (doc) => {
+					if (doc.vote) {
+						if (userVote[doc.vote]) {
+							userVote[doc.vote] = userVote[doc.vote] + 1
+						} else {
+							userVote[doc.vote] = 1
 						}
-					})
-
-					message.channel.send(
-						`The highest vote is ${findHighest(userVote)[0]}`
-					)
+					}
 				})
+
+				message.channel.send(`The highest vote is ${findHighest(userVote)[0]}`)
 				break
 			}
 			case 'eval': {
@@ -402,11 +398,9 @@ Pour avoir accès au serveur tu doit appuyer sur le bouton ci-dessous.`
 				break
 			}
 			case 'removeAllVote': {
-				await mondecorteModel.find({}).then(async (docs) => {
-					for (const doc of docs) {
-						const userInDB = await mondecorteModel.findOne({ id: doc.id })
-						userInDB.vote = null
-						await userInDB.save()
+				await client.prisma.mondecorte.updateMany({
+					data: {
+						vote: null
 					}
 				})
 				break

@@ -1,5 +1,4 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
-import { mondecorteModel } from '../../lib/utils/db'
 
 module.exports = {
 	guildIds: ['324284116021542922'],
@@ -58,7 +57,7 @@ module.exports = {
 		)
 		.toJSON(),
 
-	async execute(interaction) {
+	async execute(interaction, client) {
 		await interaction.deferReply({ ephemeral: true })
 		const subcommand = interaction.options.getSubcommand()
 		switch (subcommand) {
@@ -66,20 +65,28 @@ module.exports = {
 				if (interaction.member.roles.cache.has('880946790327799889')) {
 					const add = interaction.options.getNumber('points')
 					const user = interaction.options.get('user')
-					const userInDB = await mondecorteModel.findOne({ id: user.value })
-					if (userInDB.socialcredit) {
-						userInDB.socialcredit = userInDB.socialcredit + add
-						await userInDB.save()
+					const userInDb = await client.prisma.mondecorte.findUnique({
+						where: { id: user.value }
+					})
+					if (userInDb.socialcredit) {
+						const newPoints = userInDb.socialcredit + add
+						await client.prisma.mondecorte.update({
+							where: { id: user.value },
+							data: { socialcredit: newPoints }
+						})
 						await interaction.editReply(
 							`<@${user.value}> a maintenant ${
-								userInDB.socialcredit + add
+								userInDb.socialcredit + add
 							} points socials`
 						)
 					} else {
-						userInDB.socialcredit = 500 + add
-						await userInDB.save()
+						const newPoints = (userInDb.socialcredit = 500 + add)
+						await client.prisma.mondecorte.update({
+							where: { id: user.value },
+							data: { socialcredit: newPoints }
+						})
 						await interaction.editReply(
-							`<@${user.value}> a maintenant ${userInDB.socialcredit} points socials`
+							`<@${user.value}> a maintenant ${userInDb.socialcredit} points socials`
 						)
 					}
 				} else {
@@ -93,18 +100,26 @@ module.exports = {
 				if (interaction.member.roles.cache.has('880946790327799889')) {
 					const remove = interaction.options.getNumber('points')
 					const user = interaction.options.get('user')
-					const userInDB = await mondecorteModel.findOne({ id: user.value })
-					if (userInDB.socialcredit) {
-						userInDB.socialcredit = userInDB.socialcredit - remove
-						await userInDB.save()
+					const userInDb = await client.prisma.mondecorte.findUnique({
+						where: { id: user.value }
+					})
+					if (userInDb.socialcredit) {
+						const newPoints = userInDb.socialcredit - remove
+						await client.prisma.mondecorte.update({
+							where: { id: user.value },
+							data: { socialcredit: newPoints }
+						})
 						await interaction.editReply(
-							`<@${user.value}> a maintenant ${userInDB.socialcredit} points socials`
+							`<@${user.value}> a maintenant ${userInDb.socialcredit} points socials`
 						)
 					} else {
-						userInDB.socialcredit = 500 - remove
-						await userInDB.save()
+						const newPoints = 500 - remove
+						await client.prisma.mondecorte.update({
+							where: { id: user.value },
+							data: { socialcredit: newPoints }
+						})
 						await interaction.editReply(
-							`<@${user.value}> a maintenant ${userInDB.socialcredit} points socials`
+							`<@${user.value}> a maintenant ${userInDb.socialcredit} points socials`
 						)
 					}
 				} else {
@@ -119,16 +134,24 @@ module.exports = {
 				if (interaction.member.roles.cache.has('880946790327799889')) {
 					const set = interaction.options.getNumber('points')
 					const user = interaction.options.get('user')
-					const userInDB = await mondecorteModel.findOne({ id: user.value })
-					if (userInDB.socialcredit) {
-						userInDB.socialcredit = set
-						await userInDB.save()
+					const userInDb = await client.prisma.mondecorte.findUnique({
+						where: { id: user.value }
+					})
+					if (userInDb.socialcredit) {
+						const newPoints = set
+						await client.prisma.mondecorte.update({
+							where: { id: user.value },
+							data: { socialcredit: newPoints }
+						})
 						await interaction.editReply(
 							`<@${user.value}> a maintenant ${set} points socials`
 						)
 					} else {
-						userInDB.socialcredit = set
-						await userInDB.save()
+						const newPoints = set
+						await client.prisma.mondecorte.update({
+							where: { id: user.value },
+							data: { socialcredit: newPoints }
+						})
 						await interaction.editReply(
 							`<@${user.value}> a maintenant ${set} points socials`
 						)
@@ -143,13 +166,18 @@ module.exports = {
 			}
 			case 'view': {
 				const user = interaction.options.get('user')
-				const userInDB = await mondecorteModel.findOne({ id: user.value })
-				if (userInDB.socialcredit) {
+				const userInDb = await client.prisma.mondecorte.findUnique({
+					where: { id: user.value }
+				})
+				if (userInDb.socialcredit) {
 					await interaction.editReply(
-						`<@${user.value}> a ${userInDB.socialcredit} points socials`
+						`<@${user.value}> a ${userInDb.socialcredit} points socials`
 					)
 				} else {
-					userInDB.socialcredit = 500
+					await client.prisma.mondecorte.update({
+						where: { id: user.value },
+						data: { socialcredit: 500 }
+					})
 					await interaction.editReply(`<@${user.value}> a 500 points socials`)
 				}
 				break

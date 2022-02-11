@@ -1,6 +1,5 @@
 import { Guild, GuildMember, MessageEmbed } from 'discord.js'
 import { BotClient } from '../lib/extensions/BotClient'
-import { mondecorteModel } from '../lib/utils/db'
 import { config } from '../config/config'
 import { actifRoles } from '../config/lists'
 
@@ -18,7 +17,9 @@ export async function rewardChecker(
 ) {
 	if (member.user.bot) return
 	if (member.user.id === '324281236728053760') return
-	const inDb = await mondecorteModel.findOne({ id: member.id })
+	const inDb = await client.prisma.mondecorte.findUnique({
+		where: { id: member.id }
+	})
 	const points = inDb?.points || 0
 	const userRole = member.roles.cache.map((role) => role.id)
 
@@ -60,9 +61,10 @@ export async function rewardChecker(
 					client.logger.error(err)
 				}
 
-				const inDb = await mondecorteModel.findOne({ id: member.id })
-				inDb.crole = null
-				await inDb.save()
+				await client.prisma.mondecorte.update({
+					where: { id: member.id },
+					data: { crole: null }
+				})
 				const embed = new MessageEmbed()
 					.setAuthor({
 						name: `Rôle custom de ${member.user.tag}`,
@@ -79,8 +81,10 @@ export async function rewardChecker(
 					client.logger.error(err)
 				}
 			} else {
-				inDb.crole = null
-				await inDb.save()
+				await client.prisma.mondecorte.update({
+					where: { id: member.id },
+					data: { crole: null }
+				})
 			}
 		}
 	}

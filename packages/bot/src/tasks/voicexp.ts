@@ -1,4 +1,3 @@
-import { mondecorteModel } from '../lib/utils/db'
 import {
 	pointsBlacklistedVoiceChannel,
 	pointsMultiplier
@@ -23,21 +22,26 @@ module.exports = {
 				await channel.members.each(async (member: GuildMember) => {
 					if (member.user.bot) return
 					if (member.voice.mute || member.voice.deaf) return
-					const userInDB = await mondecorteModel.findOne({
-						id: member.id
+					const userInDb = await client.prisma.mondecorte.findUnique({
+						data: {
+							id: member.id
+						}
 					})
-					if (userInDB == null || 0) {
-						const newUser = new mondecorteModel({
-							id: member.id,
-							points: 1
+					if (userInDb == null || 0) {
+						await client.prisma.mondecorte.create({
+							data: {
+								id: member.id,
+								points: 1 * pointsMultiplier
+							}
 						})
-						await newUser.save()
 					} else {
-						const beforePoints = userInDB.points
+						const beforePoints = userInDb.points
 						const pointsToAdd = 1 * pointsMultiplier
 						const afterPoints = beforePoints + pointsToAdd
-						userInDB.points = afterPoints
-						await userInDB.save()
+						await client.prisma.mondecorte.update({
+							where: { id: member.id },
+							data: { points: afterPoints }
+						})
 						await rewardChecker(member, guild, client)
 					}
 				})

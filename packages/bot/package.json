@@ -30,11 +30,11 @@
 	"dependencies": {
 		"@discordjs/builders": "^0.12.0",
 		"@discordjs/rest": "^0.3.0",
+		"@prisma/client": "^3.9.1",
 		"ansi-colors": "^4.1.1",
 		"axios": "^0.25.0",
 		"discord.js": "^13.6.0",
 		"fs": "^0.0.1-security",
-		"mongoose": "^6.2.0",
 		"murmurhash-v3": "^1.0.2",
 		"prettier": "^2.5.1"
 	},

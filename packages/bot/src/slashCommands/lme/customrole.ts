@@ -1,6 +1,5 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { getCRoleEligibility } from '../../functions/customrole'
-import { mondecorteModel } from '../../lib/utils/db'
 import { MessageEmbed } from 'discord.js'
 
 module.exports = {
@@ -55,8 +54,10 @@ module.exports = {
 	async execute(interaction, client) {
 		await interaction.deferReply({ ephemeral: true })
 		const subcommand = interaction.options.getSubcommand()
-		const inDb = await mondecorteModel.findOne({
-			id: interaction.member.id
+		const inDb = client.prisma.mondecorte.findUnique({
+			where: {
+				id: interaction.member.id
+			}
 		})
 		const isEligible = await getCRoleEligibility(
 			interaction.member,
@@ -108,16 +109,24 @@ module.exports = {
 							})
 							.then(async (role) => {
 								interaction.member.roles.add(role)
-								inDb.crole = role.id
-								await inDb.save().then(async () => {
-									embed.setDescription(`Ton rôle custom a été créer <@&${role.id}>.
+								await client.prisma.mondecorte
+									.update({
+										data: {
+											crole: role.id
+										},
+										where: {
+											id: interaction.member.id
+										}
+									})
+									.then(async () => {
+										embed.setDescription(`Ton rôle custom a été créer <@&${role.id}>.
 									Pour modifier le nom fait la commande  \`\`/customrole name <name>\`\`
 									Pour modifier la couleur fait la commande \`\`/customrole color <color>\`\``)
-									await interaction.editReply({
-										embeds: [embed],
-										ephemeral: true
+										await interaction.editReply({
+											embeds: [embed],
+											ephemeral: true
+										})
 									})
-								})
 							})
 							.catch(console.error)
 					}
@@ -134,11 +143,22 @@ module.exports = {
 							(role) => role.id === customRoleId
 						)
 						await crole.delete()
-						inDb.crole = null
-						await inDb.save().then(async () => {
-							embed.setDescription('Ton rôle custom a été supprimer')
-							await interaction.editReply({ embeds: [embed], ephemeral: true })
-						})
+						await client.prisma.mondecorte
+							.update({
+								data: {
+									crole: null
+								},
+								where: {
+									id: interaction.member.id
+								}
+							})
+							.then(async () => {
+								embed.setDescription('Ton rôle custom a été supprimer')
+								await interaction.editReply({
+									embeds: [embed],
+									ephemeral: true
+								})
+							})
 					} catch (e) {
 						client.logger.info(e)
 					}
