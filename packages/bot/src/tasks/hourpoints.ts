@@ -11,7 +11,7 @@ module.exports = {
 		const docs = await client.prisma.mondecorte.findMany()
 		for (const user of docs) {
 			const userInDb = await client.prisma.mondecorte.findUnique({
-				user_id: user.id
+				where: { user_id: user.id }
 			})
 			if (userInDb != null && userInDb.points >= 1) {
 				let pointsToLoose = 1
