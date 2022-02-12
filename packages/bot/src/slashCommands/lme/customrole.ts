@@ -56,7 +56,7 @@ module.exports = {
 		const subcommand = interaction.options.getSubcommand()
 		const inDb = client.prisma.mondecorte.findUnique({
 			where: {
-				id: interaction.member.id
+				user_id: interaction.member.id
 			}
 		})
 		const isEligible = await getCRoleEligibility(

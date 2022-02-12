@@ -24,13 +24,13 @@ module.exports = {
 					if (member.voice.mute || member.voice.deaf) return
 					const userInDb = await client.prisma.mondecorte.findUnique({
 						data: {
-							id: member.id
+							user_id: member.id
 						}
 					})
 					if (userInDb == null || 0) {
 						await client.prisma.mondecorte.create({
 							data: {
-								id: member.id,
+								user_id: member.id,
 								points: 1 * pointsMultiplier
 							}
 						})

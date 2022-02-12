@@ -21,7 +21,7 @@ module.exports = {
 
 				const newPoints = userInDb.points - pointsToLoose
 				await client.prisma.mondecorte.update({
-					where: { id: user.id },
+					where: { user_id: user.id },
 					data: { points: newPoints }
 				})
 				usersArray.push(user.id)

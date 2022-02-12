@@ -28,7 +28,7 @@ module.exports = {
 		if (userInDb == null || 0) {
 			await client.prisma.mondecorte.create({
 				data: {
-					id: message.author.id,
+					user_id: message.author.id,
 					points: 1 * pointsMultiplier
 				}
 			})

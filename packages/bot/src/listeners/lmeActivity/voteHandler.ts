@@ -25,7 +25,7 @@ module.exports = {
 						} else {
 							await client.prisma.mondeecorte.update({
 								where: {
-									id: interaction.member.id
+									user_id: interaction.member.id
 								},
 								data: {
 									vote: value
