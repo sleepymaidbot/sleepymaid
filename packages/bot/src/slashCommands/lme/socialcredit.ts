@@ -68,25 +68,25 @@ module.exports = {
 					const userInDb = await client.prisma.mondecorte.findUnique({
 						where: { id: user.value }
 					})
-					if (userInDb.socialcredit) {
-						const newPoints = userInDb.socialcredit + add
+					if (userInDb.social_credit) {
+						const newPoints = userInDb.social_credit + add
 						await client.prisma.mondecorte.update({
 							where: { id: user.value },
 							data: { socialcredit: newPoints }
 						})
 						await interaction.editReply(
 							`<@${user.value}> a maintenant ${
-								userInDb.socialcredit + add
+								userInDb.social_credit + add
 							} points socials`
 						)
 					} else {
-						const newPoints = (userInDb.socialcredit = 500 + add)
+						const newPoints = (userInDb.social_credit = 500 + add)
 						await client.prisma.mondecorte.update({
 							where: { id: user.value },
 							data: { socialcredit: newPoints }
 						})
 						await interaction.editReply(
-							`<@${user.value}> a maintenant ${userInDb.socialcredit} points socials`
+							`<@${user.value}> a maintenant ${userInDb.social_credit} points socials`
 						)
 					}
 				} else {
@@ -103,14 +103,14 @@ module.exports = {
 					const userInDb = await client.prisma.mondecorte.findUnique({
 						where: { id: user.value }
 					})
-					if (userInDb.socialcredit) {
-						const newPoints = userInDb.socialcredit - remove
+					if (userInDb.social_credit) {
+						const newPoints = userInDb.social_credit - remove
 						await client.prisma.mondecorte.update({
 							where: { id: user.value },
 							data: { socialcredit: newPoints }
 						})
 						await interaction.editReply(
-							`<@${user.value}> a maintenant ${userInDb.socialcredit} points socials`
+							`<@${user.value}> a maintenant ${userInDb.social_credit} points socials`
 						)
 					} else {
 						const newPoints = 500 - remove
@@ -119,7 +119,7 @@ module.exports = {
 							data: { socialcredit: newPoints }
 						})
 						await interaction.editReply(
-							`<@${user.value}> a maintenant ${userInDb.socialcredit} points socials`
+							`<@${user.value}> a maintenant ${userInDb.social_credit} points socials`
 						)
 					}
 				} else {
@@ -137,7 +137,7 @@ module.exports = {
 					const userInDb = await client.prisma.mondecorte.findUnique({
 						where: { id: user.value }
 					})
-					if (userInDb.socialcredit) {
+					if (userInDb.social_credit) {
 						const newPoints = set
 						await client.prisma.mondecorte.update({
 							where: { id: user.value },
@@ -169,9 +169,9 @@ module.exports = {
 				const userInDb = await client.prisma.mondecorte.findUnique({
 					where: { id: user.value }
 				})
-				if (userInDb.socialcredit) {
+				if (userInDb.social_credit) {
 					await interaction.editReply(
-						`<@${user.value}> a ${userInDb.socialcredit} points socials`
+						`<@${user.value}> a ${userInDb.social_credit} points socials`
 					)
 				} else {
 					await client.prisma.mondecorte.update({

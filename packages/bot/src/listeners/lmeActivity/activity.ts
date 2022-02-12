@@ -22,7 +22,7 @@ module.exports = {
 		}
 		const userInDb = await client.prisma.mondecorte.findUnique({
 			where: {
-				id: message.author.id
+				user_id: message.author.id
 			}
 		})
 		if (userInDb == null || 0) {
@@ -38,7 +38,7 @@ module.exports = {
 			const afterPoints = beforePoints + pointsToAdd
 			await client.prisma.mondecorte.update({
 				where: {
-					id: message.author.id
+					user_id: message.author.id
 				},
 				data: {
 					points: afterPoints

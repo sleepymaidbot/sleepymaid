@@ -1,18 +1,16 @@
-generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["mongoDb"]
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:admin@localhost:5432/mondecorte?schema=mondecorte"
 }
 
-datasource db {
-  provider = "mongodb"
-  url      = "mongodb://root:prisma@localhost:27017/sleepymaid?authSource=admin&retryWrites=true&w=majority"
+generator client {
+  provider = "prisma-client-js"
 }
 
 model mondecorte {
-  id_          String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
-  crole        String?
-  id           String  @unique
-  points       Int?
-  socialcredit Int?
-  vote         String?
+  user_id        String  @unique
+  custom_role_id String?
+  points         Int?    @default(0)
+  social_credit  Int?    @default(500)
+  vote           String?
 }

@@ -214,7 +214,7 @@ module.exports = {
 
 					allPoints.forEach((user) => {
 						if (user.points == 0) return
-						coolUser.push(user.id)
+						coolUser.push(user.user_id)
 					})
 
 					const maxPage = Math.round(coolUser.length / 10)
@@ -239,13 +239,13 @@ module.exports = {
 							if (user.points == 0) return
 							if (page === 1) {
 								text.push(
-									`${intForEmote[index + 1]} <@${user.id}>: ${
+									`${intForEmote[index + 1]} <@${user.user_id}>: ${
 										user.points
 									} points`
 								)
 							} else {
 								const math = page * 10 + index + 1 - 10
-								text.push(`${math} <@${user.id}>: ${user.points} points`)
+								text.push(`${math} <@${user.user_id}>: ${user.points} points`)
 							}
 						})
 

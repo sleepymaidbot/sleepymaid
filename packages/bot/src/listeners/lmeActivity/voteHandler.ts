@@ -23,7 +23,7 @@ module.exports = {
 								ephemeral: true
 							})
 						} else {
-							await client.prisma.mondecorte.update({
+							await client.prisma.mondeecorte.update({
 								where: {
 									id: interaction.member.id
 								},

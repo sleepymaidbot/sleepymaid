@@ -63,7 +63,7 @@ module.exports = {
 			interaction.member,
 			inDb?.points || 0
 		)
-		const customRoleId = inDb?.crole
+		const customRoleId = inDb?.custom_role_id
 		const embed = new MessageEmbed()
 			.setAuthor({
 				name: `Rôle custom de ${interaction.member.user.tag}`,

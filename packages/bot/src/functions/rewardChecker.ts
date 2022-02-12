@@ -18,7 +18,7 @@ export async function rewardChecker(
 	if (member.user.bot) return
 	if (member.user.id === '324281236728053760') return
 	const inDb = await client.prisma.mondecorte.findUnique({
-		where: { id: member.id }
+		where: { user_id: member.id }
 	})
 	const points = inDb?.points || 0
 	const userRole = member.roles.cache.map((role) => role.id)
@@ -47,7 +47,7 @@ export async function rewardChecker(
 
 	// Check custom role
 
-	const cRoleId = inDb?.crole || null
+	const cRoleId = inDb?.custom_role_id || null
 
 	if (cRoleId != null) {
 		if ((await getCRoleEligibility(points, userRole)) === false) {
@@ -62,8 +62,8 @@ export async function rewardChecker(
 				}
 
 				await client.prisma.mondecorte.update({
-					where: { id: member.id },
-					data: { crole: null }
+					where: { user_id: member.id },
+					data: { custom_role_id: null }
 				})
 				const embed = new MessageEmbed()
 					.setAuthor({
@@ -82,8 +82,8 @@ export async function rewardChecker(
 				}
 			} else {
 				await client.prisma.mondecorte.update({
-					where: { id: member.id },
-					data: { crole: null }
+					where: { user_id: member.id },
+					data: { custom_role_id: null }
 				})
 			}
 		}
