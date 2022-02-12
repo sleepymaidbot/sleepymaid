@@ -39,7 +39,7 @@ module.exports = {
 						const pointsToAdd = 1 * pointsMultiplier
 						const afterPoints = beforePoints + pointsToAdd
 						await client.prisma.mondecorte.update({
-							where: { id: member.id },
+							where: { user_id: member.id },
 							data: { points: afterPoints }
 						})
 						await rewardChecker(member, guild, client)
