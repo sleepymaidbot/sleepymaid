@@ -21,14 +21,14 @@ module.exports = {
 
 				const newPoints = userInDb.points - pointsToLoose
 				await client.prisma.mondecorte.update({
-					where: { user_id: user.id },
+					where: { user_id: user.user_id },
 					data: { points: newPoints }
 				})
 				usersArray.push(user.id)
 
 				try {
 					const guild = await client.guilds.cache.get('324284116021542922')
-					const dUser = await guild.members.cache.get(user.id)
+					const dUser = await guild.members.cache.get(user.user_id)
 					await rewardChecker(dUser, guild, client)
 				} catch (e) {
 					client.logger.error(e)
