@@ -7,22 +7,14 @@
 	"scripts": {
 		"test": "yarn run lint && yarn run build",
 		"build": "yarn rimraf dist/ && yarn tsc",
-		"lint": "yarn eslint --fix --ext js,jsx,ts,tsx src",
-		"testlint": "yarn eslint --ext js,jsx,ts,tsx src",
-		"format": "yarn prettier --write .",
 		"start": "yarn build && node --trace-warnings -r source-map-support/register dist/index.js"
 	},
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
 		"@types/node": "^17.0.4",
-		"@types/prettier": "^2.4.3",
-		"@typescript-eslint/eslint-plugin": "^5.10.2",
-		"@typescript-eslint/parser": "^5.10.2",
 		"@yarnpkg/cli-dist": "^3.1.1",
 		"discord-api-types": "^0.26.0",
-		"eslint": "^8.8.0",
-		"eslint-config-prettier": "^8.3.0",
 		"rimraf": "^3.0.2",
 		"source-map-support": "^0.5.21",
 		"typescript": "^4.5.5"
@@ -30,12 +22,10 @@
 	"dependencies": {
 		"@discordjs/builders": "^0.12.0",
 		"@prisma/client": "^3.9.2",
-		"prisma": "^3.9.2",
 		"ansi-colors": "^4.1.1",
 		"discord.js": "^13.6.0",
 		"fs": "^0.0.1-security",
-		"mongoose": "^6.2.1",
-		"prettier": "^2.5.1"
+		"prisma": "^3.9.2"
 	},
 	"volta": {
 		"node": "16.9.0",

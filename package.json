@@ -14,11 +14,20 @@
 	},
 	"packageManager": "yarn@1.22.17",
 	"devDependencies": {
+		"@types/prettier": "^2.4.3",
+		"@typescript-eslint/eslint-plugin": "^5.10.2",
+		"@typescript-eslint/parser": "^5.10.2",
+		"eslint": "^8.8.0",
+		"eslint-config-prettier": "^8.3.0",
+		"prettier": "^2.5.1",
 		"prisma": "^3.9.2",
 		"turbo": "^1.1.2"
 	},
 	"scripts": {
-		"build": "yarn turbo run build",
-		"start": "yarn turbo run start"
+		"build": "yarn turbo run build --scope=bot",
+		"start": "yarn turbo run start --scope=bot",
+		"lint": "yarn eslint --fix --ext ts,tsx packages",
+		"testlint": "yarn eslint --ext ts,tsx packages",
+		"format": "yarn prettier --write ."
 	}
 }
