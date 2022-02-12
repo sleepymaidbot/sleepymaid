@@ -23,7 +23,7 @@ module.exports = {
 					if (member.user.bot) return
 					if (member.voice.mute || member.voice.deaf) return
 					const userInDb = await client.prisma.mondecorte.findUnique({
-						data: {
+						where: {
 							user_id: member.id
 						}
 					})
