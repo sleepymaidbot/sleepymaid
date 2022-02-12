@@ -17,9 +17,11 @@ const month = {
 
 function returnCurentTime() {
 	const d = new Date()
+	let min = d.getMinutes().toString()
+	if (d.getMinutes() <= 9) min = '0' + min
 	return `${
 		month[d.getMonth()]
-	} ${d.getDate()} ${d.getHours()}:${d.getMinutes()} ${d.getFullYear()}`
+	} ${d.getDate()} ${d.getHours()}:${min} ${d.getFullYear()}`
 }
 
 const logChannelId = '821509142518824991'
