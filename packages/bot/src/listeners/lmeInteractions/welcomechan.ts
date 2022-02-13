@@ -1,4 +1,4 @@
-import { Util, MessageEmbed } from 'discord.js'
+import { Util } from 'discord.js'
 import { Embed } from '@discordjs/builders'
 
 module.exports = {
