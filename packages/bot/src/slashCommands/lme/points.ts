@@ -53,7 +53,7 @@ module.exports = {
 					member = interaction.member.id
 					const userInDb = await client.prisma.mondecorte.findUnique({
 						where: {
-							id: interaction.member.id
+							user_id: interaction.member.id
 						}
 					})
 					points = userInDb?.points || 0
@@ -61,7 +61,7 @@ module.exports = {
 					member = user.member.id
 					const userInDb = await client.prisma.mondecorte.findUnique({
 						where: {
-							id: user.member.id
+							user_id: user.member.id
 						}
 					})
 					points = userInDb?.points || 0
@@ -118,7 +118,7 @@ module.exports = {
 				await interaction.deferReply()
 				const userInDb = await client.prisma.mondecorte.findUnique({
 					where: {
-						id: interaction.member.id
+						user_id: interaction.member.id
 					}
 				})
 				const points = userInDb?.points || 0
