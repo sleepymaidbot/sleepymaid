@@ -1,7 +1,5 @@
-import util from 'util'
 import fs from 'fs'
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const execFile = util.promisify(require('child_process').execFile)
+import { exec } from 'child_process'
 
 const sites = [
 	'tiktok.com',
@@ -27,17 +25,13 @@ module.exports = {
 			if (arg.startsWith('https://') && sites.some((a) => arg.includes(a))) {
 				try {
 					let fileName
-					await execFile(
-						'youtube-dl',
-						['-o', '%(id)s.%(ext)s', '--get-filename', arg],
+					exec(
+						`yt-dlp --get-filename -o %(id)s.%(ext)s ${arg}`,
 						async (error, stdout) => {
-							if (error) {
-								return client.logger.error(error)
-							}
+							if (error) return client.logger.error(error)
 							fileName = stdout.trim()
-							await execFile(
-								'youtube-dl',
-								['-o', `./downloads/${fileName}`, arg],
+							exec(
+								`yt-dlp -o "${fileName}" -P "./downloads/" "${arg}"`,
 								async (error) => {
 									if (error) return client.logger.error(error)
 									await message
