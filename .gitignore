@@ -165,5 +165,6 @@ packages/bot/src/config/config.ts
 *.disable
 *.exe
 packages/bot/banners/
+packages/bot/downloads/
 yes/
 icon.webp
