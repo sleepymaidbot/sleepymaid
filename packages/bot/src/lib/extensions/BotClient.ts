@@ -30,7 +30,7 @@ export class BotClient extends Client {
 		this.commands = {}
 		this.eventsFolder = eventsFolder ?? '../../listeners'
 		this.taskFolder = taskFolder ?? '../../tasks'
-		this.prisma = new PrismaClient()
+		this.prisma = new PrismaClient({ datasources: { db: { url: config.db } } })
 	}
 
 	public async startAll(): Promise<void> {
