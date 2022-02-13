@@ -1,4 +1,5 @@
-import { MessageEmbed } from 'discord.js'
+import { Util, MessageEmbed } from 'discord.js'
+import { Embed } from '@discordjs/builders'
 
 module.exports = {
 	name: 'interactionCreate',
@@ -75,24 +76,24 @@ module.exports = {
 						}
 					})
 
-					const embed = new MessageEmbed()
+					const embed = new Embed()
 						.setTitle('Rôles modifiés')
-						.setColor('#36393f')
+						.setColor(Util.resolveColor('#36393f'))
 						.setTimestamp()
 
 					if (roleAdded.length > 0) {
-						await embed.addField(
-							'Rôles ajoutés',
-							`${roleAdded.join('\n')} `,
-							true
-						)
+						embed.addField({
+							name: 'Rôles ajoutés',
+							value: `${roleAdded.join('\n')} `,
+							inline: true
+						})
 					}
 					if (roleRemoved.length > 0) {
-						await embed.addField(
-							'Rôles supprimés',
-							`${roleRemoved.join('\n')} `,
-							true
-						)
+						embed.addField({
+							name: 'Rôles supprimés',
+							value: `${roleRemoved.join('\n')} `,
+							inline: true
+						})
 					}
 					if (roleAdded.length > 0 || roleRemoved.length > 0) {
 						await interaction.followUp({

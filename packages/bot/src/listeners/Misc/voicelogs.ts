@@ -1,4 +1,5 @@
-import { MessageEmbed } from 'discord.js'
+import { Util } from 'discord.js'
+import { Embed } from '@discordjs/builders'
 
 const month = {
 	0: 'Janvier',
@@ -37,12 +38,12 @@ module.exports = {
 			const guild = newState.guild
 			const logChannel = guild.channels.cache.get(logChannelId)
 
-			const embed = new MessageEmbed()
+			const embed = new Embed()
 				.setTitle('Presence Update')
 				.setDescription(
 					`**${newState.member.user.tag}** has joined **${newState.channel.name}**.`
 				)
-				.setColor('#409400')
+				.setColor(Util.resolveColor('#409400'))
 				.setFooter({ text: returnCurentTime() })
 
 			try {
@@ -56,12 +57,12 @@ module.exports = {
 			const guild = newState.guild
 			const logChannel = guild.channels.cache.get(logChannelId)
 
-			const embed = new MessageEmbed()
+			const embed = new Embed()
 				.setTitle('Presence Update')
 				.setDescription(
 					`**${newState.member.user.tag}** has left **${oldState.channel.name}**.`
 				)
-				.setColor('#409400')
+				.setColor(Util.resolveColor('#409400'))
 				.setFooter({ text: returnCurentTime() })
 
 			try {
@@ -75,12 +76,12 @@ module.exports = {
 			const guild = newState.guild
 			const logChannel = guild.channels.cache.get(logChannelId)
 
-			const embed = new MessageEmbed()
+			const embed = new Embed()
 				.setTitle('Presence Update')
 				.setDescription(
 					`**${newState.member.user.tag}** has moved from **${oldState.channel.name}** to **${newState.channel.name}**.`
 				)
-				.setColor('#409400')
+				.setColor(Util.resolveColor('#409400'))
 				.setFooter({ text: returnCurentTime() })
 
 			try {

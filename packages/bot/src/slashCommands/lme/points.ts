@@ -1,5 +1,5 @@
-import { SlashCommandBuilder } from '@discordjs/builders'
-import { MessageActionRow, MessageButton, MessageEmbed } from 'discord.js'
+import { SlashCommandBuilder, Embed } from '@discordjs/builders'
+import { MessageActionRow, MessageButton, Util } from 'discord.js'
 import { checkUserRole, performRole } from '../../functions/rolesyncer'
 import { pointToRemoveForPoints } from '../../config/lists'
 
@@ -72,8 +72,8 @@ module.exports = {
 					interaction.member.id == '324281236728053760'
 				) {
 					if (points == 0) {
-						const embed = new MessageEmbed()
-							.setColor('#36393f')
+						const embed = new Embed()
+							.setColor(Util.resolveColor('#36393f'))
 							.setAuthor({
 								name: interaction.member.user.tag,
 								iconURL: interaction.member.user.avatarURL()
@@ -85,8 +85,8 @@ module.exports = {
 						await interaction.editReply({ embeds: [embed] })
 					} else {
 						if (points == 1) {
-							const embed = new MessageEmbed()
-								.setColor('#36393f')
+							const embed = new Embed()
+								.setColor(Util.resolveColor('#36393f'))
 								.setAuthor({
 									name: interaction.member.user.tag,
 									iconURL: interaction.member.user.avatarURL()
@@ -95,8 +95,8 @@ module.exports = {
 								.setTimestamp()
 							await interaction.editReply({ embeds: [embed] })
 						} else {
-							const embed = new MessageEmbed()
-								.setColor('#36393f')
+							const embed = new Embed()
+								.setColor(Util.resolveColor('#36393f'))
 								.setAuthor({
 									name: interaction.member.user.tag,
 									iconURL: interaction.member.user.avatarURL()
@@ -122,8 +122,8 @@ module.exports = {
 					}
 				})
 				const points = userInDb?.points || 0
-				const embed = new MessageEmbed()
-					.setColor('#36393f')
+				const embed = new Embed()
+					.setColor(Util.resolveColor('#36393f'))
 					.setAuthor({
 						name: `${interaction.member.user.tag} rewards`,
 						iconURL: interaction.member.user.avatarURL()
@@ -151,11 +151,12 @@ module.exports = {
 						}
 					} else {
 						hasCustomRole = '🟡'
-						embed.addField(
-							'Une récompense non réclamer',
-							'```Tu n\'a pas réclamer ton rôle custom. \nPour le réclamer fait "/customrole create <nom>" \n<nom> étant le nom désiré du rôle.```',
-							true
-						)
+						embed.addField({
+							name: 'Une récompense non réclamer',
+							value:
+								'```Tu n\'a pas réclamer ton rôle custom. \nPour le réclamer fait "/customrole create <nom>" \n<nom> étant le nom désiré du rôle.```',
+							inline: true
+						})
 					}
 				}
 				if (points >= 500) {
@@ -165,11 +166,11 @@ module.exports = {
 					})
 
 					if (pointsToLoose !== 1) {
-						embed.addField(
-							'Perte de points par heures',
-							`\`\`\`Tu perds ${pointsToLoose} points par heure à cause que tu as ${points} points.\`\`\``,
-							true
-						)
+						embed.addField({
+							name: 'Perte de points par heures',
+							value: `\`\`\`Tu perds ${pointsToLoose} points par heure à cause que tu as ${points} points.\`\`\``,
+							inline: true
+						})
 					}
 				}
 				let hasColorful = '❌'
@@ -291,8 +292,8 @@ module.exports = {
 
 					const leaderboardText = await getLeaderboard(page)
 
-					const embed = new MessageEmbed()
-						.setColor('#36393f')
+					const embed = new Embed()
+						.setColor(Util.resolveColor('#36393f'))
 						.setAuthor({
 							name: 'Leaderboard du serveur',
 							iconURL: interaction.guild.iconURL()
@@ -317,8 +318,8 @@ module.exports = {
 								page = page - 1
 
 								const lb = await getLeaderboard(page)
-								const newEmbed = new MessageEmbed()
-									.setColor('#36393f')
+								const newEmbed = new Embed()
+									.setColor(Util.resolveColor('#36393f'))
 									.setAuthor({
 										name: 'Leaderboard du serveur',
 										iconURL: interaction.guild.iconURL()
@@ -334,8 +335,8 @@ module.exports = {
 								page = page + 1
 
 								const lb = await getLeaderboard(page)
-								const newEmbed = new MessageEmbed()
-									.setColor('#36393f')
+								const newEmbed = new Embed()
+									.setColor(Util.resolveColor('#36393f'))
 									.setAuthor({
 										name: 'Leaderboard du serveur',
 										iconURL: interaction.guild.iconURL()

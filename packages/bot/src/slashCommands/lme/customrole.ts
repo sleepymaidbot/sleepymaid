@@ -1,6 +1,6 @@
-import { SlashCommandBuilder } from '@discordjs/builders'
+import { SlashCommandBuilder, Embed } from '@discordjs/builders'
 import { getCRoleEligibility } from '../../functions/customrole'
-import { MessageEmbed } from 'discord.js'
+import { Util } from 'discord.js'
 
 module.exports = {
 	guildIds: ['324284116021542922'],
@@ -64,12 +64,12 @@ module.exports = {
 			inDb?.points || 0
 		)
 		const customRoleId = inDb?.custom_role_id
-		const embed = new MessageEmbed()
+		const embed = new Embed()
 			.setAuthor({
 				name: `Rôle custom de ${interaction.member.user.tag}`,
 				iconURL: interaction.member.user.avatarURL()
 			})
-			.setColor('#36393f')
+			.setColor(Util.resolveColor('#36393f'))
 			.setTimestamp()
 		switch (subcommand) {
 			case 'create': {

@@ -1,4 +1,5 @@
-import { Guild, GuildMember, MessageEmbed } from 'discord.js'
+import { Guild, GuildMember, Util } from 'discord.js'
+import { Embed } from '@discordjs/builders'
 import { BotClient } from '../lib/extensions/BotClient'
 import { config } from '../config/config'
 import { actifRoles } from '../config/lists'
@@ -65,12 +66,12 @@ export async function rewardChecker(
 					where: { user_id: member.id },
 					data: { custom_role_id: null }
 				})
-				const embed = new MessageEmbed()
+				const embed = new Embed()
 					.setAuthor({
 						name: `Rôle custom de ${member.user.tag}`,
 						iconURL: member.user.avatarURL()
 					})
-					.setColor('#36393f')
+					.setColor(Util.resolveColor('#36393f'))
 					.setTimestamp()
 					.setDescription(`Tu n'est plus éligible pour un rôle custom je t'ai donc retirer retirer ton rôle custom
 					Voici quelques informations sur ton rôle custom:
