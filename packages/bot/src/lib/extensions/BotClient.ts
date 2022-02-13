@@ -251,9 +251,17 @@ export class BotClient extends Client {
 		for (const file of filesToImport) {
 			await import(`${this.eventsFolder}/${file}`).then((event) => {
 				if (event.once) {
-					this.once(event.name, (...args) => event.execute(...args, this))
+					try {
+						this.once(event.name, (...args) => event.execute(...args, this))
+					} catch (error) {
+						this.logger.error(error)
+					}
 				} else {
-					this.on(event.name, (...args) => event.execute(...args, this))
+					try {
+						this.on(event.name, (...args) => event.execute(...args, this))
+					} catch (error) {
+						this.logger.error(error)
+					}
 				}
 			})
 		}
@@ -265,7 +273,13 @@ export class BotClient extends Client {
 			.filter((file) => file.endsWith('.js'))
 		for (const file of tasksFiles) {
 			await import(`${this.taskFolder}/${file}`).then((task) => {
-				setInterval(() => task.execute(this), task.interval)
+				setInterval(() => {
+					try {
+						task.execute(this)
+					} catch (error) {
+						this.logger.error(error)
+					}
+				}, task.interval)
 			})
 		}
 	}
