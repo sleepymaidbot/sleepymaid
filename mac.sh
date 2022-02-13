@@ -1,5 +1,4 @@
-nmcli radio wifi off
+wifi off
 sudo macchanger -r wlp2s0
-nmcli radio wifi om
+wifi om
 pm2 restart all
-pm2 logs
