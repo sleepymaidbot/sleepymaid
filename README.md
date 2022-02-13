@@ -1,5 +1,29 @@
 # Sleepy Maid
 
-This is a utility bot made for some of my server and other server I like.
+## Information
 
-I will not provide any support on hosting this bot because this is made for specific server.
+This is the monorepo for my discord bot `Sleepy Maid`.
+I plan on making this bot public but for now its only available for some specific servers.
+
+## Dependencies
+
+- Nodejs (Managed by Volta)
+- Yarn (Managed by Volta)
+- Postgresql
+- Typescript
+- Youtube-dl
+
+## Contributing
+
+Im not sure why you would want to contribute to this but if you do make a PR and I will be happy to accept it.
+
+## Running the bot
+
+1. Rename `package/bot/src/config/example-config.ts` to `package/bot/src/config/config.ts`.
+2. Fill the `config.ts` with your own information.
+3. Run `yarn`.
+4. Run `yarn start`.
+
+## Contact me
+
+Join my discord server [https://discord.gg/ecorte](https://discord.gg/8bpy2PC) or send me a message `Ecorte#0003`.
