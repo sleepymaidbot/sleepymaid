@@ -1,9 +1,11 @@
 import { colorRole } from '../../config/lists'
 import {
+	Message,
 	MessageActionRow,
 	MessageButton,
 	MessageEmbed,
-	MessageSelectMenu
+	MessageSelectMenu,
+	TextChannel
 } from 'discord.js'
 import { config } from '../../config/config'
 import { inspect } from 'util'
