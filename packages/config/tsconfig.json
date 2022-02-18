@@ -11,16 +11,7 @@
 			"ESNext.Symbol",
 			"DOM"
 		],
-		"sourceMap": false,
-		"skipLibCheck": true,
-		"inlineSourceMap": true,
-		"inlineSources": true,
-		"incremental": true,
-		"esModuleInterop": true,
-		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true,
-		"alwaysStrict": true
 	},
-	"include": ["src/**/*", "src/*"],
-	"exclude": ["node_modules"]
+	"extends": "@sleepymaid-ts/tsconfig/base.json",
+	"include": ["src/**/*", "src/*"]
 }

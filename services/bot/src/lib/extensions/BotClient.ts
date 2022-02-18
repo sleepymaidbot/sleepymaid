@@ -1,8 +1,8 @@
 import { ApplicationCommandData, Client, ClientOptions } from 'discord.js'
 import { Logger } from '@sleepymaid-ts/logger'
-import fs from 'fs'
+import * as fs from 'fs'
 import { config } from '@sleepymaid-ts/config'
-import path from 'path'
+import * as path from 'path'
 import type {
 	botClientCommandsType,
 	BotClientOptions,

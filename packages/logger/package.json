@@ -13,6 +13,7 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
+		"@sleepymaid-ts/tsconfig": "*",
 		"@types/node": "^17.0.18",
 		"@yarnpkg/cli-dist": "^3.1.1",
 		"rimraf": "^3.0.2",

@@ -1,4 +1,4 @@
-import fs from 'fs'
+import * as fs from 'fs'
 import { exec } from 'child_process'
 
 const sites = [

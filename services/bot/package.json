@@ -24,6 +24,7 @@
 		"@sleepymaid-ts/logger": "*",
 		"@sleepymaid-ts/util": "*",
 		"@sleepymaid-ts/config": "*",
+		"@sleepymaid-ts/tsconfig": "*",
 		"@prisma/client": "^3.9.2",
 		"ansi-colors": "^4.1.1",
 		"discord.js": "^13.6.0",

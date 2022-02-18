@@ -1,0 +1,16 @@
+{
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"compilerOptions": {
+		"sourceMap": false,
+		"skipLibCheck": true,
+		"inlineSourceMap": true,
+		"inlineSources": true,
+		"forceConsistentCasingInFileNames": true,
+		"incremental": true,
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"alwaysStrict": true
+	},
+	"exclude": ["node_modules"]
+}
