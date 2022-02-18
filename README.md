@@ -1,8 +1,10 @@
-# Sleepy Maid
+<div align='center'>
+<h1>Sleepy Maid</h1>
+<blockquote>A simple discord utility bot written in Typescript.</blockquote>
+</div>
 
-## Information
-
-This is the monorepo for my discord bot `Sleepy Maid`.
+Sleepy Maid is a private utility bot that is used to help with various tasks.
+This is the monorepo for all the related package of the bot.
 I plan on making this bot public but for now its only available for some specific servers.
 
 ## Dependencies
