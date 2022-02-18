@@ -1,4 +1,4 @@
-import { Config } from '../lib/utils/config'
+import { Config } from './index'
 
 export const config = new Config({
 	credentials: {

@@ -6,7 +6,8 @@
 	"license": "MIT",
 	"private": true,
 	"workspaces": [
-		"services/*"
+		"services/*",
+		"packages/*"
 	],
 	"volta": {
 		"node": "16.9.0",

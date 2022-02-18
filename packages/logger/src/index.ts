@@ -6,14 +6,14 @@ export enum Loglevels {
 	Error
 }
 
-const prefixes = new Map<Loglevels, string>([
+export const prefixes = new Map<Loglevels, string>([
 	[Loglevels.Debug, 'DEBUG'],
 	[Loglevels.Info, 'INFO'],
 	[Loglevels.Error, 'ERROR']
 ])
 
-const noColor: (str: string) => string = (msg) => msg
-const colorFunctions = new Map<Loglevels, (str: string) => string>([
+export const noColor: (str: string) => string = (msg) => msg
+export const colorFunctions = new Map<Loglevels, (str: string) => string>([
 	[Loglevels.Debug, gray],
 	[Loglevels.Info, cyan],
 	[Loglevels.Error, (str: string) => red(str)]

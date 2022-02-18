@@ -40,3 +40,5 @@ export class Config {
 		return this.environment === 'development'
 	}
 }
+
+export { config } from './config'

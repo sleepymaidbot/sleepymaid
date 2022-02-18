@@ -1,14 +1,14 @@
 import { ApplicationCommandData, Client, ClientOptions } from 'discord.js'
-import { Logger } from '../logger/logger'
+import { Logger } from '@sleepymaid-ts/logger'
 import fs from 'fs'
-import { config } from '../../config/config'
+import { config } from '@sleepymaid-ts/config'
 import path from 'path'
 import type {
 	botClientCommandsType,
 	BotClientOptions,
 	guildCommandsType
 } from '../../types'
-import Util from '../utils/util'
+import Util from '@sleepymaid-ts/util'
 import { PrismaClient } from '@prisma/client'
 
 export class BotClient extends Client {

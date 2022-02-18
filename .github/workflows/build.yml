@@ -5,10 +5,12 @@ on:
     branches: [main]
     paths:
       - services/bot/**
+      - packages/**
   pull_request:
     branches: [main]
     paths:
       - services/bot/**
+      - packages/**
 
   workflow_dispatch:
 
@@ -16,9 +18,6 @@ jobs:
   Test-Build:
     runs-on: ubuntu-latest
     name: Test Build
-    defaults:
-      run:
-        working-directory: services/bot
 
     steps:
       - uses: actions/checkout@v2
@@ -39,6 +38,6 @@ jobs:
       - name: Install dependencies
         run: yarn
       - name: Fix config
-        run: cp src/config/example-config.ts src/config/config.ts
+        run: cp packages/config/example-config.ts packages/config/config.ts
       - name: Test Build
         run: yarn build

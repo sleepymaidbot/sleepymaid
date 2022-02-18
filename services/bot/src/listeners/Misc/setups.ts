@@ -7,7 +7,7 @@ import {
 	MessageSelectMenu,
 	TextChannel
 } from 'discord.js'
-import { config } from '../../config/config'
+import { config } from '@sleepymaid-ts/config'
 import { inspect } from 'util'
 
 module.exports = {
