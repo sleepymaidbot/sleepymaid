@@ -1,20 +1,9 @@
 import { colorRole } from '../../config/lists'
 import {
-<<<<<<< HEAD
-	ActionRow,
-	ButtonComponent,
-	ButtonStyle,
-	Message,
-	SelectMenuComponent,
-	TextChannel,
-	UnsafeSelectMenuOption,
-	Util
-=======
 	MessageActionRow,
 	MessageButton,
 	MessageEmbed,
 	MessageSelectMenu
->>>>>>> parent of 3ffe536 (refactor: Update for v14 changes)
 } from 'discord.js'
 import { config } from '../../config/config'
 import { inspect } from 'util'
