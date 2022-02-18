@@ -10,7 +10,7 @@
 			"ESNext.Intl",
 			"ESNext.Symbol",
 			"DOM"
-		],
+		]
 	},
 	"extends": "@sleepymaid-ts/tsconfig/base.json",
 	"include": ["src/**/*", "src/*"]
