@@ -4,11 +4,11 @@ on:
   push:
     branches: [main]
     paths:
-      - packages/bot/**
+      - services/bot/**
   pull_request:
     branches: [main]
     paths:
-      - packages/bot/**
+      - services/bot/**
 
   workflow_dispatch:
 
@@ -18,7 +18,7 @@ jobs:
     name: Test Build
     defaults:
       run:
-        working-directory: packages/bot
+        working-directory: services/bot
 
     steps:
       - uses: actions/checkout@v2
