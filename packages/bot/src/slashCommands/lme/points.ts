@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, Embed } from '@discordjs/builders'
-import { MessageActionRow, MessageButton, Util } from 'discord.js'
+import { ActionRow, ButtonComponent, ButtonStyle, Util } from 'discord.js'
 import { checkUserRole, performRole } from '../../functions/rolesyncer'
 import { pointToRemoveForPoints } from '../../config/lists'
 
@@ -261,27 +261,27 @@ module.exports = {
 							nextOn = true
 						}
 
-						const row = new MessageActionRow()
+						const row = new ActionRow()
 							.addComponents(
-								new MessageButton()
+								new ButtonComponent()
 									.setDisabled(previousOn)
-									.setStyle('PRIMARY')
+									.setStyle(ButtonStyle.Primary)
 									.setCustomId('lb:page:previous')
-									.setEmoji('◀️')
+									.setEmoji({ name: '◀️' })
 							)
 							.addComponents(
-								new MessageButton()
+								new ButtonComponent()
 									.setDisabled(true)
-									.setStyle('PRIMARY')
+									.setStyle(ButtonStyle.Primary)
 									.setCustomId('lb:label')
 									.setLabel(page.toString())
 							)
 							.addComponents(
-								new MessageButton()
+								new ButtonComponent()
 									.setDisabled(nextOn)
-									.setStyle('PRIMARY')
+									.setStyle(ButtonStyle.Primary)
 									.setCustomId('lb:page:next')
-									.setEmoji('▶️')
+									.setEmoji({ name: '▶️' })
 							)
 
 						return {
