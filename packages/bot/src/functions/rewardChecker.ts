@@ -25,22 +25,16 @@ export async function rewardChecker(
 	const userRole = member.roles.cache.map((role) => role.id)
 
 	const addRoleObj = actifRoles.filter((roles) => roles.points <= points)
-	const toAddRoles = []
-	for (const role of addRoleObj) {
-		toAddRoles.push(role.roleId)
-	}
+	const toAddRoles = addRoleObj.map((role) => role.roleId)
 	const removeRoleObj = actifRoles.filter(
 		(roles) => roles.points - 50 >= points
 	)
-	const toRemoveRoles = []
-	for (const role of removeRoleObj) {
-		toRemoveRoles.push(role.roleId)
-	}
+	const toRemoveRoles = removeRoleObj.map((roles) => roles.roleId)
 
 	if (config.isProduction) {
 		try {
-			member.roles.add(toAddRoles)
-			member.roles.remove(toRemoveRoles)
+			await member.roles.add(toAddRoles)
+			await member.roles.remove(toRemoveRoles)
 		} catch (e) {
 			client.logger.error(e)
 		}
