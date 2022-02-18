@@ -199,16 +199,6 @@ module.exports = {
 			case 'setupVote': {
 				const maire = []
 
-				const userslol = [
-					'762383326018928642',
-					'307965162705649664',
-					'696613917765533746',
-					'377944202710876161',
-					'285502356811022336',
-					'302793054962581505',
-					'280056504604819457'
-				]
-
 				const channel = (await message.guild.channels.fetch(
 					'944033597583679508'
 				)) as TextChannel
