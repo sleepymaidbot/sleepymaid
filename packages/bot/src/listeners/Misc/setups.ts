@@ -3,7 +3,9 @@ import {
 	ActionRow,
 	ButtonComponent,
 	ButtonStyle,
+	Message,
 	SelectMenuComponent,
+	TextChannel,
 	UnsafeSelectMenuOption,
 	Util
 } from 'discord.js'
@@ -207,15 +209,16 @@ module.exports = {
 					'280056504604819457'
 				]
 
-				userslol.forEach(async (user) => {
-					await message.guild.members
-						.fetch(user, { force: true })
-						.then(async (member) => {
-							maire.push({
-								value: member.user.id,
-								label: member.user.tag
-							})
-						})
+				const channel = (await message.guild.channels.fetch(
+					'944033597583679508'
+				)) as TextChannel
+				const messages = await channel.messages.fetch()
+
+				messages.forEach((message: Message) => {
+					maire.push({
+						value: message.member.user.id,
+						label: message.member.user.tag
+					})
 				})
 
 				if (maire.length === 0) message.channel.send(':poop:')
