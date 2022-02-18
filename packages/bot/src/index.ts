@@ -1,23 +1,22 @@
-import { GatewayIntentBits } from 'discord.js'
-import { ActivityType } from 'discord-api-types/v9'
+import { Intents } from 'discord.js'
 import { BotClient } from './lib/extensions/BotClient'
 
 const client: BotClient = new BotClient(
 	{
-		intents: [
-			GatewayIntentBits.Guilds,
-			GatewayIntentBits.GuildMembers,
-			GatewayIntentBits.GuildBans,
-			GatewayIntentBits.GuildVoiceStates,
-			GatewayIntentBits.GuildMessages
-		],
+		intents: new Intents([
+			'GUILDS',
+			'GUILD_MEMBERS',
+			'GUILD_BANS',
+			'GUILD_VOICE_STATES',
+			'GUILD_MESSAGES'
+		]),
 		allowedMentions: { parse: ['users', 'roles'], repliedUser: false },
 		presence: {
 			status: 'online',
 			activities: [
 				{
 					name: 'yo allo ?',
-					type: ActivityType.Watching
+					type: 'WATCHING'
 				}
 			]
 		}

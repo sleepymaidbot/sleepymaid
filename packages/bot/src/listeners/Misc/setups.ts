@@ -1,5 +1,6 @@
 import { colorRole } from '../../config/lists'
 import {
+<<<<<<< HEAD
 	ActionRow,
 	ButtonComponent,
 	ButtonStyle,
@@ -8,8 +9,13 @@ import {
 	TextChannel,
 	UnsafeSelectMenuOption,
 	Util
+=======
+	MessageActionRow,
+	MessageButton,
+	MessageEmbed,
+	MessageSelectMenu
+>>>>>>> parent of 3ffe536 (refactor: Update for v14 changes)
 } from 'discord.js'
-import { Embed } from '@discordjs/builders'
 import { config } from '../../config/config'
 import { inspect } from 'util'
 
@@ -33,70 +39,60 @@ module.exports = {
 					roleArray.push(rolePingString)
 				})
 				const displayRoleString = roleArray.join(' ')
-				const embed = new Embed()
-					.setColor(Util.resolveColor('#36393f'))
+				const embed = new MessageEmbed()
+					.setColor('#36393f')
 					.setTitle('Choix de couleur.')
 					.setDescription(
 						'Clique sur un bouton pour avoir la couleur de ton choix.'
 					)
-					.addField({
-						name: 'Rôle de couleur',
-						value: displayRoleString,
-						inline: true
-					})
+					.addField('Rôle de couleur', displayRoleString, true)
 
-				const colorOptions = [
-					{
-						label: 'Aucune couleur',
-						value: 'nothing'
-					},
-					{
-						label: 'Maya',
-						value: 'Maya'
-					},
-					{
-						label: 'Mikado',
-						value: 'Mikado'
-					},
-					{
-						label: 'Rose',
-						value: 'Rose'
-					},
-					{
-						label: 'Lavender',
-						value: 'Lavender'
-					},
-					{
-						label: 'Coral',
-						value: 'Coral'
-					},
-					{
-						label: 'Cantaloupe',
-						value: 'Cantaloupe'
-					},
-					{
-						label: 'Mint',
-						value: 'Mint'
-					},
-					{
-						label: 'Weed',
-						value: 'Weed'
-					},
-					{
-						label: 'Smoked',
-						value: 'Smoked'
-					}
-				]
-
-				const row = new ActionRow().addComponents(
-					new SelectMenuComponent()
+				const row = new MessageActionRow().addComponents(
+					new MessageSelectMenu()
 						.setCustomId('color_role_selects')
 						.setPlaceholder('Aucune couleur')
-						.addOptions(
-							...colorOptions.map(
-								(option) => new UnsafeSelectMenuOption(option)
-							)
-						)
+						.addOptions([
+							{
+								label: 'Aucune couleur',
+								value: 'nothing'
+							},
+							{
+								label: 'Maya',
+								value: 'Maya'
+							},
+							{
+								label: 'Mikado',
+								value: 'Mikado'
+							},
+							{
+								label: 'Rose',
+								value: 'Rose'
+							},
+							{
+								label: 'Lavender',
+								value: 'Lavender'
+							},
+							{
+								label: 'Coral',
+								value: 'Coral'
+							},
+							{
+								label: 'Cantaloupe',
+								value: 'Cantaloupe'
+							},
+							{
+								label: 'Mint',
+								value: 'Mint'
+							},
+							{
+								label: 'Weed',
+								value: 'Weed'
+							},
+							{
+								label: 'Smoked',
+								value: 'Smoked'
+							}
+						])
 				)
 				message.channel.send({ embeds: [embed], components: [row] })
 				break
@@ -144,12 +140,9 @@ module.exports = {
 						return message.channel.send(`no`)
 					}
 
-					const evalOutputEmbed = new Embed()
+					const evalOutputEmbed = new MessageEmbed()
 						.setTitle('Evaluated Code')
-						.addField({
-							name: `:inbox_tray: **Input**`,
-							value: `\`\`\`js\n${codetoeval}\`\`\``
-						})
+						.addField(`:inbox_tray: **Input**`, `\`\`\`js\n${codetoeval}\`\`\``)
 
 					try {
 						const output = await eval(`(async () => {${codetoeval}})()`)
@@ -164,10 +157,10 @@ module.exports = {
 						if (inspect(output, { depth: 0 }).length > 1000) {
 							return
 						} else {
-							evalOutputEmbed.addField({
-								name: `:outbox_tray: **Output**`,
-								value: `\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``
-							})
+							evalOutputEmbed.addField(
+								`:outbox_tray: **Output**`,
+								`\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``
+							)
 						}
 						await message.channel.send({ embeds: [evalOutputEmbed] })
 					} catch (e) {
@@ -183,10 +176,10 @@ module.exports = {
 						if (inspect(output, { depth: 0 }).length > 1000) {
 							return
 						} else {
-							evalOutputEmbed.addField({
-								name: `:outbox_tray: **Error**`,
-								value: `\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``
-							})
+							evalOutputEmbed.addField(
+								`:outbox_tray: **Error**`,
+								`\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``
+							)
 						}
 						await message.channel.send({ embeds: [evalOutputEmbed] })
 						await client.logger.error(e)
@@ -212,27 +205,22 @@ module.exports = {
 				})
 
 				if (maire.length === 0) message.channel.send(':poop:')
-				const embed = new Embed()
-					.setColor(Util.resolveColor('#36393f'))
-					.setAuthor({
-						name: message.guild.name,
-						iconURL: message.guild.iconURL
-					})
+				const embed = new MessageEmbed()
+					.setColor('#36393f')
+					.setAuthor(message.guild.name, message.guild.iconURL)
 					.setTitle('Élection du maire du serveur')
 					.setDescription(
-						"Va lire les candidatures dans <#944033597583679508>.\nEnsuite, sélectionner la personne que vous voulez voter.\nVous ne pouvez voter qu'une fois et une personne."
+						"Va lire les candidatures dans <#895814344267403294>.\nEnsuite, sélectionner la personne que vous voulez voter.\nVous ne pouvez sélectionner qu'une fois et une personne."
 					)
 					.setTimestamp()
 
-				const row = new ActionRow().addComponents(
-					new SelectMenuComponent()
+				const row = new MessageActionRow().addComponents(
+					new MessageSelectMenu()
 						.setCustomId('vote')
 						.setPlaceholder('Aucun vote')
 						.setMaxValues(1)
 						.setMinValues(1)
-						.addOptions(
-							...maire.map((option) => new UnsafeSelectMenuOption(option))
-						)
+						.addOptions(maire)
 				)
 
 				await message.channel.send({
@@ -258,32 +246,28 @@ module.exports = {
 >   <@&879465436922642462> (Giveaway) - Pour être notififier lors d'un giveaway.
 `
 
-				const pinOptions = [
-					{
-						label: 'Annonce',
-						value: '879465272669528098'
-					},
-					{
-						label: 'Free Stuff',
-						value: '879465303795466240'
-					},
-					{
-						label: 'Giveaway',
-						value: '879465436922642462'
-					}
-				]
-
-				const roleSelect = new ActionRow().addComponents(
-					new SelectMenuComponent()
+				const roleSelect = new MessageActionRow().addComponents(
+					new MessageSelectMenu()
 						.setCustomId('ping_role_selects')
 						.setPlaceholder(
 							'Clique ici pour choisir un ou des rôles de notification'
 						)
 						.setMaxValues(3)
 						.setMinValues(0)
-						.addOptions(
-							...pinOptions.map((option) => new UnsafeSelectMenuOption(option))
-						)
+						.addOptions([
+							{
+								label: 'Annonce',
+								value: '879465272669528098'
+							},
+							{
+								label: 'Free Stuff',
+								value: '879465303795466240'
+							},
+							{
+								label: 'Giveaway',
+								value: '879465436922642462'
+							}
+						])
 				)
 
 				const ruleMessage = await message.channel.send({
@@ -307,56 +291,52 @@ Voici les rôles de couleur que vous pouvez assigner à vous-même:
 > ${displayRoleString}
 `
 
-				const options = [
-					{
-						label: 'Aucune couleur',
-						value: 'nothing'
-					},
-					{
-						label: 'Maya',
-						value: 'Maya'
-					},
-					{
-						label: 'Mikado',
-						value: 'Mikado'
-					},
-					{
-						label: 'Rose',
-						value: 'Rose'
-					},
-					{
-						label: 'Lavender',
-						value: 'Lavender'
-					},
-					{
-						label: 'Coral',
-						value: 'Coral'
-					},
-					{
-						label: 'Cantaloupe',
-						value: 'Cantaloupe'
-					},
-					{
-						label: 'Mint',
-						value: 'Mint'
-					},
-					{
-						label: 'Weed',
-						value: 'Weed'
-					},
-					{
-						label: 'Smoked',
-						value: 'Smoked'
-					}
-				]
-
-				const colorRow = new ActionRow().addComponents(
-					new SelectMenuComponent()
+				const colorRow = new MessageActionRow().addComponents(
+					new MessageSelectMenu()
 						.setCustomId('color_role_selects')
 						.setPlaceholder('Clique ici pour choisir un rôle de couleur')
-						.addOptions(
-							...options.map((option) => new UnsafeSelectMenuOption(option))
-						)
+						.addOptions([
+							{
+								label: 'Aucune couleur',
+								value: 'nothing'
+							},
+							{
+								label: 'Maya',
+								value: 'Maya'
+							},
+							{
+								label: 'Mikado',
+								value: 'Mikado'
+							},
+							{
+								label: 'Rose',
+								value: 'Rose'
+							},
+							{
+								label: 'Lavender',
+								value: 'Lavender'
+							},
+							{
+								label: 'Coral',
+								value: 'Coral'
+							},
+							{
+								label: 'Cantaloupe',
+								value: 'Cantaloupe'
+							},
+							{
+								label: 'Mint',
+								value: 'Mint'
+							},
+							{
+								label: 'Weed',
+								value: 'Weed'
+							},
+							{
+								label: 'Smoked',
+								value: 'Smoked'
+							}
+						])
 				)
 
 				await message.channel.send({
@@ -395,22 +375,22 @@ Pour avoir un rôle custom tu doit avoir au dessus de 250 points. Tu perd ton r�
 				const message5 = `:round_pushpin: **Comment avoir accès au serveur ?**
 Pour avoir accès au serveur tu doit appuyer sur le bouton ci-dessous.`
 
-				const accessButton = new ActionRow()
+				const accessButton = new MessageActionRow()
 					.addComponents(
-						new ButtonComponent()
+						new MessageButton()
 							.setCustomId('acces_role')
 							.setLabel("J'ai lu et j'accepte les règlements")
-							.setStyle(ButtonStyle.Success)
-							.setEmoji({ name: '✅' })
+							.setStyle('SUCCESS')
+							.setEmoji('✅')
 					)
 					.addComponents(
-						new ButtonComponent()
+						new MessageButton()
 							.setLabel('Aller en haut')
-							.setStyle(ButtonStyle.Link)
+							.setStyle('LINK')
 							.setURL(
 								`https://discord.com/channels/${message.guild.id}/${message.channel.id}/${ruleMessage.id}`
 							)
-							.setEmoji({ name: '⬆️' })
+							.setEmoji('⬆️')
 					)
 
 				await message.channel.send({
@@ -428,14 +408,14 @@ Pour avoir accès au serveur tu doit appuyer sur le bouton ci-dessous.`
 				break
 			}
 			case 'spookyMessage': {
-				const embed = new Embed()
-					.setColor(Util.resolveColor('#f4900c'))
+				const embed = new MessageEmbed()
+					.setColor('#f4900c')
 					.setDescription('Spooky rôle.')
-				const row = new ActionRow().addComponents(
-					new ButtonComponent()
+				const row = new MessageActionRow().addComponents(
+					new MessageButton()
 						.setLabel('Spooky')
-						.setStyle(ButtonStyle.Primary)
-						.setEmoji({ name: '🎃' })
+						.setStyle('PRIMARY')
+						.setEmoji('🎃')
 						.setCustomId('spooky')
 				)
 
@@ -444,8 +424,8 @@ Pour avoir accès au serveur tu doit appuyer sur le bouton ci-dessous.`
 				break
 			}
 			case 'revo': {
-				const embed = new Embed()
-					.setColor(Util.resolveColor('#36393f'))
+				const embed = new MessageEmbed()
+					.setColor('#36393f')
 					.setDescription(
 						'Certain membres du serveurs du serveur ne sont pas content du gouvernement actuel.\n\nUne révolution se prépare.\nCliquer sur le bouton vert si-dessous pour la rejoindre.'
 					)
@@ -455,11 +435,11 @@ Pour avoir accès au serveur tu doit appuyer sur le bouton ci-dessous.`
 					.setThumbnail(
 						'https://cdn.discordapp.com/attachments/436249478521946191/941122330749435914/2.png'
 					)
-				const row = new ActionRow().addComponents(
-					new ButtonComponent()
+				const row = new MessageActionRow().addComponents(
+					new MessageButton()
 						.setLabel('Rejoindre la révolution.')
-						.setStyle(ButtonStyle.Success)
-						.setEmoji({ name: '✅' })
+						.setStyle('SUCCESS')
+						.setEmoji('✅')
 						.setCustomId('revo:join')
 				)
 
