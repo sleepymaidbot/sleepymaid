@@ -19,7 +19,7 @@ Im not sure why you would want to contribute to this but if you do make a PR and
 
 ## Running the bot
 
-1. Rename `package/bot/src/config/example-config.ts` to `package/bot/src/config/config.ts`.
+1. Rename `services/bot/src/config/example-config.ts` to `servicesservicesservices/bot/src/config/config.ts`.
 2. Fill the `config.ts` with your own information.
 3. Run `yarn`.
 4. Run `yarn start`.
