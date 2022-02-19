@@ -1,4 +1,4 @@
-import { Snowflake } from 'discord.js'
+import { Snowflake } from 'discord-api-types/v10'
 
 export interface ConfigOptions {
 	credentials: { token: string; devToken: string }
