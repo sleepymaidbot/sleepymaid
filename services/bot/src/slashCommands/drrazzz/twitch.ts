@@ -10,7 +10,7 @@ module.exports = {
 	async execute(interaction) {
 		await interaction.reply({
 			content:
-				'<:twitch:818473720288378980> <[Clique ici pour avoir le lien de la chaine twitch de DrraZz_](https://www.twitch.tv/drrazz_)>'
+				'<:twitch:818473720288378980> [Clique ici pour avoir le lien de la chaine twitch de DrraZz_](<https://www.twitch.tv/drrazz_>)'
 		})
 	}
 }
