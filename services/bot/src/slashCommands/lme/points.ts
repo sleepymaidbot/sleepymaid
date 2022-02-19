@@ -230,8 +230,7 @@ module.exports = {
 						page = interaction.options.get('page').value
 					}
 
-					// eslint-disable-next-line no-inner-declarations
-					async function getLeaderboard(page: number) {
+					const getLeaderboard = (page: number) => {
 						const text: Array<string> = []
 						const max = page * 10 - 1
 						const min = page * 10 - 10
