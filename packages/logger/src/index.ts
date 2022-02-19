@@ -1,4 +1,5 @@
 import { gray, blue, red, cyan } from 'ansi-colors'
+import pino from 'pino'
 
 export enum Loglevels {
 	Debug,
@@ -20,8 +21,13 @@ export const colorFunctions = new Map<Loglevels, (str: string) => string>([
 ])
 
 export class Logger {
+	public declare pino
 	constructor(protected name: string) {
-		// do nothing...
+		this.pino = pino({
+			transport: {
+				target: 'pino-pretty'
+			}
+		})
 	}
 
 	forkInstance(name: string): Logger {
@@ -38,24 +44,22 @@ export class Logger {
 
 		const date = new Date()
 		const log = [
-			`${this.name}`,
 			`[${date.toLocaleDateString()} ${date.toLocaleTimeString()}]`,
-			color(prefixes.get(level) || 'DEBUG'),
 			`: ${message} ${args.join(' ')}`
 		]
 		return log.join(' ')
 	}
 
 	debug(message: string, ...args: string[]): void {
-		console.debug(this.formatMessage(Loglevels.Debug, gray(message), ...args))
+		this.pino.debug(this.formatMessage(Loglevels.Debug, gray(message), ...args))
 	}
 
 	info(message: string, ...args: string[]): void {
-		console.log(this.formatMessage(Loglevels.Info, blue(message), ...args))
+		this.pino.info(this.formatMessage(Loglevels.Info, blue(message), ...args))
 	}
 
 	error(error: Error, ...args: string[]): void {
-		console.error(
+		this.pino.error(
 			this.formatMessage(
 				Loglevels.Error,
 				red(error.stack ?? error.message),
