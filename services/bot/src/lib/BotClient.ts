@@ -7,7 +7,7 @@ import type {
 	botClientCommandsType,
 	BotClientOptions,
 	guildCommandsType
-} from '../../types'
+} from '../types'
 import Util from '@sleepymaid-ts/util'
 import { PrismaClient } from '@prisma/client'
 

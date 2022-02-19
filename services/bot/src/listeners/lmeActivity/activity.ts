@@ -1,8 +1,5 @@
 import { Message } from 'discord.js'
-import {
-	pointsBlacklistedTextChannel,
-	pointsMultiplier
-} from '../../config/lists'
+import { pointsBlacklistedTextChannel, pointsMultiplier } from '../../lib/lists'
 import { rewardChecker } from '../../functions/rewardChecker'
 
 const talkedRecently = new Set()

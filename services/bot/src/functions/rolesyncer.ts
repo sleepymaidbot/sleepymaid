@@ -1,5 +1,5 @@
 import { GuildMember, Role } from 'discord.js'
-import { colorRole, ColorfulNeedRole } from '../config/lists'
+import { colorRole, ColorfulNeedRole } from '../lib/lists'
 
 export async function checkUserRole(
 	oldMemberRole: string[],

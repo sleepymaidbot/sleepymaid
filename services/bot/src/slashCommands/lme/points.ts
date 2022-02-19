@@ -1,7 +1,7 @@
 import { SlashCommandBuilder, Embed } from '@discordjs/builders'
 import { MessageActionRow, MessageButton, Util } from 'discord.js'
 import { checkUserRole, performRole } from '../../functions/rolesyncer'
-import { pointToRemoveForPoints } from '../../config/lists'
+import { pointToRemoveForPoints } from '../../lib/lists'
 
 const intForEmote = {
 	1: ':first_place:',

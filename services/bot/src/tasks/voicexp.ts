@@ -1,7 +1,4 @@
-import {
-	pointsBlacklistedVoiceChannel,
-	pointsMultiplier
-} from '../config/lists'
+import { pointsBlacklistedVoiceChannel, pointsMultiplier } from '../lib/lists'
 import { GuildMember } from 'discord.js'
 import { rewardChecker } from '../functions/rewardChecker'
 

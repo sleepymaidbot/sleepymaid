@@ -1,5 +1,5 @@
 import { Intents } from 'discord.js'
-import { BotClient } from './lib/extensions/BotClient'
+import { BotClient } from './lib/BotClient'
 
 const client: BotClient = new BotClient(
 	{

@@ -1,5 +1,5 @@
 import { TextChannel } from 'discord.js'
-import { pointToRemoveForPoints } from '../config/lists'
+import { pointToRemoveForPoints } from '../lib/lists'
 import { rewardChecker } from '../functions/rewardChecker'
 
 module.exports = {

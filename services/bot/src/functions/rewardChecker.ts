@@ -1,8 +1,8 @@
 import { Guild, GuildMember, Util } from 'discord.js'
 import { Embed } from '@discordjs/builders'
-import { BotClient } from '../lib/extensions/BotClient'
+import { BotClient } from '../lib/BotClient'
 import { config } from '@sleepymaid-ts/config'
-import { actifRoles } from '../config/lists'
+import { actifRoles } from '../lib/lists'
 
 async function getCRoleEligibility(
 	userPoints: number,
