@@ -23,7 +23,7 @@ const client: BotClient = new BotClient(
 	},
 	{
 		botName: 'Sleepy Maid',
-		commandFolder: '../../slashCommands'
+		commandFolder: '../slashCommands'
 	}
 )
 
