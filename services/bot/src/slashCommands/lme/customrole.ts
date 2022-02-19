@@ -1,5 +1,4 @@
 import { SlashCommandBuilder, Embed } from '@discordjs/builders'
-import { getCRoleEligibility } from '../../functions/customrole'
 import { Util } from 'discord.js'
 
 module.exports = {
@@ -59,10 +58,12 @@ module.exports = {
 				user_id: interaction.member.id
 			}
 		})
-		const isEligible = await getCRoleEligibility(
-			interaction.member,
-			inDb?.points || 0
-		)
+		const isEligible = (member, points) => {
+			const userrole = member.roles.cache.map((x) => x.id)
+			if (userrole.includes('869637334126170112')) return true
+			if (points >= 250) return true
+		}
+
 		const customRoleId = inDb?.custom_role_id
 		const embed = new Embed()
 			.setAuthor({
@@ -75,7 +76,7 @@ module.exports = {
 			case 'create': {
 				const name = await interaction.options.getString('name')
 				const color = await interaction.options.getString('color')
-				if (isEligible) {
+				if (isEligible(interaction.member, inDb?.points)) {
 					if (customRoleId !== null || undefined) {
 						try {
 							const cr = interaction.guild.roles.cache.find(
