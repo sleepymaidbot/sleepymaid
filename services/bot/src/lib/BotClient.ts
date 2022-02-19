@@ -148,7 +148,7 @@ export class BotClient extends Client {
 		if (guildCommands) {
 			for (const [key, value] of Object.entries(guildCommands)) {
 				const guild = this.guilds.cache.get(key)
-				if (!guild) return
+				if (!guild) continue
 
 				const sortedCommands = value
 					.map((cmd) => ({
