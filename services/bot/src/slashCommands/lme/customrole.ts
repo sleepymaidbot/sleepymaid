@@ -54,7 +54,7 @@ module.exports = {
 	async execute(interaction, client) {
 		await interaction.deferReply({ ephemeral: true })
 		const subcommand = interaction.options.getSubcommand()
-		const inDb = client.prisma.mondecorte.findUnique({
+		const inDb = await client.prisma.mondecorte.findUnique({
 			where: {
 				user_id: interaction.member.id
 			}
@@ -112,10 +112,10 @@ module.exports = {
 								await client.prisma.mondecorte
 									.update({
 										data: {
-											crole: role.id
+											custom_role_id: role.id
 										},
 										where: {
-											id: interaction.member.id
+											user_id: interaction.member.id
 										}
 									})
 									.then(async () => {
@@ -131,7 +131,7 @@ module.exports = {
 							.catch(console.error)
 					}
 				} else {
-					embed.setDescription("Tu n'est pas élibible.")
+					embed.setDescription("Tu n'est pas éligible.")
 					await interaction.editReply({ embeds: [embed], ephemeral: true })
 				}
 				break
@@ -146,10 +146,10 @@ module.exports = {
 						await client.prisma.mondecorte
 							.update({
 								data: {
-									crole: null
+									custom_role_id: null
 								},
 								where: {
-									id: interaction.member.id
+									user_id: interaction.member.id
 								}
 							})
 							.then(async () => {
@@ -170,7 +170,7 @@ module.exports = {
 			}
 			case 'name': {
 				const name = interaction.options.getString('name')
-				if (customRoleId && isEligible) {
+				if (customRoleId && isEligible(interaction.member, inDb?.points)) {
 					const crole = interaction.guild.roles.cache.find(
 						(role) => role.id === customRoleId
 					)
@@ -191,7 +191,7 @@ module.exports = {
 			}
 			case 'color': {
 				const color = interaction.options.getString('color')
-				if (customRoleId && isEligible) {
+				if (customRoleId && isEligible(interaction.member, inDb?.points)) {
 					const crole = interaction.guild.roles.cache.find(
 						(role) => role.id === customRoleId
 					)
