@@ -26,10 +26,10 @@ export class BotClient extends Client {
 
 		this.botName = botName ?? 'Bot'
 		this.logger = new Logger(this.botName)
-		this.commandFolder = commandFolder ?? '../../commands'
+		this.commandFolder = commandFolder ?? '../commands'
 		this.commands = {}
-		this.eventsFolder = eventsFolder ?? '../../listeners'
-		this.taskFolder = taskFolder ?? '../../tasks'
+		this.eventsFolder = eventsFolder ?? '../listeners'
+		this.taskFolder = taskFolder ?? '../tasks'
 		this.prisma = new PrismaClient({ datasources: { db: { url: config.db } } })
 	}
 
