@@ -12,7 +12,7 @@ module.exports = {
 				const value = interaction.values[0]
 				const inDb = await client.prisma.mondecorte.findUnique({
 					where: {
-						id: interaction.member.id
+						user_id: interaction.member.id
 					}
 				})
 				if (inDb) {
