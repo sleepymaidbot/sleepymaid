@@ -41,7 +41,8 @@ module.exports = {
 		})
 
 		return await interaction.reply({
-			content: `La couleur du rôle vraiment cool a été changée en ${color}.`
+			content: `La couleur du rôle vraiment cool a été changée en ${color}.`,
+			ephemeral: true
 		})
 	}
 }
