@@ -198,7 +198,10 @@ module.exports = {
 				if (maire.length === 0) message.channel.send(':poop:')
 				const embed = new MessageEmbed()
 					.setColor('#36393f')
-					.setAuthor(message.guild.name, message.guild.iconURL)
+					.setAuthor({
+						name: message.guild.name,
+						iconURL: message.guild.iconURL
+					})
 					.setTitle('Élection du maire du serveur')
 					.setDescription(
 						"Va lire les candidatures dans <#895814344267403294>.\nEnsuite, sélectionner la personne que vous voulez voter.\nVous ne pouvez sélectionner qu'une fois et une personne."
