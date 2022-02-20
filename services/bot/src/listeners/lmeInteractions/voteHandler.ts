@@ -5,7 +5,7 @@ module.exports = {
 	async execute(interaction, client) {
 		if (interaction.isSelectMenu()) {
 			if (
-				interaction.channel.id === '775820100917526548' &&
+				interaction.channel.id === '945053781240987759' &&
 				interaction.guild.id === '324284116021542922' &&
 				interaction.customId === 'vote'
 			) {
