@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { readdirSync } from 'fs'
+
 export default class Util {
 	public static deepEquals<T>(
 		a: unknown,
@@ -50,6 +52,20 @@ export default class Util {
 			} else if (newA[key] !== newB[key]) return false
 		}
 		return true
+	}
+
+	public static async loadFolder(folder: string) {
+		const fsfolder = readdirSync(folder)
+		const files = []
+		for (const file of fsfolder) {
+			if (file.endsWith('.js')) {
+				files.push(`${folder}/${file}`)
+			} else if (file.endsWith('.disable')) continue
+			else {
+				files.push(...(await this.loadFolder(`${folder}/${file}`)))
+			}
+		}
+		return files
 	}
 }
 
