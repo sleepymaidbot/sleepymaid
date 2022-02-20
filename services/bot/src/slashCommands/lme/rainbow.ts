@@ -28,7 +28,7 @@ module.exports = {
 
 		if (onCooldown === true)
 			return interaction.reply({
-				content: 'La command est en cooldown.',
+				content: 'La commande est en cooldown.',
 				ephemeral: true
 			})
 
