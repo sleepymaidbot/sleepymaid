@@ -1,6 +1,6 @@
 import { TextChannel } from 'discord.js'
-import { pointToRemoveForPoints } from '../lib/lists'
-import { rewardChecker } from '../functions/rewardChecker'
+import { pointToRemoveForPoints } from '../../lib/lists'
+import { rewardChecker } from '../../functions/rewardChecker'
 
 module.exports = {
 	interval: 3600000,

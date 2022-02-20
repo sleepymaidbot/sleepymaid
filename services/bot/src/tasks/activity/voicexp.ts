@@ -1,6 +1,9 @@
-import { pointsBlacklistedVoiceChannel, pointsMultiplier } from '../lib/lists'
+import {
+	pointsBlacklistedVoiceChannel,
+	pointsMultiplier
+} from '../../lib/lists'
 import { GuildMember } from 'discord.js'
-import { rewardChecker } from '../functions/rewardChecker'
+import { rewardChecker } from '../../functions/rewardChecker'
 
 module.exports = {
 	interval: 300000,
