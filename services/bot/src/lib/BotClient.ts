@@ -49,38 +49,16 @@ export class BotClient extends Client {
 	protected async registerApplicationCommands(): Promise<void> {
 		this.logger.info('Registering application commands...')
 
-		const slashCommandFiles = fs.readdirSync(
+		const filesToImport = await Util.loadFolder(
 			path.resolve(__dirname, this.commandFolder)
 		)
-
-		const filesToImport = []
-
-		async function importFolder(folder, commandFolder) {
-			const fsfolder = fs.readdirSync(`${__dirname}/${commandFolder}/${folder}`)
-			for (const file of fsfolder) {
-				if (file.endsWith('.js')) {
-					filesToImport.push(`${folder}/${file}`)
-				} else if (file.endsWith('.disable')) return
-				else {
-					importFolder(`${folder}/${file}`, this.commandFolder)
-				}
-			}
-		}
-		for (const file of slashCommandFiles) {
-			if (file.endsWith('.js')) {
-				filesToImport.push(file)
-			} else if (file.endsWith('.disable')) return
-			else {
-				importFolder(file, this.commandFolder)
-			}
-		}
 
 		const globalsCommands: ApplicationCommandData[] = []
 		const guildCommands: guildCommandsType = {}
 
 		for (const file of filesToImport) {
-			await import(`${this.commandFolder}/${file}`).then((cmds) => {
-				this.commands[cmds.data.name] = `${this.commandFolder}/${file}`
+			await import(file).then((cmds) => {
+				this.commands[cmds.data.name] = file
 				if (cmds.guildIds) {
 					if (cmds.guildIds.lenght === 1) {
 						const guildId = cmds.guildIDs[0]
@@ -221,35 +199,12 @@ export class BotClient extends Client {
 	}
 
 	protected async loadEvents() {
-		const eventFiles = fs.readdirSync(
+		const filesToImport = await Util.loadFolder(
 			path.resolve(__dirname, this.eventsFolder)
 		)
 
-		const filesToImport = []
-
-		async function importFolder(folder, eventsFolder) {
-			const fsfolder = fs.readdirSync(
-				path.resolve(__dirname, eventsFolder + '/' + folder)
-			)
-			for (const file of fsfolder) {
-				if (file.endsWith('.js')) {
-					filesToImport.push(`${folder}/${file}`)
-				} else if (file.endsWith('.disable')) return
-				else {
-					importFolder(`${folder}/${file}`, this.eventsFolder)
-				}
-			}
-		}
-		for (const file of eventFiles) {
-			if (file.endsWith('.js')) {
-				filesToImport.push(file)
-			} else if (file.endsWith('.disable')) return
-			else {
-				importFolder(file, this.eventsFolder)
-			}
-		}
 		for (const file of filesToImport) {
-			await import(`${this.eventsFolder}/${file}`).then((event) => {
+			await import(file).then((event) => {
 				if (event.once) {
 					try {
 						this.once(event.name, (...args) => event.execute(...args, this))
@@ -268,11 +223,12 @@ export class BotClient extends Client {
 	}
 
 	protected async loadTask() {
-		const tasksFiles = fs
-			.readdirSync(path.resolve(__dirname, this.taskFolder))
-			.filter((file) => file.endsWith('.js'))
-		for (const file of tasksFiles) {
-			await import(`${this.taskFolder}/${file}`).then((task) => {
+		const filesToImport = await Util.loadFolder(
+			path.resolve(__dirname, this.taskFolder)
+		)
+
+		for (const file of filesToImport) {
+			await import(file).then((task) => {
 				setInterval(() => {
 					try {
 						task.execute(this)
