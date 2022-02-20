@@ -23,7 +23,7 @@ module.exports = {
 								ephemeral: true
 							})
 						} else {
-							await client.prisma.mondeecorte.update({
+							await client.prisma.mondecorte.update({
 								where: {
 									user_id: interaction.member.id
 								},
@@ -38,7 +38,7 @@ module.exports = {
 						}
 					} else {
 						interaction.reply({
-							content: 'Tu a déja voté.',
+							content: 'Tu as déja voté.',
 							ephemeral: true
 						})
 					}
