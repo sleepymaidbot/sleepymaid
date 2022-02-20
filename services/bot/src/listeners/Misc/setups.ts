@@ -204,7 +204,7 @@ module.exports = {
 					})
 					.setTitle('Élection du maire du serveur')
 					.setDescription(
-						"Va lire les candidatures dans <#895814344267403294>.\nEnsuite, sélectionner la personne que vous voulez voter.\nVous ne pouvez sélectionner qu'une fois et une personne."
+						"Va lire les candidatures dans <#944033597583679508>.\nEnsuite, sélectionner la personne que vous voulez voter.\nVous ne pouvez sélectionner qu'une fois et une personne."
 					)
 					.setTimestamp()
 
