@@ -14,7 +14,7 @@
 	"license": "MIT",
 	"devDependencies": {
 		"@sleepymaid-ts/tsconfig": "*",
-		"@types/node": "^17.0.18",
+		"@types/node": "^17.0.19",
 		"@yarnpkg/cli-dist": "^3.1.1",
 		"rimraf": "^3.0.2",
 		"source-map-support": "^0.5.21",
