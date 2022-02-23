@@ -1,6 +1,5 @@
 import { ApplicationCommandData, Client, ClientOptions } from 'discord.js'
 import { Logger } from '@sleepymaid-ts/logger'
-import * as fs from 'fs'
 import { config } from '@sleepymaid-ts/config'
 import * as path from 'path'
 import type {
