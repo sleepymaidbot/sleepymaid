@@ -1,4 +1,4 @@
 wifi off
 sudo macchanger -r wlp2s0
-wifi om
+wifi on
 pm2 restart all
