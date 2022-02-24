@@ -13,7 +13,7 @@
 	"license": "MIT",
 	"devDependencies": {
 		"@types/node": "^17.0.18",
-		"@yarnpkg/cli-dist": "^3.1.1",
+		"@yarnpkg/cli-dist": "^3.2.0",
 		"discord-api-types": "^0.27.2",
 		"rimraf": "^3.0.2",
 		"source-map-support": "^0.5.21",
