@@ -6,3 +6,31 @@ updates:
     schedule:
       interval: daily
       time: '10:00'
+
+  - package-ecosystem: npm
+    directory: '/services/bot'
+    open-pull-requests-limit: 100
+    schedule:
+      interval: daily
+      time: '10:00'
+
+  - package-ecosystem: npm
+    directory: '/packages/config'
+    open-pull-requests-limit: 100
+    schedule:
+      interval: daily
+      time: '10:00'
+
+  - package-ecosystem: npm
+    directory: '/packages/logger'
+    open-pull-requests-limit: 100
+    schedule:
+      interval: daily
+      time: '10:00'
+
+  - package-ecosystem: npm
+    directory: '/packages/util'
+    open-pull-requests-limit: 100
+    schedule:
+      interval: daily
+      time: '10:00'
