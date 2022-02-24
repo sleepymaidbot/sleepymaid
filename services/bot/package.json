@@ -29,7 +29,7 @@
 		"ansi-colors": "^4.1.1",
 		"discord.js": "^13.6.0",
 		"fs": "^0.0.1-security",
-		"prisma": "^3.9.2"
+		"prisma": "^3.10.0"
 	},
 	"volta": {
 		"node": "16.9.0",
