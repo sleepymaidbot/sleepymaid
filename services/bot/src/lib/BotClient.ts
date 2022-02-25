@@ -1,4 +1,9 @@
-import { ApplicationCommandData, Client, ClientOptions } from 'discord.js'
+import {
+	ApplicationCommandData,
+	Client,
+	ClientOptions,
+	Guild
+} from 'discord.js'
 import { Logger } from '@sleepymaid-ts/logger'
 import { config } from '@sleepymaid-ts/config'
 import * as path from 'path'
@@ -162,9 +167,43 @@ export class BotClient extends Client {
 						`Guild commands for ${guild.name} have changed, updating...`
 					)
 					await guild.commands.set(value).catch((e) => this.logger.error(e))
+					this.registerApplicationCommandsPermissions(guild)
 				} else {
 					this.logger.info(`Guild commands for ${guild.name} have not changed.`)
 				}
+			}
+		}
+	}
+
+	protected async registerApplicationCommandsPermissions(
+		guild: Guild
+	): Promise<void> {
+		if (config.isDevelopment) {
+			if (guild.id === '324284116021542922') {
+				const fullPermissions = []
+				guild.commands.cache.each((cmd) => {
+					fullPermissions.push({
+						id: cmd.id,
+						permissions: [
+							{
+								id: '324281236728053760',
+								type: 'USER',
+								permission: true
+							},
+							{
+								id: '946221081251962941',
+								type: 'ROLE',
+								permission: true
+							},
+							{
+								id: '324284116021542922',
+								type: 'ROLE',
+								permission: false
+							}
+						]
+					})
+				})
+				await guild.commands.permissions.set({ fullPermissions })
 			}
 		}
 	}
