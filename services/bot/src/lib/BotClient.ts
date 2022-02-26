@@ -6,7 +6,7 @@ import {
 } from 'discord.js'
 import { Logger } from '@sleepymaid-ts/logger'
 import { config } from '@sleepymaid-ts/config'
-import * as path from 'path'
+import { resolve } from 'path'
 import type {
 	botClientCommandsType,
 	BotClientOptions,
@@ -54,7 +54,7 @@ export class BotClient extends Client {
 		this.logger.info('Registering application commands...')
 
 		const filesToImport = await Util.loadFolder(
-			path.resolve(__dirname, this.commandFolder)
+			resolve(__dirname, this.commandFolder)
 		)
 
 		const globalsCommands: ApplicationCommandData[] = []
@@ -238,7 +238,7 @@ export class BotClient extends Client {
 
 	protected async loadEvents() {
 		const filesToImport = await Util.loadFolder(
-			path.resolve(__dirname, this.eventsFolder)
+			resolve(__dirname, this.eventsFolder)
 		)
 
 		for (const file of filesToImport) {
@@ -262,7 +262,7 @@ export class BotClient extends Client {
 
 	protected async loadTask() {
 		const filesToImport = await Util.loadFolder(
-			path.resolve(__dirname, this.taskFolder)
+			resolve(__dirname, this.taskFolder)
 		)
 
 		for (const file of filesToImport) {
