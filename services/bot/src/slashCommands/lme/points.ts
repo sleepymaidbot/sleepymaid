@@ -1,7 +1,5 @@
 import { SlashCommandBuilder, Embed } from '@discordjs/builders'
 import { MessageActionRow, MessageButton, Util } from 'discord.js'
-import { checkUserRole, performRole } from '../../functions/rolesyncer'
-import { pointToRemoveForPoints } from '../../lib/lists'
 
 const intForEmote = {
 	1: ':first_place:',
@@ -28,9 +26,6 @@ module.exports = {
 				.addUserOption((option) =>
 					option.setName('user').setDescription('The user').setRequired(false)
 				)
-		)
-		.addSubcommand((subcommand) =>
-			subcommand.setName('rewards').setDescription('Show my rewards.')
 		)
 		.addSubcommand((subcommand) =>
 			subcommand
@@ -112,90 +107,6 @@ module.exports = {
 						ephemeral: true
 					})
 				}
-				break
-			}
-			case 'rewards': {
-				await interaction.deferReply()
-				const userInDb = await client.prisma.mondecorte.findUnique({
-					where: {
-						user_id: interaction.member.id
-					}
-				})
-				const points = userInDb?.points || 0
-				const embed = new Embed()
-					.setColor(Util.resolveColor('#36393f'))
-					.setAuthor({
-						name: `${interaction.member.user.tag} rewards`,
-						iconURL: interaction.member.user.avatarURL()
-					})
-					.setTimestamp()
-
-				let hasActifRole = '❌'
-				const arole = await interaction.guild.roles.cache.find(
-					(role) => role.id === '842387653394563074'
-				)
-				if (interaction.member.roles.cache.has(arole.id)) {
-					hasActifRole = '✅'
-				}
-				let hasCustomRole = '❌'
-				const croleid = userInDb?.crole
-				if (points >= 250) {
-					if (croleid != null) {
-						if (interaction.member.roles.cache.has(croleid)) {
-							hasCustomRole = '✅'
-						} else {
-							const crole = interaction.guild.roles.cache.find(
-								(role) => role.id === croleid
-							)
-							interaction.member.roles.add(crole).catch(console.error)
-						}
-					} else {
-						hasCustomRole = '🟡'
-						embed.addField({
-							name: 'Une récompense non réclamer',
-							value:
-								'```Tu n\'a pas réclamer ton rôle custom. \nPour le réclamer fait "/customrole create <nom>" \n<nom> étant le nom désiré du rôle.```',
-							inline: true
-						})
-					}
-				}
-				if (points >= 500) {
-					let pointsToLoose = 1
-					pointToRemoveForPoints.forEach((e) => {
-						if (e.need <= points) pointsToLoose = e.remove
-					})
-
-					if (pointsToLoose !== 1) {
-						embed.addField({
-							name: 'Perte de points par heures',
-							value: `\`\`\`Tu perds ${pointsToLoose} points par heure à cause que tu as ${points} points.\`\`\``,
-							inline: true
-						})
-					}
-				}
-				let hasColorful = '❌'
-				const corole = interaction.guild.roles.cache.find(
-					(role) => role.id === '857324294791364639'
-				)
-				if (interaction.member.roles.cache.has(corole.id)) {
-					hasColorful = '✅'
-				}
-				const memberRole: string[] = []
-				interaction.member.roles.cache.forEach((role) => {
-					memberRole.push(role.name)
-				})
-				const response = await checkUserRole(memberRole, memberRole)
-				const role = interaction.guild.roles.cache.find(
-					(role) => role.id === '857324294791364639'
-				)
-				await performRole(response, role, interaction.member)
-
-				embed.setDescription(`Voici une liste des récompense que tu a obtenu:
-			- Rôle <@&857324294791364639>: ${hasColorful}
-			- Rôle <@&842387653394563074>: ${hasActifRole}
-			- Rôle <@&869637334126170112>: ${hasCustomRole}`)
-
-				await interaction.editReply({ embeds: [embed] })
 				break
 			}
 			case 'leaderboard': {
