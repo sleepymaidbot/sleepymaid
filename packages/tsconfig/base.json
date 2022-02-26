@@ -10,7 +10,10 @@
 		"esModuleInterop": true,
 		"experimentalDecorators": true,
 		"emitDecoratorMetadata": true,
-		"alwaysStrict": true
+		"alwaysStrict": true,
+		"declarationDir": "./types",
+		"declaration": true,
+		"declarationMap": true
 	},
 	"exclude": ["node_modules"]
 }
