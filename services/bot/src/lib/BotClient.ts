@@ -118,6 +118,16 @@ export class BotClient extends Client {
 			}) as ApplicationCommandData[]
 
 		if (!Util.deepEquals(currentGlobalCommands, applicationCommand)) {
+			if (config.isDevelopment) {
+				const guild = this.guilds.cache.get('821717486217986098')
+				if (!guild) return
+				this.logger.info(
+					'Global commands have changed, updating...(in dev server)'
+				)
+				await guild.commands
+					.set(globalsCommands)
+					.catch((e) => this.logger.error(e))
+			}
 			this.logger.info('Global commands have changed, updating...')
 			await this.application?.commands
 				.set(globalsCommands)
