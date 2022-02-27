@@ -42,8 +42,8 @@ module.exports = {
 		if (interaction.member.roles.cache.has('927359635709628447'))
 			hasPasDeVie = '✅'
 		let hasCustomRole = '❌'
-		const croleid = userInDb?.crole
 		if (points >= 250) {
+			const croleid = userInDb?.custom_role_id
 			if (croleid != null) {
 				if (interaction.member.roles.cache.has(croleid)) {
 					hasCustomRole = '✅'
