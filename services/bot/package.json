@@ -12,24 +12,24 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
-		"@types/node": "^17.0.21",
-		"@yarnpkg/cli-dist": "^3.2.0",
-		"discord-api-types": "^0.27.3",
-		"rimraf": "^3.0.2",
-		"source-map-support": "^0.5.21",
-		"typescript": "^4.5.5"
+		"@types/node": "17.0.21",
+		"@yarnpkg/cli-dist": "3.2.0",
+		"discord-api-types": "0.27.3",
+		"rimraf": "3.0.2",
+		"source-map-support": "0.5.21",
+		"typescript": "4.5.5"
 	},
 	"dependencies": {
-		"@discordjs/builders": "^0.12.0",
-		"@prisma/client": "^3.10.0",
+		"@discordjs/builders": "0.12.0",
+		"@prisma/client": "3.10.0",
 		"@sleepymaid-ts/config": "*",
 		"@sleepymaid-ts/logger": "*",
 		"@sleepymaid-ts/tsconfig": "*",
 		"@sleepymaid-ts/util": "*",
-		"ansi-colors": "^4.1.1",
-		"discord.js": "^13.6.0",
-		"fs": "^0.0.1-security",
-		"prisma": "^3.10.0"
+		"ansi-colors": "4.1.1",
+		"discord.js": "13.6.0",
+		"fs": "0.0.1-security",
+		"prisma": "3.10.0"
 	},
 	"volta": {
 		"node": "16.9.0",
