@@ -26,8 +26,8 @@
 		"typescript": "4.6.2"
 	},
 	"scripts": {
-		"build": "yarn turbo run build --scope=bot",
-		"start": "yarn turbo run start --scope=bot",
+		"build": "yarn turbo run build",
+		"start": "yarn turbo run start --scope=@sleepymaid-ts/bot",
 		"lint": "yarn eslint --fix --ext ts,tsx packages",
 		"testlint": "yarn eslint --ext ts,tsx packages",
 		"format": "yarn prettier --write ."
