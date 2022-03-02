@@ -17,6 +17,7 @@ module.exports = {
 	once: false,
 
 	async execute(message, client) {
+		return
 		if (message.author.bot) return
 
 		const argv = message.content.split(' ')
