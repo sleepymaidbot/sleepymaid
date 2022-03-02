@@ -6,8 +6,7 @@ module.exports = {
 	once: false,
 
 	async execute(interaction) {
-		if (!interaction.isButton() || !interaction.isSelectMenu()) return
-		if (!interaction.customId.startsWith('lmeMeta')) return
+		if (!interaction.customId?.startsWith('lmeMeta')) return
 		const Ids = interaction.customId.split(':')
 		if (Ids[0] !== 'lmeMeta') return
 		if (Ids[1] === 'bienvenue') {
