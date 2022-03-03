@@ -40,6 +40,7 @@ module.exports = {
 							'> Les icônes utiliser sur le serveur sont la propriété de [Icons](https://discord.gg/9AtkECMX2P)',
 						inline: true
 					})
+					.setColor(Util.resolveColor('#36393f'))
 
 				await message.channel.send({
 					embeds: [embed1, embed2]
@@ -73,6 +74,7 @@ module.exports = {
 					.setFooter({
 						text: 'Cette liste ne contient pas tout ce que vous pouvez / ne pouvez pas faire. Les membres du staff peuvent appliquer les règles de la manière qui leur convient le mieux.'
 					})
+					.setColor(Util.resolveColor('#36393f'))
 
 				await message.channel.send({
 					content: '<:blank:948461701420945439>',
