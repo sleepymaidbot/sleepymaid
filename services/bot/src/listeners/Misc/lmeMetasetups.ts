@@ -6,18 +6,13 @@ module.exports = {
 	name: 'messageCreate',
 	once: false,
 
-	async execute(message, client) {
+	async execute(message) {
 		if (message.author.id !== '324281236728053760') return
 		const content = message.content.split(' ')
 		const cmd = content[0]
 		if (!cmd.startsWith(config.prefix)) return
 		switch (cmd.slice(1)) {
 			case 'setupBienvenue': {
-				/*const row1 = new MessageActionRow().addComponents(
-					new MessageActionRow().addComponents(
-
-					)
-				)*/
 				// Message 1
 				const embed1 = new Embed()
 					.setTitle(":otter: Bienvenue sur Le monde d'Ecorte")
