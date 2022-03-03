@@ -134,6 +134,23 @@ module.exports = {
 				})
 				break
 			}
+			case 'setupSupport': {
+				const embed1 = new Embed()
+					.setTitle("🎟️ Comment contacter l'Équipe du Staff?")
+					.setDescription(
+						"Besoin de contacter le staff pour un problème, une question un peu complexe ou autre chose demandant un espace de discussion privé avec l'équipe de modération?"
+					)
+					.setColor(Util.resolveColor('#33a34b'))
+				const embed2 = new Embed()
+					.setDescription(
+						'Alors cliquez sur la réaction 📩 sur se message pour ouvrir un ticket vous permettant de contacter le staff.'
+					)
+					.setColor(Util.resolveColor('#36393f'))
+
+				await message.channel.send({
+					embeds: [embed1, embed2]
+				})
+			}
 		}
 	}
 }
