@@ -29,12 +29,10 @@ export const pingRoleIds = [
 ]
 
 export const ColorfulNeedRole = [
-	'398478742709600256', // staff
+	'797650029278920714', // Mods
 	'719221506047213638', // nitro booster
 	'842387653394563074', // actif
-	'874008552128249966', // big gamer
-	'797650029278920714', // perm
-	'852884649646227476' // cute
+	'936027548540878928' // big gamer
 ]
 
 export const pointsBlacklistedTextChannel = [
