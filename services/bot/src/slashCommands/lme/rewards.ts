@@ -55,7 +55,7 @@ module.exports = {
 				}
 			} else {
 				hasCustomRole = '🟡'
-				embed.addField({
+				embed.addFields({
 					name: 'Une récompense non réclamer',
 					value:
 						'```Tu n\'a pas réclamer ton rôle custom. \nPour le réclamer fait "/customrole create <nom>" \n<nom> étant le nom désiré du rôle.```',
@@ -70,7 +70,7 @@ module.exports = {
 			})
 
 			if (pointsToLoose !== 1) {
-				embed.addField({
+				embed.addFields({
 					name: 'Perte de points par heures',
 					value: `\`\`\`Tu perds ${pointsToLoose} points par heure à cause que tu as ${points} points.\`\`\``,
 					inline: true

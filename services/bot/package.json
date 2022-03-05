@@ -20,14 +20,14 @@
 		"typescript": "4.6.2"
 	},
 	"dependencies": {
-		"@discordjs/builders": "0.12.0",
+		"@discordjs/builders": "^0.13.0-dev.1646395406.6f7a366",
 		"@prisma/client": "3.10.0",
 		"@sleepymaid-ts/config": "*",
 		"@sleepymaid-ts/logger": "*",
 		"@sleepymaid-ts/tsconfig": "*",
 		"@sleepymaid-ts/util": "*",
 		"ansi-colors": "4.1.1",
-		"discord.js": "13.6.0",
+		"discord.js": "^14.0.0-dev.1646395406.6f7a366",
 		"fs": "0.0.1-security",
 		"prisma": "3.10.0"
 	},

@@ -1,11 +1,13 @@
 import { colorRole } from '../../lib/lists'
 import {
 	Message,
-	MessageActionRow,
-	MessageButton,
-	MessageEmbed,
-	MessageSelectMenu,
-	TextChannel
+	ActionRow,
+	ButtonComponent,
+	Embed,
+	SelectMenuComponent,
+	TextChannel,
+	Util,
+	UnsafeSelectMenuOption
 } from 'discord.js'
 import { config } from '@sleepymaid-ts/config'
 import { inspect } from 'util'
@@ -63,9 +65,12 @@ module.exports = {
 						return message.channel.send(`no`)
 					}
 
-					const evalOutputEmbed = new MessageEmbed()
+					const evalOutputEmbed = new Embed()
 						.setTitle('Evaluated Code')
-						.addField(`:inbox_tray: **Input**`, `\`\`\`js\n${codetoeval}\`\`\``)
+						.addFields({
+							name: `:inbox_tray: **Input**`,
+							value: `\`\`\`js\n${codetoeval}\`\`\``
+						})
 
 					try {
 						const output = await eval(`(async () => {${codetoeval}})()`)
@@ -80,10 +85,10 @@ module.exports = {
 						if (inspect(output, { depth: 0 }).length > 1000) {
 							return
 						} else {
-							evalOutputEmbed.addField(
-								`:outbox_tray: **Output**`,
-								`\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``
-							)
+							evalOutputEmbed.addFields({
+								name: `:outbox_tray: **Output**`,
+								value: `\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``
+							})
 						}
 						await message.channel.send({ embeds: [evalOutputEmbed] })
 					} catch (e) {
@@ -99,10 +104,10 @@ module.exports = {
 						if (inspect(output, { depth: 0 }).length > 1000) {
 							return
 						} else {
-							evalOutputEmbed.addField(
-								`:outbox_tray: **Error**`,
-								`\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``
-							)
+							evalOutputEmbed.addFields({
+								name: `:outbox_tray: **Error**`,
+								value: `\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``
+							})
 						}
 						await message.channel.send({ embeds: [evalOutputEmbed] })
 						await client.logger.error(e)
@@ -128,8 +133,8 @@ module.exports = {
 				})
 
 				if (maire.length === 0) message.channel.send(':poop:')
-				const embed = new MessageEmbed()
-					.setColor('#36393f')
+				const embed = new Embed()
+					.setColor(Util.resolveColor('#36393f'))
 					.setAuthor({
 						name: message.guild.name,
 						iconURL: message.guild.iconURL
@@ -140,13 +145,15 @@ module.exports = {
 					)
 					.setTimestamp()
 
-				const row = new MessageActionRow().addComponents(
-					new MessageSelectMenu()
+				const row = new ActionRow().addComponents(
+					new SelectMenuComponent()
 						.setCustomId('vote')
 						.setPlaceholder('Aucun vote')
 						.setMaxValues(1)
 						.setMinValues(1)
-						.addOptions(maire)
+						.addOptions(
+							...maire.map((option) => new UnsafeSelectMenuOption(option))
+						)
 				)
 
 				await message.channel.send({

@@ -1,4 +1,10 @@
-import { MessageActionRow, MessageButton, MessageSelectMenu } from 'discord.js'
+import {
+	ActionRow,
+	ButtonComponent,
+	ButtonStyle,
+	SelectMenuComponent,
+	UnsafeSelectMenuOption
+} from 'discord.js'
 import { pingRoleIds, colorRoleIds } from '../../lib/lists'
 
 module.exports = {
@@ -13,41 +19,45 @@ module.exports = {
 			if (Ids[2] === 'init') {
 				switch (Ids[3]) {
 					case 'ping': {
-						const row1 = new MessageActionRow().addComponents(
-							new MessageSelectMenu()
+						const pingOptions = [
+							{
+								label: 'Annonce',
+								description: 'Notification pour les annonces importantes',
+								emoji: { name: '📢' },
+								value: '879465272669528098'
+							},
+							{
+								label: 'Free Stuff',
+								description: 'Notification pour quand un jeux deviens gratuit',
+								emoji: { name: '🎮' },
+								value: '879465303795466240'
+							},
+							{
+								label: 'Giveaway',
+								description: 'Notification pour quand il y a un giveaway',
+								emoji: { name: '🎉' },
+								value: '879465436922642462'
+							}
+						]
+						const row1 = new ActionRow().addComponents(
+							new SelectMenuComponent()
 								.setCustomId('lmeMeta:bienvenue:select:ping')
 								.setPlaceholder('Choisis ici tes rôles de notification')
 								.setMaxValues(3)
 								.setMinValues(0)
-								.addOptions([
-									{
-										label: 'Annonce',
-										description: 'Notification pour les annonces importantes',
-										emoji: '📢',
-										value: '879465272669528098'
-									},
-									{
-										label: 'Free Stuff',
-										description:
-											'Notification pour quand un jeux deviens gratuit',
-										emoji: '🎮',
-										value: '879465303795466240'
-									},
-									{
-										label: 'Giveaway',
-										description: 'Notification pour quand il y a un giveaway',
-										emoji: '🎉',
-										value: '879465436922642462'
-									}
-								])
+								.addOptions(
+									...pingOptions.map(
+										(option) => new UnsafeSelectMenuOption(option)
+									)
+								)
 						)
 
-						const row2 = new MessageActionRow().addComponents(
-							new MessageButton()
+						const row2 = new ActionRow().addComponents(
+							new ButtonComponent()
 								.setLabel('Supprimer mes notifications')
 								.setCustomId('lmeMeta:bienvenue:delete:ping')
-								.setEmoji('<:redX:948606748334358559>')
-								.setStyle('SECONDARY')
+								.setEmoji({ id: '948606748334358559' })
+								.setStyle(ButtonStyle.Secondary)
 						)
 
 						await interaction.reply({
@@ -60,56 +70,61 @@ module.exports = {
 					}
 					case 'color': {
 						if (interaction.member.roles.cache.has('857324294791364639')) {
-							const row1 = new MessageActionRow().addComponents(
-								new MessageSelectMenu()
+							const colorOptions = [
+								{
+									label: 'Maya',
+									value: '857372101748719656'
+								},
+								{
+									label: 'Mikado',
+									value: '857372291855679538'
+								},
+								{
+									label: 'Rose',
+									value: '857372400440967198'
+								},
+								{
+									label: 'Lavender',
+									value: '857372585552773120'
+								},
+								{
+									label: 'Coral',
+									value: '857372666141736981'
+								},
+								{
+									label: 'Cantaloupe',
+									value: '857372789139963925'
+								},
+								{
+									label: 'Mint',
+									value: '857372929598947368'
+								},
+								{
+									label: 'Weed',
+									value: '857431586202189835'
+								},
+								{
+									label: 'Smoked',
+									value: '857432207534981151'
+								}
+							]
+							const row1 = new ActionRow().addComponents(
+								new SelectMenuComponent()
 									.setCustomId('lmeMeta:bienvenue:select:color')
 									.setPlaceholder('Choisis ici ton rôle de couleur')
-									.addOptions([
-										{
-											label: 'Maya',
-											value: '857372101748719656'
-										},
-										{
-											label: 'Mikado',
-											value: '857372291855679538'
-										},
-										{
-											label: 'Rose',
-											value: '857372400440967198'
-										},
-										{
-											label: 'Lavender',
-											value: '857372585552773120'
-										},
-										{
-											label: 'Coral',
-											value: '857372666141736981'
-										},
-										{
-											label: 'Cantaloupe',
-											value: '857372789139963925'
-										},
-										{
-											label: 'Mint',
-											value: '857372929598947368'
-										},
-										{
-											label: 'Weed',
-											value: '857431586202189835'
-										},
-										{
-											label: 'Smoked',
-											value: '857432207534981151'
-										}
-									])
+									.addOptions(
+										...colorOptions.map(
+											(options) => new UnsafeSelectMenuOption(options)
+										)
+									)
 							)
 
-							const row2 = new MessageActionRow().addComponents(
-								new MessageButton()
+							const row2 = new ActionRow().addComponents(
+								new ButtonComponent()
 									.setLabel('Supprimer ma couleur')
 									.setCustomId('lmeMeta:bienvenue:delete:color')
-									.setEmoji('<:redX:948606748334358559>')
-									.setStyle('SECONDARY')
+									.setEmoji({ id: '948606748334358559' })
+									.setStyle(ButtonStyle.Secondary)
 							)
 
 							await interaction.reply({

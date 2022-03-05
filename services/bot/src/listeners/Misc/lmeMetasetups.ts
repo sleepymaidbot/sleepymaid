@@ -1,6 +1,6 @@
 import { config } from '@sleepymaid-ts/config'
 import { Embed } from '@discordjs/builders'
-import { MessageActionRow, MessageButton, Util } from 'discord.js'
+import { ActionRow, ButtonComponent, ButtonStyle, Util } from 'discord.js'
 
 module.exports = {
 	name: 'messageCreate',
@@ -24,12 +24,12 @@ module.exports = {
 					.setDescription(
 						"Dans ce lieu, vous pourrez bénéficier d'un coin pour parler de tout et de rien ou poster vos meilleur mêmes sans vous prendre la tête même après une journée difficile!\n\n Pour commencer je te conseil de lire les règlements ci-dessous.\n<:blank:948461701420945439>"
 					)
-					.addField({
+					.addFields({
 						name: '<:greenDot:948462338594467870> Liens utiles',
 						value: '> **Discord:** https://discord.gg/8bpy2PC',
 						inline: true
 					})
-					.addField({
+					.addFields({
 						name: '<:greenDot:948462338594467870> Crédits',
 						value:
 							'> Les icônes utiliser sur le serveur sont la propriété de [Icons](https://discord.gg/9AtkECMX2P)',
@@ -51,17 +51,17 @@ module.exports = {
 					.setColor(Util.resolveColor('#5765f2'))
 
 				const embed4 = new Embed()
-					.addField({
+					.addFields({
 						name: '<:blueDot:948466553505062992> A. Bon sens',
 						value:
 							'```01. Vous devez respecter les ToS de Discord\n02. Pas de NSFW, politiques ou pub\n03. Le spam ou troll est interdit\n04. Gardez vos drama personnel en MP\n05. Gardez un profil approprié\n06. Traitez les autres avec respect```'
 					})
-					.addField({
+					.addFields({
 						name: '<:blueDot:948466553505062992> B. Utilisation du serveur',
 						value:
 							"```07. Ne demandez pas de rôles, points, etc.\n08. Respectez le sujet de chaque salon\n09. Utiliser ModMail pour parler au staff\n10. Ne donnez pas d'informations personnelles\n11. Ne mentionnez pas sans raison```"
 					})
-					.addField({
+					.addFields({
 						name: '<:blueDot:948466553505062992> C. Événements',
 						value:
 							"```12. Respectez les autres participants\n13. Voler le travail d'autrui est interdit\n14. Lisez bien les instructions d'un évènement avant d'y participer```"
@@ -84,25 +84,25 @@ module.exports = {
 						'Sélectionnez les rôles et notifications qui vous intéressent sur le serveur en cliquant sur les boutons ci-dessous. Si besoin, cliquez sur le bouton **Voir mes Rôles** pour voir la liste de vos rôles.'
 					)
 
-				const row1 = new MessageActionRow()
+				const row1 = new ActionRow()
 					.addComponents(
-						new MessageButton()
+						new ButtonComponent()
 							.setCustomId('lmeMeta:bienvenue:init:ping')
 							.setLabel('Notifications')
-							.setStyle('PRIMARY')
+							.setStyle(ButtonStyle.Primary)
 					)
 					.addComponents(
-						new MessageButton()
+						new ButtonComponent()
 							.setCustomId('lmeMeta:bienvenue:init:color')
 							.setLabel('Couleur')
-							.setStyle('PRIMARY')
+							.setStyle(ButtonStyle.Primary)
 					)
 					.addComponents(
-						new MessageButton()
+						new ButtonComponent()
 							.setCustomId('lmeMeta:bienvenue:init:viewRoles')
 							.setLabel('Voir mes rôles')
-							.setEmoji('❔')
-							.setStyle('SECONDARY')
+							.setEmoji({ name: '❔' })
+							.setStyle(ButtonStyle.Secondary)
 					)
 
 				await message.channel.send({
@@ -119,12 +119,12 @@ module.exports = {
 						'Pour avoir accès au serveur, cliquez sur le bouton ci-dessous.'
 					)
 
-				const row2 = new MessageActionRow().addComponents(
-					new MessageButton()
+				const row2 = new ActionRow().addComponents(
+					new ButtonComponent()
 						.setCustomId('lmeMeta:bienvenue:join')
 						.setLabel("J'ai lu et j'accepte les règlements")
-						.setStyle('SUCCESS')
-						.setEmoji('✅')
+						.setStyle(ButtonStyle.Success)
+						.setEmoji({ name: '✅' })
 				)
 
 				await message.channel.send({

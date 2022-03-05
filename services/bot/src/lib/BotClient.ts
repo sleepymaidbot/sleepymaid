@@ -14,6 +14,7 @@ import type {
 } from '../types'
 import Util from '@sleepymaid-ts/util'
 import { PrismaClient } from '@prisma/client'
+import { ApplicationCommandPermissionType } from 'discord-api-types/v10'
 
 export class BotClient extends Client {
 	public declare botName: string
@@ -197,17 +198,17 @@ export class BotClient extends Client {
 						permissions: [
 							{
 								id: '324281236728053760',
-								type: 'USER',
+								type: ApplicationCommandPermissionType.User,
 								permission: true
 							},
 							{
 								id: '946221081251962941',
-								type: 'ROLE',
+								type: ApplicationCommandPermissionType.Role,
 								permission: true
 							},
 							{
 								id: '324284116021542922',
-								type: 'ROLE',
+								type: ApplicationCommandPermissionType.Role,
 								permission: false
 							}
 						]
