@@ -1,7 +1,10 @@
 import { Embed, SlashCommandBuilder } from '@discordjs/builders'
 import { Util } from 'discord.js'
-import { checkUserRole, performRole } from '../../functions/rolesyncer'
+import { container } from 'tsyringe'
+import { roleSyncer } from '../../functions/rolesyncer'
+import { BotClient } from '../../lib/BotClient'
 import { pointToRemoveForPoints } from '../../lib/lists'
+import 'reflect-metadata'
 
 module.exports = {
 	guildIds: ['324284116021542922'],
@@ -78,14 +81,8 @@ module.exports = {
 			}
 		}
 
-		const memberRole: string[] = await interaction.member.roles.cache.map(
-			(r) => r.id
-		)
-		const response = await checkUserRole(memberRole, memberRole)
-		const role = interaction.guild.roles.cache.find(
-			(role) => role.id === '857324294791364639'
-		)
-		await performRole(response, role, interaction.member)
+		container.register(BotClient, { useValue: client })
+		await container.resolve(roleSyncer).checkUserRole(interaction.member)
 
 		embed.setDescription(`Voici une liste des récompense que tu a obtenu:
   - Rôle <@&857324294791364639>: ${hasColorful}

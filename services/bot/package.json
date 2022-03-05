@@ -29,7 +29,9 @@
 		"ansi-colors": "4.1.1",
 		"discord.js": "^14.0.0-dev.1646395406.6f7a366",
 		"fs": "0.0.1-security",
-		"prisma": "3.10.0"
+		"prisma": "3.10.0",
+		"reflect-metadata": "^0.1.13",
+		"tsyringe": "^4.6.0"
 	},
 	"volta": {
 		"node": "16.14.0",

@@ -1,77 +1,47 @@
-import { GuildMember, Role } from 'discord.js'
+import { GuildMember } from 'discord.js'
+import { BotClient } from '../lib/BotClient'
 import { colorRole, ColorfulNeedRole } from '../lib/lists'
+import 'reflect-metadata'
+import { singleton } from 'tsyringe'
 
-export async function checkUserRole(
-	oldMemberRole: string[],
-	newMemberRole: string[]
-) {
-	let wasEligibleForColorfulRole = false
-	let eligibleForColorfulRole = false
-	oldMemberRole.forEach((role) => {
-		if (ColorfulNeedRole.includes(role.toLowerCase())) {
-			wasEligibleForColorfulRole = true
-		}
-	})
-	newMemberRole.forEach((role) => {
-		if (ColorfulNeedRole.includes(role.toLowerCase())) {
-			eligibleForColorfulRole = true
-		}
-	})
-
-	if (wasEligibleForColorfulRole && !eligibleForColorfulRole) {
-		if (newMemberRole.includes('857324294791364639')) {
-			return 'remove'
-		}
-		return 'none'
+@singleton()
+export class roleSyncer {
+	public declare client: BotClient
+	constructor(client: BotClient) {
+		this.client = client
 	}
-	if (!wasEligibleForColorfulRole && eligibleForColorfulRole) {
-		if (newMemberRole.includes('857324294791364639')) {
-			return 'none'
+	public async checkUserRole(member: GuildMember) {
+		const userRole = await member.roles.cache.map((r) => r.id)
+		const has = {
+			colorful: false
 		}
-		return 'add'
-	}
-
-	if (!wasEligibleForColorfulRole && !eligibleForColorfulRole) {
-		if (newMemberRole.includes('857324294791364639')) {
-			return 'remove'
-		}
-		return 'none'
-	}
-
-	if (wasEligibleForColorfulRole && eligibleForColorfulRole) {
-		if (newMemberRole.includes('857324294791364639')) {
-			return 'none'
-		}
-		return 'add'
-	}
-}
-
-export async function performRole(
-	action: string,
-	role: Role,
-	member: GuildMember
-) {
-	switch (action) {
-		case 'add':
-			try {
-				await member.roles.add(role)
-				return 'Done'
-			} catch (err) {
-				return `Error: ${err.message}`
+		for (const role of userRole) {
+			if (ColorfulNeedRole.includes(role)) {
+				has.colorful = true
 			}
-		case 'remove':
-			try {
-				await member.roles.remove(role)
+		}
+		this._performRole(has, member)
+	}
+
+	private async _performRole(has, member: GuildMember) {
+		const colorfulRole = await this.client.guilds.cache
+			.get('324284116021542922')
+			.roles.cache.get('857324294791364639')
+		if (has.colorful === true) {
+			if (!member.roles.cache.has('857324294791364639')) {
+				await member.roles.add(colorfulRole)
+			}
+		} else if (has.colorful === false) {
+			if (member.roles.cache.has('857324294791364639')) {
+				const toRemove = []
+				toRemove.push(colorfulRole.id)
 				member.roles.cache.forEach(async (eachRole) => {
 					if (colorRole.includes(eachRole.name)) {
-						await member.roles.remove(eachRole)
+						toRemove.push(eachRole.id)
 					}
 				})
-				return 'Done'
-			} catch (err) {
-				return `Error: ${err.message}`
+				await member.roles.remove(toRemove)
 			}
-		default:
-			return 'yes'
+		}
 	}
 }
