@@ -1,6 +1,6 @@
-import { Config } from './index'
+import { BaseConfig } from './baseConfig'
 
-export const config = new Config({
+export const config = new BaseConfig({
 	credentials: {
 		token: 'prod_token',
 		devToken: 'dev_token'
