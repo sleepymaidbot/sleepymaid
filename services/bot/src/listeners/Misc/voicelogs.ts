@@ -1,5 +1,6 @@
 import { Util } from 'discord.js'
 import { Embed } from '@discordjs/builders'
+import { config } from '@sleepymaid-ts/config'
 
 const month = {
 	0: 'Janvier',
@@ -33,6 +34,7 @@ module.exports = {
 
 	async execute(oldState, newState, client) {
 		if (newState.guild.id !== '324284116021542922') return
+		if (config.isDevelopment) return
 		// Join
 		if (oldState.channel == null && newState.channel != null) {
 			const guild = newState.guild
