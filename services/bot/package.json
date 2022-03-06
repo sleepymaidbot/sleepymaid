@@ -22,6 +22,7 @@
 	"dependencies": {
 		"@discordjs/builders": "^0.13.0-dev.1646395406.6f7a366",
 		"@prisma/client": "3.10.0",
+		"@sapphire/stopwatch": "^1.3.0",
 		"@sleepymaid-ts/config": "*",
 		"@sleepymaid-ts/logger": "*",
 		"@sleepymaid-ts/tsconfig": "*",

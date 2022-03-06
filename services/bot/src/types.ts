@@ -14,3 +14,9 @@ export interface botClientCommandsType {
 export interface guildCommandsType {
 	[key: Snowflake]: ApplicationCommandData[]
 }
+
+export enum VoiceXpState {
+	None,
+	Start,
+	Stop
+}
