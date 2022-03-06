@@ -168,4 +168,6 @@ services/bot/banners/
 services/bot/downloads/
 yes/
 icon.webp
-packages/tsconfig/types
+/**/dist
+/**/types
+!/**/src/types
