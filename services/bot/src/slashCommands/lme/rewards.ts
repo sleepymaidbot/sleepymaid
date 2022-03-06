@@ -1,7 +1,7 @@
 import { Embed, SlashCommandBuilder } from '@discordjs/builders'
 import { Util } from 'discord.js'
 import { container } from 'tsyringe'
-import { roleSyncer } from '../../functions/rolesyncer'
+import { roleSyncer } from '../../lib/rolesyncer'
 import { BotClient } from '../../lib/BotClient'
 import { pointToRemoveForPoints } from '../../lib/lists'
 import 'reflect-metadata'
