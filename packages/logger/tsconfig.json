@@ -3,6 +3,9 @@
 		"module": "commonjs",
 		"target": "esNEXT",
 		"outDir": "dist",
+		"declarationDir": "./types",
+		"declaration": true,
+		"declarationMap": true,
 		"lib": [
 			"ESNext",
 			"ESNext.Array",
