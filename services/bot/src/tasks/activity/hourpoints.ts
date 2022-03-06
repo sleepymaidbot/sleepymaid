@@ -1,6 +1,9 @@
+import 'reflect-metadata'
 import { TextChannel } from 'discord.js'
 import { pointToRemoveForPoints } from '../../lib/lists'
-import { rewardChecker } from '../../functions/rewardChecker'
+import { ActivityRewardManager } from '../../lib/activityRewardManager'
+import { container } from 'tsyringe'
+import { BotClient } from '../../lib/BotClient'
 
 module.exports = {
 	interval: 3600000,
@@ -29,7 +32,8 @@ module.exports = {
 				try {
 					const guild = await client.guilds.cache.get('324284116021542922')
 					const dUser = await guild.members.cache.get(user.user_id)
-					await rewardChecker(dUser, guild, client)
+					container.register(BotClient, { useValue: client })
+					container.resolve(ActivityRewardManager).checkActivityReward(dUser)
 				} catch (e) {
 					client.logger.error(e)
 				}

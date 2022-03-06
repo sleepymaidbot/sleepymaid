@@ -1,10 +1,10 @@
 import 'reflect-metadata'
 import { GuildMember } from 'discord.js'
-import { singleton } from 'tsyringe'
+import { singleton, container } from 'tsyringe'
 import { BotClient } from './BotClient'
 import { Stopwatch } from '@sapphire/stopwatch'
 import { pointsMultiplier } from './lists'
-import { rewardChecker } from '../functions/rewardChecker'
+import { ActivityRewardManager } from './activityRewardManager'
 
 const stopwatchs = {}
 
@@ -55,8 +55,8 @@ export class voiceXpManager {
 			this.client.logger.info(
 				'Added ' + pointsToAdd + ' points to ' + member.user.tag
 			)
-			const guild = this.client.guilds.cache.get('324284116021542922')
-			await rewardChecker(member, guild, this.client)
+			container.register(BotClient, { useValue: this.client })
+			container.resolve(ActivityRewardManager).checkActivityReward(member)
 		}
 	}
 }

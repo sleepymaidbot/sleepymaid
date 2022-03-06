@@ -1,6 +1,9 @@
+import 'reflect-metadata'
 import { Message } from 'discord.js'
 import { pointsBlacklistedTextChannel, pointsMultiplier } from '../../lib/lists'
-import { rewardChecker } from '../../functions/rewardChecker'
+import { ActivityRewardManager } from '../../lib/activityRewardManager'
+import { container } from 'tsyringe'
+import { BotClient } from '../../lib/BotClient'
 
 const talkedRecently = new Set()
 
@@ -8,7 +11,7 @@ module.exports = {
 	name: 'messageCreate',
 	once: false,
 
-	async execute(message: Message, client) {
+	async execute(message: Message, client: BotClient) {
 		if (message.guild == null) return
 		if (message.guild.id != '324284116021542922') return
 		if (message.author.bot) return
@@ -42,7 +45,10 @@ module.exports = {
 				}
 			})
 
-			await rewardChecker(message.member, message.guild, client)
+			container.register(BotClient, { useValue: client })
+			container
+				.resolve(ActivityRewardManager)
+				.checkActivityReward(message.member)
 		}
 
 		talkedRecently.add(message.author.id)
