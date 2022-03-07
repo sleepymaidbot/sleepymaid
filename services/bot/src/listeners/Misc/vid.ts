@@ -1,5 +1,7 @@
-import * as fs from 'fs'
-import { exec } from 'child_process'
+import { unlink } from 'fs'
+import { promisify } from 'util'
+import { execFile as MyExecFile } from 'child_process'
+const execFile = promisify(MyExecFile)
 
 const sites = [
 	'tiktok.com',
@@ -20,39 +22,34 @@ module.exports = {
 		return
 		if (message.author.bot) return
 
-		const argv = message.content.split(' ')
+		const args = message.content.split(' ')
 
-		for (const arg of argv) {
+		for (const arg of args) {
 			if (arg.startsWith('https://') && sites.some((a) => arg.includes(a))) {
 				try {
-					let fileName
-					exec(
-						`yt-dlp --get-filename -o %(id)s.%(ext)s ${arg}`,
-						async (error, stdout) => {
-							if (error) return client.logger.error(error)
-							fileName = stdout.trim()
-							exec(
-								`yt-dlp -o "${fileName}" -P "./downloads/" "${arg}"`,
-								async (error) => {
-									if (error) return client.logger.error(error)
-									await message
-										.reply({
-											files: [
-												{
-													attachment: `./downloads/${fileName}`,
-													name: fileName
-												}
-											]
-										})
-										.then(() => {
-											fs.unlink(`./downloads/${fileName}`, (err) => {
-												if (err) return client.logger.error(err)
-											})
-										})
+					const { stdout } = await execFile(`yt-dlp`, [
+						'--get-filename',
+						'-o',
+						'"%(id)s.%(ext)s"',
+						arg
+					])
+					const fileName = await stdout.trim()
+					await execFile(`yt-dlp`, ['-o', `./downloads/${fileName}`, `${arg}`])
+					await message
+						.reply({
+							files: [
+								{
+									attachment: `./downloads/${fileName}`,
+									name: fileName
 								}
-							)
-						}
-					)
+							]
+						})
+						.then(() => {
+							unlink(`./downloads/${fileName}`, (err) => {
+								if (err) return client.logger.error(err)
+							})
+						})
+						.catch((error) => client.logger.error(error))
 				} catch (e) {
 					client.logger.error(e)
 				}
