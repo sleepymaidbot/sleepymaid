@@ -30,6 +30,18 @@ export class voiceXpManager {
 		this.client.logger.info('Stopped voice time for ' + member.user.tag)
 	}
 
+	public async stopAll() {
+		const guild = this.client.guilds.cache.get('324284116021542922')
+		for (const key in stopwatchs) {
+			const stopwatch = stopwatchs[key]
+			const time = Math.floor(stopwatch.duration / 3000000)
+			stopwatch.stop()
+			delete stopwatchs[key]
+			this._reward(guild.members.cache.get(key) as GuildMember, time)
+		}
+		return true
+	}
+
 	private async _reward(member: GuildMember, time: number) {
 		if (time <= 1) return
 		const userInDb = await this.client.prisma.mondecorte.findUnique({
