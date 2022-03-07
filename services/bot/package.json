@@ -20,7 +20,7 @@
 		"typescript": "4.6.2"
 	},
 	"dependencies": {
-		"@discordjs/builders": "^0.13.0-dev.1646395406.6f7a366",
+		"@discordjs/builders": "0.13.0-dev.1646611698.b9ff7b0",
 		"@prisma/client": "3.10.0",
 		"@sapphire/stopwatch": "1.4.0",
 		"@sleepymaid-ts/config": "*",
