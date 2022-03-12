@@ -30,7 +30,7 @@ export class BotClient extends Client {
 		const { botName, commandFolder, eventsFolder, taskFolder } = options ?? {}
 
 		this.botName = botName ?? 'Bot'
-		this.logger = new Logger(this.botName)
+		this.logger = new Logger()
 		this.commandFolder = commandFolder ?? '../commands'
 		this.commands = {}
 		this.eventsFolder = eventsFolder ?? '../listeners'
