@@ -22,16 +22,12 @@ export const colorFunctions = new Map<Loglevels, (str: string) => string>([
 
 export class Logger {
 	public declare pino: BaseLogger
-	constructor(protected name: string) {
+	constructor() {
 		this.pino = pino({
 			transport: {
 				target: 'pino-pretty'
 			}
 		})
-	}
-
-	forkInstance(name: string): Logger {
-		return new Logger(name)
 	}
 
 	private formatMessage(
