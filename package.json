@@ -29,6 +29,7 @@
 	"scripts": {
 		"build": "yarn turbo run build",
 		"start": "yarn turbo run start --scope=@sleepymaid-ts/bot",
+		"starttest": "yarn turbo run start --scope=@sleepymaid-ts/testbot",
 		"lint": "yarn eslint --fix --ext ts,tsx packages",
 		"testlint": "yarn eslint --ext ts,tsx packages",
 		"format": "yarn prettier --write .",
