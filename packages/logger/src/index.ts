@@ -1,5 +1,5 @@
 import { gray, blue, red, cyan } from 'ansi-colors'
-import pino from 'pino'
+import pino, { BaseLogger } from 'pino'
 
 export enum Loglevels {
 	Debug,
@@ -21,7 +21,7 @@ export const colorFunctions = new Map<Loglevels, (str: string) => string>([
 ])
 
 export class Logger {
-	public declare pino
+	public declare pino: BaseLogger
 	constructor(protected name: string) {
 		this.pino = pino({
 			transport: {
