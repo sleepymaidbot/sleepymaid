@@ -118,7 +118,10 @@ export class BotClient extends Client {
 				return 0
 			}) as ApplicationCommandData[]
 
-		if (!Util.deepEquals(currentGlobalCommands, applicationCommand)) {
+		if (
+			JSON.stringify(applicationCommand) !==
+			JSON.stringify(currentGlobalCommands)
+		) {
 			if (config.isDevelopment) {
 				const guild = this.guilds.cache.get('821717486217986098')
 				if (!guild) return
@@ -173,7 +176,10 @@ export class BotClient extends Client {
 						return 0
 					})
 
-				if (!Util.deepEquals(sortedCommands, currentGuildCommands)) {
+				if (
+					JSON.stringify(sortedCommands) !==
+					JSON.stringify(currentGuildCommands)
+				) {
 					this.logger.info(
 						`Guild commands for ${guild.name} have changed, updating...`
 					)
