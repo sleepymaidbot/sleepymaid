@@ -12,8 +12,6 @@ I plan on making this bot public but for now its only available for some specifi
 - Nodejs (Managed by Volta)
 - Yarn (Managed by Volta)
 - Postgresql
-- Typescript
-- Youtube-dl
 
 ## Contributing
 
