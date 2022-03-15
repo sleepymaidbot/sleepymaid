@@ -21,7 +21,7 @@
 	},
 	"dependencies": {
 		"@discordjs/builders": "0.13.0-dev.1646913825.dcd4797",
-		"@prisma/client": "3.10.0",
+		"@prisma/client": "3.11.0",
 		"@sapphire/stopwatch": "1.4.0",
 		"@sleepymaid-ts/config": "*",
 		"@sleepymaid-ts/logger": "*",
@@ -30,7 +30,7 @@
 		"ansi-colors": "4.1.1",
 		"discord.js": "14.0.0-dev.1646914074.dcd4797",
 		"fs": "0.0.1-security",
-		"prisma": "3.10.0",
+		"prisma": "3.11.0",
 		"reflect-metadata": "0.1.13",
 		"tsyringe": "4.6.0"
 	},
