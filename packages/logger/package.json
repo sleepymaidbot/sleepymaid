@@ -24,7 +24,7 @@
 	"dependencies": {
 		"ansi-colors": "4.1.1",
 		"pino": "7.8.1",
-		"pino-pretty": "7.5.3"
+		"pino-pretty": "7.5.4"
 	},
 	"volta": {
 		"node": "16.14.1",
