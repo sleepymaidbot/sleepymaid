@@ -27,7 +27,7 @@
 		"pino-pretty": "7.5.3"
 	},
 	"volta": {
-		"node": "16.14.0",
+		"node": "16.14.1",
 		"yarn": "1.22.17"
 	},
 	"packageManager": "yarn@1.22.17"
