@@ -173,6 +173,3 @@ icon.webp
 !/**/src/types
 
 # Temporary WIP dev files
-
-packages/handler
-services/testbot

@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"module": "commonjs",
+		"target": "esNEXT",
+		"outDir": "dist",
+		"lib": [
+			"ESNext",
+			"ESNext.Array",
+			"ESNext.AsyncIterable",
+			"ESNext.Intl",
+			"ESNext.Symbol",
+			"DOM"
+		]
+	},
+	"extends": "@sleepymaid-ts/tsconfig/base.json",
+	"include": ["src/**/*", "src/*"]
+}
