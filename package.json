@@ -11,9 +11,9 @@
 	],
 	"volta": {
 		"node": "16.14.1",
-		"yarn": "1.22.17"
+		"yarn": "1.22.18"
 	},
-	"packageManager": "yarn@1.22.17",
+	"packageManager": "yarn@1.22.18",
 	"devDependencies": {
 		"@types/prettier": "2.4.4",
 		"@typescript-eslint/eslint-plugin": "5.15.0",
