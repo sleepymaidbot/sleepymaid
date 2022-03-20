@@ -11,7 +11,7 @@ export class roleSyncer {
 		this.client = client
 	}
 	public async checkUserRole(member: GuildMember) {
-		const userRole = await member.roles.cache.map((r) => r.id)
+		const userRole = member.roles.cache.map((r) => r.id)
 		const has = {
 			colorful: false
 		}
@@ -24,7 +24,7 @@ export class roleSyncer {
 	}
 
 	private async _performRole(has, member: GuildMember) {
-		const colorfulRole = await this.client.guilds.cache
+		const colorfulRole = this.client.guilds.cache
 			.get('324284116021542922')
 			.roles.cache.get('857324294791364639')
 		if (has.colorful === true) {
