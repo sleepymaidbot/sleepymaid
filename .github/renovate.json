@@ -1,3 +1,27 @@
 {
-	"extends": ["config:base"]
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": [
+		"config:base",
+		"helpers:pinGitHubActionDigests",
+		"group:allNonMajor"
+	],
+	"labels": ["Dependencies"],
+	"npm": {
+		"rangeStrategy": "bump",
+		"packageRules": [
+			{
+				"matchUpdateTypes": ["minor", "patch"],
+				"matchCurrentVersion": "!/^0/",
+				"automerge": true
+			},
+			{
+				"matchPackagePatterns": ["@sleepymaid"],
+				"groupName": "Sleepymaid Dependencies"
+			},
+			{
+				"matchDepTypes": ["engines"],
+				"enabled": false
+			}
+		]
+	}
 }
