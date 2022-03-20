@@ -31,7 +31,8 @@
 		"fs": "0.0.1-security",
 		"prisma": "3.11.0",
 		"reflect-metadata": "0.1.13",
-		"tsyringe": "4.6.0"
+		"tsyringe": "4.6.0",
+		"path": "0.12.7"
 	},
 	"volta": {
 		"node": "16.14.2",
