@@ -32,8 +32,10 @@ module.exports = {
 
 				try {
 					const dUser = await guild.members.cache.get(user.user_id)
-					container.register(BotClient, { useValue: client })
-					container.resolve(ActivityRewardManager).checkActivityReward(dUser)
+					if (dUser) {
+						container.register(BotClient, { useValue: client })
+						container.resolve(ActivityRewardManager).checkActivityReward(dUser)
+					}
 				} catch (e) {
 					client.logger.error(e)
 				}
