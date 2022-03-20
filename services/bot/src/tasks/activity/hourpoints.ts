@@ -8,7 +8,7 @@ import { BotClient } from '../../lib/BotClient'
 module.exports = {
 	interval: 3600000,
 
-	async execute(client) {
+	async execute(client: BotClient) {
 		client.logger.debug('Hourpoints task started')
 		const usersArray = []
 		const docs = await client.prisma.mondecorte.findMany()
@@ -28,7 +28,7 @@ module.exports = {
 					where: { user_id: user.user_id },
 					data: { points: newPoints }
 				})
-				usersArray.push(user.id)
+				usersArray.push(user.user_id)
 
 				try {
 					const dUser = await guild.members.cache.get(user.user_id)
