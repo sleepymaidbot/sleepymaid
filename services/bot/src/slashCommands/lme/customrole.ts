@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, Embed } from '@discordjs/builders'
+import { SlashCommandBuilder, EmbedBuilder } from '@discordjs/builders'
 import { Util } from 'discord.js'
 
 module.exports = {
@@ -65,7 +65,7 @@ module.exports = {
 		}
 
 		const customRoleId = inDb?.custom_role_id
-		const embed = new Embed()
+		const embed = new EmbedBuilder()
 			.setAuthor({
 				name: `Rôle custom de ${interaction.member.user.tag}`,
 				iconURL: interaction.member.user.avatarURL()

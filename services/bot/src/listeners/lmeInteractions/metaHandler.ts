@@ -1,10 +1,10 @@
+import { ButtonStyle } from 'discord.js'
 import {
-	ActionRow,
-	ButtonComponent,
-	ButtonStyle,
-	SelectMenuComponent,
-	UnsafeSelectMenuOption
-} from 'discord.js'
+	ButtonBuilder,
+	ActionRowBuilder,
+	SelectMenuBuilder,
+	SelectMenuOptionBuilder
+} from '@discordjs/builders'
 import { pingRoleIds, colorRoleIds } from '../../lib/lists'
 
 module.exports = {
@@ -39,21 +39,21 @@ module.exports = {
 								value: '879465436922642462'
 							}
 						]
-						const row1 = new ActionRow().addComponents(
-							new SelectMenuComponent()
+						const row1 = new ActionRowBuilder().addComponents(
+							new SelectMenuBuilder()
 								.setCustomId('lmeMeta:bienvenue:select:ping')
 								.setPlaceholder('Choisis ici tes rôles de notification')
 								.setMaxValues(3)
 								.setMinValues(0)
 								.addOptions(
 									...pingOptions.map(
-										(option) => new UnsafeSelectMenuOption(option)
+										(option) => new SelectMenuOptionBuilder(option)
 									)
 								)
 						)
 
-						const row2 = new ActionRow().addComponents(
-							new ButtonComponent()
+						const row2 = new ActionRowBuilder().addComponents(
+							new ButtonBuilder()
 								.setLabel('Supprimer mes notifications')
 								.setCustomId('lmeMeta:bienvenue:delete:ping')
 								.setEmoji({ id: '948606748334358559' })
@@ -108,19 +108,19 @@ module.exports = {
 									value: '857432207534981151'
 								}
 							]
-							const row1 = new ActionRow().addComponents(
-								new SelectMenuComponent()
+							const row1 = new ActionRowBuilder().addComponents(
+								new SelectMenuBuilder()
 									.setCustomId('lmeMeta:bienvenue:select:color')
 									.setPlaceholder('Choisis ici ton rôle de couleur')
 									.addOptions(
 										...colorOptions.map(
-											(options) => new UnsafeSelectMenuOption(options)
+											(options) => new SelectMenuOptionBuilder(options)
 										)
 									)
 							)
 
-							const row2 = new ActionRow().addComponents(
-								new ButtonComponent()
+							const row2 = new ActionRowBuilder().addComponents(
+								new ButtonBuilder()
 									.setLabel('Supprimer ma couleur')
 									.setCustomId('lmeMeta:bienvenue:delete:color')
 									.setEmoji({ id: '948606748334358559' })

@@ -4,7 +4,7 @@ import { BotClient } from './BotClient'
 import { GuildMember, Util } from 'discord.js'
 import { actifRoles } from './lists'
 import { config } from '@sleepymaid-ts/config'
-import { Embed } from '@discordjs/builders'
+import { EmbedBuilder } from '@discordjs/builders'
 
 @singleton()
 export class ActivityRewardManager {
@@ -67,7 +67,7 @@ export class ActivityRewardManager {
 						where: { user_id: member.id },
 						data: { custom_role_id: null }
 					})
-					const embed = new Embed()
+					const embed = new EmbedBuilder()
 						.setAuthor({
 							name: `Rôle custom de ${member.user.tag}`,
 							iconURL: member.user.avatarURL()

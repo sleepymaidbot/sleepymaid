@@ -1,14 +1,10 @@
-import { colorRole } from '../../lib/lists'
+import { Message, TextChannel, Util } from 'discord.js'
 import {
-	Message,
-	ActionRow,
-	ButtonComponent,
-	Embed,
-	SelectMenuComponent,
-	TextChannel,
-	Util,
-	UnsafeSelectMenuOption
-} from 'discord.js'
+	ActionRowBuilder,
+	EmbedBuilder,
+	SelectMenuBuilder,
+	SelectMenuOptionBuilder
+} from '@discordjs/builders'
 import { config } from '@sleepymaid-ts/config'
 import { inspect } from 'util'
 
@@ -65,7 +61,7 @@ module.exports = {
 						return message.channel.send(`no`)
 					}
 
-					const evalOutputEmbed = new Embed()
+					const evalOutputEmbed = new EmbedBuilder()
 						.setTitle('Evaluated Code')
 						.addFields({
 							name: `:inbox_tray: **Input**`,
@@ -133,7 +129,7 @@ module.exports = {
 				})
 
 				if (maire.length === 0) message.channel.send(':poop:')
-				const embed = new Embed()
+				const embed = new EmbedBuilder()
 					.setColor(Util.resolveColor('#36393f'))
 					.setAuthor({
 						name: message.guild.name,
@@ -145,14 +141,14 @@ module.exports = {
 					)
 					.setTimestamp()
 
-				const row = new ActionRow().addComponents(
-					new SelectMenuComponent()
+				const row = new ActionRowBuilder().addComponents(
+					new SelectMenuBuilder()
 						.setCustomId('vote')
 						.setPlaceholder('Aucun vote')
 						.setMaxValues(1)
 						.setMinValues(1)
 						.addOptions(
-							...maire.map((option) => new UnsafeSelectMenuOption(option))
+							...maire.map((option) => new SelectMenuOptionBuilder(option))
 						)
 				)
 

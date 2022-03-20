@@ -1,6 +1,10 @@
 import { config } from '@sleepymaid-ts/config'
-import { Embed } from '@discordjs/builders'
-import { ActionRow, ButtonComponent, ButtonStyle, Util } from 'discord.js'
+import {
+	EmbedBuilder,
+	ActionRowBuilder,
+	ButtonBuilder
+} from '@discordjs/builders'
+import { ButtonStyle, Util } from 'discord.js'
 
 module.exports = {
 	name: 'messageCreate',
@@ -14,13 +18,13 @@ module.exports = {
 		switch (cmd.slice(1)) {
 			case 'setupBienvenue': {
 				// Message 1
-				const embed1 = new Embed()
+				const embed1 = new EmbedBuilder()
 					.setTitle(":otter: Bienvenue sur Le monde d'Ecorte")
 					.setDescription(
 						'Ce serveur est un serveur entre amis qui vous permet de discuter et de vous divertir.'
 					)
 					.setColor(Util.resolveColor('#33a34b'))
-				const embed2 = new Embed()
+				const embed2 = new EmbedBuilder()
 					.setDescription(
 						"Dans ce lieu, vous pourrez bénéficier d'un coin pour parler de tout et de rien ou poster vos meilleur mêmes sans vous prendre la tête même après une journée difficile!\n\n Pour commencer je te conseil de lire les règlements ci-dessous.\n<:blank:948461701420945439>"
 					)
@@ -43,14 +47,14 @@ module.exports = {
 
 				// Message 2
 
-				const embed3 = new Embed()
+				const embed3 = new EmbedBuilder()
 					.setTitle(':otter: Règlements du Serveur')
 					.setDescription(
 						'Pour garantir un environnement convivial et sécurisé, nous vous demandons de respecter les règlements ci-dessous sans exception.'
 					)
 					.setColor(Util.resolveColor('#5765f2'))
 
-				const embed4 = new Embed()
+				const embed4 = new EmbedBuilder()
 					.addFields({
 						name: '<:blueDot:948466553505062992> A. Bon sens',
 						value:
@@ -77,28 +81,28 @@ module.exports = {
 				})
 
 				// Message 3
-				const embed5 = new Embed()
+				const embed5 = new EmbedBuilder()
 					.setTitle(':otter: Rôles & Notifications')
 					.setColor(Util.resolveColor('#ff9326'))
 					.setDescription(
 						'Sélectionnez les rôles et notifications qui vous intéressent sur le serveur en cliquant sur les boutons ci-dessous. Si besoin, cliquez sur le bouton **Voir mes Rôles** pour voir la liste de vos rôles.'
 					)
 
-				const row1 = new ActionRow()
+				const row1 = new ActionRowBuilder()
 					.addComponents(
-						new ButtonComponent()
+						new ButtonBuilder()
 							.setCustomId('lmeMeta:bienvenue:init:ping')
 							.setLabel('Notifications')
 							.setStyle(ButtonStyle.Primary)
 					)
 					.addComponents(
-						new ButtonComponent()
+						new ButtonBuilder()
 							.setCustomId('lmeMeta:bienvenue:init:color')
 							.setLabel('Couleur')
 							.setStyle(ButtonStyle.Primary)
 					)
 					.addComponents(
-						new ButtonComponent()
+						new ButtonBuilder()
 							.setCustomId('lmeMeta:bienvenue:init:viewRoles')
 							.setLabel('Voir mes rôles')
 							.setEmoji({ name: '❔' })
@@ -112,15 +116,15 @@ module.exports = {
 				})
 
 				// Message 4
-				const embed6 = new Embed()
+				const embed6 = new EmbedBuilder()
 					.setTitle(':otter: Accès au serveur')
 					.setColor(Util.resolveColor('#3ba55d'))
 					.setDescription(
 						'Pour avoir accès au serveur, cliquez sur le bouton ci-dessous.'
 					)
 
-				const row2 = new ActionRow().addComponents(
-					new ButtonComponent()
+				const row2 = new ActionRowBuilder().addComponents(
+					new ButtonBuilder()
 						.setCustomId('lmeMeta:bienvenue:join')
 						.setLabel("J'ai lu et j'accepte les règlements")
 						.setStyle(ButtonStyle.Success)
@@ -135,13 +139,13 @@ module.exports = {
 				break
 			}
 			case 'setupSupport': {
-				const embed1 = new Embed()
+				const embed1 = new EmbedBuilder()
 					.setTitle("🎟️ Comment contacter l'Équipe du Staff?")
 					.setDescription(
 						"Besoin de contacter le staff pour un problème, une question un peu complexe ou autre chose demandant un espace de discussion privé avec l'équipe de modération?"
 					)
 					.setColor(Util.resolveColor('#33a34b'))
-				const embed2 = new Embed()
+				const embed2 = new EmbedBuilder()
 					.setDescription(
 						'Alors cliquez sur la réaction 📩 sur se message pour ouvrir un ticket vous permettant de contacter le staff.'
 					)

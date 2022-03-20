@@ -20,7 +20,7 @@
 		"typescript": "4.6.2"
 	},
 	"dependencies": {
-		"@discordjs/builders": "0.13.0-dev.1646913825.dcd4797",
+		"@discordjs/builders": "0.13.0-dev.1647259738.2297c2b",
 		"@prisma/client": "3.11.0",
 		"@sapphire/stopwatch": "1.4.0",
 		"@sleepymaid-ts/config": "*",
@@ -28,7 +28,7 @@
 		"@sleepymaid-ts/tsconfig": "*",
 		"@sleepymaid-ts/util": "*",
 		"ansi-colors": "4.1.1",
-		"discord.js": "14.0.0-dev.1646914074.dcd4797",
+		"discord.js": "14.0.0-dev.1647259751.2297c2b",
 		"fs": "0.0.1-security",
 		"prisma": "3.11.0",
 		"reflect-metadata": "0.1.13",

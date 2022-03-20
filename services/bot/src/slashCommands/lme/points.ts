@@ -1,5 +1,10 @@
-import { SlashCommandBuilder, Embed } from '@discordjs/builders'
-import { ActionRow, ButtonComponent, ButtonStyle, Util } from 'discord.js'
+import {
+	SlashCommandBuilder,
+	EmbedBuilder,
+	ActionRowBuilder,
+	ButtonBuilder
+} from '@discordjs/builders'
+import { ButtonStyle, Util } from 'discord.js'
 
 const intForEmote = {
 	1: ':first_place:',
@@ -67,7 +72,7 @@ module.exports = {
 					interaction.member.id == '324281236728053760'
 				) {
 					if (points == 0) {
-						const embed = new Embed()
+						const embed = new EmbedBuilder()
 							.setColor(Util.resolveColor('#36393f'))
 							.setAuthor({
 								name: interaction.member.user.tag,
@@ -80,7 +85,7 @@ module.exports = {
 						await interaction.editReply({ embeds: [embed] })
 					} else {
 						if (points == 1) {
-							const embed = new Embed()
+							const embed = new EmbedBuilder()
 								.setColor(Util.resolveColor('#36393f'))
 								.setAuthor({
 									name: interaction.member.user.tag,
@@ -90,7 +95,7 @@ module.exports = {
 								.setTimestamp()
 							await interaction.editReply({ embeds: [embed] })
 						} else {
-							const embed = new Embed()
+							const embed = new EmbedBuilder()
 								.setColor(Util.resolveColor('#36393f'))
 								.setAuthor({
 									name: interaction.member.user.tag,
@@ -171,23 +176,23 @@ module.exports = {
 							nextOn = true
 						}
 
-						const row = new ActionRow()
+						const row = new ActionRowBuilder()
 							.addComponents(
-								new ButtonComponent()
+								new ButtonBuilder()
 									.setDisabled(previousOn)
 									.setStyle(ButtonStyle.Primary)
 									.setCustomId('lb:page:previous')
 									.setEmoji({ name: '◀️' })
 							)
 							.addComponents(
-								new ButtonComponent()
+								new ButtonBuilder()
 									.setDisabled(true)
 									.setStyle(ButtonStyle.Primary)
 									.setCustomId('lb:label')
 									.setLabel(page.toString())
 							)
 							.addComponents(
-								new ButtonComponent()
+								new ButtonBuilder()
 									.setDisabled(nextOn)
 									.setStyle(ButtonStyle.Primary)
 									.setCustomId('lb:page:next')
@@ -202,7 +207,7 @@ module.exports = {
 
 					const leaderboardText = await getLeaderboard(page)
 
-					const embed = new Embed()
+					const embed = new EmbedBuilder()
 						.setColor(Util.resolveColor('#36393f'))
 						.setAuthor({
 							name: 'Leaderboard du serveur',
@@ -228,7 +233,7 @@ module.exports = {
 								page = page - 1
 
 								const lb = await getLeaderboard(page)
-								const newEmbed = new Embed()
+								const newEmbed = new EmbedBuilder()
 									.setColor(Util.resolveColor('#36393f'))
 									.setAuthor({
 										name: 'Leaderboard du serveur',
@@ -245,7 +250,7 @@ module.exports = {
 								page = page + 1
 
 								const lb = await getLeaderboard(page)
-								const newEmbed = new Embed()
+								const newEmbed = new EmbedBuilder()
 									.setColor(Util.resolveColor('#36393f'))
 									.setAuthor({
 										name: 'Leaderboard du serveur',

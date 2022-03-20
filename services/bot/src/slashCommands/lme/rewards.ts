@@ -1,4 +1,4 @@
-import { Embed, SlashCommandBuilder } from '@discordjs/builders'
+import { EmbedBuilder, SlashCommandBuilder } from '@discordjs/builders'
 import { Util } from 'discord.js'
 import { container } from 'tsyringe'
 import { roleSyncer } from '../../lib/rolesyncer'
@@ -21,7 +21,7 @@ module.exports = {
 			}
 		})
 		const points = userInDb?.points || 0
-		const embed = new Embed()
+		const embed = new EmbedBuilder()
 			.setColor(Util.resolveColor('#36393f'))
 			.setAuthor({
 				name: `${interaction.member.user.tag} rewards`,

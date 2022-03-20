@@ -1,4 +1,4 @@
-import { Embed } from '@discordjs/builders'
+import { EmbedBuilder } from '@discordjs/builders'
 
 module.exports = {
 	name: 'guildMemberAdd',
@@ -16,7 +16,7 @@ module.exports = {
 			'818313526720462870'
 		)
 
-		const embed = new Embed()
+		const embed = new EmbedBuilder()
 			.setAuthor({
 				name: 'Bienvenue!',
 				iconURL: 'https://cdn.discordapp.com/emojis/612355003151286278.gif'
