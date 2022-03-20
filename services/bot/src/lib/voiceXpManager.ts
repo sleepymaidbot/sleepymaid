@@ -23,7 +23,7 @@ export class voiceXpManager {
 	public async stop(member: GuildMember) {
 		if (!stopwatchs[member.id]) return
 		const stopwatch = stopwatchs[member.id]
-		const time = Math.floor(stopwatch.duration / 3000000)
+		const time = Math.floor(stopwatch.duration / 300000)
 		stopwatch.stop()
 		delete stopwatchs[member.id]
 		this._reward(member, time)
@@ -34,7 +34,7 @@ export class voiceXpManager {
 		const guild = this.client.guilds.cache.get('324284116021542922')
 		for (const key in stopwatchs) {
 			const stopwatch = stopwatchs[key]
-			const time = Math.floor(stopwatch.duration / 3000000)
+			const time = Math.floor(stopwatch.duration / 300000)
 			stopwatch.stop()
 			delete stopwatchs[key]
 			this._reward(guild.members.cache.get(key) as GuildMember, time)
