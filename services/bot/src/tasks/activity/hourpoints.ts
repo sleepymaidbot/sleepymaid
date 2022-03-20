@@ -12,6 +12,7 @@ module.exports = {
 		client.logger.debug('Hourpoints task started')
 		const usersArray = []
 		const docs = await client.prisma.mondecorte.findMany()
+		const guild = await client.guilds.cache.get('324284116021542922')
 		for (const user of docs) {
 			const userInDb = await client.prisma.mondecorte.findUnique({
 				where: { user_id: user.user_id }
@@ -30,7 +31,6 @@ module.exports = {
 				usersArray.push(user.id)
 
 				try {
-					const guild = await client.guilds.cache.get('324284116021542922')
 					const dUser = await guild.members.cache.get(user.user_id)
 					container.register(BotClient, { useValue: client })
 					container.resolve(ActivityRewardManager).checkActivityReward(dUser)
