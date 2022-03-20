@@ -6,7 +6,8 @@
 	"main": "dist/index.js",
 	"scripts": {
 		"build": "yarn rimraf dist/ && yarn tsc",
-		"start": "yarn build && node --trace-warnings -r source-map-support/register dist/index.js"
+		"start": "yarn build && node --trace-warnings -r source-map-support/register dist/index.js",
+		"generate": "yarn primsa generate --schema ../../prisma/schema.prisma"
 	},
 	"author": "Ecorte",
 	"license": "MIT",
