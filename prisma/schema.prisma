@@ -21,8 +21,6 @@ model guilds_settings {
   mod_roles       mod_role[]
   admin_roles     admin_role[]
   leveling_tracks leveling_track[]
-
-  @@map("guildSettings")
 }
 
 model mod_role {
