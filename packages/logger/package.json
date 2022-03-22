@@ -23,7 +23,7 @@
 	},
 	"dependencies": {
 		"ansi-colors": "4.1.1",
-		"pino": "7.9.1",
+		"pino": "7.9.2",
 		"pino-pretty": "7.5.4"
 	},
 	"volta": {
