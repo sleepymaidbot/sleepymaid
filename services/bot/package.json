@@ -14,23 +14,23 @@
 	"devDependencies": {
 		"@types/node": "17.0.21",
 		"@yarnpkg/cli-dist": "3.2.0",
-		"discord-api-types": "0.29.0",
+		"discord-api-types": "0.30.0",
 		"rimraf": "3.0.2",
 		"source-map-support": "0.5.21",
-		"typescript": "4.6.2"
+		"typescript": "4.6.3"
 	},
 	"dependencies": {
-		"@discordjs/builders": "0.13.0-dev.1647259738.2297c2b",
-		"@prisma/client": "3.11.0",
-		"@sapphire/stopwatch": "1.4.0",
+		"@discordjs/builders": "0.13.0-dev.1649030892-5748dbe",
+		"@prisma/client": "3.11.1",
+		"@sapphire/stopwatch": "1.4.1",
 		"@sleepymaid-ts/config": "*",
 		"@sleepymaid-ts/logger": "*",
 		"@sleepymaid-ts/tsconfig": "*",
 		"@sleepymaid-ts/util": "*",
 		"ansi-colors": "4.1.1",
-		"discord.js": "14.0.0-dev.1647259751.2297c2b",
+		"discord.js": "14.0.0-dev.1649030898-5748dbe",
 		"fs": "0.0.1-security",
-		"prisma": "3.11.0",
+		"prisma": "3.11.1",
 		"reflect-metadata": "0.1.13",
 		"tsyringe": "4.6.0",
 		"path": "0.12.7"
