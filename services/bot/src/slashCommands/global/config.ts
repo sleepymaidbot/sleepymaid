@@ -3,7 +3,7 @@ import { CommandInteraction } from 'discord.js'
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('config-level')
+		.setName('config')
 		.setDescription('Summon a menu to configure the bot')
 		.addSubcommandGroup((SubCommandGroup) =>
 			SubCommandGroup.setName('admin-role')
