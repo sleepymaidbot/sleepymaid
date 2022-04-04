@@ -23,7 +23,7 @@ jobs:
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
-      - uses: actions/cache@4b0cf6cc4619e737324ddfcec08fff2413359514 # tag=v3
+      - uses: actions/cache@136d96b4aee02b1f0de3ba493b1d47135042d9c0 # tag=v3
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
