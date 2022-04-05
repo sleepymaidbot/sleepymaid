@@ -6,11 +6,14 @@ export type ListenerInfo = {
 }
 
 export type FunctionType = {
-	run: CommandRunFunction
+	run: ListenerRunFunction
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type CommandRunFunction = (client: HandlerClient, ...args: any[]) => void
+export type ListenerRunFunction = (
+	client: HandlerClient,
+	...args: any[]
+) => void
 
 export class Listener {
 	listenerInfo: ListenerInfo
