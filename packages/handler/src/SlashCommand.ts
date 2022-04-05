@@ -8,7 +8,6 @@ import {
 	CommandInteraction
 } from 'discord.js'
 import { HandlerClient } from './HandlerClient'
-import { inject, singleton } from 'tsyringe'
 
 export type SlashCommandInfo = {
 	guildId?: string
