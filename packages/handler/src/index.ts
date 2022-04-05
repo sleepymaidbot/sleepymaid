@@ -22,3 +22,10 @@ export type {
 	AutoCompleteFunction,
 	FunctionType as SlashCommandFunctionType
 } from './SlashCommand'
+
+export { Task } from './Task'
+export type {
+	TaskInfo,
+	FunctionType as TaskFunctionType,
+	TaskRunFunction
+} from './Task'
