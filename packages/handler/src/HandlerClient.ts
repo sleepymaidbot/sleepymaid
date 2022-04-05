@@ -265,7 +265,7 @@ export class HandlerClient extends Client {
 		}
 	}
 
-	public async loadEvents(folderPath: string): Promise<void> {
+	public async loadListeners(folderPath: string): Promise<void> {
 		const filesToImport = await Util.loadFolder(folderPath)
 
 		for (const file of filesToImport) {
