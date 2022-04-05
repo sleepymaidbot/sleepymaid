@@ -291,4 +291,19 @@ export class HandlerClient extends Client {
 			}
 		}
 	}
+
+	public async loadTasks(folderPath: string): Promise<void> {
+		const filesToImport = await Util.loadFolder(folderPath)
+
+		for (const file of filesToImport) {
+			const task = await import(file)
+			setInterval(() => {
+				try {
+					task.default.run(this)
+				} catch (error) {
+					this.logger.error(error)
+				}
+			}, task.default.taskInfo.interval)
+		}
+	}
 }
