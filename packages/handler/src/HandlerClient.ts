@@ -26,10 +26,6 @@ export interface HandlerClientOptions {
 	devServerId: string
 }
 
-export interface BotClientCommandsType {
-	[key: string]: string
-}
-
 export interface GuildCommandsType {
 	[key: Snowflake]: ApplicationCommandData[]
 }
