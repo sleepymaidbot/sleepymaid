@@ -21,7 +21,8 @@ const client = new HandlerClient(
 client.on('ready', async () => {
 	client.logger.info('Ready!')
 	await client.loadCommands(resolve(__dirname, './commands'))
-	await client.loadEvents(resolve(__dirname, './listeners'))
+	await client.loadListeners(resolve(__dirname, './listeners'))
+	await client.loadTasks(resolve(__dirname, './tasks'))
 })
 
 client.login(config.token)
