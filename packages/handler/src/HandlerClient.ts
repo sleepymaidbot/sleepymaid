@@ -14,8 +14,6 @@ import {
 } from 'discord.js'
 import Util from '@sleepymaid-ts/util'
 import { Logger } from '@sleepymaid-ts/logger'
-import { container } from 'tsyringe'
-import { SlashCommand } from './SlashCommand'
 
 export interface ClientCommandsType {
 	[key: string]: string
