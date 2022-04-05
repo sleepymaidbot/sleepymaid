@@ -5,7 +5,8 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	AutocompleteInteraction,
-	CommandInteraction
+	CommandInteraction,
+	Snowflake
 } from 'discord.js'
 import { HandlerClient } from './HandlerClient'
 
@@ -31,14 +32,17 @@ export type AutoCompleteFunction = (
 	client: HandlerClient
 ) => void
 
-export type FunctionType = {
+export type SlashCommandFunctionType = {
 	run: CommandRunFunction
 	autocomplete?: AutoCompleteFunction
 }
 
 export class SlashCommand {
 	commandInfo: SlashCommandInfo
-	constructor(commandInfo: SlashCommandInfo, functions: FunctionType) {
+	constructor(
+		commandInfo: SlashCommandInfo,
+		functions: SlashCommandFunctionType
+	) {
 		this.commandInfo = commandInfo
 		this.run = functions.run
 		if ('autocomplete' in functions) this.autocomplete = functions.autocomplete
