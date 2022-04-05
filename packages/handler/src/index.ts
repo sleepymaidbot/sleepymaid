@@ -20,7 +20,7 @@ export type {
 	SlashCommandData,
 	CommandRunFunction,
 	AutoCompleteFunction,
-	FunctionType as SlashCommandFunctionType
+	SlashCommandFunctionType
 } from './SlashCommand'
 
 export { Task } from './Task'
