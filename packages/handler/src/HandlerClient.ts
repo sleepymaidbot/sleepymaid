@@ -30,6 +30,26 @@ export interface GuildCommandsType {
 	[key: Snowflake]: ApplicationCommandData[]
 }
 
+export interface loadHandlersOptions {
+	commands?: {
+		folder: string
+		extraGlobalCommands?: Array<ApplicationCommandData>
+		extraGuildCommands?: GuildCommandsType
+	}
+	listeners?: {
+		folder: string
+	}
+	tasks?: {
+		folder: string
+	}
+	modules?: {
+		folder: string
+		entryFile?: string
+		blacklist?: string[]
+		whitelist?: string[]
+	}
+}
+
 export class HandlerClient extends Client {
 	public declare logger: Logger
 	public declare commands: ClientCommandsType
@@ -46,8 +66,35 @@ export class HandlerClient extends Client {
 		this.devServerId = devServerId
 	}
 
-	public async loadCommands(folderPath: string): Promise<void> {
-		this.RegisterApplicationCommands(folderPath)
+	public async loadHandlers(options: loadHandlersOptions): Promise<void> {
+		// commands
+		if (options.commands) {
+			this.loadCommands(
+				options.commands.folder,
+				options.commands.extraGlobalCommands,
+				options.commands.extraGuildCommands
+			)
+		}
+		// listeners
+		if (options.listeners) {
+			this.loadListeners(options.listeners.folder)
+		}
+		// tasks
+		if (options.tasks) {
+			this.loadTasks(options.tasks.folder)
+		}
+	}
+
+	public async loadCommands(
+		folderPath: string,
+		extraGlobalCommands?: Array<ApplicationCommandData>,
+		extraGuildCommands?: GuildCommandsType
+	): Promise<void> {
+		this.RegisterApplicationCommands(
+			folderPath,
+			extraGlobalCommands,
+			extraGuildCommands
+		)
 		this.on('interactionCreate', (i: Interaction) =>
 			this.HandleInteractionEvent(i)
 		)
@@ -72,13 +119,19 @@ export class HandlerClient extends Client {
 		}
 	}
 
-	private async RegisterApplicationCommands(folderPath: string): Promise<void> {
+	private async RegisterApplicationCommands(
+		folderPath: string,
+		extraGlobalCommands?: ApplicationCommandData[],
+		extraGuildCommands?: GuildCommandsType
+	): Promise<void> {
 		this.logger.info('Registering application commands...')
 
 		const filesToImport = await Util.loadFolder(folderPath)
 
-		const globalsCommands: ApplicationCommandData[] = []
-		const guildCommands: GuildCommandsType = {}
+		const globalsCommands: ApplicationCommandData[] = [
+			...(extraGlobalCommands ?? [])
+		]
+		const guildCommands: GuildCommandsType = { ...(extraGuildCommands ?? {}) }
 
 		for (const file of filesToImport) {
 			await import(file).then((cmds) => {
