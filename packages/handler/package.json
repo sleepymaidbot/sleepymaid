@@ -24,7 +24,7 @@
 	"dependencies": {
 		"@sleepymaid-ts/util": "*",
 		"discord-api-types": "0.29.0",
-		"discord.js": "14.0.0-dev.1647259751.2297c2b"
+		"discord.js": "14.0.0-dev.1649117283-905a6a1"
 	},
 	"volta": {
 		"node": "16.14.0",
