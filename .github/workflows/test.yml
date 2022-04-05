@@ -1,0 +1,43 @@
+name: Handler Node.js CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - services/testbot/**
+      - packages/**
+  pull_request:
+    branches: [main]
+    paths:
+      - services/testbot/**
+      - packages/**
+
+  workflow_dispatch:
+
+jobs:
+  Test-Build:
+    runs-on: ubuntu-latest
+    name: Test Build
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+      - uses: actions/cache@136d96b4aee02b1f0de3ba493b1d47135042d9c0 # tag=v3
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        run: yarn
+      - name: Fix config
+        run: cp packages/config/src/example-config.ts packages/config/src/config.ts
+      - name: Test Build
+        run: yarn build
