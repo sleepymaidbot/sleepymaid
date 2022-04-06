@@ -1,5 +1,9 @@
 import { HandlerClient, SlashCommand } from '@sleepymaid-ts/handler'
-import { ApplicationCommandType, CommandInteraction } from 'discord.js'
+import {
+	ApplicationCommandType,
+	AutocompleteInteraction,
+	CommandInteraction
+} from 'discord.js'
 
 export default new SlashCommand(
 	{
@@ -8,7 +12,8 @@ export default new SlashCommand(
 			description: 'Pings the bot to make sure everything is working',
 			type: ApplicationCommandType.ChatInput,
 			options: []
-		}
+		},
+		guildIds: ['821717486217986098']
 	},
 	{
 		run: async (interaction: CommandInteraction, client: HandlerClient) => {
@@ -17,6 +22,17 @@ export default new SlashCommand(
 				ephemeral: true
 			})
 			client.logger.info(`Pong!`)
+		},
+		autocomplete: async (
+			interaction: AutocompleteInteraction,
+			client: HandlerClient
+		) => {
+			interaction.respond([
+				{
+					name: 'Pong!',
+					value: 'ping'
+				}
+			])
 		}
 	}
 )

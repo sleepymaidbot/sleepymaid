@@ -2,7 +2,7 @@ import { Task } from '@sleepymaid-ts/handler'
 
 export default new Task(
 	{
-		interval: 1000
+		interval: 100000
 	},
 	{
 		run: (client) => {

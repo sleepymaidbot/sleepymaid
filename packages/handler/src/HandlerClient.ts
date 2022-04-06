@@ -5,6 +5,7 @@ import {
 	ButtonInteraction,
 	Client,
 	ClientOptions,
+	Collection,
 	CommandInteraction,
 	ContextMenuCommandInteraction,
 	Interaction,
@@ -14,6 +15,8 @@ import {
 } from 'discord.js'
 import Util from '@sleepymaid-ts/util'
 import { Logger } from '@sleepymaid-ts/logger'
+import { readdir } from 'fs/promises'
+import { join } from 'path'
 
 export interface ClientCommandsType {
 	[key: string]: string
@@ -49,10 +52,14 @@ export interface loadHandlersOptions {
 		whitelist?: string[]
 	}
 }
+export type loadCommandsReturnType = {
+	globalCommands: ApplicationCommandData[]
+	guildCommands: Collection<string, ApplicationCommandData[]>
+}
 
 export class HandlerClient extends Client {
 	public declare logger: Logger
-	public declare commands: ClientCommandsType
+	public declare commands: Collection<string, string>
 	public declare env: env
 	public declare devServerId: Snowflake
 	constructor(options: HandlerClientOptions, djsOptions: ClientOptions) {
@@ -61,7 +68,7 @@ export class HandlerClient extends Client {
 		const { env, devServerId } = options ?? {}
 
 		this.logger = new Logger()
-		this.commands = {}
+		this.commands = new Collection<string, string>()
 		this.env = env ?? 'development'
 		this.devServerId = devServerId
 	}
@@ -90,11 +97,38 @@ export class HandlerClient extends Client {
 		extraGlobalCommands?: Array<ApplicationCommandData>,
 		extraGuildCommands?: GuildCommandsType
 	): Promise<void> {
-		this.RegisterApplicationCommands(
-			folderPath,
-			extraGlobalCommands,
-			extraGuildCommands
-		)
+		this.logger.info('Registering application commands...')
+		const topLevelFolders = await readdir(folderPath)
+		const globalCommands: ApplicationCommandData[] = [
+			...(extraGlobalCommands ?? [])
+		]
+		const guildCommands = new Collection<Snowflake, ApplicationCommandData[]>()
+		for (const [key, value] of Object.entries(extraGuildCommands ?? {}))
+			guildCommands.set(key, value)
+
+		for (const folderName of topLevelFolders) {
+			switch (folderName) {
+				case 'chat': {
+					const data = await this.loadChatCommands(join(folderPath, folderName))
+					globalCommands.push(...data.globalCommands)
+					data.guildCommands.forEach((value, key) => {
+						const array = guildCommands.get(key) ?? []
+						array.push(...value)
+						guildCommands.set(key, array)
+					})
+					break
+				}
+				case 'message': {
+					// TODO: Implement message commands
+					break
+				}
+				case 'user': {
+					// TODO: Implement user commands
+					break
+				}
+			}
+		}
+		await this.RegisterApplicationCommands(globalCommands, guildCommands)
 		this.on('interactionCreate', (i: Interaction) =>
 			this.HandleInteractionEvent(i)
 		)
@@ -119,76 +153,50 @@ export class HandlerClient extends Client {
 		}
 	}
 
-	private async RegisterApplicationCommands(
-		folderPath: string,
-		extraGlobalCommands?: ApplicationCommandData[],
-		extraGuildCommands?: GuildCommandsType
-	): Promise<void> {
-		this.logger.info('Registering application commands...')
-
+	private async loadChatCommands(
+		folderPath: string
+	): Promise<loadCommandsReturnType> {
+		const globalCommands: ApplicationCommandData[] = []
+		const guildCommands = new Collection<Snowflake, ApplicationCommandData[]>()
 		const filesToImport = await Util.loadFolder(folderPath)
 
-		const globalsCommands: ApplicationCommandData[] = [
-			...(extraGlobalCommands ?? [])
-		]
-		const guildCommands: GuildCommandsType = { ...(extraGuildCommands ?? {}) }
-
 		for (const file of filesToImport) {
-			await import(file).then((cmds) => {
-				this.commands[cmds.default.commandInfo.data.name] = file
-				if (cmds.default.commandInfo.guildIds) {
-					if (cmds.default.commandInfo.guildIds.lenght === 1) {
-						const guildId = cmds.default.commandInfo.guildIDs[0]
-						if (guildCommands[guildId]) {
-							guildCommands[guildId].push(cmds.default.commandInfo.data)
-						} else {
-							guildCommands[guildId] = [cmds.default.commandInfo.data]
-						}
-					} else {
-						for (const id of cmds.default.commandInfo.guildIds) {
-							if (guildCommands[id]) {
-								guildCommands[id].push(cmds.default.commandInfo.data)
-							} else {
-								guildCommands[id] = [cmds.default.commandInfo.data]
-							}
-						}
-					}
-				} else {
-					globalsCommands.push(cmds.default.commandInfo.data)
+			const cmds = await import(file)
+			this.commands[cmds.default.commandInfo.data.name] = file
+			if (cmds.default.commandInfo.guildIds) {
+				for (const id of cmds.default.commandInfo.guildIds) {
+					const array = guildCommands.get(id) ?? []
+					array.push(cmds.default.commandInfo.data)
+					guildCommands.set(id, array)
 				}
-			})
+			} else {
+				globalCommands.push(cmds.default.commandInfo.data)
+			}
 		}
 
+		return {
+			globalCommands,
+			guildCommands
+		}
+	}
+
+	private async RegisterApplicationCommands(
+		globalCommands: ApplicationCommandData[],
+		guildCommands: Collection<Snowflake, ApplicationCommandData[]>
+	) {
 		// Global commands
-		const applicationCommand = globalsCommands
-			.map((cmd) => ({
-				name: cmd.name,
-				// @ts-ignore - This is a workaround for a bug in the builder
-				description: cmd.description,
-				// @ts-ignore - This is a workaround for a bug in the builder
-				options: cmd.options,
-				defaultPermission: cmd.defaultPermission,
-				type: cmd.type
-			}))
-			.sort((a, b) => {
+		const applicationCommand = globalCommands.sort((a, b) => {
+			if (a.name < b.name) return -1
+			if (a.name > b.name) return 1
+			return 0
+		}) as ApplicationCommandData[]
+		const currentGlobalCommands =
+			(await this.application?.commands.fetch()) ??
+			([].sort((a, b) => {
 				if (a.name < b.name) return -1
 				if (a.name > b.name) return 1
 				return 0
-			}) as ApplicationCommandData[]
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		const currentGlobalCommands = (await this.application?.commands.fetch())!
-			.map((value1) => ({
-				name: value1.name,
-				description: value1.description,
-				options: value1.options,
-				defaultPermission: value1.defaultPermission,
-				type: value1.type
-			}))
-			.sort((a, b) => {
-				if (a.name < b.name) return -1
-				if (a.name > b.name) return 1
-				return 0
-			}) as ApplicationCommandData[]
+			}) as ApplicationCommandData[])
 
 		if (
 			JSON.stringify(applicationCommand) !==
@@ -201,13 +209,13 @@ export class HandlerClient extends Client {
 					'Global commands have changed, updating...(in dev server)'
 				)
 				await guild.commands
-					.set(globalsCommands)
+					.set(globalCommands)
 					.catch((e) => this.logger.error(e))
 				await this.application?.commands.set([])
 			} else {
 				this.logger.info('Global commands have changed, updating...')
 				await this.application?.commands
-					.set(globalsCommands)
+					.set(globalCommands)
 					.catch((e) => this.logger.error(e))
 			}
 		} else {
@@ -216,39 +224,23 @@ export class HandlerClient extends Client {
 
 		// Guild commands
 		if (guildCommands) {
-			for (const [key, value] of Object.entries(guildCommands)) {
+			guildCommands.forEach(async (value, key) => {
 				const guild = this.guilds.cache.get(key)
-				if (!guild) continue
+				if (!guild) return
 
-				const sortedCommands = value
-					.map((cmd) => ({
-						name: cmd.name,
-						// @ts-ignore - This is a workaround for a bug in the builder
-						description: cmd.description,
-						// @ts-ignore - This is a workaround for a bug in the builder
-						options: cmd.options,
-						defaultPermission: cmd.defaultPermission,
-						type: cmd.type
-					}))
-					.sort((a, b) => {
+				const sortedCommands = value.sort((a, b) => {
+					if (a.name < b.name) return -1
+					if (a.name > b.name) return 1
+					return 0
+				})
+
+				const currentGuildCommands = (await guild.commands.fetch()).sort(
+					(a, b) => {
 						if (a.name < b.name) return -1
 						if (a.name > b.name) return 1
 						return 0
-					})
-
-				const currentGuildCommands = (await guild.commands.fetch())
-					.map((v1) => ({
-						name: v1.name,
-						description: v1.description,
-						options: v1.options,
-						defaultPermission: v1.defaultPermission,
-						type: v1.type
-					}))
-					.sort((a, b) => {
-						if (a.name < b.name) return -1
-						if (a.name > b.name) return 1
-						return 0
-					})
+					}
+				)
 
 				if (
 					JSON.stringify(sortedCommands) !==
@@ -261,7 +253,7 @@ export class HandlerClient extends Client {
 				} else {
 					this.logger.info(`Guild commands for ${guild.name} have not changed.`)
 				}
-			}
+			})
 		}
 	}
 
