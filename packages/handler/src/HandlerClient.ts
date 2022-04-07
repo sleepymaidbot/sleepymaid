@@ -1,7 +1,17 @@
 import { Client, ClientOptions, Snowflake } from 'discord.js'
-import Util from '@sleepymaid-ts/util'
 import { Logger } from '@sleepymaid-ts/logger'
-import { CommandManager, StartAllOptionsType } from './commands/CommandManager'
+import {
+	CommandManager,
+	CommandManagerStartAllOptionsType
+} from './commands/CommandManager'
+import {
+	ListenerManager,
+	ListenerManagerStartAllOptionsType
+} from './listeners/ListenerManager'
+import {
+	TaskManager,
+	TaskManagerStartAllOptionsType
+} from './tasks/TaskManager'
 
 export type env = 'development' | 'production'
 
@@ -11,19 +21,16 @@ export interface HandlerClientOptions {
 }
 
 export interface loadHandlersOptions {
-	commands?: StartAllOptionsType
-	listeners?: {
-		folder: string
-	}
-	tasks?: {
-		folder: string
-	}
-	modules?: {
+	commands?: CommandManagerStartAllOptionsType
+	listeners?: ListenerManagerStartAllOptionsType
+	tasks?: TaskManagerStartAllOptionsType
+	// TODO: Add modules
+	/*modules?: {
 		folder: string
 		entryFile?: string
 		blacklist?: string[]
 		whitelist?: string[]
-	}
+	}*/
 }
 
 export class HandlerClient extends Client {
@@ -31,6 +38,8 @@ export class HandlerClient extends Client {
 	public declare env: env
 	public declare devServerId: Snowflake
 	public declare commandManager: CommandManager
+	public declare listenerManager: ListenerManager
+	public declare taskManager: TaskManager
 	constructor(options: HandlerClientOptions, djsOptions: ClientOptions) {
 		super(djsOptions)
 
@@ -40,6 +49,8 @@ export class HandlerClient extends Client {
 		this.env = env ?? 'development'
 		this.devServerId = devServerId
 		this.commandManager = new CommandManager(this)
+		this.listenerManager = new ListenerManager(this)
+		this.taskManager = new TaskManager(this)
 	}
 
 	public async loadHandlers(options: loadHandlersOptions): Promise<void> {
@@ -49,53 +60,11 @@ export class HandlerClient extends Client {
 		}
 		// listeners
 		if (options.listeners) {
-			this.loadListeners(options.listeners.folder)
+			this.listenerManager.startAll(options.listeners)
 		}
 		// tasks
 		if (options.tasks) {
-			this.loadTasks(options.tasks.folder)
-		}
-	}
-
-	public async loadListeners(folderPath: string): Promise<void> {
-		const filesToImport = await Util.loadFolder(folderPath)
-
-		for (const file of filesToImport) {
-			const event = await import(file)
-			if (event.default.listenerInfo.once) {
-				try {
-					this.once(
-						event.default.listenerInfo.name,
-						async (...args) => await event.default.run(this, ...args)
-					)
-				} catch (error) {
-					this.logger.error(error)
-				}
-			} else {
-				try {
-					this.on(
-						event.default.listenerInfo.name,
-						async (...args) => await event.default.run(this, ...args)
-					)
-				} catch (error) {
-					this.logger.error(error)
-				}
-			}
-		}
-	}
-
-	public async loadTasks(folderPath: string): Promise<void> {
-		const filesToImport = await Util.loadFolder(folderPath)
-
-		for (const file of filesToImport) {
-			const task = await import(file)
-			setInterval(() => {
-				try {
-					task.default.run(this)
-				} catch (error) {
-					this.logger.error(error)
-				}
-			}, task.default.taskInfo.interval)
+			this.taskManager.startAll(options.tasks)
 		}
 	}
 }

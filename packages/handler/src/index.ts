@@ -12,6 +12,9 @@ export type {
 	ListenerRunFunction
 } from './listeners/Listener'
 
+export { ListenerManager } from './listeners/ListenerManager'
+export type { ListenerManagerStartAllOptionsType } from './listeners/ListenerManager'
+
 export { SlashCommand } from './commands/SlashCommand'
 export type {
 	SlashCommandInfo,
@@ -23,7 +26,7 @@ export type {
 
 export { CommandManager } from './commands/CommandManager'
 export type {
-	StartAllOptionsType,
+	CommandManagerStartAllOptionsType,
 	GuildCommandsType
 } from './commands/CommandManager'
 
@@ -33,3 +36,6 @@ export type {
 	FunctionType as TaskFunctionType,
 	TaskRunFunction
 } from './tasks/Task'
+
+export { TaskManager } from './tasks/TaskManager'
+export type { TaskManagerStartAllOptionsType } from './tasks/TaskManager'

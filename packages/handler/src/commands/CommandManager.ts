@@ -15,7 +15,7 @@ import { readdir } from 'fs/promises'
 import { join } from 'path'
 import { HandlerClient } from '../HandlerClient'
 
-export interface StartAllOptionsType {
+export interface CommandManagerStartAllOptionsType {
 	folder: string
 	extraGlobalCommands?: Array<ApplicationCommandData>
 	extraGuildCommands?: GuildCommandsType
@@ -40,7 +40,9 @@ export class CommandManager {
 		this.guildCommands = new Collection<string, ApplicationCommandData[]>()
 	}
 
-	public async startAll(options: StartAllOptionsType): Promise<void> {
+	public async startAll(
+		options: CommandManagerStartAllOptionsType
+	): Promise<void> {
 		await this.loadCommands(
 			options.folder,
 			options.extraGlobalCommands,
