@@ -17,11 +17,15 @@ export default new SlashCommand(
 	},
 	{
 		run: async (interaction: CommandInteraction, client: HandlerClient) => {
-			interaction.reply({
-				content: 'Pong!',
-				ephemeral: true
-			})
-			client.logger.info(`Pong!`)
+			try {
+				interaction.reply({
+					content: 'Pong!',
+					ephemeral: true
+				})
+				client.logger.info(`Pong!`)
+			} catch (error) {
+				client.logger.error(error)
+			}
 		},
 		autocomplete: async (
 			interaction: AutocompleteInteraction,

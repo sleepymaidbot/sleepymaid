@@ -23,6 +23,9 @@ export type {
 	SlashCommandFunctionType
 } from './commands/SlashCommand'
 
+export { CommandManager } from './commands/CommandManager'
+export type { StartAllOptionsType } from './commands/CommandManager'
+
 export { Task } from './tasks/Task'
 export type {
 	TaskInfo,
