@@ -1,4 +1,4 @@
-import { HandlerClient } from './HandlerClient'
+import { HandlerClient } from '../HandlerClient'
 
 export type TaskInfo = {
 	interval: number

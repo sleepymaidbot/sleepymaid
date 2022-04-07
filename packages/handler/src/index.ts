@@ -7,25 +7,25 @@ export type {
 	loadHandlersOptions
 } from './HandlerClient'
 
-export { Listener } from './Listener'
+export { Listener } from './listeners/Listener'
 export type {
 	ListenerInfo,
 	FunctionType as ListenerFunctionType,
 	ListenerRunFunction
-} from './Listener'
+} from './listeners/Listener'
 
-export { SlashCommand } from './SlashCommand'
+export { SlashCommand } from './commands/SlashCommand'
 export type {
 	SlashCommandInfo,
 	SlashCommandData,
 	CommandRunFunction,
 	AutoCompleteFunction,
 	SlashCommandFunctionType
-} from './SlashCommand'
+} from './commands/SlashCommand'
 
-export { Task } from './Task'
+export { Task } from './tasks/Task'
 export type {
 	TaskInfo,
 	FunctionType as TaskFunctionType,
 	TaskRunFunction
-} from './Task'
+} from './tasks/Task'

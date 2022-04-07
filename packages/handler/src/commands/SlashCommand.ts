@@ -8,7 +8,7 @@ import {
 	CommandInteraction,
 	Snowflake
 } from 'discord.js'
-import { HandlerClient } from './HandlerClient'
+import { HandlerClient } from '../HandlerClient'
 
 export type SlashCommandInfo = {
 	guildIds?: Snowflake[]
