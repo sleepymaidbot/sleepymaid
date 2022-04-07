@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { HandlerClient } from '../HandlerClient'
 
 export type TaskInfo = {

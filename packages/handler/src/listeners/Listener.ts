@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HandlerClient } from '../HandlerClient'
 
 export type ListenerInfo = {
@@ -9,7 +11,6 @@ export type FunctionType = {
 	run: ListenerRunFunction
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ListenerRunFunction = (
 	client: HandlerClient,
 	...args: any[]
