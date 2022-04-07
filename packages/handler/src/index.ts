@@ -1,9 +1,7 @@
 export { HandlerClient } from './HandlerClient'
 export type {
-	ClientCommandsType,
 	env,
 	HandlerClientOptions,
-	GuildCommandsType,
 	loadHandlersOptions
 } from './HandlerClient'
 
@@ -24,7 +22,10 @@ export type {
 } from './commands/SlashCommand'
 
 export { CommandManager } from './commands/CommandManager'
-export type { StartAllOptionsType } from './commands/CommandManager'
+export type {
+	StartAllOptionsType,
+	GuildCommandsType
+} from './commands/CommandManager'
 
 export { Task } from './tasks/Task'
 export type {

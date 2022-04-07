@@ -8,16 +8,21 @@ import {
 	ContextMenuCommandInteraction,
 	Interaction,
 	ModalSubmitInteraction,
-	SelectMenuInteraction
+	SelectMenuInteraction,
+	Snowflake
 } from 'discord.js'
 import { readdir } from 'fs/promises'
 import { join } from 'path'
-import { GuildCommandsType, HandlerClient } from '../HandlerClient'
+import { HandlerClient } from '../HandlerClient'
 
 export interface StartAllOptionsType {
 	folder: string
 	extraGlobalCommands?: Array<ApplicationCommandData>
 	extraGuildCommands?: GuildCommandsType
+}
+
+export interface GuildCommandsType {
+	[key: Snowflake]: ApplicationCommandData[]
 }
 
 export class CommandManager {

@@ -1,26 +1,13 @@
-import {
-	ApplicationCommandData,
-	Client,
-	ClientOptions,
-	Snowflake
-} from 'discord.js'
+import { Client, ClientOptions, Snowflake } from 'discord.js'
 import Util from '@sleepymaid-ts/util'
 import { Logger } from '@sleepymaid-ts/logger'
 import { CommandManager, StartAllOptionsType } from './commands/CommandManager'
-
-export interface ClientCommandsType {
-	[key: string]: string
-}
 
 export type env = 'development' | 'production'
 
 export interface HandlerClientOptions {
 	env?: env
 	devServerId: string
-}
-
-export interface GuildCommandsType {
-	[key: Snowflake]: ApplicationCommandData[]
 }
 
 export interface loadHandlersOptions {
