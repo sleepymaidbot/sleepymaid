@@ -73,7 +73,7 @@ export class CommandManager {
 		}
 	}
 
-	public async loadCommands(
+	private async loadCommands(
 		folderPath: string,
 		extraGlobalCommands?: Array<ApplicationCommandData>,
 		extraGuildCommands?: GuildCommandsType
@@ -121,7 +121,7 @@ export class CommandManager {
 		return
 	}
 
-	public async RegisterApplicationCommands() {
+	private async RegisterApplicationCommands() {
 		const globalCommands = this.globalCommands
 		const guildCommands = this.guildCommands
 		// Global commands
