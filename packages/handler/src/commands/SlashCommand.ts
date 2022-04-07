@@ -12,7 +12,7 @@ import { HandlerClient } from '../HandlerClient'
 
 export type SlashCommandInfo = {
 	guildIds?: Snowflake[]
-	data: SlashCommandData | RESTPostAPIApplicationCommandsJSONBody
+	data: SlashCommandData
 }
 
 export type SlashCommandData = {
