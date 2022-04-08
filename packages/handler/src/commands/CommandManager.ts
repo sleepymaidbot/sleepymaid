@@ -33,6 +33,7 @@ export class CommandManager {
 		ApplicationCommandData[]
 	>
 	private declare client: HandlerClient
+	private declare folderPath: string
 	constructor(client: HandlerClient) {
 		this.client = client
 		this.commands = new Collection<string, string>()
@@ -43,8 +44,9 @@ export class CommandManager {
 	public async startAll(
 		options: CommandManagerStartAllOptionsType
 	): Promise<void> {
+		if (!options.folder) throw new Error('No folder path provided!')
+		this.folderPath = options.folder
 		await this.loadCommands(
-			options.folder,
 			options.extraGlobalCommands,
 			options.extraGuildCommands
 		)
@@ -56,7 +58,7 @@ export class CommandManager {
 
 	private HandleInteractionEvent(i: Interaction) {
 		if (i.isCommand()) {
-			this.HandleChatApplicationCommands(i as CommandInteraction)
+			this.HandleApplicationCommands(i as CommandInteraction)
 			this.client.emit('commandRun', i)
 		} else if (i.isSelectMenu()) {
 			this.client.emit('selectChanged', i as SelectMenuInteraction)
@@ -65,7 +67,6 @@ export class CommandManager {
 		} else if (i.isModalSubmit()) {
 			this.client.emit('modalSubmit', i as ModalSubmitInteraction)
 		} else if (i.isContextMenuCommand()) {
-			// this.HandleContextMenuCommand(i as ContextMenuCommandInteraction)
 			this.client.emit('contextMenuRun', i as ContextMenuCommandInteraction)
 		} else if (i.isAutocomplete) {
 			this.HandleAutocomplete(i as AutocompleteInteraction)
@@ -74,12 +75,11 @@ export class CommandManager {
 	}
 
 	private async loadCommands(
-		folderPath: string,
 		extraGlobalCommands?: Array<ApplicationCommandData>,
 		extraGuildCommands?: GuildCommandsType
 	): Promise<void> {
 		this.client.logger.info('Registering application commands...')
-		const topLevelFolders = await readdir(folderPath)
+		const topLevelFolders = await readdir(this.folderPath)
 		this.globalCommands.push(...(extraGlobalCommands ?? []))
 		for (const [key, value] of Object.entries(extraGuildCommands ?? {})) {
 			this.guildCommands.set(key, value)
@@ -87,15 +87,15 @@ export class CommandManager {
 		for (const folderName of topLevelFolders) {
 			switch (folderName) {
 				case 'chat': {
-					await this.loadChatCommands(join(folderPath, folderName))
+					await this.loadChatCommands(join(this.folderPath, folderName))
 					break
 				}
 				case 'message': {
-					// TODO: Implement message commands
+					await this.loadMessageCommands(join(this.folderPath, folderName))
 					break
 				}
 				case 'user': {
-					// TODO: Implement user commands
+					await this.loadUserCommands(join(this.folderPath, folderName))
 					break
 				}
 			}
@@ -103,6 +103,44 @@ export class CommandManager {
 	}
 
 	private async loadChatCommands(folderPath: string): Promise<void> {
+		const filesToImport = await Util.loadFolder(folderPath)
+
+		for (const file of filesToImport) {
+			const cmds = await import(file)
+			this.commands[cmds.default.commandInfo.data.name] = file
+			if (cmds.default.commandInfo.guildIds) {
+				for (const id of cmds.default.commandInfo.guildIds) {
+					const array = this.guildCommands.get(id) ?? []
+					array.push(cmds.default.commandInfo.data)
+					this.guildCommands.set(id, array)
+				}
+			} else {
+				this.globalCommands.push(cmds.default.commandInfo.data)
+			}
+		}
+		return
+	}
+
+	private async loadMessageCommands(folderPath: string): Promise<void> {
+		const filesToImport = await Util.loadFolder(folderPath)
+
+		for (const file of filesToImport) {
+			const cmds = await import(file)
+			this.commands[cmds.default.commandInfo.data.name] = file
+			if (cmds.default.commandInfo.guildIds) {
+				for (const id of cmds.default.commandInfo.guildIds) {
+					const array = this.guildCommands.get(id) ?? []
+					array.push(cmds.default.commandInfo.data)
+					this.guildCommands.set(id, array)
+				}
+			} else {
+				this.globalCommands.push(cmds.default.commandInfo.data)
+			}
+		}
+		return
+	}
+
+	private async loadUserCommands(folderPath: string): Promise<void> {
 		const filesToImport = await Util.loadFolder(folderPath)
 
 		for (const file of filesToImport) {
@@ -201,7 +239,7 @@ export class CommandManager {
 		}
 	}
 
-	private async HandleChatApplicationCommands(i: CommandInteraction) {
+	private async HandleApplicationCommands(i: CommandInteraction) {
 		this.client.logger.info(
 			`${i.guild.name} (${i.guild.id}) > ${i.member.user.username} (${i.member.user.id}) > /${i.commandName} (${i.commandId})`
 		)
