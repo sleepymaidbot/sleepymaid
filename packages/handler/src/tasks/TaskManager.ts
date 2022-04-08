@@ -24,7 +24,7 @@ export class TaskManager {
 			const task = await import(file)
 			setInterval(() => {
 				try {
-					task.default.run(this)
+					task.default.run(this.client)
 				} catch (error) {
 					this.client.logger.error(error)
 				}
