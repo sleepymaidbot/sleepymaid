@@ -27,10 +27,7 @@ export default new SlashCommand(
 				client.logger.error(error)
 			}
 		},
-		autocomplete: async (
-			interaction: AutocompleteInteraction,
-			client: HandlerClient
-		) => {
+		autocomplete: async (interaction: AutocompleteInteraction) => {
 			interaction.respond([
 				{
 					name: 'Pong!',
