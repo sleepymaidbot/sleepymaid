@@ -1,4 +1,4 @@
-import { Listener } from '@sleepymaid-ts/handler'
+import { Listener } from '@sleepymaid/handler'
 export default new Listener(
 	{
 		name: 'interactionCreate',

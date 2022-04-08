@@ -1,5 +1,5 @@
 {
-	"name": "@sleepymaid-ts/testbot",
+	"name": "@sleepymaid/testbot",
 	"version": "1.0.0",
 	"description": "",
 	"private": true,
@@ -21,10 +21,10 @@
 	},
 	"dependencies": {
 		"@discordjs/builders": "0.13.0-dev.1649160523-402514f",
-		"@sleepymaid-ts/config": "*",
-		"@sleepymaid-ts/handler": "*",
-		"@sleepymaid-ts/logger": "*",
-		"@sleepymaid-ts/tsconfig": "*",
+		"@sleepymaid/config": "*",
+		"@sleepymaid/handler": "*",
+		"@sleepymaid/logger": "*",
+		"@sleepymaid/tsconfig": "*",
 		"discord.js": "14.0.0-dev.1649160496-402514f",
 		"path": "0.12.7"
 	},

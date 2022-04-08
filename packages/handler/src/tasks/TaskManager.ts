@@ -1,4 +1,4 @@
-import Util from '@sleepymaid-ts/util'
+import Util from '@sleepymaid/util'
 import { HandlerClient } from '../HandlerClient'
 
 export interface TaskManagerStartAllOptionsType {

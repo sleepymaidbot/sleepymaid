@@ -1,5 +1,5 @@
 import { ContextMenuCommandBuilder } from '@discordjs/builders'
-import { MessageCommand } from '@sleepymaid-ts/handler'
+import { MessageCommand } from '@sleepymaid/handler'
 import { ApplicationCommandType } from 'discord-api-types/v10'
 import { MessageApplicationCommandData } from 'discord.js'
 

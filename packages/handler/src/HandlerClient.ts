@@ -1,5 +1,5 @@
 import { Client, ClientOptions, Snowflake } from 'discord.js'
-import { Logger } from '@sleepymaid-ts/logger'
+import { Logger } from '@sleepymaid/logger'
 import {
 	CommandManager,
 	CommandManagerStartAllOptionsType

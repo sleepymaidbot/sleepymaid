@@ -1,12 +1,13 @@
 {
-	"name": "@sleepymaid-ts/util",
-	"version": "0.0.0",
+	"name": "@sleepymaid/util",
+	"version": "0.1.0",
 	"description": "",
 	"private": false,
 	"main": "./dist/index.js",
 	"types": "./types/index.d.ts",
 	"files": [
-		"dist/**"
+		"dist/**",
+		"types/**"
 	],
 	"scripts": {
 		"build": "yarn rimraf dist/ && yarn tsc"
@@ -14,7 +15,7 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
-		"@sleepymaid-ts/tsconfig": "*",
+		"@sleepymaid/tsconfig": "*",
 		"@types/node": "17.0.21",
 		"@yarnpkg/cli-dist": "3.2.0",
 		"rimraf": "3.0.2",

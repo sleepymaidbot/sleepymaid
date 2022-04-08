@@ -1,6 +1,6 @@
 import { Util } from 'discord.js'
 import { EmbedBuilder } from '@discordjs/builders'
-import { config } from '@sleepymaid-ts/config'
+import { config } from '@sleepymaid/config'
 
 const month = {
 	0: 'Janvier',

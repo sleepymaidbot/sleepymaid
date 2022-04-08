@@ -1,4 +1,4 @@
-import { Task } from '@sleepymaid-ts/handler'
+import { Task } from '@sleepymaid/handler'
 
 export default new Task(
 	{

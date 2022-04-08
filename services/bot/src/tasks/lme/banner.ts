@@ -1,5 +1,5 @@
 import { opendir } from 'fs/promises'
-import { config } from '@sleepymaid-ts/config'
+import { config } from '@sleepymaid/config'
 
 module.exports = {
 	interval: 3600000,

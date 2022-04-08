@@ -5,7 +5,7 @@ import {
 	SelectMenuBuilder,
 	SelectMenuOptionBuilder
 } from '@discordjs/builders'
-import { config } from '@sleepymaid-ts/config'
+import { config } from '@sleepymaid/config'
 import { inspect } from 'util'
 
 module.exports = {

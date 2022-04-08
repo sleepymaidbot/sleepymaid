@@ -4,15 +4,15 @@ import {
 	ClientOptions,
 	Guild
 } from 'discord.js'
-import { Logger } from '@sleepymaid-ts/logger'
-import { config } from '@sleepymaid-ts/config'
+import { Logger } from '@sleepymaid/logger'
+import { config } from '@sleepymaid/config'
 import { resolve } from 'path'
 import type {
 	botClientCommandsType,
 	BotClientOptions,
 	guildCommandsType
 } from '../types'
-import Util from '@sleepymaid-ts/util'
+import Util from '@sleepymaid/util'
 import { PrismaClient } from '@prisma/client'
 import { ApplicationCommandPermissionType } from 'discord-api-types/v10'
 

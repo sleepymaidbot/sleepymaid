@@ -1,4 +1,4 @@
-import Util from '@sleepymaid-ts/util'
+import Util from '@sleepymaid/util'
 import {
 	ApplicationCommandData,
 	AutocompleteInteraction,

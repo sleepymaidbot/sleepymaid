@@ -1,4 +1,4 @@
-import { HandlerClient, SlashCommand } from '@sleepymaid-ts/handler'
+import { HandlerClient, SlashCommand } from '@sleepymaid/handler'
 import {
 	ApplicationCommandType,
 	AutocompleteInteraction,

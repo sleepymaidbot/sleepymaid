@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import { config } from '@sleepymaid-ts/config'
+import { config } from '@sleepymaid/config'
 import { exec as MyExec } from 'child_process'
 import { Message } from 'discord.js'
 import path from 'path'

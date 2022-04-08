@@ -1,4 +1,4 @@
-import { config } from '@sleepymaid-ts/config'
+import { config } from '@sleepymaid/config'
 import {
 	EmbedBuilder,
 	ActionRowBuilder,

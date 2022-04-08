@@ -1,6 +1,6 @@
 {
-	"name": "sleepymaid-ts-interaction",
-	"version": "1.0.0",
+	"name": "sleepymaid",
+	"version": "0.0.0",
 	"repository": "https://github.com/Le-monde-dEcorte/sleepymaid-ts.git",
 	"author": "Ecorte",
 	"license": "MIT",
@@ -18,21 +18,27 @@
 		"@types/prettier": "2.4.4",
 		"@typescript-eslint/eslint-plugin": "5.18.0",
 		"@typescript-eslint/parser": "5.18.0",
+		"auto": "^10.36.5",
 		"eslint": "8.12.0",
 		"eslint-config-prettier": "8.5.0",
+		"husky": "7.0.4",
 		"prettier": "2.6.2",
 		"prisma": "3.12.0",
 		"turbo": "1.2.0",
-		"typescript": "4.6.3",
-		"husky": "7.0.4"
+		"typescript": "4.6.3"
 	},
 	"scripts": {
 		"build": "yarn turbo run build",
-		"start": "yarn turbo run start --scope=@sleepymaid-ts/bot",
-		"starttest": "yarn turbo run start --scope=@sleepymaid-ts/testbot",
+		"start": "yarn turbo run start --scope=@sleepymaid/bot",
+		"starttest": "yarn turbo run start --scope=@sleepymaid/testbot",
 		"lint": "yarn eslint --fix --ext ts,tsx packages",
 		"testlint": "yarn eslint --ext ts,tsx packages",
 		"format": "yarn prettier --write .",
 		"prepare": "husky install"
+	},
+	"auto": {
+		"plugins": [
+			"npm"
+		]
 	}
 }

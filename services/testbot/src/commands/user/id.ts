@@ -1,4 +1,4 @@
-import { HandlerClient, UserCommand } from '@sleepymaid-ts/handler'
+import { HandlerClient, UserCommand } from '@sleepymaid/handler'
 import {
 	UserApplicationCommandData,
 	UserContextMenuCommandInteraction

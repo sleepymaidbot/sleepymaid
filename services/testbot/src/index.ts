@@ -1,5 +1,5 @@
-import { config } from '@sleepymaid-ts/config'
-import { HandlerClient } from '@sleepymaid-ts/handler'
+import { config } from '@sleepymaid/config'
+import { HandlerClient } from '@sleepymaid/handler'
 import { GatewayIntentBits } from 'discord.js'
 import { resolve } from 'path'
 

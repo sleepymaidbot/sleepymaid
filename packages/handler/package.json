@@ -1,12 +1,13 @@
 {
-	"name": "@sleepymaid-ts/handler",
-	"version": "0.0.0",
+	"name": "@sleepymaid/handler",
+	"version": "0.1.0",
 	"description": "",
 	"private": false,
 	"main": "./dist/index.js",
 	"types": "./types/index.d.ts",
 	"files": [
-		"dist/**"
+		"dist/**",
+		"types/**"
 	],
 	"scripts": {
 		"build": "yarn rimraf dist/ && yarn tsc"
@@ -14,15 +15,14 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
-		"@sleepymaid-ts/tsconfig": "*",
+		"@sleepymaid/tsconfig": "*",
+		"@sleepymaid/util": "*",
+		"@sleepymaid/logger": "*",
 		"@types/node": "17.0.21",
 		"@yarnpkg/cli-dist": "3.2.0",
 		"rimraf": "3.0.2",
 		"source-map-support": "0.5.21",
-		"typescript": "4.6.3"
-	},
-	"dependencies": {
-		"@sleepymaid-ts/util": "*",
+		"typescript": "4.6.3",
 		"discord-api-types": "0.31.0",
 		"discord.js": "14.0.0-dev.1649160496-402514f"
 	},

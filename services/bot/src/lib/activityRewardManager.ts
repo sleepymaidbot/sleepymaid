@@ -3,7 +3,7 @@ import { singleton } from 'tsyringe'
 import { BotClient } from './BotClient'
 import { GuildMember, Util } from 'discord.js'
 import { actifRoles } from './lists'
-import { config } from '@sleepymaid-ts/config'
+import { config } from '@sleepymaid/config'
 import { EmbedBuilder } from '@discordjs/builders'
 
 @singleton()

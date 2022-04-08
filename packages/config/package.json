@@ -1,5 +1,5 @@
 {
-	"name": "@sleepymaid-ts/config",
+	"name": "@sleepymaid/config",
 	"version": "0.0.0",
 	"description": "",
 	"private": true,
@@ -14,7 +14,7 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
-		"@sleepymaid-ts/tsconfig": "*",
+		"@sleepymaid/tsconfig": "*",
 		"@types/node": "17.0.21",
 		"@yarnpkg/cli-dist": "3.2.0",
 		"rimraf": "3.0.2",
