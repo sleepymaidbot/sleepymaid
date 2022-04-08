@@ -6,7 +6,7 @@ import {
 import { HandlerClient } from '../HandlerClient'
 
 export type MessageCommandInfo = {
-	guilIds: Snowflake[]
+	guildIds: Snowflake[]
 	data: MessageApplicationCommandData
 }
 
