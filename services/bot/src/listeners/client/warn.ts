@@ -5,6 +5,6 @@ module.exports = {
 	once: false,
 
 	execute(info, client: BotClient) {
-		client.logger.debug(info)
+		return client.logger.debug(info)
 	}
 }

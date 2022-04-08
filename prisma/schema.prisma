@@ -1,16 +1,91 @@
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://postgres:admin@localhost:5432/mondecorte?schema=mondecorte"
 }
 
 generator client {
   provider = "prisma-client-js"
 }
 
+// TODO: Get rid of this once the new database is in place
 model mondecorte {
   user_id        String  @unique
   custom_role_id String?
   points         Int?    @default(0)
   social_credit  Int?    @default(500)
   vote           String?
+}
+
+model guilds_settings {
+  guild_id        String           @id @map("guildId")
+  mod_roles       mod_role[]
+  admin_roles     admin_role[]
+  leveling_tracks leveling_track[]
+}
+
+model mod_role {
+  guild_id String @map("guildId")
+  role_id  String @id @map("roleId")
+
+  settings guilds_settings @relation(fields: [guild_id], references: [guild_id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model admin_role {
+  guild_id String @map("guildId")
+  role_id  String @id @map("roleId")
+
+  settings guilds_settings @relation(fields: [guild_id], references: [guild_id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model track_blacklisted_role {
+  guild_id String @map("guildId")
+  track_id Int    @map("trackId")
+  role_id  String @id @map("roleId")
+
+  track leveling_track @relation(fields: [track_id], references: [track_id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model track_whitelisted_role {
+  guild_id String @map("guildId")
+  track_id Int    @map("trackId")
+  role_id  String @id @map("roleId")
+
+  track leveling_track @relation(fields: [track_id], references: [track_id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model track_role_multiplier {
+  guild_id   String @map("guildId")
+  track_id   Int    @map("trackId")
+  role_id    String @id @map("roleId")
+  multiplier Int    @default(1) @map("multiplier")
+
+  track leveling_track @relation(fields: [track_id], references: [track_id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model track_channel_multiplier {
+  guild_id   String @map("guildId")
+  track_id   Int    @map("trackId")
+  channel_id String @id @map("channelId")
+  multiplier Int    @default(1) @map("multiplier")
+
+  track leveling_track @relation(fields: [track_id], references: [track_id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model leveling_track {
+  guild_id            String                     @map("guildId")
+  track_id            Int                        @id @default(autoincrement()) @map("trackId")
+  track_name          String                     @map("trackName")
+  type                leveling_track_type
+  blacklisted_roles   track_blacklisted_role[]
+  whitelisted_roles   track_whitelisted_role[]
+  role_multipliers    track_role_multiplier[]
+  channel_multipliers track_channel_multiplier[]
+  global_multiplier   Int                        @default(1) @map("globalMultiplier")
+
+  settings guilds_settings @relation(fields: [guild_id], references: [guild_id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+enum leveling_track_type {
+  points
+  levels
 }

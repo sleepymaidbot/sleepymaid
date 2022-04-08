@@ -1,5 +1,5 @@
 {
-	"name": "@sleepymaid-ts/logger",
+	"name": "@sleepymaid-ts/handler",
 	"version": "0.0.0",
 	"description": "",
 	"private": false,
@@ -19,16 +19,16 @@
 		"@yarnpkg/cli-dist": "3.2.0",
 		"rimraf": "3.0.2",
 		"source-map-support": "0.5.21",
-		"typescript": "4.6.3"
+		"typescript": "4.6.2"
 	},
 	"dependencies": {
-		"ansi-colors": "4.1.1",
-		"pino": "7.9.2",
-		"pino-pretty": "7.6.0"
+		"@sleepymaid-ts/util": "*",
+		"discord-api-types": "0.29.0",
+		"discord.js": "14.0.0-dev.1649117283-905a6a1"
 	},
 	"volta": {
-		"node": "16.14.2",
-		"yarn": "1.22.18"
+		"node": "16.14.0",
+		"yarn": "1.22.17"
 	},
-	"packageManager": "yarn@1.22.18"
+	"packageManager": "yarn@1.22.17"
 }
