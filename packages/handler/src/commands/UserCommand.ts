@@ -1,17 +1,17 @@
 import {
-	MessageApplicationCommandData,
-	MessageContextMenuCommandInteraction,
-	Snowflake
+	Snowflake,
+	UserApplicationCommandData,
+	UserContextMenuCommandInteraction
 } from 'discord.js'
 import { HandlerClient } from '../HandlerClient'
 
 export type UserCommandInfo = {
 	guilIds: Snowflake[]
-	data: MessageApplicationCommandData
+	data: UserApplicationCommandData
 }
 
 export type UserCommandRunFunction = (
-	interaction: MessageContextMenuCommandInteraction,
+	interaction: UserContextMenuCommandInteraction,
 	client: HandlerClient
 ) => void
 
@@ -29,10 +29,7 @@ export class UserCommand {
 		this.run = functions.run
 	}
 
-	run(
-		interaction: MessageContextMenuCommandInteraction,
-		_client: HandlerClient
-	) {
+	run(interaction: UserContextMenuCommandInteraction, _client: HandlerClient) {
 		interaction.reply({
 			content: "This interaction isn't implemented yet",
 			ephemeral: true
