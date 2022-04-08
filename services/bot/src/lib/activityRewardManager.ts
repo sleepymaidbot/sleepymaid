@@ -14,6 +14,7 @@ export class ActivityRewardManager {
 	}
 
 	public async checkActivityReward(member: GuildMember) {
+		if (member.user.id === '324281236728053760') return
 		const inDb = await this.client.prisma.mondecorte.findUnique({
 			where: { user_id: member.id }
 		})
