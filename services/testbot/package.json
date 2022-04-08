@@ -14,23 +14,23 @@
 	"devDependencies": {
 		"@types/node": "17.0.21",
 		"@yarnpkg/cli-dist": "3.2.0",
-		"discord-api-types": "0.29.0",
+		"discord-api-types": "0.31.0",
 		"rimraf": "3.0.2",
 		"source-map-support": "0.5.21",
-		"typescript": "4.6.2"
+		"typescript": "4.6.3"
 	},
 	"dependencies": {
-		"@discordjs/builders": "0.13.0-dev.1649117272-905a6a1",
+		"@discordjs/builders": "0.13.0-dev.1649160523-402514f",
 		"@sleepymaid-ts/config": "*",
 		"@sleepymaid-ts/handler": "*",
 		"@sleepymaid-ts/logger": "*",
 		"@sleepymaid-ts/tsconfig": "*",
-		"discord.js": "14.0.0-dev.1649117283-905a6a1",
+		"discord.js": "14.0.0-dev.1649160496-402514f",
 		"path": "0.12.7"
 	},
 	"volta": {
-		"node": "16.14.0",
-		"yarn": "1.22.17"
+		"node": "16.14.2",
+		"yarn": "1.22.18"
 	},
-	"packageManager": "yarn@1.22.17"
+	"packageManager": "yarn@1.22.18"
 }
