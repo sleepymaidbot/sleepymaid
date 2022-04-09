@@ -222,7 +222,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@sleepymaid/handler@*, @sleepymaid/handler@workspace:packages/handler":
+"@sleepymaid/handler@npm:*":
+  version: 0.1.0
+  resolution: "@sleepymaid/handler@npm:0.1.0"
+  checksum: 692f0c950a886497ddaa9911d42cc44e0177d0bceb1f62b3b3b5b581544e0be25addbfe510d6c3c72d2b13a206d8ca6e81cd641050a7e816cd3447597c82efbc
+  languageName: node
+  linkType: hard
+
+"@sleepymaid/handler@workspace:packages/handler":
   version: 0.0.0-use.local
   resolution: "@sleepymaid/handler@workspace:packages/handler"
   dependencies:
