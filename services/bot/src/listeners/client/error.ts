@@ -1,10 +1,14 @@
+import { Listener } from '@sleepymaid/handler'
 import { BotClient } from '../../lib/BotClient'
 
-module.exports = {
-	name: 'error',
-	once: false,
-
-	execute(error: Error, client: BotClient) {
-		return client.logger.error(error)
+export default new Listener(
+	{
+		name: 'error',
+		once: false
+	},
+	{
+		run(client: BotClient, error: Error) {
+			return client.logger.error(error)
+		}
 	}
-}
+)
