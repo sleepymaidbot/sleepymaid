@@ -37,11 +37,15 @@ export interface loadHandlersOptions {
 export interface Logger {
 	info: LogFn
 	debug: LogFn
-	error: LogFn
+	error: ErrorLogFn
 }
 
 export interface LogFn {
 	(message: string, ...args: string[]): void
+}
+
+export interface ErrorLogFn {
+	(error: Error | string, ...args: string[]): void
 }
 
 export class HandlerClient extends Client {
