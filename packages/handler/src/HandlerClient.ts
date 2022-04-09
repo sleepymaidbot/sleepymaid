@@ -1,5 +1,5 @@
 import { Client, ClientOptions, Snowflake } from 'discord.js'
-import { Logger as BaseLogger } from './Logger'
+import { BaseLogger } from './BaseLogger'
 import {
 	CommandManager,
 	CommandManagerStartAllOptionsType

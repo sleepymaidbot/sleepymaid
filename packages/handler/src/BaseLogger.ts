@@ -1,6 +1,6 @@
 import { env } from './HandlerClient'
 
-export class Logger {
+export class BaseLogger {
 	public declare env: env
 	constructor(env: env) {
 		this.env = env
