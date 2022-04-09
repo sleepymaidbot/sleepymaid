@@ -5,6 +5,7 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	AutocompleteInteraction,
+	ChatInputApplicationCommandData,
 	CommandInteraction,
 	Snowflake
 } from 'discord.js'
@@ -12,16 +13,9 @@ import { HandlerClient } from '../HandlerClient'
 
 export type SlashCommandInfo = {
 	guildIds?: Snowflake[]
-	data: SlashCommandData
+	data: ChatInputApplicationCommandData
 }
 
-export type SlashCommandData = {
-	name: string
-	description: string
-	options: ApplicationCommandOptionType[]
-	type: ApplicationCommandType.ChatInput
-	defaultPermission?: boolean
-}
 export type CommandRunFunction = (
 	interaction: CommandInteraction,
 	client: HandlerClient
