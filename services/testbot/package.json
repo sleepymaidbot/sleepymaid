@@ -19,12 +19,12 @@
 		"typescript": "4.6.3"
 	},
 	"dependencies": {
-		"@discordjs/builders": "0.13.0-dev.1649160523-402514f",
+		"@discordjs/builders": "0.13.0-dev.1649505810-3c0bbac",
 		"@sleepymaid/config": "*",
 		"@sleepymaid/handler": "*",
 		"@sleepymaid/logger": "*",
 		"@sleepymaid/tsconfig": "*",
-		"discord.js": "14.0.0-dev.1649160496-402514f",
+		"discord.js": "14.0.0-dev.1649505803-3c0bbac",
 		"path": "0.12.7"
 	},
 	"volta": {
