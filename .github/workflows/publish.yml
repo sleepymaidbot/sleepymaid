@@ -1,0 +1,63 @@
+name: Publish
+on:
+  push:
+    branches: [main]
+    paths:
+      - packages/**
+  pull_request:
+    branches: [main]
+    paths:
+      - packages/**
+jobs:
+  npm:
+    name: npm
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - package: '@sleepymaid/util'
+            folder: 'util'
+          - package: '@sleepymaid/logger'
+            folder: 'logger'
+          - package: '@sleepymaid/handler'
+            folder: 'handler'
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+      - uses: actions/cache@136d96b4aee02b1f0de3ba493b1d47135042d9c0 # tag=v3
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Check previous released version
+        id: pre-release
+        run: |
+          if [[ $(npm view ${{ matrix.package }}@dev version | grep -e "$(jq --raw-output '.version' packages/${{ matrix.folder }}/package.json)\..*-$(git rev-parse --short HEAD)") ]]; \
+          then echo '::set-output name=release::false'; \
+          else echo '::set-output name=release::true'; fi
+      - name: Install dependencies
+        run: yarn
+      - name: Build packages
+        run: yarn build
+      - name: Deprecate old versions
+        if: steps.pre-release.outputs.release == 'true'
+        run: npm deprecate ${{ matrix.package }}@"~$(jq --raw-output '.version' packages/${{ matrix.folder }}/package.json)" "no longer supported" || true
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish packages
+        run: |
+          yarn workspace ${{ matrix.package }} version $(jq --raw-output '.version' packages/${{ matrix.folder }}/package.json).$(date +%s)-$(git rev-parse --short HEAD)
+          yarn workspace ${{ matrix.package }} npm publish --tag dev || true
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
