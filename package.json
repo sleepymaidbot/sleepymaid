@@ -13,11 +13,12 @@
 		"node": "16.14.2",
 		"yarn": "1.22.18"
 	},
-	"packageManager": "yarn@1.22.18",
+	"packageManager": "yarn@3.1.1",
 	"devDependencies": {
 		"@types/prettier": "2.4.4",
 		"@typescript-eslint/eslint-plugin": "5.18.0",
 		"@typescript-eslint/parser": "5.18.0",
+		"@yarnpkg/cli-dist": "^3.2.0",
 		"eslint": "8.13.0",
 		"eslint-config-prettier": "8.5.0",
 		"husky": "7.0.4",

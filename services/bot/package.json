@@ -29,10 +29,10 @@
 		"ansi-colors": "4.1.1",
 		"discord.js": "14.0.0-dev.1649160496-402514f",
 		"fs": "0.0.1-security",
+		"path": "0.12.7",
 		"prisma": "3.12.0",
 		"reflect-metadata": "0.1.13",
-		"tsyringe": "4.6.0",
-		"path": "0.12.7"
+		"tsyringe": "4.6.0"
 	},
 	"volta": {
 		"node": "16.14.2",
