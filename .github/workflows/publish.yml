@@ -45,7 +45,7 @@ jobs:
       - name: Install dependencies
         run: yarn
       - name: Build packages
-        run: yarn build
+        run: yarn build --scope=${{ matrix.package }}
       - name: Deprecate old versions
         if: steps.pre-release.outputs.release == 'true'
         run: npm deprecate ${{ matrix.package }}@"~$(jq --raw-output '.version' packages/${{ matrix.folder }}/package.json)" "no longer supported" || true
