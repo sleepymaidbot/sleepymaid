@@ -53,7 +53,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Publish packages
         run: |
-          yarn workspace ${{ matrix.package }} version --new-version $(jq --raw-output '.version' packages/${{ matrix.folder }}/package.json).$(date +%s)-$(git rev-parse --short HEAD)
+          yarn workspace ${{ matrix.package }} version $(jq --raw-output '.version' packages/${{ matrix.folder }}/package.json).$(date +%s)-$(git rev-parse --short HEAD)
           yarn workspace ${{ matrix.package }} npm publish --tag dev || true
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
