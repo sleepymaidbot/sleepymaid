@@ -1,57 +1,64 @@
-import {
-	ApplicationCommandData,
-	Client,
-	ClientOptions,
-	Guild
-} from 'discord.js'
 import { Logger } from '@sleepymaid/logger'
 import { config } from '@sleepymaid/config'
 import { resolve } from 'path'
-import type {
-	botClientCommandsType,
-	BotClientOptions,
-	guildCommandsType
-} from '../types'
-import Util from '@sleepymaid/util'
 import { PrismaClient } from '@prisma/client'
-import { ApplicationCommandPermissionType } from 'discord-api-types/v10'
+import {
+	ActivityType,
+	ApplicationCommandPermissionType,
+	GatewayIntentBits
+} from 'discord-api-types/v10'
+import { HandlerClient } from '@sleepymaid/handler'
 
-export class BotClient extends Client {
-	public declare botName: string
-	public declare logger: Logger
-	public declare commandFolder: string
-	public declare commands: botClientCommandsType
-	public declare eventsFolder: string
-	public declare taskFolder: string
+export class BotClient extends HandlerClient {
 	public declare prisma: PrismaClient
-	constructor(djsOptions: ClientOptions, options: BotClientOptions) {
-		super(djsOptions)
+	constructor() {
+		super(
+			{
+				devServerId: '821717486217986098',
+				// @ts-ignore - I don't know why this is not working
+				logger: new Logger()
+			},
+			{
+				intents: [
+					GatewayIntentBits.Guilds,
+					GatewayIntentBits.GuildMembers,
+					GatewayIntentBits.GuildBans,
+					GatewayIntentBits.GuildVoiceStates,
+					GatewayIntentBits.GuildMessages
+				],
+				allowedMentions: { parse: ['users', 'roles'], repliedUser: false },
+				presence: {
+					status: 'online',
+					activities: [
+						{
+							name: 'yo allo ?',
+							type: ActivityType.Watching
+						}
+					]
+				}
+			}
+		)
 
-		const { botName, commandFolder, eventsFolder, taskFolder } = options ?? {}
-
-		this.botName = botName ?? 'Bot'
-		this.logger = new Logger()
-		this.commandFolder = commandFolder ?? '../commands'
-		this.commands = {}
-		this.eventsFolder = eventsFolder ?? '../listeners'
-		this.taskFolder = taskFolder ?? '../tasks'
 		this.prisma = new PrismaClient({ datasources: { db: { url: config.db } } })
 	}
 
 	public async startAll(): Promise<void> {
 		this.login(config.token)
-		this.loadEvents()
-		this.on('ready', () => {
-			this.registerApplicationCommands()
-			this.loadTask()
+		this.loadHandlers({
+			commands: {
+				folder: resolve(__dirname, '../slashCommands')
+			},
+			listeners: {
+				folder: resolve(__dirname, '../listeners')
+			},
+			tasks: {
+				folder: resolve(__dirname, '../tasks')
+			}
 		})
-		this.on('interactionCreate', (i) => {
-			if (!i.isCommand()) return
-			this.handleApplicationCommands(i)
-		})
+		this.registerApplicationCommandsPermissions()
 	}
 
-	protected async registerApplicationCommands(): Promise<void> {
+	/*protected async registerApplicationCommands(): Promise<void> {
 		this.logger.info('Registering application commands...')
 
 		const filesToImport = await Util.loadFolder(
@@ -190,40 +197,38 @@ export class BotClient extends Client {
 				}
 			}
 		}
-	}
+	}*/
 
-	protected async registerApplicationCommandsPermissions(
-		guild: Guild
-	): Promise<void> {
+	protected async registerApplicationCommandsPermissions(): Promise<void> {
 		if (config.isDevelopment) {
-			if (guild.id === '324284116021542922') {
-				const fullPermissions = []
-				guild.commands.cache.each((cmd) => {
-					fullPermissions.push({
-						id: cmd.id,
-						permissions: [
-							{
-								id: '324281236728053760',
-								type: ApplicationCommandPermissionType.User,
-								permission: true
-							},
-							{
-								id: '946221081251962941',
-								type: ApplicationCommandPermissionType.Role,
-								permission: true
-							},
-							{
-								id: '324284116021542922',
-								type: ApplicationCommandPermissionType.Role,
-								permission: false
-							}
-						]
-					})
+			const guild = await this.guilds.fetch('324284116021542922')
+			const fullPermissions = []
+			guild.commands.cache.each((cmd) => {
+				fullPermissions.push({
+					id: cmd.id,
+					permissions: [
+						{
+							id: '324281236728053760',
+							type: ApplicationCommandPermissionType.User,
+							permission: true
+						},
+						{
+							id: '946221081251962941',
+							type: ApplicationCommandPermissionType.Role,
+							permission: true
+						},
+						{
+							id: '324284116021542922',
+							type: ApplicationCommandPermissionType.Role,
+							permission: false
+						}
+					]
 				})
-				await guild.commands.permissions.set({ fullPermissions })
-			}
+			})
+			await guild.commands.permissions.set({ fullPermissions })
 		}
 	}
+	/*
 
 	protected async handleApplicationCommands(i) {
 		this.logger.debug(
@@ -293,5 +298,5 @@ export class BotClient extends Client {
 				}, task.interval)
 			})
 		}
-	}
+	}*/
 }

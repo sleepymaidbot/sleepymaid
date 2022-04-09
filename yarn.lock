@@ -191,6 +191,7 @@ __metadata:
     "@prisma/client": 3.12.0
     "@sapphire/stopwatch": 1.4.1
     "@sleepymaid/config": "*"
+    "@sleepymaid/handler": "*"
     "@sleepymaid/logger": "*"
     "@sleepymaid/tsconfig": "*"
     "@sleepymaid/util": "*"

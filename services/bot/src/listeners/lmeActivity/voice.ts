@@ -4,7 +4,12 @@ import { voiceXpManager } from '../../lib/voiceXpManager'
 import { container } from 'tsyringe'
 import { pointsBlacklistedVoiceChannel } from '../../lib/lists'
 import { VoiceState } from 'discord.js'
-import { VoiceXpState } from '../../types'
+
+enum VoiceXpState {
+	None,
+	Start,
+	Stop
+}
 
 module.exports = {
 	name: 'voiceStateUpdate',
