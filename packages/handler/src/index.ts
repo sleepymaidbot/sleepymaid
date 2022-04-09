@@ -2,8 +2,12 @@ export { HandlerClient } from './HandlerClient'
 export type {
 	env,
 	HandlerClientOptions,
-	loadHandlersOptions
+	loadHandlersOptions,
+	Logger,
+	LogFn
 } from './HandlerClient'
+
+export { Logger as BaseLogger } from './Logger'
 
 // ./commands
 

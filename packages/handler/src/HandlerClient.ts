@@ -1,5 +1,5 @@
-import { Client, ClientOptions, Snowflake } from 'discord.js'
-import { Logger } from '@sleepymaid/logger'
+import { Base, Client, ClientOptions, Snowflake } from 'discord.js'
+import { Logger as BaseLogger } from './Logger'
 import {
 	CommandManager,
 	CommandManagerStartAllOptionsType
@@ -18,6 +18,7 @@ export type env = 'development' | 'production'
 export interface HandlerClientOptions {
 	env?: env
 	devServerId: string
+	logger?: Logger
 }
 
 export interface loadHandlersOptions {
@@ -33,6 +34,16 @@ export interface loadHandlersOptions {
 	}*/
 }
 
+export interface Logger {
+	info: LogFn
+	debug: LogFn
+	error: LogFn
+}
+
+export interface LogFn {
+	(message: string, ...args: string[]): void
+}
+
 export class HandlerClient extends Client {
 	public declare logger: Logger
 	public declare env: env
@@ -45,7 +56,7 @@ export class HandlerClient extends Client {
 
 		const { env, devServerId } = options ?? {}
 
-		this.logger = new Logger()
+		this.logger = options.logger ?? new BaseLogger(env)
 		this.env = env ?? 'development'
 		this.devServerId = devServerId
 		this.commandManager = new CommandManager(this)
