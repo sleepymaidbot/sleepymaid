@@ -54,12 +54,13 @@ export default new SlashCommand(
 			.toJSON() as ChatInputApplicationCommandData
 	},
 	{
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		async run(interaction: any, client: BotClient) {
 			await interaction.deferReply({ ephemeral: true })
 			const subcommand = interaction.options.getSubcommand()
 			const inDb = await client.prisma.mondecorte.findUnique({
 				where: {
-					user_id: interaction.member.id
+					user_id: interaction.user.id
 				}
 			})
 			const isEligible = (member, points) => {
@@ -71,8 +72,8 @@ export default new SlashCommand(
 			const customRoleId = inDb?.custom_role_id
 			const embed = new EmbedBuilder()
 				.setAuthor({
-					name: `Rôle custom de ${interaction.member.user.tag}`,
-					iconURL: interaction.member.user.avatarURL()
+					name: `Rôle custom de ${interaction.user.tag}`,
+					iconURL: interaction.user.avatarURL()
 				})
 				.setColor(Util.resolveColor('#36393f'))
 				.setTimestamp()

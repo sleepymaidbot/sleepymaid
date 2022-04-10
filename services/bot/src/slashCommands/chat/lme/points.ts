@@ -46,6 +46,7 @@ export default new SlashCommand(
 			.toJSON() as ChatInputApplicationCommandData
 	},
 	{
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		async run(interaction: any, client: BotClient) {
 			switch (interaction.options.getSubcommand()) {
 				case 'user': {
