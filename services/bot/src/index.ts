@@ -5,6 +5,7 @@ import { BotClient } from './lib/BotClient'
 	const client: BotClient = new BotClient()
 
 	client.on('ready', async () => {
+		await client.localizer.loadLanguage()
 		await client.loadHandlers({
 			commands: {
 				folder: resolve(__dirname, './slashCommands')

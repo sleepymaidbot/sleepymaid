@@ -7,9 +7,11 @@ import {
 	GatewayIntentBits
 } from 'discord-api-types/v10'
 import { HandlerClient } from '@sleepymaid/handler'
+import { Localizer } from '@sleepymaid/localizer'
 
 export class BotClient extends HandlerClient {
 	public declare prisma: PrismaClient
+	public declare localizer: Localizer
 	constructor() {
 		super(
 			{
@@ -39,6 +41,7 @@ export class BotClient extends HandlerClient {
 		)
 
 		this.prisma = new PrismaClient({ datasources: { db: { url: config.db } } })
+		this.localizer = new Localizer()
 	}
 
 	public async registerApplicationCommandsPermissions(): Promise<void> {

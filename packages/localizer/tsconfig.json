@@ -1,0 +1,20 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"target": "esNEXT",
+		"outDir": "dist",
+		"declarationDir": "./types",
+		"declaration": true,
+		"declarationMap": true,
+		"lib": [
+			"ESNext",
+			"ESNext.Array",
+			"ESNext.AsyncIterable",
+			"ESNext.Intl",
+			"ESNext.Symbol",
+			"DOM"
+		]
+	},
+	"extends": "@sleepymaid/tsconfig/base.json",
+	"include": ["src/**/*", "src/*"]
+}

@@ -33,6 +33,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@discordjs/collection@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "@discordjs/collection@npm:0.5.0"
+  checksum: a228979bb5f955cf095ce47441c55d0196cd99ff8484b57d26a45e58506c6646d776a98a9e11b822aab4e15fb2ac1aecfdebc63cde8ab7d04d3d74b716e80144
+  languageName: node
+  linkType: hard
+
 "@discordjs/collection@npm:^0.6.0-dev":
   version: 0.6.0-dev.1647259738.2297c2b
   resolution: "@discordjs/collection@npm:0.6.0-dev.1647259738.2297c2b"
@@ -232,6 +239,20 @@ __metadata:
     "@types/node": 17.0.21
     discord-api-types: 0.31.0
     discord.js: 14.0.0-dev.1649505803-3c0bbac
+    rimraf: 3.0.2
+    source-map-support: 0.5.21
+    typescript: 4.6.3
+  languageName: unknown
+  linkType: soft
+
+"@sleepymaid/localizer@workspace:packages/localizer":
+  version: 0.0.0-use.local
+  resolution: "@sleepymaid/localizer@workspace:packages/localizer"
+  dependencies:
+    "@discordjs/collection": ^0.5.0
+    "@sleepymaid/handler": "*"
+    "@sleepymaid/tsconfig": "*"
+    "@types/node": 17.0.21
     rimraf: 3.0.2
     source-map-support: 0.5.21
     typescript: 4.6.3
