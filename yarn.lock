@@ -250,7 +250,6 @@ __metadata:
   resolution: "@sleepymaid/localizer@workspace:packages/localizer"
   dependencies:
     "@discordjs/collection": ^0.5.0
-    "@sleepymaid/handler": "*"
     "@sleepymaid/tsconfig": "*"
     "@types/node": 17.0.21
     rimraf: 3.0.2
