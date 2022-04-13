@@ -6,7 +6,7 @@ import {
 	ApplicationCommandType,
 	AutocompleteInteraction,
 	ChatInputApplicationCommandData,
-	CommandInteraction,
+	ChatInputCommandInteraction,
 	Snowflake
 } from 'discord.js'
 import { HandlerClient } from '../HandlerClient'
@@ -17,7 +17,7 @@ export type SlashCommandInfo = {
 }
 
 export type CommandRunFunction = (
-	interaction: CommandInteraction,
+	interaction: ChatInputCommandInteraction,
 	client: HandlerClient
 ) => void
 
@@ -42,7 +42,7 @@ export class SlashCommand {
 		if ('autocomplete' in functions) this.autocomplete = functions.autocomplete
 	}
 
-	run(interaction: CommandInteraction, _client: HandlerClient) {
+	run(interaction: ChatInputCommandInteraction, _client: HandlerClient) {
 		interaction.reply({
 			content: "This interaction isn't implemented yet",
 			ephemeral: true
