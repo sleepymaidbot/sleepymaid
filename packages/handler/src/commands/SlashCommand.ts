@@ -1,9 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import 'reflect-metadata'
-import { RESTPostAPIApplicationCommandsJSONBody } from 'discord-api-types/v10'
 import {
-	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	AutocompleteInteraction,
 	ChatInputApplicationCommandData,
 	ChatInputCommandInteraction,
