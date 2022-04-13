@@ -1,6 +1,12 @@
 import { SlashCommandBuilder, EmbedBuilder } from '@discordjs/builders'
 import { SlashCommand } from '@sleepymaid/handler'
-import { ChatInputApplicationCommandData, Util } from 'discord.js'
+import {
+	ChatInputApplicationCommandData,
+	ChatInputCommandInteraction,
+	ColorResolvable,
+	GuildMember,
+	Util
+} from 'discord.js'
 import { BotClient } from '../../../lib/BotClient'
 
 export default new SlashCommand(
@@ -54,8 +60,8 @@ export default new SlashCommand(
 			.toJSON() as ChatInputApplicationCommandData
 	},
 	{
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		async run(interaction: any, client: BotClient) {
+		async run(interaction: ChatInputCommandInteraction, client: BotClient) {
+			if (!interaction.inCachedGuild()) return
 			await interaction.deferReply({ ephemeral: true })
 			const subcommand = interaction.options.getSubcommand()
 			const inDb = await client.prisma.mondecorte.findUnique({
@@ -80,7 +86,9 @@ export default new SlashCommand(
 			switch (subcommand) {
 				case 'create': {
 					const name = await interaction.options.getString('name')
-					const color = await interaction.options.getString('color')
+					const color = (await interaction.options.getString(
+						'color'
+					)) as ColorResolvable
 					if (isEligible(interaction.member, inDb?.points)) {
 						if (customRoleId !== null || undefined) {
 							try {
@@ -90,8 +98,7 @@ export default new SlashCommand(
 								await interaction.member.roles.add(cr)
 								embed.setDescription('Tu a déja un rôle custom')
 								await interaction.editReply({
-									embeds: [embed],
-									ephemeral: true
+									embeds: [embed]
 								})
 							} catch (e) {
 								client.logger.info(e)
@@ -104,15 +111,14 @@ export default new SlashCommand(
 							if (checkRole === undefined) {
 								embed.setDescription('Se rôle existe déja.')
 								return await interaction.editReply({
-									embeds: [embed],
-									ephemeral: true
+									embeds: [embed]
 								})
 							}
 							const pos = sleepyRole.position - 1
 							await interaction.guild.roles
 								.create({
 									name: name,
-									color: color,
+									color: Util.resolveColor(color),
 									position: pos,
 									reason: `Custom role created by ${interaction.member.user.tag} (${interaction.member.id})`
 								})
@@ -132,8 +138,7 @@ export default new SlashCommand(
 									Pour modifier le nom fait la commande  \`\`/customrole name <name>\`\`
 									Pour modifier la couleur fait la commande \`\`/customrole color <color>\`\``)
 											await interaction.editReply({
-												embeds: [embed],
-												ephemeral: true
+												embeds: [embed]
 											})
 										})
 								})
@@ -141,7 +146,7 @@ export default new SlashCommand(
 						}
 					} else {
 						embed.setDescription("Tu n'est pas éligible.")
-						await interaction.editReply({ embeds: [embed], ephemeral: true })
+						await interaction.editReply({ embeds: [embed] })
 					}
 					break
 				}
@@ -164,8 +169,7 @@ export default new SlashCommand(
 								.then(async () => {
 									embed.setDescription('Ton rôle custom a été supprimer')
 									await interaction.editReply({
-										embeds: [embed],
-										ephemeral: true
+										embeds: [embed]
 									})
 								})
 						} catch (e) {
@@ -173,7 +177,7 @@ export default new SlashCommand(
 						}
 					} else {
 						embed.setDescription("Tu n'as pas de rôle custom")
-						await interaction.editReply({ embeds: [embed], ephemeral: true })
+						await interaction.editReply({ embeds: [embed] })
 					}
 					break
 				}
@@ -190,38 +194,38 @@ export default new SlashCommand(
 									`Le nom de ton rôle custom a été changer pour #${name} (<@&${updated.id}>)`
 								)
 								await interaction.editReply({
-									embeds: [embed],
-									ephemeral: true
+									embeds: [embed]
 								})
 							})
 							.catch(console.error)
 					} else {
 						embed.setDescription("Tu n'as pas de rôle custom")
-						await interaction.editReply({ embeds: [embed], ephemeral: true })
+						await interaction.editReply({ embeds: [embed] })
 					}
 					break
 				}
 				case 'color': {
-					const color = interaction.options.getString('color')
+					const color = interaction.options.getString(
+						'color'
+					) as ColorResolvable
 					if (customRoleId && isEligible(interaction.member, inDb?.points)) {
 						const crole = interaction.guild.roles.cache.find(
 							(role) => role.id === customRoleId
 						)
 						crole
-							.setColor(color)
+							.setColor(Util.resolveColor(color))
 							.then(async (updated) => {
 								embed.setDescription(
 									`La couleur de ton rôle custom a été changer pour #${color} (<@&${updated.id}>)`
 								)
 								await interaction.editReply({
-									embeds: [embed],
-									ephemeral: true
+									embeds: [embed]
 								})
 							})
 							.catch(console.error)
 					} else {
 						embed.setDescription("Tu n'as pas de rôle custom")
-						await interaction.editReply({ embeds: [embed], ephemeral: true })
+						await interaction.editReply({ embeds: [embed] })
 					}
 					break
 				}
