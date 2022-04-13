@@ -6,7 +6,7 @@ import {
 	ApplicationCommandPermissionType,
 	GatewayIntentBits
 } from 'discord-api-types/v10'
-import { HandlerClient } from '@sleepymaid/handler'
+import { BaseLogger, HandlerClient } from '@sleepymaid/handler'
 import { Localizer } from '@sleepymaid/localizer'
 
 export class BotClient extends HandlerClient {
@@ -16,8 +16,7 @@ export class BotClient extends HandlerClient {
 		super(
 			{
 				devServerId: '821717486217986098',
-				// @ts-ignore - I don't know why this is not working
-				logger: new Logger()
+				logger: new Logger() as unknown as BaseLogger
 			},
 			{
 				intents: [
