@@ -2,10 +2,17 @@ import {
 	SlashCommandBuilder,
 	EmbedBuilder,
 	ActionRowBuilder,
-	ButtonBuilder
+	ButtonBuilder,
+	MessageActionRowComponentBuilder
 } from '@discordjs/builders'
 import { SlashCommand } from '@sleepymaid/handler'
-import { ButtonStyle, ChatInputApplicationCommandData, Util } from 'discord.js'
+import {
+	ButtonInteraction,
+	ButtonStyle,
+	ChatInputApplicationCommandData,
+	ChatInputCommandInteraction,
+	Util
+} from 'discord.js'
 import { BotClient } from '../../../lib/BotClient'
 
 const intForEmote = {
@@ -47,7 +54,8 @@ export default new SlashCommand(
 	},
 	{
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		async run(interaction: any, client: BotClient) {
+		async run(interaction: ChatInputCommandInteraction, client: BotClient) {
+			if (!interaction.inCachedGuild()) return
 			switch (interaction.options.getSubcommand()) {
 				case 'user': {
 					await interaction.deferReply()
@@ -113,9 +121,7 @@ export default new SlashCommand(
 						}
 					} else {
 						await interaction.editReply({
-							content:
-								'Tu doit avoir le rôle actif pour utliser cette commande',
-							ephemeral: true
+							content: 'Tu doit avoir le rôle actif pour utliser cette commande'
 						})
 					}
 					break
@@ -149,7 +155,7 @@ export default new SlashCommand(
 						} else if (interaction.options.get('page').value > maxPage) {
 							page = maxPage
 						} else {
-							page = interaction.options.get('page').value
+							page = interaction.options.getInteger('page')
 						}
 
 						const getLeaderboard = (page: number) => {
@@ -174,44 +180,35 @@ export default new SlashCommand(
 							let previousOn = false
 							let nextOn = false
 
-							if (page === 1) {
-								previousOn = true
-							}
+							if (page === 1) previousOn = true
 
-							if (page === maxPage) {
-								nextOn = true
-							}
+							if (page === maxPage) nextOn = true
 
-							const row = new ActionRowBuilder()
-								.addComponents(
-									new ButtonBuilder()
-										.setDisabled(previousOn)
-										.setStyle(ButtonStyle.Primary)
-										.setCustomId('lb:page:previous')
-										.setEmoji({ name: '◀️' })
-								)
-								.addComponents(
-									new ButtonBuilder()
-										.setDisabled(true)
-										.setStyle(ButtonStyle.Primary)
-										.setCustomId('lb:label')
-										.setLabel(page.toString())
-								)
-								.addComponents(
-									new ButtonBuilder()
-										.setDisabled(nextOn)
-										.setStyle(ButtonStyle.Primary)
-										.setCustomId('lb:page:next')
-										.setEmoji({ name: '▶️' })
-								)
+							const row = new ActionRowBuilder().addComponents(
+								new ButtonBuilder()
+									.setDisabled(previousOn)
+									.setStyle(ButtonStyle.Primary)
+									.setCustomId('lb:page:previous')
+									.setEmoji({ name: '◀️' }),
+								new ButtonBuilder()
+									.setDisabled(true)
+									.setStyle(ButtonStyle.Primary)
+									.setCustomId('lb:label')
+									.setLabel(page.toString()),
+								new ButtonBuilder()
+									.setDisabled(nextOn)
+									.setStyle(ButtonStyle.Primary)
+									.setCustomId('lb:page:next')
+									.setEmoji({ name: '▶️' })
+							)
 
 							return {
 								text: text.join('\n'),
-								row: row
+								row: row as ActionRowBuilder<MessageActionRowComponentBuilder>
 							}
 						}
 
-						const leaderboardText = await getLeaderboard(page)
+						const leaderboardText = getLeaderboard(page)
 
 						const embed = new EmbedBuilder()
 							.setColor(Util.resolveColor('#36393f'))
@@ -231,13 +228,14 @@ export default new SlashCommand(
 								time: 120000
 							})
 
-						collector.on('collect', async (i: any) => {
+						collector.on('collect', async (i: ButtonInteraction) => {
+							if (!i.inCachedGuild()) return
 							if (i.member.id === interaction.member.id) {
 								if (i.customId === 'lb:page:previous') {
 									await i.deferUpdate()
 									page = page - 1
 
-									const lb = await getLeaderboard(page)
+									const lb = getLeaderboard(page)
 									const newEmbed = new EmbedBuilder()
 										.setColor(Util.resolveColor('#36393f'))
 										.setAuthor({
@@ -254,7 +252,7 @@ export default new SlashCommand(
 									await i.deferUpdate()
 									page = page + 1
 
-									const lb = await getLeaderboard(page)
+									const lb = getLeaderboard(page)
 									const newEmbed = new EmbedBuilder()
 										.setColor(Util.resolveColor('#36393f'))
 										.setAuthor({
