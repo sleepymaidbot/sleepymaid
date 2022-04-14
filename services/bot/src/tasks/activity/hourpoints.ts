@@ -12,6 +12,7 @@ export default new Task(
 	},
 	{
 		async run(client: BotClient) {
+			return
 			client.logger.debug('Hourpoints task started')
 			const usersArray = []
 			const docs = await client.prisma.mondecorte.findMany()
