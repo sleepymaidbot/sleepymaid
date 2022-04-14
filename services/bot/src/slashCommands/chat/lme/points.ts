@@ -3,7 +3,8 @@ import {
 	EmbedBuilder,
 	ActionRowBuilder,
 	ButtonBuilder,
-	MessageActionRowComponentBuilder
+	MessageActionRowComponentBuilder,
+	UnsafeEmbedBuilder
 } from '@discordjs/builders'
 import { SlashCommand } from '@sleepymaid/handler'
 import {
@@ -210,7 +211,7 @@ export default new SlashCommand(
 
 						const leaderboardText = getLeaderboard(page)
 
-						const embed = new EmbedBuilder()
+						const embed = new UnsafeEmbedBuilder()
 							.setColor(Util.resolveColor('#36393f'))
 							.setAuthor({
 								name: 'Leaderboard du serveur',
@@ -236,7 +237,7 @@ export default new SlashCommand(
 									page = page - 1
 
 									const lb = getLeaderboard(page)
-									const newEmbed = new EmbedBuilder()
+									const newEmbed = new UnsafeEmbedBuilder()
 										.setColor(Util.resolveColor('#36393f'))
 										.setAuthor({
 											name: 'Leaderboard du serveur',
@@ -253,7 +254,7 @@ export default new SlashCommand(
 									page = page + 1
 
 									const lb = getLeaderboard(page)
-									const newEmbed = new EmbedBuilder()
+									const newEmbed = new UnsafeEmbedBuilder()
 										.setColor(Util.resolveColor('#36393f'))
 										.setAuthor({
 											name: 'Leaderboard du serveur',
