@@ -2,6 +2,7 @@ import { readdir } from 'fs/promises'
 import { resolve } from 'path'
 import { langList, supportedLanguages } from './langList'
 import { Collection } from '@discordjs/collection'
+import { isObject } from '@sapphire/utilities'
 
 export class Localizer {
 	private declare locales: Collection<supportedLanguages, object>
@@ -12,13 +13,36 @@ export class Localizer {
 	public async loadLanguage() {
 		const folder = await readdir(resolve(__dirname, '../../../locales'))
 		folder.forEach(async (file) => {
-			const lang = file.split('.')[0]
+			const lang: supportedLanguages = file.split(
+				'.'
+			)[0] as unknown as supportedLanguages
 			if (lang in supportedLanguages === false) return
-			const string = await import(
+			this.locales.set(lang, {})
+			const strings = await import(
 				resolve(__dirname, `../../../locales/${file}`)
 			)
-			this.locales.set(lang as unknown as supportedLanguages, string)
+			for (const string of Object.keys(strings.default)) {
+				if (isObject(strings.default[string])) {
+					this.loadObject(string, strings.default[string], lang)
+				} else {
+					const obj = this.locales.get(lang)
+					obj[string] = strings.default[string]
+					this.locales.set(lang, obj)
+				}
+			}
 		})
+	}
+
+	private loadObject(name: string, object: object, lang: supportedLanguages) {
+		for (const string of Object.keys(object)) {
+			if (isObject(object[string])) {
+				this.loadObject(name + '.' + string, object[string], lang)
+			} else {
+				const obj = this.locales.get(lang)
+				obj[name + '.' + string] = object[string]
+				this.locales.set(lang, obj)
+			}
+		}
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
