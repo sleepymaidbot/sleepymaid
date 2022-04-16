@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { HandlerClient } from '../HandlerClient'
 
 export type ListenerInfo = {
 	name: string
@@ -11,10 +10,7 @@ export type FunctionType = {
 	run: ListenerRunFunction
 }
 
-export type ListenerRunFunction = (
-	client: HandlerClient,
-	...args: any[]
-) => void
+export type ListenerRunFunction = (...args: any[]) => void
 
 export class Listener {
 	listenerInfo: ListenerInfo
@@ -23,7 +19,7 @@ export class Listener {
 		this.run = functions.run
 	}
 
-	run(_client: HandlerClient, ...args: any[]) {
+	run(..._args: any[]) {
 		console.log('Listener ran')
 	}
 }

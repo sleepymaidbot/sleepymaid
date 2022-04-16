@@ -26,7 +26,7 @@ export class ListenerManager {
 				try {
 					this.client.once(
 						event.default.listenerInfo.name,
-						async (...args) => await event.default.run(this.client, ...args)
+						async (...args) => await event.default.run(...args, this.client)
 					)
 				} catch (error) {
 					this.client.logger.error(error)
@@ -35,7 +35,7 @@ export class ListenerManager {
 				try {
 					this.client.on(
 						event.default.listenerInfo.name,
-						async (...args) => await event.default.run(this.client, ...args)
+						async (...args) => await event.default.run(...args, this.client)
 					)
 				} catch (error) {
 					this.client.logger.error(error)
