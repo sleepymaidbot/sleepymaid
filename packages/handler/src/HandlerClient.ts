@@ -69,17 +69,19 @@ export class HandlerClient extends Client {
 	}
 
 	public async loadHandlers(options: loadHandlersOptions): Promise<void> {
-		// commands
-		if (options.commands) {
-			this.commandManager.startAll(options.commands)
-		}
 		// listeners
 		if (options.listeners) {
 			this.listenerManager.startAll(options.listeners)
 		}
-		// tasks
-		if (options.tasks) {
-			this.taskManager.startAll(options.tasks)
-		}
+		this.once('ready', async () => {
+			// commands
+			if (options.commands) {
+				this.commandManager.startAll(options.commands)
+			}
+			// tasks
+			if (options.tasks) {
+				this.taskManager.startAll(options.tasks)
+			}
+		})
 	}
 }
