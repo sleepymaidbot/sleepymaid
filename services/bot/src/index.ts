@@ -1,24 +1,26 @@
 import { config } from '@sleepymaid/config'
 import { resolve } from 'path'
 import { BotClient } from './lib/BotClient'
-;(async () => {
+void (() => {
 	const client: BotClient = new BotClient()
 
-	client.on('ready', async () => {
-		await client.localizer.loadLanguage()
-		await client.loadHandlers({
-			commands: {
-				folder: resolve(__dirname, './slashCommands')
-			},
-			listeners: {
-				folder: resolve(__dirname, './listeners')
-			},
-			tasks: {
-				folder: resolve(__dirname, './tasks')
-			}
-		})
+	client.loadHandlers({
+		commands: {
+			folder: resolve(__dirname, './slashCommands')
+		},
+		listeners: {
+			folder: resolve(__dirname, './listeners')
+		},
+		tasks: {
+			folder: resolve(__dirname, './tasks')
+		}
+	})
+
+	client.localizer.loadLanguage()
+
+	client.once('ready', async () => {
 		await client.registerApplicationCommandsPermissions()
 	})
 
-	await client.login(config.token)
+	client.login(config.token)
 })()
