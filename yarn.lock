@@ -47,6 +47,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@discordjs/rest@npm:0.4.0-dev.1649937819-b01f414":
+  version: 0.4.0-dev.1649937819-b01f414
+  resolution: "@discordjs/rest@npm:0.4.0-dev.1649937819-b01f414"
+  dependencies:
+    "@discordjs/collection": ^0.6.0-dev
+    "@sapphire/async-queue": ^1.2.0
+    "@sapphire/snowflake": ^3.1.0
+    "@types/node-fetch": ^2.5.12
+    discord-api-types: ^0.29.0
+    form-data: ^4.0.0
+    node-fetch: ^2.6.7
+    tslib: ^2.3.1
+  checksum: a7f6b7523d877797c1c67ed238d5569d0eb3a4195caf2020a97aef2931ec62ebab63ca8942b908cbb303360c19ee6ff52333f544d05c249709b2433db1c5546c
+  languageName: node
+  linkType: hard
+
 "@discordjs/rest@npm:^0.4.0-dev":
   version: 0.4.0-dev.1647259762.2297c2b
   resolution: "@discordjs/rest@npm:0.4.0-dev.1647259762.2297c2b"
@@ -202,6 +218,7 @@ __metadata:
   resolution: "@sleepymaid/bot@workspace:services/bot"
   dependencies:
     "@discordjs/builders": 0.13.0-dev.1649937819-b01f414
+    "@discordjs/rest": 0.4.0-dev.1649937819-b01f414
     "@prisma/client": 3.12.0
     "@sapphire/stopwatch": 1.4.1
     "@sleepymaid/config": "*"
@@ -1789,6 +1806,7 @@ __metadata:
     husky: 7.0.4
     prettier: 2.6.2
     prisma: 3.12.0
+    rimraf: ^3.0.2
     turbo: 1.2.4
     typescript: 4.6.3
   languageName: unknown
