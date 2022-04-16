@@ -7,7 +7,7 @@ export default new Listener(
 		once: false
 	},
 	{
-		async run(client: BotClient, interaction) {
+		async run(interaction, client: BotClient) {
 			if (interaction.isSelectMenu()) {
 				if (
 					interaction.channel.id === '945053781240987759' &&

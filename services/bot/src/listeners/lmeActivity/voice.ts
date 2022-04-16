@@ -18,7 +18,7 @@ export default new Listener(
 		once: false
 	},
 	{
-		async run(client: BotClient, oldState: VoiceState, newState: VoiceState) {
+		async run(oldState: VoiceState, newState: VoiceState, client: BotClient) {
 			if (oldState.member.user.bot) return
 			let status = VoiceXpState.None
 			// Someone join vc start timer

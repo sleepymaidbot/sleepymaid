@@ -7,7 +7,7 @@ export default new Listener(
 		once: false
 	},
 	{
-		async run(_client, member) {
+		async run(member) {
 			if (member.guild.id !== '818313526720462868') return
 			const role = await member.guild.roles.cache.get('818475324631023656')
 			await member.roles.add(role)

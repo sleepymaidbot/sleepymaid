@@ -35,7 +35,7 @@ export default new Listener(
 		once: false
 	},
 	{
-		async run(client, oldState, newState) {
+		async run(oldState, newState, client) {
 			if (newState.guild.id !== '324284116021542922') return
 			if (config.isDevelopment) return
 			// Join

@@ -7,7 +7,7 @@ export default new Listener(
 		once: false
 	},
 	{
-		run(client: BotClient, error: Error) {
+		run(error: Error, client: BotClient) {
 			return client.logger.error(error)
 		}
 	}

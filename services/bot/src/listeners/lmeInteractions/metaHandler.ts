@@ -14,7 +14,7 @@ export default new Listener(
 		once: false
 	},
 	{
-		async run(_client, interaction) {
+		async run(interaction) {
 			if (!interaction.customId?.startsWith('lmeMeta')) return
 			const Ids = interaction.customId.split(':')
 			if (Ids[0] !== 'lmeMeta') return

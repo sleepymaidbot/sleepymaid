@@ -12,9 +12,9 @@ export default new Listener(
 	},
 	{
 		async run(
-			client: BotClient,
 			oldMember: GuildMember,
-			newMember: GuildMember
+			newMember: GuildMember,
+			client: BotClient
 		) {
 			if (newMember.user.bot) return
 			container.register(BotClient, { useValue: client })

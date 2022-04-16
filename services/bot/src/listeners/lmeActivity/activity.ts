@@ -14,7 +14,7 @@ export default new Listener(
 		once: false
 	},
 	{
-		async run(client: BotClient, message: Message) {
+		async run(message: Message, client: BotClient) {
 			if (message.guild == null) return
 			if (message.guild.id != '324284116021542922') return
 			if (message.author.bot) return

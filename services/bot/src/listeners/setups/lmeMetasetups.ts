@@ -13,7 +13,7 @@ export default new Listener(
 		once: false
 	},
 	{
-		async run(_client, message) {
+		async run(message) {
 			if (message.author.id !== '324281236728053760') return
 			const content = message.content.split(' ')
 			const cmd = content[0]

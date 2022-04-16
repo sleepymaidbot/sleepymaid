@@ -8,7 +8,7 @@ export default new Listener(
 		once: false
 	},
 	{
-		async run(client: BotClient, guild: Guild) {
+		async run(guild: Guild, client: BotClient) {
 			return await client.prisma.guilds_settings.create({
 				data: {
 					guild_id: guild.id
