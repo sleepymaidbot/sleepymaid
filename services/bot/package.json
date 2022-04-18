@@ -13,14 +13,14 @@
 	"license": "MIT",
 	"devDependencies": {
 		"@types/node": "17.0.21",
-		"discord-api-types": "0.31.1",
+		"discord-api-types": "0.31.2",
 		"rimraf": "3.0.2",
 		"source-map-support": "0.5.21",
 		"typescript": "4.6.3"
 	},
 	"dependencies": {
-		"@discordjs/builders": "0.13.0-dev.1649937819-b01f414",
-		"@discordjs/rest": "0.4.0-dev.1649937819-b01f414",
+		"@discordjs/builders": "0.13.0",
+		"@discordjs/rest": "0.4.1",
 		"@prisma/client": "3.12.0",
 		"@sapphire/stopwatch": "1.4.1",
 		"@sleepymaid/config": "*",
@@ -29,7 +29,7 @@
 		"@sleepymaid/tsconfig": "*",
 		"@sleepymaid/util": "*",
 		"ansi-colors": "4.1.1",
-		"discord.js": "14.0.0-dev.1649937833-b01f414",
+		"discord.js": "14.0.0-dev.1650240532-9ef7ffd",
 		"fs": "0.0.1-security",
 		"path": "0.12.7",
 		"prisma": "3.12.0",
