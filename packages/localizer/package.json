@@ -26,7 +26,7 @@
 	},
 	"packageManager": "yarn@1.22.18",
 	"dependencies": {
-		"@discordjs/collection": "^0.5.0",
+		"@discordjs/collection": "^0.6.0",
 		"@sapphire/utilities": "^3.6.2"
 	}
 }
