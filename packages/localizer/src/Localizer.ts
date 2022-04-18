@@ -46,14 +46,15 @@ export class Localizer {
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	public async get(key: string, options?: any) {
-		const lng = langList[options.lng] ?? 'en-US'
-		const localizedString = this.locales.get(lng)[key]
-		const englishString = this.locales.get(supportedLanguages['en-US'])[key]
-		const string = localizedString ?? englishString ?? key
+	public get(key: string, options?: any): string {
+		const string =
+			this.locales.get(langList[options.lng] ?? 'en-US')?.[key] ??
+			this.locales.get(supportedLanguages['en-US'])?.[key]
 
-		return string.replace(/{{([^}]+)}}/g, (_, match) => {
-			return options[match] ?? ''
-		})
+		return (
+			string.replace(/{{([^}]+)}}/g, (_, match) => {
+				return options[match] ?? ''
+			}) ?? key
+		)
 	}
 }

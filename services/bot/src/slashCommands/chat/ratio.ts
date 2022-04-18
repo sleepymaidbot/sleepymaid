@@ -31,7 +31,7 @@ export default new SlashCommand(
 			const user = interaction.options.get('user')
 
 			await interaction.reply(
-				await client.localizer.get('ratio', {
+				client.localizer.get('ratio', {
 					lng: interaction.locale,
 					target: `<@${user.value}>`,
 					author: `<@${interaction.user.id}>`
