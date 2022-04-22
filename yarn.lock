@@ -229,7 +229,7 @@ __metadata:
     "@types/node": 17.0.21
     ansi-colors: 4.1.1
     discord-api-types: 0.31.2
-    discord.js: 14.0.0-dev.1650413390-585169f
+    discord.js: 14.0.0-dev.1650586180-61a44c5
     fs: 0.0.1-security
     path: 0.12.7
     prisma: 3.12.0
@@ -262,7 +262,7 @@ __metadata:
     "@sleepymaid/util": "*"
     "@types/node": 17.0.21
     discord-api-types: 0.31.2
-    discord.js: 14.0.0-dev.1650413390-585169f
+    discord.js: 14.0.0-dev.1650586180-61a44c5
     rimraf: 3.0.2
     source-map-support: 0.5.21
     typescript: 4.6.3
@@ -309,7 +309,7 @@ __metadata:
     "@sleepymaid/tsconfig": "*"
     "@types/node": 17.0.21
     discord-api-types: 0.31.2
-    discord.js: 14.0.0-dev.1650413390-585169f
+    discord.js: 14.0.0-dev.1650586180-61a44c5
     path: 0.12.7
     rimraf: 3.0.2
     source-map-support: 0.5.21
@@ -801,9 +801,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:14.0.0-dev.1650413390-585169f":
-  version: 14.0.0-dev.1650413390-585169f
-  resolution: "discord.js@npm:14.0.0-dev.1650413390-585169f"
+"discord.js@npm:14.0.0-dev.1650586180-61a44c5":
+  version: 14.0.0-dev.1650586180-61a44c5
+  resolution: "discord.js@npm:14.0.0-dev.1650586180-61a44c5"
   dependencies:
     "@discordjs/builders": ^0.14.0-dev
     "@discordjs/collection": ^0.7.0-dev
@@ -816,7 +816,7 @@ __metadata:
     tslib: ^2.3.1
     undici: ^4.16.0
     ws: ^8.5.0
-  checksum: f4592cd46f5d7e839289699abf4fb82257af12737ff388aad0e7058c94961ec3602e341a0cbea127700692846b643a4f9fd395cf97aa87a523f8ce1bcad71d07
+  checksum: 2864687e9c976393b3d4905f4d70bca07193d80c83cf8208a6e7d45ca2ccbd1dc1e4acd5b21deef673f65a7e4ebcedeeee2acc0bd0282dc8ba06c87eebc0c2e2
   languageName: node
   linkType: hard
 
@@ -1808,7 +1808,7 @@ __metadata:
     prettier: 2.6.2
     prisma: 3.12.0
     rimraf: ^3.0.2
-    turbo: 1.2.4
+    turbo: 1.2.5
     typescript: 4.6.3
   languageName: unknown
   linkType: soft
@@ -1969,106 +1969,106 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo-darwin-64@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-darwin-64@npm:1.2.4"
+"turbo-darwin-64@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-darwin-64@npm:1.2.5"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-darwin-arm64@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-darwin-arm64@npm:1.2.4"
+"turbo-darwin-arm64@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-darwin-arm64@npm:1.2.5"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-freebsd-64@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-freebsd-64@npm:1.2.4"
+"turbo-freebsd-64@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-freebsd-64@npm:1.2.5"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-freebsd-arm64@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-freebsd-arm64@npm:1.2.4"
+"turbo-freebsd-arm64@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-freebsd-arm64@npm:1.2.5"
   conditions: os=freebsd & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-32@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-linux-32@npm:1.2.4"
+"turbo-linux-32@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-linux-32@npm:1.2.5"
   conditions: os=linux & cpu=ia32
   languageName: node
   linkType: hard
 
-"turbo-linux-64@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-linux-64@npm:1.2.4"
+"turbo-linux-64@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-linux-64@npm:1.2.5"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm64@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-linux-arm64@npm:1.2.4"
+"turbo-linux-arm64@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-linux-arm64@npm:1.2.5"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-linux-arm@npm:1.2.4"
+"turbo-linux-arm@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-linux-arm@npm:1.2.5"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"turbo-linux-mips64le@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-linux-mips64le@npm:1.2.4"
+"turbo-linux-mips64le@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-linux-mips64le@npm:1.2.5"
   conditions: os=linux & cpu=mips64el
   languageName: node
   linkType: hard
 
-"turbo-linux-ppc64le@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-linux-ppc64le@npm:1.2.4"
+"turbo-linux-ppc64le@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-linux-ppc64le@npm:1.2.5"
   conditions: os=linux & cpu=ppc64
   languageName: node
   linkType: hard
 
-"turbo-windows-32@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-windows-32@npm:1.2.4"
+"turbo-windows-32@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-windows-32@npm:1.2.5"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"turbo-windows-64@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-windows-64@npm:1.2.4"
+"turbo-windows-64@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-windows-64@npm:1.2.5"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo@npm:1.2.4"
+"turbo@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo@npm:1.2.5"
   dependencies:
-    turbo-darwin-64: 1.2.4
-    turbo-darwin-arm64: 1.2.4
-    turbo-freebsd-64: 1.2.4
-    turbo-freebsd-arm64: 1.2.4
-    turbo-linux-32: 1.2.4
-    turbo-linux-64: 1.2.4
-    turbo-linux-arm: 1.2.4
-    turbo-linux-arm64: 1.2.4
-    turbo-linux-mips64le: 1.2.4
-    turbo-linux-ppc64le: 1.2.4
-    turbo-windows-32: 1.2.4
-    turbo-windows-64: 1.2.4
+    turbo-darwin-64: 1.2.5
+    turbo-darwin-arm64: 1.2.5
+    turbo-freebsd-64: 1.2.5
+    turbo-freebsd-arm64: 1.2.5
+    turbo-linux-32: 1.2.5
+    turbo-linux-64: 1.2.5
+    turbo-linux-arm: 1.2.5
+    turbo-linux-arm64: 1.2.5
+    turbo-linux-mips64le: 1.2.5
+    turbo-linux-ppc64le: 1.2.5
+    turbo-windows-32: 1.2.5
+    turbo-windows-64: 1.2.5
   dependenciesMeta:
     turbo-darwin-64:
       optional: true
@@ -2096,7 +2096,7 @@ __metadata:
       optional: true
   bin:
     turbo: bin/turbo
-  checksum: a68362a1722136b4d26c9217b7da5272ea6d82b70a7855f4c2260d02aac402bbf0c866dcbd7e55a040b4327107e70dbfd357550042c02b601669477788385711
+  checksum: cba41a5c0e586f47f30e37424a112923fab5b29fda84bf6e28dfd56e981babc3787b3c1ce487bcff1feb828045ea0369f9ec5b32b495778285aa0983d417693c
   languageName: node
   linkType: hard
 
