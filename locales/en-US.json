@@ -1,3 +1,8 @@
 {
-	"ratio": "Ratio to {{target}} from {{author}}."
+	"ratio": "Ratio to {{target}} from {{author}}.",
+	"config": {
+		"no_permission": "You do not have permission to use this command. You need to have the ``ADMINISTRATOR`` permission or have a role in the admin role list.",
+		"success_add": "Successfully added {{role}} as an {{type}} role.",
+		"success_remove": "Successfully removed {{role}} as an {{type}} role."
+	}
 }

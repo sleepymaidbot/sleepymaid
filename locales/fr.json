@@ -1,3 +1,13 @@
 {
-	"ratio": "Ratio à {{target}} par {{author}}."
+	"ratio": "Ratio à {{target}} par {{author}}.",
+	"config": {
+		"admin_role": {
+			"success_add": "Le rôle {{role}} a été ajouté comme rôle modérateur.",
+			"success_remove": "Le rôle {{role}} a été supprimé comme rôle modérateur."
+		},
+		"mod_role": {
+			"success_add": "Le rôle {{role}} a été ajouté comme rôle modérateur.",
+			"success_remove": "Le rôle {{role}} a été supprimé comme rôle modérateur."
+		}
+	}
 }
