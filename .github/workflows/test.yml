@@ -37,7 +37,5 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install dependencies
         run: yarn
-      - name: Fix config
-        run: cp packages/config/src/example-config.ts packages/config/src/config.ts
       - name: Test Build
         run: yarn build
