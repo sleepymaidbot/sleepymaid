@@ -1,5 +1,4 @@
 import { opendir } from 'fs/promises'
-import { config } from '@sleepymaid/config'
 import { Task } from '@sleepymaid/handler'
 import { BotClient } from '../../lib/BotClient'
 import { TextChannel } from 'discord.js'
@@ -11,7 +10,7 @@ export default new Task(
 	{
 		async run(client: BotClient) {
 			client.logger.debug('Banner task started')
-			if (config.isDevelopment) return
+			if (client.config.environment === 'development') return
 			const guild = client.guilds.cache.get('324284116021542922')
 			if (guild.premiumSubscriptionCount < 7) return
 			try {

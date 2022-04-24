@@ -1,4 +1,3 @@
-import { config } from '@sleepymaid/config'
 import {
 	EmbedBuilder,
 	ActionRowBuilder,
@@ -13,11 +12,11 @@ export default new Listener(
 		once: false
 	},
 	{
-		async run(message) {
+		async run(message, client) {
 			if (message.author.id !== '324281236728053760') return
 			const content = message.content.split(' ')
 			const cmd = content[0]
-			if (!cmd.startsWith(config.prefix)) return
+			if (!cmd.startsWith(client.config.prefix)) return
 			switch (cmd.slice(1)) {
 				case 'setupBienvenue': {
 					// Message 1

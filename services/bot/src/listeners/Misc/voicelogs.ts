@@ -1,6 +1,5 @@
 import { Util } from 'discord.js'
 import { EmbedBuilder } from '@discordjs/builders'
-import { config } from '@sleepymaid/config'
 import { Listener } from '@sleepymaid/handler'
 
 const month = {
@@ -37,7 +36,7 @@ export default new Listener(
 	{
 		async run(oldState, newState, client) {
 			if (newState.guild.id !== '324284116021542922') return
-			if (config.isDevelopment) return
+			if (client.config.environment === 'development') return
 			// Join
 			if (oldState.channel == null && newState.channel != null) {
 				const guild = newState.guild

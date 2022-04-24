@@ -5,7 +5,6 @@ import {
 	SelectMenuBuilder,
 	SelectMenuOptionBuilder
 } from '@discordjs/builders'
-import { config } from '@sleepymaid/config'
 import { inspect } from 'util'
 import { Listener } from '@sleepymaid/handler'
 import { BotClient } from '../../lib/BotClient'
@@ -20,7 +19,7 @@ export default new Listener(
 			if (message.author.id !== '324281236728053760') return
 			const content = message.content.split(' ')
 			const cmd = content[0]
-			if (!cmd.startsWith(config.prefix)) return
+			if (!cmd.startsWith(client.config.prefix)) return
 			switch (cmd.slice(1)) {
 				case 'compilevote': {
 					const userVote = {}
@@ -78,7 +77,7 @@ export default new Listener(
 							const output = await eval(`(async () => {${codetoeval}})()`)
 							if (
 								await inspect(output).includes(
-									config.token || 'message.channel.delete()'
+									client.config.token || 'message.channel.delete()'
 								)
 							) {
 								return message.channel.send(`no`)
@@ -97,7 +96,7 @@ export default new Listener(
 							const output = e.message
 							if (
 								inspect(output).includes(
-									config.token || 'message.channel.delete()'
+									client.config.token || 'message.channel.delete()'
 								)
 							) {
 								return message.channel.send(`no`)

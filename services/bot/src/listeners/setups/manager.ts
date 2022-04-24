@@ -1,5 +1,4 @@
 import 'reflect-metadata'
-import { config } from '@sleepymaid/config'
 import { exec as MyExec } from 'child_process'
 import { Message } from 'discord.js'
 import path from 'path'
@@ -20,7 +19,7 @@ export default new Listener(
 			if (message.author.id !== '324281236728053760') return
 			const content = message.content.split(' ')
 			const cmd = content[0]
-			if (!cmd.startsWith(config.prefix)) return
+			if (!cmd.startsWith(client.config.prefix)) return
 			switch (cmd.slice(1)) {
 				case 'gitUpdate': {
 					try {

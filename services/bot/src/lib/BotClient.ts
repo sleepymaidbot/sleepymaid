@@ -1,5 +1,5 @@
 import { Logger } from '@sleepymaid/logger'
-import { config } from '@sleepymaid/config'
+import { BaseConfig, ConfigManager } from '@sleepymaid/config'
 import { PrismaClient } from '@prisma/client'
 import {
 	ActivityType,
@@ -8,10 +8,13 @@ import {
 } from 'discord-api-types/v10'
 import { BaseLogger, HandlerClient } from '@sleepymaid/handler'
 import { Localizer } from '@sleepymaid/localizer'
+import { resolve } from 'path'
 
 export class BotClient extends HandlerClient {
 	public declare prisma: PrismaClient
 	public declare localizer: Localizer
+	public declare configManager: ConfigManager
+	public declare config: BaseConfig
 	constructor() {
 		super(
 			{
@@ -38,13 +41,38 @@ export class BotClient extends HandlerClient {
 				}
 			}
 		)
-
-		this.prisma = new PrismaClient({ datasources: { db: { url: config.db } } })
 		this.localizer = new Localizer()
 	}
 
+	public async start(): Promise<void> {
+		this.configManager = new ConfigManager()
+		const configs = await this.configManager.initConfig()
+		this.config = configs['bot']
+		this.prisma = new PrismaClient({
+			datasources: { db: { url: this.config.db } }
+		})
+		this.localizer.loadLanguage()
+
+		this.loadHandlers({
+			commands: {
+				folder: resolve(__dirname, '../slashCommands')
+			},
+			listeners: {
+				folder: resolve(__dirname, '../listeners')
+			},
+			tasks: {
+				folder: resolve(__dirname, '../tasks')
+			}
+		})
+
+		this.once('ready', async () => {
+			await this.registerApplicationCommandsPermissions()
+		})
+		this.login(this.config.token)
+	}
+
 	public async registerApplicationCommandsPermissions(): Promise<void> {
-		if (config.isDevelopment) {
+		if (this.config.environment === 'development') {
 			const guild = await this.guilds.fetch('324284116021542922')
 			const fullPermissions = []
 			guild.commands.cache.each((cmd) => {

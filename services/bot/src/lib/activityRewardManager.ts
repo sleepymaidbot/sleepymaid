@@ -3,7 +3,6 @@ import { singleton } from 'tsyringe'
 import { BotClient } from './BotClient'
 import { GuildMember, Util } from 'discord.js'
 import { actifRoles } from './lists'
-import { config } from '@sleepymaid/config'
 import { EmbedBuilder } from '@discordjs/builders'
 
 @singleton()
@@ -38,7 +37,7 @@ export class ActivityRewardManager {
 		)
 		const toRemoveRoles = removeRoleObj.map((roles) => roles.roleId)
 
-		if (config.isProduction) {
+		if (this.client.config.environment === 'production') {
 			try {
 				await member.roles.add(toAddRoles)
 				await member.roles.remove(toRemoveRoles)
@@ -53,7 +52,7 @@ export class ActivityRewardManager {
 
 		if (cRoleId != null) {
 			if ((await this._isEligibleForCustomRole(member, inDb)) === false) {
-				if (config.isDevelopment) return
+				if (this.client.config.environment === 'development') return
 				this.client.logger.info(`Deleting ${member.user.tag} custom role`)
 				const guild = this.client.guilds.cache.get('324284116021542922')
 				const cRole = await guild.roles.fetch(cRoleId)
