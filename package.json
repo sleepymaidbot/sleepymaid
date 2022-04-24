@@ -31,6 +31,7 @@
 	"scripts": {
 		"build": "yarn turbo run build",
 		"start": "yarn turbo run start --filter=@sleepymaid/bot",
+		"starthelper": "yarn turbo run start --filter=@sleepymaid/helper",
 		"starttest": "yarn turbo run start --filter=@sleepymaid/testbot",
 		"lint": "yarn eslint --fix --ext ts,tsx packages",
 		"testlint": "yarn eslint --ext ts,tsx packages",
