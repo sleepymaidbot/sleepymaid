@@ -1,5 +1,9 @@
 {
 	"ratio": "Ratio à {{target}} par {{author}}.",
+	"ping": {
+		"bot_lantency": "Latence du Bot",
+		"api_latency": "Latence de l'API"
+	},
 	"config": {
 		"admin_role": {
 			"success_add": "Le rôle {{role}} a été ajouté comme rôle modérateur.",

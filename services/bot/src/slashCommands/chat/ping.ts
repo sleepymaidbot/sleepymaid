@@ -5,6 +5,7 @@ import {
 	EmbedBuilder,
 	Message
 } from 'discord.js'
+import { BotClient } from '../../lib/BotClient'
 
 export default new SlashCommand(
 	{
@@ -15,7 +16,7 @@ export default new SlashCommand(
 		}
 	},
 	{
-		async run(interaction: ChatInputCommandInteraction, client) {
+		async run(interaction: ChatInputCommandInteraction, client: BotClient) {
 			if (!interaction.inCachedGuild()) return
 			const timestamp1 = interaction.createdTimestamp
 			await interaction.reply('Pong!')
@@ -30,12 +31,16 @@ export default new SlashCommand(
 				.setTitle('Pong!  🏓')
 				.addFields(
 					{
-						name: 'Bot Latency',
+						name: client.localizer.get('ping.bot_lantency', {
+							lng: interaction.locale
+						}),
 						value: botLatency,
 						inline: true
 					},
 					{
-						name: 'API Latency',
+						name: client.localizer.get('ping.api_latency', {
+							lng: interaction.locale
+						}),
 						value: apiLatency,
 						inline: true
 					}
