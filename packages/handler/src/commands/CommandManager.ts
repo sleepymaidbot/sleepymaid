@@ -163,41 +163,35 @@ export class CommandManager {
 		const globalCommands = this.globalCommands
 		const guildCommands = this.guildCommands
 		// Global commands
-		const applicationCommand = globalCommands.sort((a, b) => {
-			if (a.name < b.name) return -1
-			if (a.name > b.name) return 1
-			return 0
-		}) as ApplicationCommandData[]
-		const currentGlobalCommands =
-			(await this.client.application?.commands.fetch()) ??
-			([].sort((a, b) => {
+		if (this.client.env === 'development') {
+			const array = guildCommands.get(this.client.devServerId) ?? []
+			array.push(...globalCommands)
+			guildCommands.set(this.client.devServerId, array)
+		} else {
+			const applicationCommand = globalCommands.sort((a, b) => {
 				if (a.name < b.name) return -1
 				if (a.name > b.name) return 1
 				return 0
-			}) as ApplicationCommandData[])
+			}) as ApplicationCommandData[]
+			const currentGlobalCommands =
+				(await this.client.application?.commands.fetch()) ??
+				([].sort((a, b) => {
+					if (a.name < b.name) return -1
+					if (a.name > b.name) return 1
+					return 0
+				}) as ApplicationCommandData[])
 
-		if (
-			JSON.stringify(applicationCommand) !==
-			JSON.stringify(currentGlobalCommands)
-		) {
-			if (this.client.env === 'development') {
-				const guild = this.client.guilds.cache.get(this.client.devServerId)
-				if (!guild) return
-				this.client.logger.info(
-					'Global commands have changed, updating...(in dev server)'
-				)
-				await guild.commands
-					.set(globalCommands)
-					.catch((e) => this.client.logger.error(e))
-				await this.client.application?.commands.set([])
-			} else {
+			if (
+				JSON.stringify(applicationCommand) !==
+				JSON.stringify(currentGlobalCommands)
+			) {
 				this.client.logger.info('Global commands have changed, updating...')
 				await this.client.application?.commands
 					.set(globalCommands)
 					.catch((e) => this.client.logger.error(e))
+			} else {
+				this.client.logger.info('Global commands have not changed.')
 			}
-		} else {
-			this.client.logger.info('Global commands have not changed.')
 		}
 
 		// Guild commands
