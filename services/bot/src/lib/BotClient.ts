@@ -51,9 +51,9 @@ export class BotClient extends HandlerClient {
 		this.prisma = new PrismaClient({
 			datasources: { db: { url: this.config.db } }
 		})
-		this.localizer.loadLanguage()
+		await this.localizer.loadLanguage()
 
-		this.loadHandlers({
+		await this.loadHandlers({
 			commands: {
 				folder: resolve(__dirname, '../slashCommands')
 			},

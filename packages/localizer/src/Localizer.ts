@@ -25,9 +25,10 @@ export class Localizer {
 				if (isObject(strings.default[string])) {
 					this.loadObject(string, strings.default[string], lang)
 				} else {
-					const obj = this.locales.get(lang)
-					obj[string] = strings.default[string]
-					this.locales.set(lang, obj)
+					this.locales.set(lang, {
+						...this.locales.get(lang),
+						[string]: strings.default[string]
+					})
 				}
 			}
 		})
