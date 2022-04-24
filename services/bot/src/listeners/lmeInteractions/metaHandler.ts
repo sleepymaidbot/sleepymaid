@@ -16,8 +16,10 @@ export default new Listener(
 	{
 		async run(interaction) {
 			if (!interaction.customId?.startsWith('lmeMeta')) return
+			if (!interaction.inCachedGuild()) return
 			const Ids = interaction.customId.split(':')
 			if (Ids[0] !== 'lmeMeta') return
+			await interaction.deferReply({ ephemeral: true })
 			if (Ids[1] === 'bienvenue') {
 				if (Ids[2] === 'init') {
 					switch (Ids[3]) {
@@ -64,11 +66,10 @@ export default new Listener(
 									.setStyle(ButtonStyle.Secondary)
 							)
 
-							await interaction.reply({
+							await interaction.editReply({
 								content:
 									'Sélectionnez ci-dessous les notifications que vous souhaitez recevoir.',
-								components: [row1, row2],
-								ephemeral: true
+								components: [row1, row2]
 							})
 							break
 						}
@@ -131,16 +132,14 @@ export default new Listener(
 										.setStyle(ButtonStyle.Secondary)
 								)
 
-								await interaction.reply({
+								await interaction.editReply({
 									content: 'Sélectionnez ci-dessous un rôle de couleur.',
-									components: [row1, row2],
-									ephemeral: true
+									components: [row1, row2]
 								})
 							} else {
-								await interaction.reply({
+								await interaction.editReply({
 									content:
-										"<:redX:948606748334358559> Pour pouvoir bénéficier des **couleurs**, vous devez posséder l'un des **rôles** suivant: ``Nitro Booster``, ``Actif``.",
-									ephemeral: true
+										"<:redX:948606748334358559> Pour pouvoir bénéficier des **couleurs**, vous devez posséder l'un des **rôles** suivant: ``Nitro Booster``, ``Actif``."
 								})
 							}
 							break
@@ -168,9 +167,8 @@ export default new Listener(
 							} else {
 								cleanColorRole = '**Couleurs:** Aucune'
 							}
-							await interaction.reply({
-								content: cleanPingRole + '\n' + cleanColorRole,
-								ephemeral: true
+							await interaction.editReply({
+								content: cleanPingRole + '\n' + cleanColorRole
 							})
 							break
 						}
@@ -193,10 +191,9 @@ export default new Listener(
 							await interaction.member.roles.add(toAdd)
 							await interaction.member.roles.remove(toRemove)
 
-							await interaction.reply({
+							await interaction.editReply({
 								content:
-									'<:greenTick:948620600144982026> Tes rôles de notifications ont été mis à jour.',
-								ephemeral: true
+									'<:greenTick:948620600144982026> Tes rôles de notifications ont été mis à jour.'
 							})
 							break
 						}
@@ -216,10 +213,9 @@ export default new Listener(
 							await interaction.member.roles.add(toAdd)
 							await interaction.member.roles.remove(toRemove)
 
-							await interaction.reply({
+							await interaction.editReply({
 								content:
-									'<:greenTick:948620600144982026> Ton rôle de couleur à été mis à jour.',
-								ephemeral: true
+									'<:greenTick:948620600144982026> Ton rôle de couleur à été mis à jour.'
 							})
 							break
 						}
@@ -231,10 +227,9 @@ export default new Listener(
 								.filter((role) => pingRoleIds.includes(role.id))
 								.map((role) => role.id)
 							interaction.member.roles.remove(currentPingRole)
-							await interaction.reply({
+							await interaction.editReply({
 								content:
-									"<:greenTick:948620600144982026> L'ensemble de tes rôles de notifications ont bien été retirés.",
-								ephemeral: true
+									"<:greenTick:948620600144982026> L'ensemble de tes rôles de notifications ont bien été retirés."
 							})
 							break
 						}
@@ -243,10 +238,9 @@ export default new Listener(
 								.filter((role) => colorRoleIds.includes(role.id))
 								.map((role) => role.id)
 							interaction.member.roles.remove(currentColorRole)
-							await interaction.reply({
+							await interaction.editReply({
 								content:
-									'<:greenTick:948620600144982026> Ton rôle de couleur à bien été retiré.',
-								ephemeral: true
+									'<:greenTick:948620600144982026> Ton rôle de couleur à bien été retiré.'
 							})
 							break
 						}
