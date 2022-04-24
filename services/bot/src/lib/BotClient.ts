@@ -27,7 +27,8 @@ export class BotClient extends HandlerClient {
 					GatewayIntentBits.GuildMembers,
 					GatewayIntentBits.GuildBans,
 					GatewayIntentBits.GuildVoiceStates,
-					GatewayIntentBits.GuildMessages
+					GatewayIntentBits.GuildMessages,
+					GatewayIntentBits.MessageContent
 				],
 				allowedMentions: { parse: ['users', 'roles'], repliedUser: false },
 				presence: {
