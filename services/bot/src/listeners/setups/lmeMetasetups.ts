@@ -30,19 +30,17 @@ export default new Listener(
 						.setDescription(
 							"Dans ce lieu, vous pourrez bénéficier d'un coin pour parler de tout et de rien ou poster vos meilleur mêmes sans vous prendre la tête même après une journée difficile!\n\n Pour commencer je te conseil de lire les règlements ci-dessous.\n<:blank:948461701420945439>"
 						)
-						.addFields(
-							{
-								name: '<:greenDot:948462338594467870> Liens utiles',
-								value: '> **Discord:** https://discord.gg/8bpy2PC',
-								inline: true
-							},
-							{
-								name: '<:greenDot:948462338594467870> Crédits',
-								value:
-									'> Les icônes utiliser sur le serveur sont la propriété de [Icons](https://discord.gg/9AtkECMX2P)',
-								inline: true
-							}
-						)
+						.addFields({
+							name: '<:greenDot:948462338594467870> Liens utiles',
+							value: '> **Discord:** https://discord.gg/8bpy2PC',
+							inline: true
+						})
+						.addFields({
+							name: '<:greenDot:948462338594467870> Crédits',
+							value:
+								'> Les icônes utiliser sur le serveur sont la propriété de [Icons](https://discord.gg/9AtkECMX2P)',
+							inline: true
+						})
 						.setColor(Util.resolveColor('#36393f'))
 
 					await message.channel.send({
@@ -59,23 +57,21 @@ export default new Listener(
 						.setColor(Util.resolveColor('#5765f2'))
 
 					const embed4 = new EmbedBuilder()
-						.addFields(
-							{
-								name: '<:blueDot:948466553505062992> A. Bon sens',
-								value:
-									'```01. Vous devez respecter les ToS de Discord\n02. Pas de NSFW, politiques ou pub\n03. Le spam ou troll est interdit\n04. Gardez vos drama personnel en MP\n05. Gardez un profil approprié\n06. Traitez les autres avec respect```'
-							},
-							{
-								name: '<:blueDot:948466553505062992> B. Utilisation du serveur',
-								value:
-									"```07. Ne demandez pas de rôles, points, etc.\n08. Respectez le sujet de chaque salon\n09. Utiliser ModMail pour parler au staff\n10. Ne donnez pas d'informations personnelles\n11. Ne mentionnez pas sans raison```"
-							},
-							{
-								name: '<:blueDot:948466553505062992> C. Événements',
-								value:
-									"```12. Respectez les autres participants\n13. Voler le travail d'autrui est interdit\n14. Lisez bien les instructions d'un évènement avant d'y participer```"
-							}
-						)
+						.addFields({
+							name: '<:blueDot:948466553505062992> A. Bon sens',
+							value:
+								'```01. Vous devez respecter les ToS de Discord\n02. Pas de NSFW, politiques ou pub\n03. Le spam ou troll est interdit\n04. Gardez vos drama personnel en MP\n05. Gardez un profil approprié\n06. Traitez les autres avec respect```'
+						})
+						.addFields({
+							name: '<:blueDot:948466553505062992> B. Utilisation du serveur',
+							value:
+								"```07. Ne demandez pas de rôles, points, etc.\n08. Respectez le sujet de chaque salon\n09. Utiliser ModMail pour parler au staff\n10. Ne donnez pas d'informations personnelles\n11. Ne mentionnez pas sans raison```"
+						})
+						.addFields({
+							name: '<:blueDot:948466553505062992> C. Événements',
+							value:
+								"```12. Respectez les autres participants\n13. Voler le travail d'autrui est interdit\n14. Lisez bien les instructions d'un évènement avant d'y participer```"
+						})
 						.setFooter({
 							text: 'Cette liste ne contient pas tout ce que vous pouvez / ne pouvez pas faire. Les membres du staff peuvent appliquer les règles de la manière qui leur convient le mieux.'
 						})
