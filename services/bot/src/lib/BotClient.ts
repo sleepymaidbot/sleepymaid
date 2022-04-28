@@ -65,40 +65,6 @@ export class BotClient extends HandlerClient {
 				folder: resolve(__dirname, '../tasks')
 			}
 		})
-
-		this.once('ready', async () => {
-			await this.registerApplicationCommandsPermissions()
-		})
 		this.login(this.config.token)
-	}
-
-	public async registerApplicationCommandsPermissions(): Promise<void> {
-		if (this.config.environment === 'development') {
-			const guild = await this.guilds.fetch('324284116021542922')
-			const fullPermissions = []
-			guild.commands.cache.each((cmd) => {
-				fullPermissions.push({
-					id: cmd.id,
-					permissions: [
-						{
-							id: '324281236728053760',
-							type: ApplicationCommandPermissionType.User,
-							permission: true
-						},
-						{
-							id: '946221081251962941',
-							type: ApplicationCommandPermissionType.Role,
-							permission: true
-						},
-						{
-							id: '324284116021542922',
-							type: ApplicationCommandPermissionType.Role,
-							permission: false
-						}
-					]
-				})
-			})
-			await guild.commands.permissions.set({ fullPermissions })
-		}
 	}
 }
