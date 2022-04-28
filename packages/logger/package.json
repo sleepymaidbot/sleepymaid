@@ -22,11 +22,11 @@
 	},
 	"dependencies": {
 		"ansi-colors": "4.1.1",
-		"pino": "7.10.0",
+		"pino": "7.11.0",
 		"pino-pretty": "7.6.1"
 	},
 	"volta": {
-		"node": "16.14.2",
+		"node": "16.15.0",
 		"yarn": "1.22.18"
 	},
 	"packageManager": "yarn@1.22.18"
