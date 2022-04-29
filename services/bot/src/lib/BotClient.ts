@@ -1,11 +1,7 @@
 import { Logger } from '@sleepymaid/logger'
 import { BaseConfig, ConfigManager } from '@sleepymaid/config'
 import { PrismaClient } from '@prisma/client'
-import {
-	ActivityType,
-	ApplicationCommandPermissionType,
-	GatewayIntentBits
-} from 'discord-api-types/v10'
+import { ActivityType, GatewayIntentBits } from 'discord-api-types/v10'
 import { BaseLogger, HandlerClient } from '@sleepymaid/handler'
 import { Localizer } from '@sleepymaid/localizer'
 import { resolve } from 'path'
