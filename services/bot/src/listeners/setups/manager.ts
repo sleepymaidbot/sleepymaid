@@ -5,7 +5,7 @@ import path from 'path'
 import { container } from 'tsyringe'
 import { promisify } from 'util'
 import { BotClient } from '../../lib/BotClient'
-import { voiceXpManager } from '../../lib/voiceXpManager'
+import { voiceXpManager } from '../../lib/managers/voiceXpManager'
 import { Listener } from '@sleepymaid/handler'
 const exec = promisify(MyExec)
 

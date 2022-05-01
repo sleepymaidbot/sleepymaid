@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 import { BotClient } from '../../lib/BotClient'
-import { voiceXpManager } from '../../lib/voiceXpManager'
+import { voiceXpManager } from '../../lib/managers/voiceXpManager'
 import { container } from 'tsyringe'
 import { pointsBlacklistedVoiceChannel } from '../../lib/lists'
 import { VoiceState } from 'discord.js'

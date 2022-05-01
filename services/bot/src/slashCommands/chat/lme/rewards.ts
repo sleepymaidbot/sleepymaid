@@ -6,7 +6,7 @@ import {
 	Util
 } from 'discord.js'
 import { container } from 'tsyringe'
-import { roleSyncer } from '../../../lib/rolesyncer'
+import { roleSyncer } from '../../../lib/managers/rolesyncer'
 import { BotClient } from '../../../lib/BotClient'
 import { pointToRemoveForPoints } from '../../../lib/lists'
 import 'reflect-metadata'

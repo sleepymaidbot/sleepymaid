@@ -3,7 +3,7 @@ import { ChannelType, GuildMember } from 'discord.js'
 import { pointsBlacklistedVoiceChannel } from '../../lib/lists'
 import { container } from 'tsyringe'
 import { BotClient } from '../../lib/BotClient'
-import { voiceXpManager } from '../../lib/voiceXpManager'
+import { voiceXpManager } from '../../lib/managers/voiceXpManager'
 import { Listener } from '@sleepymaid/handler'
 
 export default new Listener(

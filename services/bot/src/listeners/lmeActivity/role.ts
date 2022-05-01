@@ -1,4 +1,4 @@
-import { roleSyncer } from '../../lib/rolesyncer'
+import { roleSyncer } from '../../lib/managers/rolesyncer'
 import 'reflect-metadata'
 import { container } from 'tsyringe'
 import { BotClient } from '../../lib/BotClient'

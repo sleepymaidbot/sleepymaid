@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { Message } from 'discord.js'
 import { pointsBlacklistedTextChannel, pointsMultiplier } from '../../lib/lists'
-import { ActivityRewardManager } from '../../lib/activityRewardManager'
+import { ActivityRewardManager } from '../../lib/managers/activityRewardManager'
 import { container } from 'tsyringe'
 import { BotClient } from '../../lib/BotClient'
 import { Listener } from '@sleepymaid/handler'
