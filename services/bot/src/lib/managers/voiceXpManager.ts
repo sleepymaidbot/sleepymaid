@@ -1,9 +1,9 @@
 import 'reflect-metadata'
 import { GuildMember } from 'discord.js'
 import { singleton, container } from 'tsyringe'
-import { BotClient } from './BotClient'
+import { BotClient } from '../BotClient'
 import { Stopwatch } from '@sapphire/stopwatch'
-import { pointsMultiplier } from './lists'
+import { pointsMultiplier } from '../lists'
 import { ActivityRewardManager } from './activityRewardManager'
 
 const stopwatchs = {}
