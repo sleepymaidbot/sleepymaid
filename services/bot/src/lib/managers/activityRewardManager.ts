@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 import { singleton } from 'tsyringe'
-import { BotClient } from '../BotClient'
+import { BotClient } from '../extensions/BotClient'
 import { GuildMember, Util } from 'discord.js'
 import { actifRoles } from '../lists'
 import { EmbedBuilder } from '@discordjs/builders'

@@ -7,7 +7,7 @@ import {
 } from 'discord.js'
 import { container } from 'tsyringe'
 import { roleSyncer } from '../../../lib/managers/rolesyncer'
-import { BotClient } from '../../../lib/BotClient'
+import { BotClient } from '../../../lib/extensions/BotClient'
 import { pointToRemoveForPoints } from '../../../lib/lists'
 import 'reflect-metadata'
 import { SlashCommand } from '@sleepymaid/handler'

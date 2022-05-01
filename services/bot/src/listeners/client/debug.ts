@@ -1,5 +1,5 @@
 import { Listener } from '@sleepymaid/handler'
-import { BotClient } from '../../lib/BotClient'
+import { BotClient } from '../../lib/extensions/BotClient'
 
 export default new Listener(
 	{

@@ -1,4 +1,4 @@
-import { BotClient } from './lib/BotClient'
+import { BotClient } from './lib/extensions/BotClient'
 
 void (() => {
 	const client: BotClient = new BotClient()

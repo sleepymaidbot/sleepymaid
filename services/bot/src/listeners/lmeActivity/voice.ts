@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import { BotClient } from '../../lib/BotClient'
+import { BotClient } from '../../lib/extensions/BotClient'
 import { voiceXpManager } from '../../lib/managers/voiceXpManager'
 import { container } from 'tsyringe'
 import { pointsBlacklistedVoiceChannel } from '../../lib/lists'

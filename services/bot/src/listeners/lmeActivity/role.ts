@@ -1,7 +1,7 @@
 import { roleSyncer } from '../../lib/managers/rolesyncer'
 import 'reflect-metadata'
 import { container } from 'tsyringe'
-import { BotClient } from '../../lib/BotClient'
+import { BotClient } from '../../lib/extensions/BotClient'
 import { GuildMember } from 'discord.js'
 import { Listener } from '@sleepymaid/handler'
 

@@ -1,6 +1,6 @@
 import { opendir } from 'fs/promises'
 import { Task } from '@sleepymaid/handler'
-import { BotClient } from '../../lib/BotClient'
+import { BotClient } from '../../lib/extensions/BotClient'
 import { TextChannel } from 'discord.js'
 
 export default new Task(

@@ -14,7 +14,7 @@ import {
 	ChatInputCommandInteraction,
 	Util
 } from 'discord.js'
-import { BotClient } from '../../../lib/BotClient'
+import { BotClient } from '../../../lib/extensions/BotClient'
 
 const intForEmote = {
 	1: ':first_place:',

@@ -3,7 +3,7 @@ import { TextChannel } from 'discord.js'
 import { pointToRemoveForPoints } from '../../lib/lists'
 import { ActivityRewardManager } from '../../lib/managers/activityRewardManager'
 import { container } from 'tsyringe'
-import { BotClient } from '../../lib/BotClient'
+import { BotClient } from '../../lib/extensions/BotClient'
 import { Task } from '@sleepymaid/handler'
 
 export default new Task(

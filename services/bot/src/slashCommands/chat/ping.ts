@@ -5,7 +5,7 @@ import {
 	EmbedBuilder,
 	Message
 } from 'discord.js'
-import { BotClient } from '../../lib/BotClient'
+import { BotClient } from '../../lib/extensions/BotClient'
 
 export default new SlashCommand(
 	{

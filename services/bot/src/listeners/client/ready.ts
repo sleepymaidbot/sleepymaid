@@ -1,7 +1,7 @@
 import { guilds_settings } from '@prisma/client'
 import { Listener } from '@sleepymaid/handler'
 import { Guild } from 'discord.js'
-import { BotClient } from '../../lib/BotClient'
+import { BotClient } from '../../lib/extensions/BotClient'
 
 export default new Listener(
 	{
