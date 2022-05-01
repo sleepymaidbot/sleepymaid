@@ -53,13 +53,13 @@ export class BotClient extends HandlerClient {
 
 		await this.loadHandlers({
 			commands: {
-				folder: resolve(__dirname, '../slashCommands')
+				folder: resolve(__dirname, '../../slashCommands')
 			},
 			listeners: {
-				folder: resolve(__dirname, '../listeners')
+				folder: resolve(__dirname, '../../listeners')
 			},
 			tasks: {
-				folder: resolve(__dirname, '../tasks')
+				folder: resolve(__dirname, '../../tasks')
 			}
 		})
 		this.login(this.config.token)
