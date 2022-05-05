@@ -251,16 +251,16 @@ export default new Listener(
 						interaction.member.roles.cache.has('862462288345694210') ||
 						interaction.member.roles.cache.has('403681300940193804')
 					)
-						interaction.deferUpdate()
+						await interaction.editReply({
+							content: 'Tu es déjà membre.'
+						})
 					else {
-						await interaction.deferUpdate()
 						const role = await interaction.guild.roles.cache.find(
 							(r) => r.id === '884149070757769227'
 						)
 						await interaction.member.roles.add(role)
 
-						await interaction.followUp({
-							ephemeral: true,
+						await interaction.editReply({
 							content: `<:wave:948626464432083014> **__Bienvenue sur le serveur__**`
 						})
 					}
