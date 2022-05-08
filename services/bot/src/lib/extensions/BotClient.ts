@@ -5,6 +5,8 @@ import { ActivityType, GatewayIntentBits } from 'discord-api-types/v10'
 import { BaseLogger, HandlerClient } from '@sleepymaid/handler'
 import { Localizer } from '@sleepymaid/localizer'
 import { resolve } from 'path'
+import { container } from 'tsyringe'
+import { voiceXpManager } from '../managers/voiceXpManager'
 
 export class BotClient extends HandlerClient {
 	public declare prisma: PrismaClient
@@ -63,5 +65,16 @@ export class BotClient extends HandlerClient {
 			}
 		})
 		this.login(this.config.token)
+
+		process.on('unhandledRejection', (error: Error) => {
+			this.logger.error(error.stack)
+		})
+
+		process.on('exit', async () => {
+			const c = container
+			c.register(BotClient, { useValue: this })
+			await c.resolve(voiceXpManager).stopAll()
+			await this.prisma.$disconnect()
+		})
 	}
 }

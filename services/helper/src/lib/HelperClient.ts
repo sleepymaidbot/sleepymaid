@@ -52,5 +52,13 @@ export class HelperClient extends HandlerClient {
 		})
 
 		this.login(this.config.token)
+
+		process.on('unhandledRejection', (error: Error) => {
+			this.logger.error(error.stack)
+		})
+
+		process.on('exit', async () => {
+			await this.prisma.$disconnect()
+		})
 	}
 }
