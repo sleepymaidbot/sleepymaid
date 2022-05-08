@@ -1,7 +1,7 @@
-import { BotClient } from './lib/BotClient'
+import { HelperClient } from './lib/HelperClient'
 
 void (() => {
-	const client: BotClient = new BotClient()
+	const client: HelperClient = new HelperClient()
 
 	client.start()
 })()

@@ -1,5 +1,5 @@
 import { Listener } from '@sleepymaid/handler'
-import { BotClient } from '../../lib/BotClient'
+import { HelperClient } from '../../lib/HelperClient'
 
 export default new Listener(
 	{
@@ -7,7 +7,7 @@ export default new Listener(
 		once: true
 	},
 	{
-		async run(client: BotClient) {
+		async run(client: HelperClient) {
 			client.logger.info(
 				`Logged in as ${client.user.tag} | ${client.guilds.cache.size} servers`
 			)

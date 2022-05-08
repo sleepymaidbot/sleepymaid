@@ -1,5 +1,5 @@
 import { Listener } from '@sleepymaid/handler'
-import { BotClient } from '../../lib/BotClient'
+import { HelperClient } from '../../lib/HelperClient'
 
 export default new Listener(
 	{
@@ -7,7 +7,7 @@ export default new Listener(
 		once: false
 	},
 	{
-		run(error: Error, client: BotClient) {
+		run(error: Error, client: HelperClient) {
 			return client.logger.error(error)
 		}
 	}

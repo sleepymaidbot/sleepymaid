@@ -6,7 +6,7 @@ import { BaseLogger, HandlerClient } from '@sleepymaid/handler'
 import { Localizer } from '@sleepymaid/localizer'
 import { resolve } from 'path'
 
-export class BotClient extends HandlerClient {
+export class HelperClient extends HandlerClient {
 	public declare prisma: PrismaClient
 	public declare localizer: Localizer
 	public declare configManager: ConfigManager
@@ -36,6 +36,7 @@ export class BotClient extends HandlerClient {
 		this.prisma = new PrismaClient({
 			datasources: { db: { url: this.config.db } }
 		})
+		this.env = this.config.environment
 		this.localizer.loadLanguage()
 
 		this.loadHandlers({
