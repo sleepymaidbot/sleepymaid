@@ -1,6 +1,6 @@
 import { opendir } from 'fs/promises'
 import { Task } from '@sleepymaid/handler'
-import { BotClient } from '../../lib/extensions/BotClient'
+import { HelperClient } from '../lib/HelperClient'
 import { TextChannel } from 'discord.js'
 
 export default new Task(
@@ -8,7 +8,7 @@ export default new Task(
 		interval: 3600000
 	},
 	{
-		async run(client: BotClient) {
+		async run(client: HelperClient) {
 			client.logger.debug('Banner task started')
 			if (client.config.environment === 'development') return
 			const guild = client.guilds.cache.get('324284116021542922')
