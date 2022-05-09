@@ -20,9 +20,7 @@ export default new Listener(
 			if (message.author.bot) return
 			if (pointsBlacklistedTextChannel.includes(message.channel.id)) return
 
-			if (talkedRecently.has(message.author.id)) {
-				return
-			}
+			if (talkedRecently.has(message.author.id)) return
 			const userInDb = await client.prisma.mondecorte.findUnique({
 				where: {
 					user_id: message.author.id
@@ -48,10 +46,9 @@ export default new Listener(
 					}
 				})
 
-				container.register(BotClient, { useValue: client })
-				container
-					.resolve(ActivityRewardManager)
-					.checkActivityReward(message.member)
+				const c = container
+				c.register(BotClient, { useValue: client })
+				c.resolve(ActivityRewardManager).checkActivityReward(message.member)
 			}
 
 			talkedRecently.add(message.author.id)

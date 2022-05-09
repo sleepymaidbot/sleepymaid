@@ -6,7 +6,7 @@ import { Stopwatch } from '@sapphire/stopwatch'
 import { pointsMultiplier } from '../lists'
 import { ActivityRewardManager } from './activityRewardManager'
 
-const stopwatchs = {}
+const stopwatchs = new Map<string, Stopwatch>()
 
 @singleton()
 export class voiceXpManager {
@@ -16,7 +16,7 @@ export class voiceXpManager {
 	}
 
 	public async start(member: GuildMember) {
-		stopwatchs[member.id] = new Stopwatch()
+		stopwatchs.set(member.id, new Stopwatch())
 		this.client.logger.info('Started voice time for ' + member.user.tag)
 	}
 
@@ -26,23 +26,11 @@ export class voiceXpManager {
 		const time = Math.floor(stopwatch.duration / 300000)
 		stopwatch.stop()
 		delete stopwatchs[member.id]
-		this._reward(member, time)
+		this.reward(member, time)
 		this.client.logger.info('Stopped voice time for ' + member.user.tag)
 	}
 
-	public async stopAll() {
-		const guild = this.client.guilds.cache.get('324284116021542922')
-		for (const key in stopwatchs) {
-			const stopwatch = stopwatchs[key]
-			const time = Math.floor(stopwatch.duration / 300000)
-			stopwatch.stop()
-			delete stopwatchs[key]
-			this._reward(guild.members.cache.get(key) as GuildMember, time)
-		}
-		return true
-	}
-
-	private async _reward(member: GuildMember, time: number) {
+	public async reward(member: GuildMember, time: number) {
 		if (time <= 1) return
 		const userInDb = await this.client.prisma.mondecorte.findUnique({
 			where: {
@@ -67,8 +55,41 @@ export class voiceXpManager {
 			this.client.logger.info(
 				'Added ' + pointsToAdd + ' points to ' + member.user.tag
 			)
-			container.register(BotClient, { useValue: this.client })
-			container.resolve(ActivityRewardManager).checkActivityReward(member)
+			const c = container
+			c.register(BotClient, { useValue: this.client })
+			c.resolve(ActivityRewardManager).checkActivityReward(member)
 		}
 	}
+}
+
+export async function stopAll(client: BotClient) {
+	for (const [key, value] of Object.entries(stopwatchs)) {
+		const stopwatch = stopwatchs[value]
+		const time = Math.floor(stopwatch.duration / 300000)
+		stopwatch.stop()
+		delete stopwatchs[value]
+		if (time <= 1) return
+		const userInDb = await client.prisma.mondecorte.findUnique({
+			where: {
+				user_id: key
+			}
+		})
+		if (userInDb == null || 0) {
+			await client.prisma.mondecorte.create({
+				data: {
+					user_id: key,
+					points: time * pointsMultiplier
+				}
+			})
+		} else {
+			const beforePoints = userInDb.points
+			const pointsToAdd = time * pointsMultiplier
+			const afterPoints = beforePoints + pointsToAdd
+			await client.prisma.mondecorte.update({
+				where: { user_id: key },
+				data: { points: afterPoints }
+			})
+		}
+	}
+	return true
 }
