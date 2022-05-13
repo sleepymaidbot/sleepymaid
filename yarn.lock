@@ -1450,7 +1450,7 @@ __metadata:
     "@types/node": 17.0.21
     ansi-colors: 4.1.1
     discord-api-types: 0.32.1
-    discord.js: 14.0.0-dev.1652400693-aed687b
+    discord.js: 14.0.0-dev.1652443445-d522320
     fs: 0.0.1-security
     path: 0.12.7
     prisma: 3.14.0
@@ -1483,7 +1483,7 @@ __metadata:
     "@sleepymaid/util": "*"
     "@types/node": 17.0.21
     discord-api-types: 0.32.1
-    discord.js: 14.0.0-dev.1652400693-aed687b
+    discord.js: 14.0.0-dev.1652443445-d522320
     rimraf: 3.0.2
     source-map-support: 0.5.21
     typescript: 4.6.4
@@ -1502,7 +1502,7 @@ __metadata:
     "@sleepymaid/tsconfig": "*"
     "@types/node": 17.0.21
     discord-api-types: 0.32.1
-    discord.js: 14.0.0-dev.1652400693-aed687b
+    discord.js: 14.0.0-dev.1652443445-d522320
     path: 0.12.7
     rimraf: 3.0.2
     source-map-support: 0.5.21
@@ -1550,7 +1550,7 @@ __metadata:
     "@sleepymaid/tsconfig": "*"
     "@types/node": 17.0.21
     discord-api-types: 0.32.1
-    discord.js: 14.0.0-dev.1652400693-aed687b
+    discord.js: 14.0.0-dev.1652443445-d522320
     path: 0.12.7
     rimraf: 3.0.2
     source-map-support: 0.5.21
@@ -1830,13 +1830,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/cli-dist@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "@yarnpkg/cli-dist@npm:3.2.0"
+"@yarnpkg/cli-dist@npm:^3.2.1":
+  version: 3.2.1
+  resolution: "@yarnpkg/cli-dist@npm:3.2.1"
   bin:
     yarn: bin/yarn.js
     yarnpkg: bin/yarn.js
-  checksum: 6a363cd57e73e49fc994c6ff8f047b3667f4e9b733507fb8b7ec8d88d8bf917b6cdc12f96cd89bcc917e57479863a3671a48417aff39c4e8235d6ab13e9632ea
+  checksum: 7992a4f34fcf2ce34506625eb8dbc0dadfc114fb69ebd71c69fccdb3671fd3c18202fec7cdb9867b9d42e1956ad49704b574f9d7f2cdc91484ddc5bd5e184d2c
   languageName: node
   linkType: hard
 
@@ -2403,9 +2403,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:14.0.0-dev.1652400693-aed687b":
-  version: 14.0.0-dev.1652400693-aed687b
-  resolution: "discord.js@npm:14.0.0-dev.1652400693-aed687b"
+"discord.js@npm:14.0.0-dev.1652443445-d522320":
+  version: 14.0.0-dev.1652443445-d522320
+  resolution: "discord.js@npm:14.0.0-dev.1652443445-d522320"
   dependencies:
     "@discordjs/builders": ^0.14.0-dev
     "@discordjs/collection": ^0.7.0-dev
@@ -2418,7 +2418,7 @@ __metadata:
     tslib: ^2.3.1
     undici: ^5.2.0
     ws: ^8.5.0
-  checksum: 3700e22cebc39372f489666f9c902e25977cf48e9a5c752a96765b860e1690b7b83663d467ad74f0fbb47c7d9d9ca4337c394fd69353b59d2e6edfe221e25968
+  checksum: b5880cce2c9d36054da6dfef5b83fe9d7085b120419213022554df93d8f778f9b0a7052b0a541cf8b27d7a154e0c06217daf8d1bee59eac7c041debf46af754c
   languageName: node
   linkType: hard
 
@@ -4330,7 +4330,7 @@ __metadata:
     "@types/prettier": 2.6.1
     "@typescript-eslint/eslint-plugin": 5.23.0
     "@typescript-eslint/parser": 5.23.0
-    "@yarnpkg/cli-dist": ^3.2.0
+    "@yarnpkg/cli-dist": ^3.2.1
     eslint: 8.15.0
     eslint-config-prettier: 8.5.0
     husky: 8.0.1
@@ -4809,7 +4809,7 @@ __metadata:
 
 "typescript@patch:typescript@4.6.4#~builtin<compat/typescript>":
   version: 4.6.4
-  resolution: "typescript@patch:typescript@npm%3A4.6.4#~builtin<compat/typescript>::version=4.6.4&hash=bda367"
+  resolution: "typescript@patch:typescript@npm%3A4.6.4#~builtin<compat/typescript>::version=4.6.4&hash=7ad353"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
