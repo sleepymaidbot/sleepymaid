@@ -1450,7 +1450,7 @@ __metadata:
     "@types/node": 17.0.21
     ansi-colors: 4.1.1
     discord-api-types: 0.32.1
-    discord.js: 14.0.0-dev.1652443445-d522320
+    discord.js: 14.0.0-dev.1652573522-7ce641d
     fs: 0.0.1-security
     path: 0.12.7
     prisma: 3.14.0
@@ -1483,7 +1483,7 @@ __metadata:
     "@sleepymaid/util": "*"
     "@types/node": 17.0.21
     discord-api-types: 0.32.1
-    discord.js: 14.0.0-dev.1652443445-d522320
+    discord.js: 14.0.0-dev.1652573522-7ce641d
     rimraf: 3.0.2
     source-map-support: 0.5.21
     typescript: 4.6.4
@@ -1502,7 +1502,7 @@ __metadata:
     "@sleepymaid/tsconfig": "*"
     "@types/node": 17.0.21
     discord-api-types: 0.32.1
-    discord.js: 14.0.0-dev.1652443445-d522320
+    discord.js: 14.0.0-dev.1652573522-7ce641d
     path: 0.12.7
     rimraf: 3.0.2
     source-map-support: 0.5.21
@@ -1550,7 +1550,7 @@ __metadata:
     "@sleepymaid/tsconfig": "*"
     "@types/node": 17.0.21
     discord-api-types: 0.32.1
-    discord.js: 14.0.0-dev.1652443445-d522320
+    discord.js: 14.0.0-dev.1652573522-7ce641d
     path: 0.12.7
     rimraf: 3.0.2
     source-map-support: 0.5.21
@@ -2382,7 +2382,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-api-types@npm:0.32.1":
+"discord-api-types@npm:0.32.1, discord-api-types@npm:^0.32.1":
   version: 0.32.1
   resolution: "discord-api-types@npm:0.32.1"
   checksum: cce4fa81a4c8311b72cf9f23ff9a3d16e40ba7d862a7634717d9437e0e5918209a8eeb75ea9974f24e3761b06e4599757e7544343b702a23f04b07f31884c304
@@ -2403,22 +2403,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:14.0.0-dev.1652443445-d522320":
-  version: 14.0.0-dev.1652443445-d522320
-  resolution: "discord.js@npm:14.0.0-dev.1652443445-d522320"
+"discord.js@npm:14.0.0-dev.1652573522-7ce641d":
+  version: 14.0.0-dev.1652573522-7ce641d
+  resolution: "discord.js@npm:14.0.0-dev.1652573522-7ce641d"
   dependencies:
     "@discordjs/builders": ^0.14.0-dev
     "@discordjs/collection": ^0.7.0-dev
     "@discordjs/rest": ^0.5.0-dev
     "@sapphire/snowflake": ^3.2.1
     "@types/ws": ^8.5.3
-    discord-api-types: ^0.31.1
+    discord-api-types: ^0.32.1
     fast-deep-equal: ^3.1.3
     lodash.snakecase: ^4.1.1
     tslib: ^2.3.1
     undici: ^5.2.0
     ws: ^8.5.0
-  checksum: b5880cce2c9d36054da6dfef5b83fe9d7085b120419213022554df93d8f778f9b0a7052b0a541cf8b27d7a154e0c06217daf8d1bee59eac7c041debf46af754c
+  checksum: 328a3ae2d9569024fbce9edd50800e1ee0dcd6c1593075190baa5b63e67a392d810e59acb7e3e7b117e53e3515199462ccf3bc09fb370d100a8bf98344260857
   languageName: node
   linkType: hard
 

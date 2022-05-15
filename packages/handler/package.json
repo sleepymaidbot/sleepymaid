@@ -18,7 +18,7 @@
 		"@sleepymaid/util": "*",
 		"@types/node": "17.0.21",
 		"discord-api-types": "0.32.1",
-		"discord.js": "14.0.0-dev.1652443445-d522320",
+		"discord.js": "14.0.0-dev.1652573522-7ce641d",
 		"rimraf": "3.0.2",
 		"source-map-support": "0.5.21",
 		"typescript": "4.6.4"
