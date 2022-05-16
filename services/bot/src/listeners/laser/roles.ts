@@ -9,7 +9,7 @@ export default new Listener(
 	{
 		async run(interaction: ButtonInteraction) {
 			if (!interaction.inCachedGuild()) return
-			if (!interaction.isButton) return
+			if (!interaction.isButton()) return
 			if (interaction.guild.id !== '860721584373497887') return
 			if (!interaction.customId.startsWith('laser-role-ping:')) return
 			await interaction.deferReply({ ephemeral: true })
