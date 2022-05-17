@@ -164,9 +164,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chakra-ui/checkbox@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@chakra-ui/checkbox@npm:2.0.0"
+"@chakra-ui/checkbox@npm:2.0.1":
+  version: 2.0.1
+  resolution: "@chakra-ui/checkbox@npm:2.0.1"
   dependencies:
     "@chakra-ui/form-control": 2.0.0
     "@chakra-ui/hooks": 2.0.0
@@ -177,7 +177,7 @@ __metadata:
     "@chakra-ui/system": ">=2.0.0-next.0"
     framer-motion: ">=4.0.0"
     react: ">=18"
-  checksum: f99874a4b4b7671be1a702e07a2f2fc2895afc8b21ff3f3f7962601da76bdf706110125f627126457db631169b8f1a06ec7336fd40c4d41f0d1169f53389a17f
+  checksum: 39d078c0ae1edaeee327c928cbc129baeb76059874034b96fde177f46128c92bce2a6b33cb008a788695464a7e46ece7310f7165bf76089d55a873c07b9d3e93
   languageName: node
   linkType: hard
 
@@ -206,16 +206,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chakra-ui/color-mode@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@chakra-ui/color-mode@npm:2.0.0"
+"@chakra-ui/color-mode@npm:2.0.2":
+  version: 2.0.2
+  resolution: "@chakra-ui/color-mode@npm:2.0.2"
   dependencies:
     "@chakra-ui/hooks": 2.0.0
-    "@chakra-ui/react-env": 2.0.0
     "@chakra-ui/utils": 2.0.0
   peerDependencies:
     react: ">=18"
-  checksum: c43fbb42096bdfa6e42a57eef6cc8ff9b5eb043eb12bf1f95bb89e3f42ac38b0542fb5f8aa936fd579fd162748146bdebf13d43c44e1b50439c0933dd6ba78f3
+  checksum: 9b20e09dcc00ae1a58536ea5b43617dbf563b2d73e658ea205d448737e86bcc4b3ca731b189d765d39ecd569b2c414f71154bdbbde086f00be428dcaffab8751
   languageName: node
   linkType: hard
 
@@ -526,21 +525,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chakra-ui/provider@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@chakra-ui/provider@npm:2.0.0"
+"@chakra-ui/provider@npm:2.0.2":
+  version: 2.0.2
+  resolution: "@chakra-ui/provider@npm:2.0.2"
   dependencies:
     "@chakra-ui/css-reset": 2.0.0
     "@chakra-ui/portal": 2.0.0
     "@chakra-ui/react-env": 2.0.0
-    "@chakra-ui/system": 2.0.0
+    "@chakra-ui/system": 2.0.2
     "@chakra-ui/utils": 2.0.0
   peerDependencies:
     "@emotion/react": ^11.0.0
     "@emotion/styled": ^11.0.0
     react: ">=18"
     react-dom: ">=18"
-  checksum: df1a513c5ff170a227684ac587ba94af98468b4e92a9f71eeb94e1847cc225677ad87a021c1ad310343b3293118a93228815c446fd482777ea16114db69ab89a
+  checksum: 256280308796f5410c6b4e0fb98a67a8f89da4e25b9d7bbbd67009fafe6172caa083edcdfdbf1ae0837cb98c30776a3eb5a059f12110f1eb30e1d8c1a8bccdef
   languageName: node
   linkType: hard
 
@@ -582,16 +581,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chakra-ui/react@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@chakra-ui/react@npm:2.0.0"
+"@chakra-ui/react@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@chakra-ui/react@npm:2.0.2"
   dependencies:
     "@chakra-ui/accordion": 2.0.0
     "@chakra-ui/alert": 2.0.0
     "@chakra-ui/avatar": 2.0.0
     "@chakra-ui/breadcrumb": 2.0.0
     "@chakra-ui/button": 2.0.0
-    "@chakra-ui/checkbox": 2.0.0
+    "@chakra-ui/checkbox": 2.0.1
     "@chakra-ui/close-button": 2.0.0
     "@chakra-ui/control-box": 2.0.0
     "@chakra-ui/counter": 2.0.0
@@ -613,22 +612,22 @@ __metadata:
     "@chakra-ui/popper": 3.0.0
     "@chakra-ui/portal": 2.0.0
     "@chakra-ui/progress": 2.0.0
-    "@chakra-ui/provider": 2.0.0
+    "@chakra-ui/provider": 2.0.2
     "@chakra-ui/radio": 2.0.0
     "@chakra-ui/react-env": 2.0.0
     "@chakra-ui/select": 2.0.0
-    "@chakra-ui/skeleton": 2.0.0
+    "@chakra-ui/skeleton": 2.0.2
     "@chakra-ui/slider": 2.0.0
     "@chakra-ui/spinner": 2.0.0
     "@chakra-ui/stat": 2.0.0
-    "@chakra-ui/switch": 2.0.0
-    "@chakra-ui/system": 2.0.0
+    "@chakra-ui/switch": 2.0.1
+    "@chakra-ui/system": 2.0.2
     "@chakra-ui/table": 2.0.0
     "@chakra-ui/tabs": 2.0.0
     "@chakra-ui/tag": 2.0.0
     "@chakra-ui/textarea": 2.0.0
-    "@chakra-ui/theme": 2.0.0
-    "@chakra-ui/toast": 2.0.0
+    "@chakra-ui/theme": 2.0.1
+    "@chakra-ui/toast": 2.0.2
     "@chakra-ui/tooltip": 2.0.0
     "@chakra-ui/transition": 2.0.0
     "@chakra-ui/utils": 2.0.0
@@ -639,7 +638,7 @@ __metadata:
     framer-motion: ">=4.0.0"
     react: ">=18"
     react-dom: ">=18"
-  checksum: 8c11b1cdc288679b93d0e7318c652e5111507c8668c1bf542403b955aa09a8f443730a8cec32d40a903e1eafa54989ed23f1d23fe08c32f422c4ca16cfe19b65
+  checksum: 57b7b6d23af891583aa29fe55a70b4469c2a84bd1e2b69ca8f12c3321245daff3fe08d2a033f2adca50135f860cab522c4a9643b7db91a5191a811b6aa826434
   languageName: node
   linkType: hard
 
@@ -656,20 +655,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chakra-ui/skeleton@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@chakra-ui/skeleton@npm:2.0.0"
+"@chakra-ui/skeleton@npm:2.0.2":
+  version: 2.0.2
+  resolution: "@chakra-ui/skeleton@npm:2.0.2"
   dependencies:
     "@chakra-ui/hooks": 2.0.0
     "@chakra-ui/media-query": 3.0.0
-    "@chakra-ui/system": 2.0.0
+    "@chakra-ui/system": 2.0.2
     "@chakra-ui/utils": 2.0.0
   peerDependencies:
     "@chakra-ui/theme": ">=2.0.0-next.0"
     "@emotion/react": ^11.0.0
     "@emotion/styled": ^11.0.0
     react: ">=18"
-  checksum: 12b4ad27b175f291ba18a5b2e172ab2f95abe16a79877811f504eaa5ab9445d420a9367582af925f9ae919e2506444fcc552fd38711e9c322359219d9a7e194e
+  checksum: 3a0d97076d1a81680002dc9ca095e0a4fde376f0b2d592a6479e22307c51cd15d01363268cb2b2f294772028d450f3336ff646ae7ee8a41aa45a6a396f1b3556
   languageName: node
   linkType: hard
 
@@ -724,25 +723,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chakra-ui/switch@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@chakra-ui/switch@npm:2.0.0"
+"@chakra-ui/switch@npm:2.0.1":
+  version: 2.0.1
+  resolution: "@chakra-ui/switch@npm:2.0.1"
   dependencies:
-    "@chakra-ui/checkbox": 2.0.0
+    "@chakra-ui/checkbox": 2.0.1
     "@chakra-ui/utils": 2.0.0
   peerDependencies:
     "@chakra-ui/system": ">=2.0.0-next.0"
     framer-motion: ">=4.0.0"
     react: ">=18"
-  checksum: fa41bfaaa8ce96a6cb24cecb8a70814c784fb30e9a6fa43324c8056f482744539ebb7fbf6da9c51439b9e4f6308d42a2388447e35bcd5c108b46d5f7d93ed38b
+  checksum: 4d11d9ea131d683ca2a745684d7ceffa08f1658cc3c0ca95d5754f769c72a9ea3e478664f5119bdd0d28bea115561eac38885a1d7f07e627bc69ef53977b1bed
   languageName: node
   linkType: hard
 
-"@chakra-ui/system@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@chakra-ui/system@npm:2.0.0"
+"@chakra-ui/system@npm:2.0.2":
+  version: 2.0.2
+  resolution: "@chakra-ui/system@npm:2.0.2"
   dependencies:
-    "@chakra-ui/color-mode": 2.0.0
+    "@chakra-ui/color-mode": 2.0.2
     "@chakra-ui/react-utils": 2.0.0
     "@chakra-ui/styled-system": 2.0.0
     "@chakra-ui/utils": 2.0.0
@@ -751,7 +750,7 @@ __metadata:
     "@emotion/react": ^11.0.0
     "@emotion/styled": ^11.0.0
     react: ">=18"
-  checksum: 58e7da023f932418ffa086911fe3b05617ab616a5360a5e18c0145c46d4c36b0158dbc0bc46efd6bdc764da6fc91f90e3046f15a537c11b1e09682153b9e986f
+  checksum: d3c557dd01d7e360e361614ffd5dca176bc473ddcae73558a176218d3057b7525e8557632bd2b6a7ef8562e07b0f8e4103d19e655f398218f9ffc8e83b9d6a0e
   languageName: node
   linkType: hard
 
@@ -821,37 +820,37 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chakra-ui/theme@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@chakra-ui/theme@npm:2.0.0"
+"@chakra-ui/theme@npm:2.0.1":
+  version: 2.0.1
+  resolution: "@chakra-ui/theme@npm:2.0.1"
   dependencies:
     "@chakra-ui/anatomy": 2.0.0
     "@chakra-ui/theme-tools": 2.0.0
     "@chakra-ui/utils": 2.0.0
   peerDependencies:
     "@chakra-ui/system": ">=2.0.0-next.0"
-  checksum: 3231184f394d0ee3eedf064d6087be87c8b18c3bdc6c8c59e5eeab1bd49899922acf49b60d8eafc080742cc4936e35dc07b5a3e2efdf088ee63fd6a424c30a32
+  checksum: 03c246177f08fc3ea38edf0a4553b028973fa97b544a988cb849f023e22382d3120c0de590dabb31566b379bd0a4ef93318de9771916dbc6ac8a250a40782cc4
   languageName: node
   linkType: hard
 
-"@chakra-ui/toast@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@chakra-ui/toast@npm:2.0.0"
+"@chakra-ui/toast@npm:2.0.2":
+  version: 2.0.2
+  resolution: "@chakra-ui/toast@npm:2.0.2"
   dependencies:
     "@chakra-ui/alert": 2.0.0
     "@chakra-ui/close-button": 2.0.0
     "@chakra-ui/hooks": 2.0.0
     "@chakra-ui/portal": 2.0.0
     "@chakra-ui/react-utils": 2.0.0
-    "@chakra-ui/system": 2.0.0
-    "@chakra-ui/theme": 2.0.0
+    "@chakra-ui/system": 2.0.2
+    "@chakra-ui/theme": 2.0.1
     "@chakra-ui/transition": 2.0.0
     "@chakra-ui/utils": 2.0.0
   peerDependencies:
     framer-motion: ">=4.0.0"
     react: ">=18"
     react-dom: ">=18"
-  checksum: 50bb40bdc19abbf85fa46972e49e99512af5968e6f297d676095d674455089c86798010f2d666bf8907f692b2cd75549a8fe4b62f2b401485a06156d088152ad
+  checksum: 9e3bf8bf8826d5ccce1d05248fbe7367f811c5a56ce210b559087f21a98ec268aa69bbff4be96424adb62d68008ec810dc68668ffb2359aa1302c8ef745fe64b
   languageName: node
   linkType: hard
 
@@ -1539,7 +1538,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@sleepymaid/website@workspace:services/website"
   dependencies:
-    "@chakra-ui/react": ^2.0.0
+    "@chakra-ui/react": ^2.0.2
     "@emotion/react": ^11
     "@emotion/styled": ^11
     "@types/node": 17.0.31
@@ -1665,13 +1664,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:5.24.0":
-  version: 5.24.0
-  resolution: "@typescript-eslint/eslint-plugin@npm:5.24.0"
+"@typescript-eslint/eslint-plugin@npm:5.25.0":
+  version: 5.25.0
+  resolution: "@typescript-eslint/eslint-plugin@npm:5.25.0"
   dependencies:
-    "@typescript-eslint/scope-manager": 5.24.0
-    "@typescript-eslint/type-utils": 5.24.0
-    "@typescript-eslint/utils": 5.24.0
+    "@typescript-eslint/scope-manager": 5.25.0
+    "@typescript-eslint/type-utils": 5.25.0
+    "@typescript-eslint/utils": 5.25.0
     debug: ^4.3.4
     functional-red-black-tree: ^1.0.1
     ignore: ^5.2.0
@@ -1684,42 +1683,42 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 1a16849f7ec55cc5933e2dae26fc23f9a917288c349fb01476cf19d7adc8960c165650f775db925dd53f1c1434236b0232d3be9a308eb99dde44f250acf737c1
+  checksum: 7a47dc9b95031ab9e8d94a062b95c124486d471fa385335ef0129eff0854043b1894233fe28a2832cbf1c2be235242cf1eba087f4da1f4262599f18147ee1edd
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:5.24.0":
-  version: 5.24.0
-  resolution: "@typescript-eslint/parser@npm:5.24.0"
+"@typescript-eslint/parser@npm:5.25.0":
+  version: 5.25.0
+  resolution: "@typescript-eslint/parser@npm:5.25.0"
   dependencies:
-    "@typescript-eslint/scope-manager": 5.24.0
-    "@typescript-eslint/types": 5.24.0
-    "@typescript-eslint/typescript-estree": 5.24.0
+    "@typescript-eslint/scope-manager": 5.25.0
+    "@typescript-eslint/types": 5.25.0
+    "@typescript-eslint/typescript-estree": 5.25.0
     debug: ^4.3.4
   peerDependencies:
     eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 1a46015e827fcd9b68fd5267e976bb6b518b66038ef8f9b3a7a720ae4d9819be7479c080d416c1fce6479e4ae32394dae55bc07f8087a40f162218df70eb6de5
+  checksum: 9bd53d6f5f5e7b64282760a4f68411f6f6e272754aa8b4c54951bd03c18981183277dfefff1207c3d549d25d34dbe162472f7fa102ec5306113a7811f263fc00
   languageName: node
   linkType: hard
 
-"@typescript-eslint/scope-manager@npm:5.24.0":
-  version: 5.24.0
-  resolution: "@typescript-eslint/scope-manager@npm:5.24.0"
+"@typescript-eslint/scope-manager@npm:5.25.0":
+  version: 5.25.0
+  resolution: "@typescript-eslint/scope-manager@npm:5.25.0"
   dependencies:
-    "@typescript-eslint/types": 5.24.0
-    "@typescript-eslint/visitor-keys": 5.24.0
-  checksum: e83fc4808d978e577d8f28e3db8f88ab166e14210a1384f5e0ddbb7170f3055426f58270f9d2edddae1e11f602d952da5cc5fc3a9d8b9a699a3f11c32614c148
+    "@typescript-eslint/types": 5.25.0
+    "@typescript-eslint/visitor-keys": 5.25.0
+  checksum: 0616bad66bd3fe885df3401bbc3ab6631dca3b70ca3d2e8a9881d9a27654e3df9fd219abc9b7e1c23668c113d54bbb049c6231af3a2d86abcd919329b1cb4ff4
   languageName: node
   linkType: hard
 
-"@typescript-eslint/type-utils@npm:5.24.0":
-  version: 5.24.0
-  resolution: "@typescript-eslint/type-utils@npm:5.24.0"
+"@typescript-eslint/type-utils@npm:5.25.0":
+  version: 5.25.0
+  resolution: "@typescript-eslint/type-utils@npm:5.25.0"
   dependencies:
-    "@typescript-eslint/utils": 5.24.0
+    "@typescript-eslint/utils": 5.25.0
     debug: ^4.3.4
     tsutils: ^3.21.0
   peerDependencies:
@@ -1727,23 +1726,23 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 73da0fcfc06670b9a8e1204612695a5008b67bc8d56f08b5bfe2183b024f92eb74bd76853cd97a1b6af5db9cc7b3b0719419f31582133aa38380eac735877a62
+  checksum: f733b42437e7a023985ad9324e57171c8b358f54a0c5a3be3b7bc7f317f1eeee4a60d14a1873efd820a3f9011c395f5e3a75eac4eaac520948aeba4d3e4e4953
   languageName: node
   linkType: hard
 
-"@typescript-eslint/types@npm:5.24.0":
-  version: 5.24.0
-  resolution: "@typescript-eslint/types@npm:5.24.0"
-  checksum: 75cc0cbbcaa351b4e79219494e93af7d27a217b199a254d6d38e4a271251b2fbbc3f9403cdb273f0cc2e9468dbe0b96eb50364d3d352374b54a629eca130ec76
+"@typescript-eslint/types@npm:5.25.0":
+  version: 5.25.0
+  resolution: "@typescript-eslint/types@npm:5.25.0"
+  checksum: 0fa7eba1e35bbc32d865ce38cc5800aedf2b1d8aa17e8a20ff1cf05b59a92a684c0727f7ac2a26ecdf17483957bea163fe03fc1556503f23e0d974a8d9c33b82
   languageName: node
   linkType: hard
 
-"@typescript-eslint/typescript-estree@npm:5.24.0":
-  version: 5.24.0
-  resolution: "@typescript-eslint/typescript-estree@npm:5.24.0"
+"@typescript-eslint/typescript-estree@npm:5.25.0":
+  version: 5.25.0
+  resolution: "@typescript-eslint/typescript-estree@npm:5.25.0"
   dependencies:
-    "@typescript-eslint/types": 5.24.0
-    "@typescript-eslint/visitor-keys": 5.24.0
+    "@typescript-eslint/types": 5.25.0
+    "@typescript-eslint/visitor-keys": 5.25.0
     debug: ^4.3.4
     globby: ^11.1.0
     is-glob: ^4.0.3
@@ -1752,33 +1751,33 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 934da82db9ac74c755d27931eaca78340130269e2d24107b441d6c5374d9d36cf55043b1c426ffb06292b22ebcd2f0d3a7b12e0e490e732a6151d71049c596d9
+  checksum: 72638b1a9826a3062f629e23d3c9147646dc2740add1aa8bb2e63131215eed3309bc86647f7e52acecf3c169e94677d869690a050de37b7cd880ea89c63bde2a
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:5.24.0":
-  version: 5.24.0
-  resolution: "@typescript-eslint/utils@npm:5.24.0"
+"@typescript-eslint/utils@npm:5.25.0":
+  version: 5.25.0
+  resolution: "@typescript-eslint/utils@npm:5.25.0"
   dependencies:
     "@types/json-schema": ^7.0.9
-    "@typescript-eslint/scope-manager": 5.24.0
-    "@typescript-eslint/types": 5.24.0
-    "@typescript-eslint/typescript-estree": 5.24.0
+    "@typescript-eslint/scope-manager": 5.25.0
+    "@typescript-eslint/types": 5.25.0
+    "@typescript-eslint/typescript-estree": 5.25.0
     eslint-scope: ^5.1.1
     eslint-utils: ^3.0.0
   peerDependencies:
     eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
-  checksum: 8ba202373d7c0d7f15646e4b172fff101dfd178c5116e5be4c5811fc355db426ca7d9e6ad184ed65eddab58f075b1ace65039cd44b15020caee748d0489794fd
+  checksum: 744ab15cf003882db2f63b4cef1b788d5f3ab0f4b2f2fb0c1eee942cf899df9c66a34e2f6f614f1c562257041119ec03c12446f4ae72147b5f7cc0a2e5276ea6
   languageName: node
   linkType: hard
 
-"@typescript-eslint/visitor-keys@npm:5.24.0":
-  version: 5.24.0
-  resolution: "@typescript-eslint/visitor-keys@npm:5.24.0"
+"@typescript-eslint/visitor-keys@npm:5.25.0":
+  version: 5.25.0
+  resolution: "@typescript-eslint/visitor-keys@npm:5.25.0"
   dependencies:
-    "@typescript-eslint/types": 5.24.0
+    "@typescript-eslint/types": 5.25.0
     eslint-visitor-keys: ^3.3.0
-  checksum: 8001da8101a41ddcaf0931e71883dab7f8b9f1cdb896827afc8401388d23c831ba06c126b7f74cb3cb6fc8b2689564b9da6a3a35b99ab134157cd5381319d418
+  checksum: ec4d0558cf53305703c18dfd7e1cd53fc0736303a51d93a875227896a230fd049951cc0600c539719cc351d2c96cb4abc6aa9dd9b3a8401f27bb8033093f35b7
   languageName: node
   linkType: hard
 
@@ -4291,8 +4290,8 @@ __metadata:
   resolution: "sleepymaid@workspace:."
   dependencies:
     "@types/prettier": 2.6.1
-    "@typescript-eslint/eslint-plugin": 5.24.0
-    "@typescript-eslint/parser": 5.24.0
+    "@typescript-eslint/eslint-plugin": 5.25.0
+    "@typescript-eslint/parser": 5.25.0
     "@yarnpkg/cli-dist": ^3.2.1
     eslint: 8.15.0
     eslint-config-prettier: 8.5.0
