@@ -5,16 +5,12 @@ import { BotClient } from '../../extensions/BotClient'
 import { Stopwatch } from '@sapphire/stopwatch'
 import { pointsMultiplier } from '../../lists'
 import { ActivityRewardManager } from './activityRewardManager'
+import { BaseManager } from '../baseManager'
 
 const stopwatchs = new Map<string, Stopwatch>()
 
 @singleton()
-export class voiceXpManager {
-	public declare client: BotClient
-	public constructor(client: BotClient) {
-		this.client = client
-	}
-
+export class voiceXpManager extends BaseManager {
 	public async start(member: GuildMember) {
 		stopwatchs.set(member.id, new Stopwatch())
 		this.client.logger.info('Started voice time for ' + member.user.tag)

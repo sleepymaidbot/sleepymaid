@@ -4,14 +4,10 @@ import { BotClient } from '../../extensions/BotClient'
 import { GuildMember, Util } from 'discord.js'
 import { actifRoles } from '../../lists'
 import { EmbedBuilder } from '@discordjs/builders'
+import { BaseManager } from '../baseManager'
 
 @singleton()
-export class ActivityRewardManager {
-	public declare client: BotClient
-	public constructor(client: BotClient) {
-		this.client = client
-	}
-
+export class ActivityRewardManager extends BaseManager {
 	public async checkActivityReward(member: GuildMember) {
 		if (member.user.id === '324281236728053760') return
 		const inDb = await this.client.prisma.mondecorte.findUnique({

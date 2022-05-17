@@ -1,7 +1,6 @@
-import { PrismaClient } from '@prisma/client'
 import { Snowflake } from 'discord.js'
 import { singleton } from 'tsyringe'
-import { BotClient } from '../extensions/BotClient'
+import { BaseManager } from './baseManager'
 
 export enum SpecialRoleType {
 	'admin',
@@ -9,12 +8,7 @@ export enum SpecialRoleType {
 }
 
 @singleton()
-export class configManager {
-	public declare client: BotClient
-	constructor(client: BotClient) {
-		this.client = client
-	}
-
+export class configManager extends BaseManager {
 	public async getConfig(guildId: Snowflake) {
 		const config = await this.client.prisma.guilds_settings.findUnique({
 			where: {

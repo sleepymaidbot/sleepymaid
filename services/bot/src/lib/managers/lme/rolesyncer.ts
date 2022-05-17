@@ -3,13 +3,10 @@ import { BotClient } from '../../extensions/BotClient'
 import { colorRole, ColorfulNeedRole } from '../../lists'
 import 'reflect-metadata'
 import { singleton } from 'tsyringe'
+import { BaseManager } from '../baseManager'
 
 @singleton()
-export class roleSyncer {
-	public declare client: BotClient
-	constructor(client: BotClient) {
-		this.client = client
-	}
+export class roleSyncer extends BaseManager {
 	public async checkUserRole(member: GuildMember) {
 		const userRole = member.roles.cache.map((r) => r.id)
 		const has = {
