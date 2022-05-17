@@ -5,7 +5,7 @@ import { ActivityType, GatewayIntentBits } from 'discord-api-types/v10'
 import { BaseLogger, HandlerClient } from '@sleepymaid/handler'
 import { Localizer } from '@sleepymaid/localizer'
 import { resolve } from 'path'
-import { stopAll } from '../managers/voiceXpManager'
+import { stopAll } from '../managers/lme/voiceXpManager'
 
 export class BotClient extends HandlerClient {
 	public declare prisma: PrismaClient

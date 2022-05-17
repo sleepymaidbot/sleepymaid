@@ -4,7 +4,7 @@ import { Message } from 'discord.js'
 import path from 'path'
 import { promisify } from 'util'
 import { BotClient } from '../../lib/extensions/BotClient'
-import { stopAll } from '../../lib/managers/voiceXpManager'
+import { stopAll } from '../../lib/managers/lme/voiceXpManager'
 import { Listener } from '@sleepymaid/handler'
 const exec = promisify(MyExec)
 

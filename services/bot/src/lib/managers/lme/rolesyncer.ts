@@ -1,6 +1,6 @@
 import { GuildMember } from 'discord.js'
-import { BotClient } from '../extensions/BotClient'
-import { colorRole, ColorfulNeedRole } from '../lists'
+import { BotClient } from '../../extensions/BotClient'
+import { colorRole, ColorfulNeedRole } from '../../lists'
 import 'reflect-metadata'
 import { singleton } from 'tsyringe'
 
