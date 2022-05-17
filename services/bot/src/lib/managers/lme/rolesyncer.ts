@@ -1,12 +1,11 @@
 import { GuildMember } from 'discord.js'
-import { BotClient } from '../../extensions/BotClient'
 import { colorRole, ColorfulNeedRole } from '../../lists'
 import 'reflect-metadata'
 import { singleton } from 'tsyringe'
-import { BaseManager } from '../baseManager'
+import { baseManager } from '../BaseManager'
 
 @singleton()
-export class roleSyncer extends BaseManager {
+export class roleSyncer extends baseManager {
 	public async checkUserRole(member: GuildMember) {
 		const userRole = member.roles.cache.map((r) => r.id)
 		const has = {

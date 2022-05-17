@@ -1,13 +1,12 @@
 import 'reflect-metadata'
 import { singleton } from 'tsyringe'
-import { BotClient } from '../../extensions/BotClient'
 import { GuildMember, Util } from 'discord.js'
 import { actifRoles } from '../../lists'
 import { EmbedBuilder } from '@discordjs/builders'
-import { BaseManager } from '../baseManager'
+import { baseManager } from '../BaseManager'
 
 @singleton()
-export class ActivityRewardManager extends BaseManager {
+export class ActivityRewardManager extends baseManager {
 	public async checkActivityReward(member: GuildMember) {
 		if (member.user.id === '324281236728053760') return
 		const inDb = await this.client.prisma.mondecorte.findUnique({
