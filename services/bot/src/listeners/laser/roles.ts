@@ -1,5 +1,8 @@
 import { Listener } from '@sleepymaid/handler'
 import { ButtonInteraction } from 'discord.js'
+import { container } from 'tsyringe'
+import { BotClient } from '../../lib/extensions/BotClient'
+import { laserRoleManager } from '../../lib/managers/laser/roleManager'
 
 export default new Listener(
 	{
@@ -7,26 +10,16 @@ export default new Listener(
 		once: false
 	},
 	{
-		async run(interaction: ButtonInteraction) {
+		async run(interaction: ButtonInteraction, client: BotClient) {
 			if (!interaction.inCachedGuild()) return
-			if (!interaction.isButton()) return
 			if (interaction.guild.id !== '860721584373497887') return
-			if (!interaction.customId.startsWith('laser-role-ping:')) return
-			await interaction.deferReply({ ephemeral: true })
-			const roleId = interaction.customId.split(':')[1]
-			const role = interaction.guild.roles.cache.get(roleId)
-			if (!role) return
-			if (interaction.member.roles.cache.has(role.id)) {
-				interaction.member.roles.remove(role)
-				return interaction.editReply({
-					content: 'Removed role'
-				})
-			} else {
-				interaction.member.roles.add(role)
-				return interaction.editReply({
-					content: 'Added role'
-				})
-			}
+			if (!interaction.customId?.startsWith('laser-role-ping:')) return
+
+			container.register(BotClient, { useValue: client })
+			if (interaction.customId === 'laser-role-ping:manage')
+				container.resolve(laserRoleManager).startMenu(interaction)
+			else if (interaction.customId === 'laser-role-ping:removeall')
+				container.resolve(laserRoleManager).removeAllRoles(interaction)
 		}
 	}
 )

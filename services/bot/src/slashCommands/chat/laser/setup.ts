@@ -7,22 +7,16 @@ import { SlashCommand } from '@sleepymaid/handler'
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
-	ButtonStyle
+	ButtonStyle,
+	PermissionFlagsBits
 } from 'discord.js'
-import { BotClient } from '../../../lib/extensions/BotClient'
-
-const roles = {
-	'975507132306821130': 'Quebec Murder',
-	'975507024051839066': 'Doki Doki',
-	'975507065327988767': 'Murders Arena'
-}
 
 export default new SlashCommand(
 	{
 		guildIds: ['860721584373497887'],
 		data: {
 			name: 'setup',
-			description: '[Admin] a command that does command related stuff',
+			description: '[Admin only] Allow you to post pre-made messages.',
 			type: ApplicationCommandType.ChatInput,
 			options: [
 				{
@@ -35,34 +29,58 @@ export default new SlashCommand(
 		}
 	},
 	{
-		async run(interaction, client: BotClient) {
-			if (interaction.user.id !== '324281236728053760') return
+		async run(interaction) {
 			if (!interaction.inCachedGuild()) return
+			if (!interaction.memberPermissions.has(PermissionFlagsBits.Administrator))
+				return
 			const name = interaction.options.get('name')
 			switch (name.value) {
 				case 'roles': {
 					const row = new ActionRowBuilder<ButtonBuilder>()
-					for (const [id, name] of Object.entries(roles)) {
-						row.addComponents(
-							new ButtonBuilder()
-								.setCustomId('laser-role-ping:' + id)
-								.setLabel(name)
-								.setStyle(ButtonStyle.Success)
-						)
-					}
-
-					const embed = new EmbedBuilder().setTitle(
-						'Select the servers you are willing to complete map secrets on!'
+					row.addComponents(
+						new ButtonBuilder()
+							.setLabel('Manage my roles')
+							.setStyle(ButtonStyle.Success)
+							.setCustomId('laser-role-ping:manage')
+							.setEmoji({
+								id: '975870168251113545'
+							}),
+						new ButtonBuilder()
+							.setLabel('Remove all my roles')
+							.setStyle(ButtonStyle.Danger)
+							.setCustomId('laser-role-ping:removeall')
+							.setEmoji({
+								id: '948606748334358559'
+							})
 					)
 
-					await interaction.reply({
-						content: 'yo',
-						ephemeral: true
-					})
+					const embed = new EmbedBuilder()
+						.setTitle('Self-assignable roles')
+						.setDescription(
+							'With this message you can assign yourself some roles.'
+						)
+						.addFields({
+							name: 'Why ?',
+							value:
+								'Those roles are use to only get pings when we are doing a specific map secret on a specific server.',
+							inline: true
+						})
+						.addFields({
+							name: 'How ?',
+							value:
+								"Click the button 'Manage my roles' to select the servers you are willing to complete map secrets on! \n Click the button 'Remove all my roles' to remove all your roles.",
+							inline: true
+						})
+
 					await interaction.channel.send({
 						embeds: [embed],
 						components: [row]
 					})
+					await interaction.reply({
+						content: 'Sent',
+						ephemeral: true
+					})
+					break
 				}
 			}
 		}
