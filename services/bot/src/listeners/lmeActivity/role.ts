@@ -17,6 +17,7 @@ export default new Listener(
 			client: BotClient
 		) {
 			if (newMember.user.bot) return
+			if (newMember.guild.id !== '324284116021542922') return
 			container.register(BotClient, { useValue: client })
 			await container.resolve(roleSyncer).checkUserRole(newMember)
 		}
