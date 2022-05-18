@@ -1408,7 +1408,7 @@ __metadata:
     "@types/node": 17.0.21
     ansi-colors: 4.1.3
     discord-api-types: 0.33.0
-    discord.js: 14.0.0-dev.1652702635-5e9b757
+    discord.js: 14.0.0-dev.1652832627-dfe449c
     fs: 0.0.1-security
     path: 0.12.7
     prisma: 3.14.0
@@ -1441,7 +1441,7 @@ __metadata:
     "@sleepymaid/util": "*"
     "@types/node": 17.0.21
     discord-api-types: 0.33.0
-    discord.js: 14.0.0-dev.1652702635-5e9b757
+    discord.js: 14.0.0-dev.1652832627-dfe449c
     rimraf: 3.0.2
     source-map-support: 0.5.21
     typescript: 4.6.4
@@ -1460,7 +1460,7 @@ __metadata:
     "@sleepymaid/tsconfig": "*"
     "@types/node": 17.0.21
     discord-api-types: 0.33.0
-    discord.js: 14.0.0-dev.1652702635-5e9b757
+    discord.js: 14.0.0-dev.1652832627-dfe449c
     path: 0.12.7
     rimraf: 3.0.2
     source-map-support: 0.5.21
@@ -1508,7 +1508,7 @@ __metadata:
     "@sleepymaid/tsconfig": "*"
     "@types/node": 17.0.21
     discord-api-types: 0.33.0
-    discord.js: 14.0.0-dev.1652702635-5e9b757
+    discord.js: 14.0.0-dev.1652832627-dfe449c
     path: 0.12.7
     rimraf: 3.0.2
     source-map-support: 0.5.21
@@ -2354,9 +2354,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:14.0.0-dev.1652702635-5e9b757":
-  version: 14.0.0-dev.1652702635-5e9b757
-  resolution: "discord.js@npm:14.0.0-dev.1652702635-5e9b757"
+"discord.js@npm:14.0.0-dev.1652832627-dfe449c":
+  version: 14.0.0-dev.1652832627-dfe449c
+  resolution: "discord.js@npm:14.0.0-dev.1652832627-dfe449c"
   dependencies:
     "@discordjs/builders": ^0.14.0-dev
     "@discordjs/collection": ^0.7.0-dev
@@ -2369,7 +2369,7 @@ __metadata:
     tslib: ^2.3.1
     undici: ^5.2.0
     ws: ^8.5.0
-  checksum: 4bfb492fb6b964bd64b8f73c60ff013f7f8121b218b42c82a39b753f003c62f05dee9a8eb8d1c394ed1b3b113f971c911ada8f19345d83847674473ad2bd09fb
+  checksum: 2ec12aa6ce898df8b80fac4274351457cd660711d0294fc943460e44044e963d04df2aa465ef88ae39b83a34e8eaf044a0b1fe93904b6ff09b45c3b25fdabdef
   languageName: node
   linkType: hard
 
