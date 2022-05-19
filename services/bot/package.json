@@ -28,7 +28,7 @@
 		"@sleepymaid/tsconfig": "*",
 		"@sleepymaid/util": "*",
 		"ansi-colors": "4.1.3",
-		"discord.js": "14.0.0-dev.1652832627-dfe449c",
+		"discord.js": "14.0.0-dev.1652918983-adf461b",
 		"fs": "0.0.1-security",
 		"path": "0.12.7",
 		"prisma": "3.14.0",
