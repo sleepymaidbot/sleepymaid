@@ -123,13 +123,12 @@ export class laserRoleManager extends baseManager {
 		await interaction.deferReply({ ephemeral: true })
 
 		return await interaction.editReply({
-			...this.generateHomeMessage(interaction)
+			...this.generateHomeMessage()
 		})
 	}
 
-	private generateHomeMessage(interaction: ButtonInteraction) {
-		if (!interaction.inCachedGuild()) return
 
+	private generateHomeMessage() {
 		const options: Array<APISelectMenuOption> = []
 		for (const [k, v] of Object.entries(servers)) {
 			options.push({
