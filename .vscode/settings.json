@@ -11,5 +11,8 @@
 	"editor.codeActionsOnSave": {
 		"source.fixAll": true,
 		"source.organizeImports": false
+	},
+	"files.exclude": {
+		"**/node_modules": true
 	}
 }
