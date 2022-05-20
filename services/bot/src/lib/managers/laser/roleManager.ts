@@ -72,9 +72,7 @@ export class laserRoleManager extends baseManager {
 
 		const collector = collectors.get(interaction.user.id)
 
-		if (collectors.get(interaction.user.id)) {
-			collector.stop()
-		}
+		if (collectors.get(interaction.user.id)) collector.stop()
 
 		collectors.set(
 			interaction.user.id,
