@@ -92,7 +92,15 @@ export class laserRoleManager extends baseManager {
 				if (i.member.id !== interaction.member.id) return
 				if (message.id !== i.message.id) return
 				if (i.isButton()) {
-					// Add Navigation Button
+					const page = i.customId.split(':')[1]
+					switch (page) {
+						case 'backhome':
+							await this.backHome(i as ButtonInteraction)
+							break
+						case 'close':
+							collectors.get(interaction.user.id).stop()
+							break
+					}
 				} else if (i.isSelectMenu()) {
 					const page = i.customId.split(':')[1]
 					switch (page) {
@@ -127,6 +135,11 @@ export class laserRoleManager extends baseManager {
 		})
 	}
 
+	private async backHome(interaction: ButtonInteraction) {
+		return await interaction.update({
+			...this.generateHomeMessage()
+		})
+	}
 
 	private generateHomeMessage() {
 		const options: Array<APISelectMenuOption> = []
