@@ -37,6 +37,11 @@ enum Secret {
 	casino = 'casino'
 }
 
+enum EndReason {
+	overlap = 'overlap',
+	cancel = 'cancel'
+}
+
 const servers = {
 	"Murderer's Arena": Server.ma,
 	'Doki Doki Murder': Server.doki,
@@ -75,7 +80,7 @@ export class laserRoleManager extends baseManager {
 
 		const collector = collectors.get(interaction.user.id)
 
-		if (collectors.get(interaction.user.id)) collector.stop()
+		if (collectors.get(interaction.user.id)) collector.stop(EndReason.overlap)
 
 		collectors.set(
 			interaction.user.id,
@@ -98,7 +103,7 @@ export class laserRoleManager extends baseManager {
 							await this.backHome(i as ButtonInteraction)
 							break
 						case 'close':
-							collectors.get(interaction.user.id).stop()
+							collectors.get(interaction.user.id).stop(EndReason.cancel)
 							break
 					}
 				} else if (i.isSelectMenu()) {
@@ -114,13 +119,29 @@ export class laserRoleManager extends baseManager {
 				}
 			})
 
-		collectors.get(interaction.user.id).on('end', () => {
-			interaction.editReply({
-				content:
-					"The menu has expired. You can click 'Dismiss message' to dismiss this message.",
-				embeds: [],
-				components: []
-			})
+		collectors.get(interaction.user.id).on('end', (_, reason: EndReason) => {
+			if (reason === EndReason.overlap) {
+				interaction.editReply({
+					content:
+						"You have a new menu open. To save performance, only one menu can be open at a time. You can click 'Dismiss message' to dismiss this message.",
+					embeds: [],
+					components: []
+				})
+			} else if (reason === EndReason.cancel) {
+				interaction.editReply({
+					content:
+						"You have closed this menu. You can click 'Dismiss message' to dismiss this message.",
+					embeds: [],
+					components: []
+				})
+			} else {
+				interaction.editReply({
+					content:
+						"The menu has expired. You can click 'Dismiss message' to dismiss this message.",
+					embeds: [],
+					components: []
+				})
+			}
 		})
 	}
 
