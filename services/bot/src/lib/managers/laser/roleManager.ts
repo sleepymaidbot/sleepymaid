@@ -122,8 +122,16 @@ export class laserRoleManager extends baseManager {
 
 		await interaction.deferReply({ ephemeral: true })
 
+		return await interaction.editReply({
+			...this.generateHomeMessage(interaction)
+		})
+	}
+
+	private generateHomeMessage(interaction: ButtonInteraction) {
+		if (!interaction.inCachedGuild()) return
+
 		const options: Array<APISelectMenuOption> = []
-		for await (const [k, v] of Object.entries(servers)) {
+		for (const [k, v] of Object.entries(servers)) {
 			options.push({
 				label: k,
 				description: `Select this option the manage your role for the ${k}`,
