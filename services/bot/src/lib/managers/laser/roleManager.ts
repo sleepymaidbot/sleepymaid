@@ -234,7 +234,7 @@ export class laserRoleManager extends baseManager {
 			{
 				label: 'Clue',
 				description: `Select this option to receive when we are doing the clue secret on the ${server} server.`,
-				value: 'clue',
+				value: Secret.clue,
 				emoji: {
 					id: getEmoji(roles[server].clue, interaction.member)
 				}
@@ -242,7 +242,7 @@ export class laserRoleManager extends baseManager {
 			{
 				label: 'Residence',
 				description: `Select this option to receive when we are doing the residence secret on the ${server} server.`,
-				value: 'residence',
+				value: Secret.residence,
 				emoji: {
 					id: getEmoji(roles[server].residence, interaction.member)
 				}
@@ -250,7 +250,7 @@ export class laserRoleManager extends baseManager {
 			{
 				label: 'Casino',
 				description: `Select this option to receive when we are doing the casino secret on the ${server} server.`,
-				value: 'casino',
+				value: Secret.casino,
 				emoji: {
 					id: getEmoji(roles[server].casino, interaction.member)
 				}
