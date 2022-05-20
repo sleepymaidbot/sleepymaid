@@ -3,15 +3,18 @@ import {
 	ActionRowBuilder,
 	APISelectMenuOption,
 	ButtonInteraction,
+	ButtonStyle,
 	CacheType,
 	Collection,
 	EmbedBuilder,
 	GuildMember,
+	Interaction,
 	InteractionCollector,
 	MessageComponentInteraction,
 	SelectMenuInteraction,
 	SelectMenuOptionBuilder,
 	Snowflake,
+	UnsafeButtonBuilder,
 	UnsafeSelectMenuBuilder
 } from 'discord.js'
 import { singleton } from 'tsyringe'
@@ -153,43 +156,6 @@ export class laserRoleManager extends baseManager {
 		if (!interaction.inCachedGuild()) return
 		const server: Server = interaction.values[0] as Server
 		await interaction.deferUpdate()
-		const options: Array<APISelectMenuOption> = [
-			{
-				label: 'Clue',
-				description: `Select this option to receive when we are doing the clue secret on the ${server} server.`,
-				value: Secret.clue,
-				emoji: {
-					id: getEmoji(roles[server].clue, interaction.member)
-				}
-			},
-			{
-				label: 'Residence',
-				description: `Select this option to receive when we are doing the residence secret on the ${server} server.`,
-				value: Secret.residence,
-				emoji: {
-					id: getEmoji(roles[server].residence, interaction.member)
-				}
-			},
-			{
-				label: 'Casino',
-				description: `Select this option to receive when we are doing the casino secret on the ${server} server.`,
-				value: Secret.casino,
-				emoji: {
-					id: getEmoji(roles[server].casino, interaction.member)
-				}
-			}
-		]
-
-		const row = new ActionRowBuilder<UnsafeSelectMenuBuilder>().addComponents(
-			new UnsafeSelectMenuBuilder()
-				.setCustomId('laser-role-ping:secret:' + server)
-				.setMaxValues(3)
-				.setMinValues(1)
-				.setPlaceholder('Select the secrets you want to receive ping for.')
-				.addOptions(
-					...options.map((options) => new SelectMenuOptionBuilder(options))
-				)
-		)
 
 		const embed = new EmbedBuilder()
 			.setTitle(`Select the secrets you want to receive ping for.`)
@@ -197,7 +163,10 @@ export class laserRoleManager extends baseManager {
 				`Select the secrets you want to receive ping for. The roles you already have will have a <:greenTick:948620600144982026> emoji. The roles you don't have will have a <:redX:948606748334358559> emoji.`
 			)
 
-		await interaction.editReply({ embeds: [embed], components: [row] })
+		await interaction.editReply({
+			embeds: [embed],
+			...this.generateSecretMessage(interaction, server)
+		})
 	}
 
 	private async selectSecret(interaction: SelectMenuInteraction) {
@@ -223,6 +192,14 @@ export class laserRoleManager extends baseManager {
 
 		if (toRemove.length >= 1) await interaction.member.roles.remove(toRemove)
 		if (toAdd.length >= 1) await interaction.member.roles.add(toAdd)
+
+		await interaction.update({
+			...this.generateSecretMessage(interaction, server)
+		})
+	}
+
+	private generateSecretMessage(interaction: Interaction, server: Server) {
+		if (!interaction.inCachedGuild()) return
 		const options: Array<APISelectMenuOption> = [
 			{
 				label: 'Clue',
@@ -261,9 +238,9 @@ export class laserRoleManager extends baseManager {
 				)
 		)
 
-		await interaction.update({
+		return {
 			components: [row]
-		})
+		}
 	}
 
 	public async removeAllRoles(interaction: ButtonInteraction) {
