@@ -3,8 +3,12 @@ import {
 	ActionRowBuilder,
 	APISelectMenuOption,
 	ButtonInteraction,
+	CacheType,
+	Collection,
 	EmbedBuilder,
 	GuildMember,
+	InteractionCollector,
+	MessageComponentInteraction,
 	SelectMenuInteraction,
 	SelectMenuOptionBuilder,
 	Snowflake,
@@ -53,6 +57,11 @@ const roles = {
 	}
 }
 
+const collectors: Collection<
+	Snowflake,
+	InteractionCollector<MessageComponentInteraction<CacheType>>
+> = new Collection()
+
 @singleton()
 export class laserRoleManager extends baseManager {
 	public async startMenu(interaction: ButtonInteraction) {
@@ -61,14 +70,23 @@ export class laserRoleManager extends baseManager {
 		const message = await this.sendHome(interaction)
 		await message.fetch()
 
-		const collector = interaction.channel.createMessageComponentCollector({
-			message,
-			time: 120000
-		})
+		const collector = collectors.get(interaction.user.id)
 
-		collector.on(
-			'collect',
-			async (i: ButtonInteraction | SelectMenuInteraction) => {
+		if (collectors.get(interaction.user.id)) {
+			collector.stop()
+		}
+
+		collectors.set(
+			interaction.user.id,
+			interaction.channel.createMessageComponentCollector({
+				message,
+				time: 120000
+			})
+		)
+
+		collectors
+			.get(interaction.user.id)
+			.on('collect', async (i: ButtonInteraction | SelectMenuInteraction) => {
 				if (!i.inCachedGuild()) return
 				if (i.member.id !== interaction.member.id) return
 				if (message.id !== i.message.id) return
@@ -85,10 +103,9 @@ export class laserRoleManager extends baseManager {
 							break
 					}
 				}
-			}
-		)
+			})
 
-		collector.on('end', () => {
+		collectors.get(interaction.user.id).on('end', () => {
 			interaction.editReply({
 				content:
 					"The menu has expired. You can click 'Dismiss message' to dismiss this message.",
