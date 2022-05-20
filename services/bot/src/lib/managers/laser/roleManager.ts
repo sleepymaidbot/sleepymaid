@@ -252,7 +252,7 @@ export class laserRoleManager extends baseManager {
 
 		await interaction.member.roles.remove(allRoles)
 		await interaction.reply({
-			content: 'All roles have been removed.',
+			content: '<:greenTick:948620600144982026> All roles have been removed.',
 			ephemeral: true
 		})
 	}
