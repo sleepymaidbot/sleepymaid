@@ -18,10 +18,22 @@ const getEmoji = (roleId: Snowflake, member: GuildMember) => {
 	else return '948606748334358559'
 }
 
+enum Server {
+	ma = 'ma',
+	doki = 'doki',
+	qc = 'qc'
+}
+
+enum Secret {
+	clue = 'clue',
+	residence = 'residence',
+	casino = 'casino'
+}
+
 const servers = {
-	"Murderer's Arena": 'ma',
-	'Doki Doki Murder': 'doki',
-	'Québec Murder': 'qc'
+	"Murderer's Arena": Server.ma,
+	'Doki Doki Murder': Server.doki,
+	'Québec Murder': Server.qc
 }
 const roles = {
 	ma: {
@@ -124,13 +136,13 @@ export class laserRoleManager extends baseManager {
 
 	private async selectServer(interaction: SelectMenuInteraction) {
 		if (!interaction.inCachedGuild()) return
-		const server = interaction.values[0]
+		const server: Server = interaction.values[0] as Server
 		await interaction.deferUpdate()
 		const options: Array<APISelectMenuOption> = [
 			{
 				label: 'Clue',
 				description: `Select this option to receive when we are doing the clue secret on the ${server} server.`,
-				value: 'clue',
+				value: Secret.clue,
 				emoji: {
 					id: getEmoji(roles[server].clue, interaction.member)
 				}
@@ -138,7 +150,7 @@ export class laserRoleManager extends baseManager {
 			{
 				label: 'Residence',
 				description: `Select this option to receive when we are doing the residence secret on the ${server} server.`,
-				value: 'residence',
+				value: Secret.residence,
 				emoji: {
 					id: getEmoji(roles[server].residence, interaction.member)
 				}
@@ -146,7 +158,7 @@ export class laserRoleManager extends baseManager {
 			{
 				label: 'Casino',
 				description: `Select this option to receive when we are doing the casino secret on the ${server} server.`,
-				value: 'casino',
+				value: Secret.casino,
 				emoji: {
 					id: getEmoji(roles[server].casino, interaction.member)
 				}
@@ -176,7 +188,7 @@ export class laserRoleManager extends baseManager {
 	private async selectSecret(interaction: SelectMenuInteraction) {
 		if (!interaction.inCachedGuild()) return
 		if (!interaction.inCachedGuild()) return
-		const server = interaction.customId.split(':')[2]
+		const server: Server = interaction.customId.split(':')[2] as Server
 
 		const selectedRoles = []
 
