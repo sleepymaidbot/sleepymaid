@@ -149,15 +149,25 @@ export class laserRoleManager extends baseManager {
 					...options.map((options) => new SelectMenuOptionBuilder(options))
 				)
 		)
+
+		const buttonRow = new ActionRowBuilder<UnsafeButtonBuilder>().addComponents(
+			new UnsafeButtonBuilder()
+				.setLabel('Close this menu')
+				.setCustomId('laser-role-ping:close')
+				.setStyle(ButtonStyle.Danger)
+				.setEmoji({ id: '977037861205459014' })
+		)
+
 		const embed = new EmbedBuilder()
 			.setTitle('Select a server.')
 			.setDescription(
 				'Select a server to manage your role. After this you will be able to select the secrets you want to receive ping for.'
 			)
-		return await interaction.editReply({
+
+		return {
 			embeds: [embed],
-			components: [row]
-		})
+			components: [row, buttonRow]
+		}
 	}
 
 	private async selectServer(interaction: SelectMenuInteraction) {
@@ -246,8 +256,21 @@ export class laserRoleManager extends baseManager {
 				)
 		)
 
+		const buttonRow = new ActionRowBuilder<UnsafeButtonBuilder>().addComponents(
+			new UnsafeButtonBuilder()
+				.setLabel('Go Back')
+				.setCustomId('laser-role-ping:backhome')
+				.setStyle(ButtonStyle.Secondary)
+				.setEmoji({ id: '977037927953612871' }),
+			new UnsafeButtonBuilder()
+				.setLabel('Close this menu')
+				.setCustomId('laser-role-ping:close')
+				.setStyle(ButtonStyle.Danger)
+				.setEmoji({ id: '977037861205459014' })
+		)
+
 		return {
-			components: [row]
+			components: [row, buttonRow]
 		}
 	}
 
