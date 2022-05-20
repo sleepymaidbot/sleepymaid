@@ -1,4 +1,6 @@
+import { exec } from 'child_process'
 import { readdirSync } from 'fs'
+import { promisify } from 'util'
 
 export default class Util {
 	public static async loadFolder(folder: string): Promise<string[]> {
@@ -13,5 +15,12 @@ export default class Util {
 			}
 		}
 		return files
+	}
+
+	public async shell(command: string): Promise<{
+		stdout: string
+		stderr: string
+	}> {
+		return await promisify(exec)(command)
 	}
 }
