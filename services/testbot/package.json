@@ -24,7 +24,7 @@
 		"@sleepymaid/handler": "*",
 		"@sleepymaid/logger": "*",
 		"@sleepymaid/tsconfig": "*",
-		"discord.js": "14.0.0-dev.1652918983-adf461b",
+		"discord.js": "14.0.0-dev.1653091711-fdeac9d",
 		"path": "0.12.7"
 	},
 	"volta": {
