@@ -21,13 +21,13 @@ export const colorFunctions = new Map<Loglevels, (str: string) => string>([
 ])
 
 export class Logger {
-	public declare pino: BaseLogger
+	//public declare pino: BaseLogger
 	constructor() {
-		this.pino = pino({
+		/*this.pino = pino({
 			transport: {
 				target: 'pino-pretty'
 			}
-		})
+		})*/
 	}
 
 	private formatMessage(
@@ -47,15 +47,24 @@ export class Logger {
 	}
 
 	debug(message: string, ...args: string[]): void {
-		this.pino.debug(this.formatMessage(Loglevels.Debug, gray(message), ...args))
+		//this.pino.debug(this.formatMessage(Loglevels.Debug, gray(message), ...args))
+		console.debug(this.formatMessage(Loglevels.Debug, gray(message), ...args))
 	}
 
 	info(message: string, ...args: string[]): void {
-		this.pino.info(this.formatMessage(Loglevels.Info, blue(message), ...args))
+		//this.pino.info(this.formatMessage(Loglevels.Info, blue(message), ...args))
+		console.info(this.formatMessage(Loglevels.Info, blue(message), ...args))
 	}
 
 	error(error: Error, ...args: string[]): void {
-		this.pino.error(
+		/*this.pino.error(
+			this.formatMessage(
+				Loglevels.Error,
+				red(error.stack ?? error.message),
+				...args
+			)
+		)*/
+		console.error(
 			this.formatMessage(
 				Loglevels.Error,
 				red(error.stack ?? error.message),
