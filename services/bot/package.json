@@ -33,7 +33,7 @@
 		"path": "0.12.7",
 		"prisma": "3.14.0",
 		"reflect-metadata": "0.1.13",
-		"tsyringe": "4.6.0"
+		"tsyringe": "4.7.0"
 	},
 	"volta": {
 		"node": "16.15.0",
