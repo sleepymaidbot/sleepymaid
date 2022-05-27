@@ -1439,7 +1439,7 @@ __metadata:
     reflect-metadata: 0.1.13
     rimraf: 3.0.2
     source-map-support: 0.5.21
-    tsyringe: 4.6.0
+    tsyringe: 4.7.0
     typescript: 4.7.2
   languageName: unknown
   linkType: soft
@@ -4320,7 +4320,7 @@ __metadata:
     prettier: 2.6.2
     prisma: 3.14.0
     rimraf: ^3.0.2
-    turbo: 1.2.12
+    turbo: 1.2.14
     typescript: 4.7.2
   languageName: unknown
   linkType: soft
@@ -4614,123 +4614,123 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsyringe@npm:4.6.0":
-  version: 4.6.0
-  resolution: "tsyringe@npm:4.6.0"
+"tsyringe@npm:4.7.0":
+  version: 4.7.0
+  resolution: "tsyringe@npm:4.7.0"
   dependencies:
     tslib: ^1.9.3
-  checksum: e7c68e032dc07d6271a3709847063486aaa6186306698cbbb62d990320b21328a0b19b34f4c381c71c94aab6e0693a1a60cf2baafd20124a07f4a3d607c29e15
+  checksum: 6d84e0767538fabf60eafb926bd285d08d25847875b635f8a3ab8b3093c8814aca4f47072fbb51837bd431259dc2464572e5c28a838b833c9ef097d5b1a895b3
   languageName: node
   linkType: hard
 
-"turbo-darwin-64@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-darwin-64@npm:1.2.12"
+"turbo-darwin-64@npm:1.2.14":
+  version: 1.2.14
+  resolution: "turbo-darwin-64@npm:1.2.14"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-darwin-arm64@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-darwin-arm64@npm:1.2.12"
+"turbo-darwin-arm64@npm:1.2.14":
+  version: 1.2.14
+  resolution: "turbo-darwin-arm64@npm:1.2.14"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-freebsd-64@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-freebsd-64@npm:1.2.12"
+"turbo-freebsd-64@npm:1.2.14":
+  version: 1.2.14
+  resolution: "turbo-freebsd-64@npm:1.2.14"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-freebsd-arm64@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-freebsd-arm64@npm:1.2.12"
+"turbo-freebsd-arm64@npm:1.2.14":
+  version: 1.2.14
+  resolution: "turbo-freebsd-arm64@npm:1.2.14"
   conditions: os=freebsd & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-32@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-linux-32@npm:1.2.12"
+"turbo-linux-32@npm:1.2.14":
+  version: 1.2.14
+  resolution: "turbo-linux-32@npm:1.2.14"
   conditions: os=linux & cpu=ia32
   languageName: node
   linkType: hard
 
-"turbo-linux-64@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-linux-64@npm:1.2.12"
+"turbo-linux-64@npm:1.2.14":
+  version: 1.2.14
+  resolution: "turbo-linux-64@npm:1.2.14"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm64@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-linux-arm64@npm:1.2.12"
+"turbo-linux-arm64@npm:1.2.14":
+  version: 1.2.14
+  resolution: "turbo-linux-arm64@npm:1.2.14"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-linux-arm@npm:1.2.12"
+"turbo-linux-arm@npm:1.2.14":
+  version: 1.2.14
+  resolution: "turbo-linux-arm@npm:1.2.14"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"turbo-linux-mips64le@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-linux-mips64le@npm:1.2.12"
+"turbo-linux-mips64le@npm:1.2.14":
+  version: 1.2.14
+  resolution: "turbo-linux-mips64le@npm:1.2.14"
   conditions: os=linux & cpu=mips64el
   languageName: node
   linkType: hard
 
-"turbo-linux-ppc64le@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-linux-ppc64le@npm:1.2.12"
+"turbo-linux-ppc64le@npm:1.2.14":
+  version: 1.2.14
+  resolution: "turbo-linux-ppc64le@npm:1.2.14"
   conditions: os=linux & cpu=ppc64
   languageName: node
   linkType: hard
 
-"turbo-windows-32@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-windows-32@npm:1.2.12"
+"turbo-windows-32@npm:1.2.14":
+  version: 1.2.14
+  resolution: "turbo-windows-32@npm:1.2.14"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"turbo-windows-64@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-windows-64@npm:1.2.12"
+"turbo-windows-64@npm:1.2.14":
+  version: 1.2.14
+  resolution: "turbo-windows-64@npm:1.2.14"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-windows-arm64@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-windows-arm64@npm:1.2.12"
+"turbo-windows-arm64@npm:1.2.14":
+  version: 1.2.14
+  resolution: "turbo-windows-arm64@npm:1.2.14"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo@npm:1.2.12"
+"turbo@npm:1.2.14":
+  version: 1.2.14
+  resolution: "turbo@npm:1.2.14"
   dependencies:
-    turbo-darwin-64: 1.2.12
-    turbo-darwin-arm64: 1.2.12
-    turbo-freebsd-64: 1.2.12
-    turbo-freebsd-arm64: 1.2.12
-    turbo-linux-32: 1.2.12
-    turbo-linux-64: 1.2.12
-    turbo-linux-arm: 1.2.12
-    turbo-linux-arm64: 1.2.12
-    turbo-linux-mips64le: 1.2.12
-    turbo-linux-ppc64le: 1.2.12
-    turbo-windows-32: 1.2.12
-    turbo-windows-64: 1.2.12
-    turbo-windows-arm64: 1.2.12
+    turbo-darwin-64: 1.2.14
+    turbo-darwin-arm64: 1.2.14
+    turbo-freebsd-64: 1.2.14
+    turbo-freebsd-arm64: 1.2.14
+    turbo-linux-32: 1.2.14
+    turbo-linux-64: 1.2.14
+    turbo-linux-arm: 1.2.14
+    turbo-linux-arm64: 1.2.14
+    turbo-linux-mips64le: 1.2.14
+    turbo-linux-ppc64le: 1.2.14
+    turbo-windows-32: 1.2.14
+    turbo-windows-64: 1.2.14
+    turbo-windows-arm64: 1.2.14
   dependenciesMeta:
     turbo-darwin-64:
       optional: true
@@ -4760,7 +4760,7 @@ __metadata:
       optional: true
   bin:
     turbo: bin/turbo
-  checksum: 75ad427d0165b96f9381e50e8a67f70230b8cef749f247aa38b4af5499168ca61a26a88629543b6478c0bbc8992523319a52917407b413fe988173f1a5e9ff80
+  checksum: 1652628d22f3d24af80569a425a9ae0c4b3dcf3e0dfdc13704d4444c6a28631a63742064280f4f955e0b42dc7d8082f4ebcc090d89a43367716323a88b51382c
   languageName: node
   linkType: hard
 
