@@ -8,7 +8,7 @@ export default new Listener(
 	},
 	{
 		run(info, client: HelperClient) {
-			return client.logger.debug(info)
+			//return client.logger.debug(info)
 		}
 	}
 )
