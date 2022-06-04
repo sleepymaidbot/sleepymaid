@@ -13,7 +13,7 @@ export async function loadFolder(folder: string): Promise<string[]> {
 			files.push(`${folder}/${file}`)
 		} else if (file.endsWith('.disable')) continue
 		else {
-			files.push(...(await this.loadFolder(`${folder}/${file}`)))
+			files.push(...(await loadFolder(`${folder}/${file}`)))
 		}
 	}
 	return files
