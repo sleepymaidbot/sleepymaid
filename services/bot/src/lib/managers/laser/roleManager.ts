@@ -98,6 +98,7 @@ export class laserRoleManager extends baseManager {
 				if (message.id !== i.message.id) return
 				if (i.isButton()) {
 					const page = i.customId.split(':')[1]
+					let server: Server
 					switch (page) {
 						case 'backhome':
 							await this.backHome(i as ButtonInteraction)
@@ -105,6 +106,9 @@ export class laserRoleManager extends baseManager {
 						case 'close':
 							collectors.get(interaction.user.id).stop(EndReason.cancel)
 							break
+						case 'remove':
+							server = i.customId.split(':')[2] as Server
+							await this.removeRoles(i as ButtonInteraction, server)
 					}
 				} else if (i.isSelectMenu()) {
 					const page = i.customId.split(':')[1]
@@ -296,6 +300,13 @@ export class laserRoleManager extends baseManager {
 					...options.map((options) => new SelectMenuOptionBuilder(options))
 				)
 		)
+		const removeRow = new ActionRowBuilder<UnsafeButtonBuilder>().addComponents(
+			new UnsafeButtonBuilder()
+				.setLabel('Remove all roles from this server')
+				.setCustomId('laser-role-ping:remove:' + server)
+				.setEmoji({ id: '948606748334358559' })
+				.setStyle(ButtonStyle.Danger)
+		)
 
 		const buttonRow = new ActionRowBuilder<UnsafeButtonBuilder>().addComponents(
 			new UnsafeButtonBuilder()
@@ -311,25 +322,35 @@ export class laserRoleManager extends baseManager {
 		)
 
 		return {
-			components: [row, buttonRow]
+			components: [row, removeRow, buttonRow]
 		}
 	}
 
-	public async removeAllRoles(interaction: ButtonInteraction) {
+	public async removeRoles(interaction: ButtonInteraction, server?: Server) {
 		if (!interaction.inCachedGuild()) return
 
 		const allRoles: Array<Snowflake> = []
 
-		for (const [k, v] of Object.entries(roles)) {
-			for (const r of Object.values(v)) {
+		if (!server)
+			for (const v of Object.values(roles)) {
+				for (const r of Object.values(v)) {
+					allRoles.push(r)
+				}
+			}
+		else
+			for (const r of Object.values(roles[server])) {
 				allRoles.push(r)
 			}
-		}
 
 		await interaction.member.roles.remove(allRoles)
-		await interaction.reply({
-			content: '<:greenTick:948620600144982026> All roles have been removed.',
-			ephemeral: true
-		})
+		if (server)
+			await interaction.update({
+				...this.generateSecretMessage(interaction, server)
+			})
+		else
+			await interaction.reply({
+				content: '<:greenTick:948620600144982026> All roles have been removed.',
+				ephemeral: true
+			})
 	}
 }

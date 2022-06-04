@@ -19,7 +19,7 @@ export default new Listener(
 			if (interaction.customId === 'laser-role-ping:manage')
 				container.resolve(laserRoleManager).startMenu(interaction)
 			else if (interaction.customId === 'laser-role-ping:removeall')
-				container.resolve(laserRoleManager).removeAllRoles(interaction)
+				container.resolve(laserRoleManager).removeRoles(interaction)
 		}
 	}
 )
