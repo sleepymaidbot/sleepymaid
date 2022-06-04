@@ -232,7 +232,7 @@ export class laserRoleManager extends baseManager {
 		}
 
 		const serverRoles = []
-		for (const [k, v] of Object.entries(roles[server])) serverRoles.push(v)
+		for (const v of Object.values(roles[server])) serverRoles.push(v)
 
 		const userRole = interaction.member.roles.cache
 			.map((r) => r.id)
