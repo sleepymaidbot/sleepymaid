@@ -68,10 +68,12 @@ export default new Listener(
 
 						const evalOutputEmbed = new EmbedBuilder()
 							.setTitle('Evaluated Code')
-							.addFields({
-								name: `:inbox_tray: **Input**`,
-								value: `\`\`\`js\n${codetoeval}\`\`\``
-							})
+							.addFields([
+								{
+									name: `:inbox_tray: **Input**`,
+									value: `\`\`\`js\n${codetoeval}\`\`\``
+								}
+							])
 
 						try {
 							const output = await eval(`(async () => {${codetoeval}})()`)
@@ -86,10 +88,12 @@ export default new Listener(
 							if (inspect(output, { depth: 0 }).length > 1000) {
 								return
 							} else {
-								evalOutputEmbed.addFields({
-									name: `:outbox_tray: **Output**`,
-									value: `\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``
-								})
+								evalOutputEmbed.addFields([
+									{
+										name: `:outbox_tray: **Output**`,
+										value: `\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``
+									}
+								])
 							}
 							await message.channel.send({ embeds: [evalOutputEmbed] })
 						} catch (e) {
@@ -105,10 +109,12 @@ export default new Listener(
 							if (inspect(output, { depth: 0 }).length > 1000) {
 								return
 							} else {
-								evalOutputEmbed.addFields({
-									name: `:outbox_tray: **Error**`,
-									value: `\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``
-								})
+								evalOutputEmbed.addFields([
+									{
+										name: `:outbox_tray: **Error**`,
+										value: `\`\`\`js\n${inspect(output, { depth: 0 })}\`\`\``
+									}
+								])
 							}
 							await message.channel.send({ embeds: [evalOutputEmbed] })
 							await client.logger.error(e)
@@ -146,16 +152,16 @@ export default new Listener(
 						)
 						.setTimestamp()
 
-					const row = new ActionRowBuilder().addComponents(
+					const row = new ActionRowBuilder<SelectMenuBuilder>().addComponents([
 						new SelectMenuBuilder()
 							.setCustomId('vote')
 							.setPlaceholder('Aucun vote')
 							.setMaxValues(1)
 							.setMinValues(1)
 							.addOptions(
-								...maire.map((option) => new SelectMenuOptionBuilder(option))
+								maire.map((option) => new SelectMenuOptionBuilder(option))
 							)
-					)
+					])
 
 					await message.channel.send({
 						embeds: [embed],

@@ -62,12 +62,14 @@ export default new SlashCommand(
 					}
 				} else {
 					hasCustomRole = '🟡'
-					embed.addFields({
-						name: 'Une récompense non réclamer',
-						value:
-							'```Tu n\'a pas réclamer ton rôle custom. \nPour le réclamer fait "/customrole create <nom>" \n<nom> étant le nom désiré du rôle.```',
-						inline: true
-					})
+					embed.addFields([
+						{
+							name: 'Une récompense non réclamer',
+							value:
+								'```Tu n\'a pas réclamer ton rôle custom. \nPour le réclamer fait "/customrole create <nom>" \n<nom> étant le nom désiré du rôle.```',
+							inline: true
+						}
+					])
 				}
 			}
 			if (points >= 500) {
@@ -77,11 +79,13 @@ export default new SlashCommand(
 				})
 
 				if (pointsToLoose !== 1) {
-					embed.addFields({
-						name: 'Perte de points par heures',
-						value: `\`\`\`Tu perds ${pointsToLoose} points par heure à cause que tu as ${points} points.\`\`\``,
-						inline: true
-					})
+					embed.addFields([
+						{
+							name: 'Perte de points par heures',
+							value: `\`\`\`Tu perds ${pointsToLoose} points par heure à cause que tu as ${points} points.\`\`\``,
+							inline: true
+						}
+					])
 				}
 			}
 

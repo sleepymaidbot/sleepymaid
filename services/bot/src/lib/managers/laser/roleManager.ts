@@ -1,9 +1,7 @@
 import 'reflect-metadata'
 import {
 	ActionRowBuilder,
-	APISelectMenuOption,
 	ButtonInteraction,
-	ButtonStyle,
 	CacheType,
 	Collection,
 	EmbedBuilder,
@@ -17,6 +15,7 @@ import {
 	UnsafeButtonBuilder,
 	UnsafeSelectMenuBuilder
 } from 'discord.js'
+import { APISelectMenuOption, ButtonStyle } from 'discord-api-types/v10'
 import { singleton } from 'tsyringe'
 import { baseManager } from '../BaseManager'
 

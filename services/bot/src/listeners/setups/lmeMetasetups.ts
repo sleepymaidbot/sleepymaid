@@ -3,7 +3,8 @@ import {
 	ActionRowBuilder,
 	ButtonBuilder
 } from '@discordjs/builders'
-import { ButtonStyle, Util } from 'discord.js'
+import { Util } from 'discord.js'
+import { ButtonStyle } from 'discord-api-types/v10'
 import { Listener } from '@sleepymaid/handler'
 
 export default new Listener(
@@ -30,17 +31,19 @@ export default new Listener(
 						.setDescription(
 							"Dans ce lieu, vous pourrez bénéficier d'un coin pour parler de tout et de rien ou poster vos meilleur mêmes sans vous prendre la tête même après une journée difficile!\n\n Pour commencer je te conseil de lire les règlements ci-dessous.\n<:blank:948461701420945439>"
 						)
-						.addFields({
-							name: '<:greenDot:948462338594467870> Liens utiles',
-							value: '> **Discord:** https://discord.gg/8bpy2PC',
-							inline: true
-						})
-						.addFields({
-							name: '<:greenDot:948462338594467870> Crédits',
-							value:
-								'> Les icônes utiliser sur le serveur sont la propriété de [Icons](https://discord.gg/9AtkECMX2P)',
-							inline: true
-						})
+						.addFields([
+							{
+								name: '<:greenDot:948462338594467870> Liens utiles',
+								value: '> **Discord:** https://discord.gg/8bpy2PC',
+								inline: true
+							},
+							{
+								name: '<:greenDot:948462338594467870> Crédits',
+								value:
+									'> Les icônes utiliser sur le serveur sont la propriété de [Icons](https://discord.gg/9AtkECMX2P)',
+								inline: true
+							}
+						])
 						.setColor(Util.resolveColor('#36393f'))
 
 					await message.channel.send({
@@ -57,21 +60,23 @@ export default new Listener(
 						.setColor(Util.resolveColor('#5765f2'))
 
 					const embed4 = new EmbedBuilder()
-						.addFields({
-							name: '<:blueDot:948466553505062992> A. Bon sens',
-							value:
-								'```01. Vous devez respecter les ToS de Discord\n02. Pas de NSFW, politiques ou pub\n03. Le spam ou troll est interdit\n04. Gardez vos drama personnel en MP\n05. Gardez un profil approprié\n06. Traitez les autres avec respect```'
-						})
-						.addFields({
-							name: '<:blueDot:948466553505062992> B. Utilisation du serveur',
-							value:
-								"```07. Ne demandez pas de rôles, points, etc.\n08. Respectez le sujet de chaque salon\n09. Utiliser ModMail pour parler au staff\n10. Ne donnez pas d'informations personnelles\n11. Ne mentionnez pas sans raison```"
-						})
-						.addFields({
-							name: '<:blueDot:948466553505062992> C. Événements',
-							value:
-								"```12. Respectez les autres participants\n13. Voler le travail d'autrui est interdit\n14. Lisez bien les instructions d'un évènement avant d'y participer```"
-						})
+						.addFields([
+							{
+								name: '<:blueDot:948466553505062992> A. Bon sens',
+								value:
+									'```01. Vous devez respecter les ToS de Discord\n02. Pas de NSFW, politiques ou pub\n03. Le spam ou troll est interdit\n04. Gardez vos drama personnel en MP\n05. Gardez un profil approprié\n06. Traitez les autres avec respect```'
+							},
+							{
+								name: '<:blueDot:948466553505062992> B. Utilisation du serveur',
+								value:
+									"```07. Ne demandez pas de rôles, points, etc.\n08. Respectez le sujet de chaque salon\n09. Utiliser ModMail pour parler au staff\n10. Ne donnez pas d'informations personnelles\n11. Ne mentionnez pas sans raison```"
+							},
+							{
+								name: '<:blueDot:948466553505062992> C. Événements',
+								value:
+									"```12. Respectez les autres participants\n13. Voler le travail d'autrui est interdit\n14. Lisez bien les instructions d'un évènement avant d'y participer```"
+							}
+						])
 						.setFooter({
 							text: 'Cette liste ne contient pas tout ce que vous pouvez / ne pouvez pas faire. Les membres du staff peuvent appliquer les règles de la manière qui leur convient le mieux.'
 						})
@@ -90,26 +95,21 @@ export default new Listener(
 							'Sélectionnez les rôles et notifications qui vous intéressent sur le serveur en cliquant sur les boutons ci-dessous. Si besoin, cliquez sur le bouton **Voir mes Rôles** pour voir la liste de vos rôles.'
 						)
 
-					const row1 = new ActionRowBuilder()
-						.addComponents(
-							new ButtonBuilder()
-								.setCustomId('lmeMeta:bienvenue:init:ping')
-								.setLabel('Notifications')
-								.setStyle(ButtonStyle.Primary)
-						)
-						.addComponents(
-							new ButtonBuilder()
-								.setCustomId('lmeMeta:bienvenue:init:color')
-								.setLabel('Couleur')
-								.setStyle(ButtonStyle.Primary)
-						)
-						.addComponents(
-							new ButtonBuilder()
-								.setCustomId('lmeMeta:bienvenue:init:viewRoles')
-								.setLabel('Voir mes rôles')
-								.setEmoji({ name: '❔' })
-								.setStyle(ButtonStyle.Secondary)
-						)
+					const row1 = new ActionRowBuilder<ButtonBuilder>().addComponents([
+						new ButtonBuilder()
+							.setCustomId('lmeMeta:bienvenue:init:ping')
+							.setLabel('Notifications')
+							.setStyle(ButtonStyle.Primary),
+						new ButtonBuilder()
+							.setCustomId('lmeMeta:bienvenue:init:color')
+							.setLabel('Couleur')
+							.setStyle(ButtonStyle.Primary),
+						new ButtonBuilder()
+							.setCustomId('lmeMeta:bienvenue:init:viewRoles')
+							.setLabel('Voir mes rôles')
+							.setEmoji({ name: '❔' })
+							.setStyle(ButtonStyle.Secondary)
+					])
 
 					await message.channel.send({
 						content: '<:blank:948461701420945439>',
@@ -125,13 +125,13 @@ export default new Listener(
 							'Pour avoir accès au serveur, cliquez sur le bouton ci-dessous.'
 						)
 
-					const row2 = new ActionRowBuilder().addComponents(
+					const row2 = new ActionRowBuilder<ButtonBuilder>().addComponents([
 						new ButtonBuilder()
 							.setCustomId('lmeMeta:bienvenue:join')
 							.setLabel("J'ai lu et j'accepte les règlements")
 							.setStyle(ButtonStyle.Success)
 							.setEmoji({ name: '✅' })
-					)
+					])
 
 					await message.channel.send({
 						content: '<:blank:948461701420945439>',

@@ -9,11 +9,11 @@ import {
 import { SlashCommand } from '@sleepymaid/handler'
 import {
 	ButtonInteraction,
-	ButtonStyle,
 	ChatInputApplicationCommandData,
 	ChatInputCommandInteraction,
 	Util
 } from 'discord.js'
+import { ButtonStyle } from 'discord-api-types/v10'
 import { BotClient } from '../../../lib/extensions/BotClient'
 
 const intForEmote = {
@@ -185,7 +185,7 @@ export default new SlashCommand(
 
 							if (page === maxPage) nextOn = true
 
-							const row = new ActionRowBuilder().addComponents(
+							const row = new ActionRowBuilder<ButtonBuilder>().addComponents([
 								new ButtonBuilder()
 									.setDisabled(previousOn)
 									.setStyle(ButtonStyle.Primary)
@@ -201,7 +201,7 @@ export default new SlashCommand(
 									.setStyle(ButtonStyle.Primary)
 									.setCustomId('lb:page:next')
 									.setEmoji({ name: '▶️' })
-							)
+							])
 
 							return {
 								text: text.join('\n'),

@@ -9,7 +9,7 @@ import {
 	ApplicationCommandType,
 	ButtonStyle,
 	PermissionFlagsBits
-} from 'discord.js'
+} from 'discord-api-types/v10'
 
 export default new SlashCommand(
 	{
@@ -37,7 +37,7 @@ export default new SlashCommand(
 			switch (name.value) {
 				case 'roles': {
 					const row = new ActionRowBuilder<ButtonBuilder>()
-					row.addComponents(
+					row.addComponents([
 						new ButtonBuilder()
 							.setLabel('Manage my roles')
 							.setStyle(ButtonStyle.Success)
@@ -52,25 +52,27 @@ export default new SlashCommand(
 							.setEmoji({
 								id: '948606748334358559'
 							})
-					)
+					])
 
 					const embed = new EmbedBuilder()
 						.setTitle('Self-assignable roles')
 						.setDescription(
 							'With this message you can assign yourself some roles.'
 						)
-						.addFields({
-							name: 'Why ?',
-							value:
-								'Those roles are use to only get pings when we are doing a specific map secret on a specific server.',
-							inline: true
-						})
-						.addFields({
-							name: 'How ?',
-							value:
-								"Click the button 'Manage my roles' to select the servers you are willing to complete map secrets on! \n Click the button 'Remove all my roles' to remove all your roles.",
-							inline: true
-						})
+						.addFields([
+							{
+								name: 'Why ?',
+								value:
+									'Those roles are use to only get pings when we are doing a specific map secret on a specific server.',
+								inline: true
+							},
+							{
+								name: 'How ?',
+								value:
+									"Click the button 'Manage my roles' to select the servers you are willing to complete map secrets on! \n Click the button 'Remove all my roles' to remove all your roles.",
+								inline: true
+							}
+						])
 
 					await interaction.channel.send({
 						embeds: [embed],
