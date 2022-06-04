@@ -2,21 +2,20 @@ import { Logger } from '@sleepymaid/logger'
 import { BaseConfig, ConfigManager } from '@sleepymaid/config'
 import { PrismaClient } from '@prisma/client'
 import { ActivityType, GatewayIntentBits } from 'discord-api-types/v10'
-import { BaseLogger, HandlerClient } from '@sleepymaid/handler'
+import { HandlerClient } from '@sleepymaid/handler'
 import { Localizer } from '@sleepymaid/localizer'
 import { resolve } from 'path'
-import { stopAll } from '../managers/lme/voiceXpManager'
 
 export class BotClient extends HandlerClient {
 	public declare prisma: PrismaClient
 	public declare localizer: Localizer
 	public declare configManager: ConfigManager
 	public declare config: BaseConfig
+	public declare logger: Logger
 	constructor() {
 		super(
 			{
-				devServerId: '821717486217986098',
-				logger: new Logger() as unknown as BaseLogger
+				devServerId: '821717486217986098'
 			},
 			{
 				intents: [
@@ -43,6 +42,7 @@ export class BotClient extends HandlerClient {
 	}
 
 	public async start(): Promise<void> {
+		this.logger = new Logger()
 		this.configManager = new ConfigManager()
 		const configs = await this.configManager.initConfig()
 		this.config = configs['bot']
@@ -66,7 +66,7 @@ export class BotClient extends HandlerClient {
 		this.login(this.config.token)
 
 		process.on('unhandledRejection', (error: Error) => {
-			this.logger.error(error.stack)
+			this.logger.error(error)
 		})
 
 		process.on('exit', async () => {
