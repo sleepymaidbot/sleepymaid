@@ -1,4 +1,4 @@
-import Util from '@sleepymaid/util'
+import { loadFolder } from '@sleepymaid/util'
 import { HandlerClient } from '../HandlerClient'
 
 export interface ListenerManagerStartAllOptionsType {
@@ -18,7 +18,7 @@ export class ListenerManager {
 	}
 
 	private async loadListeners(folderPath: string): Promise<void> {
-		const filesToImport = await Util.loadFolder(folderPath)
+		const filesToImport = await loadFolder(folderPath)
 
 		for (const file of filesToImport) {
 			const event = await import(file)

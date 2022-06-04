@@ -1,4 +1,4 @@
-import Util from '@sleepymaid/util'
+import { loadFolder } from '@sleepymaid/util'
 import {
 	ApplicationCommandData,
 	AutocompleteInteraction,
@@ -103,7 +103,7 @@ export class CommandManager {
 	}
 
 	private async loadChatCommands(folderPath: string): Promise<void> {
-		const filesToImport = await Util.loadFolder(folderPath)
+		const filesToImport = await loadFolder(folderPath)
 
 		for (const file of filesToImport) {
 			const cmds = await import(file)
@@ -122,7 +122,7 @@ export class CommandManager {
 	}
 
 	private async loadMessageCommands(folderPath: string): Promise<void> {
-		const filesToImport = await Util.loadFolder(folderPath)
+		const filesToImport = await loadFolder(folderPath)
 
 		for (const file of filesToImport) {
 			const cmds = await import(file)
@@ -141,7 +141,7 @@ export class CommandManager {
 	}
 
 	private async loadUserCommands(folderPath: string): Promise<void> {
-		const filesToImport = await Util.loadFolder(folderPath)
+		const filesToImport = await loadFolder(folderPath)
 
 		for (const file of filesToImport) {
 			const cmds = await import(file)
