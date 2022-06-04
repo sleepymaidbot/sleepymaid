@@ -21,7 +21,7 @@
 		"typescript": "4.7.3"
 	},
 	"dependencies": {
-		"discord-api-types": "0.33.2"
+		"discord-api-types": "0.33.3"
 	},
 	"volta": {
 		"node": "16.15.1",
