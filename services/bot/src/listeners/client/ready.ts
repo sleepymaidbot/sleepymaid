@@ -1,4 +1,4 @@
-import { guilds_settings } from '@prisma/client'
+import { GuildsSettings } from '@prisma/client'
 import { Listener } from '@sleepymaid/handler'
 import { Guild } from 'discord.js'
 import { BotClient } from '../../lib/extensions/BotClient'
@@ -20,22 +20,22 @@ export default new Listener(
 
 				await g.members.fetch().catch((e) => client.logger.error(e))
 			}
-			const guildSettings: Array<guilds_settings> =
-				await client.prisma.guilds_settings.findMany()
+			const guildSettings: Array<GuildsSettings> =
+				await client.prisma.guildsSettings.findMany()
 
 			const guildsInDb: Array<string> = guildSettings.map(
-				(guild) => guild.guild_id
+				(guild) => guild.guildId
 			)
 
 			const notInDbGuilds = client.guilds.cache
 				.filter((g) => !guildsInDb.includes(g.id))
 				.map((g) => {
-					return { guild_id: g.id }
+					return { guildId: g.id }
 				})
 
 			if (notInDbGuilds.length < 0) return
 
-			await client.prisma.guilds_settings.createMany({
+			await client.prisma.guildsSettings.createMany({
 				data: notInDbGuilds
 			})
 		}

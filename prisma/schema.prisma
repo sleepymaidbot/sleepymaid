@@ -16,76 +16,76 @@ model mondecorte {
   vote           String?
 }
 
-model guilds_settings {
-  guild_id        String           @id @map("guildId")
-  mod_roles       mod_role[]
-  admin_roles     admin_role[]
-  leveling_tracks leveling_track[]
+model GuildsSettings {
+  guildId        String          @id
+  modRoles       ModRole[]
+  adminRoles     AdminRole[]
+  levelingTracks LevelingTrack[]
 }
 
-model mod_role {
-  guild_id String @map("guildId")
-  role_id  String @id @map("roleId")
+model ModRole {
+  guildId String
+  roleId  String @id
 
-  settings guilds_settings @relation(fields: [guild_id], references: [guild_id], onDelete: Cascade, onUpdate: NoAction)
+  settings GuildsSettings @relation(fields: [guildId], references: [guildId], onDelete: Cascade, onUpdate: NoAction)
 }
 
-model admin_role {
-  guild_id String @map("guildId")
-  role_id  String @id @map("roleId")
+model AdminRole {
+  guildId String
+  roleId  String @id
 
-  settings guilds_settings @relation(fields: [guild_id], references: [guild_id], onDelete: Cascade, onUpdate: NoAction)
+  settings GuildsSettings @relation(fields: [guildId], references: [guildId], onDelete: Cascade, onUpdate: NoAction)
 }
 
-model track_blacklisted_role {
-  guild_id String @map("guildId")
-  track_id Int    @map("trackId")
-  role_id  String @id @map("roleId")
+model TrackBlacklistedRole {
+  guildId String
+  trackId Int
+  roleId  String @id
 
-  track leveling_track @relation(fields: [track_id], references: [track_id], onDelete: Cascade, onUpdate: NoAction)
+  track LevelingTrack @relation(fields: [trackId], references: [trackId], onDelete: Cascade, onUpdate: NoAction)
 }
 
-model track_whitelisted_role {
-  guild_id String @map("guildId")
-  track_id Int    @map("trackId")
-  role_id  String @id @map("roleId")
+model TrackWhitelistedRole {
+  guildId String
+  trackId Int
+  roleId  String @id
 
-  track leveling_track @relation(fields: [track_id], references: [track_id], onDelete: Cascade, onUpdate: NoAction)
+  track LevelingTrack @relation(fields: [trackId], references: [trackId], onDelete: Cascade, onUpdate: NoAction)
 }
 
-model track_role_multiplier {
-  guild_id   String @map("guildId")
-  track_id   Int    @map("trackId")
-  role_id    String @id @map("roleId")
-  multiplier Int    @default(1) @map("multiplier")
+model TrackRoleMultiplier {
+  guildId    String
+  trackId    Int
+  roleId     String @id
+  multiplier Int    @default(1)
 
-  track leveling_track @relation(fields: [track_id], references: [track_id], onDelete: Cascade, onUpdate: NoAction)
+  track LevelingTrack @relation(fields: [trackId], references: [trackId], onDelete: Cascade, onUpdate: NoAction)
 }
 
-model track_channel_multiplier {
-  guild_id   String @map("guildId")
-  track_id   Int    @map("trackId")
-  channel_id String @id @map("channelId")
-  multiplier Int    @default(1) @map("multiplier")
+model TrackChannelMultiplier {
+  guildId    String
+  trackId    Int
+  channelId  String @id
+  multiplier Int    @default(1)
 
-  track leveling_track @relation(fields: [track_id], references: [track_id], onDelete: Cascade, onUpdate: NoAction)
+  track LevelingTrack @relation(fields: [trackId], references: [trackId], onDelete: Cascade, onUpdate: NoAction)
 }
 
-model leveling_track {
-  guild_id            String                     @map("guildId")
-  track_id            Int                        @id @default(autoincrement()) @map("trackId")
-  track_name          String                     @map("trackName")
-  type                leveling_track_type
-  blacklisted_roles   track_blacklisted_role[]
-  whitelisted_roles   track_whitelisted_role[]
-  role_multipliers    track_role_multiplier[]
-  channel_multipliers track_channel_multiplier[]
-  global_multiplier   Int                        @default(1) @map("globalMultiplier")
+model LevelingTrack {
+  guildId            String
+  trackId            Int                      @id @default(autoincrement())
+  trackName          String
+  type               LevelingTrackType
+  blacklistedRoles   TrackBlacklistedRole[]
+  whitelistedRoles   TrackWhitelistedRole[]
+  roleMultipliers    TrackRoleMultiplier[]
+  channelMultipliers TrackChannelMultiplier[]
+  globalMultiplier   Int                      @default(1)
 
-  settings guilds_settings @relation(fields: [guild_id], references: [guild_id], onDelete: Cascade, onUpdate: NoAction)
+  settings GuildsSettings @relation(fields: [guildId], references: [guildId], onDelete: Cascade, onUpdate: NoAction)
 }
 
-enum leveling_track_type {
+enum LevelingTrackType {
   points
   levels
 }

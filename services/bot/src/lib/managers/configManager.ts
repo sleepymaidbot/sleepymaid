@@ -10,15 +10,15 @@ export enum SpecialRoleType {
 @singleton()
 export class configManager extends baseManager {
 	public async getConfig(guildId: Snowflake) {
-		const config = await this.client.prisma.guilds_settings.findUnique({
+		const config = await this.client.prisma.guildsSettings.findUnique({
 			where: {
-				guild_id: guildId
+				guildId
 			}
 		})
 		if (!config) {
-			await this.client.prisma.guilds_settings.create({
+			await this.client.prisma.guildsSettings.create({
 				data: {
-					guild_id: guildId
+					guildId
 				}
 			})
 			return this.getConfig(guildId)
@@ -27,32 +27,32 @@ export class configManager extends baseManager {
 	}
 
 	public async addSpecialRole(
-		guild_id: Snowflake,
-		role_id: Snowflake,
+		guildId: Snowflake,
+		roleId: Snowflake,
 		type: SpecialRoleType
 	) {
 		if (type === SpecialRoleType.admin) {
-			return this.client.prisma.guilds_settings.update({
+			return this.client.prisma.guildsSettings.update({
 				where: {
-					guild_id
+					guildId
 				},
 				data: {
-					admin_roles: {
+					adminRoles: {
 						create: {
-							role_id: role_id
+							roleId
 						}
 					}
 				}
 			})
 		} else if (type === SpecialRoleType.mod) {
-			return this.client.prisma.guilds_settings.update({
+			return this.client.prisma.guildsSettings.update({
 				where: {
-					guild_id
+					guildId
 				},
 				data: {
-					mod_roles: {
+					modRoles: {
 						create: {
-							role_id
+							roleId
 						}
 					}
 				}
@@ -61,32 +61,32 @@ export class configManager extends baseManager {
 	}
 
 	public async removeSpecialRole(
-		guild_id: Snowflake,
-		role_id: Snowflake,
+		guildId: Snowflake,
+		roleId: Snowflake,
 		type: SpecialRoleType
 	) {
 		if (type === SpecialRoleType.admin) {
-			return this.client.prisma.guilds_settings.update({
+			return this.client.prisma.guildsSettings.update({
 				where: {
-					guild_id
+					guildId
 				},
 				data: {
-					admin_roles: {
+					adminRoles: {
 						delete: {
-							role_id: role_id
+							roleId
 						}
 					}
 				}
 			})
 		} else if (type === SpecialRoleType.mod) {
-			return this.client.prisma.guilds_settings.update({
+			return this.client.prisma.guildsSettings.update({
 				where: {
-					guild_id
+					guildId
 				},
 				data: {
-					mod_roles: {
+					modRoles: {
 						delete: {
-							role_id
+							roleId
 						}
 					}
 				}
@@ -94,23 +94,23 @@ export class configManager extends baseManager {
 		}
 	}
 
-	public async getSpecialRoles(guild_id: Snowflake, type: SpecialRoleType) {
+	public async getSpecialRoles(guildId: Snowflake, type: SpecialRoleType) {
 		if (type === SpecialRoleType.admin) {
-			return this.client.prisma.guilds_settings.findMany({
+			return this.client.prisma.guildsSettings.findMany({
 				where: {
-					guild_id
+					guildId
 				},
 				select: {
-					admin_roles: true
+					adminRoles: true
 				}
 			})
 		} else if (type === SpecialRoleType.mod) {
-			return this.client.prisma.guilds_settings.findMany({
+			return this.client.prisma.guildsSettings.findMany({
 				where: {
-					guild_id
+					guildId
 				},
 				select: {
-					mod_roles: true
+					modRoles: true
 				}
 			})
 		}
