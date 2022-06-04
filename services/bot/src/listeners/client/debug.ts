@@ -8,7 +8,8 @@ export default new Listener(
 	},
 	{
 		run(info, client: BotClient) {
-			return client.logger.debug(info)
+			if (client.config.environment === 'development')
+				return client.logger.debug(info)
 		}
 	}
 )
