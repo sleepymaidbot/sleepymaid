@@ -42,11 +42,6 @@ enum EndReason {
 	cancel = 'cancel'
 }
 
-const servers = {
-	"Murderer's Arena": Server.ma,
-	'Doki Doki Murder': Server.doki,
-	'Québec Murder': Server.qc
-}
 const roles = {
 	ma: {
 		clue: '975914678217764934',
@@ -163,12 +158,17 @@ export class laserRoleManager extends baseManager {
 	}
 
 	private generateHomeMessage() {
+		const cleanName = {
+			ma: "Murderer's Arena",
+			doki: 'Doki Doki Murder',
+			fr: 'Québec Murder'
+		}
 		const options: Array<APISelectMenuOption> = []
-		for (const [k, v] of Object.entries(servers)) {
+		for (const [k, v] of Object.entries(cleanName)) {
 			options.push({
-				label: k,
+				label: v,
 				description: `Select this option the manage your role for the ${k}`,
-				value: v
+				value: k
 			})
 		}
 
