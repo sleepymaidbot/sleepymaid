@@ -25,6 +25,11 @@ const getEmoji = (roleId: Snowflake, member: GuildMember) => {
 	else return '948606748334358559'
 }
 
+const getDefault = (roleId: Snowflake, member: GuildMember) => {
+	if (member.roles.cache.has(roleId)) return true
+	else return false
+}
+
 enum Server {
 	ma = 'ma',
 	doki = 'doki',
@@ -256,6 +261,7 @@ export class laserRoleManager extends baseManager {
 				label: 'Clue',
 				description: `Select this option to receive when we are doing the clue secret on the ${server} server.`,
 				value: Secret.clue,
+				default: getDefault(roles[server].clue, interaction.member),
 				emoji: {
 					id: getEmoji(roles[server].clue, interaction.member)
 				}
@@ -264,6 +270,7 @@ export class laserRoleManager extends baseManager {
 				label: 'Residence',
 				description: `Select this option to receive when we are doing the residence secret on the ${server} server.`,
 				value: Secret.residence,
+				default: getDefault(roles[server].residence, interaction.member),
 				emoji: {
 					id: getEmoji(roles[server].residence, interaction.member)
 				}
@@ -272,6 +279,7 @@ export class laserRoleManager extends baseManager {
 				label: 'Casino',
 				description: `Select this option to receive when we are doing the casino secret on the ${server} server.`,
 				value: Secret.casino,
+				default: getDefault(roles[server].casino, interaction.member),
 				emoji: {
 					id: getEmoji(roles[server].casino, interaction.member)
 				}
