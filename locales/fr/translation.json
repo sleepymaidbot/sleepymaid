@@ -1,0 +1,32 @@
+{
+	"common": {
+		"success": {
+			"resource_creation": "Le {{ resource }} a été créé avec succès.",
+			"resource_deletion": "Le {{ resource }} a été supprimé avec succès",
+			"resource_update": "Le {{ resource }} a été mis à jour avec succès"
+		},
+		"errors": {
+			"resource_exists": "Un {{ resource }} rôle existe déjà avec ce nom",
+			"resource_not_found": "Le {{ resource }} que tu cherches n'existe pas",
+			"no_resources": "Il n'y a pas de {{ resource }} disponible"
+		}
+	},
+	"commands": {
+		"ping": {
+			"name": "ping",
+			"description": "Donne la latence du bot",
+
+			"bot_lantency": "Latence du Bot",
+			"api_latency": "Latence de l'API"
+		},
+		"ratio": {
+			"name": "ratio",
+			"description": "Rationalise une personne",
+			"user": {
+				"name": "user",
+				"description": "L'utilisateur à rationaliser"
+			},
+			"ratio": "Ratio à <@{{target}}> par <@{{author}}>."
+		}
+	}
+}

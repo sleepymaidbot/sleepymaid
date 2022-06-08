@@ -1,0 +1,31 @@
+{
+	"common": {
+		"success": {
+			"resource_creation": "Successfully created {{ resource }}",
+			"resource_deletion": "Successfully deleted the given {{ resource }}",
+			"resource_update": "Successfully updated the given {{ resource }}"
+		},
+		"errors": {
+			"resource_exists": "A {{ resource }} with that name already exists",
+			"resource_not_found": "The {{ resource }} you are looking for could not be found",
+			"no_resources": "There are no {{ resource }} available"
+		}
+	},
+	"commands": {
+		"ping": {
+			"name": "ping",
+			"description": "Gets the latency of the bot",
+			"bot_lantency": "Bot Latency",
+			"api_latency": "API Latency"
+		},
+		"ratio": {
+			"name": "ratio",
+			"description": "Ratio someone",
+			"user": {
+				"name": "user",
+				"description": "The user to ratio"
+			},
+			"ratio": "Ratio to <@{{target}}> from <@{{author}}>."
+		}
+	}
+}

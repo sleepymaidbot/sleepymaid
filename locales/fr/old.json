@@ -1,9 +1,4 @@
 {
-	"ratio": "Ratio à {{target}} par {{author}}.",
-	"ping": {
-		"bot_lantency": "Latence du Bot",
-		"api_latency": "Latence de l'API"
-	},
 	"config": {
 		"no_permission": "You do not have permission to use this command. You need to have the ``ADMINISTRATOR`` permission or have a role in the admin role list.",
 		"admin_role": {
