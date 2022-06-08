@@ -18,14 +18,14 @@
 		"@sleepymaid/util": "*",
 		"@types/node": "17.0.21",
 		"discord-api-types": "0.33.5",
-		"discord.js": "14.0.0-dev.1654603515-769ea0b",
+		"discord.js": "14.0.0-dev.1654646880-ecc6600",
 		"rimraf": "3.0.2",
 		"source-map-support": "0.5.21",
 		"typescript": "4.7.3"
 	},
 	"volta": {
 		"node": "16.15.1",
-		"yarn": "1.22.18"
+		"yarn": "1.22.19"
 	},
 	"packageManager": "yarn@1.22.18"
 }
