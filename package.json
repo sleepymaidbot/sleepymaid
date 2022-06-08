@@ -30,6 +30,7 @@
 	},
 	"scripts": {
 		"build": "yarn turbo run build --filter='!@sleepymaid/website'",
+		"buildbot": "yarn turbo run build --filter=@sleepymaid/bot",
 		"buildconfig": "yarn turbo run build --filter='@sleepymaid/config'",
 		"buildpackages": "yarn turbo run build --filter='@sleepymaid/config' --filter='@sleepymaid/handler' --filter='@sleepymaid/localizer' --filter='@sleepymaid/logger' --filter='@sleepymaid/util'",
 		"start": "yarn turbo run start --filter=@sleepymaid/bot",
