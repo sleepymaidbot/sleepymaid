@@ -11,7 +11,7 @@
 	],
 	"volta": {
 		"node": "16.15.1",
-		"yarn": "1.22.18"
+		"yarn": "1.22.19"
 	},
 	"packageManager": "yarn@3.2.1",
 	"devDependencies": {

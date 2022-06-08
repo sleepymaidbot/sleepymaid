@@ -25,12 +25,12 @@
 		"@sleepymaid/localizer": "*",
 		"@sleepymaid/logger": "*",
 		"@sleepymaid/tsconfig": "*",
-		"discord.js": "14.0.0-dev.1654603515-769ea0b",
+		"discord.js": "14.0.0-dev.1654646880-ecc6600",
 		"path": "0.12.7"
 	},
 	"volta": {
 		"node": "16.15.1",
-		"yarn": "1.22.18"
+		"yarn": "1.22.19"
 	},
 	"packageManager": "yarn@1.22.18"
 }
