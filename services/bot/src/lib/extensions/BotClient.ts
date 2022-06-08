@@ -3,12 +3,13 @@ import { BaseConfig, ConfigManager } from '@sleepymaid/config'
 import { PrismaClient } from '@prisma/client'
 import { ActivityType, GatewayIntentBits } from 'discord-api-types/v10'
 import { HandlerClient } from '@sleepymaid/handler'
-import { Localizer } from '@sleepymaid/localizer'
-import { resolve } from 'path'
+import { resolve, join } from 'path'
+import i18next from 'i18next'
+import FsBackend from 'i18next-fs-backend'
+import { supportedLngs } from '@sleepymaid/localizer'
 
 export class BotClient extends HandlerClient {
 	public declare prisma: PrismaClient
-	public declare localizer: Localizer
 	public declare configManager: ConfigManager
 	public declare config: BaseConfig
 	public declare logger: Logger
@@ -38,7 +39,6 @@ export class BotClient extends HandlerClient {
 				}
 			}
 		)
-		this.localizer = new Localizer()
 	}
 
 	public async start(): Promise<void> {
@@ -50,7 +50,21 @@ export class BotClient extends HandlerClient {
 			datasources: { db: { url: this.config.db } }
 		})
 		this.env = this.config.environment
-		await this.localizer.loadLanguage()
+
+		const debug = this.config.environment === 'development'
+
+		await i18next.use(FsBackend).init({
+			debug,
+			supportedLngs,
+			backend: {
+				loadPath: join(__dirname, '../../../../../locales/{{lng}}/{{ns}}.json')
+			},
+			cleanCode: true,
+			fallbackLng: 'en-US',
+			preload: ['en-US', 'fr'],
+			defaultNS: 'translation',
+			ns: 'translation'
+		})
 
 		await this.loadHandlers({
 			commands: {

@@ -1,17 +1,19 @@
 import { SlashCommand } from '@sleepymaid/handler'
+import { getLocalizedProp } from '@sleepymaid/localizer'
 import {
 	ApplicationCommandType,
 	ChatInputCommandInteraction,
 	EmbedBuilder,
 	Message
 } from 'discord.js'
+import i18next from 'i18next'
 import { BotClient } from '../../../lib/extensions/BotClient'
 
 export default new SlashCommand(
 	{
 		data: {
-			name: 'ping',
-			description: 'Gets the latency of the bot',
+			...getLocalizedProp('name', 'commands.ping.name'),
+			...getLocalizedProp('description', 'commands.ping.description'),
 			type: ApplicationCommandType.ChatInput
 		}
 	},
@@ -31,14 +33,14 @@ export default new SlashCommand(
 				.setTitle('Pong!  🏓')
 				.addFields(
 					{
-						name: client.localizer.get('ping.bot_lantency', {
+						name: i18next.t('commands.ping.bot_lantency', {
 							lng: interaction.locale
 						}),
 						value: botLatency,
 						inline: true
 					},
 					{
-						name: client.localizer.get('ping.api_latency', {
+						name: i18next.t('commands.ping.api_lantency', {
 							lng: interaction.locale
 						}),
 						value: apiLatency,

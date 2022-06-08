@@ -3,7 +3,8 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType
 } from 'discord.js'
-import { BotClient } from '../../lib/extensions/BotClient'
+import i18next from 'i18next'
+import { getLocalizedProp } from '@sleepymaid/localizer'
 
 export default new SlashCommand(
 	{
@@ -13,13 +14,13 @@ export default new SlashCommand(
 			'821717486217986098'
 		],
 		data: {
-			name: 'ratio',
-			description: 'Rationalise une personne',
+			...getLocalizedProp('name', 'commands.ratio.name'),
+			...getLocalizedProp('description', 'commands.ratio.description'),
 			type: ApplicationCommandType.ChatInput,
 			options: [
 				{
-					name: 'user',
-					description: "L'utilisateur à rationaliser",
+					...getLocalizedProp('name', 'commands.ratio.user.name'),
+					...getLocalizedProp('description', 'commands.ratio.user.description'),
 					type: ApplicationCommandOptionType.User,
 					required: true
 				}
@@ -27,16 +28,14 @@ export default new SlashCommand(
 		}
 	},
 	{
-		async run(interaction, client: BotClient) {
-			const user = interaction.options.get('user')
-
-			await interaction.reply(
-				client.localizer.get('ratio', {
+		async run(interaction) {
+			await interaction.reply({
+				content: i18next.t('commands.ratio.ratio', {
 					lng: interaction.locale,
-					target: `<@${user.value}>`,
-					author: `<@${interaction.user.id}>`
+					target: interaction.options.get('user').value,
+					author: interaction.user.id
 				})
-			)
+			})
 		}
 	}
 )
