@@ -12,6 +12,7 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
+		"@types/i18next-fs-backend": "^1.1.2",
 		"@types/node": "17.0.21",
 		"discord-api-types": "0.33.5",
 		"rimraf": "3.0.2",
@@ -26,6 +27,8 @@
 		"@sleepymaid/logger": "*",
 		"@sleepymaid/tsconfig": "*",
 		"discord.js": "14.0.0-dev.1654733437-3ae2633",
+		"i18next": "^21.8.9",
+		"i18next-fs-backend": "^1.1.4",
 		"path": "0.12.7"
 	},
 	"volta": {
