@@ -1,10 +1,12 @@
 import {
 	ActionRowBuilder,
 	ButtonBuilder,
-	EmbedBuilder
+	EmbedBuilder,
+	UnsafeEmbedBuilder
 } from '@discordjs/builders'
 import { SlashCommand } from '@sleepymaid/handler'
 import {
+	APIEmbed,
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ButtonStyle,
@@ -23,6 +25,20 @@ export default new SlashCommand(
 					name: 'name',
 					description: 'The name of the command',
 					type: ApplicationCommandOptionType.String,
+					choices: [
+						{
+							name: 'Self Roles Setup',
+							value: 'self-roles-setup'
+						},
+						{
+							name: 'Casino Step 1 - Blockers',
+							value: 'casinostep1'
+						},
+						{
+							name: 'Casino Step 2 - Keypad',
+							value: 'casinostep2'
+						}
+					],
 					required: true
 				}
 			]
@@ -35,7 +51,7 @@ export default new SlashCommand(
 				return
 			const name = interaction.options.get('name')
 			switch (name.value) {
-				case 'roles': {
+				case 'self-roles-setup': {
 					const row = new ActionRowBuilder<ButtonBuilder>()
 					row.addComponents([
 						new ButtonBuilder()
@@ -77,6 +93,76 @@ export default new SlashCommand(
 					await interaction.channel.send({
 						embeds: [embed],
 						components: [row]
+					})
+					await interaction.reply({
+						content: 'Sent',
+						ephemeral: true
+					})
+					break
+				}
+				case 'casinostep1': {
+					const embed = new UnsafeEmbedBuilder({
+						title: 'Step 1 - Blockers',
+						description:
+							'Firstly, you need to shoot the [main power box](https://canary.discord.com/channels/860721584373497887/980671199510151208/980671239473483826) to start the sparks. \nAt the 3 or 4 spark you need to activate the [2 buttons](https://canary.discord.com/channels/860721584373497887/980671199510151208/983536491764514846) then you have to shoot the blockers right after the last spark before that blocker.',
+						color: 3553599,
+						fields: [
+							{
+								name: 'Video Clip',
+								value:
+									'Click [here](https://medal.tv/games/garrys-mod/clips/nAoR1MzFqEMsT/d1337qBlyIrl) to get a video of us doing it.'
+							},
+							{
+								name: 'Credits',
+								value:
+									'<@420662095869378560> - For being the first one to break a blocker.\n<@302793054962581505> - For helping find the good timing and being the first one the destroy all the blockers.'
+							}
+						],
+						author: {
+							name: 'Casino Secret Steps',
+							url: 'https://discord.gg/FZQtwR3MeV',
+							icon_url:
+								'https://media.discordapp.net/attachments/451488182572417025/979200894467985408/fd75504bd8a4810f750bdb5a94ade84c.png'
+						}
+					})
+
+					await interaction.channel.send({
+						embeds: [embed]
+					})
+					await interaction.reply({
+						content: 'Sent',
+						ephemeral: true
+					})
+					break
+				}
+				case 'casinostep2': {
+					const embed = new UnsafeEmbedBuilder({
+						title: 'Step 2 - Main door key card',
+						description:
+							'To get the key card you need to stab the poster in security room.\nThen shoot the [blue part](https://canary.discord.com/channels/860721584373497887/980940688168480839/980953643622740059) of the keypad with a gun.\nYou will get a key card.\nThis key card can be used in the [key card reader at the main door](https://canary.discord.com/channels/860721584373497887/980940688168480839/980940988208013392) once the first step is done.',
+						color: 3553599,
+						fields: [
+							{
+								name: 'Video Clip',
+								value:
+									'Click [here](https://medal.tv/games/garrys-mod/clips/nAp2b42Xg7ysq/d1337jx9lQuX) to get a video of us doing it.'
+							},
+							{
+								name: 'Credits',
+								value:
+									'<@285502356811022336> - For finding how to open the keypad.'
+							}
+						],
+						author: {
+							name: 'Casino Secret Steps',
+							url: 'https://discord.gg/FZQtwR3MeV',
+							icon_url:
+								'https://media.discordapp.net/attachments/451488182572417025/979200894467985408/fd75504bd8a4810f750bdb5a94ade84c.png'
+						}
+					})
+
+					await interaction.channel.send({
+						embeds: [embed]
 					})
 					await interaction.reply({
 						content: 'Sent',
