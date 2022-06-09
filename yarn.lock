@@ -1405,7 +1405,7 @@ __metadata:
     discord-api-types: 0.33.5
     discord.js: 14.0.0-dev.1654733437-3ae2633
     fs: 0.0.1-security
-    i18next: ^21.8.8
+    i18next: ^21.8.9
     i18next-fs-backend: ^1.1.4
     path: 0.12.7
     prisma: 3.15.0
@@ -1474,8 +1474,8 @@ __metadata:
   dependencies:
     "@sleepymaid/tsconfig": "*"
     "@types/node": 17.0.21
-    discord-api-types: ^0.33.3
-    i18next: ^21.8.8
+    discord-api-types: ^0.33.5
+    i18next: ^21.8.9
     rimraf: 3.0.2
     source-map-support: 0.5.21
     typescript: 4.7.3
@@ -2320,7 +2320,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-api-types@npm:0.33.5, discord-api-types@npm:^0.33.4":
+"discord-api-types@npm:0.33.5, discord-api-types@npm:^0.33.4, discord-api-types@npm:^0.33.5":
   version: 0.33.5
   resolution: "discord-api-types@npm:0.33.5"
   checksum: 6dcaad640c5693a69c9a4f5e444e739dde11ba835164ae6fd3dd5a1ab7b4d7f96cd022ed653eeaff2c8051ead0d998a5d502a2915cfacdde596364b82d9e3b3f
@@ -2994,7 +2994,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^21.0.1, i18next@npm:^21.8.8":
+"i18next@npm:^21.0.1":
   version: 21.8.8
   resolution: "i18next@npm:21.8.8"
   dependencies:
