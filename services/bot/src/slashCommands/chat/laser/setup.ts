@@ -6,7 +6,6 @@ import {
 } from '@discordjs/builders'
 import { SlashCommand } from '@sleepymaid/handler'
 import {
-	APIEmbed,
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ButtonStyle,
