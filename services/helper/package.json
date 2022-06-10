@@ -26,7 +26,7 @@
 		"@sleepymaid/localizer": "*",
 		"@sleepymaid/logger": "*",
 		"@sleepymaid/tsconfig": "*",
-		"discord.js": "14.0.0-dev.1654733437-3ae2633",
+		"discord.js": "14.0.0-dev.1654862727-0415300",
 		"i18next": "^21.8.9",
 		"i18next-fs-backend": "^1.1.4",
 		"path": "0.12.7"
