@@ -1,14 +1,15 @@
 import {
 	ActionRowBuilder,
-	ButtonBuilder,
-	UnsafeEmbedBuilder
+	UnsafeEmbedBuilder,
+	ButtonBuilder
 } from '@discordjs/builders'
 import { SlashCommand } from '@sleepymaid/handler'
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ButtonStyle,
-	PermissionFlagsBits
+	PermissionFlagsBits,
+	ComponentType
 } from 'discord-api-types/v10'
 import {
 	ChatInputCommandInteraction,
@@ -32,27 +33,33 @@ const messages: MessagesType = {
 	'self-roles-setup': {
 		fancyName: 'Self-Roles Setup',
 		function: async () => {
-			const row = new ActionRowBuilder<ButtonBuilder>().addComponents([
-				new ButtonBuilder()
-					.setLabel('Manage my roles')
-					.setStyle(ButtonStyle.Success)
-					.setCustomId('laser-role-ping:manage')
-					.setEmoji({
-						id: '975870168251113545'
-					}),
-				new ButtonBuilder()
-					.setLabel('Remove all my roles')
-					.setStyle(ButtonStyle.Danger)
-					.setCustomId('laser-role-ping:removeall')
-					.setEmoji({
-						id: '948606748334358559'
-					})
-			])
+			const row = new ActionRowBuilder<ButtonBuilder>({
+				components: [
+					{
+						type: ComponentType.Button,
+						label: 'Manage my roles',
+						style: ButtonStyle.Success,
+						custom_id: 'laser-role-ping:manage',
+						emoji: {
+							id: '975870168251113545'
+						}
+					},
+					{
+						type: ComponentType.Button,
+						label: 'Remove all my roles',
+						style: ButtonStyle.Danger,
+						custom_id: 'laser-role-ping:removeall',
+						emoji: {
+							id: '948606748334358559'
+						}
+					}
+				]
+			})
 
-			const embed = new UnsafeEmbedBuilder()
-				.setTitle('Self-assignable roles')
-				.setDescription('With this message you can assign yourself some roles.')
-				.addFields([
+			const embed = new UnsafeEmbedBuilder({
+				title: 'Self-assignable roles',
+				description: 'With this message you can assign yourself some roles.',
+				fields: [
 					{
 						name: 'Why ?',
 						value:
@@ -65,7 +72,8 @@ const messages: MessagesType = {
 							"Click the button 'Manage my roles' to select the servers you are willing to complete map secrets on! \n Click the button 'Remove all my roles' to remove all your roles.",
 						inline: true
 					}
-				])
+				]
+			})
 
 			return {
 				embeds: [embed],
