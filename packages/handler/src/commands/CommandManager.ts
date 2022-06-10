@@ -7,6 +7,7 @@ import {
 	CommandInteraction,
 	ContextMenuCommandInteraction,
 	Interaction,
+	InteractionType,
 	ModalSubmitInteraction,
 	SelectMenuInteraction,
 	Snowflake
@@ -57,18 +58,18 @@ export class CommandManager {
 	}
 
 	private HandleInteractionEvent(i: Interaction) {
-		if (i.isCommand()) {
+		if (i.type === InteractionType.ApplicationCommand) {
 			this.HandleApplicationCommands(i as CommandInteraction)
 			this.client.emit('commandRun', i)
 		} else if (i.isSelectMenu()) {
 			this.client.emit('selectChanged', i as SelectMenuInteraction)
 		} else if (i.isButton()) {
 			this.client.emit('buttonClicked', i as ButtonInteraction)
-		} else if (i.isModalSubmit()) {
+		} else if (i.type === InteractionType.ModalSubmit) {
 			this.client.emit('modalSubmit', i as ModalSubmitInteraction)
 		} else if (i.isContextMenuCommand()) {
 			this.client.emit('contextMenuRun', i as ContextMenuCommandInteraction)
-		} else if (i.isAutocomplete) {
+		} else if (i.type === InteractionType.ApplicationCommandAutocomplete) {
 			this.HandleAutocomplete(i as AutocompleteInteraction)
 			this.client.emit('autocomplete', i as AutocompleteInteraction)
 		}
