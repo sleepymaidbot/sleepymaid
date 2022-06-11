@@ -148,15 +148,15 @@ const messages: MessagesType = {
 	}
 }
 
-const getOptions = () => {
-	const options = []
+const getChoices = () => {
+	const choices = []
 	for (const [k, v] of Object.entries(messages)) {
-		options.push({
+		choices.push({
 			name: v.fancyName,
 			value: k
 		})
 	}
-	return options
+	return choices
 }
 
 export default new SlashCommand(
@@ -171,7 +171,7 @@ export default new SlashCommand(
 					name: 'name',
 					description: 'The name of the command',
 					type: ApplicationCommandOptionType.String,
-					choices: getOptions(),
+					choices: getChoices(),
 					required: true
 				},
 				{
