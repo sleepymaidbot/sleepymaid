@@ -64,7 +64,7 @@ const toLocaleString = (number, locale, options) => {
  *
  * @param number The number to format
  * @param options The options to use
- * @returns The formatted number
+ * @returns {string} The formatted number
  */
 export function prettyBytes(number, options: Options): string {
 	if (!Number.isFinite(number)) {

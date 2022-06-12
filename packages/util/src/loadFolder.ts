@@ -3,7 +3,7 @@ import { readdirSync } from 'fs'
 /**
  *
  * @param folder The folder to read
- * @returns The files in the folder and subfolders
+ * @returns {Promise<string[]>} The files in the folder and subfolders
  */
 export async function loadFolder(folder: string): Promise<string[]> {
 	const fsfolder = readdirSync(folder)
