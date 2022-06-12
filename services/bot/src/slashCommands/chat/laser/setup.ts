@@ -91,6 +91,11 @@ const messages: MessagesType = {
 				color: 3553599,
 				fields: [
 					{
+						name: 'Bonus time',
+						value:
+							'This steps gives a ``60`` seconds time bonus when completed.'
+					},
+					{
 						name: 'Video Clip',
 						value:
 							'Click [here](https://medal.tv/games/garrys-mod/clips/nOmwUbsAgsjhv/gs544iOcSp4q) to get a video of us doing it.'
