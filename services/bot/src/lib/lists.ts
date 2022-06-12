@@ -1,3 +1,9 @@
+export const ratioGuildIds = [
+	'324284116021542922',
+	'860721584373497887',
+	'821717486217986098'
+]
+
 export const colorRole = [
 	'Maya',
 	'Mikado',

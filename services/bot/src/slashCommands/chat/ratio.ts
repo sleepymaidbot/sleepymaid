@@ -5,14 +5,11 @@ import {
 } from 'discord.js'
 import i18next from 'i18next'
 import { getLocalizedProp } from '@sleepymaid/localizer'
+import { ratioGuildIds } from '../../lib/lists'
 
 export default new SlashCommand(
 	{
-		guildIds: [
-			'324284116021542922',
-			'860721584373497887',
-			'821717486217986098'
-		],
+		guildIds: ratioGuildIds,
 		data: {
 			...getLocalizedProp('name', 'commands.ratio.name'),
 			...getLocalizedProp('description', 'commands.ratio.description'),
