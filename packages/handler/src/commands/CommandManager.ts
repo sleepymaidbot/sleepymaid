@@ -1,4 +1,4 @@
-import { loadFolder } from '@sleepymaid/util'
+import { loadFolder, isEqualObjects } from '@sleepymaid/util'
 import {
 	ApplicationCommandData,
 	AutocompleteInteraction,
@@ -182,10 +182,7 @@ export class CommandManager {
 					return 0
 				}) as ApplicationCommandData[])
 
-			if (
-				JSON.stringify(applicationCommand) !==
-				JSON.stringify(currentGlobalCommands)
-			) {
+			if (!isEqualObjects(applicationCommand, currentGlobalCommands)) {
 				this.client.logger.info('Global commands have changed, updating...')
 				await this.client.application?.commands
 					.set(globalCommands)
@@ -215,10 +212,7 @@ export class CommandManager {
 					}
 				)
 
-				if (
-					JSON.stringify(sortedCommands) !==
-					JSON.stringify(currentGuildCommands)
-				) {
+				if (!isEqualObjects(sortedCommands, currentGuildCommands)) {
 					this.client.logger.info(
 						`Guild commands for ${guild.name} have changed, updating...`
 					)
