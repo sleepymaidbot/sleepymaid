@@ -27,6 +27,75 @@
 				"description": "L'utilisateur à rationaliser"
 			},
 			"ratio": "Ratio à <@{{target}}> par <@{{author}}>."
+		},
+		"config": {
+			"name": "config",
+			"description": "Gestion de la configurations du bot.",
+			"admin-role": {
+				"name": "admin-role",
+				"description": "Configure les rôles administrateurs.",
+				"add": {
+					"name": "ajouter",
+					"description": "Ajoute un rôle administrateur.",
+					"role": {
+						"name": "role",
+						"description": "Le rôle à ajouter."
+					}
+				},
+				"remove": {
+					"name": "retirer",
+					"description": "Retire un rôle administrateur.",
+					"role": {
+						"name": "role",
+						"description": "Le rôle à retirer."
+					}
+				},
+				"list": {
+					"name": "liste",
+					"description": "Liste les rôles administrateurs."
+				},
+				"clear": {
+					"name": "vider",
+					"description": "Vide la liste des rôles administrateurs."
+				},
+				"success_add": "Le rôle {{role}} a été ajouté comme rôle administrateur.",
+				"success_remove": "Le rôle {{role}} a été supprimé comme rôle administrateur.",
+				"failure_add_already_in_list": "Le rôle {{role}} n'a pas pu être ajouté comme rôle administrateur. Il est déjà dans la liste.",
+				"failure_add_already_in_mod_role_list": "Le rôle {{role}} n'a pas pu être ajouté comme rôle administrateur. Il est déjà dans la liste des rôles modérateurs."
+			},
+			"mod-role": {
+				"name": "mod-role",
+				"description": "Configure les rôles modérateurs",
+				"add": {
+					"name": "ajouter",
+					"description": "Ajoute un rôle modérateur",
+					"role": {
+						"name": "role",
+						"description": "Le rôle à ajouter."
+					}
+				},
+				"remove": {
+					"name": "retirer",
+					"description": "Retire un rôle modérateur",
+					"role": {
+						"name": "role",
+						"description": "Le rôle à retirer."
+					}
+				},
+				"list": {
+					"name": "liste",
+					"description": "Liste tous les rôles modérateurs"
+				},
+				"clear": {
+					"name": "vider",
+					"description": "Vide la liste des rôles modérateurs"
+				},
+				"success_add": "Le rôle {{role}} a été ajouté comme rôle modérateur.",
+				"success_remove": "Le rôle {{role}} a été supprimé comme rôle modérateur.",
+				"failure_add_already_in_list": "Le rôle {{role}} n'a pas pu être ajouté comme rôle modérateur. Il est déjà dans la liste.",
+				"failure_add_already_in_admin_role_list": "Le rôle {{role}} n'a pas pu être ajouté comme rôle modérateur. Il est déjà dans la liste des rôles administrateurs."
+			},
+			"no_permission": "Tu n'a pas la permission d'utliser cette command. Tu doit avoir la permission ``ADMINISTRATOR`` ou avoir un rôle dans la liste des rôles administrateurs."
 		}
 	}
 }

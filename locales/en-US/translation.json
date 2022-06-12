@@ -26,6 +26,79 @@
 				"description": "The user to ratio"
 			},
 			"ratio": "Ratio to <@{{target}}> from <@{{author}}>."
+		},
+		"config": {
+			"name": "config",
+			"description": "Configure the bot",
+			"admin-role": {
+				"name": "admin-role",
+				"description": "Configure the admin role",
+				"add": {
+					"name": "add",
+					"description": "Add a role to the admin role list.",
+					"role": {
+						"name": "role",
+						"description": "The role to add to the admin role list."
+					}
+				},
+				"remove": {
+					"name": "remove",
+					"description": "Remove a role from the admin role list.",
+					"role": {
+						"name": "role",
+						"description": "The role to remove from the admin role list."
+					}
+				},
+				"list": {
+					"name": "list",
+					"description": "List all roles in the admin role list."
+				},
+				"clear": {
+					"name": "clear",
+					"description": "Clear the admin role list."
+				},
+				"success_add": "Successfully added {{role}} as an administrator role.",
+				"failure_add_already_in_list": "Failed to add {{role}} as an administrator role. It is already in the list.",
+				"failure_add_already_in_mod_role_list": "Failed to add {{role}} as an administrator role. It is already in the moderator role list.",
+
+				"success_remove": "Successfully removed {{role}} as an administrator role.",
+				"failure_remove_not_in_list": "Failed to remove {{role}} as an administrator role. It is not in the list."
+			},
+			"mod-role": {
+				"name": "mod-role",
+				"description": "Configure the mod role",
+				"add": {
+					"name": "add",
+					"description": "Add a role to the mod role list.",
+					"role": {
+						"name": "role",
+						"description": "The role to add to the mod role list."
+					}
+				},
+				"remove": {
+					"name": "remove",
+					"description": "Remove a role from the mod role list.",
+					"role": {
+						"name": "role",
+						"description": "The role to remove from the mod role list."
+					}
+				},
+				"list": {
+					"name": "list",
+					"description": "List all roles in the mod role list."
+				},
+				"clear": {
+					"name": "clear",
+					"description": "Clear the mod role list."
+				},
+				"success_add": "Successfully added {{role}} as an moderator role.",
+				"failure_add_already_in_list": "Failed to add {{role}} as an moderator role. It is already in the list.",
+				"failure_add_already_in_admin_role_list": "Failed to add {{role}} as an administrator role. It is already in the administrator role list.",
+
+				"success_remove": "Successfully removed {{role}} as an moderator role.",
+				"failure_remove_not_in_list": "Failed to remove {{role}} as an moderator role. It is not in the list."
+			},
+			"no_permission": "You do not have permission to use this command. You need to have the ``ADMINISTRATOR`` permission or have a role in the admin role list."
 		}
 	}
 }
