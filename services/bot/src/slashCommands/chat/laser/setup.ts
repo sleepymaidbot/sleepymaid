@@ -14,7 +14,8 @@ import {
 import {
 	ChatInputCommandInteraction,
 	MessageOptions,
-	MessageEditOptions
+	MessageEditOptions,
+	APIEmbedAuthor
 } from 'discord.js'
 import { BotClient } from '../../../lib/extensions/BotClient'
 
@@ -27,6 +28,13 @@ interface MessageType {
 	function: (
 		i: ChatInputCommandInteraction
 	) => Promise<MessageOptions & MessageEditOptions>
+}
+
+const author: APIEmbedAuthor = {
+	name: 'Casino Secret Steps',
+	url: 'https://discord.gg/FZQtwR3MeV',
+	icon_url:
+		'https://media.discordapp.net/attachments/451488182572417025/979200894467985408/fd75504bd8a4810f750bdb5a94ade84c.png'
 }
 
 const messages: MessagesType = {
@@ -106,12 +114,7 @@ const messages: MessagesType = {
 							'<@420662095869378560> - For being the first one to break a blocker.\n<@302793054962581505> - For helping find the good timing and being the first one the destroy all the blockers.'
 					}
 				],
-				author: {
-					name: 'Casino Secret Steps',
-					url: 'https://discord.gg/FZQtwR3MeV',
-					icon_url:
-						'https://media.discordapp.net/attachments/451488182572417025/979200894467985408/fd75504bd8a4810f750bdb5a94ade84c.png'
-				}
+				author
 			})
 
 			return {
@@ -138,12 +141,7 @@ const messages: MessagesType = {
 						value: '<@285502356811022336> - For finding how to open the keypad.'
 					}
 				],
-				author: {
-					name: 'Casino Secret Steps',
-					url: 'https://discord.gg/FZQtwR3MeV',
-					icon_url:
-						'https://media.discordapp.net/attachments/451488182572417025/979200894467985408/fd75504bd8a4810f750bdb5a94ade84c.png'
-				}
+				author
 			})
 
 			return {
