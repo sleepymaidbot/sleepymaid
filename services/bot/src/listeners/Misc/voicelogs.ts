@@ -1,4 +1,4 @@
-import { Util } from 'discord.js'
+import { resolveColor } from 'discord.js'
 import { EmbedBuilder } from '@discordjs/builders'
 import { Listener } from '@sleepymaid/handler'
 
@@ -47,7 +47,7 @@ export default new Listener(
 					.setDescription(
 						`**${newState.member.user.tag}** has joined **${newState.channel.name}**.`
 					)
-					.setColor(Util.resolveColor('#409400'))
+					.setColor(resolveColor('#409400'))
 					.setFooter({ text: returnCurentTime() })
 
 				try {
@@ -66,7 +66,7 @@ export default new Listener(
 					.setDescription(
 						`**${newState.member.user.tag}** has left **${oldState.channel.name}**.`
 					)
-					.setColor(Util.resolveColor('#409400'))
+					.setColor(resolveColor('#409400'))
 					.setFooter({ text: returnCurentTime() })
 
 				try {
@@ -85,7 +85,7 @@ export default new Listener(
 					.setDescription(
 						`**${newState.member.user.tag}** has moved from **${oldState.channel.name}** to **${newState.channel.name}**.`
 					)
-					.setColor(Util.resolveColor('#409400'))
+					.setColor(resolveColor('#409400'))
 					.setFooter({ text: returnCurentTime() })
 
 				try {

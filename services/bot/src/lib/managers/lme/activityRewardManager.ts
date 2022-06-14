@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 import { singleton } from 'tsyringe'
-import { GuildMember, Util } from 'discord.js'
+import { GuildMember, resolveColor } from 'discord.js'
 import { actifRoles } from '../../lists'
 import { EmbedBuilder } from '@discordjs/builders'
 import { baseManager } from '../BaseManager'
@@ -67,7 +67,7 @@ export class ActivityRewardManager extends baseManager {
 							name: `Rôle custom de ${member.user.tag}`,
 							iconURL: member.user.avatarURL()
 						})
-						.setColor(Util.resolveColor('#36393f'))
+						.setColor(resolveColor('#36393f'))
 						.setTimestamp()
 						.setDescription(`Tu n'est plus éligible pour un rôle custom je t'ai donc retirer retirer ton rôle custom
 					Voici quelques informations sur ton rôle custom:

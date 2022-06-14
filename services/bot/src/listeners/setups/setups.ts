@@ -1,4 +1,4 @@
-import { Message, TextChannel, Util } from 'discord.js'
+import { Message, resolveColor, TextChannel } from 'discord.js'
 import {
 	ActionRowBuilder,
 	EmbedBuilder,
@@ -141,7 +141,7 @@ export default new Listener(
 
 					if (maire.length === 0) message.channel.send(':poop:')
 					const embed = new EmbedBuilder()
-						.setColor(Util.resolveColor('#36393f'))
+						.setColor(resolveColor('#36393f'))
 						.setAuthor({
 							name: message.guild.name,
 							iconURL: message.guild.iconURL

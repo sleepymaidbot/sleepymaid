@@ -4,8 +4,7 @@ import {
 	ChatInputApplicationCommandData,
 	ChatInputCommandInteraction,
 	ColorResolvable,
-	GuildMember,
-	Util
+	resolveColor
 } from 'discord.js'
 import { BotClient } from '../../../lib/extensions/BotClient'
 
@@ -81,7 +80,7 @@ export default new SlashCommand(
 					name: `Rôle custom de ${interaction.user.tag}`,
 					iconURL: interaction.user.avatarURL()
 				})
-				.setColor(Util.resolveColor('#36393f'))
+				.setColor(resolveColor('#36393f'))
 				.setTimestamp()
 			switch (subcommand) {
 				case 'create': {
@@ -118,7 +117,7 @@ export default new SlashCommand(
 							await interaction.guild.roles
 								.create({
 									name: name,
-									color: Util.resolveColor(color),
+									color: resolveColor(color),
 									position: pos,
 									reason: `Custom role created by ${interaction.member.user.tag} (${interaction.member.id})`
 								})
@@ -213,7 +212,7 @@ export default new SlashCommand(
 							(role) => role.id === customRoleId
 						)
 						crole
-							.setColor(Util.resolveColor(color))
+							.setColor(resolveColor(color))
 							.then(async (updated) => {
 								embed.setDescription(
 									`La couleur de ton rôle custom a été changer pour #${color} (<@&${updated.id}>)`

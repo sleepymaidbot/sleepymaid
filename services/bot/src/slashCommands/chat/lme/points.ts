@@ -11,7 +11,7 @@ import {
 	ButtonInteraction,
 	ChatInputApplicationCommandData,
 	ChatInputCommandInteraction,
-	Util
+	resolveColor
 } from 'discord.js'
 import { ButtonStyle } from 'discord-api-types/v10'
 import { BotClient } from '../../../lib/extensions/BotClient'
@@ -87,7 +87,7 @@ export default new SlashCommand(
 					) {
 						if (points == 0) {
 							const embed = new EmbedBuilder()
-								.setColor(Util.resolveColor('#36393f'))
+								.setColor(resolveColor('#36393f'))
 								.setAuthor({
 									name: interaction.member.user.tag,
 									iconURL: interaction.member.user.avatarURL()
@@ -100,7 +100,7 @@ export default new SlashCommand(
 						} else {
 							if (points == 1) {
 								const embed = new EmbedBuilder()
-									.setColor(Util.resolveColor('#36393f'))
+									.setColor(resolveColor('#36393f'))
 									.setAuthor({
 										name: interaction.member.user.tag,
 										iconURL: interaction.member.user.avatarURL()
@@ -110,7 +110,7 @@ export default new SlashCommand(
 								await interaction.editReply({ embeds: [embed] })
 							} else {
 								const embed = new EmbedBuilder()
-									.setColor(Util.resolveColor('#36393f'))
+									.setColor(resolveColor('#36393f'))
 									.setAuthor({
 										name: interaction.member.user.tag,
 										iconURL: interaction.member.user.avatarURL()
@@ -212,7 +212,7 @@ export default new SlashCommand(
 						const leaderboardText = getLeaderboard(page)
 
 						const embed = new UnsafeEmbedBuilder()
-							.setColor(Util.resolveColor('#36393f'))
+							.setColor(resolveColor('#36393f'))
 							.setAuthor({
 								name: 'Leaderboard du serveur',
 								iconURL: interaction.guild.iconURL()
@@ -238,7 +238,7 @@ export default new SlashCommand(
 
 									const lb = getLeaderboard(page)
 									const newEmbed = new UnsafeEmbedBuilder()
-										.setColor(Util.resolveColor('#36393f'))
+										.setColor(resolveColor('#36393f'))
 										.setAuthor({
 											name: 'Leaderboard du serveur',
 											iconURL: interaction.guild.iconURL()
@@ -255,7 +255,7 @@ export default new SlashCommand(
 
 									const lb = getLeaderboard(page)
 									const newEmbed = new UnsafeEmbedBuilder()
-										.setColor(Util.resolveColor('#36393f'))
+										.setColor(resolveColor('#36393f'))
 										.setAuthor({
 											name: 'Leaderboard du serveur',
 											iconURL: interaction.guild.iconURL()

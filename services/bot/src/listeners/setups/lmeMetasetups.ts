@@ -3,7 +3,7 @@ import {
 	ActionRowBuilder,
 	ButtonBuilder
 } from '@discordjs/builders'
-import { Util } from 'discord.js'
+import { resolveColor } from 'discord.js'
 import { ButtonStyle } from 'discord-api-types/v10'
 import { Listener } from '@sleepymaid/handler'
 
@@ -26,7 +26,7 @@ export default new Listener(
 						.setDescription(
 							'Ce serveur est un serveur entre amis qui vous permet de discuter et de vous divertir.'
 						)
-						.setColor(Util.resolveColor('#33a34b'))
+						.setColor(resolveColor('#33a34b'))
 					const embed2 = new EmbedBuilder()
 						.setDescription(
 							"Dans ce lieu, vous pourrez bénéficier d'un coin pour parler de tout et de rien ou poster vos meilleur mêmes sans vous prendre la tête même après une journée difficile!\n\n Pour commencer je te conseil de lire les règlements ci-dessous.\n<:blank:948461701420945439>"
@@ -44,7 +44,7 @@ export default new Listener(
 								inline: true
 							}
 						])
-						.setColor(Util.resolveColor('#36393f'))
+						.setColor(resolveColor('#36393f'))
 
 					await message.channel.send({
 						embeds: [embed1, embed2]
@@ -57,7 +57,7 @@ export default new Listener(
 						.setDescription(
 							'Pour garantir un environnement convivial et sécurisé, nous vous demandons de respecter les règlements ci-dessous sans exception.'
 						)
-						.setColor(Util.resolveColor('#5765f2'))
+						.setColor(resolveColor('#5765f2'))
 
 					const embed4 = new EmbedBuilder()
 						.addFields([
@@ -80,7 +80,7 @@ export default new Listener(
 						.setFooter({
 							text: 'Cette liste ne contient pas tout ce que vous pouvez / ne pouvez pas faire. Les membres du staff peuvent appliquer les règles de la manière qui leur convient le mieux.'
 						})
-						.setColor(Util.resolveColor('#36393f'))
+						.setColor(resolveColor('#36393f'))
 
 					await message.channel.send({
 						content: '<:blank:948461701420945439>',
@@ -90,7 +90,7 @@ export default new Listener(
 					// Message 3
 					const embed5 = new EmbedBuilder()
 						.setTitle(':otter: Rôles & Notifications')
-						.setColor(Util.resolveColor('#ff9326'))
+						.setColor(resolveColor('#ff9326'))
 						.setDescription(
 							'Sélectionnez les rôles et notifications qui vous intéressent sur le serveur en cliquant sur les boutons ci-dessous. Si besoin, cliquez sur le bouton **Voir mes Rôles** pour voir la liste de vos rôles.'
 						)
@@ -120,7 +120,7 @@ export default new Listener(
 					// Message 4
 					const embed6 = new EmbedBuilder()
 						.setTitle(':otter: Accès au serveur')
-						.setColor(Util.resolveColor('#3ba55d'))
+						.setColor(resolveColor('#3ba55d'))
 						.setDescription(
 							'Pour avoir accès au serveur, cliquez sur le bouton ci-dessous.'
 						)
@@ -146,12 +146,12 @@ export default new Listener(
 						.setDescription(
 							"Besoin de contacter le staff pour un problème, une question un peu complexe ou autre chose demandant un espace de discussion privé avec l'équipe de modération?"
 						)
-						.setColor(Util.resolveColor('#33a34b'))
+						.setColor(resolveColor('#33a34b'))
 					const embed2 = new EmbedBuilder()
 						.setDescription(
 							'Alors cliquez sur la réaction 📩 sur se message pour ouvrir un ticket vous permettant de contacter le staff.'
 						)
-						.setColor(Util.resolveColor('#36393f'))
+						.setColor(resolveColor('#36393f'))
 
 					await message.channel.send({
 						embeds: [embed1, embed2]

@@ -3,7 +3,7 @@ import {
 	ChatInputApplicationCommandData,
 	CommandInteraction,
 	GuildMember,
-	Util
+	resolveColor
 } from 'discord.js'
 import { container } from 'tsyringe'
 import { roleSyncer } from '../../../lib/managers/lme/rolesyncer'
@@ -31,7 +31,7 @@ export default new SlashCommand(
 			const member = interaction.member as GuildMember
 			const points = userInDb?.points || 0
 			const embed = new EmbedBuilder()
-				.setColor(Util.resolveColor('#36393f'))
+				.setColor(resolveColor('#36393f'))
 				.setAuthor({
 					name: `${interaction.user.tag} rewards`,
 					iconURL: interaction.user.avatarURL() || undefined
