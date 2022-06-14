@@ -148,6 +148,32 @@ const messages: MessagesType = {
 				embeds: [embed]
 			}
 		}
+	},
+	'casinostep3': {
+		fancyName: 'Casino Step 3 - Hammer',
+		function: async () => {
+			const embed = new UnsafeEmbedBuilder({
+				title: 'Step 3 - Hammer',
+				color: 3553599,
+				description:
+					'To get the hammer you need to bring to [box](https://canary.discord.com/channels/860721584373497887/986336932109881374/986337044089430086) outside to the [lasers](https://canary.discord.com/channels/860721584373497887/986336932109881374/986337155678896189). Then activate the lasers. This will burn the box and give the hammer that can be used to open the [blocked door](https://canary.discord.com/channels/860721584373497887/986336932109881374/986337214311063572).',
+				fields: [
+					{
+						name: 'Video Clip',
+						value:
+							'Click [here](https://medal.tv/games/garrys-mod/clips/opgyilfYXydqy/d1337LULzVYw) to get a video of us doing it.'
+					},
+					{
+						name: 'Credits',
+						value:
+							'<@562779372533186560> - For having the idea of burning the box.'
+					}
+				],
+				author
+			})
+
+			return { embeds: [embed] }
+		}
 	}
 }
 
