@@ -84,6 +84,10 @@ export class laserRoleManager extends baseManager {
 			interaction.user.id,
 			interaction.channel.createMessageComponentCollector({
 				message,
+				filter: (i: Interaction) => {
+					if (!i.inCachedGuild()) return false
+					if (i.user.id === interaction.user.id) return true
+				},
 				time: 120000
 			})
 		)
@@ -92,7 +96,6 @@ export class laserRoleManager extends baseManager {
 			.get(interaction.user.id)
 			.on('collect', async (i: ButtonInteraction | SelectMenuInteraction) => {
 				if (!i.inCachedGuild()) return
-				if (i.member.id !== interaction.member.id) return
 				if (message.id !== i.message.id) return
 				if (i.isButton()) {
 					const page = i.customId.split(':')[1]
