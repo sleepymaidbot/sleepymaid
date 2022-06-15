@@ -1322,9 +1322,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/client@npm:3.15.1":
-  version: 3.15.1
-  resolution: "@prisma/client@npm:3.15.1"
+"@prisma/client@npm:3.15.2":
+  version: 3.15.2
+  resolution: "@prisma/client@npm:3.15.2"
   dependencies:
     "@prisma/engines-version": 3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e
   peerDependencies:
@@ -1332,7 +1332,7 @@ __metadata:
   peerDependenciesMeta:
     prisma:
       optional: true
-  checksum: ade441292ff19b9559521680b6d72998dae24914a85a4136c43c85f763e47ef7c4a0c2c68d20e4698a2f7dda31d244c28cbcaccaf52a26a312631cf88233aa02
+  checksum: ef7eaeba6c9b85b0c4ebd95ce87083ca0deb0a588b46a8fac1f9769228e550785c53eb991be774746a7e6bf36c4bcb199bffa20795737aa59384216273d981be
   languageName: node
   linkType: hard
 
@@ -1392,7 +1392,7 @@ __metadata:
   resolution: "@sleepymaid/bot@workspace:services/bot"
   dependencies:
     "@discordjs/builders": 0.15.0
-    "@prisma/client": 3.15.1
+    "@prisma/client": 3.15.2
     "@sapphire/stopwatch": 1.4.1
     "@sleepymaid/config": "*"
     "@sleepymaid/handler": "*"
@@ -1408,7 +1408,7 @@ __metadata:
     i18next: ^21.8.9
     i18next-fs-backend: ^1.1.4
     path: 0.12.7
-    prisma: 3.15.1
+    prisma: 3.15.2
     reflect-metadata: 0.1.13
     rimraf: 3.0.2
     source-map-support: 0.5.21
@@ -3822,15 +3822,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prisma@npm:3.15.1":
-  version: 3.15.1
-  resolution: "prisma@npm:3.15.1"
+"prisma@npm:3.15.2":
+  version: 3.15.2
+  resolution: "prisma@npm:3.15.2"
   dependencies:
     "@prisma/engines": 3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e
   bin:
     prisma: build/index.js
     prisma2: build/index.js
-  checksum: 75f74ff1134115aa3094d8ae5aae5154ccb8834f55da59297d88c393013db202ba1e4dc798ad3f487ef68d588e5130284b467da414be95424e368725731fcf69
+  checksum: 2efdd77cadad51c7c2ff6fcfe0b594849733dffee73755b0e48cefd426e75f0cb5dbe134360a92e47865d331b11308878be91c009acf9f51ca57f86212492118
   languageName: node
   linkType: hard
 
@@ -4268,7 +4268,7 @@ __metadata:
     eslint-config-prettier: 8.5.0
     husky: 8.0.1
     prettier: 2.7.0
-    prisma: 3.15.1
+    prisma: 3.15.2
     rimraf: ^3.0.2
     turbo: 1.2.16
     typescript: 4.7.3
