@@ -171,7 +171,7 @@ export class laserRoleManager extends baseManager {
 		const cleanName = {
 			ma: "Murderer's Arena",
 			doki: 'Doki Doki Murder',
-			fr: 'Québec Murder'
+			qc: 'Québec Murder'
 		}
 		const options: Array<APISelectMenuOption> = []
 		for (const [k, v] of Object.entries(cleanName)) {
