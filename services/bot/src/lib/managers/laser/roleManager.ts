@@ -177,7 +177,7 @@ export class laserRoleManager extends baseManager {
 		for (const [k, v] of Object.entries(cleanName)) {
 			options.push({
 				label: v,
-				description: `Select this option the manage your role for the ${k}`,
+				description: `Select this option the manage your role for the ${v} server`,
 				value: k
 			})
 		}
