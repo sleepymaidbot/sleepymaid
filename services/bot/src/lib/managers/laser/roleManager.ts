@@ -75,7 +75,6 @@ export class laserRoleManager extends baseManager {
 		if (!interaction.inCachedGuild()) return
 		await interaction.member.fetch()
 		const message = await this.sendHome(interaction)
-		await message.fetch()
 
 		const collector = collectors.get(interaction.user.id)
 
