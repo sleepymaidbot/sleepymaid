@@ -15,7 +15,7 @@
 		"ping": {
 			"name": "ping",
 			"description": "Gets the latency of the bot",
-			"bot_lantency": "Bot Latency",
+			"bot_latency": "Bot Latency",
 			"api_latency": "API Latency"
 		},
 		"ratio": {

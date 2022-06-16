@@ -33,14 +33,14 @@ export default new SlashCommand(
 				.setTitle('Pong!  🏓')
 				.addFields(
 					{
-						name: i18next.t('commands.ping.bot_lantency', {
+						name: i18next.t('commands.ping.bot_latency', {
 							lng: interaction.locale
 						}),
 						value: botLatency,
 						inline: true
 					},
 					{
-						name: i18next.t('commands.ping.api_lantency', {
+						name: i18next.t('commands.ping.api_latency', {
 							lng: interaction.locale
 						}),
 						value: apiLatency,
