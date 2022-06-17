@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { Snowflake } from 'discord.js'
 import { singleton } from 'tsyringe'
 import { baseManager } from './BaseManager'
