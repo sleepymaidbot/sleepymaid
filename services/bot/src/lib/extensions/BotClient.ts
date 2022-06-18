@@ -51,10 +51,8 @@ export class BotClient extends HandlerClient {
 		})
 		this.env = this.config.environment
 
-		const debug = this.config.environment === 'development'
-
 		await i18next.use(FsBackend).init({
-			debug,
+			//debug: this.config.environment === 'development',
 			supportedLngs,
 			backend: {
 				loadPath: join(__dirname, '../../../../../locales/{{lng}}/{{ns}}.json')
