@@ -25,7 +25,6 @@
 		"@sleepymaid/handler": "*",
 		"@sleepymaid/localizer": "*",
 		"@sleepymaid/logger": "*",
-		"@sleepymaid/tsconfig": "*",
 		"discord.js": "14.0.0-dev.1655381041-4df491c",
 		"i18next": "^21.8.10",
 		"i18next-fs-backend": "^1.1.4",

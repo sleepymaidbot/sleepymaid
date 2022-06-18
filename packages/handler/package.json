@@ -14,7 +14,6 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
-		"@sleepymaid/tsconfig": "*",
 		"@sleepymaid/util": "*",
 		"@types/node": "17.0.21",
 		"discord-api-types": "0.34.0",

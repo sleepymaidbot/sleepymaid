@@ -14,6 +14,6 @@
 			"DOM"
 		]
 	},
-	"extends": "@sleepymaid/tsconfig/base.json",
+	"extends": "../../tsconfig.json",
 	"include": ["src/**/*", "src/*"]
 }

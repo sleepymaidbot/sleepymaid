@@ -14,7 +14,6 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
-		"@sleepymaid/tsconfig": "*",
 		"@types/node": "17.0.21",
 		"rimraf": "3.0.2",
 		"source-map-support": "0.5.21",

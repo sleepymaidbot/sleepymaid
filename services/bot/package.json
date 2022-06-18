@@ -26,7 +26,6 @@
 		"@sleepymaid/config": "*",
 		"@sleepymaid/handler": "*",
 		"@sleepymaid/logger": "*",
-		"@sleepymaid/tsconfig": "*",
 		"@sleepymaid/util": "*",
 		"ansi-colors": "4.1.3",
 		"discord.js": "14.0.0-dev.1655381041-4df491c",
