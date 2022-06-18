@@ -17,7 +17,7 @@
 		"discord-api-types": "0.34.0",
 		"rimraf": "3.0.2",
 		"source-map-support": "0.5.21",
-		"typescript": "4.7.3"
+		"typescript": "4.7.4"
 	},
 	"dependencies": {
 		"@discordjs/builders": "0.15.0",
@@ -25,7 +25,7 @@
 		"@sleepymaid/handler": "*",
 		"@sleepymaid/localizer": "*",
 		"@sleepymaid/logger": "*",
-		"discord.js": "14.0.0-dev.1655381041-4df491c",
+		"discord.js": "14.0.0-dev.1655511041-2681929",
 		"i18next": "^21.8.10",
 		"i18next-fs-backend": "^1.1.4",
 		"path": "0.12.7"
