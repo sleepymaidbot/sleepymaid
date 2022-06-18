@@ -61,7 +61,7 @@
 				"success_add": "Le rôle <@&{{role}}> a été ajouté comme rôle administrateur.",
 				"success_remove": "Le rôle <@&{{role}}> a été supprimé comme rôle administrateur.",
 				"failure_add_already_in_list": "Le rôle <@&{{role}}> n'a pas pu être ajouté comme rôle administrateur. Il est déjà dans la liste.",
-				"failure_add_already_in_mod_role_list": "Le rôle <@&{{role}}> n'a pas pu être ajouté comme rôle administrateur. Il est déjà dans la liste des rôles modérateurs."
+				"failure_add_already_in_other_list": "Le rôle <@&{{role}}> n'a pas pu être ajouté comme rôle administrateur. Il est déjà dans la liste des rôles modérateurs."
 			},
 			"mod-role": {
 				"name": "mod-role",
@@ -93,7 +93,7 @@
 				"success_add": "Le rôle <@&{{role}}> a été ajouté comme rôle modérateur.",
 				"success_remove": "Le rôle <@&{{role}}> a été supprimé comme rôle modérateur.",
 				"failure_add_already_in_list": "Le rôle <@&{{role}}> n'a pas pu être ajouté comme rôle modérateur. Il est déjà dans la liste.",
-				"failure_add_already_in_admin_role_list": "Le rôle <@&{{role}}> n'a pas pu être ajouté comme rôle modérateur. Il est déjà dans la liste des rôles administrateurs."
+				"failure_add_already_in_other_list": "Le rôle <@&{{role}}> n'a pas pu être ajouté comme rôle modérateur. Il est déjà dans la liste des rôles administrateurs."
 			},
 			"no_permission": "Tu n'a pas la permission d'utliser cette command. Tu doit avoir la permission ``ADMINISTRATOR`` ou avoir un rôle dans la liste des rôles administrateurs."
 		}
