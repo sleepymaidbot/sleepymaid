@@ -95,25 +95,15 @@ export class configManager extends baseManager {
 		}
 	}
 
-	public async getSpecialRoles(guildId: Snowflake, type: SpecialRoleType) {
-		if (type === SpecialRoleType.admin) {
-			return this.client.prisma.guildsSettings.findMany({
-				where: {
-					guildId
-				},
-				select: {
-					adminRoles: true
-				}
-			})
-		} else if (type === SpecialRoleType.mod) {
-			return this.client.prisma.guildsSettings.findMany({
-				where: {
-					guildId
-				},
-				select: {
-					modRoles: true
-				}
-			})
-		}
+	public async getSpecialRoles(guildId: Snowflake) {
+		return this.client.prisma.guildsSettings.findMany({
+			where: {
+				guildId
+			},
+			select: {
+				modRoles: true,
+				adminRoles: true
+			}
+		})
 	}
 }
