@@ -21,7 +21,8 @@ Im not sure why you would want to contribute to this but if you do make a PR and
 
 1. Fill the `packages/config/src/config/bot.ts` with your own information.
 2. Run `yarn`.
-3. Run `yarn start`.
+3. Run `yarn build`.
+4. Run `yarn start`.
 
 ## Contact me
 
