@@ -78,6 +78,11 @@ export default new SlashCommand(
 									7
 								)}](${repoUrl}/commit/${currentCommit})`,
 								inline: true
+							},
+							{
+								name: '**Credits**',
+								value: 'Emotes from [Icons](https://discord.gg/9AtkECMX2P)',
+								inline: true
 							}
 						]
 					}
