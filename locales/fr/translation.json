@@ -54,10 +54,6 @@
 					"name": "liste",
 					"description": "Liste les rôles administrateurs."
 				},
-				"clear": {
-					"name": "vider",
-					"description": "Vide la liste des rôles administrateurs."
-				},
 				"success_add": "Le rôle <@&{{role}}> a été ajouté comme rôle administrateur.",
 				"success_remove": "Le rôle <@&{{role}}> a été supprimé comme rôle administrateur.",
 				"failure_add_already_in_list": "Le rôle <@&{{role}}> n'a pas pu être ajouté comme rôle administrateur. Il est déjà dans la liste.",
@@ -85,10 +81,6 @@
 				"list": {
 					"name": "liste",
 					"description": "Liste tous les rôles modérateurs"
-				},
-				"clear": {
-					"name": "vider",
-					"description": "Vide la liste des rôles modérateurs"
 				},
 				"success_add": "Le rôle <@&{{role}}> a été ajouté comme rôle modérateur.",
 				"success_remove": "Le rôle <@&{{role}}> a été supprimé comme rôle modérateur.",

@@ -53,10 +53,6 @@
 					"name": "list",
 					"description": "List all roles in the admin role list."
 				},
-				"clear": {
-					"name": "clear",
-					"description": "Clear the admin role list."
-				},
 				"success_add": "Successfully added <@&{{role}}> as a administrator role.",
 				"failure_add_already_in_list": "Failed to add <@&{{role}}> as a administrator role. It is already in the list.",
 				"failure_add_already_in_other_list": "Failed to add <@&{{role}}> as a administrator role. It is already in the moderator role list.",
@@ -86,10 +82,6 @@
 				"list": {
 					"name": "list",
 					"description": "List all roles in the mod role list."
-				},
-				"clear": {
-					"name": "clear",
-					"description": "Clear the mod role list."
 				},
 				"success_add": "Successfully added <@&{{role}}> as a moderator role.",
 				"failure_add_already_in_list": "Failed to add <@&{{role}}> as a moderator role. It is already in the list.",
