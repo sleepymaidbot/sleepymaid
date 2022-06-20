@@ -19,10 +19,9 @@ Im not sure why you would want to contribute to this but if you do make a PR and
 
 ## Running the bot
 
-1. Rename `packages/config/src/example-config.ts` to `packages/config/src/config.ts`.
-2. Fill the `config.ts` with your own information.
-3. Run `yarn`.
-4. Run `yarn start`.
+1. Fill the `packages/config/src/config/bot.ts` with your own information.
+2. Run `yarn`.
+3. Run `yarn start`.
 
 ## Contact me
 
