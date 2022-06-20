@@ -229,7 +229,7 @@ export default new SlashCommand(
 											{
 												...getBaseEmbed(interaction),
 												description:
-													'<:redX:948606748334358559>' +
+													'<:redX:948606748334358559> ' +
 													i18next.t(
 														`commands.config.${cleanAction}.failure_add_already_in_list`,
 														{
@@ -246,7 +246,7 @@ export default new SlashCommand(
 											{
 												...getBaseEmbed(interaction),
 												description:
-													'<:redX:948606748334358559>' +
+													'<:redX:948606748334358559> ' +
 													i18next.t(
 														`commands.config.${cleanAction}.failure_add_already_in_other_list`,
 														{
@@ -265,7 +265,7 @@ export default new SlashCommand(
 											{
 												...getBaseEmbed(interaction),
 												description:
-													'<:redX:948606748334358559>' +
+													'<:redX:948606748334358559> ' +
 													i18next.t(
 														`commands.config.${cleanAction}.failure_add_already_in_list`,
 														{
@@ -282,7 +282,7 @@ export default new SlashCommand(
 											{
 												...getBaseEmbed(interaction),
 												description:
-													'<:redX:948606748334358559>' +
+													'<:redX:948606748334358559> ' +
 													i18next.t(
 														`commands.config.${cleanAction}.failure_add_already_in_other_list`,
 														{
@@ -304,7 +304,7 @@ export default new SlashCommand(
 									{
 										...getBaseEmbed(interaction),
 										description:
-											'<:greenTick:948620600144982026>' +
+											'<:greenTick:948620600144982026> ' +
 											i18next.t(`commands.config.${cleanAction}.success_add`, {
 												lng: interaction.locale,
 												role: roleId
@@ -324,7 +324,7 @@ export default new SlashCommand(
 										{
 											...getBaseEmbed(interaction),
 											description:
-												'<:redX:948606748334358559>' +
+												'<:redX:948606748334358559> ' +
 												i18next.t(
 													`commands.config.${cleanAction}.failure_remove_not_in_list`,
 													{
@@ -344,7 +344,7 @@ export default new SlashCommand(
 										{
 											...getBaseEmbed(interaction),
 											description:
-												'<:redX:948606748334358559>' +
+												'<:redX:948606748334358559> ' +
 												i18next.t(
 													`commands.config.${cleanAction}.failure_remove_not_in_list`,
 													{
@@ -365,7 +365,7 @@ export default new SlashCommand(
 									{
 										...getBaseEmbed(interaction),
 										description:
-											'<:greenTick:948620600144982026>' +
+											'<:greenTick:948620600144982026> ' +
 											i18next.t(
 												`commands.config.${cleanAction}.success_remove`,
 												{
@@ -423,7 +423,7 @@ export default new SlashCommand(
 							{
 								...getBaseEmbed(interaction),
 								description:
-									'<:redX:948606748334358559>' +
+									'<:redX:948606748334358559> ' +
 									i18next.t(`commands.config.no_permission`, {
 										lng: interaction.locale
 									})
