@@ -1,9 +1,9 @@
 import { SlashCommand } from '@sleepymaid/handler'
 import { getLocalizedProp } from '@sleepymaid/localizer'
 import {
+	APIEmbed,
 	ApplicationCommandType,
 	ChatInputCommandInteraction,
-	EmbedBuilder,
 	Message
 } from 'discord.js'
 import i18next from 'i18next'
@@ -29,9 +29,9 @@ export default new SlashCommand(
 				timestamp2 - timestamp1
 			)}ms \`\`\``
 			const apiLatency = `\`\`\`\n ${Math.round(client.ws.ping)}ms \`\`\``
-			const embed = new EmbedBuilder()
-				.setTitle('Pong!  🏓')
-				.addFields(
+			const embed: APIEmbed = {
+				title: 'Pong!  🏓',
+				fields: [
 					{
 						name: i18next.t('commands.ping.bot_latency', {
 							lng: interaction.locale
@@ -46,12 +46,13 @@ export default new SlashCommand(
 						value: apiLatency,
 						inline: true
 					}
-				)
-				.setFooter({
+				],
+				footer: {
 					text: interaction.user.username,
-					iconURL: interaction.user.displayAvatarURL()
-				})
-				.setTimestamp()
+					icon_url: interaction.user.displayAvatarURL()
+				},
+				timestamp: new Date(Date.now()).toISOString()
+			}
 			await interaction.editReply({
 				content: null,
 				embeds: [embed]
