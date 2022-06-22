@@ -1,5 +1,4 @@
 import { gray, blue, red, cyan } from 'ansi-colors'
-import pino, { BaseLogger } from 'pino'
 
 export enum Loglevels {
 	Debug,
