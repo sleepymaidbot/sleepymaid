@@ -29,7 +29,7 @@
 		"@sleepymaid/logger": "*",
 		"@sleepymaid/util": "*",
 		"ansi-colors": "4.1.3",
-		"discord.js": "14.0.0-dev.1655942976-7279f9c",
+		"discord.js": "14.0.0-dev.1655985916-70b42bb",
 		"fs": "0.0.1-security",
 		"i18next": "^21.8.10",
 		"i18next-fs-backend": "^1.1.4",
