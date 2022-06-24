@@ -6,7 +6,7 @@ import { BotClient } from '../../../lib/extensions/BotClient'
 import {
 	configManager,
 	SpecialRoleType
-} from '../../../lib/managers/configManager'
+} from '../../../lib/managers/global/configManager'
 import {
 	APIEmbed,
 	ApplicationCommandOptionType,

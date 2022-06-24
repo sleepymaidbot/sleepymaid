@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { Snowflake } from 'discord.js'
 import { singleton } from 'tsyringe'
-import { baseManager } from './BaseManager'
+import { baseManager } from '../BaseManager'
 
 export enum SpecialRoleType {
 	'admin',
