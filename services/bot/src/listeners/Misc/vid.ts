@@ -4,7 +4,7 @@ import { Message } from 'discord.js'
 import { BotClient } from '../../lib/extensions/BotClient'
 import { shell } from '@sleepymaid/util'
 import { join } from 'path'
-import { from, fromAsync, isErr } from '@sapphire/result'
+import { Result } from '@sapphire/result'
 
 const sites = [
 	'tiktok.com',
@@ -30,14 +30,15 @@ export default new Listener(
 
 			for (const arg of args) {
 				if (arg.startsWith('https://') && sites.some((a) => arg.includes(a))) {
-					const nameReturn = await fromAsync(
+					const nameReturn = await Result.fromAsync(
 						async () =>
 							await shell('yt-dlp --print filename -o "%(id)s.%(ext)s" ' + arg)
 					)
-					if (isErr(nameReturn))
-						return client.logger.error(nameReturn.error as Error)
-					const fileName = nameReturn.value.stdout.trim()
-					const dlReturn = await fromAsync(
+					if (nameReturn.isErr()) {
+						return client.logger.error(nameReturn.unwrapErr() as Error)
+					}
+					const fileName = nameReturn.unwrap().stdout.trim()
+					const dlReturn = await Result.fromAsync(
 						async () =>
 							await shell(
 								`yt-dlp -P "${join(
@@ -46,9 +47,9 @@ export default new Listener(
 								)}" -o "${fileName}" "${arg}"`
 							)
 					)
-					if (isErr(dlReturn))
-						return client.logger.error(dlReturn.error as Error)
-					const messageReturn = await fromAsync(
+					if (dlReturn.isErr())
+						return client.logger.error(dlReturn.unwrapErr() as Error)
+					const messageReturn = await Result.fromAsync(
 						async () =>
 							await message.reply({
 								files: [
@@ -59,14 +60,14 @@ export default new Listener(
 								]
 							})
 					)
-					if (isErr(messageReturn))
-						return client.logger.error(messageReturn.error as Error)
+					if (messageReturn.isErr())
+						return client.logger.error(messageReturn.unwrapErr() as Error)
 
-					const unlinkReturn = from(() =>
+					const unlinkReturn = Result.from(() =>
 						unlink(`./downloads/${fileName}`, (err) => err)
 					)
-					if (isErr(unlinkReturn))
-						return client.logger.error(unlinkReturn.error as Error)
+					if (unlinkReturn.isErr())
+						return client.logger.error(unlinkReturn.unwrapErr() as Error)
 				}
 			}
 		}
