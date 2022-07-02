@@ -20,6 +20,6 @@ export * from './listeners/ListenerManager'
 
 // ./tasks
 
-export * from './tasks/Task'
+export * from './tasks/TaskInterface'
 
 export * from './tasks/TaskManager'
