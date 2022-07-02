@@ -4,11 +4,11 @@ export * from './BaseLogger'
 
 // ./commands
 
-export * from './commands/SlashCommand'
+export * from './commands/SlashCommandInterface'
 
-export * from './commands/UserCommand'
+export * from './commands/UserCommandInterface'
 
-export * from './commands/MessageCommand'
+export * from './commands/MessageCommandInterface'
 
 export * from './commands/CommandManager'
 
