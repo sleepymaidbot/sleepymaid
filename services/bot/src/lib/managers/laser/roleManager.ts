@@ -2,13 +2,11 @@ import 'reflect-metadata'
 import {
 	ActionRowBuilder,
 	ButtonInteraction,
-	CacheType,
 	Collection,
 	EmbedBuilder,
 	GuildMember,
 	Interaction,
 	InteractionCollector,
-	MessageComponentInteraction,
 	SelectMenuInteraction,
 	SelectMenuOptionBuilder,
 	Snowflake,
@@ -66,7 +64,7 @@ const roles = {
 
 const collectors: Collection<
 	Snowflake,
-	InteractionCollector<MessageComponentInteraction<CacheType>>
+	InteractionCollector<ButtonInteraction | SelectMenuInteraction>
 > = new Collection()
 
 @singleton()
