@@ -82,7 +82,9 @@ export class CommandManager {
 		extraGlobalCommands?: Array<ApplicationCommandData>,
 		extraGuildCommands?: GuildCommandsType
 	): Promise<void> {
-		this.client.logger.info('Registering application commands...')
+		this.client.logger.info(
+			'Command Handler: -> Registering application commands...'
+		)
 		const topLevelFolders = await readdir(this.folderPath)
 		this.globalCommands.push(...(extraGlobalCommands ?? []))
 		for (const [key, value] of Object.entries(extraGuildCommands ?? {})) {
@@ -111,7 +113,9 @@ export class CommandManager {
 				}
 			}
 		}
-		this.client.logger.info(`Registered ${count} application commands!`)
+		this.client.logger.info(
+			`Command Handler: -> Registered ${count} application commands!`
+		)
 	}
 
 	private async loadChatCommands(folderPath: string): Promise<number> {
@@ -133,7 +137,9 @@ export class CommandManager {
 			} else {
 				this.globalCommands.push(cmd_.data)
 			}
-			this.client.logger.debug(`Command Handler: -> ${cmd_.data.name}`)
+			this.client.logger.debug(
+				`Command Handler: -> Command loaded -> ${cmd_.data.name}`
+			)
 			count++
 		}
 		return count
@@ -158,7 +164,9 @@ export class CommandManager {
 			} else {
 				this.globalCommands.push(cmd_.data)
 			}
-			this.client.logger.debug(`Command Handler: -> ${cmd_.data.name}`)
+			this.client.logger.debug(
+				`Command Handler: -> Command loaded -> ${cmd_.data.name}`
+			)
 			count++
 		}
 		return count
@@ -183,7 +191,9 @@ export class CommandManager {
 			} else {
 				this.globalCommands.push(cmd_.data)
 			}
-			this.client.logger.debug(`Command Handler: -> ${cmd_.data.name}`)
+			this.client.logger.debug(
+				`Command Handler: -> Command loaded -> ${cmd_.data.name}`
+			)
 			count++
 		}
 		return count
@@ -212,12 +222,16 @@ export class CommandManager {
 				}) as ApplicationCommandData[])
 
 			if (!isEqualObjects(applicationCommand, currentGlobalCommands)) {
-				this.client.logger.info('Global commands have changed, updating...')
+				this.client.logger.info(
+					'Command Handler: -> Global commands have changed, updating...'
+				)
 				await this.client.application?.commands
 					.set(globalCommands)
 					.catch((e) => this.client.logger.error(e))
 			} else {
-				this.client.logger.info('Global commands have not changed.')
+				this.client.logger.info(
+					'Command Handler: -> Global commands have not changed.'
+				)
 			}
 		}
 
@@ -243,14 +257,14 @@ export class CommandManager {
 
 				if (!isEqualObjects(sortedCommands, currentGuildCommands)) {
 					this.client.logger.info(
-						`Guild commands for ${guild.name} have changed, updating...`
+						`Command Handler: -> Guild commands for ${guild.name} have changed, updating...`
 					)
 					await guild.commands
 						.set(value)
 						.catch((e) => this.client.logger.error(e))
 				} else {
 					this.client.logger.info(
-						`Guild commands for ${guild.name} have not changed.`
+						`Command Handler: -> Guild commands for ${guild.name} have not changed.`
 					)
 				}
 			})
