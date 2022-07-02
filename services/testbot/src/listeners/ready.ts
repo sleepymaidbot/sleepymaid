@@ -1,20 +1,19 @@
-import { HandlerClient, Listener } from '@sleepymaid/handler'
-import { Guild } from 'discord.js'
-export default new Listener(
-	{
-		name: 'ready',
-		once: false
-	},
-	{
-		run: async function run(client: HandlerClient) {
-			client.logger.info('Listener ran')
-			const guilds = await client.guilds.fetch()
-			for (const guild of guilds.values()) {
-				const g: Guild = await client.guilds.fetch(guild.id)
+import { HandlerClient, ListenerInterface } from '@sleepymaid/handler'
+import { injectable } from 'tsyringe'
 
-				await g.members.fetch().catch((e) => client.logger.error(e))
-			}
-			client.logger.info('in guilds', client.guilds.cache.size.toString())
+@injectable()
+export default class ReadyListener implements ListenerInterface {
+	public readonly name = 'ready'
+	public readonly once = false
+
+	public async execute(client: HandlerClient) {
+		client.logger.info('Listener ran')
+		const guilds = await client.guilds.fetch()
+		for (const guild of guilds.values()) {
+			const g = await client.guilds.fetch(guild.id)
+
+			await g.members.fetch().catch((e) => client.logger.error(e))
 		}
+		client.logger.info('in guilds', client.guilds.cache.size.toString())
 	}
-)
+}

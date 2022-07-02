@@ -14,7 +14,7 @@ export * from './commands/CommandManager'
 
 // ./listeners
 
-export * from './listeners/Listener'
+export * from './listeners/ListenerInterface'
 
 export * from './listeners/ListenerManager'
 
