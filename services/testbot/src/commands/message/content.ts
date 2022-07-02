@@ -2,7 +2,6 @@ import { ContextMenuCommandBuilder } from '@discordjs/builders'
 import { HandlerClient, MessageCommandInterface } from '@sleepymaid/handler'
 import { ApplicationCommandType } from 'discord-api-types/v10'
 import {
-	ChatInputCommandInteraction,
 	MessageApplicationCommandData,
 	MessageContextMenuCommandInteraction
 } from 'discord.js'
