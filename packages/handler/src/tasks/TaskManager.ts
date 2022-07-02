@@ -1,5 +1,8 @@
+import 'reflect-metadata'
 import { loadFolder } from '@sleepymaid/util'
+import { container } from 'tsyringe'
 import { HandlerClient } from '../HandlerClient'
+import { TaskInterface } from './TaskInterface'
 
 export interface TaskManagerStartAllOptionsType {
 	folder: string
@@ -21,14 +24,19 @@ export class TaskManager {
 		const filesToImport = await loadFolder(folderPath)
 
 		for (const file of filesToImport) {
-			const task = await import(file)
+			const task = container.resolve<TaskInterface>(
+				(await import(file)).default
+			)
 			setInterval(() => {
 				try {
-					task.default.run(this.client)
+					task.execute(this.client)
 				} catch (error) {
 					this.client.logger.error(error)
 				}
-			}, task.default.taskInfo.interval)
+			}, task.interval)
+			this.client.logger.info(
+				`Task handler: -> Loaded task -> ${file.split('/').pop().split('.')[0]}`
+			)
 		}
 	}
 }
