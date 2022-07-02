@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { loadFolder, isEqualObjects } from '@sleepymaid/util'
 import {
 	ApplicationCommandData,
@@ -12,9 +13,13 @@ import {
 	SelectMenuInteraction,
 	Snowflake
 } from 'discord.js'
-import { readdir } from 'fs/promises'
 import { join } from 'path'
+import { container } from 'tsyringe'
 import { HandlerClient } from '../HandlerClient'
+import { SlashCommandInterface } from './SlashCommandInterface'
+import { readdir } from 'fs/promises'
+import { UserCommandInterface } from './UserCommandInterface'
+import { MessageCommandInterface } from './MessageCommandInterface'
 
 export interface CommandManagerStartAllOptionsType {
 	folder: string
@@ -27,19 +32,17 @@ export interface GuildCommandsType {
 }
 
 export class CommandManager {
-	private declare commands: Collection<string, string>
-	public declare readonly globalCommands: ApplicationCommandData[]
-	public declare readonly guildCommands: Collection<
+	private commands: Collection<string, string> = new Collection<
 		string,
-		ApplicationCommandData[]
-	>
+		string
+	>()
+	public readonly globalCommands: ApplicationCommandData[] = []
+	public readonly guildCommands: Collection<string, ApplicationCommandData[]> =
+		new Collection<string, ApplicationCommandData[]>()
 	private declare client: HandlerClient
 	private declare folderPath: string
 	constructor(client: HandlerClient) {
 		this.client = client
-		this.commands = new Collection<string, string>()
-		this.globalCommands = []
-		this.guildCommands = new Collection<string, ApplicationCommandData[]>()
 	}
 
 	public async startAll(
@@ -85,79 +88,105 @@ export class CommandManager {
 		for (const [key, value] of Object.entries(extraGuildCommands ?? {})) {
 			this.guildCommands.set(key, value)
 		}
-		for (const folderName of topLevelFolders) {
+		let count = 0
+		for await (const folderName of topLevelFolders) {
 			switch (folderName) {
 				case 'chat': {
-					await this.loadChatCommands(join(this.folderPath, folderName))
+					count =
+						count +
+						(await this.loadChatCommands(join(this.folderPath, folderName)))
 					break
 				}
 				case 'message': {
-					await this.loadMessageCommands(join(this.folderPath, folderName))
+					count =
+						count +
+						(await this.loadMessageCommands(join(this.folderPath, folderName)))
 					break
 				}
 				case 'user': {
-					await this.loadUserCommands(join(this.folderPath, folderName))
+					count =
+						count +
+						(await this.loadUserCommands(join(this.folderPath, folderName)))
 					break
 				}
 			}
 		}
+		this.client.logger.info(`Registered ${count} application commands!`)
 	}
 
-	private async loadChatCommands(folderPath: string): Promise<void> {
+	private async loadChatCommands(folderPath: string): Promise<number> {
 		const filesToImport = await loadFolder(folderPath)
 
-		for (const file of filesToImport) {
-			const cmds = await import(file)
-			this.commands[cmds.default.commandInfo.data.name] = file
-			if (cmds.default.commandInfo.guildIds) {
-				for (const id of cmds.default.commandInfo.guildIds) {
+		let count = 0
+		for await (const file of filesToImport) {
+			const cmd_ = container.resolve<SlashCommandInterface>(
+				(await import(file)).default
+			)
+
+			this.commands[cmd_.data.name] = file
+			if (cmd_.guildIds) {
+				for (const id of cmd_.guildIds) {
 					const array = this.guildCommands.get(id) ?? []
-					array.push(cmds.default.commandInfo.data)
+					array.push(cmd_.data)
 					this.guildCommands.set(id, array)
 				}
 			} else {
-				this.globalCommands.push(cmds.default.commandInfo.data)
+				this.globalCommands.push(cmd_.data)
 			}
+			this.client.logger.debug(`Command Handler: -> ${cmd_.data.name}`)
+			count++
 		}
-		return
+		return count
 	}
 
-	private async loadMessageCommands(folderPath: string): Promise<void> {
+	private async loadMessageCommands(folderPath: string): Promise<number> {
 		const filesToImport = await loadFolder(folderPath)
 
-		for (const file of filesToImport) {
-			const cmds = await import(file)
-			this.commands[cmds.default.commandInfo.data.name] = file
-			if (cmds.default.commandInfo.guildIds) {
-				for (const id of cmds.default.commandInfo.guildIds) {
+		let count = 0
+		for await (const file of filesToImport) {
+			const cmd_ = container.resolve<MessageCommandInterface>(
+				(await import(file)).default
+			)
+
+			this.commands[cmd_.data.name] = file
+			if (cmd_.guildIds) {
+				for (const id of cmd_.guildIds) {
 					const array = this.guildCommands.get(id) ?? []
-					array.push(cmds.default.commandInfo.data)
+					array.push(cmd_.data)
 					this.guildCommands.set(id, array)
 				}
 			} else {
-				this.globalCommands.push(cmds.default.commandInfo.data)
+				this.globalCommands.push(cmd_.data)
 			}
+			this.client.logger.debug(`Command Handler: -> ${cmd_.data.name}`)
+			count++
 		}
-		return
+		return count
 	}
 
-	private async loadUserCommands(folderPath: string): Promise<void> {
+	private async loadUserCommands(folderPath: string): Promise<number> {
 		const filesToImport = await loadFolder(folderPath)
 
-		for (const file of filesToImport) {
-			const cmds = await import(file)
-			this.commands[cmds.default.commandInfo.data.name] = file
-			if (cmds.default.commandInfo.guildIds) {
-				for (const id of cmds.default.commandInfo.guildIds) {
+		let count = 0
+		for await (const file of filesToImport) {
+			const cmd_ = container.resolve<UserCommandInterface>(
+				(await import(file)).default
+			)
+
+			this.commands[cmd_.data.name] = file
+			if (cmd_.guildIds) {
+				for (const id of cmd_.guildIds) {
 					const array = this.guildCommands.get(id) ?? []
-					array.push(cmds.default.commandInfo.data)
+					array.push(cmd_.data)
 					this.guildCommands.set(id, array)
 				}
 			} else {
-				this.globalCommands.push(cmds.default.commandInfo.data)
+				this.globalCommands.push(cmd_.data)
 			}
+			this.client.logger.debug(`Command Handler: -> ${cmd_.data.name}`)
+			count++
 		}
-		return
+		return count
 	}
 
 	private async RegisterApplicationCommands() {
@@ -235,8 +264,11 @@ export class CommandManager {
 		try {
 			const file = this.commands[i.commandName]
 			if (!file) return
-			const cmd = await import(file)
-			await cmd.default.run(i, this.client)
+			const cmd = container.resolve<
+				SlashCommandInterface | UserCommandInterface | MessageCommandInterface
+			>((await import(file)).default)
+			if (!i.inCachedGuild()) return
+			await cmd.execute(i as never, this.client)
 		} catch (error) {
 			this.client.logger.error(error)
 			try {
@@ -260,8 +292,11 @@ export class CommandManager {
 		try {
 			const file = this.commands[i.commandName]
 			if (!file) return
-			const cmd = await import(file)
-			await cmd.default.autocomplete(i, this.client)
+			const cmd = container.resolve<SlashCommandInterface>(
+				(await import(file)).default
+			)
+			if (!i.inCachedGuild()) return
+			await cmd.autocomplete(i, this.client)
 		} catch (error) {
 			this.client.logger.error(error)
 			try {

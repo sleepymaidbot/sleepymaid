@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
 		"outDir": "dist",
-		"declarationDir": "./types",
+		"declarationDir": "./types"
 	},
 	"extends": "../../tsconfig.json",
 	"include": ["src/**/*", "src/*"]
