@@ -30,10 +30,6 @@ import { resolve } from 'path'
 		}
 	})
 
-	client.on('ready', async () => {
-		client.logger.info('Ready!')
-	})
-
 	const configManager = new ConfigManager()
 
 	const configs = await configManager.initConfig()
