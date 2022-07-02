@@ -13,7 +13,7 @@
 	"license": "MIT",
 	"devDependencies": {
 		"@types/node": "17.0.21",
-		"discord-api-types": "0.34.0",
+		"discord-api-types": "0.36.0",
 		"rimraf": "3.0.2",
 		"source-map-support": "0.5.21",
 		"typescript": "4.7.4"
@@ -23,7 +23,7 @@
 		"@sleepymaid/config": "*",
 		"@sleepymaid/handler": "*",
 		"@sleepymaid/logger": "*",
-		"discord.js": "14.0.0-dev.1655985916-70b42bb",
+		"discord.js": "14.0.0-dev.1656720731-d95197c",
 		"path": "0.12.7"
 	},
 	"volta": {
