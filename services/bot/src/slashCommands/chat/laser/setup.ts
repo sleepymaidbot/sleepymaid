@@ -1,4 +1,4 @@
-import { SlashCommand } from '@sleepymaid/handler'
+import { SlashCommandInterface } from '@sleepymaid/handler'
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
@@ -12,7 +12,8 @@ import {
 import {
 	ChatInputCommandInteraction,
 	MessageOptions,
-	MessageEditOptions
+	MessageEditOptions,
+	ChatInputApplicationCommandData
 } from 'discord.js'
 import { BotClient } from '../../../lib/extensions/BotClient'
 
@@ -186,78 +187,78 @@ const getChoices = () => {
 	return choices
 }
 
-export default new SlashCommand(
-	{
-		guildIds: ['860721584373497887'],
-		data: {
-			name: 'setup',
-			description: '[Admin only] Allow you to post pre-made messages.',
-			type: ApplicationCommandType.ChatInput,
-			options: [
-				{
-					name: 'name',
-					description: 'The name of the command',
-					type: ApplicationCommandOptionType.String,
-					choices: getChoices(),
-					required: true
-				},
-				{
-					name: 'message_id',
-					description: 'The id of the message you want to edit',
-					type: ApplicationCommandOptionType.String,
-					required: false
-				}
-			]
-		}
-	},
-	{
-		async run(interaction: ChatInputCommandInteraction, client: BotClient) {
-			if (!interaction.inCachedGuild()) return
-			if (!interaction.memberPermissions.has(PermissionFlagsBits.Administrator))
-				return
-			const name = interaction.options.getString('name')
-			const msg = messages[name]
-			if (!msg) return
-			const messageId = interaction.options.getString('message_id')
-			if (messageId) {
-				const message = await interaction.channel.messages.fetch(messageId)
-				if (!message) {
-					await interaction.reply({
-						embeds: [
-							{
-								color: 3553599,
-								description: '<:redX:948606748334358559> Message not found.'
-							}
-						],
-						ephemeral: true
-					})
-				}
-				if (message.author.id !== client.user.id) {
-					await interaction.reply({
-						embeds: [
-							{
-								color: 3553599,
-								description:
-									'<:redX:948606748334358559> You can only edit messages sent by the bot.'
-							}
-						],
-						ephemeral: true
-					})
-				} else {
-					await message.edit(await msg.function(interaction))
-				}
-			} else {
-				await interaction.channel.send(await msg.function(interaction))
+export default class LaserSetupCommand implements SlashCommandInterface {
+	public readonly guildIds = ['860721584373497887']
+	public readonly data = {
+		name: 'setup',
+		description: '[Admin only] Allow you to post pre-made messages.',
+		type: ApplicationCommandType.ChatInput,
+		options: [
+			{
+				name: 'name',
+				description: 'The name of the command',
+				type: ApplicationCommandOptionType.String,
+				choices: getChoices(),
+				required: true
+			},
+			{
+				name: 'message_id',
+				description: 'The id of the message you want to edit',
+				type: ApplicationCommandOptionType.String,
+				required: false
 			}
-			await interaction.reply({
-				embeds: [
-					{
-						color: 3553599,
-						description: '<:greenTick:948620600144982026> Done!'
-					}
-				],
-				ephemeral: true
-			})
+		]
+	} as ChatInputApplicationCommandData
+
+	public async execute(
+		interaction: ChatInputCommandInteraction,
+		client: BotClient
+	) {
+		if (!interaction.inCachedGuild()) return
+		if (!interaction.memberPermissions.has(PermissionFlagsBits.Administrator))
+			return
+		const name = interaction.options.getString('name')
+		const msg = messages[name]
+		if (!msg) return
+		const messageId = interaction.options.getString('message_id')
+		if (messageId) {
+			const message = await interaction.channel.messages.fetch(messageId)
+			if (!message) {
+				await interaction.reply({
+					embeds: [
+						{
+							color: 3553599,
+							description: '<:redX:948606748334358559> Message not found.'
+						}
+					],
+					ephemeral: true
+				})
+			}
+			if (message.author.id !== client.user.id) {
+				await interaction.reply({
+					embeds: [
+						{
+							color: 3553599,
+							description:
+								'<:redX:948606748334358559> You can only edit messages sent by the bot.'
+						}
+					],
+					ephemeral: true
+				})
+			} else {
+				await message.edit(await msg.function(interaction))
+			}
+		} else {
+			await interaction.channel.send(await msg.function(interaction))
 		}
+		await interaction.reply({
+			embeds: [
+				{
+					color: 3553599,
+					description: '<:greenTick:948620600144982026> Done!'
+				}
+			],
+			ephemeral: true
+		})
 	}
-)
+}

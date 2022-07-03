@@ -1,13 +1,10 @@
-import { Listener } from '@sleepymaid/handler'
+import { ListenerInterface } from '@sleepymaid/handler'
 
-export default new Listener(
-	{
-		name: 'threadCreate',
-		once: false
-	},
-	{
-		async run(thread) {
-			thread.join()
-		}
+export default class ThreadListener implements ListenerInterface {
+	public readonly name = 'threadCreate'
+	public readonly once = false
+
+	public async execute(thread) {
+		thread.join()
 	}
-)
+}

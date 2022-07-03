@@ -1,14 +1,11 @@
-import { Listener } from '@sleepymaid/handler'
+import { ListenerInterface } from '@sleepymaid/handler'
 import { BotClient } from '../../lib/extensions/BotClient'
 
-export default new Listener(
-	{
-		name: 'error',
-		once: false
-	},
-	{
-		run(error: Error, client: BotClient) {
-			return client.logger.error(error)
-		}
+export default class ErrorListener implements ListenerInterface {
+	public readonly name = 'error'
+	public readonly once = false
+
+	public async execute(error: Error, client: BotClient) {
+		client.logger.error(error)
 	}
-)
+}

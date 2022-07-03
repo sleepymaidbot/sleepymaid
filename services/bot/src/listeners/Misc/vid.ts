@@ -1,5 +1,5 @@
 import { unlink } from 'fs'
-import { Listener } from '@sleepymaid/handler'
+import { ListenerInterface } from '@sleepymaid/handler'
 import { Message } from 'discord.js'
 import { BotClient } from '../../lib/extensions/BotClient'
 import { shell } from '@sleepymaid/util'
@@ -17,59 +17,56 @@ const sites = [
 	'instagram.com'
 ]
 
-export default new Listener(
-	{
-		name: 'messageCreate',
-		once: false
-	},
-	{
-		async run(message: Message, client: BotClient) {
-			if (message.author.bot) return
+export default class VidListener implements ListenerInterface {
+	public readonly name = 'messageCreate'
+	public readonly once = false
 
-			const args = message.content.split(' ')
+	public async execute(message: Message, client: BotClient) {
+		if (message.author.bot) return
 
-			for (const arg of args) {
-				if (arg.startsWith('https://') && sites.some((a) => arg.includes(a))) {
-					const nameReturn = await Result.fromAsync(
-						async () =>
-							await shell('yt-dlp --print filename -o "%(id)s.%(ext)s" ' + arg)
-					)
-					if (nameReturn.isErr()) {
-						return client.logger.error(nameReturn.unwrapErr() as Error)
-					}
-					const fileName = nameReturn.unwrap().stdout.trim()
-					const dlReturn = await Result.fromAsync(
-						async () =>
-							await shell(
-								`yt-dlp -P "${join(
-									__dirname,
-									'../../../downloads/'
-								)}" -o "${fileName}" "${arg}"`
-							)
-					)
-					if (dlReturn.isErr())
-						return client.logger.error(dlReturn.unwrapErr() as Error)
-					const messageReturn = await Result.fromAsync(
-						async () =>
-							await message.reply({
-								files: [
-									{
-										attachment: `./downloads/${fileName}`,
-										name: fileName
-									}
-								]
-							})
-					)
-					if (messageReturn.isErr())
-						return client.logger.error(messageReturn.unwrapErr() as Error)
+		const args = message.content.split(' ')
 
-					const unlinkReturn = Result.from(() =>
-						unlink(`./downloads/${fileName}`, (err) => err)
-					)
-					if (unlinkReturn.isErr())
-						return client.logger.error(unlinkReturn.unwrapErr() as Error)
+		for (const arg of args) {
+			if (arg.startsWith('https://') && sites.some((a) => arg.includes(a))) {
+				const nameReturn = await Result.fromAsync(
+					async () =>
+						await shell('yt-dlp --print filename -o "%(id)s.%(ext)s" ' + arg)
+				)
+				if (nameReturn.isErr()) {
+					return client.logger.error(nameReturn.unwrapErr() as Error)
 				}
+				const fileName = nameReturn.unwrap().stdout.trim()
+				const dlReturn = await Result.fromAsync(
+					async () =>
+						await shell(
+							`yt-dlp -P "${join(
+								__dirname,
+								'../../../downloads/'
+							)}" -o "${fileName}" "${arg}"`
+						)
+				)
+				if (dlReturn.isErr())
+					return client.logger.error(dlReturn.unwrapErr() as Error)
+				const messageReturn = await Result.fromAsync(
+					async () =>
+						await message.reply({
+							files: [
+								{
+									attachment: `./downloads/${fileName}`,
+									name: fileName
+								}
+							]
+						})
+				)
+				if (messageReturn.isErr())
+					return client.logger.error(messageReturn.unwrapErr() as Error)
+
+				const unlinkReturn = Result.from(() =>
+					unlink(`./downloads/${fileName}`, (err) => err)
+				)
+				if (unlinkReturn.isErr())
+					return client.logger.error(unlinkReturn.unwrapErr() as Error)
 			}
 		}
 	}
-)
+}

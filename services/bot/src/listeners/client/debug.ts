@@ -1,15 +1,11 @@
-import { Listener } from '@sleepymaid/handler'
+import { ListenerInterface } from '@sleepymaid/handler'
 import { BotClient } from '../../lib/extensions/BotClient'
 
-export default new Listener(
-	{
-		name: 'debug',
-		once: false
-	},
-	{
-		run(info, client: BotClient) {
-			if (client.config.environment === 'development')
-				return client.logger.debug(info)
-		}
+export default class DebugListener implements ListenerInterface {
+	public readonly name = 'debug'
+	public readonly once = false
+
+	public async execute(info: string, client: BotClient) {
+		client.logger.debug(info)
 	}
-)
+}
