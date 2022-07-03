@@ -137,7 +137,7 @@ export class CommandManager {
 			} else {
 				this.globalCommands.push(cmd_.data)
 			}
-			this.client.logger.debug(
+			this.client.logger.info(
 				`Command Handler: -> Command loaded -> ${cmd_.data.name}`
 			)
 			count++
@@ -164,7 +164,7 @@ export class CommandManager {
 			} else {
 				this.globalCommands.push(cmd_.data)
 			}
-			this.client.logger.debug(
+			this.client.logger.info(
 				`Command Handler: -> Command loaded -> ${cmd_.data.name}`
 			)
 			count++
@@ -191,7 +191,7 @@ export class CommandManager {
 			} else {
 				this.globalCommands.push(cmd_.data)
 			}
-			this.client.logger.debug(
+			this.client.logger.info(
 				`Command Handler: -> Command loaded -> ${cmd_.data.name}`
 			)
 			count++
