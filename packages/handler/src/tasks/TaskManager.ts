@@ -23,6 +23,7 @@ export class TaskManager {
 	public async loadTasks(folderPath: string): Promise<void> {
 		const filesToImport = await loadFolder(folderPath)
 
+		let count = 0
 		for (const file of filesToImport) {
 			const task = container.resolve<TaskInterface>(
 				(await import(file)).default
@@ -34,9 +35,12 @@ export class TaskManager {
 					this.client.logger.error(error)
 				}
 			}, task.interval)
+			count++
 			this.client.logger.info(
 				`Task handler: -> Loaded task -> ${file.split('/').pop().split('.')[0]}`
 			)
 		}
+		this.client.logger.info(`
+			Task handler: -> Loaded ${count} tasks`)
 	}
 }
