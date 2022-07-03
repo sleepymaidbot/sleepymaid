@@ -314,15 +314,10 @@ export class CommandManager {
 		} catch (error) {
 			this.client.logger.error(error)
 			try {
-				/*await i.reply({
-					content: 'There was an error while executing this command!',
-					ephemeral: true
-				})*/
+				await i.respond([])
 			} catch (error) {
 				try {
-					/*await i.editReply({
-						content: 'There was an error while executing this command!'
-					})*/
+					await i.respond([])
 				} catch (error) {
 					this.client.logger.error(error)
 				}
