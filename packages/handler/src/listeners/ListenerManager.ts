@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { loadFolder } from '@sleepymaid/util'
 import { container } from 'tsyringe'
-import { ListenerInterface } from './ListenerInterface'
+import { ListenerInterface } from './Listener'
 import { BaseManager } from '../BaseManager'
 
 export interface ListenerManagerStartAllOptionsType {

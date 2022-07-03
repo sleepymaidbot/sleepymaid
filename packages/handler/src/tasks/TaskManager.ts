@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { loadFolder } from '@sleepymaid/util'
 import { container } from 'tsyringe'
-import { TaskInterface } from './TaskInterface'
+import { TaskInterface } from './Task'
 import { BaseManager } from '../BaseManager'
 
 export interface TaskManagerStartAllOptionsType {

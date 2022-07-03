@@ -15,10 +15,10 @@ import {
 } from 'discord.js'
 import { join } from 'path'
 import { container } from 'tsyringe'
-import { SlashCommandInterface } from './SlashCommandInterface'
+import { SlashCommandInterface } from './SlashCommand'
 import { readdir } from 'fs/promises'
-import { UserCommandInterface } from './UserCommandInterface'
-import { MessageCommandInterface } from './MessageCommandInterface'
+import { UserCommandInterface } from './UserCommand'
+import { MessageCommandInterface } from './MessageCommand'
 import { BaseManager } from '../BaseManager'
 
 export interface CommandManagerStartAllOptionsType {
