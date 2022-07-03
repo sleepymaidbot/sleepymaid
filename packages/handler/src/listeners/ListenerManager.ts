@@ -23,6 +23,7 @@ export class ListenerManager {
 	private async loadListeners(folderPath: string): Promise<void> {
 		const filesToImport = await loadFolder(folderPath)
 
+		let count = 0
 		for (const file of filesToImport) {
 			const event = container.resolve<ListenerInterface>(
 				(await import(file)).default
@@ -32,6 +33,7 @@ export class ListenerManager {
 					this.client.once(event.name, async (...args) => {
 						await event.execute(...args, this.client)
 					})
+					count++
 				} catch (error) {
 					this.client.logger.error(error)
 				}
@@ -40,6 +42,7 @@ export class ListenerManager {
 					this.client.on(event.name, async (...args) => {
 						await event.execute(...args, this.client)
 					})
+					count++
 				} catch (error) {
 					this.client.logger.error(error)
 				}
@@ -50,5 +53,7 @@ export class ListenerManager {
 				}`
 			)
 		}
+		this.client.logger.info(`
+			Listener handler: -> Loaded ${count} listeners`)
 	}
 }
