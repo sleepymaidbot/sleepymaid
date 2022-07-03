@@ -1,7 +1,6 @@
 import 'reflect-metadata'
 import { loadFolder } from '@sleepymaid/util'
 import { container } from 'tsyringe'
-import { HandlerClient } from '../HandlerClient'
 import { ListenerInterface } from './ListenerInterface'
 import { BaseManager } from '../BaseManager'
 
