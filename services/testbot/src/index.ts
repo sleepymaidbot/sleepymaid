@@ -13,7 +13,8 @@ import { resolve } from 'path'
 				GatewayIntentBits.GuildMembers,
 				GatewayIntentBits.GuildBans,
 				GatewayIntentBits.GuildVoiceStates,
-				GatewayIntentBits.GuildMessages
+				GatewayIntentBits.GuildMessages,
+				GatewayIntentBits.MessageContent
 			]
 		}
 	)
