@@ -15,11 +15,11 @@ import {
 } from 'discord.js'
 import { join } from 'path'
 import { container } from 'tsyringe'
-import { HandlerClient } from '../HandlerClient'
 import { SlashCommandInterface } from './SlashCommandInterface'
 import { readdir } from 'fs/promises'
 import { UserCommandInterface } from './UserCommandInterface'
 import { MessageCommandInterface } from './MessageCommandInterface'
+import { BaseManager } from '../BaseManager'
 
 export interface CommandManagerStartAllOptionsType {
 	folder: string
@@ -31,7 +31,7 @@ export interface GuildCommandsType {
 	[key: Snowflake]: ApplicationCommandData[]
 }
 
-export class CommandManager {
+export class CommandManager extends BaseManager {
 	private commands: Collection<string, string> = new Collection<
 		string,
 		string
@@ -39,11 +39,7 @@ export class CommandManager {
 	public readonly globalCommands: ApplicationCommandData[] = []
 	public readonly guildCommands: Collection<string, ApplicationCommandData[]> =
 		new Collection<string, ApplicationCommandData[]>()
-	private declare client: HandlerClient
 	private declare folderPath: string
-	constructor(client: HandlerClient) {
-		this.client = client
-	}
 
 	public async startAll(
 		options: CommandManagerStartAllOptionsType

@@ -1,19 +1,14 @@
 import 'reflect-metadata'
 import { loadFolder } from '@sleepymaid/util'
 import { container } from 'tsyringe'
-import { HandlerClient } from '../HandlerClient'
 import { TaskInterface } from './TaskInterface'
+import { BaseManager } from '../BaseManager'
 
 export interface TaskManagerStartAllOptionsType {
 	folder: string
 }
 
-export class TaskManager {
-	private client: HandlerClient
-	constructor(client: HandlerClient) {
-		this.client = client
-	}
-
+export class TaskManager extends BaseManager {
 	public async startAll(
 		options: TaskManagerStartAllOptionsType
 	): Promise<void> {

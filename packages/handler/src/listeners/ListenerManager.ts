@@ -3,17 +3,13 @@ import { loadFolder } from '@sleepymaid/util'
 import { container } from 'tsyringe'
 import { HandlerClient } from '../HandlerClient'
 import { ListenerInterface } from './ListenerInterface'
+import { BaseManager } from '../BaseManager'
 
 export interface ListenerManagerStartAllOptionsType {
 	folder: string
 }
 
-export class ListenerManager {
-	private client: HandlerClient
-	constructor(client: HandlerClient) {
-		this.client = client
-	}
-
+export class ListenerManager extends BaseManager {
 	public async startAll(
 		options: ListenerManagerStartAllOptionsType
 	): Promise<void> {
