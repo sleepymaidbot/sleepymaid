@@ -3,7 +3,7 @@
 		"outDir": "dist",
 		"declarationDir": "./types",
 		"declaration": true,
-		"declarationMap": true,
+		"declarationMap": true
 	},
 	"extends": "../../tsconfig.json",
 	"include": ["src/**/*", "src/*"]
