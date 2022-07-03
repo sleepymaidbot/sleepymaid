@@ -14,8 +14,6 @@
 		"experimentalDecorators": true,
 		"emitDecoratorMetadata": true,
 		"alwaysStrict": true,
-		"declaration": true,
-		"declarationMap": true,
 		"lib": [
 			"ESNext",
 			"ESNext.Array",
