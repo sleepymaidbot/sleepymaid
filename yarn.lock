@@ -1475,8 +1475,10 @@ __metadata:
     i18next: ^21.8.11
     i18next-fs-backend: ^1.1.4
     path: 0.12.7
+    reflect-metadata: ^0.1.13
     rimraf: 3.0.2
     source-map-support: 0.5.21
+    tsyringe: ^4.7.0
     typescript: 4.7.4
   languageName: unknown
   linkType: soft
