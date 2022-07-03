@@ -6,11 +6,9 @@ import {
 	MessageActionRowComponentBuilder,
 	UnsafeEmbedBuilder
 } from '@discordjs/builders'
-import { HandlerClient, SlashCommandInterface } from '@sleepymaid/handler'
+import { SlashCommandInterface } from '@sleepymaid/handler'
 import {
-	AutocompleteInteraction,
 	ButtonInteraction,
-	CacheType,
 	ChatInputApplicationCommandData,
 	ChatInputCommandInteraction,
 	resolveColor
