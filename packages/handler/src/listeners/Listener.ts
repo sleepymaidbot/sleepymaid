@@ -1,25 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-export type ListenerInfo = {
+export interface ListenerInterface {
 	name: string
 	once: boolean
-}
-
-export type FunctionType = {
-	run: ListenerRunFunction
-}
-
-export type ListenerRunFunction = (...args: any[]) => void
-
-export class Listener {
-	listenerInfo: ListenerInfo
-	constructor(listenerInfo: ListenerInfo, functions: FunctionType) {
-		this.listenerInfo = listenerInfo
-		this.run = functions.run
-	}
-
-	run(..._args: any[]) {
-		console.log('Listener ran')
-	}
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	execute: (...args: any[]) => unknown | Promise<unknown>
 }

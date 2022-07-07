@@ -24,7 +24,9 @@
 		"@sleepymaid/handler": "*",
 		"@sleepymaid/logger": "*",
 		"discord.js": "14.0.0-dev.1656720731-d95197c",
-		"path": "0.12.7"
+		"path": "0.12.7",
+		"reflect-metadata": "^0.1.13",
+		"tsyringe": "^4.7.0"
 	},
 	"volta": {
 		"node": "16.15.1",

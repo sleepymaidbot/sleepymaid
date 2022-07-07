@@ -1,19 +1,9 @@
 {
 	"compilerOptions": {
-		"module": "commonjs",
-		"target": "esNEXT",
 		"outDir": "dist",
-		"declarationDir": "./types",
 		"declaration": true,
 		"declarationMap": true,
-		"lib": [
-			"ESNext",
-			"ESNext.Array",
-			"ESNext.AsyncIterable",
-			"ESNext.Intl",
-			"ESNext.Symbol",
-			"DOM"
-		]
+		"declarationDir": "./types"
 	},
 	"extends": "../../tsconfig.json",
 	"include": ["src/**/*", "src/*"]

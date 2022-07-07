@@ -1,6 +1,9 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
 	"compilerOptions": {
+		"module": "commonjs",
+		"target": "esNEXT",
+		"moduleResolution": "Node",
 		"sourceMap": false,
 		"skipLibCheck": true,
 		"inlineSourceMap": true,
@@ -10,7 +13,15 @@
 		"esModuleInterop": true,
 		"experimentalDecorators": true,
 		"emitDecoratorMetadata": true,
-		"alwaysStrict": true
+		"alwaysStrict": true,
+		"lib": [
+			"ESNext",
+			"ESNext.Array",
+			"ESNext.AsyncIterable",
+			"ESNext.Intl",
+			"ESNext.Symbol",
+			"DOM"
+		]
 	},
 	"exclude": ["node_modules"]
 }

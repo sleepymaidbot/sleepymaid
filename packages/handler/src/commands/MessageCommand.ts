@@ -1,42 +1,15 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import {
+import type {
 	MessageApplicationCommandData,
 	MessageContextMenuCommandInteraction,
 	Snowflake
 } from 'discord.js'
 import { HandlerClient } from '../HandlerClient'
 
-export type MessageCommandInfo = {
-	guildIds: Snowflake[]
+export interface MessageCommandInterface {
 	data: MessageApplicationCommandData
-}
-
-export type MessageCommandRunFunction = (
-	interaction: MessageContextMenuCommandInteraction,
-	client: HandlerClient
-) => void
-
-export type MessageCommandFunctionType = {
-	run: MessageCommandRunFunction
-}
-
-export class MessageCommand {
-	commandInfo: MessageCommandInfo
-	constructor(
-		commandInfo: MessageCommandInfo,
-		functions: MessageCommandFunctionType
-	) {
-		this.commandInfo = commandInfo
-		this.run = functions.run
-	}
-
-	run(
-		interaction: MessageContextMenuCommandInteraction,
-		_client: HandlerClient
-	) {
-		interaction.reply({
-			content: "This interaction isn't implemented yet",
-			ephemeral: true
-		})
-	}
+	guildIds?: Snowflake[]
+	execute: (
+		interaction: MessageContextMenuCommandInteraction<`cached`>,
+		client: HandlerClient
+	) => unknown | Promise<unknown>
 }

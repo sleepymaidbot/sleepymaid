@@ -13,7 +13,8 @@ import { resolve } from 'path'
 				GatewayIntentBits.GuildMembers,
 				GatewayIntentBits.GuildBans,
 				GatewayIntentBits.GuildVoiceStates,
-				GatewayIntentBits.GuildMessages
+				GatewayIntentBits.GuildMessages,
+				GatewayIntentBits.MessageContent
 			]
 		}
 	)
@@ -28,10 +29,6 @@ import { resolve } from 'path'
 		tasks: {
 			folder: resolve(__dirname, './tasks')
 		}
-	})
-
-	client.on('ready', async () => {
-		client.logger.info('Ready!')
 	})
 
 	const configManager = new ConfigManager()
