@@ -23,7 +23,7 @@
 		"@sleepymaid/config": "*",
 		"@sleepymaid/handler": "*",
 		"@sleepymaid/logger": "*",
-		"discord.js": "14.0.0-dev.1657152699-10ba008",
+		"discord.js": "14.0.0-dev.1657239101-e78c9c9",
 		"path": "0.12.7",
 		"reflect-metadata": "^0.1.13",
 		"tsyringe": "^4.7.0"
