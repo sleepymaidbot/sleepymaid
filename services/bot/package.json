@@ -28,7 +28,7 @@
 		"@sleepymaid/handler": "*",
 		"@sleepymaid/logger": "*",
 		"@sleepymaid/util": "*",
-		"discord.js": "14.0.0-dev.1657239101-e78c9c9",
+		"discord.js": "14.0.0-dev.1657325401-33ae7df",
 		"fs": "0.0.1-security",
 		"i18next": "^21.8.13",
 		"i18next-fs-backend": "^1.1.4",
