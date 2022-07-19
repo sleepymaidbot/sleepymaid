@@ -6,6 +6,6 @@ export default class DebugListener implements ListenerInterface {
 	public readonly once = false
 
 	public async execute(info: string, client: HelperClient) {
-		client.logger.debug(info)
+		if (client.config.environment === 'development') client.logger.debug(info)
 	}
 }
