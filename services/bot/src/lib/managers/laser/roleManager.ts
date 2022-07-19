@@ -1,6 +1,5 @@
 import 'reflect-metadata'
 import {
-	ActionRowBuilder,
 	ButtonInteraction,
 	Collection,
 	EmbedBuilder,
@@ -8,12 +7,16 @@ import {
 	Interaction,
 	InteractionCollector,
 	SelectMenuInteraction,
-	SelectMenuOptionBuilder,
-	Snowflake,
-	UnsafeButtonBuilder,
-	UnsafeSelectMenuBuilder
+	Snowflake
 } from 'discord.js'
-import { APISelectMenuOption, ButtonStyle } from 'discord-api-types/v10'
+import {
+	APIActionRowComponent,
+	APIButtonComponent,
+	APISelectMenuComponent,
+	APISelectMenuOption,
+	ButtonStyle,
+	ComponentType
+} from 'discord-api-types/v10'
 import { singleton } from 'tsyringe'
 import { baseManager } from '../BaseManager'
 
@@ -180,24 +183,32 @@ export class laserRoleManager extends baseManager {
 			})
 		}
 
-		const row = new ActionRowBuilder<UnsafeSelectMenuBuilder>().addComponents(
-			new UnsafeSelectMenuBuilder()
-				.setCustomId('laser-role-ping:home')
-				.setMaxValues(1)
-				.setMinValues(1)
-				.setPlaceholder('Select a server.')
-				.addOptions(
-					...options.map((options) => new SelectMenuOptionBuilder(options))
-				)
-		)
+		const row: APIActionRowComponent<APISelectMenuComponent> = {
+			type: 1,
+			components: [
+				{
+					type: ComponentType.SelectMenu,
+					custom_id: 'laser-role-ping:home',
+					max_values: 1,
+					min_values: 1,
+					placeholder: 'Select a server.',
+					options
+				}
+			]
+		}
 
-		const buttonRow = new ActionRowBuilder<UnsafeButtonBuilder>().addComponents(
-			new UnsafeButtonBuilder()
-				.setLabel('Close this menu')
-				.setCustomId('laser-role-ping:close')
-				.setStyle(ButtonStyle.Danger)
-				.setEmoji({ id: '977037861205459014' })
-		)
+		const buttonRow: APIActionRowComponent<APIButtonComponent> = {
+			type: 1,
+			components: [
+				{
+					type: ComponentType.Button,
+					label: 'Close this menu',
+					custom_id: 'laser-role-ping:close',
+					style: ButtonStyle.Danger,
+					emoji: { id: '977037861205459014' }
+				}
+			]
+		}
 
 		const embed = new EmbedBuilder()
 			.setTitle('Select a server.')
@@ -289,36 +300,52 @@ export class laserRoleManager extends baseManager {
 			}
 		]
 
-		const row = new ActionRowBuilder<UnsafeSelectMenuBuilder>().addComponents(
-			new UnsafeSelectMenuBuilder()
-				.setCustomId('laser-role-ping:secret:' + server)
-				.setMaxValues(3)
-				.setMinValues(1)
-				.setPlaceholder('Select the secrets you want to receive ping for.')
-				.addOptions(
-					...options.map((options) => new SelectMenuOptionBuilder(options))
-				)
-		)
-		const removeRow = new ActionRowBuilder<UnsafeButtonBuilder>().addComponents(
-			new UnsafeButtonBuilder()
-				.setLabel('Remove all roles from this server')
-				.setCustomId('laser-role-ping:remove:' + server)
-				.setEmoji({ id: '948606748334358559' })
-				.setStyle(ButtonStyle.Danger)
-		)
+		const row: APIActionRowComponent<APISelectMenuComponent> = {
+			type: 1,
+			components: [
+				{
+					type: ComponentType.SelectMenu,
+					custom_id: 'laser-role-ping:secret:' + server,
+					max_values: 3,
+					min_values: 1,
+					placeholder: 'Select the secrets you want to receive ping for.',
+					options
+				}
+			]
+		}
 
-		const buttonRow = new ActionRowBuilder<UnsafeButtonBuilder>().addComponents(
-			new UnsafeButtonBuilder()
-				.setLabel('Go Back')
-				.setCustomId('laser-role-ping:backhome')
-				.setStyle(ButtonStyle.Secondary)
-				.setEmoji({ id: '977037927953612871' }),
-			new UnsafeButtonBuilder()
-				.setLabel('Close this menu')
-				.setCustomId('laser-role-ping:close')
-				.setStyle(ButtonStyle.Danger)
-				.setEmoji({ id: '977037861205459014' })
-		)
+		const removeRow: APIActionRowComponent<APIButtonComponent> = {
+			type: 1,
+			components: [
+				{
+					type: ComponentType.Button,
+					label: 'Remove all roles from this server',
+					custom_id: 'laser-role-ping:remove:' + server,
+					style: ButtonStyle.Danger,
+					emoji: { id: '948606748334358559' }
+				}
+			]
+		}
+
+		const buttonRow: APIActionRowComponent<APIButtonComponent> = {
+			type: 1,
+			components: [
+				{
+					type: ComponentType.Button,
+					label: 'Go Back',
+					custom_id: 'laser-role-ping:backhome',
+					style: ButtonStyle.Danger,
+					emoji: { id: '977037927953612871' }
+				},
+				{
+					type: ComponentType.Button,
+					label: 'Close this menu',
+					custom_id: 'laser-role-ping:close',
+					style: ButtonStyle.Danger,
+					emoji: { id: '977037861205459014' }
+				}
+			]
+		}
 
 		return {
 			components: [row, removeRow, buttonRow]

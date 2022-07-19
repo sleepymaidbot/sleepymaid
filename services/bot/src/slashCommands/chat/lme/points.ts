@@ -3,8 +3,7 @@ import {
 	EmbedBuilder,
 	ActionRowBuilder,
 	ButtonBuilder,
-	MessageActionRowComponentBuilder,
-	UnsafeEmbedBuilder
+	MessageActionRowComponentBuilder
 } from '@discordjs/builders'
 import { SlashCommandInterface } from '@sleepymaid/handler'
 import {
@@ -13,7 +12,7 @@ import {
 	ChatInputCommandInteraction,
 	resolveColor
 } from 'discord.js'
-import { ButtonStyle } from 'discord-api-types/v10'
+import { APIEmbed, ButtonStyle } from 'discord-api-types/v10'
 import { BotClient } from '../../../lib/extensions/BotClient'
 
 const intForEmote = {
@@ -210,14 +209,15 @@ export default class PointsCommand implements SlashCommandInterface {
 
 					const leaderboardText = getLeaderboard(page)
 
-					const embed = new UnsafeEmbedBuilder()
-						.setColor(resolveColor('#36393f'))
-						.setAuthor({
+					const embed: APIEmbed = {
+						color: resolveColor('#36393f'),
+						author: {
 							name: 'Leaderboard du serveur',
-							iconURL: interaction.guild.iconURL()
-						})
-						.setDescription(leaderboardText.text)
-						.setTimestamp()
+							icon_url: interaction.guild.iconURL()
+						},
+						description: leaderboardText.text,
+						timestamp: new Date(Date.now()).toISOString()
+					}
 					await interaction.editReply({
 						embeds: [embed],
 						components: [leaderboardText.row]
@@ -237,14 +237,15 @@ export default class PointsCommand implements SlashCommandInterface {
 								page = page - 1
 
 								const lb = getLeaderboard(page)
-								const newEmbed = new UnsafeEmbedBuilder()
-									.setColor(resolveColor('#36393f'))
-									.setAuthor({
+								const newEmbed: APIEmbed = {
+									color: resolveColor('#36393f'),
+									author: {
 										name: 'Leaderboard du serveur',
-										iconURL: interaction.guild.iconURL()
-									})
-									.setDescription(lb.text)
-									.setTimestamp()
+										icon_url: interaction.guild.iconURL()
+									},
+									description: lb.text,
+									timestamp: new Date(Date.now()).toISOString()
+								}
 								await interaction.editReply({
 									embeds: [newEmbed],
 									components: [lb.row]
@@ -254,14 +255,15 @@ export default class PointsCommand implements SlashCommandInterface {
 								page = page + 1
 
 								const lb = getLeaderboard(page)
-								const newEmbed = new UnsafeEmbedBuilder()
-									.setColor(resolveColor('#36393f'))
-									.setAuthor({
+								const newEmbed: APIEmbed = {
+									color: resolveColor('#36393f'),
+									author: {
 										name: 'Leaderboard du serveur',
-										iconURL: interaction.guild.iconURL()
-									})
-									.setDescription(lb.text)
-									.setTimestamp()
+										icon_url: interaction.guild.iconURL()
+									},
+									description: lb.text,
+									timestamp: new Date(Date.now()).toISOString()
+								}
 								await interaction.editReply({
 									embeds: [newEmbed],
 									components: [lb.row]
