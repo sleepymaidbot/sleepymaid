@@ -12,6 +12,8 @@ const stopwatchs = new Map<string, Stopwatch>()
 @singleton()
 export class voiceXpManager extends baseManager {
 	public async start(member: GuildMember) {
+		// TODO: Check if the user already has a stopwatch
+		if (stopwatchs[member.id]) return
 		stopwatchs.set(member.id, new Stopwatch())
 		this.client.logger.info('Started voice time for ' + member.user.tag)
 	}
