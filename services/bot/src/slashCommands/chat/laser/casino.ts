@@ -8,7 +8,7 @@ import {
 } from 'discord.js'
 
 export default class LaserCasinoCommand implements SlashCommandInterface {
-	public readonly guildIds = ['860721584373497887']
+	public readonly guildIds = ['860721584373497887', '324284116021542922']
 	public readonly data = {
 		name: 'casino',
 		description: 'Base command for the casino secret.',
