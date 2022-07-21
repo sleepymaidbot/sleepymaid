@@ -1422,7 +1422,7 @@ __metadata:
     "@sleepymaid/util": "*"
     "@types/i18next-fs-backend": ^1.1.2
     "@types/node": 17.0.21
-    discord-api-types: ^0.36.2
+    discord-api-types: ^0.36.3
     discord.js: ^14.0.3
     fs: 0.0.1-security
     i18next: ^21.8.14
@@ -1442,7 +1442,7 @@ __metadata:
   resolution: "@sleepymaid/config@workspace:packages/config"
   dependencies:
     "@types/node": 17.0.21
-    discord-api-types: ^0.36.2
+    discord-api-types: ^0.36.3
     rimraf: 3.0.2
     source-map-support: 0.5.21
     typescript: 4.7.4
@@ -1455,7 +1455,7 @@ __metadata:
   dependencies:
     "@sleepymaid/util": "*"
     "@types/node": 17.0.21
-    discord-api-types: ^0.36.2
+    discord-api-types: ^0.36.3
     discord.js: ^14.0.3
     reflect-metadata: ^0.1.13
     rimraf: 3.0.2
@@ -1476,7 +1476,7 @@ __metadata:
     "@sleepymaid/logger": "*"
     "@types/i18next-fs-backend": ^1.1.2
     "@types/node": 17.0.21
-    discord-api-types: ^0.36.2
+    discord-api-types: ^0.36.3
     discord.js: ^14.0.3
     i18next: ^21.8.14
     i18next-fs-backend: ^1.1.4
@@ -1494,7 +1494,7 @@ __metadata:
   resolution: "@sleepymaid/localizer@workspace:packages/localizer"
   dependencies:
     "@types/node": 17.0.21
-    discord-api-types: ^0.36.2
+    discord-api-types: ^0.36.3
     i18next: ^21.8.14
     rimraf: 3.0.2
     source-map-support: 0.5.21
@@ -1523,7 +1523,7 @@ __metadata:
     "@sleepymaid/handler": "*"
     "@sleepymaid/logger": "*"
     "@types/node": 17.0.21
-    discord-api-types: ^0.36.2
+    discord-api-types: ^0.36.3
     discord.js: ^14.0.3
     path: 0.12.7
     reflect-metadata: ^0.1.13
@@ -1818,13 +1818,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/cli-dist@npm:^3.2.1":
-  version: 3.2.1
-  resolution: "@yarnpkg/cli-dist@npm:3.2.1"
+"@yarnpkg/cli-dist@npm:^3.2.2":
+  version: 3.2.2
+  resolution: "@yarnpkg/cli-dist@npm:3.2.2"
   bin:
     yarn: bin/yarn.js
     yarnpkg: bin/yarn.js
-  checksum: 7992a4f34fcf2ce34506625eb8dbc0dadfc114fb69ebd71c69fccdb3671fd3c18202fec7cdb9867b9d42e1956ad49704b574f9d7f2cdc91484ddc5bd5e184d2c
+  checksum: 3cae7b641e8066855cef08c4111a9f7a2acd35db73ed648d645d738268a99fb025ed2c4eaa08f3c2f1de924c25ce0c83339808a9e51e81409bde61ec85c54342
   languageName: node
   linkType: hard
 
@@ -2311,6 +2311,13 @@ __metadata:
   version: 0.36.2
   resolution: "discord-api-types@npm:0.36.2"
   checksum: 0275ac9db1bb8354ed3fedb37d7fa66d02b63aa6dc749add1e9ed52b428e94cb8b5111bd60e781cf0c2c5cdb0e948c4e83d00b74f500f1b0ac90ddc38a822798
+  languageName: node
+  linkType: hard
+
+"discord-api-types@npm:^0.36.3":
+  version: 0.36.3
+  resolution: "discord-api-types@npm:0.36.3"
+  checksum: 3089c0fb37425dc5df03c76d82988d43fcc272699b06a02fc830d0a3bef550009aaebdf6d646529e8a7ccea76ae3f43b099d736ea5ef37a0be143142ab49871d
   languageName: node
   linkType: hard
 
@@ -4099,14 +4106,14 @@ __metadata:
     "@types/prettier": 2.6.3
     "@typescript-eslint/eslint-plugin": 5.30.7
     "@typescript-eslint/parser": 5.30.7
-    "@yarnpkg/cli-dist": ^3.2.1
+    "@yarnpkg/cli-dist": ^3.2.2
     eslint: ^8.20.0
     eslint-config-prettier: 8.5.0
     husky: 8.0.1
     prettier: 2.7.1
     prisma: 4.1.0
     rimraf: ^3.0.2
-    turbo: 1.3.1
+    turbo: 1.3.3
     typescript: 4.7.4
   languageName: unknown
   linkType: soft
@@ -4390,122 +4397,122 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo-android-arm64@npm:1.3.1":
-  version: 1.3.1
-  resolution: "turbo-android-arm64@npm:1.3.1"
+"turbo-android-arm64@npm:1.3.3":
+  version: 1.3.3
+  resolution: "turbo-android-arm64@npm:1.3.3"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-darwin-64@npm:1.3.1":
-  version: 1.3.1
-  resolution: "turbo-darwin-64@npm:1.3.1"
+"turbo-darwin-64@npm:1.3.3":
+  version: 1.3.3
+  resolution: "turbo-darwin-64@npm:1.3.3"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-darwin-arm64@npm:1.3.1":
-  version: 1.3.1
-  resolution: "turbo-darwin-arm64@npm:1.3.1"
+"turbo-darwin-arm64@npm:1.3.3":
+  version: 1.3.3
+  resolution: "turbo-darwin-arm64@npm:1.3.3"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-freebsd-64@npm:1.3.1":
-  version: 1.3.1
-  resolution: "turbo-freebsd-64@npm:1.3.1"
+"turbo-freebsd-64@npm:1.3.3":
+  version: 1.3.3
+  resolution: "turbo-freebsd-64@npm:1.3.3"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-freebsd-arm64@npm:1.3.1":
-  version: 1.3.1
-  resolution: "turbo-freebsd-arm64@npm:1.3.1"
+"turbo-freebsd-arm64@npm:1.3.3":
+  version: 1.3.3
+  resolution: "turbo-freebsd-arm64@npm:1.3.3"
   conditions: os=freebsd & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-32@npm:1.3.1":
-  version: 1.3.1
-  resolution: "turbo-linux-32@npm:1.3.1"
+"turbo-linux-32@npm:1.3.3":
+  version: 1.3.3
+  resolution: "turbo-linux-32@npm:1.3.3"
   conditions: os=linux & cpu=ia32
   languageName: node
   linkType: hard
 
-"turbo-linux-64@npm:1.3.1":
-  version: 1.3.1
-  resolution: "turbo-linux-64@npm:1.3.1"
+"turbo-linux-64@npm:1.3.3":
+  version: 1.3.3
+  resolution: "turbo-linux-64@npm:1.3.3"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm64@npm:1.3.1":
-  version: 1.3.1
-  resolution: "turbo-linux-arm64@npm:1.3.1"
+"turbo-linux-arm64@npm:1.3.3":
+  version: 1.3.3
+  resolution: "turbo-linux-arm64@npm:1.3.3"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm@npm:1.3.1":
-  version: 1.3.1
-  resolution: "turbo-linux-arm@npm:1.3.1"
+"turbo-linux-arm@npm:1.3.3":
+  version: 1.3.3
+  resolution: "turbo-linux-arm@npm:1.3.3"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"turbo-linux-mips64le@npm:1.3.1":
-  version: 1.3.1
-  resolution: "turbo-linux-mips64le@npm:1.3.1"
+"turbo-linux-mips64le@npm:1.3.3":
+  version: 1.3.3
+  resolution: "turbo-linux-mips64le@npm:1.3.3"
   conditions: os=linux & cpu=mips64el
   languageName: node
   linkType: hard
 
-"turbo-linux-ppc64le@npm:1.3.1":
-  version: 1.3.1
-  resolution: "turbo-linux-ppc64le@npm:1.3.1"
+"turbo-linux-ppc64le@npm:1.3.3":
+  version: 1.3.3
+  resolution: "turbo-linux-ppc64le@npm:1.3.3"
   conditions: os=linux & cpu=ppc64
   languageName: node
   linkType: hard
 
-"turbo-windows-32@npm:1.3.1":
-  version: 1.3.1
-  resolution: "turbo-windows-32@npm:1.3.1"
+"turbo-windows-32@npm:1.3.3":
+  version: 1.3.3
+  resolution: "turbo-windows-32@npm:1.3.3"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"turbo-windows-64@npm:1.3.1":
-  version: 1.3.1
-  resolution: "turbo-windows-64@npm:1.3.1"
+"turbo-windows-64@npm:1.3.3":
+  version: 1.3.3
+  resolution: "turbo-windows-64@npm:1.3.3"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-windows-arm64@npm:1.3.1":
-  version: 1.3.1
-  resolution: "turbo-windows-arm64@npm:1.3.1"
+"turbo-windows-arm64@npm:1.3.3":
+  version: 1.3.3
+  resolution: "turbo-windows-arm64@npm:1.3.3"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo@npm:1.3.1":
-  version: 1.3.1
-  resolution: "turbo@npm:1.3.1"
+"turbo@npm:1.3.3":
+  version: 1.3.3
+  resolution: "turbo@npm:1.3.3"
   dependencies:
-    turbo-android-arm64: 1.3.1
-    turbo-darwin-64: 1.3.1
-    turbo-darwin-arm64: 1.3.1
-    turbo-freebsd-64: 1.3.1
-    turbo-freebsd-arm64: 1.3.1
-    turbo-linux-32: 1.3.1
-    turbo-linux-64: 1.3.1
-    turbo-linux-arm: 1.3.1
-    turbo-linux-arm64: 1.3.1
-    turbo-linux-mips64le: 1.3.1
-    turbo-linux-ppc64le: 1.3.1
-    turbo-windows-32: 1.3.1
-    turbo-windows-64: 1.3.1
-    turbo-windows-arm64: 1.3.1
+    turbo-android-arm64: 1.3.3
+    turbo-darwin-64: 1.3.3
+    turbo-darwin-arm64: 1.3.3
+    turbo-freebsd-64: 1.3.3
+    turbo-freebsd-arm64: 1.3.3
+    turbo-linux-32: 1.3.3
+    turbo-linux-64: 1.3.3
+    turbo-linux-arm: 1.3.3
+    turbo-linux-arm64: 1.3.3
+    turbo-linux-mips64le: 1.3.3
+    turbo-linux-ppc64le: 1.3.3
+    turbo-windows-32: 1.3.3
+    turbo-windows-64: 1.3.3
+    turbo-windows-arm64: 1.3.3
   dependenciesMeta:
     turbo-android-arm64:
       optional: true
@@ -4537,7 +4544,7 @@ __metadata:
       optional: true
   bin:
     turbo: bin/turbo
-  checksum: fced49081f2c64aaf93a2499edb057bb05d30bd2074b9652610f939c9037869501fcc50e7ad05a48cec4a8b9d344cc1c4ea505edd45fe2f9639fb138fa55182b
+  checksum: 73173ff02f1b28b5eee8430a5c2883a7b6627255c8901f3e8ea0e7e5a3c2e6c1c6d345d633a75d061589bd0de6c07984b63f8f7f699443fb8742f3fa87e58793
   languageName: node
   linkType: hard
 
@@ -4569,7 +4576,7 @@ __metadata:
 
 "typescript@patch:typescript@4.7.4#~builtin<compat/typescript>":
   version: 4.7.4
-  resolution: "typescript@patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"
+  resolution: "typescript@patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=f456af"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
