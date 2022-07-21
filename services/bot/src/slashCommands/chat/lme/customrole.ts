@@ -1,4 +1,5 @@
 import { SlashCommandBuilder, EmbedBuilder } from '@discordjs/builders'
+import { Result } from '@sapphire/result'
 import { SlashCommandInterface } from '@sleepymaid/handler'
 import {
 	ChatInputApplicationCommandData,
@@ -92,16 +93,30 @@ export default class CustomRoleCommand implements SlashCommandInterface {
 				if (isEligible(interaction.member, inDb?.points)) {
 					if (customRoleId !== null || undefined) {
 						try {
-							const cr = interaction.guild.roles.cache.find(
-								(role) => role.id === customRoleId
-							)
-							await interaction.member.roles.add(cr)
+							const roleReturn = await Result.fromAsync(async () => {
+								const role = interaction.guild.roles.cache.find(
+									(role) => role.id === customRoleId
+								)
+								await interaction.member.roles.add(role)
+							})
+							if (roleReturn.isErr()) {
+								await client.prisma.mondecorte.update({
+									where: { user_id: interaction.user.id },
+									data: {
+										custom_role_id: null
+									}
+								})
+								embed.setDescription('Ton rôle custom a été supprimé')
+								return await interaction.editReply({
+									embeds: [embed]
+								})
+							}
 							embed.setDescription('Tu a déja un rôle custom')
 							await interaction.editReply({
 								embeds: [embed]
 							})
 						} catch (e) {
-							client.logger.info(e)
+							client.logger.error(e)
 						}
 					} else {
 						const sleepyRole = interaction.guild.roles.cache.find(
@@ -142,7 +157,7 @@ export default class CustomRoleCommand implements SlashCommandInterface {
 										})
 									})
 							})
-							.catch(console.error)
+							.catch(client.logger.error)
 					}
 				} else {
 					embed.setDescription("Tu n'est pas éligible.")
@@ -173,7 +188,7 @@ export default class CustomRoleCommand implements SlashCommandInterface {
 								})
 							})
 					} catch (e) {
-						client.logger.info(e)
+						client.logger.error(e)
 					}
 				} else {
 					embed.setDescription("Tu n'as pas de rôle custom")
@@ -197,7 +212,7 @@ export default class CustomRoleCommand implements SlashCommandInterface {
 								embeds: [embed]
 							})
 						})
-						.catch(console.error)
+						.catch(client.logger.error)
 				} else {
 					embed.setDescription("Tu n'as pas de rôle custom")
 					await interaction.editReply({ embeds: [embed] })
@@ -220,7 +235,7 @@ export default class CustomRoleCommand implements SlashCommandInterface {
 								embeds: [embed]
 							})
 						})
-						.catch(console.error)
+						.catch(client.logger.error)
 				} else {
 					embed.setDescription("Tu n'as pas de rôle custom")
 					await interaction.editReply({ embeds: [embed] })
