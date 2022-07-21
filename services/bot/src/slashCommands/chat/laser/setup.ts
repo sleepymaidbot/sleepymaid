@@ -7,7 +7,8 @@ import {
 	ComponentType,
 	APIActionRowComponent,
 	APIEmbedAuthor,
-	APIButtonComponent
+	APIButtonComponent,
+	APIEmbed
 } from 'discord-api-types/v10'
 import {
 	ChatInputCommandInteraction,
@@ -63,7 +64,7 @@ const messages: MessagesType = {
 				]
 			}
 
-			const embed = {
+			const embed: APIEmbed = {
 				title: 'Self-assignable roles',
 				description: 'With this message you can assign yourself some roles.',
 				fields: [
@@ -91,7 +92,7 @@ const messages: MessagesType = {
 	'casinostep1': {
 		fancyName: 'Casino Step 1 - Blockers',
 		function: async () => {
-			const embed = {
+			const embed: APIEmbed = {
 				title: 'Step 1 - Blockers',
 				description:
 					'Firstly, you need to shoot the [main power box](https://canary.discord.com/channels/860721584373497887/980671199510151208/980671239473483826) to start the sparks. \nAt the 3 or 4 spark you need to activate the [2 buttons](https://canary.discord.com/channels/860721584373497887/980671199510151208/983536491764514846) then you have to shoot the blockers right after the last spark before that blocker.',
@@ -124,7 +125,7 @@ const messages: MessagesType = {
 	'casinostep2': {
 		fancyName: 'Casino Step 2 - Keypad',
 		function: async () => {
-			const embed = {
+			const embed: APIEmbed = {
 				title: 'Step 2 - Main door key card',
 				description:
 					'To get the key card you need to stab the poster in security room.\nThen shoot the [blue part](https://canary.discord.com/channels/860721584373497887/980940688168480839/980953643622740059) of the keypad with a gun.\nYou will get a key card.\nThis key card can be used in the [key card reader at the main door](https://canary.discord.com/channels/860721584373497887/980940688168480839/980940988208013392) once the first step is done.',
@@ -151,7 +152,7 @@ const messages: MessagesType = {
 	'casinostep3': {
 		fancyName: 'Casino Step 3 - Hammer',
 		function: async () => {
-			const embed = {
+			const embed: APIEmbed = {
 				title: 'Step 3 - Hammer',
 				color: 3553599,
 				description:
