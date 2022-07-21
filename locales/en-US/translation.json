@@ -93,6 +93,25 @@
 				"failure_remove_not_in_list": "Failed to remove <@&{{role}}> as a moderator role. It is not in the list."
 			},
 			"no_permission": "You do not have permission to use this command. You need to have the ``ADMINISTRATOR`` permission or have a role in the admin role list."
+		},
+		"logs": {
+			"name": "logs",
+			"description": "Base command for configuring your server logs",
+			"new": {
+				"name": "new",
+				"description": "Create a new log channel",
+				"channel": {
+					"name": "channel",
+					"description": "The channel to create the log channel in"
+				},
+
+				"home": {
+					"description": "Please select where in <#{{ channel }}> do you want to create the log messages.",
+					"button-here": "In this channel",
+					"button-thread": "In a thread in this channel",
+					"button-cancel": "Cancel"
+				}
+			}
 		}
 	}
 }
