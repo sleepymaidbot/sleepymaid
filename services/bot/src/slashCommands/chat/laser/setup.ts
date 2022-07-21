@@ -174,6 +174,30 @@ const messages: MessagesType = {
 
 			return { embeds: [embed] }
 		}
+	},
+	'casinostep4': {
+		fancyName: 'Casino Step 4 - Control room lasers',
+		function: async () => {
+			const embed: APIEmbed = {
+				title: 'Step 4 - Control room lasers',
+				color: 3553599,
+				description:
+					'You first need to get the order of which the control room lasers (insert cool laser image) and the middle lasers (another image) are shaking. To do that you need to first activate the middle laser (cool picture) and then shoot on the power box (another picture) in the control room which will make all lasers shake in an order. Middle lasers might be split in 2 (better wording for that sentence ???). The code from the control room represents the order and the code from the middle lasers the code itself. Example: Middle code: `1342` and control room code: `2431` the first number from the middle code is `1` and from the control room code `2` so that means that the number one will be the second button the activate. The order for the buttons would be `2143`. Then you need to shoot knife, axes or props on the buttons (<#980682918793973760>).',
+				fields: [
+					{
+						name: 'Slash command',
+						value:
+							'We made a slash that takes as input order from the control room and the middle lasers and outputs the button order. The command is `/casino getbuttonorder <control room code> <middle lasers code>`.'
+					},
+					{
+						name: 'Credits',
+						value: 'Laser donne moi les credits'
+					}
+				],
+				author
+			}
+			return { embeds: [embed] } //
+		}
 	}
 }
 
