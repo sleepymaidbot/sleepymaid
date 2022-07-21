@@ -198,6 +198,36 @@ const messages: MessagesType = {
 			}
 			return { embeds: [embed] } //
 		}
+	},
+	'casinostep5': {
+		fancyName: 'Casino Step 5 - Simon Says',
+		function: async () => {
+			const embed: APIEmbed = {
+				title: 'Step 5 - Simon Says',
+				color: 3553599,
+				description:
+					'Firstly, you need to bring back the key card from step 2.\nThen someone will go and be at the security room watching cams.\nThen you need to slide the key card in the [key card reader in the control room](https://discord.com/channels/860721584373497887/980940688168480839/982099937087078511). \n\nThree color will appear on a screen that you are able to see from the third floor cam you will need to remember them. \nAt the same time, the third floor cam will be available in security room. The button to view the third floor cam changes after every sequence of color. It will put you on a random cam and the button will be randomised again. An order will be shown on a screen. \n\nYou then need to input that order in control room. You need to do this ``6`` times adding one color to the order every time.',
+				fields: [
+					{
+						name: 'Bonus time',
+						value:
+							'This steps gives a ``120`` seconds time bonus when completed.'
+					},
+					{
+						name: 'Video Clip',
+						value:
+							'Click [here](https://medal.tv/games/garrys-mod/clips/oOCAEKxMGwoDR/d1337CBNS5hA) to get a video of us doing it.'
+					},
+					{
+						name: 'Credits',
+						value:
+							'<@217473615174565888> - For being the first one the finish simon says.'
+					}
+				],
+				author
+			}
+			return { embeds: [embed] }
+		}
 	}
 }
 
