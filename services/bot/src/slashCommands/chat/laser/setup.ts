@@ -182,7 +182,7 @@ const messages: MessagesType = {
 				title: 'Step 4 - Control room lasers',
 				color: 3553599,
 				description:
-					'You first need to get the order of which the control room lasers (insert cool laser image) and the middle lasers (another image) are shaking. To do that you need to first activate the middle laser (cool picture) and then shoot on the power box (another picture) in the control room which will make all lasers shake in an order. Middle lasers might be split in 2 (better wording for that sentence ???). The code from the control room represents the order and the code from the middle lasers the code itself. Example: Middle code: `1342` and control room code: `2431` the first number from the middle code is `1` and from the control room code `2` so that means that the number one will be the second button the activate. The order for the buttons would be `2143`. Then you need to shoot knife, axes or props on the buttons (<#980682918793973760>).',
+					'You first need to get the order of which the control room lasers (insert cool laser image) and the middle lasers (another image) are shaking. To do that you need to first activate the middle laser (cool picture) and then shoot on the power box (another picture) in the control room which will make all lasers shake in an order.\n :information_source: **Info:** Middle lasers might be split in 2 (better wording for that sentence ???). \n\nThe code from the control room represents the order and the code from the middle lasers the code itself. \n:information_source: **Example:** Middle code: `1342` and control room code: `2431` the first number from the middle code is `1` and from the control room code `2` so that means that the number one will be the second button the activate. The order for the buttons would be `2143`. \nThen you need to shoot knifes, axes or props on the buttons (<#980682918793973760>).',
 				fields: [
 					{
 						name: 'Slash command',
@@ -191,7 +191,7 @@ const messages: MessagesType = {
 					},
 					{
 						name: 'Credits',
-						value: 'Laser donne moi les credits'
+						value: '<@285502356811022336> - For finding how to decode the code.'
 					}
 				],
 				author
