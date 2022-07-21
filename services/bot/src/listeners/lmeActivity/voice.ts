@@ -21,8 +21,8 @@ export default class VoiceListener implements ListenerInterface {
 		newState: VoiceState,
 		client: BotClient
 	) {
-		// to disable this listener
-		if (oldState.guild.id !== '1') return
+		if (client.config.environment === 'production') return
+		if (oldState.guild.id !== '324284116021542922') return
 		if (oldState.member.user.bot) return
 		let status = VoiceXpState.None
 		// Someone join vc start timer
