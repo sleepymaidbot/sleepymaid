@@ -27,72 +27,81 @@ export default class VoiceListener implements ListenerInterface {
 		let status = VoiceXpState.None
 		// Someone join vc start timer
 		if (
-			oldState.channel === null &&
-			newState.channel !== null &&
-			!pointsBlacklistedVoiceChannel.includes(newState.channel.id) &&
+			oldState.channel?.id === undefined &&
+			newState.channel?.id !== undefined &&
 			!newState.deaf &&
 			!newState.mute
-		)
+		) {
+			if (pointsBlacklistedVoiceChannel.includes(newState.channel.id)) return
 			status = VoiceXpState.Start
+		}
 		// Someone leave vc stop timer
-		if (oldState.channel !== null && newState.channel === null)
+		if (
+			oldState.channel?.id !== undefined &&
+			newState.channel?.id === undefined
+		)
 			status = VoiceXpState.Stop
 		// Someone change channel from bl to non-bl
 		if (
-			oldState.channel !== null &&
-			pointsBlacklistedVoiceChannel.includes(oldState.channel.id) &&
-			newState.channel !== null &&
-			!pointsBlacklistedVoiceChannel.includes(newState.channel.id) &&
+			oldState.channel?.id !== undefined &&
+			pointsBlacklistedVoiceChannel.includes(oldState.channel?.id) &&
+			newState.channel?.id !== undefined &&
+			!pointsBlacklistedVoiceChannel.includes(newState.channel?.id) &&
 			!newState.deaf &&
 			!newState.mute
 		)
 			status = VoiceXpState.Start
 		// Someone change channel from non-bl to bl
 		if (
-			oldState.channel !== null &&
-			!pointsBlacklistedVoiceChannel.includes(oldState.channel.id) &&
-			newState.channel !== null &&
-			pointsBlacklistedVoiceChannel.includes(newState.channel.id)
+			oldState.channel?.id !== undefined &&
+			!pointsBlacklistedVoiceChannel.includes(oldState.channel?.id) &&
+			newState.channel?.id !== undefined &&
+			pointsBlacklistedVoiceChannel.includes(newState.channel?.id)
 		)
 			status = VoiceXpState.Stop
 		// Someone mutes themselves
 		if (
-			oldState.channel !== null &&
-			newState.channel !== null &&
-			oldState.channel.id === newState.channel.id &&
+			oldState.channel?.id !== undefined &&
+			newState.channel?.id !== undefined &&
+			oldState.channel?.id === newState.channel?.id &&
 			!oldState.mute &&
 			newState.mute
 		)
 			status = VoiceXpState.Stop
 		// Someone unmutes themselves
 		if (
-			oldState.channel !== null &&
-			newState.channel !== null &&
-			oldState.channel.id === newState.channel.id &&
+			oldState.channel?.id !== undefined &&
+			newState.channel?.id !== undefined &&
+			oldState.channel?.id === newState.channel?.id &&
 			oldState.mute &&
 			!newState.mute
-		)
+		) {
+			if (pointsBlacklistedVoiceChannel.includes(newState.channel.id)) return
 			status = VoiceXpState.Start
+		}
 		// Someone deafen themselves
 		if (
-			oldState.channel !== null &&
-			newState.channel !== null &&
-			oldState.channel.id === newState.channel.id &&
+			oldState.channel?.id !== undefined &&
+			newState.channel?.id !== undefined &&
+			oldState.channel?.id === newState.channel?.id &&
 			!oldState.deaf &&
 			newState.deaf
 		)
 			status = VoiceXpState.Stop
 		// Someone undeafen themselves
 		if (
-			oldState.channel !== null &&
-			newState.channel !== null &&
-			oldState.channel.id === newState.channel.id &&
+			oldState.channel?.id !== undefined &&
+			newState.channel?.id !== undefined &&
+			oldState.channel?.id === newState.channel?.id &&
 			oldState.deaf &&
 			!newState.deaf
-		)
+		) {
+			if (pointsBlacklistedVoiceChannel.includes(newState.channel.id)) return
 			status = VoiceXpState.Start
+		}
 
 		switch (status) {
+			default:
 			case VoiceXpState.None:
 				break
 			case VoiceXpState.Start:

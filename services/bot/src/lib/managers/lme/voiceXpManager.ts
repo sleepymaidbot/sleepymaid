@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import { GuildMember } from 'discord.js'
+import { Collection, GuildMember } from 'discord.js'
 import { singleton, container } from 'tsyringe'
 import { BotClient } from '../../extensions/BotClient'
 import { Stopwatch } from '@sapphire/stopwatch'
@@ -7,23 +7,23 @@ import { pointsMultiplier } from '../../lists'
 import { ActivityRewardManager } from './activityRewardManager'
 import { baseManager } from '../BaseManager'
 
-const stopwatchs = new Map<string, Stopwatch>()
+const stopwatchs = new Collection<string, Stopwatch>()
 
 @singleton()
 export class voiceXpManager extends baseManager {
 	public async start(member: GuildMember) {
 		// TODO: Check if the user already has a stopwatch
-		if (stopwatchs[member.id]) return
+		if (stopwatchs.get(member.id) !== undefined) return
 		stopwatchs.set(member.id, new Stopwatch())
 		this.client.logger.info('Started voice time for ' + member.user.tag)
 	}
 
 	public async stop(member: GuildMember) {
-		if (!stopwatchs[member.id]) return
-		const stopwatch = stopwatchs[member.id]
-		const time = Math.floor(stopwatch.duration / 300000)
+		const stopwatch = stopwatchs.get(member.id)
+		if (!stopwatch) return
 		stopwatch.stop()
-		delete stopwatchs[member.id]
+		const time = Math.floor(stopwatch.duration / 300000)
+		stopwatchs.delete(member.id)
 		this.reward(member, time)
 		this.client.logger.info('Stopped voice time for ' + member.user.tag)
 	}
@@ -63,11 +63,11 @@ export class voiceXpManager extends baseManager {
 }
 
 export async function stopAll(client: BotClient) {
-	for (const [key, value] of Object.entries(stopwatchs)) {
-		const stopwatch = stopwatchs[value]
+	for (const [key, value] of stopwatchs.entries()) {
+		const stopwatch = value
 		const time = Math.floor(stopwatch.duration / 300000)
 		stopwatch.stop()
-		delete stopwatchs[value]
+		stopwatchs.delete(key)
 		if (time <= 1) return
 		const userInDb = await client.prisma.mondecorte.findUnique({
 			where: {
@@ -93,5 +93,4 @@ export async function stopAll(client: BotClient) {
 			})
 		}
 	}
-	return true
 }
