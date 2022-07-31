@@ -21,7 +21,6 @@ export default class VoiceListener implements ListenerInterface {
 		newState: VoiceState,
 		client: BotClient
 	) {
-		if (client.config.environment === 'production') return
 		if (oldState.guild.id !== '324284116021542922') return
 		if (oldState.member.user.bot) return
 		let status = VoiceXpState.None

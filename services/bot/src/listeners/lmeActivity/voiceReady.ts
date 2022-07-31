@@ -12,7 +12,6 @@ export default class VoiceReadyListener implements ListenerInterface {
 
 	public async execute(client: BotClient) {
 		const guild = client.guilds.cache.get('324284116021542922')
-		if (client.config.environment === 'production') return
 		guild.channels.cache.forEach(async (channel) => {
 			if (channel.type == ChannelType.GuildVoice) {
 				if (pointsBlacklistedVoiceChannel.includes(channel.id)) return
