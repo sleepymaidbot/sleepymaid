@@ -32,15 +32,15 @@ export default class ActivityListener implements ListenerInterface {
 				}
 			})
 		} else {
-			const beforePoints = userInDb.points
 			const pointsToAdd = 1 * pointsMultiplier
-			const afterPoints = beforePoints + pointsToAdd
 			await client.prisma.mondecorte.update({
 				where: {
 					user_id: message.author.id
 				},
 				data: {
-					points: afterPoints
+					points: {
+						increment: pointsToAdd
+					}
 				}
 			})
 

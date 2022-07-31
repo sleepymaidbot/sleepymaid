@@ -43,12 +43,14 @@ export class voiceXpManager extends baseManager {
 				}
 			})
 		} else {
-			const beforePoints = userInDb.points
 			const pointsToAdd = time * pointsMultiplier
-			const afterPoints = beforePoints + pointsToAdd
 			await this.client.prisma.mondecorte.update({
 				where: { user_id: member.id },
-				data: { points: afterPoints }
+				data: {
+					points: {
+						increment: pointsToAdd
+					}
+				}
 			})
 			this.client.logger.info(
 				'Added ' + pointsToAdd + ' points to ' + member.user.tag
@@ -80,12 +82,14 @@ export async function stopAll(client: BotClient) {
 				}
 			})
 		} else {
-			const beforePoints = userInDb.points
 			const pointsToAdd = time * pointsMultiplier
-			const afterPoints = beforePoints + pointsToAdd
-			await client.prisma.mondecorte.update({
+			await this.client.prisma.mondecorte.update({
 				where: { user_id: key },
-				data: { points: afterPoints }
+				data: {
+					points: {
+						increment: pointsToAdd
+					}
+				}
 			})
 		}
 	}
