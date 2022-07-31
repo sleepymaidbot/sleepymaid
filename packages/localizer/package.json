@@ -26,6 +26,6 @@
 	"packageManager": "yarn@1.22.18",
 	"dependencies": {
 		"discord-api-types": "^0.37.0",
-		"i18next": "^21.8.14"
+		"i18next": "^21.8.16"
 	}
 }

@@ -1375,10 +1375,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/result@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@sapphire/result@npm:2.0.1"
-  checksum: 878790efbd4a3127513f6ddb1ffdf287503a88595915a22550ac3583e4dde229dd0d7d49612d397a49f12a0c2323afc43ab54ceb818d969f8d0571d71336287a
+"@sapphire/result@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "@sapphire/result@npm:2.1.1"
+  checksum: e1c77ba6fcdb63b17152e06a1b30ca8e9a8da00c343019cf1181aeb6d14cc3d7546c2535c9f3f592252c3578889081dcdbad0649bd33d6279b93a79710a7f8e1
   languageName: node
   linkType: hard
 
@@ -1414,7 +1414,7 @@ __metadata:
   dependencies:
     "@discordjs/builders": ^1.1.0
     "@prisma/client": 4.1.1
-    "@sapphire/result": ^2.0.1
+    "@sapphire/result": ^2.1.1
     "@sapphire/stopwatch": 1.4.1
     "@sleepymaid/config": "*"
     "@sleepymaid/handler": "*"
@@ -1423,9 +1423,9 @@ __metadata:
     "@types/i18next-fs-backend": ^1.1.2
     "@types/node": 17.0.21
     discord-api-types: ^0.37.0
-    discord.js: ^14.1.1
+    discord.js: ^14.1.2
     fs: 0.0.1-security
-    i18next: ^21.8.14
+    i18next: ^21.8.16
     i18next-fs-backend: ^1.1.4
     path: 0.12.7
     prisma: 4.1.1
@@ -1456,7 +1456,7 @@ __metadata:
     "@sleepymaid/util": "*"
     "@types/node": 17.0.21
     discord-api-types: ^0.37.0
-    discord.js: ^14.1.1
+    discord.js: ^14.1.2
     reflect-metadata: ^0.1.13
     rimraf: 3.0.2
     source-map-support: 0.5.21
@@ -1477,8 +1477,8 @@ __metadata:
     "@types/i18next-fs-backend": ^1.1.2
     "@types/node": 17.0.21
     discord-api-types: ^0.37.0
-    discord.js: ^14.1.1
-    i18next: ^21.8.14
+    discord.js: ^14.1.2
+    i18next: ^21.8.16
     i18next-fs-backend: ^1.1.4
     path: 0.12.7
     reflect-metadata: ^0.1.13
@@ -1495,7 +1495,7 @@ __metadata:
   dependencies:
     "@types/node": 17.0.21
     discord-api-types: ^0.37.0
-    i18next: ^21.8.14
+    i18next: ^21.8.16
     rimraf: 3.0.2
     source-map-support: 0.5.21
     typescript: 4.7.4
@@ -1524,7 +1524,7 @@ __metadata:
     "@sleepymaid/logger": "*"
     "@types/node": 17.0.21
     discord-api-types: ^0.37.0
-    discord.js: ^14.1.1
+    discord.js: ^14.1.2
     path: 0.12.7
     reflect-metadata: ^0.1.13
     rimraf: 3.0.2
@@ -2321,9 +2321,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:^14.1.1":
-  version: 14.1.1
-  resolution: "discord.js@npm:14.1.1"
+"discord.js@npm:^14.1.2":
+  version: 14.1.2
+  resolution: "discord.js@npm:14.1.2"
   dependencies:
     "@discordjs/builders": ^1.1.0
     "@discordjs/collection": ^1.0.1
@@ -2336,7 +2336,7 @@ __metadata:
     tslib: ^2.4.0
     undici: ^5.8.0
     ws: ^8.8.1
-  checksum: fbb606d10d2ce6382f1c14558a3ac95ffc3e6f446b29dfa4e52d92491afe4cc4ed1fde4f76787008d3e726a691432c182f902396ff2eb8ad4713ef19aead863d
+  checksum: f392bbe8b469d90fb4beceafa052787facc38224d1bfa679f3e60f1dd10e83cad3cae33fe1c11e04c615ce4f73c2a6a0d9265b449d1b9b57b93b31e9a66ac106
   languageName: node
   linkType: hard
 
@@ -2959,12 +2959,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^21.8.14":
-  version: 21.8.14
-  resolution: "i18next@npm:21.8.14"
+"i18next@npm:^21.8.16":
+  version: 21.8.16
+  resolution: "i18next@npm:21.8.16"
   dependencies:
     "@babel/runtime": ^7.17.2
-  checksum: 83b1a57d761c3d29b90f4e87eb9945902fa13d7750f11bc7f22e8c9999f7e5bf9b2a30c44a9b47569c8ea704573b02a562c2678cf2281073197ace07657d21be
+  checksum: b29d0cfd3e69edb01ba55fac7f642cde921a47880bfb0552756dffdd2aaa866da17ae0825e47b6972b2c1249aa22a6e9f8813ce18a5072975a0dc720c408a4e5
   languageName: node
   linkType: hard
 
