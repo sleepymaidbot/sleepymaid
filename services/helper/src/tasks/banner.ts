@@ -25,14 +25,14 @@ export default class BannerTask implements TaskInterface {
 
 			guild
 				.setBanner(`./banners/${banner}`, `Changed banner to ${banner}`)
-				.catch(console.error)
+				.catch(client.logger.error)
 
 			const channel = guild.channels.cache.get('863117686334554142')
 			if (!isTextChannel(channel)) return
 
 			channel.send(`**Banner Rotation**\nBanner is now \`\`${banner}\`\``)
 		} catch (err) {
-			console.error(err)
+			client.logger.error(err)
 		}
 	}
 }
