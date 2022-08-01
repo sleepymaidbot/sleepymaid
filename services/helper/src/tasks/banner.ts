@@ -1,7 +1,11 @@
 import { opendir } from 'fs/promises'
 import { TaskInterface } from '@sleepymaid/handler'
 import { HelperClient } from '../lib/HelperClient'
-import { TextChannel } from 'discord.js'
+import { Channel, ChannelType, TextChannel } from 'discord.js'
+
+function isTextChannel(channel: Channel): channel is TextChannel {
+	return channel.type == ChannelType.GuildText
+}
 
 export default class BannerTask implements TaskInterface {
 	public readonly interval = 3600000
@@ -23,9 +27,8 @@ export default class BannerTask implements TaskInterface {
 				.setBanner(`./banners/${banner}`, `Changed banner to ${banner}`)
 				.catch(console.error)
 
-			const channel = guild.channels.cache.get(
-				'863117686334554142'
-			) as TextChannel
+			const channel = guild.channels.cache.get('863117686334554142')
+			if (!isTextChannel(channel)) return
 
 			channel.send(`**Banner Rotation**\nBanner is now \`\`${banner}\`\``)
 		} catch (err) {

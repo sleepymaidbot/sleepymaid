@@ -1,10 +1,14 @@
 import 'reflect-metadata'
-import { TextChannel } from 'discord.js'
+import { Channel, ChannelType, TextChannel } from 'discord.js'
 import { pointToRemoveForPoints } from '../../lib/lists'
 import { ActivityRewardManager } from '../../lib/managers/lme/activityRewardManager'
 import { container } from 'tsyringe'
 import { BotClient } from '../../lib/extensions/BotClient'
 import { TaskInterface } from '@sleepymaid/handler'
+
+function isTextChannel(channel: Channel): channel is TextChannel {
+	return channel.type == ChannelType.GuildText
+}
 
 export default class HourPointsTask implements TaskInterface {
 	public readonly interval = 3600000
@@ -42,9 +46,8 @@ export default class HourPointsTask implements TaskInterface {
 					client.logger.error(e)
 				}
 			}
-			const logChannel = client.channels.cache.get(
-				'863117686334554142'
-			) as TextChannel
+			const logChannel = client.channels.cache.get('863117686334554142')
+			if (!isTextChannel(logChannel)) return
 			await logChannel.send({
 				content: `**Hourly points**\n${usersArray.length} members have been removed activity points.`
 			})
