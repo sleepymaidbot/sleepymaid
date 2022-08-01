@@ -33,7 +33,7 @@ export default class HourPointsTask implements TaskInterface {
 				usersArray.push(user.user_id)
 
 				try {
-					const dUser = await guild.members.cache.get(user.user_id)
+					const dUser = guild.members.cache.get(user.user_id)
 					if (dUser) {
 						container.register(BotClient, { useValue: client })
 						container.resolve(ActivityRewardManager).checkActivityReward(dUser)
