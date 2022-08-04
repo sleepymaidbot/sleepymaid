@@ -16,7 +16,7 @@
 	"devDependencies": {
 		"@sleepymaid/util": "*",
 		"@types/node": "17.0.21",
-		"discord-api-types": "^0.37.0",
+		"discord-api-types": "^0.37.1",
 		"discord.js": "^14.1.2",
 		"reflect-metadata": "^0.1.13",
 		"rimraf": "3.0.2",
