@@ -15,7 +15,7 @@
 	},
 	"packageManager": "yarn@3.2.2",
 	"devDependencies": {
-		"@types/prettier": "2.6.4",
+		"@types/prettier": "2.7.0",
 		"@typescript-eslint/eslint-plugin": "5.32.0",
 		"@typescript-eslint/parser": "5.32.0",
 		"@yarnpkg/cli-dist": "^3.2.2",
