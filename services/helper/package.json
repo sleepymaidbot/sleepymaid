@@ -26,8 +26,8 @@
 		"@sleepymaid/logger": "*",
 		"discord-api-types": "^0.37.1",
 		"discord.js": "^14.1.2",
-		"i18next": "^21.8.16",
-		"i18next-fs-backend": "^1.1.4",
+		"i18next": "^21.9.0",
+		"i18next-fs-backend": "^1.1.5",
 		"path": "0.12.7",
 		"reflect-metadata": "^0.1.13",
 		"tsyringe": "^4.7.0"
