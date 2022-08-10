@@ -20,7 +20,7 @@
 	},
 	"dependencies": {
 		"@discordjs/builders": "^1.1.0",
-		"@prisma/client": "4.2.0",
+		"@prisma/client": "4.2.1",
 		"@sapphire/result": "^2.3.3",
 		"@sapphire/stopwatch": "1.4.1",
 		"@sleepymaid/config": "*",
@@ -33,7 +33,7 @@
 		"i18next": "^21.9.0",
 		"i18next-fs-backend": "^1.1.5",
 		"path": "0.12.7",
-		"prisma": "4.2.0",
+		"prisma": "4.2.1",
 		"reflect-metadata": "0.1.13",
 		"tsyringe": "4.7.0"
 	},
