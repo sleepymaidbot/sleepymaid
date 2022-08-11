@@ -1172,6 +1172,71 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@motionone/animation@npm:^10.13.1":
+  version: 10.13.2
+  resolution: "@motionone/animation@npm:10.13.2"
+  dependencies:
+    "@motionone/easing": ^10.13.2
+    "@motionone/types": ^10.13.2
+    "@motionone/utils": ^10.13.2
+    tslib: ^2.3.1
+  checksum: f748e40c004b1d34ffec246e7193ecf79b8a211495ad1ea66701ac34ca5fb3b306a081db8989def0e3898334f2c58fda82fd48dffd70a0218315dd1a568ba8fd
+  languageName: node
+  linkType: hard
+
+"@motionone/dom@npm:10.13.1":
+  version: 10.13.1
+  resolution: "@motionone/dom@npm:10.13.1"
+  dependencies:
+    "@motionone/animation": ^10.13.1
+    "@motionone/generators": ^10.13.1
+    "@motionone/types": ^10.13.0
+    "@motionone/utils": ^10.13.1
+    hey-listen: ^1.0.8
+    tslib: ^2.3.1
+  checksum: cbf7e9f4f23eb6dc0ae7fb7d19b4ad9c3fab51b161c9ad309dbe7e50de676002ffad35d5123d610d3a9d2bdc717cfbc79909facc32fbf2ca871287861bca6e6d
+  languageName: node
+  linkType: hard
+
+"@motionone/easing@npm:^10.13.2":
+  version: 10.13.2
+  resolution: "@motionone/easing@npm:10.13.2"
+  dependencies:
+    "@motionone/utils": ^10.13.2
+    tslib: ^2.3.1
+  checksum: 7589a46cf0024150dcd2b409b13c3217599b2fe6b195048b61819d4d2406bd7a4b72a471a2f1480b5a75afce39860e08ce2935d44ebdcdbcf5aac6837b3058cc
+  languageName: node
+  linkType: hard
+
+"@motionone/generators@npm:^10.13.1":
+  version: 10.13.2
+  resolution: "@motionone/generators@npm:10.13.2"
+  dependencies:
+    "@motionone/types": ^10.13.2
+    "@motionone/utils": ^10.13.2
+    tslib: ^2.3.1
+  checksum: 1f93e74e997a4b2943408a87c8a8430811bb0ddce5006e6ddba965c797f1a5fdbedd95374983aa1a2d24cd0143886a9a8b588a4bc9f0837d20eb2d630f4ca6c1
+  languageName: node
+  linkType: hard
+
+"@motionone/types@npm:^10.13.0, @motionone/types@npm:^10.13.2":
+  version: 10.13.2
+  resolution: "@motionone/types@npm:10.13.2"
+  checksum: 34745476c2344c4b2216c4de1a7306becf5eb9db5e35c6caef79a6712a9c71e943cc5053d79530453e4af58540ee5be68bb19d662da7f2ba25b697702fb65f53
+  languageName: node
+  linkType: hard
+
+"@motionone/utils@npm:^10.13.1, @motionone/utils@npm:^10.13.2":
+  version: 10.13.2
+  resolution: "@motionone/utils@npm:10.13.2"
+  dependencies:
+    "@motionone/types": ^10.13.2
+    hey-listen: ^1.0.8
+    tslib: ^2.3.1
+  checksum: fd43f7c5d21462b0ca060ac6556e59175c07550b4181ecc5944a9920a883c8810d0601c7128d9fcfdcc7f69b3df407cb501be9f28682149a38d391ba8ba2410a
+  languageName: node
+  linkType: hard
+
 "@next/env@npm:12.2.4":
   version: 12.2.4
   resolution: "@next/env@npm:12.2.4"
@@ -1539,7 +1604,7 @@ __metadata:
     "@types/node": 17.0.31
     "@types/react": 18.0.17
     "@types/react-dom": 18.0.6
-    framer-motion: ^6
+    framer-motion: ^7
     next: 12.2.4
     react: 18.2.0
     react-dom: 18.2.0
@@ -2676,23 +2741,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^6":
-  version: 6.3.3
-  resolution: "framer-motion@npm:6.3.3"
+"framer-motion@npm:^7":
+  version: 7.0.1
+  resolution: "framer-motion@npm:7.0.1"
   dependencies:
     "@emotion/is-prop-valid": ^0.8.2
+    "@motionone/dom": 10.13.1
     framesync: 6.0.1
     hey-listen: ^1.0.8
     popmotion: 11.0.3
-    style-value-types: 5.0.0
+    style-value-types: 5.1.0
     tslib: ^2.1.0
   peerDependencies:
-    react: ">=16.8 || ^17.0.0 || ^18.0.0"
-    react-dom: ">=16.8 || ^17.0.0 || ^18.0.0"
+    react: ^18.0.0
+    react-dom: ^18.0.0
   dependenciesMeta:
     "@emotion/is-prop-valid":
       optional: true
-  checksum: 905ccf2679a45b00f6fd3fa6220f73f176e0c14b43d65ceb5feb93e23b12098def275930b98926c9bd4320f0436564745ebcfd488d7a477646a7a4600362fdbf
+  checksum: 42253a22c445e47857d46da6095293ca4e783f94435f44c072e5e94ec6fde04b9a5116467b93a44c142f25ba74d46d6ae54ca663f56a735aca1509bde58a55bc
   languageName: node
   linkType: hard
 
@@ -4298,6 +4364,16 @@ __metadata:
     hey-listen: ^1.0.8
     tslib: ^2.1.0
   checksum: 16d198302cd102edf9dba94e7752a2364c93b1eaa5cc7c32b42b28eef4af4ccb5149a3f16bc2a256adc02616a2404f4612bd15f3081c1e8ca06132cae78be6c0
+  languageName: node
+  linkType: hard
+
+"style-value-types@npm:5.1.0":
+  version: 5.1.0
+  resolution: "style-value-types@npm:5.1.0"
+  dependencies:
+    hey-listen: ^1.0.8
+    tslib: ^2.3.1
+  checksum: 25af60d2ea8e2c64a405f377e3208fe3cad672a115417748d72c3d515809655d8468b3ee2dbdef19bade4aa0dc4a07086c63faa2b10ef39673a2ab01a35b9cfa
   languageName: node
   linkType: hard
 
