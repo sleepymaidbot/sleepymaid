@@ -51,12 +51,10 @@ export default class LaserCasinoCommand implements SlashCommandInterface {
 				const midNumbers = ('' + imidNumber).split('')
 
 				const finalOrder = [0, 0, 0, 0]
-				const validatedNumbers = []
-				for (let i = 0; validatedNumbers.length < 4; i++) {
+				for (let i = 0; i < 4; i++) {
 					const int = parseInt(midNumbers[i])
 					const pos = parseInt(roomNumbers[i]) - 1
 					finalOrder[pos] = int
-					validatedNumbers.push(int)
 				}
 				return await interaction.reply({
 					embeds: [
