@@ -1476,6 +1476,7 @@ __metadata:
     fs: 0.0.1-security
     i18next: ^21.9.0
     i18next-fs-backend: ^1.1.5
+    murmurhash-v3: ^1.0.2
     path: 0.12.7
     prisma: 4.2.1
     reflect-metadata: 0.1.13
@@ -1483,6 +1484,7 @@ __metadata:
     source-map-support: 0.5.21
     tsyringe: 4.7.0
     typescript: 4.7.4
+    undici: ^5.8.2
   languageName: unknown
   linkType: soft
 
@@ -1504,8 +1506,10 @@ __metadata:
   dependencies:
     "@sleepymaid/util": "*"
     "@types/node": 17.0.21
+    "@types/node-cron": ^3.0.2
     discord-api-types: ^0.37.2
     discord.js: ^14.2.0
+    node-cron: ^3.0.2
     reflect-metadata: ^0.1.13
     rimraf: 3.0.2
     source-map-support: 0.5.21
@@ -1665,6 +1669,13 @@ __metadata:
   version: 4.14.182
   resolution: "@types/lodash@npm:4.14.182"
   checksum: 7dd137aa9dbabd632408bd37009d984655164fa1ecc3f2b6eb94afe35bf0a5852cbab6183148d883e9c73a958b7fec9a9bcf7c8e45d41195add6a18c34958209
+  languageName: node
+  linkType: hard
+
+"@types/node-cron@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "@types/node-cron@npm:3.0.2"
+  checksum: 921b1276c793ab6ae095436b8cde8d4d3ab02d8749011bd5b2006a4d921e206ae06de66edd9bccff4b1c09726bad16d9274c1ad104ab2d4370ad910f71cb9db2
   languageName: node
   linkType: hard
 
@@ -3501,6 +3512,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"murmurhash-v3@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "murmurhash-v3@npm:1.0.2"
+  checksum: 4c54e01b5da5366db9746f563f1cceff53cd15166845b8aadbdec584d86e6c01ae8795cfcd263e6f5a064cf711f40552e391321bd108871c7ec76d1a18167efc
+  languageName: node
+  linkType: hard
+
 "nanoid@npm:^3.3.4":
   version: 3.3.4
   resolution: "nanoid@npm:3.3.4"
@@ -3590,6 +3608,15 @@ __metadata:
   bin:
     next: dist/bin/next
   checksum: 31da1485d3499b2d43b452378931cc04d3593dcdecb7629263d5f5dae375ae956d68963a7398b613a283d0c42c50a7ab9f5ef911d8df50f740e8438721e06457
+  languageName: node
+  linkType: hard
+
+"node-cron@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "node-cron@npm:3.0.2"
+  dependencies:
+    uuid: 8.3.2
+  checksum: dd21585c0d4069a0752022dad9b8380a4393c4783ec78355ffa99ff32b018c3743a35d4ebf9d7c7863949e94e302b440f58c884eb4960e71c7260d817e2d3f25
   languageName: node
   linkType: hard
 
@@ -4813,6 +4840,15 @@ __metadata:
   dependencies:
     inherits: 2.0.3
   checksum: 913f9a90d05a60e91f91af01b8bd37e06bca4cc02d7b49e01089f9d5b78be2fffd61fb1a41b517de7238c5fc7337fa939c62d1fb4eb82e014894c7bee6637aaf
+  languageName: node
+  linkType: hard
+
+"uuid@npm:8.3.2":
+  version: 8.3.2
+  resolution: "uuid@npm:8.3.2"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 5575a8a75c13120e2f10e6ddc801b2c7ed7d8f3c8ac22c7ed0c7b2ba6383ec0abda88c905085d630e251719e0777045ae3236f04c812184b7c765f63a70e58df
   languageName: node
   linkType: hard
 
