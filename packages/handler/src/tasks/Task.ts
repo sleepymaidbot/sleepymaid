@@ -1,6 +1,6 @@
 import { HandlerClient } from '../HandlerClient'
 
 export interface TaskInterface {
-	interval: number
+	interval: string
 	execute: (client: HandlerClient) => unknown | Promise<unknown>
 }

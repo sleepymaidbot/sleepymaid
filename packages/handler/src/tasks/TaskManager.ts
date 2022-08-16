@@ -3,6 +3,7 @@ import { loadFolder } from '@sleepymaid/util'
 import { container } from 'tsyringe'
 import { TaskInterface } from './Task'
 import { BaseManager } from '../BaseManager'
+import { schedule } from 'node-cron'
 
 export interface TaskManagerStartAllOptionsType {
 	folder: string
@@ -23,13 +24,11 @@ export class TaskManager extends BaseManager {
 			const task = container.resolve<TaskInterface>(
 				(await import(file)).default
 			)
-			setInterval(() => {
-				try {
-					task.execute(this.client)
-				} catch (error) {
-					this.client.logger.error(error)
-				}
-			}, task.interval)
+			try {
+				schedule(task.interval, () => task.execute(this.client))
+			} catch (error) {
+				this.client.logger.error(error)
+			}
 			count++
 			this.client.logger.info(
 				`Task handler: -> Loaded task -> ${file.split('/').pop().split('.')[0]}`
