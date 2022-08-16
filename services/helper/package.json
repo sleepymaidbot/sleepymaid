@@ -26,14 +26,14 @@
 		"@sleepymaid/logger": "*",
 		"discord-api-types": "^0.37.2",
 		"discord.js": "^14.2.0",
-		"i18next": "^21.9.0",
+		"i18next": "^21.9.1",
 		"i18next-fs-backend": "^1.1.5",
 		"path": "0.12.7",
 		"reflect-metadata": "^0.1.13",
 		"tsyringe": "^4.7.0"
 	},
 	"volta": {
-		"node": "16.16.0",
+		"node": "16.17.0",
 		"yarn": "1.22.19"
 	},
 	"packageManager": "yarn@1.22.18"

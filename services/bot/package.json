@@ -30,7 +30,7 @@
 		"discord-api-types": "^0.37.2",
 		"discord.js": "^14.2.0",
 		"fs": "0.0.1-security",
-		"i18next": "^21.9.0",
+		"i18next": "^21.9.1",
 		"i18next-fs-backend": "^1.1.5",
 		"murmurhash-v3": "^1.0.2",
 		"path": "0.12.7",
@@ -40,7 +40,7 @@
 		"undici": "^5.8.2"
 	},
 	"volta": {
-		"node": "16.16.0",
+		"node": "16.17.0",
 		"yarn": "1.22.19"
 	},
 	"packageManager": "yarn@1.22.18"
