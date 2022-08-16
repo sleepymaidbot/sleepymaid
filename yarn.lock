@@ -1506,7 +1506,6 @@ __metadata:
   dependencies:
     "@sleepymaid/util": "*"
     "@types/node": 17.0.21
-    "@types/node-cron": ^3.0.2
     discord-api-types: ^0.37.2
     discord.js: ^14.2.0
     node-cron: ^3.0.2
@@ -1669,13 +1668,6 @@ __metadata:
   version: 4.14.182
   resolution: "@types/lodash@npm:4.14.182"
   checksum: 7dd137aa9dbabd632408bd37009d984655164fa1ecc3f2b6eb94afe35bf0a5852cbab6183148d883e9c73a958b7fec9a9bcf7c8e45d41195add6a18c34958209
-  languageName: node
-  linkType: hard
-
-"@types/node-cron@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "@types/node-cron@npm:3.0.2"
-  checksum: 921b1276c793ab6ae095436b8cde8d4d3ab02d8749011bd5b2006a4d921e206ae06de66edd9bccff4b1c09726bad16d9274c1ad104ab2d4370ad910f71cb9db2
   languageName: node
   linkType: hard
 
