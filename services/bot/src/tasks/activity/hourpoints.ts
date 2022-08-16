@@ -11,7 +11,7 @@ function isTextChannel(channel: Channel): channel is TextChannel {
 }
 
 export default class HourPointsTask implements TaskInterface {
-	public readonly interval = 3600000
+	public readonly interval = '0 * * * *'
 
 	public async execute(client: BotClient) {
 		if (client.config.environment === 'production') return

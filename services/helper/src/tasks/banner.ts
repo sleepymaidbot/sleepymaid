@@ -8,7 +8,7 @@ function isTextChannel(channel: Channel): channel is TextChannel {
 }
 
 export default class BannerTask implements TaskInterface {
-	public readonly interval = 3600000
+	public readonly interval = '0 * * * *'
 	public async execute(client: HelperClient) {
 		if (client.config.environment === 'development') return
 		const guild = client.guilds.cache.get('324284116021542922')
