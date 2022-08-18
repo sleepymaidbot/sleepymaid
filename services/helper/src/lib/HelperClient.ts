@@ -51,9 +51,9 @@ export class HelperClient extends HandlerClient {
 		})
 
 		this.loadHandlers({
-			/*commands: {
-				folder: resolve(__dirname, '../slashCommands')
-			},*/
+			commands: {
+				folder: resolve(__dirname, '../commands')
+			},
 			listeners: {
 				folder: resolve(__dirname, '../listeners')
 			},
