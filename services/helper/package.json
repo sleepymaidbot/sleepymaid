@@ -24,7 +24,7 @@
 		"@sleepymaid/handler": "*",
 		"@sleepymaid/localizer": "*",
 		"@sleepymaid/logger": "*",
-		"discord-api-types": "^0.37.2",
+		"discord-api-types": "^0.37.3",
 		"discord.js": "^14.2.0",
 		"i18next": "^21.9.1",
 		"i18next-fs-backend": "^1.1.5",

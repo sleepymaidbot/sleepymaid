@@ -26,7 +26,7 @@
 	},
 	"packageManager": "yarn@1.22.18",
 	"dependencies": {
-		"discord-api-types": "^0.37.2",
+		"discord-api-types": "^0.37.3",
 		"discord.js": "^14.2.0",
 		"node-cron": "^3.0.2",
 		"reflect-metadata": "^0.1.13",
