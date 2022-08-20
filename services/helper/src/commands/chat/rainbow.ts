@@ -21,7 +21,7 @@ export default class RainbowCommand implements SlashCommandInterface {
 					{
 						color: role.color,
 						description:
-							'<:redX:948606748334358559> Tu doit avoir le rôle `Vraiment Cool` pour utiliser cette commande.'
+							'Tu doit avoir le rôle `Vraiment Cool` pour utiliser cette commande.'
 					}
 				],
 				ephemeral: true
@@ -41,8 +41,7 @@ export default class RainbowCommand implements SlashCommandInterface {
 				embeds: [
 					{
 						color: role.color,
-						description:
-							'<:redX:948606748334358559> La commande est en cooldown.'
+						description: 'La commande est en cooldown.'
 					}
 				],
 				ephemeral: true
@@ -61,7 +60,7 @@ export default class RainbowCommand implements SlashCommandInterface {
 			embeds: [
 				{
 					color: color,
-					description: `<:greenTick:948620600144982026> La couleur du rôle vraiment cool a été changée en #${color}.`
+					description: `La couleur du rôle vraiment cool a été changée en #${color}.`
 				}
 			],
 			ephemeral: true
