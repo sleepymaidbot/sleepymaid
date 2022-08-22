@@ -1,6 +1,6 @@
 import { opendir } from 'fs/promises'
 import { TaskInterface } from '@sleepymaid/handler'
-import { HelperClient } from '../lib/HelperClient'
+import { HelperClient } from '../lib/extensions/HelperClient'
 import { Channel, ChannelType, TextChannel } from 'discord.js'
 
 function isTextChannel(channel: Channel): channel is TextChannel {

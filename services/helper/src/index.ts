@@ -1,2 +1,2 @@
-import { HelperClient } from './lib/HelperClient'
+import { HelperClient } from './lib/extensions/HelperClient'
 new HelperClient().start()
