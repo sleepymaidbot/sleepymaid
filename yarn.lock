@@ -1519,10 +1519,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/result@npm:^2.3.3":
-  version: 2.3.3
-  resolution: "@sapphire/result@npm:2.3.3"
-  checksum: 9691638cf9b8da28f3cfde49b42ec90ae2d0215ef526d6e44ae7363a7f4ea0df6ebd1eb1fe990da4353a836793f8bae4d2868397a8ec9a6cc42b81e99c31bda7
+"@sapphire/result@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "@sapphire/result@npm:2.4.0"
+  checksum: ac4fb15e1375b7d39a60f10acc8afdb710831b8677ec2fed8bb9dc625d8716fbda607ea63c678a4f3b1c7c3c47db25655903401cb5073c3037ebbae56ca9cabc
   languageName: node
   linkType: hard
 
@@ -1558,7 +1558,7 @@ __metadata:
   dependencies:
     "@discordjs/builders": ^1.1.0
     "@prisma/client": 4.2.1
-    "@sapphire/result": ^2.3.3
+    "@sapphire/result": ^2.4.0
     "@sapphire/stopwatch": 1.4.1
     "@sleepymaid/config": "*"
     "@sleepymaid/handler": "*"
@@ -1566,7 +1566,7 @@ __metadata:
     "@sleepymaid/util": "*"
     "@types/i18next-fs-backend": ^1.1.2
     "@types/node": 17.0.21
-    discord-api-types: ^0.37.2
+    discord-api-types: ^0.37.3
     discord.js: ^14.2.0
     fs: 0.0.1-security
     i18next: ^21.9.1
@@ -1579,7 +1579,7 @@ __metadata:
     source-map-support: 0.5.21
     tsyringe: 4.7.0
     typescript: 4.7.4
-    undici: ^5.8.2
+    undici: ^5.9.1
   languageName: unknown
   linkType: soft
 
@@ -1588,7 +1588,7 @@ __metadata:
   resolution: "@sleepymaid/config@workspace:packages/config"
   dependencies:
     "@types/node": 17.0.21
-    discord-api-types: ^0.37.2
+    discord-api-types: ^0.37.3
     rimraf: 3.0.2
     source-map-support: 0.5.21
     typescript: 4.7.4
@@ -1601,7 +1601,7 @@ __metadata:
   dependencies:
     "@sleepymaid/util": "*"
     "@types/node": 17.0.21
-    discord-api-types: ^0.37.2
+    discord-api-types: ^0.37.3
     discord.js: ^14.2.0
     node-cron: ^3.0.2
     reflect-metadata: ^0.1.13
@@ -1623,7 +1623,7 @@ __metadata:
     "@sleepymaid/logger": "*"
     "@types/i18next-fs-backend": ^1.1.2
     "@types/node": 17.0.21
-    discord-api-types: ^0.37.2
+    discord-api-types: ^0.37.3
     discord.js: ^14.2.0
     i18next: ^21.9.1
     i18next-fs-backend: ^1.1.5
@@ -1641,7 +1641,7 @@ __metadata:
   resolution: "@sleepymaid/localizer@workspace:packages/localizer"
   dependencies:
     "@types/node": 17.0.21
-    discord-api-types: ^0.37.2
+    discord-api-types: ^0.37.3
     i18next: ^21.9.1
     rimraf: 3.0.2
     source-map-support: 0.5.21
@@ -1670,7 +1670,7 @@ __metadata:
     "@sleepymaid/handler": "*"
     "@sleepymaid/logger": "*"
     "@types/node": 17.0.21
-    discord-api-types: ^0.37.2
+    discord-api-types: ^0.37.3
     discord.js: ^14.2.0
     path: 0.12.7
     reflect-metadata: ^0.1.13
@@ -1706,7 +1706,7 @@ __metadata:
     next: 12.2.5
     react: 18.2.0
     react-dom: 18.2.0
-    sass: ^1.54.4
+    sass: ^1.54.5
     typescript: 4.7.4
   languageName: unknown
   linkType: soft
@@ -2477,10 +2477,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-api-types@npm:^0.37.2":
-  version: 0.37.2
-  resolution: "discord-api-types@npm:0.37.2"
-  checksum: cf89c232a70c8f77653fdfa7fc34e109f51ba2650f98d54d456aefdb0a90872e2189292dfcf7572a9ece1d16652c6993df64f75199eaee3715f28e592dbf6c25
+"discord-api-types@npm:^0.37.3":
+  version: 0.37.3
+  resolution: "discord-api-types@npm:0.37.3"
+  checksum: 35451bfcac67c3c32fdc78eec79649a4a4c07132e14b661f797c61f30cedaf5202066aaf7f39d1ae1143262be07a93257b3c302699814884d2beed1572d1beff
   languageName: node
   linkType: hard
 
@@ -4264,16 +4264,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.54.4":
-  version: 1.54.4
-  resolution: "sass@npm:1.54.4"
+"sass@npm:^1.54.5":
+  version: 1.54.5
+  resolution: "sass@npm:1.54.5"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
     immutable: ^4.0.0
     source-map-js: ">=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: bb6aead09764de450a02b9a66e4ee538f0ba6bc8f2fc3905c71b2c302b5f47e089b510b86cfa7ef2d4139c210c8abf99fe157e7a5bd356c057f10d29e6c4b44c
+  checksum: ba7a65aa7508419468547c8de4d59e537bec874f52823f501663dc98d80dfd2d374e8ea73a31200db7f510b8816c925edf89728c9b36889f4e6673d3e94ec100
   languageName: node
   linkType: hard
 
@@ -4851,6 +4851,13 @@ __metadata:
   version: 5.8.2
   resolution: "undici@npm:5.8.2"
   checksum: 726e04bb37e2e285b4f632600c792efc9eaa5e06e37f9f34338352ac5e1dbd8ae3cdd12dd8761abfecffc5f200d1c7b91b41efb3a31c4e804ea341e5808ddfcf
+  languageName: node
+  linkType: hard
+
+"undici@npm:^5.9.1":
+  version: 5.9.1
+  resolution: "undici@npm:5.9.1"
+  checksum: 8acabbac8e18943ff822574f831d03d65e697e66ef486a679763f7778f37b28980caf7097ededf4017b58c099809e8efd8509a6688f60638360fb86ef47a59df
   languageName: node
   linkType: hard
 
