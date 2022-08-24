@@ -18,12 +18,12 @@
 		"typescript": "4.7.4"
 	},
 	"dependencies": {
-		"@discordjs/builders": "^1.1.0",
+		"@discordjs/builders": "^1.2.0",
 		"@sleepymaid/config": "*",
 		"@sleepymaid/handler": "*",
 		"@sleepymaid/logger": "*",
-		"discord-api-types": "^0.37.3",
-		"discord.js": "^14.2.0",
+		"discord-api-types": "^0.37.4",
+		"discord.js": "^14.3.0",
 		"path": "0.12.7",
 		"reflect-metadata": "^0.1.13",
 		"tsyringe": "^4.7.0"
