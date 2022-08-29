@@ -45,7 +45,9 @@ export const pointsBlacklistedTextChannel = [
 	'777648765065625670', // Mudae
 	'429066457410699274', // Décompte
 	'434861245846519828', // Deleted channel
-	'439155130924007444' // bots et vocal
+	'439155130924007444', // bots 1
+	'1012893445788008458', // bots 2
+	'1012893521851715584' // bots 3
 ]
 
 export const pointsBlacklistedVoiceChannel = [
