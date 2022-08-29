@@ -1725,9 +1725,10 @@ __metadata:
     "@prisma/client": 4.2.1
     "@sapphire/result": ^2.4.0
     "@sapphire/stopwatch": 1.4.1
-    "@sleepymaid/config": "*"
-    "@sleepymaid/handler": "*"
-    "@sleepymaid/logger": "*"
+    "@sleepymaid/config": "workspace:^"
+    "@sleepymaid/handler": "workspace:^"
+    "@sleepymaid/logger": "workspace:^"
+    "@sleepymaid/shared": "workspace:^"
     "@sleepymaid/util": "*"
     "@types/i18next-fs-backend": ^1.1.2
     "@types/node": 17.0.21
@@ -1748,7 +1749,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@sleepymaid/config@*, @sleepymaid/config@workspace:packages/config":
+"@sleepymaid/config@*, @sleepymaid/config@workspace:^, @sleepymaid/config@workspace:packages/config":
   version: 0.0.0-use.local
   resolution: "@sleepymaid/config@workspace:packages/config"
   dependencies:
@@ -1760,7 +1761,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@sleepymaid/handler@*, @sleepymaid/handler@workspace:packages/handler":
+"@sleepymaid/handler@*, @sleepymaid/handler@workspace:^, @sleepymaid/handler@workspace:packages/handler":
   version: 0.0.0-use.local
   resolution: "@sleepymaid/handler@workspace:packages/handler"
   dependencies:
@@ -1782,10 +1783,11 @@ __metadata:
   resolution: "@sleepymaid/helper@workspace:services/helper"
   dependencies:
     "@discordjs/builders": ^1.2.0
-    "@sleepymaid/config": "*"
-    "@sleepymaid/handler": "*"
-    "@sleepymaid/localizer": "*"
-    "@sleepymaid/logger": "*"
+    "@sleepymaid/config": "workspace:^"
+    "@sleepymaid/handler": "workspace:^"
+    "@sleepymaid/localizer": "workspace:^"
+    "@sleepymaid/logger": "workspace:^"
+    "@sleepymaid/shared": "workspace:^"
     "@types/i18next-fs-backend": ^1.1.2
     "@types/node": 17.0.21
     discord-api-types: ^0.37.5
@@ -1801,7 +1803,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@sleepymaid/localizer@*, @sleepymaid/localizer@workspace:packages/localizer":
+"@sleepymaid/localizer@workspace:^, @sleepymaid/localizer@workspace:packages/localizer":
   version: 0.0.0-use.local
   resolution: "@sleepymaid/localizer@workspace:packages/localizer"
   dependencies:
@@ -1814,12 +1816,23 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@sleepymaid/logger@*, @sleepymaid/logger@workspace:packages/logger":
+"@sleepymaid/logger@*, @sleepymaid/logger@workspace:^, @sleepymaid/logger@workspace:packages/logger":
   version: 0.0.0-use.local
   resolution: "@sleepymaid/logger@workspace:packages/logger"
   dependencies:
     "@types/node": 17.0.21
     ansi-colors: 4.1.3
+    rimraf: 3.0.2
+    source-map-support: 0.5.21
+    typescript: 4.8.2
+  languageName: unknown
+  linkType: soft
+
+"@sleepymaid/shared@workspace:^, @sleepymaid/shared@workspace:packages/shared":
+  version: 0.0.0-use.local
+  resolution: "@sleepymaid/shared@workspace:packages/shared"
+  dependencies:
+    "@types/node": 17.0.21
     rimraf: 3.0.2
     source-map-support: 0.5.21
     typescript: 4.8.2

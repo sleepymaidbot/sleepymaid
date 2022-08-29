@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 import { ChannelType, GuildMember } from 'discord.js'
-import { pointsBlacklistedVoiceChannel } from '../../lib/lists'
+import { pointsBlacklistedVoiceChannel } from '@sleepymaid/shared'
 import { container } from 'tsyringe'
 import { BotClient } from '../../lib/extensions/BotClient'
 import { voiceXpManager } from '../../lib/managers/lme/voiceXpManager'

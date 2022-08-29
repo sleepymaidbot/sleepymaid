@@ -2,7 +2,7 @@ import 'reflect-metadata'
 import { BotClient } from '../../lib/extensions/BotClient'
 import { voiceXpManager } from '../../lib/managers/lme/voiceXpManager'
 import { container } from 'tsyringe'
-import { pointsBlacklistedVoiceChannel } from '../../lib/lists'
+import { pointsBlacklistedVoiceChannel } from '@sleepymaid/shared'
 import { VoiceState } from 'discord.js'
 import { ListenerInterface } from '@sleepymaid/handler'
 

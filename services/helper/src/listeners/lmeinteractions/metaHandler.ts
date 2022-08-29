@@ -5,7 +5,7 @@ import {
 	SelectMenuBuilder,
 	SelectMenuOptionBuilder
 } from '@discordjs/builders'
-import { pingRoleIds, colorRoleIds } from '../../lib/lists'
+import { pingRoleIds, colorRoleIds } from '@sleepymaid/shared'
 import { ListenerInterface } from '@sleepymaid/handler'
 
 export default class MetahandlerListener implements ListenerInterface {

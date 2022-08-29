@@ -7,7 +7,7 @@ import {
 } from 'discord.js'
 import { container } from 'tsyringe'
 import { BotClient } from '../../../lib/extensions/BotClient'
-import { pointToRemoveForPoints } from '../../../lib/lists'
+import { pointToRemoveForPoints } from '@sleepymaid/shared'
 import 'reflect-metadata'
 import { SlashCommandInterface } from '@sleepymaid/handler'
 

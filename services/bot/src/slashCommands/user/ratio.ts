@@ -3,7 +3,7 @@ import { getLocalizedProp } from '@sleepymaid/localizer'
 import { ApplicationCommandType } from 'discord-api-types/v10'
 import { UserContextMenuCommandInteraction } from 'discord.js'
 import i18next from 'i18next'
-import { ratioGuildIds } from '../../lib/lists'
+import { ratioGuildIds } from '@sleepymaid/shared'
 
 export default class RatioUserCommand implements UserCommandInterface {
 	public readonly guildIds = ratioGuildIds

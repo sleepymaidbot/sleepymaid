@@ -11,6 +11,7 @@ import {
 import { container, singleton } from 'tsyringe'
 import { HelperClient } from '../../extensions/HelperClient'
 import { baseManager } from '../BaseManager'
+import { colorRoleIds } from '@sleepymaid/shared'
 
 interface RoleSync {
 	id: string
@@ -27,18 +28,6 @@ export const ColorfulNeedRole = [
 ]
 
 const ColorfulRoleId = '857324294791364639'
-
-const colorRoleIds = [
-	'857372101748719656', // Maya
-	'857372291855679538', // Mikado
-	'857372400440967198', // Rose
-	'857372585552773120', // Lavender
-	'857372666141736981', // Coral
-	'857372789139963925', // Cantaloupe
-	'857372929598947368', // Mint
-	'857431586202189835', // Smoked
-	'857432207534981151' // Weed
-]
 
 interface RoleSyncReturn {
 	toAdd: string[]

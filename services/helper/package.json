@@ -24,6 +24,7 @@
 		"@sleepymaid/handler": "workspace:^",
 		"@sleepymaid/localizer": "workspace:^",
 		"@sleepymaid/logger": "workspace:^",
+		"@sleepymaid/shared": "workspace:^",
 		"discord-api-types": "^0.37.5",
 		"discord.js": "^14.3.0",
 		"i18next": "^21.9.1",

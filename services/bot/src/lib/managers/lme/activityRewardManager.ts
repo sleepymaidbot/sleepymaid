@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { singleton } from 'tsyringe'
 import { GuildMember, resolveColor } from 'discord.js'
-import { actifRoles } from '../../lists'
+import { actifRoles } from '@sleepymaid/shared'
 import { EmbedBuilder } from '@discordjs/builders'
 import { baseManager } from '../BaseManager'
 

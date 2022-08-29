@@ -3,7 +3,7 @@ import { Collection, GuildMember } from 'discord.js'
 import { singleton, container } from 'tsyringe'
 import { BotClient } from '../../extensions/BotClient'
 import { Stopwatch } from '@sapphire/stopwatch'
-import { pointsMultiplier } from '../../lists'
+import { pointsMultiplier } from '@sleepymaid/shared'
 import { ActivityRewardManager } from './activityRewardManager'
 import { baseManager } from '../BaseManager'
 

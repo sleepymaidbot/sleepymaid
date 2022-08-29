@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 import { Channel, ChannelType, TextChannel } from 'discord.js'
-import { pointToRemoveForPoints } from '../../lib/lists'
+import { pointToRemoveForPoints } from '@sleepymaid/shared'
 import { ActivityRewardManager } from '../../lib/managers/lme/activityRewardManager'
 import { container } from 'tsyringe'
 import { BotClient } from '../../lib/extensions/BotClient'
