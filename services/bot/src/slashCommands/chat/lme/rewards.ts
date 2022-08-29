@@ -6,7 +6,6 @@ import {
 	resolveColor
 } from 'discord.js'
 import { container } from 'tsyringe'
-import { roleSyncer } from '../../../lib/managers/lme/rolesyncer'
 import { BotClient } from '../../../lib/extensions/BotClient'
 import { pointToRemoveForPoints } from '../../../lib/lists'
 import 'reflect-metadata'
@@ -87,9 +86,6 @@ export default class RewardsCommand implements SlashCommandInterface {
 		}
 
 		container.register(BotClient, { useValue: client })
-		await container
-			.resolve(roleSyncer)
-			.checkUserRole(interaction.member as GuildMember)
 
 		embed.setDescription(`Voici une liste des récompense que tu a obtenu:
   - Rôle <@&857324294791364639>: ${hasColorful}
