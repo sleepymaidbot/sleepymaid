@@ -1,4 +1,11 @@
-import { Guild, GuildMember, resolveColor } from 'discord.js'
+import {
+	Collection,
+	Guild,
+	GuildMember,
+	resolveColor,
+	Role,
+	Snowflake
+} from 'discord.js'
 import { container, singleton } from 'tsyringe'
 import { HelperClient } from '../../extensions/HelperClient'
 import { baseManager } from '../BaseManager'
@@ -18,6 +25,23 @@ export const ColorfulNeedRole = [
 ]
 
 const ColorfulRoleId = '857324294791364639'
+
+const colorRoleIds = [
+	'857372101748719656', // Maya
+	'857372291855679538', // Mikado
+	'857372400440967198', // Rose
+	'857372585552773120', // Lavender
+	'857372666141736981', // Coral
+	'857372789139963925', // Cantaloupe
+	'857372929598947368', // Mint
+	'857431586202189835', // Smoked
+	'857432207534981151' // Weed
+]
+
+interface RoleSyncReturn {
+	toAdd: string[]
+	toRemove: string[]
+}
 
 @singleton()
 export class ServerRoleSyncerManager extends baseManager {
@@ -58,22 +82,72 @@ export class ServerRoleSyncerManager extends baseManager {
 	}
 }
 
+const cd = new Set()
+
 @singleton()
 export class UserRoleSyncerManager extends baseManager {
+	private userRole: Collection<Snowflake, Role>
 	private reloadGuildSeparatorRoles(guild: Guild): void {
 		container.register(HelperClient, { useValue: this.client })
 		container.resolve(ServerRoleSyncerManager).reloadSeparatorRoles(guild)
 	}
 
 	public async syncRoles(member: GuildMember): Promise<void> {
+		if (cd.has(member.id)) return
+		this.userRole = new Collection<Snowflake, Role>(member.roles.cache)
+
+		const toAdd: string[] = []
+		const toRemove: string[] = []
+
 		// Colorful role
-		await this.checkColorfulRole(member)
+		const colorful = await this.checkColorfulRole()
+		toAdd.push(...colorful.toAdd)
+		for await (const roleId of colorful.toAdd) {
+			const role = member.guild.roles.cache.get(roleId)
+			if (role) {
+				this.userRole.set(roleId, role)
+			}
+		}
+		toRemove.push(...colorful.toRemove)
+		for await (const roleId of colorful.toRemove) {
+			this.userRole.delete(roleId)
+		}
 
 		// Color roles
-		await this.checkColorRoles(member)
+		const color = await this.checkColorRoles()
+		toAdd.push(...color.toAdd)
+		for await (const roleId of color.toAdd) {
+			const role = member.guild.roles.cache.get(roleId)
+			if (role) {
+				this.userRole.set(roleId, role)
+			}
+		}
+		toRemove.push(...color.toRemove)
+		for await (const roleId of color.toRemove) {
+			this.userRole.delete(roleId)
+		}
 
 		// Separators roles
-		await this.syncSeparatorRoles(member)
+		/*const sep = await this.syncSeparatorRoles(member)
+		toAdd.push(...sep.toAdd)
+		for await (const roleId of sep.toAdd) {
+			const role = member.guild.roles.cache.get(roleId)
+			if (role) {
+				this.userRole.set(roleId, role)
+			}
+		}
+		toRemove.push(...sep.toRemove)
+		for await (const roleId of sep.toRemove) {
+			this.userRole.delete(roleId)
+		}*/
+
+		await this.applyRoles(member, toAdd, toRemove)
+		if (toAdd.length > 0 || toRemove.length > 0) {
+			cd.add(member.id)
+			setTimeout(() => {
+				cd.delete(member.id)
+			}, 2000)
+		}
 	}
 
 	private async applyRoles(
@@ -91,54 +165,42 @@ export class UserRoleSyncerManager extends baseManager {
 		}
 	}
 
-	private async checkColorRoles(member: GuildMember): Promise<void> {
-		const roles = member.roles.cache
-		const separatorRoles = container
-			.resolve(ServerRoleSyncerManager)
-			.getSeparatorRoles()
-
-		if (roles.has(ColorfulRoleId)) {
-			return
+	private async checkColorRoles(): Promise<RoleSyncReturn> {
+		if (this.userRole.has(ColorfulRoleId)) {
+			return { toAdd: [], toRemove: [] }
 		} else {
-			if (separatorRoles.length === 0)
-				this.reloadGuildSeparatorRoles(member.guild)
-			const role = member.guild.roles.cache.find((role) => {
-				return (
-					role.name.split(' ').includes('Couleur') &&
-					role.name.startsWith('─') &&
-					role.color === resolveColor('#292b2f')
-				)
-			})
+			const toRemove = [...colorRoleIds]
 
-			const roles = separatorRoles.find((sep) => {
-				return sep.id === role.id
-			})
+			toRemove.filter((id) => this.userRole.has(id))
 
-			console.log(roles)
-
-			const toRemove: string[] = [...roles.mustHave]
-
-			return await this.applyRoles(member, [], toRemove)
+			return { toAdd: [], toRemove }
 		}
 	}
 
-	private async checkColorfulRole(member: GuildMember): Promise<void> {
-		const roles = member.roles.cache
-
+	private async checkColorfulRole(): Promise<RoleSyncReturn> {
 		const toAdd: string[] = []
 		const toRemove: string[] = []
 
-		if (roles.hasAny(...ColorfulNeedRole)) {
+		let need = false
+
+		for (const role of this.userRole.keys()) {
+			if (ColorfulNeedRole.includes(role)) {
+				need = true
+				break
+			}
+		}
+
+		if (need) {
 			toAdd.push(ColorfulRoleId)
 		} else {
 			toRemove.push(ColorfulRoleId)
 		}
 
-		return await this.applyRoles(member, toAdd, toRemove)
+		return { toAdd, toRemove }
 	}
-	private async syncSeparatorRoles(member: GuildMember): Promise<void> {
-		const roles = member.roles.cache
-
+	private async syncSeparatorRoles(
+		member: GuildMember
+	): Promise<RoleSyncReturn> {
 		const separatorRoles = container
 			.resolve(ServerRoleSyncerManager)
 			.getSeparatorRoles()
@@ -149,7 +211,7 @@ export class UserRoleSyncerManager extends baseManager {
 
 		for (let i = 0; i < userSeparator.length; i++) {
 			userSeparator[i].mustHave = userSeparator[i].mustHave.filter((id) =>
-				roles.has(id)
+				this.userRole.has(id)
 			)
 		}
 
@@ -166,7 +228,7 @@ export class UserRoleSyncerManager extends baseManager {
 		userSeparator = userSeparator.filter((role) => role !== null)
 
 		const removeFirst = []
-		for (const role of roles.values()) {
+		for (const role of this.userRole.values()) {
 			if (role.position >= userSeparator[0].pos + 1) {
 				if (role.color === 0) removeFirst.push(false)
 				else removeFirst.push(true)
@@ -191,6 +253,6 @@ export class UserRoleSyncerManager extends baseManager {
 			}
 		}
 
-		return await this.applyRoles(member, toAdd, toRemove)
+		return { toAdd, toRemove }
 	}
 }
