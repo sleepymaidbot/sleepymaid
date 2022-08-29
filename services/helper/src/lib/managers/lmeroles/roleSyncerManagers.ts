@@ -1,3 +1,5 @@
+// eslint is dumb af
+/* eslint-disable @typescript-eslint/no-unused-vars  */
 import {
 	Collection,
 	Guild,
