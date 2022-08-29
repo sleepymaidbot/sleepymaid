@@ -22,7 +22,8 @@ export class HelperClient extends HandlerClient {
 				intents: [
 					GatewayIntentBits.Guilds,
 					GatewayIntentBits.GuildMembers,
-					GatewayIntentBits.GuildMessages
+					GatewayIntentBits.GuildMessages,
+					GatewayIntentBits.GuildVoiceStates
 				],
 				allowedMentions: { parse: ['users', 'roles'], repliedUser: false }
 			}
