@@ -172,4 +172,8 @@ icon.webp
 /**/types
 !/**/src/types
 
+compose/docker-compose.config.yml
+compose/docker-compose.config.dev.yml
+compose/docker-compose.config.prod.yml
+
 # Temporary WIP dev files
