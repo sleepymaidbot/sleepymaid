@@ -19,6 +19,9 @@
 		"source-map-support": "0.5.21",
 		"typescript": "4.8.2"
 	},
+	"dependencies": {
+		"discord-api-types": "^0.37.5"
+	},
 	"volta": {
 		"node": "16.17.0",
 		"yarn": "1.22.19"
