@@ -1,0 +1,12 @@
+version: '3.9'
+
+services:
+  sleepymaid:
+    environment:
+      NODE_ENV: 'dev'
+  helper:
+    environment:
+      NODE_ENV: 'dev'
+  postgres:
+    ports:
+      - '127.0.0.1:5433:5432'
