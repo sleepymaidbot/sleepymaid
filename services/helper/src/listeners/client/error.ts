@@ -9,15 +9,3 @@ export default class WarnListener implements ListenerInterface {
 		client.logger.error(warn)
 	}
 }
-
-/*export default new Listener(
-	{
-		name: 'error',
-		once: false
-	},
-	{
-		run(error: Error, client: HelperClient) {
-			return client.logger.error(error)
-		}
-	}
-)*/
