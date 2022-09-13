@@ -10,9 +10,7 @@ RUN yarn workspaces focus
 COPY prisma ./prisma
 RUN yarn prisma generate
 
-COPY packages/config/package.json ./packages/config/package.json
 COPY packages/handler/package.json ./packages/handler/package.json
-COPY packages/localizer/package.json ./packages/localizer/package.json
 COPY packages/logger/package.json ./packages/logger/package.json
 COPY packages/shared/package.json ./packages/shared/package.json
 COPY packages/util/package.json ./packages/util/package.json
@@ -22,9 +20,7 @@ COPY services/bot/package.json ./services/bot/package.json
 
 RUN yarn
 
-COPY packages/config ./packages/config
 COPY packages/handler ./packages/handler
-COPY packages/localizer ./packages/localizer
 COPY packages/logger ./packages/logger
 COPY packages/shared ./packages/shared
 COPY packages/util ./packages/util
