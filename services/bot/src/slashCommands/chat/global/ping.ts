@@ -1,5 +1,5 @@
 import { SlashCommandInterface } from '@sleepymaid/handler'
-import { getLocalizedProp } from '@sleepymaid/localizer'
+import { getLocalizedProp } from '@sleepymaid/shared'
 import {
 	APIEmbed,
 	ApplicationCommandType,

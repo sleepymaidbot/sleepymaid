@@ -5,8 +5,7 @@ import {
 	ChatInputApplicationCommandData
 } from 'discord.js'
 import i18next from 'i18next'
-import { getLocalizedProp } from '@sleepymaid/localizer'
-import { ratioGuildIds } from '@sleepymaid/shared'
+import { getLocalizedProp, ratioGuildIds } from '@sleepymaid/shared'
 
 export default class RatioSlashCommand implements SlashCommandInterface {
 	public readonly guildIds = ratioGuildIds

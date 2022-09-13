@@ -17,7 +17,7 @@ import {
 	ApplicationCommandType,
 	PermissionFlagsBits
 } from 'discord-api-types/v10'
-import { getLocalizedProp } from '@sleepymaid/localizer'
+import { getLocalizedProp } from '@sleepymaid/shared'
 import i18next from 'i18next'
 
 const getBaseEmbed = (i: ChatInputCommandInteraction<'cached'>): APIEmbed => {

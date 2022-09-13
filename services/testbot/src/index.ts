@@ -1,4 +1,4 @@
-import { initConfig } from '@sleepymaid/config'
+import { initConfig } from '@sleepymaid/shared'
 import { HandlerClient } from '@sleepymaid/handler'
 import { GatewayIntentBits } from 'discord.js'
 import { resolve } from 'path'

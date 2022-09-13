@@ -1,12 +1,11 @@
 import { Logger } from '@sleepymaid/logger'
-import { initConfig, Config } from '@sleepymaid/config'
+import { initConfig, Config, supportedLngs } from '@sleepymaid/shared'
 import { PrismaClient } from '@prisma/client'
 import { ActivityType, GatewayIntentBits } from 'discord-api-types/v10'
 import { HandlerClient } from '@sleepymaid/handler'
 import { resolve, join } from 'path'
 import i18next from 'i18next'
 import FsBackend from 'i18next-fs-backend'
-import { supportedLngs } from '@sleepymaid/localizer'
 
 export class BotClient extends HandlerClient {
 	public declare prisma: PrismaClient
