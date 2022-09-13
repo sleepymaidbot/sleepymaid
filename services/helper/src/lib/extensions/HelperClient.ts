@@ -1,5 +1,5 @@
 import { Logger } from '@sleepymaid/logger'
-import { BaseConfig, ConfigManager } from '@sleepymaid/config'
+import { initConfig, Config } from '@sleepymaid/config'
 import { PrismaClient } from '@prisma/client'
 import { GatewayIntentBits } from 'discord-api-types/v10'
 import { BaseLogger, HandlerClient } from '@sleepymaid/handler'
@@ -10,8 +10,7 @@ import FsBackend from 'i18next-fs-backend'
 
 export class HelperClient extends HandlerClient {
 	public declare prisma: PrismaClient
-	public declare configManager: ConfigManager
-	public declare config: BaseConfig
+	public declare config: Config
 	constructor() {
 		super(
 			{
@@ -31,13 +30,9 @@ export class HelperClient extends HandlerClient {
 	}
 
 	public async start(): Promise<void> {
-		this.configManager = new ConfigManager()
-		const configs = await this.configManager.initConfig()
-		this.config = configs['helper']
-		this.prisma = new PrismaClient({
-			datasources: { db: { url: this.config.db } }
-		})
-		this.env = this.config.environment
+		this.config = initConfig()
+		this.prisma = new PrismaClient()
+		this.env = this.config.nodeEnv
 		await i18next.use(FsBackend).init({
 			//debug: this.config.environment === 'development',
 			supportedLngs,
@@ -63,7 +58,7 @@ export class HelperClient extends HandlerClient {
 			}
 		})
 
-		this.login(this.config.token)
+		this.login(this.config.discordToken)
 
 		process.on('unhandledRejection', (error: Error) => {
 			this.logger.error(error.stack)

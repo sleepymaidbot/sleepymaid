@@ -10,7 +10,7 @@ function isTextChannel(channel: Channel): channel is TextChannel {
 export default class BannerTask implements TaskInterface {
 	public readonly interval = '0 * * * *'
 	public async execute(client: HelperClient) {
-		if (client.config.environment === 'development') return
+		if (client.config.nodeEnv === 'dev') return
 		const guild = client.guilds.cache.get('324284116021542922')
 		if (guild.premiumSubscriptionCount < 7) return
 		client.logger.debug('Banner task started')

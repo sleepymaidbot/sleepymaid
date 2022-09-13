@@ -9,7 +9,7 @@ export default class FeurListener implements ListenerInterface {
 	public readonly once = false
 
 	public async execute(message: Message, client: BotClient) {
-		if (client.config.environment !== 'production') return
+		if (client.config.nodeEnv !== 'dev') return
 		if (message.guild.id !== '860721584373497887') return
 		let feur = false
 		for (const trigger of triggers) {

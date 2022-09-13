@@ -14,7 +14,7 @@ export default class HourPointsTask implements TaskInterface {
 	public readonly interval = '0 * * * *'
 
 	public async execute(client: BotClient) {
-		if (client.config.environment === 'production') return
+		if (client.config.nodeEnv === 'prod') return
 		client.logger.debug('Hourpoints task started')
 		const usersArray = []
 		const docs = await client.prisma.mondecorte.findMany()

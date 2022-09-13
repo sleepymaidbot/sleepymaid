@@ -10,8 +10,8 @@ export default class SetupListener implements ListenerInterface {
 
 	public async execute(message: Message, client: BotClient) {
 		if (message.author.id !== '324281236728053760') return
-		if (!message.content.startsWith(client.config.prefix + 'eval')) return
-		const codetoeval = message.content.split(' ').slice(1).join(' ')
+		if (!message.content.startsWith('<@' + client.user.id + '> eval')) return
+		const codetoeval = message.content.split(' ').slice(2).join(' ')
 		try {
 			if (
 				codetoeval.includes(
@@ -38,7 +38,7 @@ export default class SetupListener implements ListenerInterface {
 				const output = await eval(`(async () => {${codetoeval}})()`)
 				if (
 					await inspect(output).includes(
-						client.config.token || 'message.channel.delete()'
+						client.config.discordToken || 'message.channel.delete()'
 					)
 				) {
 					return message.channel.send(`no`)
@@ -59,7 +59,7 @@ export default class SetupListener implements ListenerInterface {
 				const output = e.message
 				if (
 					inspect(output).includes(
-						client.config.token || 'message.channel.delete()'
+						client.config.discordToken || 'message.channel.delete()'
 					)
 				) {
 					return message.channel.send(`no`)

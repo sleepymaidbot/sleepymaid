@@ -1,5 +1,5 @@
 import { Logger } from '@sleepymaid/logger'
-import { BaseConfig, ConfigManager } from '@sleepymaid/config'
+import { initConfig, Config } from '@sleepymaid/config'
 import { PrismaClient } from '@prisma/client'
 import { ActivityType, GatewayIntentBits } from 'discord-api-types/v10'
 import { HandlerClient } from '@sleepymaid/handler'
@@ -10,8 +10,7 @@ import { supportedLngs } from '@sleepymaid/localizer'
 
 export class BotClient extends HandlerClient {
 	public declare prisma: PrismaClient
-	public declare configManager: ConfigManager
-	public declare config: BaseConfig
+	public declare config: Config
 	public declare logger: Logger
 	constructor() {
 		super(
@@ -43,13 +42,9 @@ export class BotClient extends HandlerClient {
 
 	public async start(): Promise<void> {
 		this.logger = new Logger()
-		this.configManager = new ConfigManager()
-		const configs = await this.configManager.initConfig()
-		this.config = configs['bot']
-		this.prisma = new PrismaClient({
-			datasources: { db: { url: this.config.db } }
-		})
-		this.env = this.config.environment
+		this.config = initConfig()
+		this.prisma = new PrismaClient()
+		this.env = this.config.nodeEnv
 
 		await i18next.use(FsBackend).init({
 			//debug: this.config.environment === 'development',
@@ -75,7 +70,7 @@ export class BotClient extends HandlerClient {
 				folder: resolve(__dirname, '../../tasks')
 			}
 		})
-		this.login(this.config.token)
+		this.login(this.config.discordToken)
 
 		process.on('unhandledRejection', (error: Error) => {
 			this.logger.error(error)

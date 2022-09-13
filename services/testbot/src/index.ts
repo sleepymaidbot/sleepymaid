@@ -1,4 +1,4 @@
-import { ConfigManager } from '@sleepymaid/config'
+import { initConfig } from '@sleepymaid/config'
 import { HandlerClient } from '@sleepymaid/handler'
 import { GatewayIntentBits } from 'discord.js'
 import { resolve } from 'path'
@@ -31,9 +31,7 @@ import { resolve } from 'path'
 		}
 	})
 
-	const configManager = new ConfigManager()
+	const config = initConfig()
 
-	const configs = await configManager.initConfig()
-
-	await client.login(configs['bot'].token)
+	await client.login(config.discordToken)
 })().catch(console.error)

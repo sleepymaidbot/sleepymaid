@@ -32,7 +32,7 @@ export class ActivityRewardManager extends baseManager {
 		)
 		const toRemoveRoles = removeRoleObj.map((roles) => roles.roleId)
 
-		if (this.client.config.environment === 'production') {
+		if (this.client.config.nodeEnv === 'dev') {
 			try {
 				await member.roles.add(toAddRoles)
 				await member.roles.remove(toRemoveRoles)
@@ -47,7 +47,7 @@ export class ActivityRewardManager extends baseManager {
 
 		if (cRoleId != null) {
 			if ((await this._isEligibleForCustomRole(member, inDb)) === false) {
-				if (this.client.config.environment === 'development') return
+				if (this.client.config.nodeEnv === 'dev') return
 				this.client.logger.info(`Deleting ${member.user.tag} custom role`)
 				const guild = this.client.guilds.cache.get('324284116021542922')
 				const cRole = await guild.roles.fetch(cRoleId)
