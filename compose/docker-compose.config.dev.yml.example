@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  sleepymaid:
+    environment:
+      DISCORD_CLIENT_ID: '123'
+      DISCORD_TOKEN: 'token'
+      DEV_IDS: '123,456'
+
+  helper:
+    environment:
+      DISCORD_CLIENT_ID: '123'
+      DISCORD_TOKEN: 'awooga'
+      DEV_IDS: '123,456'
