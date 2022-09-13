@@ -1725,7 +1725,6 @@ __metadata:
     "@prisma/client": 4.3.1
     "@sapphire/result": ^2.4.1
     "@sapphire/stopwatch": 1.4.1
-    "@sleepymaid/config": "workspace:^"
     "@sleepymaid/handler": "workspace:^"
     "@sleepymaid/logger": "workspace:^"
     "@sleepymaid/shared": "workspace:^"
@@ -1746,18 +1745,6 @@ __metadata:
     tsyringe: 4.7.0
     typescript: 4.8.3
     undici: ^5.10.0
-  languageName: unknown
-  linkType: soft
-
-"@sleepymaid/config@*, @sleepymaid/config@workspace:^, @sleepymaid/config@workspace:packages/config":
-  version: 0.0.0-use.local
-  resolution: "@sleepymaid/config@workspace:packages/config"
-  dependencies:
-    "@types/node": 17.0.21
-    discord-api-types: ^0.37.9
-    rimraf: 3.0.2
-    source-map-support: 0.5.21
-    typescript: 4.8.3
   languageName: unknown
   linkType: soft
 
@@ -1783,9 +1770,7 @@ __metadata:
   resolution: "@sleepymaid/helper@workspace:services/helper"
   dependencies:
     "@discordjs/builders": ^1.2.0
-    "@sleepymaid/config": "workspace:^"
     "@sleepymaid/handler": "workspace:^"
-    "@sleepymaid/localizer": "workspace:^"
     "@sleepymaid/logger": "workspace:^"
     "@sleepymaid/shared": "workspace:^"
     "@types/i18next-fs-backend": ^1.1.2
@@ -1799,19 +1784,6 @@ __metadata:
     rimraf: 3.0.2
     source-map-support: 0.5.21
     tsyringe: ^4.7.0
-    typescript: 4.8.3
-  languageName: unknown
-  linkType: soft
-
-"@sleepymaid/localizer@workspace:^, @sleepymaid/localizer@workspace:packages/localizer":
-  version: 0.0.0-use.local
-  resolution: "@sleepymaid/localizer@workspace:packages/localizer"
-  dependencies:
-    "@types/node": 17.0.21
-    discord-api-types: ^0.37.9
-    i18next: ^21.9.1
-    rimraf: 3.0.2
-    source-map-support: 0.5.21
     typescript: 4.8.3
   languageName: unknown
   linkType: soft
@@ -1844,7 +1816,6 @@ __metadata:
   resolution: "@sleepymaid/testbot@workspace:services/testbot"
   dependencies:
     "@discordjs/builders": ^1.2.0
-    "@sleepymaid/config": "*"
     "@sleepymaid/handler": "*"
     "@sleepymaid/logger": "*"
     "@types/node": 17.0.21

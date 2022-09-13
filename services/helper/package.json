@@ -20,9 +20,7 @@
 	},
 	"dependencies": {
 		"@discordjs/builders": "^1.2.0",
-		"@sleepymaid/config": "workspace:^",
 		"@sleepymaid/handler": "workspace:^",
-		"@sleepymaid/localizer": "workspace:^",
 		"@sleepymaid/logger": "workspace:^",
 		"@sleepymaid/shared": "workspace:^",
 		"discord-api-types": "^0.37.9",

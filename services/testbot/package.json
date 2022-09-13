@@ -19,7 +19,6 @@
 	},
 	"dependencies": {
 		"@discordjs/builders": "^1.2.0",
-		"@sleepymaid/config": "*",
 		"@sleepymaid/handler": "*",
 		"@sleepymaid/logger": "*",
 		"discord-api-types": "^0.37.9",

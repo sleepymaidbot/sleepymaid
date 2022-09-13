@@ -1,7 +1,3 @@
-/*
- Inspired by: https://github.com/ChatSift/ModMail/blob/main/src/struct/Command.ts
-*/
-
 import { Locale } from 'discord-api-types/v10'
 import i18next from 'i18next'
 
