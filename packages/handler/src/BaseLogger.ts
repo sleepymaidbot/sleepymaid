@@ -7,7 +7,7 @@ export class BaseLogger {
 	}
 
 	debug(message: string, ...args: string[]): void {
-		if (this.env === 'production') return
+		if (this.env === 'prod') return
 		console.debug(message, ...args)
 	}
 

@@ -199,7 +199,7 @@ export class CommandManager extends BaseManager {
 		const globalCommands = this.globalCommands
 		const guildCommands = this.guildCommands
 		// Global commands
-		if (this.client.env === 'development') {
+		if (this.client.env === 'dev') {
 			const array = guildCommands.get(this.client.devServerId) ?? []
 			array.push(...globalCommands)
 			guildCommands.set(this.client.devServerId, array)

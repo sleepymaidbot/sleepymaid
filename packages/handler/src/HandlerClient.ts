@@ -13,7 +13,7 @@ import {
 	TaskManagerStartAllOptionsType
 } from './tasks/TaskManager'
 
-export type env = 'development' | 'production'
+export type env = 'dev' | 'prod'
 
 export interface HandlerClientOptions {
 	env?: env
@@ -61,7 +61,7 @@ export class HandlerClient extends Client {
 		const { env, devServerId } = options ?? {}
 
 		this.logger = options.logger ?? new BaseLogger(env)
-		this.env = env ?? 'development'
+		this.env = env ?? 'dev'
 		this.devServerId = devServerId
 		this.commandManager = new CommandManager(this)
 		this.listenerManager = new ListenerManager(this)
