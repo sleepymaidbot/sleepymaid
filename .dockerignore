@@ -18,7 +18,7 @@ coverage
 .prettierrc.json
 
 gitUpdate.sh
-a.sh
+dc.sh
 
 LICENSE
 **/README.md

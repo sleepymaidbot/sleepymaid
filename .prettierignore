@@ -1,9 +1,9 @@
-yes/
-packgages/bot/dist
-node_modules/
+**/node_modules/
+
+**/types
+!**/src/types
+**/dist
+
 .git
 .yarn/**
 .pnp.*
-/**/dist
-/**/types
-!/**/src/types
