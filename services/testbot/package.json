@@ -26,10 +26,5 @@
 		"path": "0.12.7",
 		"reflect-metadata": "^0.1.13",
 		"tsyringe": "^4.7.0"
-	},
-	"volta": {
-		"node": "16.17.0",
-		"yarn": "1.22.19"
-	},
-	"packageManager": "yarn@1.22.18"
+	}
 }

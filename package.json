@@ -9,10 +9,6 @@
 		"services/*",
 		"packages/*"
 	],
-	"volta": {
-		"node": "16.17.0",
-		"yarn": "1.22.19"
-	},
 	"packageManager": "yarn@3.2.3",
 	"devDependencies": {
 		"@types/prettier": "2.7.0",
