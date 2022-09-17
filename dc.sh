@@ -1,5 +1,4 @@
 #!/bin/bash
-
 docker-compose \
   -p sleepymaid \
   --env-file ./.env \
