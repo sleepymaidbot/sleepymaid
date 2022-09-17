@@ -30,7 +30,7 @@ export class ActivityRewardManager extends baseManager {
 		const removeRoleObj = actifRoles.filter((roles) => roles.points - 50 >= points);
 		const toRemoveRoles = removeRoleObj.map((roles) => roles.roleId);
 
-		if (this.client.config.nodeEnv === 'dev') {
+		if (this.client.config.nodeEnv === 'prod') {
 			try {
 				await member.roles.add(toAddRoles);
 				await member.roles.remove(toRemoveRoles);
