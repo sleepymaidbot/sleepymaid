@@ -9,9 +9,10 @@ I plan on making this bot public but for now its only available for some specifi
 
 ## Dependencies
 
-- Nodejs (Managed by Volta)
-- Yarn (Managed by Volta)
+- Nodejs
+- Yarn
 - Postgresql
+- Docker
 
 ## Contributing
 
@@ -19,10 +20,10 @@ Im not sure why you would want to contribute to this but if you do make a PR and
 
 ## Running the bot
 
-1. Fill the `packages/config/src/config/bot.ts` with your own information.
-2. Run `yarn`.
-3. Run `yarn build`.
-4. Run `yarn start`.
+1. Copy the `.env.example` file to `.env` and fill in the values.
+2. Copy the `compose/docker-compose.config.[ENV].yml.example` file to `compose/docker-compose.config.[ENV].yml` and fill in the values.
+3. Run `./dc.sh [ENV] build` to build the bot.
+4. Run `./dc.sh [ENV] up -d --remove-orphans` to start the bot.
 
 ## Contact me
 
