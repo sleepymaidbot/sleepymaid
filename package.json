@@ -29,16 +29,8 @@
 		"typescript": "4.8.3"
 	},
 	"scripts": {
-		"build": "yarn turbo run build --filter='!@sleepymaid/website'",
-		"buildbot": "yarn turbo run build --filter=@sleepymaid/bot",
-		"buildtest": "yarn turbo run build --filter=@sleepymaid/test",
-		"buildconfig": "yarn turbo run build --filter='@sleepymaid/config'",
-		"buildpackages": "yarn turbo run build --filter='@sleepymaid/config' --filter='@sleepymaid/handler' --filter='@sleepymaid/localizer' --filter='@sleepymaid/logger' --filter='@sleepymaid/util'",
-		"start": "yarn turbo run start --filter=@sleepymaid/bot",
-		"starthelper": "yarn turbo run start --filter=@sleepymaid/helper",
-		"starttest": "yarn turbo run start --filter=@sleepymaid/testbot",
-		"lint": "yarn eslint --fix --ext ts,tsx packages",
-		"testlint": "yarn eslint --ext ts,tsx packages",
+		"build": "yarn turbo run build",
+		"lint": "yarn eslint --fix --ext ts,tsx",
 		"format": "yarn prettier --write .",
 		"prepare": "husky install"
 	}
