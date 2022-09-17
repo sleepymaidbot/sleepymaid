@@ -1,7 +1,7 @@
 {
 	"name": "sleepymaid",
 	"version": "0.0.0",
-	"repository": "https://github.com/Le-monde-dEcorte/sleepymaid-ts.git",
+	"repository": "https://github.com/sleepymaidbot/sleepymaid.git",
 	"author": "Ecorte",
 	"license": "MIT",
 	"private": true,
