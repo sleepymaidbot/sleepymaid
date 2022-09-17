@@ -1,6 +1,6 @@
-import { HandlerClient } from '../HandlerClient'
+import { HandlerClient } from '../HandlerClient';
 
 export interface TaskInterface {
-	interval: string
-	execute: (client: HandlerClient) => unknown | Promise<unknown>
+	interval: string;
+	execute: (client: HandlerClient) => unknown | Promise<unknown>;
 }

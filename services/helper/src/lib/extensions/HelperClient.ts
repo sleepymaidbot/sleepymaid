@@ -1,70 +1,70 @@
-import { Logger } from '@sleepymaid/logger'
-import { initConfig, Config, supportedLngs } from '@sleepymaid/shared'
-import { PrismaClient } from '@prisma/client'
-import { GatewayIntentBits } from 'discord-api-types/v10'
-import { BaseLogger, HandlerClient } from '@sleepymaid/handler'
-import { join, resolve } from 'path'
-import i18next from 'i18next'
-import FsBackend from 'i18next-fs-backend'
+import { Logger } from '@sleepymaid/logger';
+import { initConfig, Config, supportedLngs } from '@sleepymaid/shared';
+import { PrismaClient } from '@prisma/client';
+import { GatewayIntentBits } from 'discord-api-types/v10';
+import { BaseLogger, HandlerClient } from '@sleepymaid/handler';
+import { join, resolve } from 'path';
+import i18next from 'i18next';
+import FsBackend from 'i18next-fs-backend';
 
 export class HelperClient extends HandlerClient {
-	public declare prisma: PrismaClient
-	public declare config: Config
+	public declare prisma: PrismaClient;
+	public declare config: Config;
 	constructor() {
 		super(
 			{
 				devServerId: '821717486217986098',
-				logger: new Logger() as unknown as BaseLogger
+				logger: new Logger() as unknown as BaseLogger,
 			},
 			{
 				intents: [
 					GatewayIntentBits.Guilds,
 					GatewayIntentBits.GuildMembers,
 					GatewayIntentBits.GuildMessages,
-					GatewayIntentBits.GuildVoiceStates
+					GatewayIntentBits.GuildVoiceStates,
 				],
-				allowedMentions: { parse: ['users', 'roles'], repliedUser: false }
-			}
-		)
+				allowedMentions: { parse: ['users', 'roles'], repliedUser: false },
+			},
+		);
 	}
 
 	public async start(): Promise<void> {
-		this.config = initConfig()
-		this.prisma = new PrismaClient()
-		this.env = this.config.nodeEnv
+		this.config = initConfig();
+		this.prisma = new PrismaClient();
+		this.env = this.config.nodeEnv;
 		await i18next.use(FsBackend).init({
 			//debug: this.config.environment === 'development',
 			supportedLngs,
 			backend: {
-				loadPath: join(__dirname, '../../../../../locales/{{lng}}/{{ns}}.json')
+				loadPath: join(__dirname, '../../../../../locales/{{lng}}/{{ns}}.json'),
 			},
 			cleanCode: true,
 			fallbackLng: 'en-US',
 			preload: ['en-US', 'fr'],
 			defaultNS: 'translation',
-			ns: 'translation'
-		})
+			ns: 'translation',
+		});
 
 		this.loadHandlers({
 			commands: {
-				folder: resolve(__dirname, '../../commands')
+				folder: resolve(__dirname, '../../commands'),
 			},
 			listeners: {
-				folder: resolve(__dirname, '../../listeners')
+				folder: resolve(__dirname, '../../listeners'),
 			},
 			tasks: {
-				folder: resolve(__dirname, '../../tasks')
-			}
-		})
+				folder: resolve(__dirname, '../../tasks'),
+			},
+		});
 
-		this.login(this.config.discordToken)
+		this.login(this.config.discordToken);
 
 		process.on('unhandledRejection', (error: Error) => {
-			this.logger.error(error.stack)
-		})
+			this.logger.error(error.stack);
+		});
 
 		process.on('exit', async () => {
-			await this.prisma.$disconnect()
-		})
+			await this.prisma.$disconnect();
+		});
 	}
 }

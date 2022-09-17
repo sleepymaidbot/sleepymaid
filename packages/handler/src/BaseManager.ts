@@ -1,8 +1,8 @@
-import { HandlerClient } from './HandlerClient'
+import { HandlerClient } from './HandlerClient';
 
 export class BaseManager {
-	declare client: HandlerClient
+	declare client: HandlerClient;
 	constructor(client: HandlerClient) {
-		this.client = client
+		this.client = client;
 	}
 }

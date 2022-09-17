@@ -1,6 +1,6 @@
-import { NextPage } from 'next'
-import Head from 'next/head'
-import Link from 'next/link'
+import { NextPage } from 'next';
+import Head from 'next/head';
+import Link from 'next/link';
 
 const Info: NextPage = () => {
 	return (
@@ -15,7 +15,7 @@ const Info: NextPage = () => {
 				</Link>
 			</h2>
 		</>
-	)
-}
+	);
+};
 
-export default Info
+export default Info;

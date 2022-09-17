@@ -1,4 +1,4 @@
-import { SlashCommandInterface } from '@sleepymaid/handler'
+import { SlashCommandInterface } from '@sleepymaid/handler';
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
@@ -8,33 +8,31 @@ import {
 	APIActionRowComponent,
 	APIEmbedAuthor,
 	APIButtonComponent,
-	APIEmbed
-} from 'discord-api-types/v10'
+	APIEmbed,
+} from 'discord-api-types/v10';
 import {
 	ChatInputCommandInteraction,
 	MessageOptions,
 	MessageEditOptions,
-	ChatInputApplicationCommandData
-} from 'discord.js'
-import { BotClient } from '../../../lib/extensions/BotClient'
+	ChatInputApplicationCommandData,
+} from 'discord.js';
+import { BotClient } from '../../../lib/extensions/BotClient';
 
 interface MessagesType {
-	[key: string]: MessageType
+	[key: string]: MessageType;
 }
 
 interface MessageType {
-	fancyName: string
-	function: (
-		i: ChatInputCommandInteraction
-	) => Promise<MessageOptions & MessageEditOptions>
+	fancyName: string;
+	function: (i: ChatInputCommandInteraction) => Promise<MessageOptions & MessageEditOptions>;
 }
 
 const author: APIEmbedAuthor = {
 	name: 'Casino Secret Steps',
 	url: 'https://discord.gg/FZQtwR3MeV',
 	icon_url:
-		'https://media.discordapp.net/attachments/451488182572417025/979200894467985408/fd75504bd8a4810f750bdb5a94ade84c.png'
-}
+		'https://media.discordapp.net/attachments/451488182572417025/979200894467985408/fd75504bd8a4810f750bdb5a94ade84c.png',
+};
 
 const messages: MessagesType = {
 	'self-roles-setup': {
@@ -49,8 +47,8 @@ const messages: MessagesType = {
 						style: ButtonStyle.Success,
 						custom_id: 'laser-role-ping:manage',
 						emoji: {
-							id: '975870168251113545'
-						}
+							id: '975870168251113545',
+						},
 					},
 					{
 						type: ComponentType.Button,
@@ -58,11 +56,11 @@ const messages: MessagesType = {
 						style: ButtonStyle.Danger,
 						custom_id: 'laser-role-ping:removeall',
 						emoji: {
-							id: '948606748334358559'
-						}
-					}
-				]
-			}
+							id: '948606748334358559',
+						},
+					},
+				],
+			};
 
 			const embed: APIEmbed = {
 				title: 'Self-assignable roles',
@@ -72,24 +70,24 @@ const messages: MessagesType = {
 						name: 'Why ?',
 						value:
 							'Those roles are use to only get pings when we are doing a specific map secret on a specific server.',
-						inline: true
+						inline: true,
 					},
 					{
 						name: 'How ?',
 						value:
 							"Click the button 'Manage my roles' to select the servers you are willing to complete map secrets on! \n Click the button 'Remove all my roles' to remove all your roles.",
-						inline: true
-					}
-				]
-			}
+						inline: true,
+					},
+				],
+			};
 
 			return {
 				embeds: [embed],
-				components: [row]
-			}
-		}
+				components: [row],
+			};
+		},
 	},
-	'casinostep1': {
+	casinostep1: {
 		fancyName: 'Casino Step 1 - Blockers',
 		function: async () => {
 			const embed: APIEmbed = {
@@ -100,29 +98,28 @@ const messages: MessagesType = {
 				fields: [
 					{
 						name: 'Bonus time',
-						value:
-							'This steps gives a ``60`` seconds time bonus when completed.'
+						value: 'This steps gives a ``60`` seconds time bonus when completed.',
 					},
 					{
 						name: 'Video Clip',
 						value:
-							'Click [here](https://medal.tv/games/garrys-mod/clips/nOmwUbsAgsjhv/gs544iOcSp4q) to get a video of us doing it.'
+							'Click [here](https://medal.tv/games/garrys-mod/clips/nOmwUbsAgsjhv/gs544iOcSp4q) to get a video of us doing it.',
 					},
 					{
 						name: 'Credits',
 						value:
-							'<@420662095869378560> - For being the first one to break a blocker.\n<@302793054962581505> - For helping find the good timing and being the first one the destroy all the blockers.'
-					}
+							'<@420662095869378560> - For being the first one to break a blocker.\n<@302793054962581505> - For helping find the good timing and being the first one the destroy all the blockers.',
+					},
 				],
-				author
-			}
+				author,
+			};
 
 			return {
-				embeds: [embed]
-			}
-		}
+				embeds: [embed],
+			};
+		},
 	},
-	'casinostep2': {
+	casinostep2: {
 		fancyName: 'Casino Step 2 - Keypad',
 		function: async () => {
 			const embed: APIEmbed = {
@@ -134,22 +131,22 @@ const messages: MessagesType = {
 					{
 						name: 'Video Clip',
 						value:
-							'Click [here](https://medal.tv/games/garrys-mod/clips/nAp2b42Xg7ysq/d1337jx9lQuX) to get a video of us doing it.'
+							'Click [here](https://medal.tv/games/garrys-mod/clips/nAp2b42Xg7ysq/d1337jx9lQuX) to get a video of us doing it.',
 					},
 					{
 						name: 'Credits',
-						value: '<@285502356811022336> - For finding how to open the keypad.'
-					}
+						value: '<@285502356811022336> - For finding how to open the keypad.',
+					},
 				],
-				author
-			}
+				author,
+			};
 
 			return {
-				embeds: [embed]
-			}
-		}
+				embeds: [embed],
+			};
+		},
 	},
-	'casinostep3': {
+	casinostep3: {
 		fancyName: 'Casino Step 3 - Hammer',
 		function: async () => {
 			const embed: APIEmbed = {
@@ -161,21 +158,20 @@ const messages: MessagesType = {
 					{
 						name: 'Video Clip',
 						value:
-							'Click [here](https://medal.tv/games/garrys-mod/clips/opgyilfYXydqy/d1337LULzVYw) to get a video of us doing it.'
+							'Click [here](https://medal.tv/games/garrys-mod/clips/opgyilfYXydqy/d1337LULzVYw) to get a video of us doing it.',
 					},
 					{
 						name: 'Credits',
-						value:
-							'<@562779372533186560> - For having the idea of burning the box.'
-					}
+						value: '<@562779372533186560> - For having the idea of burning the box.',
+					},
 				],
-				author
-			}
+				author,
+			};
 
-			return { embeds: [embed] }
-		}
+			return { embeds: [embed] };
+		},
 	},
-	'casinostep4': {
+	casinostep4: {
 		fancyName: 'Casino Step 4 - Control room lasers',
 		function: async () => {
 			const embed: APIEmbed = {
@@ -187,19 +183,19 @@ const messages: MessagesType = {
 					{
 						name: 'Slash command',
 						value:
-							'We made a slash that takes as input order from the control room and the middle lasers and outputs the button order. The command is `/casino getbuttonorder <control room code> <middle lasers code>`.'
+							'We made a slash that takes as input order from the control room and the middle lasers and outputs the button order. The command is `/casino getbuttonorder <control room code> <middle lasers code>`.',
 					},
 					{
 						name: 'Credits',
-						value: '<@285502356811022336> - For finding how to decode the code.'
-					}
+						value: '<@285502356811022336> - For finding how to decode the code.',
+					},
 				],
-				author
-			}
-			return { embeds: [embed] } //
-		}
+				author,
+			};
+			return { embeds: [embed] }; //
+		},
 	},
-	'casinostep5': {
+	casinostep5: {
 		fancyName: 'Casino Step 5 - Simon Says',
 		function: async () => {
 			const embed: APIEmbed = {
@@ -210,40 +206,38 @@ const messages: MessagesType = {
 				fields: [
 					{
 						name: 'Bonus time',
-						value:
-							'This steps gives a ``120`` seconds time bonus when completed.'
+						value: 'This steps gives a ``120`` seconds time bonus when completed.',
 					},
 					{
 						name: 'Video Clip',
 						value:
-							'Click [here](https://medal.tv/games/garrys-mod/clips/oOCAEKxMGwoDR/d1337CBNS5hA) to get a video of us doing it.'
+							'Click [here](https://medal.tv/games/garrys-mod/clips/oOCAEKxMGwoDR/d1337CBNS5hA) to get a video of us doing it.',
 					},
 					{
 						name: 'Credits',
-						value:
-							'<@217473615174565888> - For being the first one the finish simon says.'
-					}
+						value: '<@217473615174565888> - For being the first one the finish simon says.',
+					},
 				],
-				author
-			}
-			return { embeds: [embed] }
-		}
-	}
-}
+				author,
+			};
+			return { embeds: [embed] };
+		},
+	},
+};
 
 const getChoices = () => {
-	const choices = []
+	const choices = [];
 	for (const [k, v] of Object.entries(messages)) {
 		choices.push({
 			name: v.fancyName,
-			value: k
-		})
+			value: k,
+		});
 	}
-	return choices
-}
+	return choices;
+};
 
 export default class LaserSetupCommand implements SlashCommandInterface {
-	public readonly guildIds = ['860721584373497887']
+	public readonly guildIds = ['860721584373497887'];
 	public readonly data = {
 		name: 'setup',
 		description: '[Admin only] Allow you to post pre-made messages.',
@@ -254,66 +248,61 @@ export default class LaserSetupCommand implements SlashCommandInterface {
 				description: 'The name of the command',
 				type: ApplicationCommandOptionType.String,
 				choices: getChoices(),
-				required: true
+				required: true,
 			},
 			{
 				name: 'message_id',
 				description: 'The id of the message you want to edit',
 				type: ApplicationCommandOptionType.String,
-				required: false
-			}
-		]
-	} as ChatInputApplicationCommandData
+				required: false,
+			},
+		],
+	} as ChatInputApplicationCommandData;
 
-	public async execute(
-		interaction: ChatInputCommandInteraction,
-		client: BotClient
-	) {
-		if (!interaction.inCachedGuild()) return
-		if (!interaction.memberPermissions.has(PermissionFlagsBits.Administrator))
-			return
-		const name = interaction.options.getString('name')
-		const msg = messages[name]
-		if (!msg) return
-		const messageId = interaction.options.getString('message_id')
+	public async execute(interaction: ChatInputCommandInteraction, client: BotClient) {
+		if (!interaction.inCachedGuild()) return;
+		if (!interaction.memberPermissions.has(PermissionFlagsBits.Administrator)) return;
+		const name = interaction.options.getString('name');
+		const msg = messages[name];
+		if (!msg) return;
+		const messageId = interaction.options.getString('message_id');
 		if (messageId) {
-			const message = await interaction.channel.messages.fetch(messageId)
+			const message = await interaction.channel.messages.fetch(messageId);
 			if (!message) {
 				await interaction.reply({
 					embeds: [
 						{
 							color: 3553599,
-							description: '<:redX:948606748334358559> Message not found.'
-						}
+							description: '<:redX:948606748334358559> Message not found.',
+						},
 					],
-					ephemeral: true
-				})
+					ephemeral: true,
+				});
 			}
 			if (message.author.id !== client.user.id) {
 				await interaction.reply({
 					embeds: [
 						{
 							color: 3553599,
-							description:
-								'<:redX:948606748334358559> You can only edit messages sent by the bot.'
-						}
+							description: '<:redX:948606748334358559> You can only edit messages sent by the bot.',
+						},
 					],
-					ephemeral: true
-				})
+					ephemeral: true,
+				});
 			} else {
-				await message.edit(await msg.function(interaction))
+				await message.edit(await msg.function(interaction));
 			}
 		} else {
-			await interaction.channel.send(await msg.function(interaction))
+			await interaction.channel.send(await msg.function(interaction));
 		}
 		await interaction.reply({
 			embeds: [
 				{
 					color: 3553599,
-					description: '<:greenTick:948620600144982026> Done!'
-				}
+					description: '<:greenTick:948620600144982026> Done!',
+				},
 			],
-			ephemeral: true
-		})
+			ephemeral: true,
+		});
 	}
 }

@@ -1,29 +1,18 @@
 {
+	"root": true,
 	"env": {
 		"es2021": true,
 		"node": true
 	},
-	"extends": [
-		"eslint:recommended",
-		"plugin:@typescript-eslint/recommended",
-		"prettier"
-	],
+	"extends": ["neon/common", "neon/node", "neon/typescript", "neon/prettier", "neon/module"],
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
 		"ecmaVersion": 12,
 		"sourceType": "module"
 	},
-	"plugins": ["@typescript-eslint"],
+	"plugins": ["@typescript-eslint", "prettier", "import", "typescript-sort-keys"],
 	"ignorePatterns": ["dist"],
 	"rules": {
-		"no-return-await": "off",
-		"@typescript-eslint/no-empty-interface": "warn",
-		"no-mixed-spaces-and-tabs": "warn",
-		"no-duplicate-imports": "warn",
-		"no-empty-function": "warn",
-		"@typescript-eslint/no-empty-function": "warn",
-		"no-empty": "warn",
-		"@typescript-eslint/explicit-module-boundary-types": "off",
 		"@typescript-eslint/ban-ts-comment": [
 			"warn",
 			{

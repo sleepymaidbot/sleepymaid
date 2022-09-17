@@ -10,24 +10,27 @@
 		"packages/*"
 	],
 	"packageManager": "yarn@3.2.3",
+	"scripts": {
+		"build": "yarn turbo run build",
+		"lint": "yarn eslint --fix --ext ts,tsx",
+		"format": "yarn prettier --write . --plugin-search-dir=. .",
+		"prepare": "husky install"
+	},
 	"devDependencies": {
 		"@types/prettier": "2.7.0",
 		"@typescript-eslint/eslint-plugin": "5.37.0",
 		"@typescript-eslint/parser": "5.37.0",
 		"@yarnpkg/cli-dist": "^3.2.3",
 		"eslint": "^8.23.1",
+		"eslint-config-neon": "^0.1.33",
 		"eslint-config-prettier": "8.5.0",
+		"eslint-plugin-import": "^2.26.0",
+		"eslint-plugin-typescript-sort-keys": "^2.1.0",
 		"husky": "^8.0.1",
 		"prettier": "2.7.1",
 		"prisma": "4.3.1",
 		"rimraf": "^3.0.2",
 		"turbo": "1.4.7",
 		"typescript": "4.8.3"
-	},
-	"scripts": {
-		"build": "yarn turbo run build",
-		"lint": "yarn eslint --fix --ext ts,tsx",
-		"format": "yarn prettier --write .",
-		"prepare": "husky install"
 	}
 }

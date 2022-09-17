@@ -4,7 +4,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	distDir: 'dist',
-	reactStrictMode: true
-}
+	reactStrictMode: true,
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

@@ -1,4 +1,4 @@
-import { readdirSync } from 'fs'
+import { readdirSync } from 'fs';
 
 /**
  *
@@ -6,15 +6,15 @@ import { readdirSync } from 'fs'
  * @returns {Promise<string[]>} The files in the folder and subfolders
  */
 export async function loadFolder(folder: string): Promise<string[]> {
-	const fsfolder = readdirSync(folder)
-	const files = []
+	const fsfolder = readdirSync(folder);
+	const files = [];
 	for (const file of fsfolder) {
 		if (file.endsWith('.js')) {
-			files.push(`${folder}/${file}`)
-		} else if (file.endsWith('.disable')) continue
+			files.push(`${folder}/${file}`);
+		} else if (file.endsWith('.disable')) continue;
 		else {
-			files.push(...(await loadFolder(`${folder}/${file}`)))
+			files.push(...(await loadFolder(`${folder}/${file}`)));
 		}
 	}
-	return files
+	return files;
 }
