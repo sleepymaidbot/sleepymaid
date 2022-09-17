@@ -5,7 +5,7 @@ WORKDIR /opt/build
 
 RUN apk add --update \
   && apk add --no-cache ca-certificates \
-  && apk add --no-cache --virtual .build-deps curl git python3 alpine-sdk
+  && apk add --no-cache --virtual .build-deps curl git python3 alpine-sdk yt-dlp
 
 COPY turbo.json package.json tsconfig.json yarn.lock .yarnrc.yml ./
 COPY .yarn ./.yarn
