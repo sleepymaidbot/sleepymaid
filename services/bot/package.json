@@ -30,7 +30,7 @@
 		"discord-api-types": "^0.37.10",
 		"discord.js": "^14.3.0",
 		"fs": "0.0.1-security",
-		"i18next": "^21.9.1",
+		"i18next": "^21.9.2",
 		"i18next-fs-backend": "^1.1.5",
 		"murmurhash-v3": "^1.0.2",
 		"path": "0.12.7",
