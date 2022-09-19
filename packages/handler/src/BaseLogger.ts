@@ -1,4 +1,4 @@
-import { env } from './HandlerClient';
+import type { env } from './HandlerClient';
 
 export class BaseLogger {
 	public declare env: env;
@@ -15,7 +15,7 @@ export class BaseLogger {
 		console.info(message, ...args);
 	}
 
-	error(error: string, ...args: string[]): void {
+	error(error: string | Error, ...args: string[]): void {
 		console.error(error, ...args);
 	}
 }

@@ -1,7 +1,7 @@
 import { unlink } from 'fs';
-import { ListenerInterface } from '@sleepymaid/handler';
-import { Message } from 'discord.js';
-import { BotClient } from '../../lib/extensions/BotClient';
+import type { ListenerInterface } from '@sleepymaid/handler';
+import type { Message } from 'discord.js';
+import type { BotClient } from '../../lib/extensions/BotClient';
 import { shell } from '@sleepymaid/util';
 import { join } from 'path';
 import { Result } from '@sapphire/result';

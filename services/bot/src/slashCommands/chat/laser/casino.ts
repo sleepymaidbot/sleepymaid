@@ -1,4 +1,4 @@
-import { SlashCommandInterface } from '@sleepymaid/handler';
+import type { SlashCommandInterface } from '@sleepymaid/handler';
 import {
 	ChatInputApplicationCommandData,
 	ChatInputCommandInteraction,
@@ -43,8 +43,10 @@ export default class LaserCasinoCommand implements SlashCommandInterface {
 		switch (interaction.options.getSubcommand()) {
 			case 'getbuttonorder': {
 				const iroomNumber = interaction.options.getInteger('control');
+				if (!iroomNumber) return;
 				await this.checkNumber(interaction, iroomNumber);
 				const imidNumber = interaction.options.getInteger('mid');
+				if (!imidNumber) return;
 				await this.checkNumber(interaction, imidNumber);
 
 				const roomNumbers = ('' + iroomNumber).split('');
@@ -52,7 +54,9 @@ export default class LaserCasinoCommand implements SlashCommandInterface {
 
 				const finalOrder = [0, 0, 0, 0];
 				for (let i = 0; i < 4; i++) {
+					// @ts-expect-error
 					const int = parseInt(midNumbers[i]);
+					// @ts-expect-error
 					const pos = parseInt(roomNumbers[i]) - 1;
 					finalOrder[pos] = int;
 				}

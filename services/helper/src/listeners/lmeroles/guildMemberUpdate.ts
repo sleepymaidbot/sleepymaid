@@ -1,6 +1,6 @@
 import 'reflect-metadata';
-import { ListenerInterface } from '@sleepymaid/handler';
-import { GuildMember } from 'discord.js';
+import type { ListenerInterface } from '@sleepymaid/handler';
+import type { GuildMember } from 'discord.js';
 import { container } from 'tsyringe';
 import { HelperClient } from '../../lib/extensions/HelperClient';
 import { UserRoleSyncerManager } from '../../lib/managers/lmeroles/roleSyncerManagers';

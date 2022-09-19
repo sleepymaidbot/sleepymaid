@@ -79,23 +79,21 @@ export class laserRoleManager extends baseManager {
 
 		const collector = collectors.get(interaction.user.id);
 
-		if (collectors.get(interaction.user.id)) collector.stop(EndReason.overlap);
+		if (collectors.get(interaction.user.id)) collector!.stop(EndReason.overlap);
 
 		collectors.set(
 			interaction.user.id,
-			interaction.channel.createMessageComponentCollector({
+			interaction.channel!.createMessageComponentCollector({
 				message,
-				filter: (i: Interaction) => {
-					if (!i.inCachedGuild()) return false;
-					if (i.user.id === interaction.user.id) return true;
-				},
+				filter: (i) => i.user.id === interaction.user.id,
 				time: 120000,
 			}),
 		);
 
-		collectors.get(interaction.user.id).on('collect', async (i: ButtonInteraction | SelectMenuInteraction) => {
+		collectors.get(interaction.user.id)!.on('collect', async (i: ButtonInteraction | SelectMenuInteraction) => {
 			if (!i.inCachedGuild()) return;
-			if (message.id !== i.message.id) return;
+			if (message!.id !== i.message.id) return;
+
 			if (i.isButton()) {
 				const page = i.customId.split(':')[1];
 				let server: Server;
@@ -104,7 +102,7 @@ export class laserRoleManager extends baseManager {
 						await this.backHome(i as ButtonInteraction);
 						break;
 					case 'close':
-						collectors.get(interaction.user.id).stop(EndReason.cancel);
+						collectors.get(interaction.user.id)!.stop(EndReason.cancel);
 						break;
 					case 'remove':
 						server = i.customId.split(':')[2] as Server;
@@ -123,7 +121,7 @@ export class laserRoleManager extends baseManager {
 			}
 		});
 
-		collectors.get(interaction.user.id).on('end', (_, reason: EndReason) => {
+		collectors.get(interaction.user.id)!.on('end', (_, reason: EndReason) => {
 			if (reason === EndReason.overlap) {
 				interaction.editReply({
 					content:
@@ -240,13 +238,14 @@ export class laserRoleManager extends baseManager {
 		if (!interaction.inCachedGuild()) return;
 		const server: Server = interaction.customId.split(':')[2] as Server;
 
-		const selectedRoles = [];
+		const selectedRoles: string[] = [];
 
 		for (const secret of interaction.values) {
+			// @ts-ignore
 			selectedRoles.push(roles[server][secret]);
 		}
 
-		const serverRoles = [];
+		const serverRoles: string[] = [];
 		for (const v of Object.values(roles[server])) serverRoles.push(v);
 
 		const userRole = interaction.member.roles.cache.map((r) => r.id).filter((r) => serverRoles.includes(r));

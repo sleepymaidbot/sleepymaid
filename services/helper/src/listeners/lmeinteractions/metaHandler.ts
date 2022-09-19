@@ -1,13 +1,14 @@
 import { ButtonStyle } from 'discord-api-types/v10';
 import { ButtonBuilder, ActionRowBuilder, SelectMenuBuilder, SelectMenuOptionBuilder } from '@discordjs/builders';
 import { pingRoleIds, colorRoleIds } from '@sleepymaid/shared';
-import { ListenerInterface } from '@sleepymaid/handler';
+import type { ListenerInterface } from '@sleepymaid/handler';
+import type { ButtonInteraction, Interaction, Role, SelectMenuInteraction } from 'discord.js';
 
 export default class MetahandlerListener implements ListenerInterface {
 	public readonly name = 'interactionCreate';
 	public readonly once = false;
 
-	public async execute(interaction) {
+	public async execute(interaction: ButtonInteraction | SelectMenuInteraction) {
 		if (!interaction.customId?.startsWith('lmeMeta')) return;
 		if (!interaction.inCachedGuild()) return;
 		const Ids = interaction.customId.split(':');
@@ -100,14 +101,14 @@ export default class MetahandlerListener implements ListenerInterface {
 									value: '857432207534981151',
 								},
 							];
-							const row1 = new ActionRowBuilder().addComponents([
+							const row1 = new ActionRowBuilder<SelectMenuBuilder>().addComponents([
 								new SelectMenuBuilder()
 									.setCustomId('lmeMeta:bienvenue:select:color')
 									.setPlaceholder('Choisis ici ton rôle de couleur')
 									.addOptions(colorOptions.map((options) => new SelectMenuOptionBuilder(options))),
 							]);
 
-							const row2 = new ActionRowBuilder().addComponents([
+							const row2 = new ActionRowBuilder<ButtonBuilder>().addComponents([
 								new ButtonBuilder()
 									.setLabel('Supprimer ma couleur')
 									.setCustomId('lmeMeta:bienvenue:delete:color')
@@ -154,6 +155,8 @@ export default class MetahandlerListener implements ListenerInterface {
 						const currentPingRole = interaction.member.roles.cache
 							.filter((role) => pingRoleIds.includes(role.id))
 							.map((role) => role.id);
+
+						if (!interaction.isSelectMenu()) return;
 						const newPingRole = interaction.values;
 
 						const toAdd = newPingRole.filter((role) => !currentPingRole.includes(role));
@@ -171,6 +174,7 @@ export default class MetahandlerListener implements ListenerInterface {
 						const currentColorRole = interaction.member.roles.cache
 							.filter((role) => colorRoleIds.includes(role.id))
 							.map((role) => role.id);
+						if (!interaction.isSelectMenu()) return;
 						const newColorRole = interaction.values;
 
 						const toAdd = newColorRole.filter((role) => !currentColorRole.includes(role));
@@ -219,6 +223,7 @@ export default class MetahandlerListener implements ListenerInterface {
 					});
 				else {
 					const role = await interaction.guild.roles.cache.find((r) => r.id === '884149070757769227');
+					if (!role) return;
 					await interaction.member.roles.add(role);
 
 					await interaction.editReply({

@@ -1,5 +1,5 @@
-import { SlashCommandInterface } from '@sleepymaid/handler';
-import { ApplicationCommandType, ChatInputApplicationCommandData } from 'discord.js';
+import type { SlashCommandInterface } from '@sleepymaid/handler';
+import { ApplicationCommandType, ChatInputApplicationCommandData, ChatInputCommandInteraction } from 'discord.js';
 
 export default class YoutubeCommand implements SlashCommandInterface {
 	public readonly guildIds = ['818313526720462868'];
@@ -10,7 +10,7 @@ export default class YoutubeCommand implements SlashCommandInterface {
 		options: [],
 	} as ChatInputApplicationCommandData;
 
-	public async execute(interaction) {
+	public async execute(interaction: ChatInputCommandInteraction) {
 		await interaction.reply({
 			content:
 				'<:youtube:818473733785649183> [Clique ici pour avoir le lien de la chaine youtube de DrraZz_](<https://www.youtube.com/channel/UC-bGc-EQVsAshuL4f4TupeQ>)',

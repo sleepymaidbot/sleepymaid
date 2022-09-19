@@ -4,7 +4,7 @@ import type {
 	ChatInputCommandInteraction,
 	Snowflake,
 } from 'discord.js';
-import { HandlerClient } from '../HandlerClient';
+import type { HandlerClient } from '../HandlerClient';
 
 export interface SlashCommandInterface {
 	data: ChatInputApplicationCommandData;

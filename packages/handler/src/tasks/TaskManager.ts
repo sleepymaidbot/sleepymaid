@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { loadFolder } from '@sleepymaid/util';
 import { container } from 'tsyringe';
-import { TaskInterface } from './Task';
+import type { TaskInterface } from './Task';
 import { BaseManager } from '../BaseManager';
 import { schedule } from 'node-cron';
 
@@ -23,10 +23,10 @@ export class TaskManager extends BaseManager {
 			try {
 				schedule(task.interval, () => task.execute(this.client));
 			} catch (error) {
-				this.client.logger.error(error);
+				this.client.logger.error(error as Error);
 			}
 			count++;
-			this.client.logger.info(`Task handler: -> Loaded task -> ${file.split('/').pop().split('.')[0]}`);
+			this.client.logger.info(`Task handler: -> Loaded task -> ${file?.split('/')?.pop()?.split('.')[0]}`);
 		}
 		this.client.logger.info(`
 			Task handler: -> Loaded ${count} tasks`);

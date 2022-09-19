@@ -1,6 +1,6 @@
 import 'reflect-metadata';
-import { ListenerInterface } from '@sleepymaid/handler';
-import { Role } from 'discord.js';
+import type { ListenerInterface } from '@sleepymaid/handler';
+import type { Role } from 'discord.js';
 import { container } from 'tsyringe';
 import { HelperClient } from '../../lib/extensions/HelperClient';
 import { ServerRoleSyncerManager } from '../../lib/managers/lmeroles/roleSyncerManagers';

@@ -1,5 +1,5 @@
 import type { MessageApplicationCommandData, MessageContextMenuCommandInteraction, Snowflake } from 'discord.js';
-import { HandlerClient } from '../HandlerClient';
+import type { HandlerClient } from '../HandlerClient';
 
 export interface MessageCommandInterface {
 	data: MessageApplicationCommandData;

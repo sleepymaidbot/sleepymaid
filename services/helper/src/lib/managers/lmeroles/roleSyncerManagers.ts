@@ -53,7 +53,7 @@ export class ServerRoleSyncerManager extends baseManager {
 		for (let i = 0; i < max; i++) {
 			for (const role of guild.roles.cache.values()) {
 				const pos = role.position;
-				if (pos < separatedRoles[i]?.pos && pos > separatedRoles[i + 1]?.pos) separatedRoles[i].mustHave.push(role.id);
+				if (pos < separatedRoles[i]!.pos && pos > separatedRoles[i + 1]!.pos) separatedRoles[i]!.mustHave.push(role.id);
 			}
 		}
 
@@ -70,6 +70,10 @@ const cd = new Set();
 @singleton()
 export class UserRoleSyncerManager extends baseManager {
 	private userRole: Collection<Snowflake, Role>;
+	constructor(client: HelperClient) {
+		super(client);
+		this.userRole = new Collection<Snowflake, Role>();
+	}
 	private reloadGuildSeparatorRoles(guild: Guild): void {
 		container.register(HelperClient, { useValue: this.client });
 		container.resolve(ServerRoleSyncerManager).reloadSeparatorRoles(guild);
@@ -181,18 +185,18 @@ export class UserRoleSyncerManager extends baseManager {
 		const separatorRoles = container.resolve(ServerRoleSyncerManager).getSeparatorRoles();
 
 		if (separatorRoles.length === 0) this.reloadGuildSeparatorRoles(member.guild);
-		let userSeparator: RoleSync[] = [...separatorRoles];
+		let userSeparator: Array<RoleSync | null> = [...separatorRoles];
 
 		for (let i = 0; i < userSeparator.length; i++) {
-			userSeparator[i].mustHave = userSeparator[i].mustHave.filter((id) => this.userRole.has(id));
+			userSeparator[i]!.mustHave = userSeparator[i]!.mustHave.filter((id) => this.userRole.has(id));
 		}
 
 		const toAdd: string[] = [];
 		const toRemove: string[] = [];
 
 		for (let i = 0; i < userSeparator.length; i++) {
-			if (userSeparator[i].mustHave.length === 0) {
-				toRemove.push(userSeparator[i].id);
+			if (userSeparator[i]!.mustHave.length === 0) {
+				toRemove.push(userSeparator[i]!.id);
 				userSeparator[i] = null;
 			}
 		}
@@ -201,7 +205,7 @@ export class UserRoleSyncerManager extends baseManager {
 
 		const removeFirst = [];
 		for (const role of this.userRole.values()) {
-			if (role.position >= userSeparator[0].pos + 1) {
+			if (role.position >= userSeparator[0]!.pos + 1) {
 				if (role.color === 0) removeFirst.push(false);
 				else removeFirst.push(true);
 			}
@@ -209,19 +213,19 @@ export class UserRoleSyncerManager extends baseManager {
 
 		if (removeFirst.length >= 1) {
 			if (removeFirst.some((value) => value === true)) {
-				userSeparator[0].toAdd = true;
+				userSeparator[0]!.toAdd = true;
 			} else if (removeFirst.every((value) => value === false)) {
-				userSeparator[0].toAdd = false;
+				userSeparator[0]!.toAdd = false;
 			}
 		} else if (removeFirst.length === 0) {
-			userSeparator[0].toAdd = false;
+			userSeparator[0]!.toAdd = false;
 		}
 
 		for (const role of userSeparator) {
-			if (role.toAdd === true) {
-				toAdd.push(role.id);
+			if (role!.toAdd === true) {
+				toAdd.push(role!.id);
 			} else {
-				toRemove.push(role.id);
+				toRemove.push(role!.id);
 			}
 		}
 

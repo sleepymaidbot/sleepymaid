@@ -1,4 +1,4 @@
-import { SlashCommandInterface } from '@sleepymaid/handler';
+import type { SlashCommandInterface } from '@sleepymaid/handler';
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
@@ -15,7 +15,7 @@ import {
 	ActionRowBuilder,
 	ButtonBuilder,
 } from 'discord.js';
-import { HelperClient } from '../../../lib/extensions/HelperClient';
+import type { HelperClient } from '../../../lib/extensions/HelperClient';
 
 interface MessagesType {
 	[key: string]: MessageType;
@@ -182,15 +182,17 @@ export default class LmeSetupCommand implements SlashCommandInterface {
 		],
 	} as ChatInputApplicationCommandData;
 
+	// @ts-ignore
 	public async execute(interaction: ChatInputCommandInteraction, client: HelperClient) {
 		if (!interaction.inCachedGuild()) return;
 		if (!interaction.memberPermissions.has(PermissionFlagsBits.Administrator)) return;
 		const name = interaction.options.getString('name');
+		if (!name) return;
 		const msg = messages[name];
 		if (!msg) return;
 		const messageId = interaction.options.getString('message_id');
 		if (messageId) {
-			const message = await interaction.channel.messages.fetch(messageId);
+			const message = await interaction.channel?.messages.fetch(messageId);
 			if (!message) {
 				await interaction.reply({
 					embeds: [
@@ -202,7 +204,7 @@ export default class LmeSetupCommand implements SlashCommandInterface {
 					ephemeral: true,
 				});
 			}
-			if (message.author.id !== client.user.id) {
+			if (message?.author.id !== client.user?.id) {
 				await interaction.reply({
 					embeds: [
 						{
@@ -214,7 +216,7 @@ export default class LmeSetupCommand implements SlashCommandInterface {
 				});
 			} else {
 				const msgs = await msg.function(interaction);
-				if (msgs.length === 1) await message.edit(await msgs[0]);
+				if (msgs.length === 1) await message?.edit((await msgs[0]) as MessageEditOptions);
 				else
 					await interaction.reply({
 						embeds: [
@@ -229,7 +231,7 @@ export default class LmeSetupCommand implements SlashCommandInterface {
 		} else {
 			await msg.function(interaction).then((msgs) =>
 				msgs.forEach(async (msg) => {
-					await interaction.channel.send(msg);
+					await interaction?.channel?.send(msg);
 				}),
 			);
 		}

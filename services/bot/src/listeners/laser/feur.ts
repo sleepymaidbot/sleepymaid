@@ -1,6 +1,6 @@
-import { ListenerInterface } from '@sleepymaid/handler';
-import { Message } from 'discord.js';
-import { BotClient } from '../../lib/extensions/BotClient';
+import type { ListenerInterface } from '@sleepymaid/handler';
+import type { Message } from 'discord.js';
+import type { BotClient } from '../../lib/extensions/BotClient';
 
 const triggers = ['quoi', 'quoi?', 'pourquoi', 'pourquoi?', 'pk', 'pk?'];
 
@@ -10,7 +10,7 @@ export default class FeurListener implements ListenerInterface {
 
 	public async execute(message: Message, client: BotClient) {
 		if (client.config.nodeEnv !== 'dev') return;
-		if (message.guild.id !== '860721584373497887') return;
+		if (message?.guild?.id !== '860721584373497887') return;
 		let feur = false;
 		for (const trigger of triggers) {
 			if (message.content.toLowerCase().endsWith(trigger)) {

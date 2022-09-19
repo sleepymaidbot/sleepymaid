@@ -1,5 +1,5 @@
-import { HandlerClient, UserCommandInterface } from '@sleepymaid/handler';
-import { UserApplicationCommandData, UserContextMenuCommandInteraction } from 'discord.js';
+import type { HandlerClient, UserCommandInterface } from '@sleepymaid/handler';
+import type { UserApplicationCommandData, UserContextMenuCommandInteraction } from 'discord.js';
 import { ContextMenuCommandBuilder } from '@discordjs/builders';
 import { ApplicationCommandType } from 'discord-api-types/v10';
 import { injectable } from 'tsyringe';
@@ -19,7 +19,7 @@ export default class IdCommand implements UserCommandInterface {
 			});
 			client.logger.info(`Pong!`);
 		} catch (error) {
-			client.logger.error(error);
+			client.logger.error(error as Error);
 		}
 	}
 }

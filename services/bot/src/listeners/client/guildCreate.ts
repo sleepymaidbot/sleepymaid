@@ -1,6 +1,6 @@
-import { ListenerInterface } from '@sleepymaid/handler';
-import { Guild } from 'discord.js';
-import { BotClient } from '../../lib/extensions/BotClient';
+import type { ListenerInterface } from '@sleepymaid/handler';
+import type { Guild } from 'discord.js';
+import type { BotClient } from '../../lib/extensions/BotClient';
 
 export default class GuildCreateListener implements ListenerInterface {
 	public readonly name = 'guildCreate';

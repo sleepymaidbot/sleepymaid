@@ -1,5 +1,5 @@
-import { ListenerInterface } from '@sleepymaid/handler';
-import { ButtonInteraction } from 'discord.js';
+import type { ListenerInterface } from '@sleepymaid/handler';
+import type { ButtonInteraction } from 'discord.js';
 import { container } from 'tsyringe';
 import { BotClient } from '../../lib/extensions/BotClient';
 import { laserRoleManager } from '../../lib/managers/laser/roleManager';

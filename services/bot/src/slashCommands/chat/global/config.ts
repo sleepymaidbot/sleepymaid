@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { SlashCommandInterface } from '@sleepymaid/handler';
+import type { SlashCommandInterface } from '@sleepymaid/handler';
 import { ChatInputApplicationCommandData, ChatInputCommandInteraction, PermissionsBitField } from 'discord.js';
 import { container, DependencyContainer } from 'tsyringe';
 import { BotClient } from '../../../lib/extensions/BotClient';
@@ -18,7 +18,7 @@ const getBaseEmbed = (i: ChatInputCommandInteraction<'cached'>): APIEmbed => {
 		color: 3553599,
 		author: {
 			name: i.member.user.tag,
-			icon_url: i.member.user.avatarURL(),
+			icon_url: i.member.user.avatarURL() ?? undefined,
 		},
 		timestamp: new Date(Date.now()).toISOString(),
 	};
@@ -112,6 +112,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 		],
 	} as ChatInputApplicationCommandData;
 
+	// @ts-ignore
 	public async execute(interaction: ChatInputCommandInteraction, client: BotClient) {
 		if (!interaction.inCachedGuild()) return;
 		if (!interaction.guild) return;
@@ -139,8 +140,8 @@ export default class ConfigCommand implements SlashCommandInterface {
 				interaction.member.roles.cache.hasAny(...adminRoles) ||
 				interaction.member.id === interaction.guild.ownerId
 			) {
-				let action: SpecialRoleType;
-				let cleanAction: 'admin-role' | 'mod-role';
+				let action: SpecialRoleType | undefined;
+				let cleanAction: 'admin-role' | 'mod-role' | undefined;
 				if (subcommandGroup === 'admin-role') {
 					action = SpecialRoleType.admin;
 					cleanAction = 'admin-role';
@@ -148,11 +149,12 @@ export default class ConfigCommand implements SlashCommandInterface {
 					action = SpecialRoleType.mod;
 					cleanAction = 'mod-role';
 				}
+				if (action === undefined || cleanAction === undefined) return;
 				const c: DependencyContainer = container;
 				c.register<BotClient>(BotClient, { useValue: client });
 				switch (subcommand) {
 					case 'add': {
-						const roleId = interaction.options.getRole('role').id;
+						const roleId = interaction.options.getRole('role')!.id;
 						if (action === SpecialRoleType.admin) {
 							if (adminRoles.includes(roleId)) {
 								return await interaction.editReply({
@@ -231,7 +233,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 						});
 					}
 					case 'remove': {
-						const roleId = interaction.options.getRole('role').id;
+						const roleId = interaction.options.getRole('role')!.id;
 						if (action === SpecialRoleType.admin && !adminRoles.includes(roleId)) {
 							return await interaction.editReply({
 								embeds: [

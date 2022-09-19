@@ -1,4 +1,4 @@
-import { HandlerClient, TaskInterface } from '@sleepymaid/handler';
+import type { HandlerClient, TaskInterface } from '@sleepymaid/handler';
 import { injectable } from 'tsyringe';
 
 @injectable()

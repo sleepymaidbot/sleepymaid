@@ -1,5 +1,5 @@
 import { EmbedBuilder } from '@discordjs/builders';
-import { ListenerInterface } from '@sleepymaid/handler';
+import type { ListenerInterface } from '@sleepymaid/handler';
 import { ChannelType, GuildBasedChannel, GuildMember, TextChannel } from 'discord.js';
 
 function isTextChannel(channel: GuildBasedChannel): channel is TextChannel {
@@ -13,12 +13,13 @@ export default class DrrazzWelcomeListener implements ListenerInterface {
 	public async execute(member: GuildMember) {
 		if (member.guild.id !== '818313526720462868') return;
 		const role = member.guild.roles.cache.get('818475324631023656');
+		if (!role) return;
 		await member.roles.add(role);
 
 		const ruleChannel = member.guild.channels.cache.get('818314179508568126');
-		if (!isTextChannel(ruleChannel)) return;
+		if (!ruleChannel || !isTextChannel(ruleChannel)) return;
 		const generalChannel = member.guild.channels.cache.get('818313526720462870');
-		if (!isTextChannel(generalChannel)) return;
+		if (!generalChannel || !isTextChannel(generalChannel)) return;
 
 		const embed = new EmbedBuilder()
 			.setAuthor({

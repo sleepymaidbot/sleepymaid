@@ -4,7 +4,7 @@ import { pointsBlacklistedVoiceChannel } from '@sleepymaid/shared';
 import { container } from 'tsyringe';
 import { BotClient } from '../../lib/extensions/BotClient';
 import { voiceXpManager } from '../../lib/managers/lme/voiceXpManager';
-import { ListenerInterface } from '@sleepymaid/handler';
+import type { ListenerInterface } from '@sleepymaid/handler';
 
 export default class VoiceReadyListener implements ListenerInterface {
 	public readonly name = 'ready';
@@ -12,6 +12,7 @@ export default class VoiceReadyListener implements ListenerInterface {
 
 	public async execute(client: BotClient) {
 		const guild = client.guilds.cache.get('324284116021542922');
+		if (!guild) return;
 		guild.channels.cache.forEach(async (channel) => {
 			if (channel.type == ChannelType.GuildVoice) {
 				if (pointsBlacklistedVoiceChannel.includes(channel.id)) return;

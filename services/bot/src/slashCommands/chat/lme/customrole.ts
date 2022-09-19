@@ -1,13 +1,15 @@
 import { SlashCommandBuilder, EmbedBuilder } from '@discordjs/builders';
 import { Result } from '@sapphire/result';
-import { SlashCommandInterface } from '@sleepymaid/handler';
+import type { Err } from '@sapphire/result/dist/lib/Result/Err';
+import type { SlashCommandInterface } from '@sleepymaid/handler';
 import {
 	ChatInputApplicationCommandData,
 	ChatInputCommandInteraction,
 	ColorResolvable,
+	GuildMember,
 	resolveColor,
 } from 'discord.js';
-import { BotClient } from '../../../lib/extensions/BotClient';
+import type { BotClient } from '../../../lib/extensions/BotClient';
 
 export default class CustomRoleCommand implements SlashCommandInterface {
 	public readonly guildIds = ['324284116021542922'];
@@ -42,6 +44,7 @@ export default class CustomRoleCommand implements SlashCommandInterface {
 		)
 		.toJSON() as ChatInputApplicationCommandData;
 
+	// @ts-ignore
 	public async execute(interaction: ChatInputCommandInteraction, client: BotClient) {
 		if (!interaction.inCachedGuild()) return;
 		await interaction.deferReply({ ephemeral: true });
@@ -51,7 +54,7 @@ export default class CustomRoleCommand implements SlashCommandInterface {
 				user_id: interaction.user.id,
 			},
 		});
-		const isEligible = (member, points) => {
+		const isEligible = (member: GuildMember, points: Number) => {
 			const userrole = member.roles.cache.map((x) => x.id);
 			if (userrole.includes('869637334126170112')) return true;
 			if (points >= 250) return true;
@@ -61,19 +64,20 @@ export default class CustomRoleCommand implements SlashCommandInterface {
 		const embed = new EmbedBuilder()
 			.setAuthor({
 				name: `Rôle custom de ${interaction.user.tag}`,
-				iconURL: interaction.user.avatarURL(),
+				iconURL: interaction.user.avatarURL() ?? undefined,
 			})
 			.setColor(resolveColor('#36393f'))
 			.setTimestamp();
 		switch (subcommand) {
 			case 'create': {
-				const name = await interaction.options.getString('name');
+				const name = await interaction.options.getString('name')!;
 				const color = (await interaction.options.getString('color')) as ColorResolvable;
-				if (isEligible(interaction.member, inDb?.points)) {
+				if (isEligible(interaction.member, inDb?.points!)) {
 					if (customRoleId !== null || undefined) {
 						try {
 							const roleReturn = await Result.fromAsync(async () => {
 								const role = interaction.guild.roles.cache.find((role) => role.id === customRoleId);
+								if (!role) return;
 								await interaction.member.roles.add(role);
 							});
 							if (roleReturn.isErr()) {
@@ -93,10 +97,11 @@ export default class CustomRoleCommand implements SlashCommandInterface {
 								embeds: [embed],
 							});
 						} catch (e) {
-							client.logger.error(e);
+							client.logger.error(e as Error);
 						}
 					} else {
 						const sleepyRole = interaction.guild.roles.cache.find((role) => role.id === '811285873458544680');
+						if (!sleepyRole) return;
 						const checkRole = interaction.guild.roles.fetch(name);
 						if (checkRole === undefined) {
 							embed.setDescription('Se rôle existe déja.');
@@ -144,6 +149,7 @@ export default class CustomRoleCommand implements SlashCommandInterface {
 				if (customRoleId) {
 					try {
 						const crole = interaction.guild.roles.cache.find((role) => role.id === customRoleId);
+						if (!crole) return;
 						await crole.delete();
 						await client.prisma.mondecorte
 							.update({
@@ -161,7 +167,7 @@ export default class CustomRoleCommand implements SlashCommandInterface {
 								});
 							});
 					} catch (e) {
-						client.logger.error(e);
+						client.logger.error(e as Error);
 					}
 				} else {
 					embed.setDescription("Tu n'as pas de rôle custom");
@@ -170,9 +176,10 @@ export default class CustomRoleCommand implements SlashCommandInterface {
 				break;
 			}
 			case 'name': {
-				const name = interaction.options.getString('name');
-				if (customRoleId && isEligible(interaction.member, inDb?.points)) {
+				const name = interaction.options.getString('name')!;
+				if (customRoleId && isEligible(interaction.member, inDb?.points!)) {
 					const crole = interaction.guild.roles.cache.find((role) => role.id === customRoleId);
+					if (!crole) return;
 					crole
 						.setName(name)
 						.then(async (updated) => {
@@ -189,9 +196,10 @@ export default class CustomRoleCommand implements SlashCommandInterface {
 				break;
 			}
 			case 'color': {
-				const color = interaction.options.getString('color') as ColorResolvable;
-				if (customRoleId && isEligible(interaction.member, inDb?.points)) {
+				const color = interaction.options.getString('color')! as ColorResolvable;
+				if (customRoleId && isEligible(interaction.member, inDb?.points!)) {
 					const crole = interaction.guild.roles.cache.find((role) => role.id === customRoleId);
+					if (!crole) return;
 					crole
 						.setColor(resolveColor(color))
 						.then(async (updated) => {

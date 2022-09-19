@@ -15,10 +15,10 @@ import {
 } from 'discord.js';
 import { join } from 'path';
 import { container } from 'tsyringe';
-import { SlashCommandInterface } from './SlashCommand';
+import type { SlashCommandInterface } from './SlashCommand';
 import { readdir } from 'fs/promises';
-import { UserCommandInterface } from './UserCommand';
-import { MessageCommandInterface } from './MessageCommand';
+import type { UserCommandInterface } from './UserCommand';
+import type { MessageCommandInterface } from './MessageCommand';
 import { BaseManager } from '../BaseManager';
 
 export interface CommandManagerStartAllOptionsType {
@@ -105,7 +105,7 @@ export class CommandManager extends BaseManager {
 		for await (const file of filesToImport) {
 			const cmd_ = container.resolve<SlashCommandInterface>((await import(file)).default);
 
-			this.commands[cmd_.data.name] = file;
+			this.commands.set(cmd_.data.name, file);
 			if (cmd_.guildIds) {
 				for (const id of cmd_.guildIds) {
 					const array = this.guildCommands.get(id) ?? [];
@@ -128,7 +128,7 @@ export class CommandManager extends BaseManager {
 		for await (const file of filesToImport) {
 			const cmd_ = container.resolve<MessageCommandInterface>((await import(file)).default);
 
-			this.commands[cmd_.data.name] = file;
+			this.commands.set(cmd_.data.name, file);
 			if (cmd_.guildIds) {
 				for (const id of cmd_.guildIds) {
 					const array = this.guildCommands.get(id) ?? [];
@@ -151,7 +151,7 @@ export class CommandManager extends BaseManager {
 		for await (const file of filesToImport) {
 			const cmd_ = container.resolve<UserCommandInterface>((await import(file)).default);
 
-			this.commands[cmd_.data.name] = file;
+			this.commands.set(cmd_.data.name, file);
 			if (cmd_.guildIds) {
 				for (const id of cmd_.guildIds) {
 					const array = this.guildCommands.get(id) ?? [];
@@ -183,7 +183,7 @@ export class CommandManager extends BaseManager {
 			}) as ApplicationCommandData[];
 			const currentGlobalCommands =
 				(await this.client.application?.commands.fetch()) ??
-				([].sort((a, b) => {
+				([].sort((a: ApplicationCommandData, b: ApplicationCommandData) => {
 					if (a.name < b.name) return -1;
 					if (a.name > b.name) return 1;
 					return 0;
@@ -227,10 +227,10 @@ export class CommandManager extends BaseManager {
 
 	private async HandleApplicationCommands(i: CommandInteraction) {
 		this.client.logger.info(
-			`${i.guild.name} (${i.guild.id}) > ${i.member.user.username} (${i.member.user.id}) > /${i.commandName} (${i.commandId})`,
+			`${i.guild?.name} (${i.guild?.id}) > ${i.member?.user.username} (${i.member?.user.id}) > /${i.commandName} (${i.commandId})`,
 		);
 		try {
-			const file = this.commands[i.commandName];
+			const file = this.commands.get(i.commandName);
 			if (!file) return;
 			const cmd = container.resolve<SlashCommandInterface | UserCommandInterface | MessageCommandInterface>(
 				(await import(file)).default,
@@ -238,7 +238,7 @@ export class CommandManager extends BaseManager {
 			if (!i.inCachedGuild()) return;
 			await cmd.execute(i as never, this.client);
 		} catch (error) {
-			this.client.logger.error(error);
+			this.client.logger.error(error as Error);
 			try {
 				await i.reply({
 					content: 'There was an error while executing this command!',
@@ -250,7 +250,7 @@ export class CommandManager extends BaseManager {
 						content: 'There was an error while executing this command!',
 					});
 				} catch (error) {
-					this.client.logger.error(error);
+					this.client.logger.error(error as Error);
 				}
 			}
 		}
@@ -258,20 +258,21 @@ export class CommandManager extends BaseManager {
 
 	private async HandleAutocomplete(i: AutocompleteInteraction) {
 		try {
-			const file = this.commands[i.commandName];
+			const file = this.commands.get(i.commandName);
 			if (!file) return;
 			const cmd = container.resolve<SlashCommandInterface>((await import(file)).default);
 			if (!i.inCachedGuild()) return;
+			if (!cmd.autocomplete) return;
 			await cmd.autocomplete(i, this.client);
 		} catch (error) {
-			this.client.logger.error(error);
+			this.client.logger.error(error as Error);
 			try {
 				await i.respond([]);
 			} catch (error) {
 				try {
 					await i.respond([]);
 				} catch (error) {
-					this.client.logger.error(error);
+					this.client.logger.error(error as Error);
 				}
 			}
 		}

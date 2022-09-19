@@ -1,4 +1,4 @@
-import { SlashCommandInterface } from '@sleepymaid/handler';
+import type { SlashCommandInterface } from '@sleepymaid/handler';
 import { ChatInputCommandInteraction, resolveColor, ColorResolvable } from 'discord.js';
 
 let onCooldown = false;
@@ -11,6 +11,7 @@ export default class RainbowCommand implements SlashCommandInterface {
 	};
 	public async execute(interaction: ChatInputCommandInteraction<'cached'>) {
 		const role = interaction.guild.roles.cache.get('944706938946609232');
+		if (!role) return;
 		if (!interaction.member.roles.cache.has('944706938946609232'))
 			return interaction.reply({
 				embeds: [

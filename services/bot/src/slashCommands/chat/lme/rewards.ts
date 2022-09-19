@@ -4,7 +4,7 @@ import { container } from 'tsyringe';
 import { BotClient } from '../../../lib/extensions/BotClient';
 import { pointToRemoveForPoints } from '@sleepymaid/shared';
 import 'reflect-metadata';
-import { SlashCommandInterface } from '@sleepymaid/handler';
+import type { SlashCommandInterface } from '@sleepymaid/handler';
 
 export default class RewardsCommand implements SlashCommandInterface {
 	public readonly guildIds = ['324284116021542922'];
@@ -12,11 +12,12 @@ export default class RewardsCommand implements SlashCommandInterface {
 		.setName('rewards')
 		.setDescription('Show my rewards.')
 		.toJSON() as ChatInputApplicationCommandData;
+	// @ts-ignore
 	public async execute(interaction: CommandInteraction, client: BotClient) {
 		await interaction.deferReply();
 		const userInDb = await client.prisma.mondecorte.findUnique({
 			where: {
-				user_id: interaction.member.user.id,
+				user_id: interaction.member!.user.id,
 			},
 		});
 		const member = interaction.member as GuildMember;
@@ -46,7 +47,8 @@ export default class RewardsCommand implements SlashCommandInterface {
 				if (member.roles.cache.has(croleid)) {
 					hasCustomRole = '✅';
 				} else {
-					const crole = interaction.guild.roles.cache.find((role) => role.id === croleid);
+					const crole = interaction.guild?.roles.cache.find((role) => role.id === croleid);
+					if (!crole) return;
 					member.roles.add(crole).catch(console.error);
 				}
 			} else {

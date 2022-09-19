@@ -5,7 +5,7 @@ import {
 	ButtonBuilder,
 	MessageActionRowComponentBuilder,
 } from '@discordjs/builders';
-import { SlashCommandInterface } from '@sleepymaid/handler';
+import type { SlashCommandInterface } from '@sleepymaid/handler';
 import {
 	ButtonInteraction,
 	ChatInputApplicationCommandData,
@@ -13,7 +13,8 @@ import {
 	resolveColor,
 } from 'discord.js';
 import { APIEmbed, ButtonStyle } from 'discord-api-types/v10';
-import { BotClient } from '../../../lib/extensions/BotClient';
+import type { BotClient } from '../../../lib/extensions/BotClient';
+import type { mondecorte } from '@prisma/client';
 
 const intForEmote = {
 	1: ':first_place:',
@@ -46,6 +47,7 @@ export default class PointsCommand implements SlashCommandInterface {
 				.addNumberOption((option) => option.setName('page').setDescription('The page').setRequired(false)),
 		)
 		.toJSON() as ChatInputApplicationCommandData;
+	// @ts-ignore
 	public async execute(interaction: ChatInputCommandInteraction, client: BotClient) {
 		if (!interaction.inCachedGuild()) return;
 		switch (interaction.options.getSubcommand()) {
@@ -63,10 +65,10 @@ export default class PointsCommand implements SlashCommandInterface {
 					});
 					points = userInDb?.points || 0;
 				} else {
-					member = user.member.id;
+					member = user.member!.id;
 					const userInDb = await client.prisma.mondecorte.findUnique({
 						where: {
-							user_id: user.member.id,
+							user_id: user.member!.id,
 						},
 					});
 					points = userInDb?.points || 0;
@@ -78,7 +80,7 @@ export default class PointsCommand implements SlashCommandInterface {
 							.setColor(resolveColor('#36393f'))
 							.setAuthor({
 								name: interaction.member.user.tag,
-								iconURL: interaction.member.user.avatarURL(),
+								iconURL: interaction.member.user.avatarURL() || undefined,
 							})
 							.setDescription(`<@${member}> n'a pas de points. \nCommence par envoyer des message pour en avoir.`)
 							.setTimestamp();
@@ -89,7 +91,7 @@ export default class PointsCommand implements SlashCommandInterface {
 								.setColor(resolveColor('#36393f'))
 								.setAuthor({
 									name: interaction.member.user.tag,
-									iconURL: interaction.member.user.avatarURL(),
+									iconURL: interaction.member.user.avatarURL() || undefined,
 								})
 								.setDescription(`<@${member}> a ${points} point.`)
 								.setTimestamp();
@@ -99,7 +101,7 @@ export default class PointsCommand implements SlashCommandInterface {
 								.setColor(resolveColor('#36393f'))
 								.setAuthor({
 									name: interaction.member.user.tag,
-									iconURL: interaction.member.user.avatarURL(),
+									iconURL: interaction.member.user.avatarURL() || undefined,
 								})
 								.setDescription(`<@${member}> a ${points} points.`)
 								.setTimestamp();
@@ -118,8 +120,8 @@ export default class PointsCommand implements SlashCommandInterface {
 				if (interaction.member.roles.cache.has('842387653394563074') || interaction.member.id == '324281236728053760') {
 					const docs = await client.prisma.mondecorte.findMany();
 					const allPoints = docs
-						.sort((a, b) => {
-							return a.points - b.points;
+						.sort((a: mondecorte, b: mondecorte) => {
+							return a.points! - b.points!;
 						})
 						.reverse();
 
@@ -134,12 +136,12 @@ export default class PointsCommand implements SlashCommandInterface {
 
 					let page: number;
 
-					if (interaction.options.get('page') == null) {
+					if (interaction.options.getInteger('page') == null) {
 						page = 1;
-					} else if (interaction.options.get('page').value > maxPage) {
+					} else if (interaction.options.getInteger('page')! > maxPage) {
 						page = maxPage;
 					} else {
-						page = interaction.options.getInteger('page');
+						page = interaction.options.getInteger('page') || 1;
 					}
 
 					const getLeaderboard = (page: number) => {
@@ -150,6 +152,7 @@ export default class PointsCommand implements SlashCommandInterface {
 						allPoints.slice(min, max + 1).forEach((user, index) => {
 							if (user.points == 0) return;
 							if (page === 1) {
+								// @ts-ignore
 								text.push(`${intForEmote[index + 1]} <@${user.user_id}>: ${user.points} points`);
 							} else {
 								const math = page * 10 + index + 1 - 10;
@@ -194,7 +197,7 @@ export default class PointsCommand implements SlashCommandInterface {
 						color: resolveColor('#36393f'),
 						author: {
 							name: 'Leaderboard du serveur',
-							icon_url: interaction.guild.iconURL(),
+							icon_url: interaction.guild.iconURL() || undefined,
 						},
 						description: leaderboardText.text,
 						timestamp: new Date(Date.now()).toISOString(),
@@ -204,11 +207,11 @@ export default class PointsCommand implements SlashCommandInterface {
 						components: [leaderboardText.row],
 					});
 
-					const collector = interaction.channel.createMessageComponentCollector({
+					const collector = interaction?.channel?.createMessageComponentCollector({
 						time: 120000,
 					});
 
-					collector.on('collect', async (i: ButtonInteraction) => {
+					collector?.on('collect', async (i: ButtonInteraction) => {
 						if (!i.inCachedGuild()) return;
 						if (i.member.id === interaction.member.id) {
 							if (i.customId === 'lb:page:previous') {
@@ -220,7 +223,7 @@ export default class PointsCommand implements SlashCommandInterface {
 									color: resolveColor('#36393f'),
 									author: {
 										name: 'Leaderboard du serveur',
-										icon_url: interaction.guild.iconURL(),
+										icon_url: interaction.guild.iconURL() || undefined,
 									},
 									description: lb.text,
 									timestamp: new Date(Date.now()).toISOString(),
@@ -238,7 +241,7 @@ export default class PointsCommand implements SlashCommandInterface {
 									color: resolveColor('#36393f'),
 									author: {
 										name: 'Leaderboard du serveur',
-										icon_url: interaction.guild.iconURL(),
+										icon_url: interaction.guild.iconURL() || undefined,
 									},
 									description: lb.text,
 									timestamp: new Date(Date.now()).toISOString(),
@@ -256,7 +259,7 @@ export default class PointsCommand implements SlashCommandInterface {
 						}
 					});
 
-					collector.on('end', () => {
+					collector?.on('end', () => {
 						interaction.editReply({
 							components: [],
 						});

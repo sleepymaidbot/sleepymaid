@@ -3,8 +3,8 @@ import { BotClient } from '../../lib/extensions/BotClient';
 import { voiceXpManager } from '../../lib/managers/lme/voiceXpManager';
 import { container } from 'tsyringe';
 import { pointsBlacklistedVoiceChannel } from '@sleepymaid/shared';
-import { VoiceState } from 'discord.js';
-import { ListenerInterface } from '@sleepymaid/handler';
+import type { VoiceState } from 'discord.js';
+import type { ListenerInterface } from '@sleepymaid/handler';
 
 enum VoiceXpState {
 	None,
@@ -18,7 +18,8 @@ export default class VoiceListener implements ListenerInterface {
 
 	public async execute(oldState: VoiceState, newState: VoiceState, client: BotClient) {
 		if (oldState.guild.id !== '324284116021542922') return;
-		if (oldState.member.user.bot) return;
+		if (!oldState.member || !newState.member) return;
+		if (oldState?.member?.user.bot) return;
 		let status = VoiceXpState.None;
 		// Someone join vc start timer
 		if (oldState.channel?.id === undefined && newState.channel?.id !== undefined && !newState.deaf && !newState.mute) {

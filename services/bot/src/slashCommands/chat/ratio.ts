@@ -1,5 +1,10 @@
-import { SlashCommandInterface } from '@sleepymaid/handler';
-import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputApplicationCommandData } from 'discord.js';
+import type { SlashCommandInterface } from '@sleepymaid/handler';
+import {
+	ApplicationCommandOptionType,
+	ApplicationCommandType,
+	ChatInputApplicationCommandData,
+	ChatInputCommandInteraction,
+} from 'discord.js';
 import i18next from 'i18next';
 import { getLocalizedProp, ratioGuildIds } from '@sleepymaid/shared';
 
@@ -19,11 +24,11 @@ export default class RatioSlashCommand implements SlashCommandInterface {
 		],
 	} as ChatInputApplicationCommandData;
 
-	public async execute(interaction) {
+	public async execute(interaction: ChatInputCommandInteraction) {
 		await interaction.reply({
 			content: i18next.t('commands.ratio.ratio', {
 				lng: interaction.locale,
-				target: interaction.options.get('user').value,
+				target: interaction.options.get('user')!.value,
 				author: interaction.user.id,
 			}),
 		});

@@ -1,7 +1,7 @@
 import { ContextMenuCommandBuilder } from '@discordjs/builders';
-import { HandlerClient, MessageCommandInterface } from '@sleepymaid/handler';
+import type { HandlerClient, MessageCommandInterface } from '@sleepymaid/handler';
 import { ApplicationCommandType } from 'discord-api-types/v10';
-import { MessageApplicationCommandData, MessageContextMenuCommandInteraction } from 'discord.js';
+import type { MessageApplicationCommandData, MessageContextMenuCommandInteraction } from 'discord.js';
 import { injectable } from 'tsyringe';
 
 @injectable()
@@ -16,7 +16,7 @@ export default class ContentCommand implements MessageCommandInterface {
 		try {
 			interaction.reply(`The content of the targeted message is ${interaction.targetMessage.content}`);
 		} catch (error) {
-			client.logger.error(error);
+			client.logger.error(error as Error);
 		}
 	}
 }

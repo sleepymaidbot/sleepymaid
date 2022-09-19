@@ -1,7 +1,8 @@
 import 'reflect-metadata';
-import { Snowflake } from 'discord.js';
+import type { Snowflake } from 'discord.js';
 import { singleton } from 'tsyringe';
 import { baseManager } from '../BaseManager';
+import type { GuildsSettings } from '@prisma/client';
 
 export enum SpecialRoleType {
 	'admin',
@@ -10,7 +11,7 @@ export enum SpecialRoleType {
 
 @singleton()
 export class configManager extends baseManager {
-	public async getConfig(guildId: Snowflake) {
+	public async getConfig(guildId: Snowflake): Promise<GuildsSettings> {
 		const config = await this.client.prisma.guildsSettings.findUnique({
 			where: {
 				guildId,

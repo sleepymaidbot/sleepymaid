@@ -1,5 +1,5 @@
-import { HandlerClient, ListenerInterface } from '@sleepymaid/handler';
-import { Message } from 'discord.js';
+import type { HandlerClient, ListenerInterface } from '@sleepymaid/handler';
+import type { Message } from 'discord.js';
 
 export default class MessageListener implements ListenerInterface {
 	public readonly name = 'messageCreate';

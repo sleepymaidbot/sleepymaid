@@ -1,5 +1,5 @@
-import { ListenerInterface } from '@sleepymaid/handler';
-import { BotClient } from '../../lib/extensions/BotClient';
+import type { ListenerInterface } from '@sleepymaid/handler';
+import type { BotClient } from '../../lib/extensions/BotClient';
 
 export default class ErrorListener implements ListenerInterface {
 	public readonly name = 'error';

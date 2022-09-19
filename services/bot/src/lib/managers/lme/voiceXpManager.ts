@@ -81,7 +81,7 @@ export async function stopAll(client: BotClient) {
 			});
 		} else {
 			const pointsToAdd = time * pointsMultiplier;
-			await this.client.prisma.mondecorte.update({
+			await client.prisma.mondecorte.update({
 				where: { user_id: key },
 				data: {
 					points: {

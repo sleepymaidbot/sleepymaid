@@ -1,7 +1,7 @@
-import { ListenerInterface } from '@sleepymaid/handler';
+import type { ListenerInterface } from '@sleepymaid/handler';
 import { ChannelType } from 'discord-api-types/v10';
-import { Message } from 'discord.js';
-import { HelperClient } from '../../lib/extensions/HelperClient';
+import type { Message } from 'discord.js';
+import type { HelperClient } from '../../lib/extensions/HelperClient';
 
 export default class AutoPublishListener implements ListenerInterface {
 	public readonly name = 'messageCreate';

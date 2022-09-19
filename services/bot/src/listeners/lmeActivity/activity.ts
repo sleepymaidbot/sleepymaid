@@ -1,10 +1,10 @@
 import 'reflect-metadata';
-import { Message } from 'discord.js';
+import type { Message } from 'discord.js';
 import { pointsBlacklistedTextChannel, pointsMultiplier } from '@sleepymaid/shared';
 import { ActivityRewardManager } from '../../lib/managers/lme/activityRewardManager';
 import { container } from 'tsyringe';
 import { BotClient } from '../../lib/extensions/BotClient';
-import { ListenerInterface } from '@sleepymaid/handler';
+import type { ListenerInterface } from '@sleepymaid/handler';
 
 const talkedRecently = new Set();
 
@@ -46,7 +46,7 @@ export default class ActivityListener implements ListenerInterface {
 
 			const c = container;
 			c.register(BotClient, { useValue: client });
-			c.resolve(ActivityRewardManager).checkActivityReward(message.member);
+			c.resolve(ActivityRewardManager).checkActivityReward(message.member!);
 		}
 
 		talkedRecently.add(message.author.id);

@@ -14,7 +14,6 @@ export class HelperClient extends HandlerClient {
 		super(
 			{
 				devServerId: '821717486217986098',
-				logger: new Logger() as unknown as BaseLogger,
 			},
 			{
 				intents: [
@@ -29,9 +28,11 @@ export class HelperClient extends HandlerClient {
 	}
 
 	public async start(): Promise<void> {
+		this.env = this.config.nodeEnv;
+		this.logger = new Logger(this.env);
 		this.config = initConfig();
 		this.prisma = new PrismaClient();
-		this.env = this.config.nodeEnv;
+
 		await i18next.use(FsBackend).init({
 			//debug: this.config.environment === 'development',
 			supportedLngs,
@@ -60,7 +61,7 @@ export class HelperClient extends HandlerClient {
 		this.login(this.config.discordToken);
 
 		process.on('unhandledRejection', (error: Error) => {
-			this.logger.error(error.stack);
+			this.logger.error(error);
 		});
 
 		process.on('exit', async () => {

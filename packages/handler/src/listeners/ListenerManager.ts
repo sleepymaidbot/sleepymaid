@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { loadFolder } from '@sleepymaid/util';
 import { container } from 'tsyringe';
-import { ListenerInterface } from './Listener';
+import type { ListenerInterface } from './Listener';
 import { BaseManager } from '../BaseManager';
 
 export interface ListenerManagerStartAllOptionsType {
@@ -26,7 +26,7 @@ export class ListenerManager extends BaseManager {
 					});
 					count++;
 				} catch (error) {
-					this.client.logger.error(error);
+					this.client.logger.error(error as Error);
 				}
 			} else {
 				try {
@@ -35,10 +35,10 @@ export class ListenerManager extends BaseManager {
 					});
 					count++;
 				} catch (error) {
-					this.client.logger.error(error);
+					this.client.logger.error(error as Error);
 				}
 			}
-			this.client.logger.info(`Listener handler: -> Loaded listener -> ${file.split('/').pop().split('.')[0]}`);
+			this.client.logger.info(`Listener handler: -> Loaded listener -> ${file?.split('/')?.pop()?.split('.')[0]}`);
 		}
 		this.client.logger.info(`
 			Listener handler: -> Loaded ${count} listeners`);

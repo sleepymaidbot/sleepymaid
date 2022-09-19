@@ -1,8 +1,9 @@
-import { SlashCommandInterface } from '@sleepymaid/handler';
-import { ChatInputApplicationCommandData, version as discordJSVersion } from 'discord.js';
+import type { SlashCommandInterface } from '@sleepymaid/handler';
+import { ChatInputApplicationCommandData, ChatInputCommandInteraction, version as discordJSVersion } from 'discord.js';
 import { ApplicationCommandType } from 'discord-api-types/v10';
 import { prettyBytes, shell } from '@sleepymaid/util';
 import * as os from 'os';
+import type { BotClient } from '../../../lib/extensions/BotClient';
 
 export default class InfoCommand implements SlashCommandInterface {
 	public readonly data = {
@@ -11,12 +12,13 @@ export default class InfoCommand implements SlashCommandInterface {
 		type: ApplicationCommandType.ChatInput,
 	} as ChatInputApplicationCommandData;
 
-	public async execute(interaction, client) {
-		const currentCommit = (await shell('git rev-parse HEAD')).stdout.replace('\n', '');
-		let repoUrl = (await shell('git remote get-url origin')).stdout.replace('\n', '');
+	// @ts-ignore
+	public async execute(interaction: ChatInputCommandInteraction, client: BotClient) {
+		const currentCommit = (await shell('git rev-parse HEAD')).stdout.replace('\n', '') || 'unknown';
+		let repoUrl = (await shell('git remote get-url origin')).stdout.replace('\n', '') || 'unknown';
 		if (repoUrl.includes('.git')) repoUrl = repoUrl.substring(0, repoUrl.length - 4);
 
-		const uptime = Date.now() - client.uptime;
+		const uptime = Date.now() - client.uptime!;
 		const formatUptime = Math.floor(uptime / 1000);
 
 		await interaction.reply({

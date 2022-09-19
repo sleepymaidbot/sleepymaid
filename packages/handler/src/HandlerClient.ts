@@ -51,8 +51,8 @@ export class HandlerClient extends Client {
 
 		const { env, devServerId } = options ?? {};
 
-		this.logger = options.logger ?? new BaseLogger(env);
 		this.env = env ?? 'dev';
+		this.logger = options.logger ?? (new BaseLogger(this.env) as Logger);
 		this.devServerId = devServerId;
 		this.commandManager = new CommandManager(this);
 		this.listenerManager = new ListenerManager(this);

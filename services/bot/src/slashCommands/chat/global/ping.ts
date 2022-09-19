@@ -1,4 +1,4 @@
-import { SlashCommandInterface } from '@sleepymaid/handler';
+import type { SlashCommandInterface } from '@sleepymaid/handler';
 import { getLocalizedProp } from '@sleepymaid/shared';
 import {
 	APIEmbed,
@@ -8,7 +8,7 @@ import {
 	Message,
 } from 'discord.js';
 import i18next from 'i18next';
-import { BotClient } from '../../../lib/extensions/BotClient';
+import type { BotClient } from '../../../lib/extensions/BotClient';
 
 export default class PingCommand implements SlashCommandInterface {
 	public readonly data = {
@@ -17,6 +17,7 @@ export default class PingCommand implements SlashCommandInterface {
 		type: ApplicationCommandType.ChatInput,
 	} as ChatInputApplicationCommandData;
 
+	// @ts-ignore
 	public async execute(interaction: ChatInputCommandInteraction, client: BotClient) {
 		if (!interaction.inCachedGuild()) return;
 		const timestamp1 = interaction.createdTimestamp;

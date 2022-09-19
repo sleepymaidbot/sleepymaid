@@ -1,4 +1,4 @@
-import { SlashCommandInterface } from '@sleepymaid/handler';
+import type { SlashCommandInterface } from '@sleepymaid/handler';
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
@@ -10,13 +10,13 @@ import {
 	APIButtonComponent,
 	APIEmbed,
 } from 'discord-api-types/v10';
-import {
+import type {
 	ChatInputCommandInteraction,
 	MessageOptions,
 	MessageEditOptions,
 	ChatInputApplicationCommandData,
 } from 'discord.js';
-import { BotClient } from '../../../lib/extensions/BotClient';
+import type { BotClient } from '../../../lib/extensions/BotClient';
 
 interface MessagesType {
 	[key: string]: MessageType;
@@ -259,15 +259,16 @@ export default class LaserSetupCommand implements SlashCommandInterface {
 		],
 	} as ChatInputApplicationCommandData;
 
+	// @ts-ignore
 	public async execute(interaction: ChatInputCommandInteraction, client: BotClient) {
 		if (!interaction.inCachedGuild()) return;
 		if (!interaction.memberPermissions.has(PermissionFlagsBits.Administrator)) return;
-		const name = interaction.options.getString('name');
+		const name = interaction.options.getString('name')!;
 		const msg = messages[name];
 		if (!msg) return;
 		const messageId = interaction.options.getString('message_id');
 		if (messageId) {
-			const message = await interaction.channel.messages.fetch(messageId);
+			const message = await interaction.channel?.messages.fetch(messageId);
 			if (!message) {
 				await interaction.reply({
 					embeds: [
@@ -279,7 +280,7 @@ export default class LaserSetupCommand implements SlashCommandInterface {
 					ephemeral: true,
 				});
 			}
-			if (message.author.id !== client.user.id) {
+			if (message?.author.id !== client.user?.id) {
 				await interaction.reply({
 					embeds: [
 						{
@@ -290,10 +291,10 @@ export default class LaserSetupCommand implements SlashCommandInterface {
 					ephemeral: true,
 				});
 			} else {
-				await message.edit(await msg.function(interaction));
+				await message?.edit(await msg.function(interaction));
 			}
 		} else {
-			await interaction.channel.send(await msg.function(interaction));
+			await interaction.channel?.send(await msg.function(interaction));
 		}
 		await interaction.reply({
 			embeds: [

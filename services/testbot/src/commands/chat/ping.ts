@@ -1,5 +1,5 @@
-import { HandlerClient, SlashCommandInterface } from '@sleepymaid/handler';
-import { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
+import type { HandlerClient, SlashCommandInterface } from '@sleepymaid/handler';
+import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
 import { injectable } from 'tsyringe';
 
 @injectable()
@@ -19,7 +19,7 @@ export default class PingCommand implements SlashCommandInterface {
 			});
 			client.logger.info(`Pong!`);
 		} catch (error) {
-			client.logger.error(error);
+			client.logger.error(error as Error);
 		}
 	}
 
@@ -33,7 +33,7 @@ export default class PingCommand implements SlashCommandInterface {
 			]);
 			client.logger.info(`Pong!`);
 		} catch (error) {
-			client.logger.error(error);
+			client.logger.error(error as Error);
 		}
 	}
 }

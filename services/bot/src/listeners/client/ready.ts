@@ -1,14 +1,14 @@
-import { GuildsSettings } from '@prisma/client';
-import { ListenerInterface } from '@sleepymaid/handler';
-import { Guild } from 'discord.js';
-import { BotClient } from '../../lib/extensions/BotClient';
+import type { GuildsSettings } from '@prisma/client';
+import type { ListenerInterface } from '@sleepymaid/handler';
+import type { Guild } from 'discord.js';
+import type { BotClient } from '../../lib/extensions/BotClient';
 
 export default class ReadyListener implements ListenerInterface {
 	public readonly name = 'ready';
 	public readonly once = true;
 
 	public async execute(client: BotClient) {
-		client.logger.info(`Logged in as ${client.user.tag} | ${client.guilds.cache.size} servers`);
+		client.logger.info(`Logged in as ${client.user!.tag} | ${client.guilds.cache.size} servers`);
 
 		const guilds = await client.guilds.fetch();
 		for (const guild of guilds.values()) {

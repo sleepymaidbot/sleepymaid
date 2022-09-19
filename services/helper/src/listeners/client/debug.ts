@@ -1,5 +1,5 @@
-import { ListenerInterface } from '@sleepymaid/handler';
-import { HelperClient } from '../../lib/extensions/HelperClient';
+import type { ListenerInterface } from '@sleepymaid/handler';
+import type { HelperClient } from '../../lib/extensions/HelperClient';
 
 export default class DebugListener implements ListenerInterface {
 	public readonly name = 'debug';

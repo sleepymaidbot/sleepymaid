@@ -1,4 +1,4 @@
-import { HandlerClient, ListenerInterface } from '@sleepymaid/handler';
+import type { HandlerClient, ListenerInterface } from '@sleepymaid/handler';
 import { injectable } from 'tsyringe';
 
 @injectable()

@@ -19,7 +19,7 @@ Formats the given number using `Number#toLocaleString`.
 - If locale is true, the system default locale is used for translation.
 - If no value for locale is specified, the number is returned unmodified.
 */
-const toLocaleString = (number, locale, options) => {
+const toLocaleString = (number: Number | string, locale: boolean | string, options: any) => {
 	let result = number;
 	if (typeof locale === 'string' || Array.isArray(locale)) {
 		result = number.toLocaleString(locale, options);
@@ -36,7 +36,7 @@ const toLocaleString = (number, locale, options) => {
  * @param options The options to use
  * @returns {string} The formatted number
  */
-export function prettyBytes(number, options: Options): string {
+export function prettyBytes(number: Number, options: Options): string {
 	if (!Number.isFinite(number)) {
 		throw new TypeError(`Expected a finite number, got ${typeof number}: ${number}`);
 	}
@@ -74,20 +74,25 @@ export function prettyBytes(number, options: Options): string {
 	}
 
 	if (number < 1) {
-		const numberString = toLocaleString(number, options.locale, localeOptions);
+		// @ts-ignore
+		const numberString = toLocaleString(number, options.locale || false, localeOptions);
 		return prefix + numberString + ' ' + UNITS[0];
 	}
 
 	const exponent = Math.min(
+		// @ts-ignore
 		Math.floor(options.binary ? Math.log(number) / Math.log(1024) : Math.log10(number) / 3),
 		UNITS.length - 1,
 	);
+	// @ts-ignore
 	number /= (options.binary ? 1024 : 1000) ** exponent;
 
 	if (!localeOptions) {
+		// @ts-ignore
 		number = number.toPrecision(3);
 	}
 
+	// @ts-ignore
 	const numberString = toLocaleString(Number(number), options.locale, localeOptions);
 
 	const unit = UNITS[exponent];

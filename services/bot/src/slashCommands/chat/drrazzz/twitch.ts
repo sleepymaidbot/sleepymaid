@@ -1,5 +1,5 @@
-import { SlashCommandInterface } from '@sleepymaid/handler';
-import { ApplicationCommandType, ChatInputApplicationCommandData } from 'discord.js';
+import type { SlashCommandInterface } from '@sleepymaid/handler';
+import { ApplicationCommandType, ChatInputApplicationCommandData, ChatInputCommandInteraction } from 'discord.js';
 
 export default class TwitchCommand implements SlashCommandInterface {
 	public readonly guildIds = ['818313526720462868'];
@@ -10,7 +10,7 @@ export default class TwitchCommand implements SlashCommandInterface {
 		options: [],
 	} as ChatInputApplicationCommandData;
 
-	public async execute(interaction) {
+	public async execute(interaction: ChatInputCommandInteraction) {
 		await interaction.reply({
 			content:
 				'<:twitch:818473720288378980> [Clique ici pour avoir le lien de la chaine twitch de DrraZz_](<https://www.twitch.tv/drrazz_>)',

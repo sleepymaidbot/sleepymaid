@@ -1,8 +1,8 @@
-import { Message } from 'discord.js';
+import type { Message } from 'discord.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import { inspect } from 'util';
-import { ListenerInterface } from '@sleepymaid/handler';
-import { BotClient } from '../../lib/extensions/BotClient';
+import type { ListenerInterface } from '@sleepymaid/handler';
+import type { BotClient } from '../../lib/extensions/BotClient';
 
 export default class SetupListener implements ListenerInterface {
 	public readonly name = 'messageCreate';
@@ -10,6 +10,7 @@ export default class SetupListener implements ListenerInterface {
 
 	public async execute(message: Message, client: BotClient) {
 		if (message.author.id !== '324281236728053760') return;
+		if (!client.user) return;
 		if (!message.content.startsWith('<@' + client.user.id + '> eval')) return;
 		const codetoeval = message.content.split(' ').slice(2).join(' ');
 		try {
@@ -42,6 +43,7 @@ export default class SetupListener implements ListenerInterface {
 				}
 				await message.channel.send({ embeds: [evalOutputEmbed] });
 			} catch (e) {
+				// @ts-ignore
 				const output = e.message;
 				if (inspect(output).includes(client.config.discordToken || 'message.channel.delete()')) {
 					return message.channel.send(`no`);
@@ -58,10 +60,10 @@ export default class SetupListener implements ListenerInterface {
 					]);
 				}
 				await message.channel.send({ embeds: [evalOutputEmbed] });
-				await client.logger.error(e);
+				client.logger.error(e as Error);
 			}
 		} catch (err) {
-			client.logger.error(err);
+			client.logger.error(err as Error);
 		}
 	}
 }

@@ -1,8 +1,10 @@
-import { resolveColor } from 'discord.js';
+import { GuildBasedChannel, resolveColor, TextChannel, VoiceState } from 'discord.js';
 import { EmbedBuilder } from '@discordjs/builders';
-import { ListenerInterface } from '@sleepymaid/handler';
+import type { ListenerInterface } from '@sleepymaid/handler';
+import type { HelperClient } from '../../lib/extensions/HelperClient';
+import { ChannelType } from 'discord-api-types/v10';
 
-const month = {
+const month: { [key: number]: string } = {
 	0: 'Janvier',
 	1: 'Février',
 	2: 'Mars',
@@ -26,13 +28,17 @@ function returnCurentTime() {
 
 const logChannelId = '821509142518824991';
 
+function isTextChannel(channel: GuildBasedChannel): channel is TextChannel {
+	return channel.type === ChannelType.GuildText;
+}
+
 export default class VoiceLogListener implements ListenerInterface {
 	public readonly name = 'voiceStateUpdate';
 	public readonly once = false;
 
-	async execute(oldState, newState, client) {
+	async execute(oldState: VoiceState, newState: VoiceState, client: HelperClient) {
 		if (newState.guild.id !== '324284116021542922') return;
-		if (client.config.environment === 'development') return;
+		if (client.config.nodeEnv === 'dev') return;
 		// Join
 		if (oldState.channel == null && newState.channel != null) {
 			const guild = newState.guild;
@@ -40,14 +46,15 @@ export default class VoiceLogListener implements ListenerInterface {
 
 			const embed = new EmbedBuilder()
 				.setTitle('Presence Update')
-				.setDescription(`**${newState.member.user.tag}** has joined **${newState.channel.name}**.`)
+				.setDescription(`**${newState?.member?.user.tag}** has joined **${newState.channel.name}**.`)
 				.setColor(resolveColor('#409400'))
 				.setFooter({ text: returnCurentTime() });
 
+			if (!logChannel || !isTextChannel(logChannel)) return;
 			try {
 				await logChannel.send({ embeds: [embed] });
 			} catch (e) {
-				client.logger.error(e);
+				client.logger.error(e as Error);
 			}
 		}
 		// Leave
@@ -57,14 +64,15 @@ export default class VoiceLogListener implements ListenerInterface {
 
 			const embed = new EmbedBuilder()
 				.setTitle('Presence Update')
-				.setDescription(`**${newState.member.user.tag}** has left **${oldState.channel.name}**.`)
+				.setDescription(`**${newState?.member?.user.tag}** has left **${oldState.channel.name}**.`)
 				.setColor(resolveColor('#409400'))
 				.setFooter({ text: returnCurentTime() });
 
+			if (!logChannel || !isTextChannel(logChannel)) return;
 			try {
 				await logChannel.send({ embeds: [embed] });
 			} catch (e) {
-				client.logger.error(e);
+				client.logger.error(e as Error);
 			}
 		}
 		// Move
@@ -75,15 +83,16 @@ export default class VoiceLogListener implements ListenerInterface {
 			const embed = new EmbedBuilder()
 				.setTitle('Presence Update')
 				.setDescription(
-					`**${newState.member.user.tag}** has moved from **${oldState.channel.name}** to **${newState.channel.name}**.`,
+					`**${newState?.member?.user.tag}** has moved from **${oldState?.channel?.name}** to **${newState?.channel?.name}**.`,
 				)
 				.setColor(resolveColor('#409400'))
 				.setFooter({ text: returnCurentTime() });
 
+			if (!logChannel || !isTextChannel(logChannel)) return;
 			try {
 				await logChannel.send({ embeds: [embed] });
 			} catch (e) {
-				client.logger.error(e);
+				client.logger.error(e as Error);
 			}
 		}
 	}
