@@ -16,6 +16,7 @@
 	"devDependencies": {
 		"@sleepymaid/util": "workspace:^",
 		"@types/node": "17.0.21",
+		"@types/node-cron": "^3.0.4",
 		"rimraf": "3.0.2",
 		"source-map-support": "0.5.21",
 		"typescript": "4.8.3"
