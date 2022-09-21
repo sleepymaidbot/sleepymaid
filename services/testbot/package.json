@@ -22,7 +22,7 @@
 		"@sleepymaid/handler": "*",
 		"@sleepymaid/logger": "*",
 		"discord-api-types": "^0.37.10",
-		"discord.js": "^14.3.0",
+		"discord.js": "^14.4.0",
 		"path": "0.12.7",
 		"reflect-metadata": "^0.1.13",
 		"tsyringe": "^4.7.0"
