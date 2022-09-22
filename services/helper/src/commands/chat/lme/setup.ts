@@ -7,7 +7,7 @@ import {
 } from 'discord-api-types/v10';
 import {
 	ChatInputCommandInteraction,
-	MessageOptions,
+	MessageCreateOptions,
 	MessageEditOptions,
 	ChatInputApplicationCommandData,
 	EmbedBuilder,
@@ -23,7 +23,7 @@ interface MessagesType {
 
 interface MessageType {
 	fancyName: string;
-	function: (i: ChatInputCommandInteraction) => Promise<Array<MessageOptions & MessageEditOptions>>;
+	function: (i: ChatInputCommandInteraction) => Promise<Array<MessageCreateOptions & MessageEditOptions>>;
 }
 
 const messages: MessagesType = {

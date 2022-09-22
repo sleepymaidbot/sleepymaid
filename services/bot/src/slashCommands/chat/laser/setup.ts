@@ -12,7 +12,7 @@ import {
 } from 'discord-api-types/v10';
 import type {
 	ChatInputCommandInteraction,
-	MessageOptions,
+	MessageCreateOptions,
 	MessageEditOptions,
 	ChatInputApplicationCommandData,
 } from 'discord.js';
@@ -24,7 +24,7 @@ interface MessagesType {
 
 interface MessageType {
 	fancyName: string;
-	function: (i: ChatInputCommandInteraction) => Promise<MessageOptions & MessageEditOptions>;
+	function: (i: ChatInputCommandInteraction) => Promise<MessageCreateOptions & MessageEditOptions>;
 }
 
 const author: APIEmbedAuthor = {
