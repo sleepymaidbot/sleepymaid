@@ -1,27 +1,20 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
 	"compilerOptions": {
-		"strict": true,
-		"alwaysStrict": true,
-		"moduleResolution": "node",
-		"removeComments": true,
-		"pretty": true,
-		"module": "CommonJS",
-		"target": "ES2020",
-		"lib": ["ESNext"],
-		"sourceMap": true,
-		"declarationMap": true,
-		"incremental": true,
+		"module": "commonjs",
+		"target": "esNEXT",
+		"moduleResolution": "Node",
+		"sourceMap": false,
 		"skipLibCheck": true,
-		"noEmitHelpers": true,
-		"importHelpers": true,
-		"declaration": true,
+		"inlineSourceMap": true,
+		"inlineSources": true,
+		"forceConsistentCasingInFileNames": true,
+		"incremental": true,
 		"esModuleInterop": true,
-		"noUncheckedIndexedAccess": true,
-		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
-		"noImplicitOverride": true,
-		"importsNotUsedAsValues": "error"
+		"emitDecoratorMetadata": true,
+		"alwaysStrict": true,
+		"lib": ["ESNext", "ESNext.Array", "ESNext.AsyncIterable", "ESNext.Intl", "ESNext.Symbol", "DOM"]
 	},
 	"exclude": ["node_modules"]
 }

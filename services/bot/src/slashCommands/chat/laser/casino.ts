@@ -54,9 +54,7 @@ export default class LaserCasinoCommand implements SlashCommandInterface {
 
 				const finalOrder = [0, 0, 0, 0];
 				for (let i = 0; i < 4; i++) {
-					// @ts-expect-error
 					const int = parseInt(midNumbers[i]);
-					// @ts-expect-error
 					const pos = parseInt(roomNumbers[i]) - 1;
 					finalOrder[pos] = int;
 				}
