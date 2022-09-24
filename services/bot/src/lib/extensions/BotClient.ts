@@ -39,9 +39,9 @@ export class BotClient extends HandlerClient {
 	}
 
 	public async start(): Promise<void> {
+		this.config = initConfig();
 		this.env = this.config.nodeEnv;
 		this.logger = new Logger(this.env);
-		this.config = initConfig();
 		this.prisma = new PrismaClient();
 
 		await i18next.use(FsBackend).init({

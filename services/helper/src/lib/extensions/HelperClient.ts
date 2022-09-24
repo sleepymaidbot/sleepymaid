@@ -28,9 +28,9 @@ export class HelperClient extends HandlerClient {
 	}
 
 	public async start(): Promise<void> {
-		this.env = this.config.nodeEnv;
-		this.logger = new Logger(this.env);
 		this.config = initConfig();
+		this.logger = new Logger(this.env);
+		this.env = this.config.nodeEnv;
 		this.prisma = new PrismaClient();
 
 		await i18next.use(FsBackend).init({
