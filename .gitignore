@@ -164,7 +164,7 @@ temp/
 packages/config/src/config/
 *.disable
 *.exe
-services/bot/banners/
+services/helper/banners/
 services/bot/downloads/
 yes/
 icon.webp
