@@ -37,5 +37,6 @@ COPY services/helper/ ./services/helper
 RUN yarn turbo run build --filter=./services/*
 
 COPY locales/ ./locales
+COPY services/helper/banners ./services/helper/banners
 
 CMD ["node", "--trace-warnings", "-r", "source-map-support/register", "services/helper/dist/index.js"]
