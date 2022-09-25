@@ -44,7 +44,7 @@ export default class VidListener implements ListenerInterface {
 						await message.reply({
 							files: [
 								{
-									attachment: `./downloads/${fileName}`,
+									attachment: join(__dirname, `../../../downloads/${fileName}`),
 									name: fileName,
 								},
 							],
@@ -52,7 +52,7 @@ export default class VidListener implements ListenerInterface {
 				);
 				if (messageReturn.isErr()) return client.logger.error(messageReturn.unwrapErr() as Error);
 
-				const unlinkReturn = Result.from(() => unlink(`./downloads/${fileName}`, (err) => err));
+				const unlinkReturn = Result.from(() => unlink(join(__dirname, `../../../downloads/${fileName}`), (err) => err));
 				if (unlinkReturn.isErr()) return client.logger.error(unlinkReturn.unwrapErr() as Error);
 			}
 		}
