@@ -1057,12 +1057,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/stopwatch@npm:1.4.1":
-  version: 1.4.1
-  resolution: "@sapphire/stopwatch@npm:1.4.1"
+"@sapphire/stopwatch@npm:1.5.0":
+  version: 1.5.0
+  resolution: "@sapphire/stopwatch@npm:1.5.0"
   dependencies:
-    tslib: ^2.3.1
-  checksum: 084462d9ca7ace45fd06d61e346a7a3326362d6d598c8721c908acf35772634b68f0224db998f0c59448a17b32b0d163248c6bc76c7f6f2d1db8a4f2ffc9fa68
+    tslib: ^2.4.0
+  checksum: 23c013598d87d2fcc797efe5d2409ae6836b9221d79eacc10b7c2a95f9d694b562b7ad027dc49e9e8125095417199385a15317520fec371bdb8cc7622085e3af
   languageName: node
   linkType: hard
 
@@ -1073,7 +1073,7 @@ __metadata:
     "@discordjs/builders": ^1.2.0
     "@prisma/client": 4.4.0
     "@sapphire/result": ^2.5.0
-    "@sapphire/stopwatch": 1.4.1
+    "@sapphire/stopwatch": 1.5.0
     "@sleepymaid/handler": "workspace:^"
     "@sleepymaid/logger": "workspace:^"
     "@sleepymaid/shared": "workspace:^"
