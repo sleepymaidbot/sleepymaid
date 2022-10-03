@@ -1,4 +1,4 @@
-import { GuildBasedChannel, resolveColor, TextChannel, VoiceState } from 'discord.js';
+import { ForumChannel, GuildBasedChannel, resolveColor, VoiceState } from 'discord.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import type { ListenerInterface } from '@sleepymaid/handler';
 import type { HelperClient } from '../../lib/extensions/HelperClient';
@@ -26,10 +26,8 @@ function returnCurentTime() {
 	return `${month[d.getMonth()]} ${d.getDate()} ${d.getHours()}:${min} ${d.getFullYear()}`;
 }
 
-const logChannelId = '821509142518824991';
-
-function isTextChannel(channel: GuildBasedChannel): channel is TextChannel {
-	return channel.type === ChannelType.GuildText;
+function isForumChannel(channel: GuildBasedChannel): channel is ForumChannel {
+	return channel.type === ChannelType.GuildForum;
 }
 
 export default class VoiceLogListener implements ListenerInterface {
@@ -38,48 +36,41 @@ export default class VoiceLogListener implements ListenerInterface {
 
 	async execute(oldState: VoiceState, newState: VoiceState, client: HelperClient) {
 		if (newState.guild.id !== '324284116021542922') return;
-		if (client.config.nodeEnv === 'dev') return;
+		//if (client.config.nodeEnv === 'dev') return;
+		const channel = newState.guild?.channels.cache.get('1024444544407834675');
+		if (!channel || !isForumChannel(channel)) return;
+		const thread = await channel.threads.fetch('1026359329890254919');
+		if (!thread) return;
 		// Join
 		if (oldState.channel == null && newState.channel != null) {
-			const guild = newState.guild;
-			const logChannel = guild.channels.cache.get(logChannelId);
-
 			const embed = new EmbedBuilder()
 				.setTitle('Presence Update')
 				.setDescription(`**${newState?.member?.user.tag}** has joined **${newState.channel.name}**.`)
 				.setColor(resolveColor('#409400'))
 				.setFooter({ text: returnCurentTime() });
 
-			if (!logChannel || !isTextChannel(logChannel)) return;
 			try {
-				await logChannel.send({ embeds: [embed] });
+				await thread.send({ embeds: [embed] });
 			} catch (e) {
 				client.logger.error(e as Error);
 			}
 		}
 		// Leave
 		else if (oldState.channel != null && newState.channel == null) {
-			const guild = newState.guild;
-			const logChannel = guild.channels.cache.get(logChannelId);
-
 			const embed = new EmbedBuilder()
 				.setTitle('Presence Update')
 				.setDescription(`**${newState?.member?.user.tag}** has left **${oldState.channel.name}**.`)
 				.setColor(resolveColor('#409400'))
 				.setFooter({ text: returnCurentTime() });
 
-			if (!logChannel || !isTextChannel(logChannel)) return;
 			try {
-				await logChannel.send({ embeds: [embed] });
+				await thread.send({ embeds: [embed] });
 			} catch (e) {
 				client.logger.error(e as Error);
 			}
 		}
 		// Move
 		else if (oldState.channel != newState.channel) {
-			const guild = newState.guild;
-			const logChannel = guild.channels.cache.get(logChannelId);
-
 			const embed = new EmbedBuilder()
 				.setTitle('Presence Update')
 				.setDescription(
@@ -88,9 +79,8 @@ export default class VoiceLogListener implements ListenerInterface {
 				.setColor(resolveColor('#409400'))
 				.setFooter({ text: returnCurentTime() });
 
-			if (!logChannel || !isTextChannel(logChannel)) return;
 			try {
-				await logChannel.send({ embeds: [embed] });
+				await thread.send({ embeds: [embed] });
 			} catch (e) {
 				client.logger.error(e as Error);
 			}

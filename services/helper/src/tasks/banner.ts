@@ -1,11 +1,11 @@
 import { opendir } from 'node:fs/promises';
 import type { TaskInterface } from '@sleepymaid/handler';
 import type { HelperClient } from '../lib/extensions/HelperClient';
-import { Channel, ChannelType, TextChannel } from 'discord.js';
+import { Channel, ChannelType, ForumChannel } from 'discord.js';
 import { join } from 'node:path';
 
-function isTextChannel(channel: Channel): channel is TextChannel {
-	return channel.type == ChannelType.GuildText;
+function isForumChannel(channel: Channel): channel is ForumChannel {
+	return channel.type == ChannelType.GuildForum;
 }
 
 export default class BannerTask implements TaskInterface {
@@ -30,10 +30,11 @@ export default class BannerTask implements TaskInterface {
 				?.setBanner(join(__dirname, `../../banners/${banner}`), `Changed banner to ${banner}`)
 				.catch(client.logger.error);
 
-			const channel = guild?.channels.cache.get('863117686334554142');
-			if (!channel || !isTextChannel(channel)) return;
-
-			channel.send(`**Banner Rotation**\nBanner is now \`\`${banner}\`\``);
+			const channel = guild?.channels.cache.get('1024444544407834675');
+			if (!channel || !isForumChannel(channel)) return;
+			const thread = await channel.threads.fetch('1026359286093336606');
+			if (!thread) return;
+			thread.send(`**Banner Rotation**\nBanner is now \`\`${banner}\`\``);
 		} catch (err) {
 			client.logger.error(err as Error);
 		}
