@@ -7,10 +7,10 @@
 			"outputs": ["dist/**", "types/**"]
 		},
 		"start": {
-			"dependsOn": ["^start"]
+			"dependsOn": ["start"]
 		},
 		"lint": {
-			"dependsOn": ["^build"],
+			"dependsOn": ["build"],
 			"outputs": []
 		},
 		"format": {

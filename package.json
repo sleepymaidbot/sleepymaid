@@ -14,9 +14,11 @@
 		"build": "yarn turbo run build",
 		"lint": "yarn eslint --fix --ext ts,tsx",
 		"format": "yarn prettier --write . --plugin-search-dir=. .",
-		"prepare": "husky install"
+		"prepare": "husky install",
+		"publish": "yarn run build && yarn changeset publish"
 	},
 	"devDependencies": {
+		"@changesets/cli": "^2.25.0",
 		"@types/prettier": "2.7.1",
 		"@typescript-eslint/eslint-plugin": "5.38.1",
 		"@typescript-eslint/parser": "5.38.1",
