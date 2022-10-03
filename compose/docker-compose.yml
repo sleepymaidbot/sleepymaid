@@ -16,6 +16,18 @@ services:
       test: ['CMD-SHELL', 'pg_isready -U sleepymaid']
       interval: 10s
       timeout: 5s
+  ghost:
+    image: ghost:4-alpine
+    restart: unless-stopped
+    expose:
+      - 2368
+    environment:
+      url: 'https://blog.ecorte.xyz'
+      database__client: 'sqlite3'
+      mail__transport: 'SMTP'
+      mail__options__service: 'Mailgun'
+    volumes:
+      - ghost-data:/var/lib/ghost/content
   sleepymaid:
     build:
       context: ../
@@ -34,3 +46,5 @@ services:
 volumes:
   postgres-data:
     name: 'sleepymaid-postgres-data'
+  ghost-data:
+    name: 'sleepymaid-ghost-data'
