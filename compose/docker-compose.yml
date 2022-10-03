@@ -33,6 +33,7 @@ services:
     environment:
       url: 'https://blog.ecorte.xyz'
       database__client: 'sqlite3'
+      database__connection__filename: '/var/lib/ghost/content/data/ghost.db'
       mail__transport: 'SMTP'
       mail__options__service: 'Mailgun'
     volumes:
