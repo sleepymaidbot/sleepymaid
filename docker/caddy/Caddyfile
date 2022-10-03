@@ -1,0 +1,3 @@
+blog.ecorte.xyz {
+  reverse_proxy * http://ghost:2368
+}
