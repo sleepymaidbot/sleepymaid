@@ -15,8 +15,10 @@ import type {
 	MessageCreateOptions,
 	MessageEditOptions,
 	ChatInputApplicationCommandData,
+	AutocompleteInteraction,
 } from 'discord.js';
 import type { BotClient } from '../../../lib/extensions/BotClient';
+import { getAutocompleteResults } from '@sleepymaid/shared';
 
 interface MessagesType {
 	[key: string]: MessageType;
@@ -225,17 +227,6 @@ const messages: MessagesType = {
 	},
 };
 
-const getChoices = () => {
-	const choices = [];
-	for (const [k, v] of Object.entries(messages)) {
-		choices.push({
-			name: v.fancyName,
-			value: k,
-		});
-	}
-	return choices;
-};
-
 export default class LaserSetupCommand implements SlashCommandInterface {
 	public readonly guildIds = ['860721584373497887'];
 	public readonly data = {
@@ -247,7 +238,7 @@ export default class LaserSetupCommand implements SlashCommandInterface {
 				name: 'name',
 				description: 'The name of the command',
 				type: ApplicationCommandOptionType.String,
-				choices: getChoices(),
+				autocomplete: true,
 				required: true,
 			},
 			{
@@ -305,5 +296,20 @@ export default class LaserSetupCommand implements SlashCommandInterface {
 			],
 			ephemeral: true,
 		});
+	}
+
+	public async autocomplete(interaction: AutocompleteInteraction) {
+		if (!interaction.inCachedGuild()) return;
+		const getChoices = () => {
+			const choices = [];
+			for (const [k, v] of Object.entries(messages)) {
+				choices.push({
+					name: v.fancyName,
+					value: k,
+				});
+			}
+			return choices;
+		};
+		await interaction.respond(getAutocompleteResults(getChoices(), interaction.options.getFocused()));
 	}
 }
