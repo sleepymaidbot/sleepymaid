@@ -9,7 +9,7 @@
 		"services/*",
 		"packages/*"
 	],
-	"packageManager": "yarn@3.2.3",
+	"packageManager": "yarn@3.2.4",
 	"scripts": {
 		"build": "yarn turbo run build",
 		"lint": "yarn eslint --fix --ext ts,tsx",
@@ -22,9 +22,9 @@
 		"@types/prettier": "2.7.1",
 		"@typescript-eslint/eslint-plugin": "5.39.0",
 		"@typescript-eslint/parser": "5.39.0",
-		"@yarnpkg/cli-dist": "^3.2.3",
+		"@yarnpkg/cli-dist": "^3.2.4",
 		"eslint": "^8.24.0",
-		"eslint-config-neon": "^0.1.33",
+		"eslint-config-neon": "^0.1.34",
 		"eslint-config-prettier": "8.5.0",
 		"eslint-plugin-import": "^2.26.0",
 		"eslint-plugin-typescript-sort-keys": "^2.1.0",
