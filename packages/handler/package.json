@@ -9,7 +9,7 @@
 		"types/**"
 	],
 	"scripts": {
-		"build": "yarn rimraf dist/ && yarn tsc"
+		"build": "yarn rimraf dist/ && yarn tsup"
 	},
 	"author": "Ecorte",
 	"license": "MIT",
@@ -19,6 +19,7 @@
 		"@types/node-cron": "^3.0.4",
 		"rimraf": "3.0.2",
 		"source-map-support": "0.5.21",
+		"tsup": "^6.2.3",
 		"typescript": "4.8.4"
 	},
 	"dependencies": {
