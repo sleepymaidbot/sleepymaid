@@ -29,11 +29,12 @@ interface MessageType {
 	function: (i: ChatInputCommandInteraction) => Promise<MessageCreateOptions & MessageEditOptions>;
 }
 
-const author: APIEmbedAuthor = {
-	name: 'Casino Secret Steps',
-	url: 'https://discord.gg/FZQtwR3MeV',
-	icon_url:
-		'https://media.discordapp.net/attachments/451488182572417025/979200894467985408/fd75504bd8a4810f750bdb5a94ade84c.png',
+const getSecretStepsAuthor = (map: string): APIEmbedAuthor => {
+	return {
+		name: map + ' Secret Steps',
+		url: 'https://discord.gg/FZQtwR3MeV',
+		icon_url: 'https://cdn.discordapp.com/avatars/613040835684073506/464c4cd4a6d5137116065954a42adbd7.png?size=2048',
+	};
 };
 
 const messages: MessagesType = {
@@ -89,6 +90,73 @@ const messages: MessagesType = {
 			};
 		},
 	},
+	// Clue secret steps section
+	cluestep1: {
+		fancyName: 'Clue Step 1 - Frames',
+		function: async () => {
+			const embed: APIEmbed = {
+				title: 'Step 1 - Frames',
+				description:
+					'Bring all the neptunia frames at the entrance. There will be a sound and an orb will briefly appear.',
+				color: 3553599,
+				author: getSecretStepsAuthor('Clue'),
+			};
+
+			return {
+				embeds: [embed],
+			};
+		},
+	},
+	cluestep2: {
+		fancyName: 'Clue Step 2 - Suicides',
+		function: async () => {
+			const embed: APIEmbed = {
+				title: 'Step 2 - Suicides',
+				description:
+					'Firstly, take the [cross from TV room](https://canary.discord.com/channels/860721584373497887/1026689456746549298/1027015877733928970) and place it in the [puddle that has no cross](https://canary.discord.com/channels/860721584373497887/1026689456746549298/1027016087755313233) in noose room.\n\n Then three people can suicide using the noose',
+				color: 3553599,
+				author: getSecretStepsAuthor('Clue'),
+			};
+
+			return {
+				embeds: [embed],
+			};
+		},
+	},
+	cluestep3: {
+		fancyName: 'Clue Step 3 - Guns',
+		function: async () => {
+			const embed: APIEmbed = {
+				title: 'Step 3 - Guns',
+				description:
+					'Craft guns until there is 4 gunners and shoot the gongs respectively at [mid](https://canary.discord.com/channels/860721584373497887/1026689456746549298/1026830231971057694), [basement](https://canary.discord.com/channels/860721584373497887/1026689456746549298/1026830252711890994), [corridor to piano](https://canary.discord.com/channels/860721584373497887/1026689456746549298/1026830267823947846) and [the attic](https://canary.discord.com/channels/860721584373497887/1026689456746549298/1026830284794118154).\n Then get the gunners to shoot all of them at the same time.',
+				color: 3553599,
+				author: getSecretStepsAuthor('Clue'),
+			};
+
+			return {
+				embeds: [embed],
+			};
+		},
+	},
+	cluestep4: {
+		fancyName: 'Clue Step 4 - Breaking the door',
+		function: async () => {
+			const embed: APIEmbed = {
+				title: 'Step 4 - Breaking the door',
+				description:
+					'Pick up the [gun in mid](https://canary.discord.com/channels/860721584373497887/1026689456746549298/1027039389068562432), bring it to the [shelve](https://canary.discord.com/channels/860721584373497887/1026689456746549298/1027039553984397332) that you can open after step 2, collide the ammo box and the gun together, to reload it and throw it on the [entrance door](https://canary.discord.com/channels/860721584373497887/1026689456746549298/1027039699145080902), the door should break',
+				color: 3553599,
+				author: getSecretStepsAuthor('Clue'),
+			};
+
+			return {
+				embeds: [embed],
+			};
+		},
+	},
+
+	// Casino secret steps section
 	casinostep1: {
 		fancyName: 'Casino Step 1 - Blockers',
 		function: async () => {
@@ -113,7 +181,7 @@ const messages: MessagesType = {
 							'<@420662095869378560> - For being the first one to break a blocker.\n<@302793054962581505> - For helping find the good timing and being the first one the destroy all the blockers.',
 					},
 				],
-				author,
+				author: getSecretStepsAuthor('Casino'),
 			};
 
 			return {
@@ -140,7 +208,7 @@ const messages: MessagesType = {
 						value: '<@285502356811022336> - For finding how to open the keypad.',
 					},
 				],
-				author,
+				author: getSecretStepsAuthor('Casino'),
 			};
 
 			return {
@@ -167,7 +235,7 @@ const messages: MessagesType = {
 						value: '<@562779372533186560> - For having the idea of burning the box.',
 					},
 				],
-				author,
+				author: getSecretStepsAuthor('Casino'),
 			};
 
 			return { embeds: [embed] };
@@ -192,7 +260,7 @@ const messages: MessagesType = {
 						value: '<@285502356811022336> - For finding how to decode the code.',
 					},
 				],
-				author,
+				author: getSecretStepsAuthor('Casino'),
 			};
 			return { embeds: [embed] }; //
 		},
@@ -220,7 +288,7 @@ const messages: MessagesType = {
 						value: '<@217473615174565888> - For being the first one the finish simon says.',
 					},
 				],
-				author,
+				author: getSecretStepsAuthor('Casino'),
 			};
 			return { embeds: [embed] };
 		},
