@@ -16,6 +16,17 @@ services:
       test: ['CMD-SHELL', 'pg_isready -U sleepymaid']
       interval: 10s
       timeout: 5s
+
+  redis:
+    image: redis:6-alpine
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD-SHELL', 'redis-cli ping']
+      interval: 10s
+      timeout: 5s
+
   caddy:
     build:
       context: ../docker/caddy
@@ -25,6 +36,7 @@ services:
     ports:
       - '80:80'
       - '443:443'
+
   ghost:
     image: ghost:5-alpine
     restart: unless-stopped
@@ -38,6 +50,7 @@ services:
       mail__options__service: 'Mailgun'
     volumes:
       - ghost-data:/var/lib/ghost/content
+
   sleepymaid:
     build:
       context: ../
@@ -45,6 +58,8 @@ services:
     restart: unless-stopped
     environment:
       DATABASE_URL: 'postgresql://sleepymaid:admin@postgres:5432/sleepymaid'
+      REDIS_URL: 'redis://redis:6379/0'
+
   helper:
     build:
       context: ../
@@ -52,8 +67,11 @@ services:
     restart: unless-stopped
     environment:
       DATABASE_URL: 'postgresql://sleepymaid:admin@postgres:5432/sleepymaid'
+      REDIS_URL: 'redis://redis:6379/0'
 
 volumes:
+  redis-data:
+    name: 'sleepymaid-redis-data'
   postgres-data:
     name: 'sleepymaid-postgres-data'
   ghost-data:

@@ -7,6 +7,7 @@ export interface Config {
 	discordToken: string;
 	devIds: string[];
 	dbUrl: string;
+	redisUrl: string;
 	nodeEnv: NodeEnv;
 }
 
@@ -17,6 +18,7 @@ export const initConfig = () => {
 		discordClientSecret: process.env.DISCORD_CLIENT_SECRET!,
 		discordToken: process.env.DISCORD_TOKEN!,
 		dbUrl: process.env.DB_URL!,
+		redisUrl: process.env.REDIS_URL!,
 		nodeEnv: (process.env.NODE_ENV as NodeEnv) ?? 'dev',
 	};
 	return config;

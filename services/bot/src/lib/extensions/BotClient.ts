@@ -1,3 +1,4 @@
+import { PubSubRedisBroker } from '@discordjs/brokers';
 import { Logger } from '@sleepymaid/logger';
 import { initConfig, Config, supportedLngs } from '@sleepymaid/shared';
 import { PrismaClient } from '@prisma/client';
@@ -6,9 +7,12 @@ import { HandlerClient } from '@sleepymaid/handler';
 import { resolve, join } from 'path';
 import i18next from 'i18next';
 import FsBackend from 'i18next-fs-backend';
+import Redis from 'ioredis';
 
 export class BotClient extends HandlerClient {
 	public declare prisma: PrismaClient;
+	public declare redis: Redis;
+	public declare brokers: PubSubRedisBroker<any>;
 	public declare config: Config;
 	constructor() {
 		super(
@@ -43,6 +47,8 @@ export class BotClient extends HandlerClient {
 		this.env = this.config.nodeEnv;
 		this.logger = new Logger(this.env);
 		this.prisma = new PrismaClient();
+		this.redis = new Redis(this.config.redisUrl);
+		this.brokers = new PubSubRedisBroker({ redisClient: this.redis });
 
 		await i18next.use(FsBackend).init({
 			//debug: this.config.environment === 'development',
