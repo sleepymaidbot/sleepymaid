@@ -2,7 +2,7 @@ import { Logger } from '@sleepymaid/logger';
 import { initConfig, Config, supportedLngs } from '@sleepymaid/shared';
 import { PrismaClient } from '@prisma/client';
 import { ActivityType, GatewayIntentBits } from 'discord-api-types/v10';
-import { BaseLogger, HandlerClient } from '@sleepymaid/handler';
+import { HandlerClient } from '@sleepymaid/handler';
 import { resolve, join } from 'path';
 import i18next from 'i18next';
 import FsBackend from 'i18next-fs-backend';
