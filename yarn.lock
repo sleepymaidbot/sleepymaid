@@ -1699,6 +1699,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@sleepymaid/handler@workspace:packages/handler"
   dependencies:
+    "@favware/cliff-jumper": ^1.8.8
     "@sleepymaid/util": "workspace:^"
     "@types/node": 17.0.21
     "@types/node-cron": ^3.0.4
