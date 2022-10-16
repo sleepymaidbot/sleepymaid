@@ -18,11 +18,14 @@
 		"dist"
 	],
 	"scripts": {
-		"build": "yarn rimraf dist/ && yarn tsup"
+		"build": "yarn rimraf dist/ && yarn tsup",
+		"changelog": "git cliff --prepend ./CHANGELOG.md -u -c ./cliff.toml -r ../../ --include-path 'packages/builders/*'",
+		"release": "cliff-jumper"
 	},
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
+		"@favware/cliff-jumper": "^1.8.8",
 		"@sleepymaid/handler": "workspace:^",
 		"@types/node": "17.0.21",
 		"rimraf": "3.0.2",

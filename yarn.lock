@@ -1745,6 +1745,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@sleepymaid/logger@workspace:packages/logger"
   dependencies:
+    "@favware/cliff-jumper": ^1.8.8
     "@sleepymaid/handler": "workspace:^"
     "@types/node": 17.0.21
     ansi-colors: 4.1.3
