@@ -8071,7 +8071,6 @@ __metadata:
     rimraf: ^3.0.2
     tsup: ^6.2.3
     turbo: ^1.5.6
-    turbo-linux-64: ^1.5.6
     typescript: 4.8.4
   languageName: unknown
   linkType: soft
@@ -8926,10 +8925,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo-linux-64@npm:1.5.6, turbo-linux-64@npm:^1.5.6":
+"turbo-linux-64@npm:1.5.6":
   version: 1.5.6
   resolution: "turbo-linux-64@npm:1.5.6"
-  checksum: fc2c50bfe4dd9345bccfa211b2677fddc3d6d9ab154d35ab9864d8e9622d1aa783a2a9d8f9c746d7c2e2d380d5012dd3b22fc64c8c59b56619d973707599f7dc
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
@@ -9061,11 +9059,11 @@ __metadata:
 
 "typescript@patch:typescript@4.8.4#~builtin<compat/typescript>, typescript@patch:typescript@^4.6.4#~builtin<compat/typescript>, typescript@patch:typescript@^4.8.4#~builtin<compat/typescript>":
   version: 4.8.4
-  resolution: "typescript@patch:typescript@npm%3A4.8.4#~builtin<compat/typescript>::version=4.8.4&hash=a1c5e5"
+  resolution: "typescript@patch:typescript@npm%3A4.8.4#~builtin<compat/typescript>::version=4.8.4&hash=701156"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 563a0ef47abae6df27a9a3ab38f75fc681f633ccf1a3502b1108e252e187787893de689220f4544aaf95a371a4eb3141e4a337deb9895de5ac3c1ca76430e5f0
+  checksum: 301459fc3eb3b1a38fe91bf96d98eb55da88a9cb17b4ef80b4d105d620f4d547ba776cc27b44cc2ef58b66eda23fe0a74142feb5e79a6fb99f54fc018a696afa
   languageName: node
   linkType: hard
 
