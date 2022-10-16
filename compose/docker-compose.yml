@@ -18,7 +18,7 @@ services:
       timeout: 5s
 
   redis:
-    image: redis:6-alpine
+    image: redis:7-alpine
     volumes:
       - redis-data:/data
     restart: unless-stopped
