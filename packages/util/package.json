@@ -20,7 +20,7 @@
 	"scripts": {
 		"build": "yarn rimraf dist/ && yarn tsup",
 		"test": "vitest run",
-		"changelog": "git cliff --prepend ./CHANGELOG.md -u -c ./cliff.toml -r ../../ --include-path 'packages/builders/*'",
+		"changelog": "git cliff --prepend ./CHANGELOG.md -u -c ./cliff.toml -r ../../ --include-path 'packages/util/*'",
 		"release": "cliff-jumper"
 	},
 	"author": "Ecorte",
