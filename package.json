@@ -15,11 +15,9 @@
 		"test": "yarn turbo run test --parallel",
 		"lint": "yarn eslint --fix --ext ts,tsx",
 		"format": "yarn prettier --write . --plugin-search-dir=. .",
-		"prepare": "yarn husky install",
-		"publish": "yarn run build && yarn changeset publish"
+		"prepare": "yarn husky install"
 	},
 	"devDependencies": {
-		"@changesets/cli": "^2.25.0",
 		"@commitlint/cli": "^17.1.2",
 		"@commitlint/config-angular": "^17.1.0",
 		"@favware/cliff-jumper": "^1.8.8",
