@@ -39,4 +39,6 @@ RUN yarn turbo run build --filter=./services/*
 COPY locales/ ./locales
 COPY services/bot/downloads ./services/bot/downloads
 
-CMD ["node", "--trace-warnings", "-r", "source-map-support/register", "services/bot/dist/index.js"]
+WORKDIR /opt/build/services/bot
+
+CMD ["node", "--trace-warnings", "-r", "source-map-support/register", "dist/index.js"]
