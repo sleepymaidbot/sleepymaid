@@ -27,7 +27,7 @@
 		"@typescript-eslint/parser": "5.40.1",
 		"@yarnpkg/cli-dist": "^3.2.4",
 		"eslint": "^8.25.0",
-		"eslint-config-neon": "^0.1.38",
+		"eslint-config-neon": "^0.1.39",
 		"eslint-config-prettier": "8.5.0",
 		"eslint-plugin-import": "^2.26.0",
 		"eslint-plugin-typescript-sort-keys": "^2.1.0",
