@@ -5,7 +5,7 @@
 	"private": true,
 	"main": "dist/index.js",
 	"scripts": {
-		"build": "yarn rimraf dist/ && yarn tsup",
+		"build": "yarn rimraf dist/ && yarn tsup src/**/* src/*",
 		"start": "yarn build && node --trace-warnings -r source-map-support/register dist/index.js"
 	},
 	"author": "Ecorte",

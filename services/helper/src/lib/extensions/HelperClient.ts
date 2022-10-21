@@ -44,7 +44,7 @@ export class HelperClient extends HandlerClient {
 			//debug: this.config.environment === 'development',
 			supportedLngs,
 			backend: {
-				loadPath: join(__dirname, '../../../../../locales/{{lng}}/{{ns}}.json'),
+				loadPath: join(__dirname, '/../../locales/{{lng}}/{{ns}}.json'),
 			},
 			cleanCode: true,
 			fallbackLng: 'en-US',
@@ -55,13 +55,13 @@ export class HelperClient extends HandlerClient {
 
 		this.loadHandlers({
 			commands: {
-				folder: join(__dirname, '..', '..', 'commands'),
+				folder: join(__dirname, 'commands'),
 			},
 			listeners: {
-				folder: join(__dirname, '..', '..', 'listeners'),
+				folder: join(__dirname, 'listeners'),
 			},
 			tasks: {
-				folder: join(__dirname, '..', '..', 'tasks'),
+				folder: join(__dirname, 'tasks'),
 			},
 		});
 

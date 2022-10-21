@@ -54,7 +54,7 @@ export class BotClient extends HandlerClient {
 			//debug: this.config.environment === 'development',
 			supportedLngs,
 			backend: {
-				loadPath: join(__dirname, '../../../../../locales/{{lng}}/{{ns}}.json'),
+				loadPath: join(__dirname, '/../../locales/{{lng}}/{{ns}}.json'),
 			},
 			cleanCode: true,
 			fallbackLng: 'en-US',
@@ -65,13 +65,13 @@ export class BotClient extends HandlerClient {
 
 		await this.loadHandlers({
 			commands: {
-				folder: join(__dirname, '..', '..', 'slashCommands'),
+				folder: join(__dirname, 'slashCommands'),
 			},
 			listeners: {
-				folder: join(__dirname, '..', '..', 'listeners'),
+				folder: join(__dirname, 'listeners'),
 			},
 			tasks: {
-				folder: join(__dirname, '..', '..', 'tasks'),
+				folder: join(__dirname, 'tasks'),
 			},
 		});
 		this.login(this.config.discordToken);
