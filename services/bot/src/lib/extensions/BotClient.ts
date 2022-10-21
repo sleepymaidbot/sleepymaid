@@ -65,13 +65,13 @@ export class BotClient extends HandlerClient {
 
 		await this.loadHandlers({
 			commands: {
-				folder: resolve(__dirname, '..', '..', 'slashCommands'),
+				folder: join(__dirname, '..', '..', 'slashCommands'),
 			},
 			listeners: {
-				folder: resolve(__dirname, '..', '..', 'listeners'),
+				folder: join(__dirname, '..', '..', 'listeners'),
 			},
 			tasks: {
-				folder: resolve(__dirname, '..', '..', 'tasks'),
+				folder: join(__dirname, '..', '..', 'tasks'),
 			},
 		});
 		this.login(this.config.discordToken);
