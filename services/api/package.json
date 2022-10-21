@@ -1,0 +1,39 @@
+{
+	"name": "@sleepymaid/api",
+	"version": "0.0.0",
+	"description": "",
+	"private": true,
+	"main": "dist/index.js",
+	"scripts": {
+		"build": "yarn rimraf dist/ && yarn tsup",
+		"start": "yarn build && node --trace-warnings -r source-map-support/register dist/index.js"
+	},
+	"author": "Ecorte",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/node": "17.0.21",
+		"rimraf": "3.0.2",
+		"source-map-support": "0.5.21",
+		"tsup": "^6.2.3",
+		"typescript": "4.8.4"
+	},
+	"dependencies": {
+		"@hapi/boom": "^10.0.0",
+		"@prisma/client": "4.4.0",
+		"@sapphire/node-utilities": "^1.0.0",
+		"@sapphire/result": "^2.6.0",
+		"@sapphire/shapeshift": "^3.7.0",
+		"@sleepymaid/logger": "workspace:^",
+		"@sleepymaid/shared": "workspace:^",
+		"@sleepymaid/util": "*",
+		"cors": "^2.8.5",
+		"helmet": "^6.0.0",
+		"ioredis": "^5.2.3",
+		"path": "0.12.7",
+		"polka": "1.0.0-next.22",
+		"prisma": "4.4.0",
+		"reflect-metadata": "0.1.13",
+		"trouter": "^3.2.0",
+		"tsyringe": "4.7.0"
+	}
+}

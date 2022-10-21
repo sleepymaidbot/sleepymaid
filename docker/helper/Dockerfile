@@ -19,6 +19,7 @@ COPY packages/logger/package.json ./packages/logger/package.json
 COPY packages/shared/package.json ./packages/shared/package.json
 COPY packages/util/package.json ./packages/util/package.json
 
+COPY services/api/package.json ./services/api/package.json
 COPY services/helper/package.json ./services/helper/package.json
 COPY services/bot/package.json ./services/bot/package.json
 
@@ -31,6 +32,7 @@ COPY packages/util ./packages/util
 
 RUN yarn turbo run build --filter=./packages/*
 
+COPY services/api/ ./services/api/
 COPY services/bot ./services/bot
 COPY services/helper/ ./services/helper
 
@@ -39,6 +41,4 @@ RUN yarn turbo run build --filter=./services/*
 COPY locales/ ./locales
 COPY services/helper/banners ./services/helper/banners
 
-WORKDIR /opt/build/services/helper
-
-CMD ["node", "--trace-warnings", "-r", "source-map-support/register", "dist/index.js"]
+CMD ["node", "--trace-warnings", "-r", "source-map-support/register", "services/helper/dist/index.js"]

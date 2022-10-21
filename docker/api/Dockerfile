@@ -1,11 +1,11 @@
-FROM node:19-alpine
-LABEL name "sleepymaid bot"
+FROM node:18-alpine
+LABEL name "sleepymaid api"
 
 WORKDIR /opt/build
 
 RUN apk add --update \
   && apk add --no-cache ca-certificates \
-  && apk add --no-cache --virtual .build-deps curl git python3 alpine-sdk libc6-compat yt-dlp
+  && apk add --no-cache --virtual .build-deps curl git python3 alpine-sdk yt-dlp libc6-compat
 
 COPY tsup.config.js turbo.json package.json tsconfig.json yarn.lock .yarnrc.yml ./
 COPY .yarn ./.yarn
@@ -39,6 +39,5 @@ COPY services/helper/ ./services/helper
 RUN yarn turbo run build --filter=./services/*
 
 COPY locales/ ./locales
-COPY services/bot/downloads ./services/bot/downloads
 
-CMD ["node", "--trace-warnings", "-r", "source-map-support/register", "services/bot/dist/index.js"]
+CMD ["node", "--trace-warnings", "-r", "source-map-support/register", "services/api/dist/index.js"]
