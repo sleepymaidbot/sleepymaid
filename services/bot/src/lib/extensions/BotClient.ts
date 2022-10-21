@@ -1,4 +1,4 @@
-import { PubSubRedisBroker } from '@discordjs/brokers';
+//import { PubSubRedisBroker } from '@discordjs/brokers';
 import { Logger } from '@sleepymaid/logger';
 import { initConfig, Config, supportedLngs } from '@sleepymaid/shared';
 import { PrismaClient } from '@prisma/client';
@@ -12,7 +12,7 @@ import Redis from 'ioredis';
 export class BotClient extends HandlerClient {
 	public declare prisma: PrismaClient;
 	public declare redis: Redis;
-	public declare brokers: PubSubRedisBroker<any>;
+	//public declare brokers: PubSubRedisBroker<any>;
 	public declare config: Config;
 	constructor() {
 		super(
@@ -65,13 +65,13 @@ export class BotClient extends HandlerClient {
 
 		await this.loadHandlers({
 			commands: {
-				folder: resolve(__dirname, '../../slashCommands'),
+				folder: resolve(__dirname, '..', '..', 'slashCommands'),
 			},
 			listeners: {
-				folder: resolve(__dirname, '../../listeners'),
+				folder: resolve(__dirname, '..', '..', 'listeners'),
 			},
 			tasks: {
-				folder: resolve(__dirname, '../../tasks'),
+				folder: resolve(__dirname, '..', '..', 'tasks'),
 			},
 		});
 		this.login(this.config.discordToken);

@@ -55,13 +55,13 @@ export class HelperClient extends HandlerClient {
 
 		this.loadHandlers({
 			commands: {
-				folder: resolve(__dirname, '../../commands'),
+				folder: resolve(__dirname, '..', '..', 'commands'),
 			},
 			listeners: {
-				folder: resolve(__dirname, '../../listeners'),
+				folder: resolve(__dirname, '..', '..', 'listeners'),
 			},
 			tasks: {
-				folder: resolve(__dirname, '../../tasks'),
+				folder: resolve(__dirname, '..', '..', 'tasks'),
 			},
 		});
 
