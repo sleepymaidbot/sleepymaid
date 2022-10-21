@@ -181,6 +181,7 @@ export class UserRoleSyncerManager extends baseManager {
 
 		return { toAdd, toRemove };
 	}
+	// @ts-ignore
 	private async syncSeparatorRoles(member: GuildMember): Promise<RoleSyncReturn> {
 		const separatorRoles = container.resolve(ServerRoleSyncerManager).getSeparatorRoles();
 

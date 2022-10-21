@@ -80,7 +80,7 @@ export default class PointsCommand implements SlashCommandInterface {
 							.setColor(resolveColor('#36393f'))
 							.setAuthor({
 								name: interaction.member.user.tag,
-								iconURL: interaction.member.user.avatarURL() || undefined,
+								iconURL: interaction.member.user.avatarURL() || '',
 							})
 							.setDescription(`<@${member}> n'a pas de points. \nCommence par envoyer des message pour en avoir.`)
 							.setTimestamp();
@@ -91,7 +91,7 @@ export default class PointsCommand implements SlashCommandInterface {
 								.setColor(resolveColor('#36393f'))
 								.setAuthor({
 									name: interaction.member.user.tag,
-									iconURL: interaction.member.user.avatarURL() || undefined,
+									iconURL: interaction.member.user.avatarURL() || '',
 								})
 								.setDescription(`<@${member}> a ${points} point.`)
 								.setTimestamp();
@@ -101,7 +101,7 @@ export default class PointsCommand implements SlashCommandInterface {
 								.setColor(resolveColor('#36393f'))
 								.setAuthor({
 									name: interaction.member.user.tag,
-									iconURL: interaction.member.user.avatarURL() || undefined,
+									iconURL: interaction.member.user.avatarURL() || '',
 								})
 								.setDescription(`<@${member}> a ${points} points.`)
 								.setTimestamp();
@@ -197,7 +197,7 @@ export default class PointsCommand implements SlashCommandInterface {
 						color: resolveColor('#36393f'),
 						author: {
 							name: 'Leaderboard du serveur',
-							icon_url: interaction.guild.iconURL() || undefined,
+							icon_url: interaction.guild.iconURL() || '',
 						},
 						description: leaderboardText.text,
 						timestamp: new Date(Date.now()).toISOString(),
@@ -223,7 +223,7 @@ export default class PointsCommand implements SlashCommandInterface {
 									color: resolveColor('#36393f'),
 									author: {
 										name: 'Leaderboard du serveur',
-										icon_url: interaction.guild.iconURL() || undefined,
+										icon_url: interaction.guild.iconURL() || '',
 									},
 									description: lb.text,
 									timestamp: new Date(Date.now()).toISOString(),
@@ -241,7 +241,7 @@ export default class PointsCommand implements SlashCommandInterface {
 									color: resolveColor('#36393f'),
 									author: {
 										name: 'Leaderboard du serveur',
-										icon_url: interaction.guild.iconURL() || undefined,
+										icon_url: interaction.guild.iconURL() || '',
 									},
 									description: lb.text,
 									timestamp: new Date(Date.now()).toISOString(),

@@ -39,6 +39,8 @@ export default class LaserCasinoCommand implements SlashCommandInterface {
 			},
 		],
 	} as ChatInputApplicationCommandData;
+
+	//@ts-expect-error
 	public async execute(interaction: ChatInputCommandInteraction<'cached'>) {
 		switch (interaction.options.getSubcommand()) {
 			case 'getbuttonorder': {
@@ -54,8 +56,8 @@ export default class LaserCasinoCommand implements SlashCommandInterface {
 
 				const finalOrder = [0, 0, 0, 0];
 				for (let i = 0; i < 4; i++) {
-					const int = parseInt(midNumbers[i]);
-					const pos = parseInt(roomNumbers[i]) - 1;
+					const int = parseInt(midNumbers[i]!);
+					const pos = parseInt(roomNumbers[i]!) - 1;
 					finalOrder[pos] = int;
 				}
 				return await interaction.reply({

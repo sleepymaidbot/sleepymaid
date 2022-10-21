@@ -4,7 +4,7 @@ import { initConfig, Config, supportedLngs } from '@sleepymaid/shared';
 import { PrismaClient } from '@prisma/client';
 import { GatewayIntentBits } from 'discord-api-types/v10';
 import { HandlerClient } from '@sleepymaid/handler';
-import { join, resolve } from 'path';
+import { resolve } from 'path';
 import i18next from 'i18next';
 import FsBackend from 'i18next-fs-backend';
 import Redis from 'ioredis';
@@ -44,7 +44,7 @@ export class HelperClient extends HandlerClient {
 			//debug: this.config.environment === 'development',
 			supportedLngs,
 			backend: {
-				loadPath: join(__dirname, '/../../locales/{{lng}}/{{ns}}.json'),
+				loadPath: resolve(__dirname, '/../../locales/{{lng}}/{{ns}}.json'),
 			},
 			cleanCode: true,
 			fallbackLng: 'en-US',
@@ -55,13 +55,13 @@ export class HelperClient extends HandlerClient {
 
 		this.loadHandlers({
 			commands: {
-				folder: join(__dirname, 'commands'),
+				folder: resolve(__dirname, 'commands'),
 			},
 			listeners: {
-				folder: join(__dirname, 'listeners'),
+				folder: resolve(__dirname, 'listeners'),
 			},
 			tasks: {
-				folder: join(__dirname, 'tasks'),
+				folder: resolve(__dirname, 'tasks'),
 			},
 		});
 

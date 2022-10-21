@@ -2,7 +2,7 @@ import { ButtonStyle } from 'discord-api-types/v10';
 import { ButtonBuilder, ActionRowBuilder, SelectMenuBuilder, SelectMenuOptionBuilder } from '@discordjs/builders';
 import { pingRoleIds, colorRoleIds } from '@sleepymaid/shared';
 import type { ListenerInterface } from '@sleepymaid/handler';
-import type { ButtonInteraction, Interaction, Role, SelectMenuInteraction } from 'discord.js';
+import type { ButtonInteraction, SelectMenuInteraction } from 'discord.js';
 
 export default class MetahandlerListener implements ListenerInterface {
 	public readonly name = 'interactionCreate';

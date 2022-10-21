@@ -1,6 +1,5 @@
 import { SlashCommandBuilder, EmbedBuilder } from '@discordjs/builders';
 import { Result } from '@sapphire/result';
-import type { Err } from '@sapphire/result/dist/lib/Result/Err';
 import type { SlashCommandInterface } from '@sleepymaid/handler';
 import {
 	ChatInputApplicationCommandData,
@@ -58,13 +57,14 @@ export default class CustomRoleCommand implements SlashCommandInterface {
 			const userrole = member.roles.cache.map((x) => x.id);
 			if (userrole.includes('869637334126170112')) return true;
 			if (points >= 250) return true;
+			return false;
 		};
 
 		const customRoleId = inDb?.custom_role_id;
 		const embed = new EmbedBuilder()
 			.setAuthor({
 				name: `Rôle custom de ${interaction.user.tag}`,
-				iconURL: interaction.user.avatarURL() ?? undefined,
+				iconURL: interaction.user.avatarURL() ?? '',
 			})
 			.setColor(resolveColor('#36393f'))
 			.setTimestamp();

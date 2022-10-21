@@ -18,7 +18,7 @@ const getBaseEmbed = (i: ChatInputCommandInteraction<'cached'>): APIEmbed => {
 		color: 3553599,
 		author: {
 			name: i.member.user.tag,
-			icon_url: i.member.user.avatarURL() ?? undefined,
+			icon_url: i.member.user.avatarURL() ?? '',
 		},
 		timestamp: new Date(Date.now()).toISOString(),
 	};

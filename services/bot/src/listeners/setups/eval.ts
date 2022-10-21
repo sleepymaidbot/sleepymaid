@@ -8,6 +8,7 @@ export default class SetupListener implements ListenerInterface {
 	public readonly name = 'messageCreate';
 	public readonly once = false;
 
+	// @ts-expect-error
 	public async execute(message: Message, client: BotClient) {
 		if (message.author.id !== '324281236728053760') return;
 		if (!client.user) return;

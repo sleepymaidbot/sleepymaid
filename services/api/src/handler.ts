@@ -6,7 +6,7 @@ import { Logger } from '@sleepymaid/logger';
 import { Config, initConfig } from '@sleepymaid/shared';
 import Redis from 'ioredis';
 import path from 'node:path';
-import Polka, { Request } from 'polka';
+import Polka from 'polka';
 import { sendBoom } from './util/sendBoom';
 
 export default class Handler {
@@ -25,8 +25,8 @@ export default class Handler {
 		this.redis = new Redis(this.config.redisUrl);
 		//this.brokers = new PubSubRedisBroker({ redisClient: this.redis });
 		const logger = this.logger;
-		const app = Polka({
-			onError(error: any, _: any, res: { setHeader: (arg0: string, arg1: string) => void }) {
+		Polka({
+			onError(error: any, _: any, res) {
 				res.setHeader('content-type', 'application/json');
 				const boom = isBoom(error) ? error : new Boom(error);
 
@@ -36,7 +36,7 @@ export default class Handler {
 
 				sendBoom(boom, res);
 			},
-			onNoMatch(_: any, res: { setHeader: (arg0: string, arg1: string) => void }) {
+			onNoMatch(_: any, res) {
 				res.setHeader('content-type', 'application/json');
 				sendBoom(notFound(), res);
 			},

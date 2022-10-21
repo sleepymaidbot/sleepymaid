@@ -64,7 +64,7 @@ export class ActivityRewardManager extends baseManager {
 					const embed = new EmbedBuilder()
 						.setAuthor({
 							name: `Rôle custom de ${member.user.tag}`,
-							iconURL: member.user.avatarURL() || undefined,
+							iconURL: member.user.avatarURL() || '',
 						})
 						.setColor(resolveColor('#36393f'))
 						.setTimestamp()

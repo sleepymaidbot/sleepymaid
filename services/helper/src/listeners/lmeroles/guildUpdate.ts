@@ -9,7 +9,7 @@ export default class guildUpdate implements ListenerInterface {
 	public readonly name = 'roleUpdate';
 	public readonly once = false;
 
-	public async execute(oldRole: Role, newRole: Role, client: HelperClient) {
+	public async execute(_oldRole: Role, newRole: Role, client: HelperClient) {
 		if (newRole.guild.id !== '324284116021542922') return;
 
 		container.register(HelperClient, { useValue: client });

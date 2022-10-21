@@ -26,7 +26,7 @@ export default class RewardsCommand implements SlashCommandInterface {
 			.setColor(resolveColor('#36393f'))
 			.setAuthor({
 				name: `${interaction.user.tag} rewards`,
-				iconURL: interaction.user.avatarURL() || undefined,
+				iconURL: interaction.user.avatarURL() || '',
 			})
 			.setTimestamp();
 

@@ -55,7 +55,7 @@ export class configManager extends baseManager {
 					},
 				},
 			});
-		}
+		} else return null;
 	}
 
 	public async removeSpecialRole(guildId: Snowflake, roleId: Snowflake, type: SpecialRoleType) {
@@ -85,7 +85,7 @@ export class configManager extends baseManager {
 					},
 				},
 			});
-		}
+		} else return null;
 	}
 
 	public async getSpecialRoles(guildId: Snowflake) {
