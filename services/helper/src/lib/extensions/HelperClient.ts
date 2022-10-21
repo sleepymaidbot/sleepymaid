@@ -10,69 +10,69 @@ import FsBackend from 'i18next-fs-backend';
 import Redis from 'ioredis';
 
 export class HelperClient extends HandlerClient {
-	public declare prisma: PrismaClient;
-	public declare redis: Redis;
-	public declare brokers: PubSubRedisBroker<any>;
-	public declare config: Config;
-	constructor() {
-		super(
-			{
-				devServerId: '821717486217986098',
-			},
-			{
-				intents: [
-					GatewayIntentBits.Guilds,
-					GatewayIntentBits.GuildMembers,
-					GatewayIntentBits.GuildMessages,
-					GatewayIntentBits.GuildVoiceStates,
-					GatewayIntentBits.MessageContent,
-				],
-				allowedMentions: { parse: ['users', 'roles'], repliedUser: false },
-			},
-		);
-	}
+  public declare prisma: PrismaClient;
+  public declare redis: Redis;
+  public declare brokers: PubSubRedisBroker<any>;
+  public declare config: Config;
+  constructor() {
+    super(
+      {
+        devServerId: '821717486217986098',
+      },
+      {
+        intents: [
+          GatewayIntentBits.Guilds,
+          GatewayIntentBits.GuildMembers,
+          GatewayIntentBits.GuildMessages,
+          GatewayIntentBits.GuildVoiceStates,
+          GatewayIntentBits.MessageContent,
+        ],
+        allowedMentions: { parse: ['users', 'roles'], repliedUser: false },
+      }
+    );
+  }
 
-	public async start(): Promise<void> {
-		this.config = initConfig();
-		this.logger = new Logger(this.env);
-		this.env = this.config.nodeEnv;
-		this.prisma = new PrismaClient();
-		this.redis = new Redis(this.config.redisUrl);
-		this.brokers = new PubSubRedisBroker({ redisClient: this.redis });
+  public async start(): Promise<void> {
+    this.config = initConfig();
+    this.logger = new Logger(this.env);
+    this.env = this.config.nodeEnv;
+    this.prisma = new PrismaClient();
+    this.redis = new Redis(this.config.redisUrl);
+    //this.brokers = new PubSubRedisBroker({ redisClient: this.redis });
 
-		await i18next.use(FsBackend).init({
-			//debug: this.config.environment === 'development',
-			supportedLngs,
-			backend: {
-				loadPath: join(__dirname, '../../../../../locales/{{lng}}/{{ns}}.json'),
-			},
-			cleanCode: true,
-			fallbackLng: 'en-US',
-			preload: ['en-US', 'fr'],
-			defaultNS: 'translation',
-			ns: 'translation',
-		});
+    await i18next.use(FsBackend).init({
+      //debug: this.config.environment === 'development',
+      supportedLngs,
+      backend: {
+        loadPath: join(__dirname, '../../../../../locales/{{lng}}/{{ns}}.json'),
+      },
+      cleanCode: true,
+      fallbackLng: 'en-US',
+      preload: ['en-US', 'fr'],
+      defaultNS: 'translation',
+      ns: 'translation',
+    });
 
-		this.loadHandlers({
-			commands: {
-				folder: resolve(__dirname, '../../commands'),
-			},
-			listeners: {
-				folder: resolve(__dirname, '../../listeners'),
-			},
-			tasks: {
-				folder: resolve(__dirname, '../../tasks'),
-			},
-		});
+    this.loadHandlers({
+      commands: {
+        folder: resolve(__dirname, '../../commands'),
+      },
+      listeners: {
+        folder: resolve(__dirname, '../../listeners'),
+      },
+      tasks: {
+        folder: resolve(__dirname, '../../tasks'),
+      },
+    });
 
-		this.login(this.config.discordToken);
+    this.login(this.config.discordToken);
 
-		process.on('unhandledRejection', (error: Error) => {
-			this.logger.error(error);
-		});
+    process.on('unhandledRejection', (error: Error) => {
+      this.logger.error(error);
+    });
 
-		process.on('exit', async () => {
-			await this.prisma.$disconnect();
-		});
-	}
+    process.on('exit', async () => {
+      await this.prisma.$disconnect();
+    });
+  }
 }

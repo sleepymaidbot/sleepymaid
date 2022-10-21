@@ -48,7 +48,7 @@ export class BotClient extends HandlerClient {
 		this.logger = new Logger(this.env);
 		this.prisma = new PrismaClient();
 		this.redis = new Redis(this.config.redisUrl);
-		this.brokers = new PubSubRedisBroker({ redisClient: this.redis });
+		//this.brokers = new PubSubRedisBroker({ redisClient: this.redis });
 
 		await i18next.use(FsBackend).init({
 			//debug: this.config.environment === 'development',
