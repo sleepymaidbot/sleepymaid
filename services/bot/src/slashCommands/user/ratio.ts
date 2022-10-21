@@ -17,7 +17,7 @@ export default class RatioUserCommand implements UserCommandInterface {
 				lng: interaction.locale,
 				target: interaction.options.get('user')!.value,
 				author: interaction.user.id,
-			}),
+			})!,
 		});
 	}
 }

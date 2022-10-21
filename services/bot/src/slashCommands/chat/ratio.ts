@@ -30,7 +30,7 @@ export default class RatioSlashCommand implements SlashCommandInterface {
 				lng: interaction.locale,
 				target: interaction.options.get('user')!.value,
 				author: interaction.user.id,
-			}),
+			})!,
 		});
 	}
 }
