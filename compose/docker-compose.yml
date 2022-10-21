@@ -18,6 +18,9 @@ services:
       timeout: 5s
 
   redis:
+    build:
+      context: ../docker/redis
+      dockerfile: ./Dockerfile
     image: redis:7-alpine
     volumes:
       - redis-data:/data
@@ -38,6 +41,9 @@ services:
       - '443:443'
 
   ghost:
+    build:
+      context: ../docker/ghost
+      dockerfile: ./Dockerfile
     image: ghost:5-alpine
     restart: unless-stopped
     expose:
