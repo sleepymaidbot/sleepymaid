@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { loadFolder, isEqualObjects } from '@sleepymaid/util';
+import { isEqualObjects } from '@sleepymaid/util';
 import {
 	ApplicationCommandData,
 	AutocompleteInteraction,
@@ -20,6 +20,7 @@ import { readdir } from 'fs/promises';
 import type { UserCommandInterface } from './UserCommand';
 import type { MessageCommandInterface } from './MessageCommand';
 import { BaseManager } from '../BaseManager';
+import { findFilesRecursively } from '@sapphire/node-utilities';
 
 export interface CommandManagerStartAllOptionsType {
 	folder: string;
@@ -99,10 +100,8 @@ export class CommandManager extends BaseManager {
 	}
 
 	private async loadChatCommands(folderPath: string): Promise<number> {
-		const filesToImport = await loadFolder(folderPath);
-
 		let count = 0;
-		for await (const file of filesToImport) {
+		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith('.js'))) {
 			const cmd_ = container.resolve<SlashCommandInterface>((await import(file)).default);
 
 			this.commands.set(cmd_.data.name, file);
@@ -122,10 +121,8 @@ export class CommandManager extends BaseManager {
 	}
 
 	private async loadMessageCommands(folderPath: string): Promise<number> {
-		const filesToImport = await loadFolder(folderPath);
-
 		let count = 0;
-		for await (const file of filesToImport) {
+		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith('.js'))) {
 			const cmd_ = container.resolve<MessageCommandInterface>((await import(file)).default);
 
 			this.commands.set(cmd_.data.name, file);
@@ -145,10 +142,8 @@ export class CommandManager extends BaseManager {
 	}
 
 	private async loadUserCommands(folderPath: string): Promise<number> {
-		const filesToImport = await loadFolder(folderPath);
-
 		let count = 0;
-		for await (const file of filesToImport) {
+		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith('.js'))) {
 			const cmd_ = container.resolve<UserCommandInterface>((await import(file)).default);
 
 			this.commands.set(cmd_.data.name, file);

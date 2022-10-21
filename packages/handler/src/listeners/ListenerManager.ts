@@ -1,8 +1,8 @@
 import 'reflect-metadata';
-import { loadFolder } from '@sleepymaid/util';
 import { container } from 'tsyringe';
 import type { ListenerInterface } from './Listener';
 import { BaseManager } from '../BaseManager';
+import { findFilesRecursively } from '@sapphire/node-utilities';
 
 export interface ListenerManagerStartAllOptionsType {
 	folder: string;
@@ -14,10 +14,8 @@ export class ListenerManager extends BaseManager {
 	}
 
 	private async loadListeners(folderPath: string): Promise<void> {
-		const filesToImport = await loadFolder(folderPath);
-
 		let count = 0;
-		for (const file of filesToImport) {
+		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith('.js'))) {
 			const event = container.resolve<ListenerInterface>((await import(file)).default);
 			if (event.once) {
 				try {

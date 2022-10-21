@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { loadFolder } from '@sleepymaid/util';
+import { findFilesRecursively } from '@sapphire/node-utilities';
 import { container } from 'tsyringe';
 import type { TaskInterface } from './Task';
 import { BaseManager } from '../BaseManager';
@@ -15,11 +15,9 @@ export class TaskManager extends BaseManager {
 	}
 
 	public async loadTasks(folderPath: string): Promise<void> {
-		const filesToImport = await loadFolder(folderPath);
-
 		let count = 0;
-		for (const file of filesToImport) {
-			const task = container.resolve<TaskInterface>((await import(file)).default);
+		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith('.js'))) {
+			const task = container.resolve<TaskInterface>(await import(file));
 			try {
 				schedule(task.interval, () => task.execute(this.client));
 			} catch (error) {
