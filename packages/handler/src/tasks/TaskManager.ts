@@ -17,7 +17,7 @@ export class TaskManager extends BaseManager {
 	public async loadTasks(folderPath: string): Promise<void> {
 		let count = 0;
 		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith('.js'))) {
-			const task = container.resolve<TaskInterface>(await import(file));
+			const task = container.resolve<TaskInterface>((await import(file)).default.default);
 			try {
 				schedule(task.interval, () => task.execute(this.client));
 			} catch (error) {

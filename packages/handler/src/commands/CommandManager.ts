@@ -102,7 +102,7 @@ export class CommandManager extends BaseManager {
 	private async loadChatCommands(folderPath: string): Promise<number> {
 		let count = 0;
 		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith('.js'))) {
-			const cmd_ = container.resolve<SlashCommandInterface>((await import(file)).default);
+			const cmd_ = container.resolve<SlashCommandInterface>((await import(file)).default.default);
 
 			this.commands.set(cmd_.data.name, file);
 			if (cmd_.guildIds) {
@@ -123,7 +123,7 @@ export class CommandManager extends BaseManager {
 	private async loadMessageCommands(folderPath: string): Promise<number> {
 		let count = 0;
 		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith('.js'))) {
-			const cmd_ = container.resolve<MessageCommandInterface>((await import(file)).default);
+			const cmd_ = container.resolve<MessageCommandInterface>((await import(file)).default.default);
 
 			this.commands.set(cmd_.data.name, file);
 			if (cmd_.guildIds) {
@@ -144,7 +144,7 @@ export class CommandManager extends BaseManager {
 	private async loadUserCommands(folderPath: string): Promise<number> {
 		let count = 0;
 		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith('.js'))) {
-			const cmd_ = container.resolve<UserCommandInterface>((await import(file)).default);
+			const cmd_ = container.resolve<UserCommandInterface>((await import(file)).default.default);
 
 			this.commands.set(cmd_.data.name, file);
 			if (cmd_.guildIds) {
@@ -228,7 +228,7 @@ export class CommandManager extends BaseManager {
 			const file = this.commands.get(i.commandName);
 			if (!file) return;
 			const cmd = container.resolve<SlashCommandInterface | UserCommandInterface | MessageCommandInterface>(
-				(await import(file)).default,
+				(await import(file)).default.default,
 			);
 			if (!i.inCachedGuild()) return;
 			await cmd.execute(i as never, this.client);
@@ -255,7 +255,7 @@ export class CommandManager extends BaseManager {
 		try {
 			const file = this.commands.get(i.commandName);
 			if (!file) return;
-			const cmd = container.resolve<SlashCommandInterface>((await import(file)).default);
+			const cmd = container.resolve<SlashCommandInterface>((await import(file)).default.default);
 			if (!i.inCachedGuild()) return;
 			if (!cmd.autocomplete) return;
 			await cmd.autocomplete(i, this.client);

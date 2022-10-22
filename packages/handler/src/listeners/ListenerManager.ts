@@ -16,7 +16,7 @@ export class ListenerManager extends BaseManager {
 	private async loadListeners(folderPath: string): Promise<void> {
 		let count = 0;
 		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith('.js'))) {
-			const event = container.resolve<ListenerInterface>((await import(file)).default);
+			const event = container.resolve<ListenerInterface>((await import(file)).default.default);
 			if (event.once) {
 				try {
 					this.client.once(event.name, async (...args) => {
