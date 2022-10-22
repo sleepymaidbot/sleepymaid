@@ -11,7 +11,7 @@ COPY tsup.config.js turbo.json package.json tsconfig.json yarn.lock .yarnrc.yml 
 COPY .yarn ./.yarn
 RUN yarn workspaces focus
 
-COPY prisma ./prisma
+COPY prisma/ ./prisma
 RUN yarn prisma generate
 
 COPY packages/handler/package.json ./packages/handler/package.json
