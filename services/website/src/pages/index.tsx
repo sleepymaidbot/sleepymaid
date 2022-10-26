@@ -70,4 +70,4 @@ const Home: NextPage = () => {
 
 export default Home;
 
-export const SleepyMaidPfp = () => <Image src="/images/sleepymaid.png" height={144} width={144} />;
+export const SleepyMaidPfp = () => <Image src="/images/sleepymaid.png" height={144} width={144} alt={''} />;
