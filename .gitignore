@@ -171,6 +171,7 @@ icon.webp
 /**/dist
 /**/types
 !/**/src/types
+ignore/
 
 compose/docker-compose.config.yml
 compose/docker-compose.config.dev.yml
