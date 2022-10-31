@@ -1263,7 +1263,7 @@ __metadata:
     "@sleepymaid/logger": "workspace:^"
     "@sleepymaid/shared": "workspace:^"
     "@sleepymaid/util": "*"
-    "@types/node": 18.11.5
+    "@types/node": ^18.11.8
     cors: ^2.8.5
     helmet: ^6.0.0
     ioredis: ^5.2.3
@@ -1292,7 +1292,7 @@ __metadata:
     "@sleepymaid/shared": "workspace:^"
     "@sleepymaid/util": "*"
     "@types/i18next-fs-backend": ^1.1.2
-    "@types/node": 18.11.5
+    "@types/node": ^18.11.8
     discord-api-types: ^0.37.14
     discord.js: ^14.6.0
     fs: 0.0.1-security
@@ -1319,8 +1319,8 @@ __metadata:
     "@sapphire/node-utilities": ^1.0.0
     "@sleepymaid/util": "workspace:^"
     "@swc/core": ^1.3.10
-    "@types/node": 18.11.5
-    "@types/node-cron": ^3.0.4
+    "@types/node": ^18.11.8
+    "@types/node-cron": ^3.0.5
     discord-api-types: ^0.37.14
     discord.js: ^14.6.0
     node-cron: ^3.0.2
@@ -1342,7 +1342,7 @@ __metadata:
     "@sleepymaid/logger": "workspace:^"
     "@sleepymaid/shared": "workspace:^"
     "@types/i18next-fs-backend": ^1.1.2
-    "@types/node": 18.11.5
+    "@types/node": ^18.11.8
     discord-api-types: ^0.37.14
     discord.js: ^14.6.0
     i18next: ^22.0.2
@@ -1364,7 +1364,7 @@ __metadata:
     "@favware/cliff-jumper": ^1.8.8
     "@sleepymaid/handler": "workspace:^"
     "@swc/core": ^1.3.10
-    "@types/node": 18.11.5
+    "@types/node": ^18.11.8
     ansi-colors: 4.1.3
     rimraf: 3.0.2
     source-map-support: 0.5.21
@@ -1378,7 +1378,7 @@ __metadata:
   resolution: "@sleepymaid/shared@workspace:packages/shared"
   dependencies:
     "@swc/core": ^1.3.10
-    "@types/node": 18.11.5
+    "@types/node": ^18.11.8
     fuse.js: ^6.6.2
     i18next: ^22.0.2
     rimraf: 3.0.2
@@ -1394,7 +1394,7 @@ __metadata:
   dependencies:
     "@favware/cliff-jumper": ^1.8.8
     "@swc/core": ^1.3.10
-    "@types/node": 18.11.5
+    "@types/node": ^18.11.8
     rimraf: 3.0.2
     source-map-support: 0.5.21
     tsup: ^6.3.0
@@ -1411,9 +1411,9 @@ __metadata:
     "@emotion/react": ^11
     "@emotion/server": ^11.10.0
     "@emotion/styled": ^11
-    "@types/node": 18.11.5
-    "@types/react": ^18.0.23
-    "@types/react-dom": ^18.0.7
+    "@types/node": ^18.11.8
+    "@types/react": ^18.0.24
+    "@types/react-dom": ^18.0.8
     framer-motion: ^7
     next: ^13.0.0
     react: ^18.2.0
@@ -1688,10 +1688,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node-cron@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "@types/node-cron@npm:3.0.4"
-  checksum: 52d87ca7b64a941a2bfcca56dd823456d0cefacdfbfbed1c5d6ba92c8d60205ad0d42d14f676f96b12cc715f671a0392d82e82b79dda7e943398c996f86d2e33
+"@types/node-cron@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "@types/node-cron@npm:3.0.5"
+  checksum: 40347212fad2b1a82b0590edc6c031ccbb173c3d7e3e01e587268deb78865270d70e6a6e2f54de6a92e666fdde00ce56cc1714578edd2af3c302dcc86b7f7c3c
   languageName: node
   linkType: hard
 
@@ -1702,17 +1702,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:18.11.5":
-  version: 18.11.5
-  resolution: "@types/node@npm:18.11.5"
-  checksum: ac54e9287dd4549ea3dc8aabc0cf7bfa04c52f02925d7fd68414789617ec770f034c8ae2e111e8bd00d446a46fcac42587b5a316a1303e2f6ea094854248c9ff
-  languageName: node
-  linkType: hard
-
 "@types/node@npm:^14.0.0":
   version: 14.18.32
   resolution: "@types/node@npm:14.18.32"
   checksum: 45463114bf85d06dc12925d876dd90b7fff43d9ee10a40e48fd16aece3d0201c76426c128e41230b2818d386422be06c5be33b3d94d90ee924b6fa4d54574035
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^18.11.8":
+  version: 18.11.8
+  resolution: "@types/node@npm:18.11.8"
+  checksum: 60b358f97c1a029722dc785811b217615ef20249c3fbde60a65869cfd7a5cd5b1872ee95c79c187ef70e5a078f4ac7670d2129803985268b1f021ad6e8040af8
   languageName: node
   linkType: hard
 
@@ -1744,12 +1744,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.0.7":
-  version: 18.0.7
-  resolution: "@types/react-dom@npm:18.0.7"
+"@types/react-dom@npm:^18.0.8":
+  version: 18.0.8
+  resolution: "@types/react-dom@npm:18.0.8"
   dependencies:
     "@types/react": "*"
-  checksum: 4fd47dd114d61e7228637de9bee685b81ea18b89b220a67662b05ebe74f69aad7cd929ebe69e8fd572cc8e0e9adf9bba1ea5586cfd37eb9045778851e78bcd66
+  checksum: 522e5e949d05f35c6037a2290838c9c7ff92a9d06f7d96b993c7c3f5a86d8f3a6337e059c94e6fb0920227f445e5d1ce10fbfe3d9bbd95fb82a5539249d90646
   languageName: node
   linkType: hard
 
@@ -1764,14 +1764,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.0.23":
-  version: 18.0.23
-  resolution: "@types/react@npm:18.0.23"
+"@types/react@npm:^18.0.24":
+  version: 18.0.24
+  resolution: "@types/react@npm:18.0.24"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 8b915793b9d6d53c19d76aab35d50a407cac6f4fb1e349cf037196302e8a7661d6c75870dc2fcb0b029c6f0db89d23fee910b777d28dd0e26becf8b312ddb61b
+  checksum: 7d06125bac61e1c6661e5dfbeeeb56d5b6d1d4c743292faebaa6b0f30f8414c7af3cadf674923fd86e4ca14e82566ff9156cd40c56786be024600c31b97d6c03
   languageName: node
   linkType: hard
 
