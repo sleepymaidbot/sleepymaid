@@ -26,7 +26,7 @@
 		"@sleepymaid/logger": "workspace:^",
 		"@sleepymaid/shared": "workspace:^",
 		"@sleepymaid/util": "*",
-		"discord-api-types": "^0.37.14",
+		"discord-api-types": "^0.37.16",
 		"discord.js": "^14.6.0",
 		"fs": "0.0.1-security",
 		"i18next": "^22.0.4",

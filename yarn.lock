@@ -1348,7 +1348,7 @@ __metadata:
     "@sleepymaid/util": "*"
     "@types/i18next-fs-backend": ^1.1.2
     "@types/node": ^18.11.8
-    discord-api-types: ^0.37.14
+    discord-api-types: ^0.37.16
     discord.js: ^14.6.0
     fs: 0.0.1-security
     i18next: ^22.0.4
@@ -1376,7 +1376,7 @@ __metadata:
     "@swc/core": ^1.3.11
     "@types/node": ^18.11.8
     "@types/node-cron": ^3.0.5
-    discord-api-types: ^0.37.14
+    discord-api-types: ^0.37.16
     discord.js: ^14.6.0
     node-cron: ^3.0.2
     reflect-metadata: ^0.1.13
@@ -1398,7 +1398,7 @@ __metadata:
     "@sleepymaid/shared": "workspace:^"
     "@types/i18next-fs-backend": ^1.1.2
     "@types/node": ^18.11.8
-    discord-api-types: ^0.37.14
+    discord-api-types: ^0.37.16
     discord.js: ^14.6.0
     i18next: ^22.0.4
     i18next-fs-backend: ^2.0.0
@@ -3318,10 +3318,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-api-types@npm:^0.37.12, discord-api-types@npm:^0.37.14":
+"discord-api-types@npm:^0.37.12":
   version: 0.37.14
   resolution: "discord-api-types@npm:0.37.14"
   checksum: 8f45f202e66acfd7b25624c8f4d225b363d9d8991d766959bcf246761548b99e21c12d9f7eafe00903913af66058595e5e56329dfb219eab8bb75a84f6413983
+  languageName: node
+  linkType: hard
+
+"discord-api-types@npm:^0.37.16":
+  version: 0.37.16
+  resolution: "discord-api-types@npm:0.37.16"
+  checksum: bf8fb1d8f83fd26be12173d5a86be0736d411f2dd1a7b5e9e29b5b5880bb96cefd4a253ed4d36b36b58e12105eda29dff53569f0d1d3c51cf05c6789e904e506
   languageName: node
   linkType: hard
 
