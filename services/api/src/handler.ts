@@ -1,4 +1,4 @@
-//import { PubSubRedisBroker } from '@discordjs/brokers';
+import { PubSubRedisBroker } from '@discordjs/brokers';
 import { Boom, isBoom, notFound } from '@hapi/boom';
 import { PrismaClient } from '@prisma/client';
 import { findFilesRecursively } from '@sapphire/node-utilities';
@@ -13,7 +13,7 @@ export default class Handler {
 	public declare logger: Logger;
 	public declare prisma: PrismaClient;
 	public declare redis: Redis;
-	//public declare brokers: PubSubRedisBroker<any>;
+	public declare brokers: PubSubRedisBroker<any>;
 	public declare config: Config;
 	constructor() {
 		// ...
@@ -23,7 +23,7 @@ export default class Handler {
 		this.logger = new Logger(this.config.nodeEnv);
 		this.prisma = new PrismaClient();
 		this.redis = new Redis(this.config.redisUrl);
-		//this.brokers = new PubSubRedisBroker({ redisClient: this.redis });
+		this.brokers = new PubSubRedisBroker({ redisClient: this.redis });
 		const logger = this.logger;
 		Polka({
 			onError(error: any, _: any, res) {
