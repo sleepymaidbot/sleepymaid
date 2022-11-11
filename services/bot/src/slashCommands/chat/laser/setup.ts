@@ -257,7 +257,8 @@ const messages: MessagesType = {
 					},
 					{
 						name: 'Credits',
-						value: '<@285502356811022336> - For finding how to decode the code.',
+						value:
+							'<@150594287845900288> - For finding that lasers start to shake after you shoot the power box.\n<@285502356811022336> - For finding how to decode the code.',
 					},
 				],
 				author: getSecretStepsAuthor('Casino'),
