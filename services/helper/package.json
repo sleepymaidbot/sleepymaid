@@ -18,11 +18,10 @@
 		"typescript": "4.8.4"
 	},
 	"dependencies": {
-		"@discordjs/builders": "^1.3.0",
+		"@discordjs/brokers": "^0.1.1-dev.1667649852-68c9cb3.0",
 		"@sleepymaid/handler": "workspace:^",
 		"@sleepymaid/logger": "workspace:^",
 		"@sleepymaid/shared": "workspace:^",
-		"discord-api-types": "^0.37.14",
 		"discord.js": "^14.6.0",
 		"i18next": "^22.0.4",
 		"i18next-fs-backend": "^2.0.0",

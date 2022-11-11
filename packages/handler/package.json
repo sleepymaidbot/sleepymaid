@@ -37,7 +37,6 @@
 	},
 	"dependencies": {
 		"@sapphire/node-utilities": "^1.0.0",
-		"discord-api-types": "^0.37.14",
 		"discord.js": "^14.6.0",
 		"node-cron": "^3.0.2",
 		"reflect-metadata": "^0.1.13",
