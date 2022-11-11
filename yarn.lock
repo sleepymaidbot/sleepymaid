@@ -467,17 +467,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@discordjs/builders@npm:^1.3.0":
-  version: 1.3.0
-  resolution: "@discordjs/builders@npm:1.3.0"
+"@discordjs/builders@npm:1.4.0-dev.1668168268-ff85481.0":
+  version: 1.4.0-dev.1668168268-ff85481.0
+  resolution: "@discordjs/builders@npm:1.4.0-dev.1668168268-ff85481.0"
   dependencies:
     "@discordjs/util": ^0.1.0
     "@sapphire/shapeshift": ^3.7.0
-    discord-api-types: ^0.37.12
+    discord-api-types: ^0.37.15
     fast-deep-equal: ^3.1.3
     ts-mixer: ^6.0.1
     tslib: ^2.4.0
-  checksum: e88133be93fb525381f0b5e0333dc5e8583c3c50e9fae2b51fc7e24f6bdb44c436d1ac174734e81fc97a880550283e7d15e6d6e2459ba9412d709eef14611f28
+  checksum: 73f5f1896245f9256a722c17d6e09fa9cac695368fa70942b2a4520874e7e374dd51892301c3c780b1f742cacff6629d4ff06900d807619bb0eaf6d819b4dd84
   languageName: node
   linkType: hard
 
@@ -1312,7 +1312,7 @@ __metadata:
     "@sleepymaid/util": "*"
     "@types/i18next-fs-backend": ^1.1.2
     "@types/node": ^18.11.8
-    discord.js: ^14.6.0
+    discord.js: 14.7.0-dev.1668168250-ff85481.0
     fs: 0.0.1-security
     i18next: ^22.0.4
     i18next-fs-backend: ^2.0.0
@@ -1325,7 +1325,6 @@ __metadata:
     source-map-support: 0.5.21
     tsyringe: 4.7.0
     typescript: 4.8.4
-    undici: ^5.12.0
   languageName: unknown
   linkType: soft
 
@@ -1339,7 +1338,7 @@ __metadata:
     "@swc/core": ^1.3.11
     "@types/node": ^18.11.8
     "@types/node-cron": ^3.0.5
-    discord.js: ^14.6.0
+    discord.js: 14.7.0-dev.1668168250-ff85481.0
     node-cron: ^3.0.2
     reflect-metadata: ^0.1.13
     rimraf: 3.0.2
@@ -1360,7 +1359,7 @@ __metadata:
     "@sleepymaid/shared": "workspace:^"
     "@types/i18next-fs-backend": ^1.1.2
     "@types/node": ^18.11.8
-    discord.js: ^14.6.0
+    discord.js: 14.7.0-dev.1668168250-ff85481.0
     i18next: ^22.0.4
     i18next-fs-backend: ^2.0.0
     ioredis: ^5.2.3
@@ -1428,8 +1427,8 @@ __metadata:
     "@emotion/server": ^11.10.0
     "@emotion/styled": ^11
     "@types/node": ^18.11.8
-    "@types/react": ^18.0.24
-    "@types/react-dom": ^18.0.8
+    "@types/react": ^18.0.21
+    "@types/react-dom": ^18.0.6
     framer-motion: ^7
     next: ^13.0.0
     react: ^18.2.0
@@ -1697,7 +1696,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.0.8":
+"@types/react-dom@npm:^18.0.6":
   version: 18.0.8
   resolution: "@types/react-dom@npm:18.0.8"
   dependencies:
@@ -1706,7 +1705,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.0.24":
+"@types/react@npm:*, @types/react@npm:^18.0.21":
   version: 18.0.25
   resolution: "@types/react@npm:18.0.25"
   dependencies:
@@ -3104,16 +3103,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-api-types@npm:^0.37.12":
+"discord-api-types@npm:^0.37.12, discord-api-types@npm:^0.37.15":
   version: 0.37.17
   resolution: "discord-api-types@npm:0.37.17"
   checksum: 784344f70d66f4926829450f42addeabbf895786419b0d8b5596a395352eea313d64bb057d69f352fd613b88b5b0567205189a95386ce5ed48a5b46c03f69a70
   languageName: node
   linkType: hard
 
-"discord.js@npm:^14.6.0":
-  version: 14.6.0
-  resolution: "discord.js@npm:14.6.0"
+"discord.js@npm:14.7.0-dev.1668168250-ff85481.0":
+  version: 14.7.0-dev.1668168250-ff85481.0
+  resolution: "discord.js@npm:14.7.0-dev.1668168250-ff85481.0"
   dependencies:
     "@discordjs/builders": ^1.3.0
     "@discordjs/collection": ^1.2.0
@@ -3121,13 +3120,13 @@ __metadata:
     "@discordjs/util": ^0.1.0
     "@sapphire/snowflake": ^3.2.2
     "@types/ws": ^8.5.3
-    discord-api-types: ^0.37.12
+    discord-api-types: ^0.37.15
     fast-deep-equal: ^3.1.3
     lodash.snakecase: ^4.1.1
     tslib: ^2.4.0
     undici: ^5.11.0
     ws: ^8.9.0
-  checksum: a1b5319835171eef54b9079398cb71482d09eb8425e6f1a83e9d7a4eaf7179fc19ac43780d6dee8a436dd4b81e61ac5e36ca07f59beb3ca19facd929e69bc2a7
+  checksum: dc0ab53f5eab61e175ab63c5aae044404a5fb7a2460e61a112d1ebbf4b2c67ff8595546476ed7c6d372481f4bab1726d45209d23d4987837878e4a76972f8f7b
   languageName: node
   linkType: hard
 
@@ -8167,7 +8166,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:^5.11.0, undici@npm:^5.12.0":
+"undici@npm:^5.11.0":
   version: 5.12.0
   resolution: "undici@npm:5.12.0"
   dependencies:

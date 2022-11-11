@@ -83,7 +83,7 @@ export class laserRoleManager extends baseManager {
 
 		collectors.set(
 			interaction.user.id,
-			interaction.channel!.createMessageComponentCollector({
+			interaction.channel!.createMessageComponentCollector<ComponentType.Button | ComponentType.StringSelect>({
 				filter: (i) => i.user.id === interaction.user.id && i.message.id === message!.id,
 				time: 120000,
 			}),
