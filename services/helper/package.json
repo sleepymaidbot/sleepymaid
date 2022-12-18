@@ -22,15 +22,12 @@
 		"@sleepymaid/handler": "workspace:^",
 		"@sleepymaid/logger": "workspace:^",
 		"@sleepymaid/shared": "workspace:^",
-		"discord.js": "14.7.0-dev.1668168250-ff85481.0",
+		"discord.js": "^14.7.1",
 		"i18next": "^22.0.4",
 		"i18next-fs-backend": "^2.0.0",
 		"ioredis": "^5.2.3",
 		"path": "0.12.7",
 		"reflect-metadata": "^0.1.13",
 		"tsyringe": "^4.7.0"
-	},
-	"resolutions": {
-		"@discordjs/builders": "1.4.0-dev.1667347887-5152abf.0"
 	}
 }

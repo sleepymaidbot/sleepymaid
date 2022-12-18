@@ -26,7 +26,7 @@
 		"@sleepymaid/logger": "workspace:^",
 		"@sleepymaid/shared": "workspace:^",
 		"@sleepymaid/util": "*",
-		"discord.js": "14.7.0-dev.1668168250-ff85481.0",
+		"discord.js": "^14.7.1",
 		"fs": "0.0.1-security",
 		"i18next": "^22.0.4",
 		"i18next-fs-backend": "^2.0.0",
@@ -36,8 +36,5 @@
 		"prisma": "4.5.0",
 		"reflect-metadata": "0.1.13",
 		"tsyringe": "4.7.0"
-	},
-	"resolutions": {
-		"@discordjs/builders": "1.4.0-dev.1668168268-ff85481.0"
 	}
 }

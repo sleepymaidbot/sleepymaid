@@ -37,12 +37,9 @@
 	},
 	"dependencies": {
 		"@sapphire/node-utilities": "^1.0.0",
-		"discord.js": "14.7.0-dev.1668168250-ff85481.0",
+		"discord.js": "^14.7.1",
 		"node-cron": "^3.0.2",
 		"reflect-metadata": "^0.1.13",
 		"tsyringe": "^4.7.0"
-	},
-	"resolutions": {
-		"@discordjs/builders": "1.4.0-dev.1667347887-5152abf.0"
 	}
 }
