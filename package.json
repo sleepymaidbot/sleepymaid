@@ -9,7 +9,7 @@
 		"services/*",
 		"packages/*"
 	],
-	"packageManager": "yarn@3.2.4",
+	"packageManager": "yarn@3.3.0",
 	"scripts": {
 		"build": "yarn turbo run build",
 		"test": "yarn turbo run test --parallel",
