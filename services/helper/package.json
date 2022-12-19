@@ -12,20 +12,20 @@
 	"license": "MIT",
 	"devDependencies": {
 		"@types/i18next-fs-backend": "^1.1.2",
-		"@types/node": "^18.11.8",
+		"@types/node": "^18.11.17",
 		"rimraf": "3.0.2",
 		"source-map-support": "0.5.21",
-		"typescript": "4.8.4"
+		"typescript": "^4.9.4"
 	},
 	"dependencies": {
-		"@discordjs/brokers": "^0.1.1-dev.1667649852-68c9cb3.0",
+		"@discordjs/brokers": "^0.1.0",
 		"@sleepymaid/handler": "workspace:^",
 		"@sleepymaid/logger": "workspace:^",
 		"@sleepymaid/shared": "workspace:^",
 		"discord.js": "^14.7.1",
-		"i18next": "^22.0.4",
-		"i18next-fs-backend": "^2.0.0",
-		"ioredis": "^5.2.3",
+		"i18next": "^22.4.5",
+		"i18next-fs-backend": "^2.1.0",
+		"ioredis": "^5.2.4",
 		"path": "0.12.7",
 		"reflect-metadata": "^0.1.13",
 		"tsyringe": "^4.7.0"
