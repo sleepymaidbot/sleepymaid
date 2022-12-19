@@ -7,3 +7,6 @@
 .git
 .yarn/**
 .pnp.*
+
+**/.next
+**/out
