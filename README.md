@@ -14,10 +14,6 @@ I plan on making this bot public but for now its only available for some specifi
 - Postgresql
 - Docker
 
-## Contributing
-
-Im not sure why you would want to contribute to this but if you do make a PR and I will be happy to accept it.
-
 ## Running the bot
 
 1. Copy the `.env.example` file to `.env` and fill in the values.
@@ -28,3 +24,13 @@ Im not sure why you would want to contribute to this but if you do make a PR and
 ## Contact me
 
 Join my discord server [https://discord.gg/ecorte](https://discord.gg/8bpy2PC) or send me a message `Ecorte#0003`.
+
+## Contributors
+
+Im not sure why you would want to contribute to this but if you do make a PR and I will be happy to accept it.
+
+<a href="https://github.com/sleepymaidbot/sleepymaid/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=sleepymaidbot/sleepymaid" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
