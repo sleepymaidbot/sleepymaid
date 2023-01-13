@@ -86,6 +86,20 @@ services:
       DATABASE_URL: 'postgresql://sleepymaid:admin@postgres:5432/sleepymaid'
       REDIS_URL: 'redis://redis:6379/0'
 
+  website:
+    build:
+      context: ../
+      dockerfile: ./docker/website/Dockerfile
+      args:
+        NEXT_PUBLIC_CLIENTVAR: 'clientvar'
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    environment:
+      DATABASE_URL: 'postgresql://sleepymaid:admin@postgres:5432/sleepymaid'
+      REDIS_URL: 'redis://redis:6379/0'
+      NEXTAUTH_URL: 'http://localhost:3000'
+
 volumes:
   redis-data:
     name: 'sleepymaid-redis-data'

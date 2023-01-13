@@ -179,3 +179,4 @@ compose/docker-compose.config.prod.yml
 
 # Temporary WIP dev files
 .turbo
+*.ignore

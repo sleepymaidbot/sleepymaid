@@ -22,6 +22,7 @@ COPY packages/util/package.json ./packages/util/package.json
 COPY services/api/package.json ./services/api/package.json
 COPY services/helper/package.json ./services/helper/package.json
 COPY services/bot/package.json ./services/bot/package.json
+COPY services/website/package.json ./services/website/package.json
 
 RUN yarn
 
@@ -32,9 +33,10 @@ COPY packages/util ./packages/util
 
 RUN yarn turbo run build --filter=./packages/*
 
-COPY services/api/ ./services/api/
+COPY services/api/ ./services/api
 COPY services/bot ./services/bot
 COPY services/helper/ ./services/helper
+COPY services/website ./services/website
 
 RUN yarn turbo run build --filter=./services/*
 

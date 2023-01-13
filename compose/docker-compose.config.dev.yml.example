@@ -12,3 +12,12 @@ services:
       DISCORD_CLIENT_ID: '123'
       DISCORD_TOKEN: 'awooga'
       DEV_IDS: '123,456'
+
+  website:
+    environment:
+      DISCORD_CLIENT_ID: 'awooga'
+      DISCORD_CLIENT_SECRET: 'awooga'
+       Next Auth
+       You can generate the secret via 'openssl rand -base64 32' on Linux
+       More info: https://next-auth.js.org/configuration/options#secret
+      NEXTAUTH_SECRET: 'awooga'
