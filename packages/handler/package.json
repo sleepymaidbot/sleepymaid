@@ -30,7 +30,7 @@
 		"@swc/core": "^1.3.26",
 		"@types/node": "^18.11.18",
 		"@types/node-cron": "^3.0.7",
-		"rimraf": "3.0.2",
+		"rimraf": "4.0.1",
 		"source-map-support": "0.5.21",
 		"tsup": "^6.5.0",
 		"typescript": "^4.9.4"
