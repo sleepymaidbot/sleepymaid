@@ -1,3 +1,7 @@
 blog.ecorte.xyz {
   reverse_proxy * http://ghost:2368
 }
+
+sleepymaid.ecorte.xyz {
+  reverse_proxy * http://website:3000
+}
