@@ -32,7 +32,7 @@ COPY packages/logger ./packages/logger
 COPY packages/shared ./packages/shared
 COPY packages/util ./packages/util
 
-RUN yarn turbo run build --filter=./packages/*
+RUN yarn turbo run build --filter=bot^
 
 COPY services/api/ ./services/api
 COPY services/bot ./services/bot
