@@ -4,9 +4,6 @@ import mdx from '@astrojs/mdx';
 import node from '@astrojs/node';
 import compress from 'astro-compress';
 import critters from 'astro-critters';
-import { createRequire } from 'node:module';
-
-const require = createRequire(import.meta.url);
 
 // https://astro.build/config
 export default defineConfig({
