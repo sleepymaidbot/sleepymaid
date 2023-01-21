@@ -40,7 +40,7 @@ COPY services/helper/ ./services/helper
 COPY services/website ./services/website
 COPY services/qcgsecret ./services/qcgsecret
 
-RUN yarn turbo run build --filter=./services/*
+RUN yarn turbo run build --filter=api
 
 COPY locales/ ./locales
 
