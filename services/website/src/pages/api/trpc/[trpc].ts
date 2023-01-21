@@ -5,6 +5,7 @@ import { createTRPCContext } from '../../../server/api/trpc';
 import { appRouter } from '../../../server/api/root';
 
 // export API handler
+// @ts-ignore
 export default createNextApiHandler({
 	router: appRouter,
 	createContext: createTRPCContext,

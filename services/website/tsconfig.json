@@ -16,6 +16,7 @@
 		"incremental": true,
 		"noUncheckedIndexedAccess": true
 	},
+	"extends": "../../tsconfig.json",
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs"],
 	"exclude": ["node_modules"]
 }
