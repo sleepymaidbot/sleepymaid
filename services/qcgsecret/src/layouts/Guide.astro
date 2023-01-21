@@ -1,0 +1,35 @@
+---
+import Layout from './Layout.astro';
+import type { Maps } from '../util/types.js';
+import type { MarkdownLayoutProps } from 'astro';
+
+type Props = MarkdownLayoutProps<{
+	// Define frontmatter props here
+	title: string;
+	map: Maps;
+}>;
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.title}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{frontmatter.title}</title>
+	</head>
+	<h1>{frontmatter.map} Secret Guide</h1>
+	<body>
+		This is a guide on how to do the {frontmatter.map} secret on the Québec Games servers
+		<slot />
+	</body>
+</Layout>
+
+<style>
+	h1 {
+		font-size: 3rem;
+		font-weight: 800;
+		margin: 0;
+	}
+</style>

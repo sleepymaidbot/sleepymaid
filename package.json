@@ -36,7 +36,7 @@
 		"husky": "^8.0.3",
 		"lint-staged": "^13.1.0",
 		"prettier": "^2.8.2",
-		"prisma": "^4.8.1",
+		"prisma": "^4.9.0",
 		"rimraf": "^4.0.4",
 		"tsup": "^6.5.0",
 		"turbo": "^1.7.0",

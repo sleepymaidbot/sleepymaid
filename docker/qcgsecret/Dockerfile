@@ -1,5 +1,5 @@
 FROM node:19-alpine
-LABEL name "sleepymaid website"
+LABEL name "sleepymaid qcgsecret"
 
 WORKDIR /opt/build
 
@@ -44,7 +44,7 @@ RUN yarn turbo run build --filter=./services/*
 
 COPY locales/ ./locales
 
-EXPOSE 3000
-ENV PORT 3000
+EXPOSE 3001
+ENV PORT 3001
 
-CMD ["yarn", "workspace", "@sleepymaid/website", "start"]
+CMD ["yarn", "workspace", "@sleepymaid/qcgsecret", "start"]
