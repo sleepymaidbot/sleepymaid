@@ -48,6 +48,8 @@ services:
     restart: unless-stopped
     expose:
       - 2368
+    ports:
+      - '2368:2368'
     environment:
       url: 'https://blog.ecorte.xyz'
       database__client: 'sqlite3'
@@ -75,6 +77,8 @@ services:
     restart: unless-stopped
     expose:
       - 3001
+    ports:
+      - '3001:3001'
 
   sleepymaid:
     build:
@@ -103,6 +107,8 @@ services:
     restart: unless-stopped
     expose:
       - 3000
+    ports:
+      - '3000:3000'
     environment:
       DATABASE_URL: 'postgresql://sleepymaid:admin@postgres:5432/sleepymaid'
       REDIS_URL: 'redis://redis:6379/0'

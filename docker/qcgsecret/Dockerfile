@@ -46,5 +46,6 @@ COPY locales/ ./locales
 
 EXPOSE 3001
 ENV PORT 3001
+ENV HOST 0.0.0.0
 
 CMD ["yarn", "workspace", "@sleepymaid/qcgsecret", "start"]
