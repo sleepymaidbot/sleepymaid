@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from 'react';
-import '../styles/header.css';
+import '../styles/Header.css';
 
 export interface IHeader {
 	title: string;
