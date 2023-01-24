@@ -13,7 +13,7 @@
 	"dependencies": {
 		"@astrojs/mdx": "^0.14.0",
 		"@astrojs/node": "^4.0.0",
-		"@astrojs/react": "^1.2.2",
+		"@astrojs/react": "^2.0.0",
 		"@types/react": "^18.0.21",
 		"@types/react-dom": "^18.0.6",
 		"ariakit": "^2.0.0-next.43",
