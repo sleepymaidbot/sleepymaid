@@ -25,7 +25,6 @@
 		"discord.js": "^14.7.1",
 		"i18next": "^22.4.9",
 		"i18next-fs-backend": "^2.1.1",
-		"ioredis": "^5.2.4",
 		"path": "0.12.7",
 		"reflect-metadata": "^0.1.13",
 		"tsyringe": "^4.7.0"

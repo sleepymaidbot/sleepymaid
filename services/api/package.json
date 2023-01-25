@@ -28,7 +28,6 @@
 		"@sleepymaid/util": "*",
 		"cors": "^2.8.5",
 		"helmet": "^6.0.1",
-		"ioredis": "^5.2.4",
 		"path": "0.12.7",
 		"polka": "1.0.0-next.22",
 		"prisma": "^4.9.0",
