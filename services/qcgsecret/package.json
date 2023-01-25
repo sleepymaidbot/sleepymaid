@@ -11,13 +11,13 @@
 		"astro": "astro"
 	},
 	"dependencies": {
-		"@astrojs/mdx": "^0.14.0",
-		"@astrojs/node": "^4.0.0",
-		"@astrojs/react": "^1.2.2",
+		"@astrojs/mdx": "^0.15.0",
+		"@astrojs/node": "^5.0.0",
+		"@astrojs/react": "^2.0.0",
 		"@types/react": "^18.0.21",
 		"@types/react-dom": "^18.0.6",
 		"ariakit": "^2.0.0-next.43",
-		"astro": "^1.9.2",
+		"astro": "^2.0.1",
 		"astro-compress": "^1.1.28",
 		"astro-critters": "^1.1.26",
 		"hast-util-to-string": "^2.0.0",
