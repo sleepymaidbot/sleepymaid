@@ -19,9 +19,9 @@ const { frontmatter } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{frontmatter.title}</title>
 	</head>
-	<h1>{frontmatter.map} Secret Guide</h1>
+	<h1 class="titles">{frontmatter.map} Secret Guide</h1>
 	<body>
-		<p>This is a guide on how to do the {frontmatter.map} secret on the Québec Games servers</p>
+		<p class="titles">This is a guide on how to do the {frontmatter.map} secret on the Québec Games servers</p>
 		<slot />
 	</body>
 </Layout>
@@ -30,6 +30,10 @@ const { frontmatter } = Astro.props;
 	h1 {
 		font-size: 3rem;
 		font-weight: 800;
-		margin: 0;
+	}
+	.titles {
+		margin: auto;
+		text-align: center;
+		width: 1000px;
 	}
 </style>

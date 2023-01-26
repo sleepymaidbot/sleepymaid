@@ -9,7 +9,7 @@ export default function Header({ title, children }: PropsWithChildren<IHeader>) 
 	return (
 		<div className="header-component">
 			<h1>{title}</h1>
-			{children}
+			<p>{children}</p>
 		</div>
 	);
 }
