@@ -52,7 +52,7 @@ export default function Alert({ title, type, children }: PropsWithChildren<IAler
 						<span>{title && <h1>{title}</h1>}</span>
 					</div>
 				</div>
-				{children}
+				<div className="alert-component-children">{children}</div>
 			</div>
 		</div>
 	);

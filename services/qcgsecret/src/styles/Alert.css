@@ -15,6 +15,11 @@
 	margin-top: 1vmin;
 }
 
+.alert-component-children {
+	margin-left: 3vmin;
+	margin-right: 3vmin;
+}
+
 .alert-component-middle {
 	display: flex;
 	flex-direction: row;
