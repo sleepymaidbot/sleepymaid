@@ -11,14 +11,14 @@
 		"astro": "astro"
 	},
 	"dependencies": {
-		"@astrojs/mdx": "^0.15.0",
-		"@astrojs/node": "^5.0.0",
-		"@astrojs/react": "^2.0.0",
+		"@astrojs/mdx": "^0.15.1",
+		"@astrojs/node": "^5.0.1",
+		"@astrojs/react": "^2.0.1",
 		"@react-icons/all-files": "^4.1.0",
 		"@types/react": "^18.0.21",
 		"@types/react-dom": "^18.0.6",
 		"ariakit": "^2.0.0-next.43",
-		"astro": "^2.0.1",
+		"astro": "^2.0.2",
 		"astro-compress": "^1.1.28",
 		"astro-critters": "^1.1.26",
 		"classnames": "^2.3.2",

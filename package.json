@@ -13,7 +13,7 @@
 	"scripts": {
 		"build": "yarn turbo run build",
 		"test": "yarn turbo run test --parallel",
-		"lint": "yarn eslint --fix --ext ts,tsx",
+		"lint": "yarn eslint --fix --ext ts,tsx,astro",
 		"format": "yarn prettier --write . --plugin-search-dir=. .",
 		"prepare": "yarn husky install"
 	},
@@ -26,6 +26,7 @@
 		"@typescript-eslint/eslint-plugin": "^5.48.1",
 		"@typescript-eslint/parser": "^5.48.1",
 		"@yarnpkg/cli-dist": "^3.3.1",
+		"astro-eslint-parser": "^0.11.0",
 		"eslint": "^8.31.0",
 		"eslint-config-neon": "^0.1.40",
 		"eslint-config-next": "^13.1.2",
@@ -36,6 +37,7 @@
 		"husky": "^8.0.3",
 		"lint-staged": "^13.1.0",
 		"prettier": "^2.8.2",
+		"prettier-plugin-astro": "^0.8.0",
 		"prisma": "^4.9.0",
 		"rimraf": "^4.0.4",
 		"tsup": "^6.5.0",

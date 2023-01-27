@@ -92,7 +92,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@astrojs/compiler@npm:^1.0.1":
+"@astrojs/compiler@npm:^1.0.0, @astrojs/compiler@npm:^1.0.1":
   version: 1.0.1
   resolution: "@astrojs/compiler@npm:1.0.1"
   checksum: 1ccbe6258c03e74020e15ff654425a1d4fa97ec9763f357b9007bceffece6935c1fe2fd3e385550ede995e411be0b02140208eebd12f30a54ae6898d0f315182
@@ -121,9 +121,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@astrojs/markdown-remark@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@astrojs/markdown-remark@npm:2.0.0"
+"@astrojs/markdown-remark@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@astrojs/markdown-remark@npm:2.0.1"
   dependencies:
     "@astrojs/prism": ^2.0.0
     github-slugger: ^1.4.0
@@ -139,16 +139,16 @@ __metadata:
     unist-util-visit: ^4.1.0
     vfile: ^5.3.2
   peerDependencies:
-    astro: ^2.0.0
-  checksum: ddc9737a6eb37f01a242484ca62ef0e0520f9ab122f9a1206a5aa942174aafe64a791761f422fd36664c1dff3ba0bb0f7936b11c85cf10df57f8d3415ff92b34
+    astro: ^2.0.2
+  checksum: fe603a00e91a3c383b84c90b44e0834bcd8dd1530c6c24a99f9a20125c5860f5127905feceffa13ec088963f0eddf36208f5f05f1983833dcf4d4ab9fe1fc899
   languageName: node
   linkType: hard
 
-"@astrojs/mdx@npm:^0.15.0":
-  version: 0.15.0
-  resolution: "@astrojs/mdx@npm:0.15.0"
+"@astrojs/mdx@npm:^0.15.1":
+  version: 0.15.1
+  resolution: "@astrojs/mdx@npm:0.15.1"
   dependencies:
-    "@astrojs/markdown-remark": ^2.0.0
+    "@astrojs/markdown-remark": ^2.0.1
     "@astrojs/prism": ^2.0.0
     "@mdx-js/mdx": ^2.1.2
     "@mdx-js/rollup": ^2.1.1
@@ -165,19 +165,19 @@ __metadata:
     shiki: ^0.11.1
     unist-util-visit: ^4.1.0
     vfile: ^5.3.2
-  checksum: a1e7a0a395cc48e68cbe330484b4cfed2460b617f80adc4b9e8772ec5c685643779e124cb9fe3afec24edb6307729c1f4f71a110919ab022145a1036341413cb
+  checksum: 4b667d1b3f1ce2d1937e0726bc9e2945df59213c92155cf523c791f7636675155f81ec0cd63a6d74bbece9503a29c0ed799d42340b7761a83808e2d5272f965c
   languageName: node
   linkType: hard
 
-"@astrojs/node@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "@astrojs/node@npm:5.0.0"
+"@astrojs/node@npm:^5.0.1":
+  version: 5.0.1
+  resolution: "@astrojs/node@npm:5.0.1"
   dependencies:
     "@astrojs/webapi": ^2.0.0
     send: ^0.18.0
   peerDependencies:
-    astro: ^2.0.0
-  checksum: 229aa292df686172e30a96d259addeaf2e8dedaa193f722c9f89fd2eb6979ab32f775a953c9074da0ee6bfbe471fa7e865fdc4af291e4b656a8e7d3688a0560f
+    astro: ^2.0.2
+  checksum: 054dccf83e89c19df5ca6bc664402e56d7abf490a48487d2c6098d527f3f105f8287c0d3e9357233330db64cb7731fffc8bf3f3c9ab22e4c1ea48115a108c9b6
   languageName: node
   linkType: hard
 
@@ -190,9 +190,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@astrojs/react@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@astrojs/react@npm:2.0.0"
+"@astrojs/react@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@astrojs/react@npm:2.0.1"
   dependencies:
     "@babel/core": ">=7.0.0-0 <8.0.0"
     "@babel/plugin-transform-react-jsx": ^7.17.12
@@ -201,7 +201,7 @@ __metadata:
     "@types/react-dom": ^17.0.17 || ^18.0.6
     react: ^17.0.2 || ^18.0.0
     react-dom: ^17.0.2 || ^18.0.0
-  checksum: fd514feb850a40e56a2fcfb30a8bfdab6a683e3de2530b7ce7b112d22cf30dad554e88b77cb9c81790d983dc954feb4705e3e859aab218b1cb4a6503926794a3
+  checksum: ae6ee617d24eb31827d787105cf44b560ce5a46b761045123b1882c9f94c3350b9e9a369ed0cf0fc54cb03f88d4e219b2edef84202fdae4ffc563ed305e07432
   languageName: node
   linkType: hard
 
@@ -1811,14 +1811,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@sleepymaid/qcgsecret@workspace:services/qcgsecret"
   dependencies:
-    "@astrojs/mdx": ^0.15.0
-    "@astrojs/node": ^5.0.0
-    "@astrojs/react": ^2.0.0
+    "@astrojs/mdx": ^0.15.1
+    "@astrojs/node": ^5.0.1
+    "@astrojs/react": ^2.0.1
     "@react-icons/all-files": ^4.1.0
     "@types/react": ^18.0.21
     "@types/react-dom": ^18.0.6
     ariakit: ^2.0.0-next.43
-    astro: ^2.0.1
+    astro: ^2.0.2
     astro-compress: ^1.1.28
     astro-critters: ^1.1.26
     classnames: ^2.3.2
@@ -2612,6 +2612,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@typescript-eslint/scope-manager@npm:^5.48.2":
+  version: 5.49.0
+  resolution: "@typescript-eslint/scope-manager@npm:5.49.0"
+  dependencies:
+    "@typescript-eslint/types": 5.49.0
+    "@typescript-eslint/visitor-keys": 5.49.0
+  checksum: 466047e24ff8a4195f14aadde39375f22891bdaced09e58c89f2c32af0aa4a0d87e71a5f006f6ab76858e6f30c4b764b1e0ef7bc26713bb78add30638108c45f
+  languageName: node
+  linkType: hard
+
 "@typescript-eslint/type-utils@npm:5.43.0":
   version: 5.43.0
   resolution: "@typescript-eslint/type-utils@npm:5.43.0"
@@ -2688,6 +2698,13 @@ __metadata:
   version: 5.48.1
   resolution: "@typescript-eslint/types@npm:5.48.1"
   checksum: 8437986e9d86d792b23327517ae2f9861ec55992d5a9cd55991e525409b6244169436cd708f3987ab7c579e45e59b6eab5a9d3583f7729219e25691164293094
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/types@npm:5.49.0":
+  version: 5.49.0
+  resolution: "@typescript-eslint/types@npm:5.49.0"
+  checksum: 41f72a043007fc3f3356b5a38d7bfa54871545b4a309810a062f044cff25122413a9660ce6d83d1221762f60d067351d020b0cb68f7e1279817f53e77ce8f33d
   languageName: node
   linkType: hard
 
@@ -2872,6 +2889,16 @@ __metadata:
     "@typescript-eslint/types": 5.48.1
     eslint-visitor-keys: ^3.3.0
   checksum: 2bda10cf4e6bc48b0d463767617e48a832d708b9434665dff6ed101f7d33e0d592f02af17a2259bde1bd17e666246448ae78d0fe006148cb93d897fff9b1d134
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/visitor-keys@npm:5.49.0":
+  version: 5.49.0
+  resolution: "@typescript-eslint/visitor-keys@npm:5.49.0"
+  dependencies:
+    "@typescript-eslint/types": 5.49.0
+    eslint-visitor-keys: ^3.3.0
+  checksum: 46dc7bc713e8825d1fccba521fdf7c6e2f8829e491c2afd44dbe4105c6432e3c3dfe7e1ecb221401269d639264bb4af77b60a7b65521fcff9ab02cd31d8ef782
   languageName: node
   linkType: hard
 
@@ -3366,6 +3393,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"astro-eslint-parser@npm:^0.11.0":
+  version: 0.11.0
+  resolution: "astro-eslint-parser@npm:0.11.0"
+  dependencies:
+    "@astrojs/compiler": ^1.0.0
+    "@typescript-eslint/scope-manager": ^5.48.2
+    "@typescript-eslint/types": ^5.25.0
+    astrojs-compiler-sync: ^0.3.0
+    debug: ^4.3.4
+    eslint-visitor-keys: ^3.0.0
+    espree: ^9.0.0
+  checksum: 30252a02f4fb10b61aa51b414fe7361a437f805287e0f976615abc53d10be150d6b76c6b3fe0bab5c5017d9a056d994d303a4a0cd7fda56f4161bb2c2f686c2d
+  languageName: node
+  linkType: hard
+
 "astro-eslint-parser@npm:^0.9.0":
   version: 0.9.2
   resolution: "astro-eslint-parser@npm:0.9.2"
@@ -3381,13 +3423,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"astro@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "astro@npm:2.0.1"
+"astro@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "astro@npm:2.0.2"
   dependencies:
     "@astrojs/compiler": ^1.0.1
     "@astrojs/language-server": ^0.28.3
-    "@astrojs/markdown-remark": ^2.0.0
+    "@astrojs/markdown-remark": ^2.0.1
     "@astrojs/telemetry": ^2.0.0
     "@astrojs/webapi": ^2.0.0
     "@babel/core": ^7.18.2
@@ -3439,7 +3481,7 @@ __metadata:
     zod: ^3.17.3
   bin:
     astro: astro.js
-  checksum: 20f8fdc6c67848ab14e0551e7bf45b49452171db91e65f9d5a298efa0fbf6eb79d2b4f12b1f181668bdbf3db285c6a120a48fcadaf719485af4c6d5b36e9b73e
+  checksum: be4ab7e64ab9ba6343837decfa8c22f2e05f0d661aaedf042106fa619640c0c0f7e5b63a50c45e6855a6d9be4db3f11754a5e63d5109814edac5b2bbf080cafb
   languageName: node
   linkType: hard
 
@@ -11067,7 +11109,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.7.1":
+"prettier-plugin-astro@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "prettier-plugin-astro@npm:0.8.0"
+  dependencies:
+    "@astrojs/compiler": ^1.0.1
+    prettier: ^2.8.3
+    sass-formatter: ^0.7.5
+    synckit: ^0.8.4
+  checksum: 95551c59457cad020d74ea15830a06fb7ae51f7577f897127daae31e3d9b3f99081595ba1571925970f3d7a10d479b2ef37f2eef1c706c2569c590e64487c46e
+  languageName: node
+  linkType: hard
+
+"prettier@npm:^2.7.1, prettier@npm:^2.8.3":
   version: 2.8.3
   resolution: "prettier@npm:2.8.3"
   bin:
@@ -12380,6 +12434,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.48.1
     "@typescript-eslint/parser": ^5.48.1
     "@yarnpkg/cli-dist": ^3.3.1
+    astro-eslint-parser: ^0.11.0
     eslint: ^8.31.0
     eslint-config-neon: ^0.1.40
     eslint-config-next: ^13.1.2
@@ -12390,6 +12445,7 @@ __metadata:
     husky: ^8.0.3
     lint-staged: ^13.1.0
     prettier: ^2.8.2
+    prettier-plugin-astro: ^0.8.0
     prisma: ^4.9.0
     rimraf: ^4.0.4
     tsup: ^6.5.0

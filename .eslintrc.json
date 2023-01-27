@@ -30,6 +30,10 @@
 			"parserOptions": {
 				"project": "tsconfig.json"
 			}
+		},
+		{
+			"files": ["*.astro"],
+			"parser": "astro-eslint-parser"
 		}
 	],
 	"rules": {
