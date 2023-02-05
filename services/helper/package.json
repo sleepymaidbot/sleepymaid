@@ -12,10 +12,10 @@
 	"license": "MIT",
 	"devDependencies": {
 		"@types/i18next-fs-backend": "^1.1.2",
-		"@types/node": "^18.11.18",
-		"rimraf": "^4.0.4",
+		"@types/node": "^18.11.19",
+		"rimraf": "^4.1.2",
 		"source-map-support": "0.5.21",
-		"typescript": "^4.9.4"
+		"typescript": "^4.9.5"
 	},
 	"dependencies": {
 		"@discordjs/brokers": "^0.1.0",
