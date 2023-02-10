@@ -1806,7 +1806,7 @@ __metadata:
     "@favware/cliff-jumper": ^1.10.0
     "@sapphire/node-utilities": ^1.0.0
     "@sleepymaid/util": "workspace:^"
-    "@swc/core": ^1.3.34
+    "@swc/core": ^1.3.35
     "@types/node": ^18.13.0
     "@types/node-cron": ^3.0.7
     discord.js: ^14.7.1
@@ -1848,7 +1848,7 @@ __metadata:
   dependencies:
     "@favware/cliff-jumper": ^1.10.0
     "@sleepymaid/handler": "workspace:^"
-    "@swc/core": ^1.3.34
+    "@swc/core": ^1.3.35
     "@types/node": ^18.13.0
     ansi-colors: 4.1.3
     rimraf: ^4.1.2
@@ -1889,7 +1889,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@sleepymaid/shared@workspace:packages/shared"
   dependencies:
-    "@swc/core": ^1.3.34
+    "@swc/core": ^1.3.35
     "@types/node": ^18.13.0
     fuse.js: ^6.6.2
     i18next: ^22.4.9
@@ -1905,7 +1905,7 @@ __metadata:
   resolution: "@sleepymaid/util@workspace:packages/util"
   dependencies:
     "@favware/cliff-jumper": ^1.10.0
-    "@swc/core": ^1.3.34
+    "@swc/core": ^1.3.35
     "@types/node": ^18.13.0
     rimraf: ^4.1.2
     source-map-support: 0.5.21
@@ -1923,10 +1923,10 @@ __metadata:
     "@next-auth/prisma-adapter": ^1.0.5
     "@prisma/client": ^4.10.1
     "@tanstack/react-query": ^4.24.4
-    "@trpc/client": ^10.10.0
-    "@trpc/next": ^10.10.0
-    "@trpc/react-query": ^10.10.0
-    "@trpc/server": ^10.10.0
+    "@trpc/client": ^10.11.0
+    "@trpc/next": ^10.11.0
+    "@trpc/react-query": ^10.11.0
+    "@trpc/server": ^10.11.0
     "@types/node": ^18.13.0
     "@types/react": ^18.0.27
     "@types/react-dom": ^18.0.10
@@ -1941,90 +1941,90 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@swc/core-darwin-arm64@npm:1.3.34":
-  version: 1.3.34
-  resolution: "@swc/core-darwin-arm64@npm:1.3.34"
+"@swc/core-darwin-arm64@npm:1.3.35":
+  version: 1.3.35
+  resolution: "@swc/core-darwin-arm64@npm:1.3.35"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-x64@npm:1.3.34":
-  version: 1.3.34
-  resolution: "@swc/core-darwin-x64@npm:1.3.34"
+"@swc/core-darwin-x64@npm:1.3.35":
+  version: 1.3.35
+  resolution: "@swc/core-darwin-x64@npm:1.3.35"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm-gnueabihf@npm:1.3.34":
-  version: 1.3.34
-  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.3.34"
+"@swc/core-linux-arm-gnueabihf@npm:1.3.35":
+  version: 1.3.35
+  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.3.35"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-gnu@npm:1.3.34":
-  version: 1.3.34
-  resolution: "@swc/core-linux-arm64-gnu@npm:1.3.34"
+"@swc/core-linux-arm64-gnu@npm:1.3.35":
+  version: 1.3.35
+  resolution: "@swc/core-linux-arm64-gnu@npm:1.3.35"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-musl@npm:1.3.34":
-  version: 1.3.34
-  resolution: "@swc/core-linux-arm64-musl@npm:1.3.34"
+"@swc/core-linux-arm64-musl@npm:1.3.35":
+  version: 1.3.35
+  resolution: "@swc/core-linux-arm64-musl@npm:1.3.35"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-gnu@npm:1.3.34":
-  version: 1.3.34
-  resolution: "@swc/core-linux-x64-gnu@npm:1.3.34"
+"@swc/core-linux-x64-gnu@npm:1.3.35":
+  version: 1.3.35
+  resolution: "@swc/core-linux-x64-gnu@npm:1.3.35"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-musl@npm:1.3.34":
-  version: 1.3.34
-  resolution: "@swc/core-linux-x64-musl@npm:1.3.34"
+"@swc/core-linux-x64-musl@npm:1.3.35":
+  version: 1.3.35
+  resolution: "@swc/core-linux-x64-musl@npm:1.3.35"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-win32-arm64-msvc@npm:1.3.34":
-  version: 1.3.34
-  resolution: "@swc/core-win32-arm64-msvc@npm:1.3.34"
+"@swc/core-win32-arm64-msvc@npm:1.3.35":
+  version: 1.3.35
+  resolution: "@swc/core-win32-arm64-msvc@npm:1.3.35"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-win32-ia32-msvc@npm:1.3.34":
-  version: 1.3.34
-  resolution: "@swc/core-win32-ia32-msvc@npm:1.3.34"
+"@swc/core-win32-ia32-msvc@npm:1.3.35":
+  version: 1.3.35
+  resolution: "@swc/core-win32-ia32-msvc@npm:1.3.35"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@swc/core-win32-x64-msvc@npm:1.3.34":
-  version: 1.3.34
-  resolution: "@swc/core-win32-x64-msvc@npm:1.3.34"
+"@swc/core-win32-x64-msvc@npm:1.3.35":
+  version: 1.3.35
+  resolution: "@swc/core-win32-x64-msvc@npm:1.3.35"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core@npm:^1.3.34":
-  version: 1.3.34
-  resolution: "@swc/core@npm:1.3.34"
+"@swc/core@npm:^1.3.35":
+  version: 1.3.35
+  resolution: "@swc/core@npm:1.3.35"
   dependencies:
-    "@swc/core-darwin-arm64": 1.3.34
-    "@swc/core-darwin-x64": 1.3.34
-    "@swc/core-linux-arm-gnueabihf": 1.3.34
-    "@swc/core-linux-arm64-gnu": 1.3.34
-    "@swc/core-linux-arm64-musl": 1.3.34
-    "@swc/core-linux-x64-gnu": 1.3.34
-    "@swc/core-linux-x64-musl": 1.3.34
-    "@swc/core-win32-arm64-msvc": 1.3.34
-    "@swc/core-win32-ia32-msvc": 1.3.34
-    "@swc/core-win32-x64-msvc": 1.3.34
+    "@swc/core-darwin-arm64": 1.3.35
+    "@swc/core-darwin-x64": 1.3.35
+    "@swc/core-linux-arm-gnueabihf": 1.3.35
+    "@swc/core-linux-arm64-gnu": 1.3.35
+    "@swc/core-linux-arm64-musl": 1.3.35
+    "@swc/core-linux-x64-gnu": 1.3.35
+    "@swc/core-linux-x64-musl": 1.3.35
+    "@swc/core-win32-arm64-msvc": 1.3.35
+    "@swc/core-win32-ia32-msvc": 1.3.35
+    "@swc/core-win32-x64-msvc": 1.3.35
   dependenciesMeta:
     "@swc/core-darwin-arm64":
       optional: true
@@ -2046,7 +2046,7 @@ __metadata:
       optional: true
     "@swc/core-win32-x64-msvc":
       optional: true
-  checksum: a77c286b6b34d40f634ae882aac66f882cf806c165453878c31311070c46f020c607925bd454f64959504f08852b204cc37feba93fc6a3c1a64b295a9b5007d6
+  checksum: 263e01904fe4f4d6cbf6deef90439d6d93f28c04252d917fc290aadde131a1716820eb488a615b3c0dbe3f48d6d7ac0f1c886e2c2acd07a72e3d99e4a245b3de
   languageName: node
   linkType: hard
 
@@ -2099,49 +2099,49 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@trpc/client@npm:^10.10.0":
-  version: 10.10.0
-  resolution: "@trpc/client@npm:10.10.0"
+"@trpc/client@npm:^10.11.0":
+  version: 10.11.0
+  resolution: "@trpc/client@npm:10.11.0"
   peerDependencies:
-    "@trpc/server": 10.10.0
-  checksum: 62d467ff54160bfbbef2d9a4815557a60b4ed3026190399340a7eb479adba4f757b93b7a74823fbe6006afe66e78a5a8a407603a968ed0404d345613c2d15e11
+    "@trpc/server": 10.11.0
+  checksum: b3abc20614043e2e17c00e60a4a9250ec61dd6125d044dccfec76a2c51d2566d7bec6cd4891ae83e0e880044a96a7459a63a2e9fb625918496bd651710e5f547
   languageName: node
   linkType: hard
 
-"@trpc/next@npm:^10.10.0":
-  version: 10.10.0
-  resolution: "@trpc/next@npm:10.10.0"
+"@trpc/next@npm:^10.11.0":
+  version: 10.11.0
+  resolution: "@trpc/next@npm:10.11.0"
   dependencies:
     react-ssr-prepass: ^1.5.0
   peerDependencies:
     "@tanstack/react-query": ^4.3.8
-    "@trpc/client": 10.10.0
+    "@trpc/client": 10.11.0
     "@trpc/react-query": ^10.8.0
-    "@trpc/server": 10.10.0
+    "@trpc/server": 10.11.0
     next: "*"
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 06b5c1832c12a4b478134e22cac4f4821b3906e00c08301c50e86eddbc89d1e4469a4e6d13dfde893429477973710cb5b803a0f4d1f392ae8a1cc9da3feb721d
+  checksum: b8e3ae923acd7692e63a867cd760b665043e2cf4eb8e4c009455fcb8eb936a48b556aab8c0a49aab4e08fd0a83220bc2e5352945aef6c3a122dd429962ffa775
   languageName: node
   linkType: hard
 
-"@trpc/react-query@npm:^10.10.0":
-  version: 10.10.0
-  resolution: "@trpc/react-query@npm:10.10.0"
+"@trpc/react-query@npm:^10.11.0":
+  version: 10.11.0
+  resolution: "@trpc/react-query@npm:10.11.0"
   peerDependencies:
     "@tanstack/react-query": ^4.3.8
-    "@trpc/client": 10.10.0
-    "@trpc/server": 10.10.0
+    "@trpc/client": 10.11.0
+    "@trpc/server": 10.11.0
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 7e26bcc33f6aa97986fbfcbcdf0a4864eba79beda33d9c98bd2293c48ff3d9195977716dd1bc4b4d93988e59791ee7291581924d7d98e34104b03e90826d6e2a
+  checksum: b2d7d7165c38fc46be9009649cae15a7d471e9dbe32cfeefe42cd954bc7fce8d57e46ca65c32ad1bd0c69a7c18436cbd6385cb847fb3f0ad7fa8e614a586575d
   languageName: node
   linkType: hard
 
-"@trpc/server@npm:^10.10.0":
-  version: 10.10.0
-  resolution: "@trpc/server@npm:10.10.0"
-  checksum: a50724416886d6ec406c87e03086baa4abb2509ea87984a96f1a1a891a67ffd2e13fdfcde9bc490ca2bb41083d7beb5d59d889446b3341af887d1d6281b5fe41
+"@trpc/server@npm:^10.11.0":
+  version: 10.11.0
+  resolution: "@trpc/server@npm:10.11.0"
+  checksum: 66778a95287a0022b98e0c629fba66fe2d4ecf38b19b2a369ebabde35aa949eac3fa6bb874eed285d950f0ed52c1078fba883ee1c013d5a271ec9e4df567dcf7
   languageName: node
   linkType: hard
 
