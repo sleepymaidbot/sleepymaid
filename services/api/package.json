@@ -18,7 +18,7 @@
 	},
 	"dependencies": {
 		"@discordjs/brokers": "^0.1.0",
-		"@hapi/boom": "^10.0.0",
+		"@hapi/boom": "^10.0.1",
 		"@prisma/client": "^4.10.1",
 		"@sapphire/node-utilities": "^1.0.0",
 		"@sapphire/result": "^2.6.0",
