@@ -6,6 +6,7 @@ category: Guide
 ---
 
 import Header from '../../components/Header.jsx';
+import Dropdown from '../../components/Dropdown.jsx';
 import Step from '../../components/Step.jsx';
 import Alert from '../../components/Alert.jsx';
 import { Underline } from '../../components/Formatters.jsx';
@@ -231,28 +232,51 @@ By interacting with it, the actual camera will be replaced by the Candle room ca
 
 Here a list of the Trial :
 
-<Underline>Chimney Smoke</Underline> : The murderer need to Activate the smoke trap located on the top of the bedroom.
+<Dropdown title="Chimney Smoke" client:only="react">
+	<img src="/assets/guide/casino/firetrial/trials/smoke.png" width="672" />
+	The murderer need to Activate the smoke trap located on the top of the bedroom.
+	<img src="/assets/guide/casino/firetrial/trials/smoketrap.png" width="672" />
+</Dropdown>
 
-<Underline>Moving Hexagon</Underline> : Depending of the rotation (clockwise or counterclockwise), a player will need to
-match the rotating door movement to the hexagon, by putting the card in the key card reader near the door.
+<Dropdown title="Moving Hexagon" client:only="react">
+	<img src="/assets/guide/casino/firetrial/trials/door.png" width="672" />
+	Depending of the rotation (clockwise or counterclockwise), a player will need to match the rotating door movement to the
+	hexagon, by putting the card in the key card reader near the door.
+</Dropdown>
 
-<Underline>Elevator Signs</Underline> : Depending of the arrow lighted up, you will need to call or go In An Elevator And
-go up If the arrow shows "up" or go down if It show "down"
+<Dropdown title="Elevator Signs" client:only="react">
+	<img src="/assets/guide/casino/firetrial/trials/preelevator.png" width="672" />
+	Depending of the arrow lighted up, you will need to call or go In An Elevator And go up If the arrow shows "up" or go down
+	if It show "down"
+</Dropdown>
 
-<Underline>The Table</Underline> : Depending on the items, show on the table you will have to put this item on the table
-located between the 2 Couches In Front Of Restaurant at 2nd Floor. The items can be : A coffee cup from Control Room ; Cans
-; Gold coin ; Watermelon.
+<Dropdown title="The Table" client:only="react">
+	<img src="/assets/guide/casino/firetrial/trials/table.png" width="672" />
+	Depending on the items, show on the table you will have to put this item on the table located between the 2 Couches In
+	Front Of Restaurant at 2nd Floor. The items can be : A coffee cup from Control Room ; Cans ; Gold coin ; Watermelon.
+</Dropdown>
 
-<Underline>The Phones</Underline> : If the table have a phone in it, it mean that one of the phone on the map will begin
-to ring, you must answer it by pressing the "Action key" There are 3 phones on the map located at the Cashier, Reception
-and Bedroom.
+<Dropdown title="The Phones" client:only="react">
+	<img src="/assets/guide/casino/firetrial/trials/phone.png" width="672" />
+	If the table have a phone in it, it mean that one of the phone on the map will begin to ring, you must answer it by pressing
+	the "Action key" There are 3 phones on the map located at the Cashier, Reception and Bedroom.
+	<img src="/assets/guide/casino/firetrial/trials/phone1.png" width="672" />
+	<img src="/assets/guide/casino/firetrial/trials/phone2.png" width="672" />
+	<img src="/assets/guide/casino/firetrial/trials/phone3.png" width="672" />
+</Dropdown>
 
-<Underline>2 Blocks Showing Lasers In Between Them</Underline> : Someone has to activate the lasers In Mid.
+<Dropdown title="2 Blocks Showing Lasers In Between Them" client:only="react">
+	<img src="/assets/guide/casino/firetrial/trials/lasers.png" width="672" />
+	Someone has to activate the lasers In Mid.
+</Dropdown>
 
-<Underline>Wild West Game</Underline>: If some dust / Mist appear on the camera with two guns. It mean that someone with
-a gun has to go in the bedroom in front of the target located on the wall, nothing will happen at first but then the
-player inside the Security room, will hear a "DRAW", quickly after that draw your gun and shoot the target as quickly as
-possible.
+<Dropdown title="Wild West Game" client:only="react">
+	<img src="/assets/guide/casino/firetrial/trials/wildwestgame.png" width="672" />
+	If some dust / Mist appear on the camera with two guns. It mean that someone with a gun has to go in the bedroom in front
+	of the target located on the wall, nothing will happen at first but then the player inside the Security room, will hear
+	a "DRAW", quickly after that draw your gun and shoot the target as quickly as possible.
+	<img src="/assets/guide/casino/firetrial/trials/target.png" width="672" />
+</Dropdown>
 
 </Step>
 
