@@ -11,7 +11,7 @@
 		"astro": "astro"
 	},
 	"dependencies": {
-		"@astrojs/mdx": "^0.16.2",
+		"@astrojs/mdx": "^0.17.0",
 		"@astrojs/node": "^5.0.3",
 		"@astrojs/react": "^2.0.2",
 		"@fontsource/inter": "^4.5.15",
@@ -19,7 +19,7 @@
 		"@types/react": "^18.0.28",
 		"@types/react-dom": "^18.0.11",
 		"ariakit": "^2.0.0-next.43",
-		"astro": "^2.0.12",
+		"astro": "^2.0.13",
 		"astro-compress": "^1.1.33",
 		"astro-critters": "^1.1.29",
 		"classnames": "^2.3.2",
