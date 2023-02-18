@@ -238,6 +238,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@astrojs/webapi@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@astrojs/webapi@npm:2.0.1"
+  dependencies:
+    undici: 5.18.0
+  checksum: 7e0db7f0540f6b71cdb70478737eb2acbb2eb6ece1069b677201ccce23292fd6f96181ee0876d18647d3d8a548cdbbdfc6cc8d42bc02785252e8abe8dcce6108
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.18.6":
   version: 7.18.6
   resolution: "@babel/code-frame@npm:7.18.6"
@@ -1788,7 +1797,7 @@ __metadata:
     "@sleepymaid/logger": "workspace:^"
     "@sleepymaid/shared": "workspace:^"
     "@sleepymaid/util": "*"
-    "@types/node": ^18.13.0
+    "@types/node": ^18.14.0
     cors: ^2.8.5
     helmet: ^6.0.1
     path: 0.12.7
@@ -1816,7 +1825,7 @@ __metadata:
     "@sleepymaid/shared": "workspace:^"
     "@sleepymaid/util": "*"
     "@types/i18next-fs-backend": ^1.1.2
-    "@types/node": ^18.13.0
+    "@types/node": ^18.14.0
     discord.js: ^14.7.1
     i18next: ^22.4.10
     i18next-fs-backend: ^2.1.1
@@ -1839,7 +1848,7 @@ __metadata:
     "@sapphire/node-utilities": ^1.0.0
     "@sleepymaid/util": "workspace:^"
     "@swc/core": ^1.3.35
-    "@types/node": ^18.13.0
+    "@types/node": ^18.14.0
     "@types/node-cron": ^3.0.7
     discord.js: ^14.7.1
     node-cron: ^3.0.2
@@ -1861,7 +1870,7 @@ __metadata:
     "@sleepymaid/logger": "workspace:^"
     "@sleepymaid/shared": "workspace:^"
     "@types/i18next-fs-backend": ^1.1.2
-    "@types/node": ^18.13.0
+    "@types/node": ^18.14.0
     discord.js: ^14.7.1
     i18next: ^22.4.10
     i18next-fs-backend: ^2.1.1
@@ -1881,7 +1890,7 @@ __metadata:
     "@favware/cliff-jumper": ^1.10.0
     "@sleepymaid/handler": "workspace:^"
     "@swc/core": ^1.3.35
-    "@types/node": ^18.13.0
+    "@types/node": ^18.14.0
     ansi-colors: 4.1.3
     rimraf: ^4.1.2
     source-map-support: 0.5.21
@@ -1902,7 +1911,7 @@ __metadata:
     "@types/react": ^18.0.28
     "@types/react-dom": ^18.0.11
     ariakit: ^2.0.0-next.43
-    astro: ^2.0.13
+    astro: ^2.0.14
     astro-compress: ^1.1.33
     astro-critters: ^1.1.29
     classnames: ^2.3.2
@@ -1923,7 +1932,7 @@ __metadata:
   resolution: "@sleepymaid/shared@workspace:packages/shared"
   dependencies:
     "@swc/core": ^1.3.35
-    "@types/node": ^18.13.0
+    "@types/node": ^18.14.0
     fuse.js: ^6.6.2
     i18next: ^22.4.10
     rimraf: ^4.1.2
@@ -1939,7 +1948,7 @@ __metadata:
   dependencies:
     "@favware/cliff-jumper": ^1.10.0
     "@swc/core": ^1.3.35
-    "@types/node": ^18.13.0
+    "@types/node": ^18.14.0
     rimraf: ^4.1.2
     source-map-support: 0.5.21
     tsup: ^6.6.3
@@ -1960,7 +1969,7 @@ __metadata:
     "@trpc/next": ^10.11.1
     "@trpc/react-query": ^10.11.1
     "@trpc/server": ^10.11.1
-    "@types/node": ^18.13.0
+    "@types/node": ^18.14.0
     "@types/react": ^18.0.28
     "@types/react-dom": ^18.0.11
     next: 13.1.6
@@ -2426,10 +2435,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.13.0":
-  version: 18.13.0
-  resolution: "@types/node@npm:18.13.0"
-  checksum: 4ea10f8802848b01672bce938f678b6774ca2cee0c9774f12275ab064ae07818419c3e2e41d6257ce7ba846d1ea26c63214aa1dfa4166fa3746291752b8c6416
+"@types/node@npm:^18.14.0":
+  version: 18.14.0
+  resolution: "@types/node@npm:18.14.0"
+  checksum: d83fcf5e4ed544755dd9028f5cbb6b9d46235043159111bb2ad62223729aee581c0144a9f6df8ba73d74011db9ed4ebd7af2fd5e0996714e3beb508a5da8ac5c
   languageName: node
   linkType: hard
 
@@ -3449,15 +3458,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"astro@npm:^2.0.13":
-  version: 2.0.13
-  resolution: "astro@npm:2.0.13"
+"astro@npm:^2.0.14":
+  version: 2.0.14
+  resolution: "astro@npm:2.0.14"
   dependencies:
     "@astrojs/compiler": ^1.1.0
     "@astrojs/language-server": ^0.28.3
     "@astrojs/markdown-remark": ^2.0.1
     "@astrojs/telemetry": ^2.0.0
-    "@astrojs/webapi": ^2.0.0
+    "@astrojs/webapi": ^2.0.1
     "@babel/core": ^7.18.2
     "@babel/generator": ^7.18.2
     "@babel/parser": ^7.18.4
@@ -3501,13 +3510,13 @@ __metadata:
     typescript: "*"
     unist-util-visit: ^4.1.0
     vfile: ^5.3.2
-    vite: ^4.0.3
+    vite: ^4.1.2
     vitefu: ^0.2.4
     yargs-parser: ^21.0.1
     zod: ^3.17.3
   bin:
     astro: astro.js
-  checksum: 681479da3f20711e4999d5e2248f8de13d6564eda3f0c250cab94d1b93964996078a26605ad7cc171736658db1cfda72d1bf7ba61f35b851da7cd737f9e20894
+  checksum: a2d0fddff9f8d63e004d130542f0bfb5f74e64589501cc287f64008c827e94085b4b6666de45f30bfcdbe067cedf08f5a6c627c63413124160f7207b63cd3e3a
   languageName: node
   linkType: hard
 
@@ -12256,7 +12265,7 @@ __metadata:
     prisma: ^4.10.1
     rimraf: ^4.1.2
     tsup: ^6.6.3
-    turbo: ^1.7.4
+    turbo: ^1.8.1
     typescript: ^4.9.5
   languageName: unknown
   linkType: soft
@@ -13308,58 +13317,58 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo-darwin-64@npm:1.7.4":
-  version: 1.7.4
-  resolution: "turbo-darwin-64@npm:1.7.4"
+"turbo-darwin-64@npm:1.8.1":
+  version: 1.8.1
+  resolution: "turbo-darwin-64@npm:1.8.1"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-darwin-arm64@npm:1.7.4":
-  version: 1.7.4
-  resolution: "turbo-darwin-arm64@npm:1.7.4"
+"turbo-darwin-arm64@npm:1.8.1":
+  version: 1.8.1
+  resolution: "turbo-darwin-arm64@npm:1.8.1"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-64@npm:1.7.4":
-  version: 1.7.4
-  resolution: "turbo-linux-64@npm:1.7.4"
+"turbo-linux-64@npm:1.8.1":
+  version: 1.8.1
+  resolution: "turbo-linux-64@npm:1.8.1"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm64@npm:1.7.4":
-  version: 1.7.4
-  resolution: "turbo-linux-arm64@npm:1.7.4"
+"turbo-linux-arm64@npm:1.8.1":
+  version: 1.8.1
+  resolution: "turbo-linux-arm64@npm:1.8.1"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-windows-64@npm:1.7.4":
-  version: 1.7.4
-  resolution: "turbo-windows-64@npm:1.7.4"
+"turbo-windows-64@npm:1.8.1":
+  version: 1.8.1
+  resolution: "turbo-windows-64@npm:1.8.1"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-windows-arm64@npm:1.7.4":
-  version: 1.7.4
-  resolution: "turbo-windows-arm64@npm:1.7.4"
+"turbo-windows-arm64@npm:1.8.1":
+  version: 1.8.1
+  resolution: "turbo-windows-arm64@npm:1.8.1"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo@npm:^1.7.4":
-  version: 1.7.4
-  resolution: "turbo@npm:1.7.4"
+"turbo@npm:^1.8.1":
+  version: 1.8.1
+  resolution: "turbo@npm:1.8.1"
   dependencies:
-    turbo-darwin-64: 1.7.4
-    turbo-darwin-arm64: 1.7.4
-    turbo-linux-64: 1.7.4
-    turbo-linux-arm64: 1.7.4
-    turbo-windows-64: 1.7.4
-    turbo-windows-arm64: 1.7.4
+    turbo-darwin-64: 1.8.1
+    turbo-darwin-arm64: 1.8.1
+    turbo-linux-64: 1.8.1
+    turbo-linux-arm64: 1.8.1
+    turbo-windows-64: 1.8.1
+    turbo-windows-arm64: 1.8.1
   dependenciesMeta:
     turbo-darwin-64:
       optional: true
@@ -13375,7 +13384,7 @@ __metadata:
       optional: true
   bin:
     turbo: bin/turbo
-  checksum: c4387cfee36c57dd1490e9b2452888d8450faa390aec5bc148389b426bc079d03044891d61ad84a6a3a7454e66dfbe9e9cfba05f636b36fef7ece7af275ef9ce
+  checksum: d222bcf1995f39675d0d2c47f21ed9e72fb249bfb95c469f0729e97c80eedf921e22addfa994da961230a0e8b1d1c69b5037815c396cb4d7ac95708553dcaabb
   languageName: node
   linkType: hard
 
@@ -13505,6 +13514,15 @@ __metadata:
     has-symbols: ^1.0.3
     which-boxed-primitive: ^1.0.2
   checksum: b7a1cf5862b5e4b5deb091672ffa579aa274f648410009c81cca63fed3b62b610c4f3b773f912ce545bb4e31edc3138975b5bc777fc6e4817dca51affb6380e9
+  languageName: node
+  linkType: hard
+
+"undici@npm:5.18.0":
+  version: 5.18.0
+  resolution: "undici@npm:5.18.0"
+  dependencies:
+    busboy: ^1.6.0
+  checksum: 74e0f357c376c745fcca612481a5742866ae36086ad387e626255f4c4a15fc5357d9d0fa4355271b6a633d50f5556c3e85720844680c44861c66e23afca7245f
   languageName: node
   linkType: hard
 
@@ -13827,7 +13845,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^3.0.0 || ^4.0.0, vite@npm:^4.0.3":
+"vite@npm:^3.0.0 || ^4.0.0":
   version: 4.1.1
   resolution: "vite@npm:4.1.1"
   dependencies:
