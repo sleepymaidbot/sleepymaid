@@ -46,6 +46,7 @@
 	},
 	"resolutions": {
 		"turbo": "1.7.4",
-		"turbo-linux-64": "1.7.4"
+		"turbo-linux-64": "1.7.4",
+		"discord-api-types": "0.37.20"
 	}
 }
