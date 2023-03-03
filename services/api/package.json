@@ -11,15 +11,15 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
-		"@types/node": "^18.14.0",
-		"rimraf": "^4.1.2",
+		"@types/node": "^18.14.4",
+		"rimraf": "^4.2.0",
 		"source-map-support": "0.5.21",
 		"typescript": "^4.9.5"
 	},
 	"dependencies": {
 		"@discordjs/brokers": "^0.1.0",
 		"@hapi/boom": "^10.0.1",
-		"@prisma/client": "^4.10.1",
+		"@prisma/client": "^4.11.0",
 		"@sapphire/node-utilities": "^1.0.0",
 		"@sapphire/result": "^2.6.0",
 		"@sapphire/shapeshift": "^3.8.1",
@@ -30,9 +30,9 @@
 		"helmet": "^6.0.1",
 		"path": "0.12.7",
 		"polka": "1.0.0-next.22",
-		"prisma": "^4.10.1",
+		"prisma": "^4.11.0",
 		"reflect-metadata": "0.1.13",
-		"trouter": "^3.2.0",
+		"trouter": "^3.2.1",
 		"tsyringe": "4.7.0"
 	}
 }
