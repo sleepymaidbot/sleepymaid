@@ -1,14 +1,14 @@
-import type { PropsWithChildren } from 'react';
 import { VscFlame } from '@react-icons/all-files/vsc/VscFlame';
 import { VscInfo } from '@react-icons/all-files/vsc/VscInfo';
 import { VscWarning } from '@react-icons/all-files/vsc/VscWarning';
 import '../styles/Alert.css';
 import classnames from 'classnames';
+import type { PropsWithChildren } from 'react';
 
-export interface IAlert {
+export type IAlert = {
 	title?: string | undefined;
 	type: 'danger' | 'info' | 'success' | 'warning';
-}
+};
 
 function resolveType(type: IAlert['type']) {
 	switch (type) {

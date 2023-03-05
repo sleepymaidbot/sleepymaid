@@ -1,12 +1,12 @@
-import type { PropsWithChildren } from 'react';
-import { Disclosure, DisclosureContent, useDisclosureState } from 'ariakit/disclosure';
 import '../styles/Dropdown.css';
 import { BsArrowDownLeft } from '@react-icons/all-files/bs/BsArrowDownLeft';
 import { BsArrowUpLeft } from '@react-icons/all-files/bs/BsArrowUpLeft';
+import { Disclosure, DisclosureContent, useDisclosureState } from 'ariakit/disclosure';
+import type { PropsWithChildren } from 'react';
 
-export interface IDropdown {
+export type IDropdown = {
 	title: string;
-}
+};
 
 export default function Dropdown({ title, children }: PropsWithChildren<IDropdown>) {
 	const disclosure = useDisclosureState();
@@ -19,13 +19,13 @@ export default function Dropdown({ title, children }: PropsWithChildren<IDropdow
 	return (
 		<div className="ext">
 			<div className="wrapper">
-				<Disclosure state={disclosure} className="button">
+				<Disclosure className="button" state={disclosure}>
 					<div className="button-container">
 						<span className="button-text">{title}</span>
 						<span className="icon">{icon}</span>
 					</div>
 				</Disclosure>
-				<DisclosureContent state={disclosure} className="content">
+				<DisclosureContent className="content" state={disclosure}>
 					<p>{children}</p>
 				</DisclosureContent>
 			</div>

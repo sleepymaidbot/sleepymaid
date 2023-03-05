@@ -1,9 +1,9 @@
 import type { PropsWithChildren } from 'react';
 import '../styles/Header.css';
 
-export interface IHeader {
+export type IHeader = {
 	title: string;
-}
+};
 
 export default function Header({ title, children }: PropsWithChildren<IHeader>) {
 	return (
