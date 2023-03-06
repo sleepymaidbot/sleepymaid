@@ -1847,7 +1847,7 @@ __metadata:
     "@favware/cliff-jumper": ^2.0.0
     "@sapphire/node-utilities": ^1.0.0
     "@sleepymaid/util": "workspace:^"
-    "@swc/core": ^1.3.37
+    "@swc/core": ^1.3.38
     "@types/node": ^18.14.6
     "@types/node-cron": ^3.0.7
     discord.js: ^14.7.1
@@ -1889,7 +1889,7 @@ __metadata:
   dependencies:
     "@favware/cliff-jumper": ^2.0.0
     "@sleepymaid/handler": "workspace:^"
-    "@swc/core": ^1.3.37
+    "@swc/core": ^1.3.38
     "@types/node": ^18.14.6
     ansi-colors: 4.1.3
     rimraf: ^4.3.0
@@ -1931,7 +1931,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@sleepymaid/shared@workspace:packages/shared"
   dependencies:
-    "@swc/core": ^1.3.37
+    "@swc/core": ^1.3.38
     "@types/node": ^18.14.6
     fuse.js: ^6.6.2
     i18next: ^22.4.10
@@ -1947,7 +1947,7 @@ __metadata:
   resolution: "@sleepymaid/util@workspace:packages/util"
   dependencies:
     "@favware/cliff-jumper": ^2.0.0
-    "@swc/core": ^1.3.37
+    "@swc/core": ^1.3.38
     "@types/node": ^18.14.6
     rimraf: ^4.3.0
     source-map-support: 0.5.21
@@ -1979,94 +1979,94 @@ __metadata:
     react-dom: 18.2.0
     superjson: 1.12.2
     typescript: ^4.9.5
-    zod: ^3.21.0
+    zod: ^3.21.2
   languageName: unknown
   linkType: soft
 
-"@swc/core-darwin-arm64@npm:1.3.37":
-  version: 1.3.37
-  resolution: "@swc/core-darwin-arm64@npm:1.3.37"
+"@swc/core-darwin-arm64@npm:1.3.38":
+  version: 1.3.38
+  resolution: "@swc/core-darwin-arm64@npm:1.3.38"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-x64@npm:1.3.37":
-  version: 1.3.37
-  resolution: "@swc/core-darwin-x64@npm:1.3.37"
+"@swc/core-darwin-x64@npm:1.3.38":
+  version: 1.3.38
+  resolution: "@swc/core-darwin-x64@npm:1.3.38"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm-gnueabihf@npm:1.3.37":
-  version: 1.3.37
-  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.3.37"
+"@swc/core-linux-arm-gnueabihf@npm:1.3.38":
+  version: 1.3.38
+  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.3.38"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-gnu@npm:1.3.37":
-  version: 1.3.37
-  resolution: "@swc/core-linux-arm64-gnu@npm:1.3.37"
+"@swc/core-linux-arm64-gnu@npm:1.3.38":
+  version: 1.3.38
+  resolution: "@swc/core-linux-arm64-gnu@npm:1.3.38"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-musl@npm:1.3.37":
-  version: 1.3.37
-  resolution: "@swc/core-linux-arm64-musl@npm:1.3.37"
+"@swc/core-linux-arm64-musl@npm:1.3.38":
+  version: 1.3.38
+  resolution: "@swc/core-linux-arm64-musl@npm:1.3.38"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-gnu@npm:1.3.37":
-  version: 1.3.37
-  resolution: "@swc/core-linux-x64-gnu@npm:1.3.37"
+"@swc/core-linux-x64-gnu@npm:1.3.38":
+  version: 1.3.38
+  resolution: "@swc/core-linux-x64-gnu@npm:1.3.38"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-musl@npm:1.3.37":
-  version: 1.3.37
-  resolution: "@swc/core-linux-x64-musl@npm:1.3.37"
+"@swc/core-linux-x64-musl@npm:1.3.38":
+  version: 1.3.38
+  resolution: "@swc/core-linux-x64-musl@npm:1.3.38"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-win32-arm64-msvc@npm:1.3.37":
-  version: 1.3.37
-  resolution: "@swc/core-win32-arm64-msvc@npm:1.3.37"
+"@swc/core-win32-arm64-msvc@npm:1.3.38":
+  version: 1.3.38
+  resolution: "@swc/core-win32-arm64-msvc@npm:1.3.38"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-win32-ia32-msvc@npm:1.3.37":
-  version: 1.3.37
-  resolution: "@swc/core-win32-ia32-msvc@npm:1.3.37"
+"@swc/core-win32-ia32-msvc@npm:1.3.38":
+  version: 1.3.38
+  resolution: "@swc/core-win32-ia32-msvc@npm:1.3.38"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@swc/core-win32-x64-msvc@npm:1.3.37":
-  version: 1.3.37
-  resolution: "@swc/core-win32-x64-msvc@npm:1.3.37"
+"@swc/core-win32-x64-msvc@npm:1.3.38":
+  version: 1.3.38
+  resolution: "@swc/core-win32-x64-msvc@npm:1.3.38"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core@npm:^1.3.37":
-  version: 1.3.37
-  resolution: "@swc/core@npm:1.3.37"
+"@swc/core@npm:^1.3.38":
+  version: 1.3.38
+  resolution: "@swc/core@npm:1.3.38"
   dependencies:
-    "@swc/core-darwin-arm64": 1.3.37
-    "@swc/core-darwin-x64": 1.3.37
-    "@swc/core-linux-arm-gnueabihf": 1.3.37
-    "@swc/core-linux-arm64-gnu": 1.3.37
-    "@swc/core-linux-arm64-musl": 1.3.37
-    "@swc/core-linux-x64-gnu": 1.3.37
-    "@swc/core-linux-x64-musl": 1.3.37
-    "@swc/core-win32-arm64-msvc": 1.3.37
-    "@swc/core-win32-ia32-msvc": 1.3.37
-    "@swc/core-win32-x64-msvc": 1.3.37
+    "@swc/core-darwin-arm64": 1.3.38
+    "@swc/core-darwin-x64": 1.3.38
+    "@swc/core-linux-arm-gnueabihf": 1.3.38
+    "@swc/core-linux-arm64-gnu": 1.3.38
+    "@swc/core-linux-arm64-musl": 1.3.38
+    "@swc/core-linux-x64-gnu": 1.3.38
+    "@swc/core-linux-x64-musl": 1.3.38
+    "@swc/core-win32-arm64-msvc": 1.3.38
+    "@swc/core-win32-ia32-msvc": 1.3.38
+    "@swc/core-win32-x64-msvc": 1.3.38
   dependenciesMeta:
     "@swc/core-darwin-arm64":
       optional: true
@@ -2088,7 +2088,7 @@ __metadata:
       optional: true
     "@swc/core-win32-x64-msvc":
       optional: true
-  checksum: 1cfa1ce8967a1d04361af076023bb50cc90bb413c347b0d7c7e86cf9b8277d05471dd2a24708a77365e527c51ddde3cd752fe49975b9e236c3abf9590e3106dd
+  checksum: c55d30e57638bcd21f788add8490c3f3e71bfe027aa5a8b153e1b1b9686ecddd6deeaaa6a6b17717c7eab4c1e2a232b465b6755b6c891506fc0d03139badfbf7
   languageName: node
   linkType: hard
 
@@ -5688,7 +5688,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-prettier@npm:8.6.0, eslint-config-prettier@npm:^8.5.0":
+"eslint-config-prettier@npm:8.7.0":
+  version: 8.7.0
+  resolution: "eslint-config-prettier@npm:8.7.0"
+  peerDependencies:
+    eslint: ">=7.0.0"
+  bin:
+    eslint-config-prettier: bin/cli.js
+  checksum: b05bc7f2296ce3e0925c14147849706544870e0382d38af2352d709a6cf8521bdaff2bd8e5021f1780e570775a8ffa1d2bac28b8065d90d43a3f1f98fd26ce52
+  languageName: node
+  linkType: hard
+
+"eslint-config-prettier@npm:^8.5.0":
   version: 8.6.0
   resolution: "eslint-config-prettier@npm:8.6.0"
   peerDependencies:
@@ -12380,7 +12391,7 @@ __metadata:
     eslint: ^8.35.0
     eslint-config-neon: ^0.1.40
     eslint-config-next: ^13.2.3
-    eslint-config-prettier: 8.6.0
+    eslint-config-prettier: 8.7.0
     eslint-plugin-import: ^2.27.5
     eslint-plugin-prettier: ^4.2.1
     eslint-plugin-typescript-sort-keys: ^2.1.0
@@ -14584,10 +14595,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.21.0":
-  version: 3.21.0
-  resolution: "zod@npm:3.21.0"
-  checksum: 459e75ad32f2dd1069af8bfe16f133ad4e135f351e84ef99fd50f239f8a23ec7f731e65fe98c1c0e2ab8b708165d2763a60e045f7d276e4654b66aa615afaccf
+"zod@npm:^3.21.2":
+  version: 3.21.2
+  resolution: "zod@npm:3.21.2"
+  checksum: 6a5fa0992827b61440de7087038ec737f76074efbdc1b3594630ecdad314fd566439f7900aa05d4938222a5f739e599c61a848f794a8264f80909720b96ed764
   languageName: node
   linkType: hard
 
