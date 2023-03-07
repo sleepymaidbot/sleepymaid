@@ -19,7 +19,7 @@
 		"@types/react": "^18.0.28",
 		"@types/react-dom": "^18.0.11",
 		"ariakit": "^2.0.0-next.43",
-		"astro": "^2.0.17",
+		"astro": "^2.0.18",
 		"astro-compress": "^1.1.35",
 		"astro-critters": "^1.1.31",
 		"classnames": "^2.3.2",
