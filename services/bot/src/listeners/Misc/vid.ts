@@ -8,11 +8,11 @@ import { Result } from '@sapphire/result';
 
 const sites = [
 	'tiktok.com',
-	'https://redd.it',
-	'https://v.redd.it',
+	'redd.it',
+	'v.redd.it',
 	'reddit.com',
 	'twitter.com',
-	'https://t.co',
+	't.co',
 	'facebook.com',
 	'instagram.com',
 	'fb.watch',
@@ -37,7 +37,8 @@ export default class VidListener implements ListenerInterface {
 				}
 				const fileName = nameReturn.unwrap().stdout.trim();
 				const dlReturn = await Result.fromAsync(
-					async () => await shell(`yt-dlp -P "${join(__dirname, '../../../downloads/')}" -o "${fileName}" "${arg}"`),
+					async () =>
+						await shell(`yt-dlp -P "${join(__dirname, '../../../downloads/')}" -o "${fileName}" "${arg}" -f mp4`),
 				);
 				if (dlReturn.isErr()) return client.logger.error(dlReturn.unwrapErr() as Error);
 				const messageReturn = await Result.fromAsync(
