@@ -1796,7 +1796,7 @@ __metadata:
     polka: 1.0.0-next.22
     prisma: ^4.11.0
     reflect-metadata: 0.1.13
-    rimraf: ^4.3.0
+    rimraf: ^4.4.0
     source-map-support: 0.5.21
     trouter: ^3.2.1
     tsyringe: 4.7.0
@@ -1825,7 +1825,7 @@ __metadata:
     path: 0.12.7
     prisma: ^4.11.0
     reflect-metadata: 0.1.13
-    rimraf: ^4.3.0
+    rimraf: ^4.4.0
     source-map-support: 0.5.21
     tsyringe: 4.7.0
     typescript: ^4.9.5
@@ -1845,7 +1845,7 @@ __metadata:
     discord.js: ^14.7.1
     node-cron: ^3.0.2
     reflect-metadata: ^0.1.13
-    rimraf: ^4.3.0
+    rimraf: ^4.4.0
     source-map-support: 0.5.21
     tsup: ^6.6.3
     tsyringe: ^4.7.0
@@ -1868,7 +1868,7 @@ __metadata:
     i18next-fs-backend: ^2.1.1
     path: 0.12.7
     reflect-metadata: ^0.1.13
-    rimraf: ^4.3.0
+    rimraf: ^4.4.0
     source-map-support: 0.5.21
     tsyringe: ^4.7.0
     typescript: ^4.9.5
@@ -1884,7 +1884,7 @@ __metadata:
     "@swc/core": ^1.3.38
     "@types/node": ^18.14.6
     ansi-colors: 4.1.3
-    rimraf: ^4.3.0
+    rimraf: ^4.4.0
     source-map-support: 0.5.21
     tsup: ^6.6.3
     typescript: ^4.9.5
@@ -1903,7 +1903,7 @@ __metadata:
     "@types/react": ^18.0.28
     "@types/react-dom": ^18.0.11
     ariakit: ^2.0.0-next.43
-    astro: ^2.1.0
+    astro: ^2.1.2
     astro-compress: ^1.1.35
     astro-critters: ^1.1.31
     classnames: ^2.3.2
@@ -1927,7 +1927,7 @@ __metadata:
     "@types/node": ^18.14.6
     fuse.js: ^6.6.2
     i18next: ^22.4.11
-    rimraf: ^4.3.0
+    rimraf: ^4.4.0
     source-map-support: 0.5.21
     tsup: ^6.6.3
     typescript: ^4.9.5
@@ -1941,7 +1941,7 @@ __metadata:
     "@favware/cliff-jumper": ^2.0.0
     "@swc/core": ^1.3.38
     "@types/node": ^18.14.6
-    rimraf: ^4.3.0
+    rimraf: ^4.4.0
     source-map-support: 0.5.21
     tsup: ^6.6.3
     typescript: ^4.9.5
@@ -3439,9 +3439,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"astro@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "astro@npm:2.1.0"
+"astro@npm:^2.1.2":
+  version: 2.1.2
+  resolution: "astro@npm:2.1.2"
   dependencies:
     "@astrojs/compiler": ^1.2.0
     "@astrojs/language-server": ^0.28.3
@@ -3504,7 +3504,7 @@ __metadata:
       optional: true
   bin:
     astro: astro.js
-  checksum: eb8a3aec75c4f93c1c6ed48251369065135211c88eb5eb54fd31dbb4a13f82247b23612974cc6b5210eb03d633c8521416fbe925f810dad1e6535ab1f34945b7
+  checksum: df90edc6145ce0f0e8b21511335cb218c9839f4815793071e0b56e8cef6a0ec6dcc780c83772513f06bf88760f666124a1622e1f8d8d9ba433383a6b96287823
   languageName: node
   linkType: hard
 
@@ -11995,14 +11995,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rimraf@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "rimraf@npm:4.3.0"
+"rimraf@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "rimraf@npm:4.4.0"
   dependencies:
     glob: ^9.2.0
   bin:
     rimraf: dist/cjs/src/bin.js
-  checksum: 48498f1eeb9b6b848605d93fa79e7bf3c57bb47807500ee636848dc0fd3b69b6b532f1ce9d4e46c4feeb4c3ff0e8ab85cd177cbbbd65f635f8bc8cb88aee151c
+  checksum: 0cedaf9d138589d1bb0ab851f05804c6d30827aa66563472b04ab76245f83537e23e7b94f1f79ea6c368c0d84a18fcde6a756fca3a44c967e08792671b3a0a6e
   languageName: node
   linkType: hard
 
@@ -12419,7 +12419,7 @@ __metadata:
     prettier: ^2.8.4
     prettier-plugin-astro: ^0.8.0
     prisma: ^4.11.0
-    rimraf: ^4.3.0
+    rimraf: ^4.4.0
     tsup: ^6.6.3
     turbo: ^1.7.4
     typescript: ^4.9.5
