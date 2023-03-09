@@ -15,6 +15,7 @@ const sites = [
 	'https://t.co',
 	'facebook.com',
 	'instagram.com',
+	'fb.watch',
 ];
 
 export default class VidListener implements ListenerInterface {
