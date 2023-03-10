@@ -5,6 +5,7 @@ import node from '@astrojs/node';
 import compress from 'astro-compress';
 import critters from 'astro-critters';
 import { fileURLToPath, URL } from 'node:url';
+import tailwind from '@astrojs/tailwind';
 
 const rootDir = new URL('../../', import.meta.url);
 
@@ -44,6 +45,7 @@ export default defineConfig({
 		}*/),
 		compress(),
 		critters(),
+		tailwind(),
 	],
 	output: 'server',
 	adapter: node({
