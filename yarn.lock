@@ -1163,27 +1163,45 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/eslintrc@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@eslint/eslintrc@npm:2.0.0"
+"@eslint-community/eslint-utils@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "@eslint-community/eslint-utils@npm:4.2.0"
+  dependencies:
+    eslint-visitor-keys: ^3.3.0
+  peerDependencies:
+    eslint: ^6.0.0 || ^7.0.0 || >=8.0.0
+  checksum: 82fdd1cc2a5d169def0e665ec790580ef708e7df9c91f20006595dc90e3bd42ec31c8976a2eeccd336286301a72e937c0ddf3ab4b7377d7014997c36333a7d22
+  languageName: node
+  linkType: hard
+
+"@eslint-community/regexpp@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "@eslint-community/regexpp@npm:4.4.0"
+  checksum: 2d127af0c752b80e8a782eacfe996a86925d21de92da3ffc6f9e615e701145e44a62e26bdd88bfac2cd76779c39ba8d9875a91046ec5e7e5f23cb647c247ea6a
+  languageName: node
+  linkType: hard
+
+"@eslint/eslintrc@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@eslint/eslintrc@npm:2.0.1"
   dependencies:
     ajv: ^6.12.4
     debug: ^4.3.2
-    espree: ^9.4.0
+    espree: ^9.5.0
     globals: ^13.19.0
     ignore: ^5.2.0
     import-fresh: ^3.2.1
     js-yaml: ^4.1.0
     minimatch: ^3.1.2
     strip-json-comments: ^3.1.1
-  checksum: 31119c8ca06723d80384f18f5c78e0530d8e6306ad36379868650131a8b10dd7cffd7aff79a5deb3a2e9933660823052623d268532bae9538ded53d5b19a69a6
+  checksum: 56b9192a687a450db53a7b883daf9f0f447c43b3510189cf88808a7a2467c2a302a42a50f184cc6d5a9faf3d1df890a2ef0fd0d60b751f32a3e9dfea717c6b48
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:8.35.0":
-  version: 8.35.0
-  resolution: "@eslint/js@npm:8.35.0"
-  checksum: 6687ceff659a6d617e37823f809dc9c4b096535961a81acead27d26b1a51a4cf608a5e59d831ddd57f24f6f8bb99340a4a0e19f9c99b390fbb4b275f51ed5f5e
+"@eslint/js@npm:8.36.0":
+  version: 8.36.0
+  resolution: "@eslint/js@npm:8.36.0"
+  checksum: b7d6b84b823c8c7784be390741196617565527b1f7c0977fde9455bfb57fd88f81c074a03dd878757d2c33fa29f24291e9ecbc1425710f067917324b55e1bf3a
   languageName: node
   linkType: hard
 
@@ -1982,10 +2000,10 @@ __metadata:
     "@next-auth/prisma-adapter": ^1.0.5
     "@prisma/client": ^4.11.0
     "@tanstack/react-query": ^4.26.1
-    "@trpc/client": ^10.14.1
-    "@trpc/next": ^10.14.1
-    "@trpc/react-query": ^10.14.1
-    "@trpc/server": ^10.14.1
+    "@trpc/client": ^10.15.0
+    "@trpc/next": ^10.15.0
+    "@trpc/react-query": ^10.15.0
+    "@trpc/server": ^10.15.0
     "@types/node": ^18.15.0
     "@types/react": ^18.0.28
     "@types/react-dom": ^18.0.11
@@ -2158,49 +2176,49 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@trpc/client@npm:^10.14.1":
-  version: 10.14.1
-  resolution: "@trpc/client@npm:10.14.1"
+"@trpc/client@npm:^10.15.0":
+  version: 10.15.0
+  resolution: "@trpc/client@npm:10.15.0"
   peerDependencies:
-    "@trpc/server": 10.14.1
-  checksum: f82f141797ce3dbc5731277db3499cc02d7348df614b72cc52a7d48d365e2723b157be9168a5d6c4901729a78b5be7eecf924877f3972604f2b17677faa898b0
+    "@trpc/server": 10.15.0
+  checksum: e0669fbf28305358025f5544678ec3efea4b6a529618338c099596e36bf97f09b37d0c631e0e965f76b80e69018ecf926439e9e51e12fd7cdd918ad7664f5361
   languageName: node
   linkType: hard
 
-"@trpc/next@npm:^10.14.1":
-  version: 10.14.1
-  resolution: "@trpc/next@npm:10.14.1"
+"@trpc/next@npm:^10.15.0":
+  version: 10.15.0
+  resolution: "@trpc/next@npm:10.15.0"
   dependencies:
     react-ssr-prepass: ^1.5.0
   peerDependencies:
     "@tanstack/react-query": ^4.3.8
-    "@trpc/client": 10.14.1
-    "@trpc/react-query": 10.14.1
-    "@trpc/server": 10.14.1
+    "@trpc/client": 10.15.0
+    "@trpc/react-query": 10.15.0
+    "@trpc/server": 10.15.0
     next: "*"
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 7ec9b52c6723f6a19ab34962a79a75f9fea7c5b6a9d30c32542c1312a59b749eee1a4edc5b6c8ce71f733819a841018b8defb92f58e01542f6c3e27684fdab00
+  checksum: 3c9381ce74ce7dbd44ad9578bb2ce40dda424318cdd38f69f79444c52b99b3b874fa05e9ee766b60002f54747ab00c1577ca576b4406cb4375d8f6906ea4ccbe
   languageName: node
   linkType: hard
 
-"@trpc/react-query@npm:^10.14.1":
-  version: 10.14.1
-  resolution: "@trpc/react-query@npm:10.14.1"
+"@trpc/react-query@npm:^10.15.0":
+  version: 10.15.0
+  resolution: "@trpc/react-query@npm:10.15.0"
   peerDependencies:
     "@tanstack/react-query": ^4.3.8
-    "@trpc/client": 10.14.1
-    "@trpc/server": 10.14.1
+    "@trpc/client": 10.15.0
+    "@trpc/server": 10.15.0
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: f44eb20e224cc400d3fb481af676d8da8eb8b7b42439d75d2c1e727f043e3afce43c6b9a3244fd6d9a7c6338662672149dc90ba95f67042dda0ac48bcecf68f6
+  checksum: 0be445ec2e0ce8fb2caf62c5d2e47dc6e9df5c2fa97a793d4b58adc31b4581d375ea8a25dfb992475d9f2b3f15704e328699e750483859545ca2b46cda1bcec9
   languageName: node
   linkType: hard
 
-"@trpc/server@npm:^10.14.1":
-  version: 10.14.1
-  resolution: "@trpc/server@npm:10.14.1"
-  checksum: 31c29e2b46e2108573cb6fa5582890ac94ede439d7414b6de80f15008a801bbb676506431a1d773cc0350b174dcd8ad9ba01f7480b897240a32b499b9c07a752
+"@trpc/server@npm:^10.15.0":
+  version: 10.15.0
+  resolution: "@trpc/server@npm:10.15.0"
+  checksum: d02bd5b6c409e59642c860e29c41b5787a98d4db81e5ee7f6c4c0600af07fdf00217c032f5345711f9556680fdf1686da8aef0c4d28bd44cd652eee96ecc11e0
   languageName: node
   linkType: hard
 
@@ -6309,12 +6327,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.35.0":
-  version: 8.35.0
-  resolution: "eslint@npm:8.35.0"
+"eslint@npm:^8.36.0":
+  version: 8.36.0
+  resolution: "eslint@npm:8.36.0"
   dependencies:
-    "@eslint/eslintrc": ^2.0.0
-    "@eslint/js": 8.35.0
+    "@eslint-community/eslint-utils": ^4.2.0
+    "@eslint-community/regexpp": ^4.4.0
+    "@eslint/eslintrc": ^2.0.1
+    "@eslint/js": 8.36.0
     "@humanwhocodes/config-array": ^0.11.8
     "@humanwhocodes/module-importer": ^1.0.1
     "@nodelib/fs.walk": ^1.2.8
@@ -6325,9 +6345,8 @@ __metadata:
     doctrine: ^3.0.0
     escape-string-regexp: ^4.0.0
     eslint-scope: ^7.1.1
-    eslint-utils: ^3.0.0
     eslint-visitor-keys: ^3.3.0
-    espree: ^9.4.0
+    espree: ^9.5.0
     esquery: ^1.4.2
     esutils: ^2.0.2
     fast-deep-equal: ^3.1.3
@@ -6349,17 +6368,16 @@ __metadata:
     minimatch: ^3.1.2
     natural-compare: ^1.4.0
     optionator: ^0.9.1
-    regexpp: ^3.2.0
     strip-ansi: ^6.0.1
     strip-json-comments: ^3.1.0
     text-table: ^0.2.0
   bin:
     eslint: bin/eslint.js
-  checksum: 6212173691d90b1bc94dd3d640e1f210374b30c3905fc0a15e501cf71c6ca52aa3d80ea7a9a245adaaed26d6019169e01fb6881b3f2885b188d37069c749308c
+  checksum: e9a961fc3b3de5cff5a1cb2c92eeffaa7e155a715489e30b3e1e76f186bd1255e0481e09564f2094733c0b1dbd3453499fb72ae7c043c83156e11e6d965b2304
   languageName: node
   linkType: hard
 
-"espree@npm:^9.0.0, espree@npm:^9.3.1, espree@npm:^9.4.0":
+"espree@npm:^9.0.0, espree@npm:^9.3.1":
   version: 9.4.1
   resolution: "espree@npm:9.4.1"
   dependencies:
@@ -6367,6 +6385,17 @@ __metadata:
     acorn-jsx: ^5.3.2
     eslint-visitor-keys: ^3.3.0
   checksum: 4d266b0cf81c7dfe69e542c7df0f246e78d29f5b04dda36e514eb4c7af117ee6cfbd3280e560571ed82ff6c9c3f0003c05b82583fc7a94006db7497c4fe4270e
+  languageName: node
+  linkType: hard
+
+"espree@npm:^9.5.0":
+  version: 9.5.0
+  resolution: "espree@npm:9.5.0"
+  dependencies:
+    acorn: ^8.8.0
+    acorn-jsx: ^5.3.2
+    eslint-visitor-keys: ^3.3.0
+  checksum: a7f110aefb6407e0d3237aa635ab3cea87106ae63748dd23c67031afccc640d04c4209fca2daf16e2233c82efb505faead0fb84097478fd9cc6e8f8dd80bf99d
   languageName: node
   linkType: hard
 
@@ -12611,7 +12640,7 @@ __metadata:
     "@typescript-eslint/parser": ^5.54.1
     "@yarnpkg/cli-dist": ^3.4.1
     astro-eslint-parser: ^0.12.0
-    eslint: ^8.35.0
+    eslint: ^8.36.0
     eslint-config-neon: ^0.1.40
     eslint-config-next: ^13.2.4
     eslint-config-prettier: 8.7.0
