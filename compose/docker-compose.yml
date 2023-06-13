@@ -40,6 +40,7 @@ services:
       - '80:80'
       - '443:443'
     network_mode: host
+    restart: always
 
   ghost:
     build:
@@ -116,16 +117,14 @@ services:
       NEXTAUTH_URL: 'http://localhost:3000'
 
   nextcloud:
-    build:
-      context: ../
-      dockerfile: ./docker/nextcloud/Dockerfile
+    image: nextcloud/all-in-one:latest
+    container_name: nextcloud-aio-mastercontainer
     restart: always
     ports:
-      - '8080:80'
-    expose:
-      - 11000
+      - 8080:8080
     volumes:
-      - nextcloud:/var/www/html
+      - nextcloud_aio_mastercontainer:/mnt/docker-aio-config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       POSTGRES_PASSWORD: 'admin'
       POSTGRES_DB: 'nextcloud'
@@ -141,5 +140,5 @@ volumes:
     name: 'sleepymaid-postgres-data'
   ghost-data:
     name: 'sleepymaid-ghost-data'
-  nextcloud:
-    name: 'sleepymaid-nextcloud'
+  nextcloud_aio_mastercontainer:
+    name: 'nextcloud_aio_mastercontainer'
