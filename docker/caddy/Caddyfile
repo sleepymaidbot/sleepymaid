@@ -1,17 +1,17 @@
 blog.ecorte.xyz {
-  reverse_proxy * localhost:2368
+  reverse_proxy * http://ghost:2368
 }
 
 sleepymaid.ecorte.xyz {
-  reverse_proxy * localhost:3000
+  reverse_proxy * http://website:3000
 }
 
 qcgsecret.ecorte.xyz {
-  reverse_proxy * localhost:3001
+  reverse_proxy * http://qcgsecret:3001
 }
 
 f.ecorte.xyz:443 {
-  reverse_proxy * localhost:11000 {
+  reverse_proxy * http://nextcloud:11000 {
       transport http {
             tls_insecure_skip_verify
       }
