@@ -11,5 +11,9 @@ qcgsecret.ecorte.xyz {
 }
 
 f.ecorte.xyz {
+  reverse_proxy * http://nextcloud:8080
+}
+
+f.ecorte.xyz:443 {
   reverse_proxy * http://nextcloud:11000
 }
