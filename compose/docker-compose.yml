@@ -131,7 +131,6 @@ services:
       POSTGRES_USER: 'sleepymaid'
       POSTGRES_HOST: 'postgres'
       APACHE_PORT: '11000'
-      APACHE_IP_BINDING: '127.0.0.1'
 
 volumes:
   redis-data:
