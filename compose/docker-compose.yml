@@ -114,6 +114,25 @@ services:
       REDIS_URL: 'redis://redis:6379/0'
       NEXTAUTH_URL: 'http://localhost:3000'
 
+  nextcloud:
+    build:
+      context: ../
+      dockerfile: ./docker/nextcloud/Dockerfile
+    restart: always
+    ports:
+      - '8080:80'
+    expose:
+      - 11000
+    volumes:
+      - nextcloud:/var/www/html
+    environment:
+      POSTGRES_PASSWORD: 'admin'
+      POSTGRES_DB: 'nextcloud'
+      POSTGRES_USER: 'sleepymaid'
+      POSTGRES_HOST: 'postgres'
+      APACHE_PORT: '11000'
+      APACHE_IP_BINDING: '127.0.0.1'
+
 volumes:
   redis-data:
     name: 'sleepymaid-redis-data'
@@ -121,3 +140,5 @@ volumes:
     name: 'sleepymaid-postgres-data'
   ghost-data:
     name: 'sleepymaid-ghost-data'
+  nextcloud:
+    name: 'sleepymaid-nextcloud'
