@@ -10,10 +10,7 @@ qcgsecret.ecorte.xyz {
   reverse_proxy * http://qcgsecret:3001
 }
 
-f.ecorte.xyz {
-  reverse_proxy * http://nextcloud:8080
-}
-
 f.ecorte.xyz:443 {
+  header Strict-Transport-Security max-age=31536000;
   reverse_proxy * http://nextcloud:11000
 }
