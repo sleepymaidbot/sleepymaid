@@ -115,6 +115,23 @@ services:
       REDIS_URL: 'redis://redis:6379/0'
       NEXTAUTH_URL: 'http://localhost:3000'
 
+  zipline:
+    image: ghcr.io/diced/zipline
+    ports:
+      - '3002:3002'
+    restart: unless-stopped
+    environment:
+      - CORE_RETURN_HTTPS=false
+      - CORE_HOST=0.0.0.0
+      - CORE_PORT=3002
+      - CORE_DATABASE_URL=postgresql://sleepymaid:admin@postgres:5432/zipline
+      - CORE_LOGGER=true
+    volumes:
+      - './uploads:/zipline/uploads'
+      - './public:/zipline/public'
+    depends_on:
+      - 'postgres'
+
 volumes:
   redis-data:
     name: 'sleepymaid-redis-data'
