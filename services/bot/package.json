@@ -19,7 +19,7 @@
 	},
 	"dependencies": {
 		"@discordjs/brokers": "^0.1.0",
-		"@prisma/client": "^4.15.0",
+		"@prisma/client": "^4.16.1",
 		"@sapphire/result": "^2.6.0",
 		"@sapphire/stopwatch": "1.5.0",
 		"@sleepymaid/handler": "workspace:^",
@@ -31,7 +31,7 @@
 		"i18next-fs-backend": "^2.1.1",
 		"murmurhash-v3": "^1.0.2",
 		"path": "0.12.7",
-		"prisma": "^4.15.0",
+		"prisma": "^4.16.1",
 		"reflect-metadata": "0.1.13",
 		"tsyringe": "4.7.0"
 	}
