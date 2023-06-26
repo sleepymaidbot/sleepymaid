@@ -208,18 +208,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@astrojs/tailwind@npm:^3.1.3":
-  version: 3.1.3
-  resolution: "@astrojs/tailwind@npm:3.1.3"
+"@astrojs/tailwind@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@astrojs/tailwind@npm:4.0.0"
   dependencies:
-    "@proload/core": ^0.3.3
     autoprefixer: ^10.4.14
-    postcss: ^8.4.23
+    postcss: ^8.4.24
     postcss-load-config: ^4.0.1
   peerDependencies:
-    astro: ^2.5.0
+    astro: ^2.6.5
     tailwindcss: ^3.0.24
-  checksum: 5f9d00a383884d2c090e312c925321b1fc96def37965f03eda22aee887c0ee41a22ca1b858de8a1171c9d4258b9e6871139e43c48bab99c5ef7bd47986a90cb6
+  checksum: 0619428920f55485aa2f46f87ac5a088a8bb57abe620b948ef720b7ea2e4d3ed553840620a06bfdfec5b42a13e40f88328c66fbafe24b01f1fe6d6d8981b5501
   languageName: node
   linkType: hard
 
@@ -2099,16 +2098,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@proload/core@npm:^0.3.3":
-  version: 0.3.3
-  resolution: "@proload/core@npm:0.3.3"
-  dependencies:
-    deepmerge: ^4.2.2
-    escalade: ^3.1.1
-  checksum: bf1483f21928eabbf632b3d34bb53b0d86d0c44d22c2bf798151351c0179db4fdefa6801176bff6a6318e01caa3bc486d600d3b1afd963a57cf227168639bc7f
-  languageName: node
-  linkType: hard
-
 "@react-icons/all-files@npm:^4.1.0":
   version: 4.1.0
   resolution: "@react-icons/all-files@npm:4.1.0"
@@ -2340,7 +2329,7 @@ __metadata:
     "@astrojs/mdx": ^0.19.4
     "@astrojs/node": ^5.1.4
     "@astrojs/react": ^2.2.0
-    "@astrojs/tailwind": ^3.1.3
+    "@astrojs/tailwind": ^4.0.0
     "@fontsource/inter": ^4.5.15
     "@react-icons/all-files": ^4.1.0
     "@types/react": ^18.0.31
@@ -5588,13 +5577,6 @@ __metadata:
   version: 4.3.0
   resolution: "deepmerge-ts@npm:4.3.0"
   checksum: d5f8a96df9a2bc7177d59544b9390ba76e50fb725f776669068ca04eef319e98ee8870cf7b7ecca9f636b711d57cea571ac61553ee01101a614c045f7a86e0be
-  languageName: node
-  linkType: hard
-
-"deepmerge@npm:^4.2.2":
-  version: 4.3.0
-  resolution: "deepmerge@npm:4.3.0"
-  checksum: c7980eb5c5be040b371f1df0d566473875cfabed9f672ccc177b81ba8eee5686ce2478de2f1d0076391621cbe729e5eacda397179a59ef0f68901849647db126
   languageName: node
   linkType: hard
 
@@ -12308,7 +12290,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.23":
+"postcss@npm:^8.4.23, postcss@npm:^8.4.24":
   version: 8.4.24
   resolution: "postcss@npm:8.4.24"
   dependencies:
