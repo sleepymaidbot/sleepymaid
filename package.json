@@ -26,7 +26,7 @@
 		"@typescript-eslint/eslint-plugin": "^5.57.0",
 		"@typescript-eslint/parser": "^5.57.0",
 		"@yarnpkg/cli-dist": "^3.5.0",
-		"astro-eslint-parser": "^0.13.2",
+		"astro-eslint-parser": "^0.14.0",
 		"eslint": "^8.41.0",
 		"eslint-config-neon": "^0.1.47",
 		"eslint-config-next": "^13.4.4",
