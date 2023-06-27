@@ -49,7 +49,7 @@ export default function Alert({ title, type, children }: PropsWithChildren<IAler
 				<div className="alert-component-middle">
 					<div className="alert-component-aligned">
 						<span className="alert-component-icon">{icon}</span>
-						<span>{title && <h1>{title}</h1>}</span>
+						<span className="text-xl">{title && <h1>{title}</h1>}</span>
 					</div>
 				</div>
 				<div className="alert-component-children">{children}</div>
