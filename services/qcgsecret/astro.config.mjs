@@ -1,17 +1,17 @@
-import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
+import { fileURLToPath, URL } from 'node:url';
 import mdx from '@astrojs/mdx';
 import node from '@astrojs/node';
+import react from '@astrojs/react';
+import tailwind from '@astrojs/tailwind';
+import { defineConfig } from 'astro/config';
 import compress from 'astro-compress';
 import critters from 'astro-critters';
-import { fileURLToPath, URL } from 'node:url';
-import tailwind from '@astrojs/tailwind';
 
 const rootDir = new URL('../../', import.meta.url);
 
 // https://astro.build/config
 export default defineConfig({
-	integrations: [react(), mdx(), compress(), critters(), tailwind()],
+	integrations: [react(), mdx(), compress(), critters(), tailwind({ applyBaseStyles: false })],
 	output: 'server',
 	adapter: node({
 		mode: 'standalone',

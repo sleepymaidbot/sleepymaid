@@ -8,7 +8,7 @@ export type IHeader = {
 export default function Header({ title, children }: PropsWithChildren<IHeader>) {
 	return (
 		<div className="header-component">
-			<h1 className="text-5xl">{title}</h1>
+			<h1>{title}</h1>
 			<p>{children}</p>
 		</div>
 	);
