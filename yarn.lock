@@ -3800,13 +3800,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/cli-dist@npm:^3.5.0":
-  version: 3.5.0
-  resolution: "@yarnpkg/cli-dist@npm:3.5.0"
+"@yarnpkg/cli-dist@npm:^3.6.0":
+  version: 3.6.0
+  resolution: "@yarnpkg/cli-dist@npm:3.6.0"
   bin:
     yarn: bin/yarn.js
     yarnpkg: bin/yarn.js
-  checksum: 8beaca056d2c653c4496b6a851b49850d1be2950e2d9e32b3d04eef5eb331518275bf3e433e8d46c49cb18aae1db678f3fbeade7f9d97fa399d2cc600040fd1f
+  checksum: 75538adfda874bc3b0d289bb103fae8696aa77f1b567d007527eb4bc1fc476ba99b32cbf26097c7ba92a1b69ff05e75a74ca327b1f1924ef7a2051e5602d125f
   languageName: node
   linkType: hard
 
@@ -14075,7 +14075,7 @@ __metadata:
     "@types/prettier": 2.7.2
     "@typescript-eslint/eslint-plugin": ^5.57.0
     "@typescript-eslint/parser": ^5.57.0
-    "@yarnpkg/cli-dist": ^3.5.0
+    "@yarnpkg/cli-dist": ^3.6.0
     astro-eslint-parser: ^0.14.0
     eslint: ^8.41.0
     eslint-config-neon: ^0.1.47
