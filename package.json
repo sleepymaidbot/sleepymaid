@@ -6,8 +6,10 @@
 	"license": "MIT",
 	"private": true,
 	"workspaces": [
-		"services/*",
-		"packages/*"
+		"packages/*",
+		"services/bot/*",
+		"services/helper/*",
+		"services/qcgsecret/*"
 	],
 	"packageManager": "yarn@3.6.0",
 	"scripts": {
