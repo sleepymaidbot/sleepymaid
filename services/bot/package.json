@@ -12,27 +12,27 @@
 	"license": "MIT",
 	"devDependencies": {
 		"@types/i18next-fs-backend": "^1.1.2",
-		"@types/node": "^18.15.11",
+		"@types/node": "^18.16.18",
 		"rimraf": "^5.0.1",
 		"source-map-support": "0.5.21",
 		"typescript": "^4.9.5"
 	},
 	"dependencies": {
-		"@discordjs/brokers": "^0.1.0",
+		"@discordjs/brokers": "^0.2.1",
 		"@prisma/client": "^4.16.1",
-		"@sapphire/result": "^2.6.0",
+		"@sapphire/result": "^2.6.4",
 		"@sapphire/stopwatch": "1.5.0",
 		"@sleepymaid/handler": "workspace:^",
 		"@sleepymaid/logger": "workspace:^",
 		"@sleepymaid/shared": "workspace:^",
 		"@sleepymaid/util": "*",
-		"discord.js": "^14.8.0",
-		"i18next": "^23.2.3",
-		"i18next-fs-backend": "^2.1.1",
+		"discord.js": "^14.11.0",
+		"i18next": "^23.2.6",
+		"i18next-fs-backend": "^2.1.5",
 		"murmurhash-v3": "^1.0.2",
 		"path": "0.12.7",
 		"prisma": "^4.16.1",
 		"reflect-metadata": "0.1.13",
-		"tsyringe": "4.7.0"
+		"tsyringe": "4.8.0"
 	}
 }
