@@ -19,7 +19,7 @@
 	"dependencies": {
 		"@discordjs/brokers": "^0.2.1",
 		"@hapi/boom": "^10.0.1",
-		"@prisma/client": "^4.16.1",
+		"@prisma/client": "^4.16.2",
 		"@sapphire/node-utilities": "^1.0.0",
 		"@sapphire/result": "^2.6.4",
 		"@sapphire/shapeshift": "^3.9.2",
@@ -30,7 +30,7 @@
 		"helmet": "^7.0.0",
 		"path": "0.12.7",
 		"polka": "1.0.0-next.22",
-		"prisma": "^4.16.1",
+		"prisma": "^4.16.2",
 		"reflect-metadata": "0.1.13",
 		"trouter": "^3.2.1",
 		"tsyringe": "4.8.0"
