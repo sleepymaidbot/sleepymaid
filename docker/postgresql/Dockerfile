@@ -1,3 +1,3 @@
-FROM postgres:14.7-alpine
+FROM postgres:14.8-alpine
 
 LABEL name "sleepymaid postgresql"
