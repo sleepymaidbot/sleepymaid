@@ -7,9 +7,9 @@
 	"private": true,
 	"workspaces": [
 		"packages/*",
-		"services/bot/*",
-		"services/helper/*",
-		"services/qcgsecret/*"
+		"services/bot/",
+		"services/helper/",
+		"services/qcgsecret/"
 	],
 	"packageManager": "yarn@3.6.0",
 	"scripts": {
