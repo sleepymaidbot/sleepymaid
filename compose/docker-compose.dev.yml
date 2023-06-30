@@ -10,9 +10,9 @@ services:
   helper:
     environment:
       NODE_ENV: 'dev'
-  website:
-    environment:
-      NODE_ENV: 'development'
+  #website:
+  #  environment:
+  #    NODE_ENV: 'development'
   postgres:
     ports:
       - '127.0.0.1:5433:5432'
