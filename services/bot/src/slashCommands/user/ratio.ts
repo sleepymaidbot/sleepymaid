@@ -12,12 +12,14 @@ export default class RatioUserCommand implements UserCommandInterface {
 	} as const;
 
 	public async execute(interaction: UserContextMenuCommandInteraction) {
+		const target = interaction.options.get('user');
+		if (target === null) return;
 		await interaction.reply({
 			content: i18next.t('commands.ratio.ratio', {
 				lng: interaction.locale,
-				target: interaction.options.get('user')!.value,
+				target: target.value,
 				author: interaction.user.id,
-			})!,
+			}),
 		});
 	}
 }
