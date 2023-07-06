@@ -2383,7 +2383,7 @@ __metadata:
     "@types/i18next-fs-backend": ^1.1.2
     "@types/node": ^18.16.19
     discord.js: ^14.11.0
-    i18next: ^23.2.7
+    i18next: ^23.2.8
     i18next-fs-backend: ^2.1.5
     murmurhash-v3: ^1.0.2
     path: 0.12.7
@@ -2428,7 +2428,7 @@ __metadata:
     "@types/i18next-fs-backend": ^1.1.2
     "@types/node": ^18.16.19
     discord.js: ^14.11.0
-    i18next: ^23.2.7
+    i18next: ^23.2.8
     i18next-fs-backend: ^2.1.5
     path: 0.12.7
     reflect-metadata: ^0.1.13
@@ -2468,7 +2468,7 @@ __metadata:
     "@types/react": ^18.2.14
     "@types/react-dom": ^18.2.6
     ariakit: ^2.0.0-next.44
-    astro: ^2.7.4
+    astro: ^2.8.0
     astro-compress: ^1.1.48
     astro-critters: ^1.1.39
     classnames: ^2.3.2
@@ -2490,7 +2490,7 @@ __metadata:
     "@swc/core": ^1.3.68
     "@types/node": ^18.16.19
     fuse.js: ^6.6.2
-    i18next: ^23.2.7
+    i18next: ^23.2.8
     rimraf: ^5.0.1
     source-map-support: 0.5.21
     tsup: ^7.1.0
@@ -2509,7 +2509,7 @@ __metadata:
     source-map-support: 0.5.21
     tsup: ^7.1.0
     typescript: ^4.9.5
-    vite: ^4.4.0
+    vite: ^4.4.1
     vitest: ^0.33.0
   languageName: unknown
   linkType: soft
@@ -4057,9 +4057,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"astro@npm:^2.7.4":
-  version: 2.7.4
-  resolution: "astro@npm:2.7.4"
+"astro@npm:^2.8.0":
+  version: 2.8.0
+  resolution: "astro@npm:2.8.0"
   dependencies:
     "@astrojs/compiler": ^1.5.3
     "@astrojs/internal-helpers": ^0.1.1
@@ -4114,6 +4114,7 @@ __metadata:
     vfile: ^5.3.7
     vite: ^4.3.9
     vitefu: ^0.2.4
+    which-pm: ^2.0.0
     yargs-parser: ^21.1.1
     zod: ^3.20.6
   peerDependencies:
@@ -4123,7 +4124,7 @@ __metadata:
       optional: true
   bin:
     astro: astro.js
-  checksum: 983f5b4307cfdc7d1f55604b65204a63fb407404df9ba7f848c439a7287ef2e2051a87021063afbcec36fd6b3f8e6dea50fb780b28014b4e4faaa61624e525ec
+  checksum: e075a1aef5e93ac70eeaddb0b1b30dbd4d3ef620e305af786beb4edbf06bd75e81d2107a948bf7c5270ec3e5591e45b778c196eee52ae67d5ce29a4d88bbf854
   languageName: node
   linkType: hard
 
@@ -8639,12 +8640,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^23.2.7":
-  version: 23.2.7
-  resolution: "i18next@npm:23.2.7"
+"i18next@npm:^23.2.8":
+  version: 23.2.8
+  resolution: "i18next@npm:23.2.8"
   dependencies:
     "@babel/runtime": ^7.22.5
-  checksum: b5fdf0d7a8bda38fde39b5968fe637ccc22e7d2157f729008b4d34fb8474df93d82bcbdfabe51bf1286176669409aad3fe68b0934cadeb9f9b95f45ddf74fc79
+  checksum: 6f01943cc8bf3e9315773fecbed2a8bcede4575dd505badea12c8f07b69936f5d0474dc6a724b123bedc8a3db4e12dca1e377d807eda90f1bd53d8f66b4694fb
   languageName: node
   linkType: hard
 
@@ -15497,9 +15498,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^4.4.0":
-  version: 4.4.0
-  resolution: "vite@npm:4.4.0"
+"vite@npm:^4.4.1":
+  version: 4.4.1
+  resolution: "vite@npm:4.4.1"
   dependencies:
     esbuild: ^0.18.10
     fsevents: ~2.3.2
@@ -15533,7 +15534,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: a0565345836d2bd5471aa784a3769c19c2c7b5f1df05f3b30948ccba691c0a37300ff40bcbb288a7a189aba13063b04b91abbb49dffe9ec45472e95bf4a9ab17
+  checksum: c91d5228cd0b2410e95ea4b17279640a414f1a2d5290a01baec77351af2dda7d5901c240ed6a62de2b465567e328168d386da2aaa262d3a138fde827b289592d
   languageName: node
   linkType: hard
 
@@ -15810,7 +15811,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"which-pm@npm:2.0.0":
+"which-pm@npm:2.0.0, which-pm@npm:^2.0.0":
   version: 2.0.0
   resolution: "which-pm@npm:2.0.0"
   dependencies:
