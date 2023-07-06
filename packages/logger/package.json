@@ -27,7 +27,7 @@
 	"devDependencies": {
 		"@favware/cliff-jumper": "^2.1.1",
 		"@sleepymaid/handler": "workspace:^",
-		"@swc/core": "^1.3.67",
+		"@swc/core": "^1.3.68",
 		"@types/node": "^18.16.19",
 		"rimraf": "^5.0.1",
 		"source-map-support": "0.5.21",
