@@ -92,6 +92,39 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ariakit/core@npm:0.2.7":
+  version: 0.2.7
+  resolution: "@ariakit/core@npm:0.2.7"
+  checksum: 0953cbc5f968e04848a39fc5f22d5d10a633ec7ccfb52b92bc2a5f5624c2ee0e478147999944aee0348bcfa8df1c9b8909e2ccecd9bc366e027af00bb3ac422c
+  languageName: node
+  linkType: hard
+
+"@ariakit/react-core@npm:0.2.12":
+  version: 0.2.12
+  resolution: "@ariakit/react-core@npm:0.2.12"
+  dependencies:
+    "@ariakit/core": 0.2.7
+    "@floating-ui/dom": ^1.0.0
+    use-sync-external-store: ^1.2.0
+  peerDependencies:
+    react: ^17.0.0 || ^18.0.0
+    react-dom: ^17.0.0 || ^18.0.0
+  checksum: f90bb4f4aa15a0b4764b09dc71e167362e6f552d6d232efa8cd02caa2ce81450d4a63e1a986f6eb5fe74de9f1905a3a71dde0476023bfa8c681888ec92dd5afc
+  languageName: node
+  linkType: hard
+
+"@ariakit/react@npm:^0.2.12":
+  version: 0.2.12
+  resolution: "@ariakit/react@npm:0.2.12"
+  dependencies:
+    "@ariakit/react-core": 0.2.12
+  peerDependencies:
+    react: ^17.0.0 || ^18.0.0
+    react-dom: ^17.0.0 || ^18.0.0
+  checksum: 357a54e452471cbec534d61d6d9bdb8977ca1a56b60d55eb4f67373bcc228a9ced77376222748051b383b5a87f71b31415b65476fb7bcbdd6efd735a319fee56
+  languageName: node
+  linkType: hard
+
 "@astrojs/compiler@npm:^1.0.0":
   version: 1.1.1
   resolution: "@astrojs/compiler@npm:1.1.1"
@@ -2466,6 +2499,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@sleepymaid/qcgsecret@workspace:services/qcgsecret"
   dependencies:
+    "@ariakit/react": ^0.2.12
     "@astrojs/mdx": ^0.19.7
     "@astrojs/node": ^5.3.0
     "@astrojs/react": ^2.2.1
@@ -15027,31 +15061,31 @@ __metadata:
 
 "typescript@patch:typescript@*#~builtin<compat/typescript>":
   version: 5.1.6
-  resolution: "typescript@patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=5da071"
+  resolution: "typescript@patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=1f5320"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: f53bfe97f7c8b2b6d23cf572750d4e7d1e0c5fff1c36d859d0ec84556a827b8785077bc27676bf7e71fae538e517c3ecc0f37e7f593be913d884805d931bc8be
+  checksum: 21e88b0a0c0226f9cb9fd25b9626fb05b4c0f3fddac521844a13e1f30beb8f14e90bd409a9ac43c812c5946d714d6e0dee12d5d02dfc1c562c5aacfa1f49b606
   languageName: node
   linkType: hard
 
 "typescript@patch:typescript@^4.6.4 || ^5.0.0#~builtin<compat/typescript>":
   version: 5.0.3
-  resolution: "typescript@patch:typescript@npm%3A5.0.3#~builtin<compat/typescript>::version=5.0.3&hash=b5f058"
+  resolution: "typescript@patch:typescript@npm%3A5.0.3#~builtin<compat/typescript>::version=5.0.3&hash=1f5320"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: f341676d09552abce8c2e86a9980bccef3d4c0a5e89fb2b8a2649fbbce8141c742cc44765649aafd92f8fe5da61ae36ca236879d959a64ed9844af9e994dbe3b
+  checksum: 9ec0a8eed38d46cc2c8794555b7674e413604c56c159f71b8ff21ce7f17334a44127a68724cb2ef8221ff3b19369f8f05654e8a5266621d7d962aeed889bd630
   languageName: node
   linkType: hard
 
 "typescript@patch:typescript@^4.9.5#~builtin<compat/typescript>":
   version: 4.9.5
-  resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=289587"
+  resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 1f8f3b6aaea19f0f67cba79057674ba580438a7db55057eb89cc06950483c5d632115c14077f6663ea76fd09fce3c190e6414bb98582ec80aa5a4eaf345d5b68
+  checksum: ab417a2f398380c90a6cf5a5f74badd17866adf57f1165617d6a551f059c3ba0a3e4da0d147b3ac5681db9ac76a303c5876394b13b3de75fdd5b1eaa06181c9d
   languageName: node
   linkType: hard
 
@@ -15307,6 +15341,15 @@ __metadata:
   dependencies:
     punycode: ^2.1.0
   checksum: 7167432de6817fe8e9e0c9684f1d2de2bb688c94388f7569f7dbdb1587c9f4ca2a77962f134ec90be0cc4d004c939ff0d05acc9f34a0db39a3c797dada262633
+  languageName: node
+  linkType: hard
+
+"use-sync-external-store@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "use-sync-external-store@npm:1.2.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 5c639e0f8da3521d605f59ce5be9e094ca772bd44a4ce7322b055a6f58eeed8dda3c94cabd90c7a41fb6fa852210092008afe48f7038792fd47501f33299116a
   languageName: node
   linkType: hard
 
