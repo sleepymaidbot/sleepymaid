@@ -19,7 +19,7 @@
 		"@fontsource/inter": "^5.0.5",
 		"@react-icons/all-files": "^4.1.0",
 		"@types/react": "^18.2.14",
-		"@types/react-dom": "^18.2.6",
+		"@types/react-dom": "^18.2.7",
 		"ariakit": "^2.0.0-next.44",
 		"astro": "^2.8.1",
 		"astro-compress": "^1.1.48",
