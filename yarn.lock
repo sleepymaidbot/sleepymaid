@@ -132,7 +132,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@astrojs/compiler@npm:^1.0.1, @astrojs/compiler@npm:^1.4.2, @astrojs/compiler@npm:^1.5.0":
+"@astrojs/compiler@npm:^1.0.1, @astrojs/compiler@npm:^1.4.2":
   version: 1.5.2
   resolution: "@astrojs/compiler@npm:1.5.2"
   checksum: 501f63076756a2737f3e20bdcdac902f29afffbf27c3408b6e9968e7f344c61aa858af82d847702548fb0c235ebeb1d3f31b1bc18df59f9f79306a1d36112369
@@ -143,6 +143,13 @@ __metadata:
   version: 1.5.4
   resolution: "@astrojs/compiler@npm:1.5.4"
   checksum: 608648fec4b81d73f61177de11e01cd1befe46e7d6f094c9fa56606c9b996b771b6607dbf69177de5570289397fe4574f8cee381d2b31434dbb7607a3947ea7b
+  languageName: node
+  linkType: hard
+
+"@astrojs/compiler@npm:^1.5.5":
+  version: 1.5.6
+  resolution: "@astrojs/compiler@npm:1.5.6"
+  checksum: a69dba8bd34ce0113baee214869a1183d83a4740a0ff39eddac4ef545f2bcd9071498684ad0f84d6b2368e0cd575d2a4f833d021a1909d2e778bf20fef60b118
   languageName: node
   linkType: hard
 
@@ -2443,7 +2450,7 @@ __metadata:
     "@favware/cliff-jumper": ^2.1.1
     "@sapphire/node-utilities": ^1.0.0
     "@sleepymaid/util": "workspace:^"
-    "@swc/core": ^1.3.68
+    "@swc/core": ^1.3.69
     "@types/node": ^18.16.19
     "@types/node-cron": ^3.0.8
     discord.js: ^14.11.0
@@ -2485,7 +2492,7 @@ __metadata:
   dependencies:
     "@favware/cliff-jumper": ^2.1.1
     "@sleepymaid/handler": "workspace:^"
-    "@swc/core": ^1.3.68
+    "@swc/core": ^1.3.69
     "@types/node": ^18.16.19
     ansi-colors: 4.1.3
     rimraf: ^5.0.1
@@ -2506,10 +2513,10 @@ __metadata:
     "@astrojs/tailwind": ^4.0.0
     "@fontsource/inter": ^5.0.5
     "@react-icons/all-files": ^4.1.0
-    "@types/react": ^18.2.14
+    "@types/react": ^18.2.15
     "@types/react-dom": ^18.2.7
     ariakit: ^2.0.0-next.44
-    astro: ^2.8.1
+    astro: ^2.8.2
     astro-compress: ^1.1.48
     astro-critters: ^1.1.39
     classnames: ^2.3.2
@@ -2520,7 +2527,7 @@ __metadata:
     react-icons: ^4.10.1
     react-use: ^17.4.0
     rollup-plugin-node-builtins: ^2.1.2
-    tailwindcss: ^3.3.2
+    tailwindcss: ^3.3.3
   languageName: unknown
   linkType: soft
 
@@ -2528,7 +2535,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@sleepymaid/shared@workspace:packages/shared"
   dependencies:
-    "@swc/core": ^1.3.68
+    "@swc/core": ^1.3.69
     "@types/node": ^18.16.19
     fuse.js: ^6.6.2
     i18next: ^23.2.11
@@ -2544,7 +2551,7 @@ __metadata:
   resolution: "@sleepymaid/util@workspace:packages/util"
   dependencies:
     "@favware/cliff-jumper": ^2.1.1
-    "@swc/core": ^1.3.68
+    "@swc/core": ^1.3.69
     "@types/node": ^18.16.19
     rimraf: ^5.0.1
     source-map-support: 0.5.21
@@ -2555,90 +2562,90 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@swc/core-darwin-arm64@npm:1.3.68":
-  version: 1.3.68
-  resolution: "@swc/core-darwin-arm64@npm:1.3.68"
+"@swc/core-darwin-arm64@npm:1.3.69":
+  version: 1.3.69
+  resolution: "@swc/core-darwin-arm64@npm:1.3.69"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-x64@npm:1.3.68":
-  version: 1.3.68
-  resolution: "@swc/core-darwin-x64@npm:1.3.68"
+"@swc/core-darwin-x64@npm:1.3.69":
+  version: 1.3.69
+  resolution: "@swc/core-darwin-x64@npm:1.3.69"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm-gnueabihf@npm:1.3.68":
-  version: 1.3.68
-  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.3.68"
+"@swc/core-linux-arm-gnueabihf@npm:1.3.69":
+  version: 1.3.69
+  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.3.69"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-gnu@npm:1.3.68":
-  version: 1.3.68
-  resolution: "@swc/core-linux-arm64-gnu@npm:1.3.68"
+"@swc/core-linux-arm64-gnu@npm:1.3.69":
+  version: 1.3.69
+  resolution: "@swc/core-linux-arm64-gnu@npm:1.3.69"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-musl@npm:1.3.68":
-  version: 1.3.68
-  resolution: "@swc/core-linux-arm64-musl@npm:1.3.68"
+"@swc/core-linux-arm64-musl@npm:1.3.69":
+  version: 1.3.69
+  resolution: "@swc/core-linux-arm64-musl@npm:1.3.69"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-gnu@npm:1.3.68":
-  version: 1.3.68
-  resolution: "@swc/core-linux-x64-gnu@npm:1.3.68"
+"@swc/core-linux-x64-gnu@npm:1.3.69":
+  version: 1.3.69
+  resolution: "@swc/core-linux-x64-gnu@npm:1.3.69"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-musl@npm:1.3.68":
-  version: 1.3.68
-  resolution: "@swc/core-linux-x64-musl@npm:1.3.68"
+"@swc/core-linux-x64-musl@npm:1.3.69":
+  version: 1.3.69
+  resolution: "@swc/core-linux-x64-musl@npm:1.3.69"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-win32-arm64-msvc@npm:1.3.68":
-  version: 1.3.68
-  resolution: "@swc/core-win32-arm64-msvc@npm:1.3.68"
+"@swc/core-win32-arm64-msvc@npm:1.3.69":
+  version: 1.3.69
+  resolution: "@swc/core-win32-arm64-msvc@npm:1.3.69"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-win32-ia32-msvc@npm:1.3.68":
-  version: 1.3.68
-  resolution: "@swc/core-win32-ia32-msvc@npm:1.3.68"
+"@swc/core-win32-ia32-msvc@npm:1.3.69":
+  version: 1.3.69
+  resolution: "@swc/core-win32-ia32-msvc@npm:1.3.69"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@swc/core-win32-x64-msvc@npm:1.3.68":
-  version: 1.3.68
-  resolution: "@swc/core-win32-x64-msvc@npm:1.3.68"
+"@swc/core-win32-x64-msvc@npm:1.3.69":
+  version: 1.3.69
+  resolution: "@swc/core-win32-x64-msvc@npm:1.3.69"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core@npm:^1.3.68":
-  version: 1.3.68
-  resolution: "@swc/core@npm:1.3.68"
+"@swc/core@npm:^1.3.69":
+  version: 1.3.69
+  resolution: "@swc/core@npm:1.3.69"
   dependencies:
-    "@swc/core-darwin-arm64": 1.3.68
-    "@swc/core-darwin-x64": 1.3.68
-    "@swc/core-linux-arm-gnueabihf": 1.3.68
-    "@swc/core-linux-arm64-gnu": 1.3.68
-    "@swc/core-linux-arm64-musl": 1.3.68
-    "@swc/core-linux-x64-gnu": 1.3.68
-    "@swc/core-linux-x64-musl": 1.3.68
-    "@swc/core-win32-arm64-msvc": 1.3.68
-    "@swc/core-win32-ia32-msvc": 1.3.68
-    "@swc/core-win32-x64-msvc": 1.3.68
+    "@swc/core-darwin-arm64": 1.3.69
+    "@swc/core-darwin-x64": 1.3.69
+    "@swc/core-linux-arm-gnueabihf": 1.3.69
+    "@swc/core-linux-arm64-gnu": 1.3.69
+    "@swc/core-linux-arm64-musl": 1.3.69
+    "@swc/core-linux-x64-gnu": 1.3.69
+    "@swc/core-linux-x64-musl": 1.3.69
+    "@swc/core-win32-arm64-msvc": 1.3.69
+    "@swc/core-win32-ia32-msvc": 1.3.69
+    "@swc/core-win32-x64-msvc": 1.3.69
   peerDependencies:
     "@swc/helpers": ^0.5.0
   dependenciesMeta:
@@ -2665,7 +2672,7 @@ __metadata:
   peerDependenciesMeta:
     "@swc/helpers":
       optional: true
-  checksum: f56ad1d4cb91f7cc1cb5d4b9894bbb528da0b2eabc98984581f5b3f3187cf2c0d512003880f6ff7a3f6d215b7a3dcbf5a9c45e8a428ac2d711941027c0151d89
+  checksum: 764b5c489030b1cf34ea412d7b7e0680996101d667387c646b44d89e630605f52d48d3ca6c0e63811b0ae675018602dbb132e149c01c9154291ecf180787bd86
   languageName: node
   linkType: hard
 
@@ -3012,7 +3019,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.2.14":
+"@types/react@npm:*":
   version: 18.2.14
   resolution: "@types/react@npm:18.2.14"
   dependencies:
@@ -3020,6 +3027,17 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: a6a5e8cc78f486b9020d1ad009aa6c56943c68c7c6376e0f8399e9cbcd950b7b8f5d73f00200f5379f5e58d31d57d8aed24357f301d8e86108cd438ce6c8b3dd
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:^18.2.15":
+  version: 18.2.15
+  resolution: "@types/react@npm:18.2.15"
+  dependencies:
+    "@types/prop-types": "*"
+    "@types/scheduler": "*"
+    csstype: ^3.0.2
+  checksum: 36989f638201bfe2f4110b06c119180f6df9c0e13d7060481e82e7a745f81745a01ae543c478a25b61e0767cb52e82da2ad5b0dedacabf99339e523d06176705
   languageName: node
   linkType: hard
 
@@ -4109,9 +4127,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"astro@npm:^2.8.1":
-  version: 2.8.1
-  resolution: "astro@npm:2.8.1"
+"astro@npm:^2.8.2":
+  version: 2.8.2
+  resolution: "astro@npm:2.8.2"
   dependencies:
     "@astrojs/compiler": ^1.5.3
     "@astrojs/internal-helpers": ^0.1.1
@@ -4176,7 +4194,7 @@ __metadata:
       optional: true
   bin:
     astro: astro.js
-  checksum: e825abdda4f26edbfb698da580c503476fe974e10fecd15e76026f6c28567add2d10ad1543f9042fbe2321266bd32adab3105066fe4ddbcc4995abc26b44ee12
+  checksum: 5f5d3f45c6bbf13928cc35e1526a4a095e84e87ee82cb1f819b7ffbc934d0d0d997dd53c545d6daee0ba805df6d9edd10779ab6fcb89d968d005cd6b8acce17d
   languageName: node
   linkType: hard
 
@@ -12320,14 +12338,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-astro@npm:^0.10.0":
-  version: 0.10.0
-  resolution: "prettier-plugin-astro@npm:0.10.0"
+"prettier-plugin-astro@npm:^0.11.0":
+  version: 0.11.0
+  resolution: "prettier-plugin-astro@npm:0.11.0"
   dependencies:
-    "@astrojs/compiler": ^1.5.0
-    prettier: ^2.8.8
+    "@astrojs/compiler": ^1.5.5
+    prettier: ^3.0.0
     sass-formatter: ^0.7.6
-  checksum: 4cb68c274dde64e42c1e2eb080ecd70c79fbcdef6ab4ba40f5d9e246ac794842d36534b82c5231d59d0536e70de1502c9f4fe9a603897a38606339868749d5e3
+  checksum: d1d0a21a009372ab5c893dd4b7548cc07e263f3a47023d0fff07bc70a4b3cbfd8d29f1710d6c07fcde8845d6940622579077b7c991a41e3237f79db251b00c8c
   languageName: node
   linkType: hard
 
@@ -13766,7 +13784,7 @@ __metadata:
     husky: ^8.0.3
     lint-staged: ^13.2.3
     prettier: ^3.0.0
-    prettier-plugin-astro: ^0.10.0
+    prettier-plugin-astro: ^0.11.0
     prisma: ^5.0.0
     rimraf: ^5.0.1
     tsup: ^7.1.0
@@ -14385,9 +14403,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:^3.3.2":
-  version: 3.3.2
-  resolution: "tailwindcss@npm:3.3.2"
+"tailwindcss@npm:^3.3.3":
+  version: 3.3.3
+  resolution: "tailwindcss@npm:3.3.3"
   dependencies:
     "@alloc/quick-lru": ^5.2.0
     arg: ^5.0.2
@@ -14409,13 +14427,12 @@ __metadata:
     postcss-load-config: ^4.0.1
     postcss-nested: ^6.0.1
     postcss-selector-parser: ^6.0.11
-    postcss-value-parser: ^4.2.0
     resolve: ^1.22.2
     sucrase: ^3.32.0
   bin:
     tailwind: lib/cli.js
     tailwindcss: lib/cli.js
-  checksum: 4897c70e671c885e151f57434d87ccb806f468a11900f028245b351ffbca5245ff0c10ca5dbb6eb4c7c4df3de8a15a05fe08c2aea4b152cb07bee9bb1d8a14a8
+  checksum: 0195c7a3ebb0de5e391d2a883d777c78a4749f0c532d204ee8aea9129f2ed8e701d8c0c276aa5f7338d07176a3c2a7682c1d0ab9c8a6c2abe6d9325c2954eb50
   languageName: node
   linkType: hard
 
