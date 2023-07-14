@@ -53,6 +53,7 @@ export function prettyBytes(number: Number, options: Options): string {
 		return ` 0 ${UNITS[0]}`;
 	}
 
+	// @ts-ignore
 	const isNegative = number < 0;
 	const prefix = isNegative ? '-' : options.signed ? '+' : '';
 
@@ -73,6 +74,7 @@ export function prettyBytes(number: Number, options: Options): string {
 		};
 	}
 
+	// @ts-ignore
 	if (number < 1) {
 		// @ts-ignore
 		const numberString = toLocaleString(number, options.locale || false, localeOptions);

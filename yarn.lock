@@ -2439,7 +2439,7 @@ __metadata:
     rimraf: ^5.0.1
     source-map-support: 0.5.21
     tsyringe: 4.8.0
-    typescript: ^4.9.5
+    typescript: ^5.1.6
   languageName: unknown
   linkType: soft
 
@@ -2460,7 +2460,7 @@ __metadata:
     source-map-support: 0.5.21
     tsup: ^7.1.0
     tsyringe: ^4.8.0
-    typescript: ^4.9.5
+    typescript: ^5.1.6
   languageName: unknown
   linkType: soft
 
@@ -2482,7 +2482,7 @@ __metadata:
     rimraf: ^5.0.1
     source-map-support: 0.5.21
     tsyringe: ^4.8.0
-    typescript: ^4.9.5
+    typescript: ^5.1.6
   languageName: unknown
   linkType: soft
 
@@ -2498,7 +2498,7 @@ __metadata:
     rimraf: ^5.0.1
     source-map-support: 0.5.21
     tsup: ^7.1.0
-    typescript: ^4.9.5
+    typescript: ^5.1.6
   languageName: unknown
   linkType: soft
 
@@ -2542,7 +2542,7 @@ __metadata:
     rimraf: ^5.0.1
     source-map-support: 0.5.21
     tsup: ^7.1.0
-    typescript: ^4.9.5
+    typescript: ^5.1.6
   languageName: unknown
   linkType: soft
 
@@ -2556,7 +2556,7 @@ __metadata:
     rimraf: ^5.0.1
     source-map-support: 0.5.21
     tsup: ^7.1.0
-    typescript: ^4.9.5
+    typescript: ^5.1.6
     vite: ^4.4.3
     vitest: ^0.33.0
   languageName: unknown
@@ -13789,7 +13789,7 @@ __metadata:
     rimraf: ^5.0.1
     tsup: ^7.1.0
     turbo: ^1.7.4
-    typescript: ^4.9.5
+    typescript: ^5.1.6
   languageName: unknown
   linkType: soft
 
@@ -15060,7 +15060,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:*":
+"typescript@npm:*, typescript@npm:^5.1.6":
   version: 5.1.6
   resolution: "typescript@npm:5.1.6"
   bin:
@@ -15080,17 +15080,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.9.5":
-  version: 4.9.5
-  resolution: "typescript@npm:4.9.5"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: ee000bc26848147ad423b581bd250075662a354d84f0e06eb76d3b892328d8d4440b7487b5a83e851b12b255f55d71835b008a66cbf8f255a11e4400159237db
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@*#~builtin<compat/typescript>":
+"typescript@patch:typescript@*#~builtin<compat/typescript>, typescript@patch:typescript@^5.1.6#~builtin<compat/typescript>":
   version: 5.1.6
   resolution: "typescript@patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=5da071"
   bin:
@@ -15107,16 +15097,6 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: f341676d09552abce8c2e86a9980bccef3d4c0a5e89fb2b8a2649fbbce8141c742cc44765649aafd92f8fe5da61ae36ca236879d959a64ed9844af9e994dbe3b
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@^4.9.5#~builtin<compat/typescript>":
-  version: 4.9.5
-  resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=289587"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 1f8f3b6aaea19f0f67cba79057674ba580438a7db55057eb89cc06950483c5d632115c14077f6663ea76fd09fce3c190e6414bb98582ec80aa5a4eaf345d5b68
   languageName: node
   linkType: hard
 

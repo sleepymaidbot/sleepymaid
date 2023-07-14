@@ -56,7 +56,7 @@ export default class CustomRoleCommand implements SlashCommandInterface {
 		const isEligible = (member: GuildMember, points: Number) => {
 			const userrole = member.roles.cache.map((x) => x.id);
 			if (userrole.includes('869637334126170112')) return true;
-			if (points >= 250) return true;
+			if (Number(points) >= 250) return true;
 			return false;
 		};
 
