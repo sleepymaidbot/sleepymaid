@@ -20,8 +20,8 @@
 		"prepare": "yarn husky install"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^17.6.6",
-		"@commitlint/config-angular": "^17.6.6",
+		"@commitlint/cli": "^17.6.7",
+		"@commitlint/config-angular": "^17.6.7",
 		"@favware/cliff-jumper": "^2.1.1",
 		"@favware/npm-deprecate": "^1.0.7",
 		"@types/prettier": "2.7.3",
