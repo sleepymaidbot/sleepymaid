@@ -7,8 +7,8 @@ import {
 	resolveColor,
 } from 'discord.js';
 
-export default class LaserCasinoCommand implements SlashCommandInterface {
-	public readonly guildIds = ['860721584373497887', '324284116021542922'];
+export default class SecretCasinoCommand implements SlashCommandInterface {
+	public readonly guildIds = ['860721584373497887', '324284116021542922', '1131653884377579651'];
 	public readonly data = {
 		name: 'casino',
 		description: 'Base command for the casino secret.',
