@@ -6,7 +6,6 @@ import {
 	PermissionFlagsBits,
 	ComponentType,
 	APIActionRowComponent,
-	APIEmbedAuthor,
 	APIButtonComponent,
 	APIEmbed,
 } from 'discord-api-types/v10';
