@@ -140,10 +140,12 @@ export default class QCGSecretSetupCommand implements SlashCommandInterface {
 						.catch(client.logger.error);
 			}
 		} else {
+			console.log('not an edit');
 			await msg
 				.function(interaction)
 				.then((msgs) =>
 					msgs.forEach(async (msg) => {
+						console.log('sending msg');
 						await interaction?.channel?.send({ ...msg, allowedMentions: { parse: [] } }).catch(client.logger.error);
 					}),
 				)
