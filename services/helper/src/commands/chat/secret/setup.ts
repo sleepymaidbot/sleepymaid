@@ -40,7 +40,6 @@ This server is made to help and contribute to the completion of the secret on th
 <@&1131659418648445010> » Given to the admins of the Québec Games servers.
 <@&1131658226363015339> » Given to people that have done a significant contribution to any of the secret completion.
 <@&1131656791118336071> » The default role. Given to everyone.
-
 ## Useful links
 Guides » <https://qcgsecret.ecorte.xyz/>
 Permanent invite link » <https://discord.gg/h65PAkZgru>
