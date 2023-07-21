@@ -162,7 +162,7 @@ const getChoices = () => {
 export default class LmeSetupCommand implements SlashCommandInterface {
 	public readonly guildIds = ['324284116021542922'];
 	public readonly data = {
-		name: 'setup',
+		name: 'lmesetup',
 		description: '[Admin only] Allow you to post pre-made messages.',
 		type: ApplicationCommandType.ChatInput,
 		options: [
@@ -231,7 +231,7 @@ export default class LmeSetupCommand implements SlashCommandInterface {
 		} else {
 			await msg.function(interaction).then((msgs) =>
 				msgs.forEach(async (msg) => {
-					await interaction?.channel?.send(msg);
+					await interaction?.channel?.send({ ...msg, allowedMentions: { parse: [] } });
 				}),
 			);
 		}

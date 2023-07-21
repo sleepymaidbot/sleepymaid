@@ -66,7 +66,7 @@ const getChoices = () => {
 export default class QCGSecretSetupCommand implements SlashCommandInterface {
 	public readonly guildIds = ['1131653884377579651'];
 	public readonly data = {
-		name: 'setup',
+		name: 'qcgssetup',
 		description: '[Admin only] Allow you to post pre-made messages.',
 		type: ApplicationCommandType.ChatInput,
 		defaultMemberPermissions: new PermissionsBitField([PermissionFlagsBits.Administrator]),
