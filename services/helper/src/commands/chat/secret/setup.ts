@@ -89,6 +89,7 @@ export default class QCGSecretSetupCommand implements SlashCommandInterface {
 
 	// @ts-ignore
 	public async execute(interaction: ChatInputCommandInteraction, client: HelperClient) {
+		console.log('yo');
 		if (!interaction.inCachedGuild()) return;
 		if (!interaction.memberPermissions.has(PermissionFlagsBits.Administrator)) return;
 		const name = interaction.options.getString('name');
