@@ -96,6 +96,7 @@ export default class QCGSecretSetupCommand implements SlashCommandInterface {
 		const msg = messages[name];
 		if (!msg) return;
 		const messageId = interaction.options.getString('message_id');
+		console.log('b4');
 		if (messageId) {
 			const message = await interaction.channel?.messages.fetch(messageId);
 			if (!message) {
