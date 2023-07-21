@@ -91,6 +91,7 @@ services:
       REDIS_URL: 'redis://redis:6379/0'
     depends_on:
       - 'postgres'
+      - 'redis'
 
   helper:
     build:
@@ -102,6 +103,7 @@ services:
       REDIS_URL: 'redis://redis:6379/0'
     depends_on:
       - 'postgres'
+      - 'redis'
 
   #website:
   #  build:
