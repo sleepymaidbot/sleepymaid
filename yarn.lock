@@ -2165,12 +2165,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:13.4.11":
-  version: 13.4.11
-  resolution: "@next/eslint-plugin-next@npm:13.4.11"
+"@next/eslint-plugin-next@npm:13.4.12":
+  version: 13.4.12
+  resolution: "@next/eslint-plugin-next@npm:13.4.12"
   dependencies:
     glob: 7.1.7
-  checksum: fd898e5aebe1c8abd6162297ff4eb58f7534714d5465c77b7342925bad5305e82b0c54d92f6ceab213b1c523090a26aaad97c508016a2844eedecc2f3d03d1f0
+  checksum: a20cf430efe7602b819e69d826c33659a9c2cfa7c6162f63d91b607ff6ac9da0e79ff27f38cebd79117500640329bd107521b4874e6a2d009ddafab762885c82
   languageName: node
   linkType: hard
 
@@ -2428,7 +2428,7 @@ __metadata:
     "@sleepymaid/shared": "workspace:^"
     "@sleepymaid/util": "*"
     "@types/i18next-fs-backend": ^1.1.2
-    "@types/node": ^18.16.19
+    "@types/node": ^18.16.20
     discord.js: ^14.11.0
     i18next: ^23.2.11
     i18next-fs-backend: ^2.1.5
@@ -2451,7 +2451,7 @@ __metadata:
     "@sapphire/node-utilities": ^1.0.0
     "@sleepymaid/util": "workspace:^"
     "@swc/core": ^1.3.70
-    "@types/node": ^18.16.19
+    "@types/node": ^18.16.20
     "@types/node-cron": ^3.0.8
     discord.js: ^14.11.0
     node-cron: ^3.0.2
@@ -2473,7 +2473,7 @@ __metadata:
     "@sleepymaid/logger": "workspace:^"
     "@sleepymaid/shared": "workspace:^"
     "@types/i18next-fs-backend": ^1.1.2
-    "@types/node": ^18.16.19
+    "@types/node": ^18.16.20
     discord.js: ^14.11.0
     i18next: ^23.2.11
     i18next-fs-backend: ^2.1.5
@@ -2493,7 +2493,7 @@ __metadata:
     "@favware/cliff-jumper": ^2.1.1
     "@sleepymaid/handler": "workspace:^"
     "@swc/core": ^1.3.70
-    "@types/node": ^18.16.19
+    "@types/node": ^18.16.20
     ansi-colors: 4.1.3
     rimraf: ^5.0.1
     source-map-support: 0.5.21
@@ -2516,7 +2516,7 @@ __metadata:
     "@types/react": ^18.2.15
     "@types/react-dom": ^18.2.7
     ariakit: ^2.0.0-next.44
-    astro: ^2.9.0
+    astro: ^2.9.1
     astro-compress: ^1.1.48
     astro-critters: ^1.1.39
     classnames: ^2.3.2
@@ -2536,7 +2536,7 @@ __metadata:
   resolution: "@sleepymaid/shared@workspace:packages/shared"
   dependencies:
     "@swc/core": ^1.3.70
-    "@types/node": ^18.16.19
+    "@types/node": ^18.16.20
     fuse.js: ^6.6.2
     i18next: ^23.2.11
     rimraf: ^5.0.1
@@ -2552,7 +2552,7 @@ __metadata:
   dependencies:
     "@favware/cliff-jumper": ^2.1.1
     "@swc/core": ^1.3.70
-    "@types/node": ^18.16.19
+    "@types/node": ^18.16.20
     rimraf: ^5.0.1
     source-map-support: 0.5.21
     tsup: ^7.1.0
@@ -2982,10 +2982,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.16.19":
-  version: 18.16.19
-  resolution: "@types/node@npm:18.16.19"
-  checksum: 63c31f09616508aa7135380a4c79470a897b75f9ff3a70eb069e534dfabdec3f32fb0f9df5939127f1086614d980ddea0fa5e8cc29a49103c4f74cd687618aaf
+"@types/node@npm:^18.16.20":
+  version: 18.16.20
+  resolution: "@types/node@npm:18.16.20"
+  checksum: 00ea5668e12047447b20bb31408ae717823e5b879c4c6296036216756874b2dc7976086343ffb6a717eb52e8d73dc6972d90b9134ef464b7361673228a02ed41
   languageName: node
   linkType: hard
 
@@ -4139,9 +4139,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"astro@npm:^2.9.0":
-  version: 2.9.0
-  resolution: "astro@npm:2.9.0"
+"astro@npm:^2.9.1":
+  version: 2.9.1
+  resolution: "astro@npm:2.9.1"
   dependencies:
     "@astrojs/compiler": ^1.6.0
     "@astrojs/internal-helpers": ^0.1.1
@@ -4208,7 +4208,7 @@ __metadata:
       optional: true
   bin:
     astro: astro.js
-  checksum: 2a48f9e7caad2f93388d6b57968e9a5e3624b3c18beb895d864256aad49be587086e9427813f7b9562204daee7ecc3ed457d445a85d35871b0d563f30cc19130
+  checksum: 78a47f72324375cd14f7d269afa7147224845bfe3d987937387024691defeae864d54141af80f2418941a2c3e6c3155b3dc8d64ae647b4f2ed02da273872042f
   languageName: node
   linkType: hard
 
@@ -6631,11 +6631,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-next@npm:^13.4.11":
-  version: 13.4.11
-  resolution: "eslint-config-next@npm:13.4.11"
+"eslint-config-next@npm:^13.4.12":
+  version: 13.4.12
+  resolution: "eslint-config-next@npm:13.4.12"
   dependencies:
-    "@next/eslint-plugin-next": 13.4.11
+    "@next/eslint-plugin-next": 13.4.12
     "@rushstack/eslint-patch": ^1.1.3
     "@typescript-eslint/parser": ^5.42.0
     eslint-import-resolver-node: ^0.3.6
@@ -6650,7 +6650,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 2c9c91a3fa05feafb7982793b601a0dcdb5b6be027ea9e82745c35c29df7d3cf40bae415bfb1bae2209120b4e0eb8473e5133ef0fe8c5d653a989ee818a6967d
+  checksum: 633eccf920d94a1248c089ec08c52245d863b1b45d68be04deff93c0a0d60373c96610d69d005909b2c9beb81b0af7a12a777d03277cd4db60233e99ac8ef281
   languageName: node
   linkType: hard
 
@@ -13808,7 +13808,7 @@ __metadata:
     astro-eslint-parser: ^0.14.0
     eslint: ^8.45.0
     eslint-config-neon: ^0.1.47
-    eslint-config-next: ^13.4.11
+    eslint-config-next: ^13.4.12
     eslint-config-prettier: 8.8.0
     eslint-plugin-import: ^2.27.5
     eslint-plugin-prettier: ^5.0.0
