@@ -1,0 +1,40 @@
+---
+import Layout from './Layout.astro';
+import type { Maps } from '../util/types.js';
+import type { MarkdownLayoutProps } from 'astro';
+
+type Props = MarkdownLayoutProps<{
+	// Define frontmatter props here
+	title: string;
+	map: Maps;
+}>;
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.title}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{frontmatter.title}</title>
+	</head>
+	<h1 class="titles">Casino Quiz Answers</h1>
+	<body>
+		<p class="titles">This is a guide with all the answers of the quiz on the casino map on the Québec Games servers</p>
+		<br />
+		<slot />
+	</body>
+</Layout>
+
+<style>
+	h1 {
+		font-size: 3rem !important;
+		font-weight: 800;
+	}
+	.titles {
+		margin: auto;
+		text-align: center;
+		width: 1000px;
+	}
+</style>
