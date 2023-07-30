@@ -59,9 +59,9 @@ export class WatcherClient extends HandlerClient {
 			listeners: {
 				folder: resolve(__dirname, '..', '..', 'listeners'),
 			},
-			tasks: {
+			/*tasks: {
 				folder: resolve(__dirname, '..', '..', 'tasks'),
-			},
+			},*/
 		});
 
 		this.login(this.config.discordToken);
