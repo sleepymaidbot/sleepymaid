@@ -1,0 +1,32 @@
+{
+	"name": "@sleepymaid/watcher",
+	"version": "0.0.0",
+	"description": "",
+	"private": true,
+	"main": "dist/index.js",
+	"scripts": {
+		"build": "yarn rimraf dist/ && yarn tsc",
+		"start": "yarn build && node --trace-warnings -r source-map-support/register dist/index.js"
+	},
+	"author": "Ecorte",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/i18next-fs-backend": "^1.1.2",
+		"@types/node": "^18.17.0",
+		"rimraf": "^5.0.1",
+		"source-map-support": "0.5.21",
+		"typescript": "^5.1.6"
+	},
+	"dependencies": {
+		"@discordjs/brokers": "^0.2.1",
+		"@sleepymaid/handler": "workspace:^",
+		"@sleepymaid/logger": "workspace:^",
+		"@sleepymaid/shared": "workspace:^",
+		"discord.js": "^14.11.0",
+		"i18next": "^23.2.11",
+		"i18next-fs-backend": "^2.1.5",
+		"path": "0.12.7",
+		"reflect-metadata": "^0.1.13",
+		"tsyringe": "^4.8.0"
+	}
+}

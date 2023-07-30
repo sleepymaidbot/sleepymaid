@@ -1,5 +1,5 @@
 FROM node:20-alpine
-LABEL name "sleepymaid helper"
+LABEL name "sleepymaid watcher"
 
 WORKDIR /opt/build
 
@@ -33,7 +33,7 @@ COPY packages/logger ./packages/logger
 COPY packages/shared ./packages/shared
 COPY packages/util ./packages/util
 
-RUN yarn turbo run build --filter=helper^
+RUN yarn turbo run build --filter=watcher^
 
 COPY services/api/ ./services/api
 COPY services/bot ./services/bot
@@ -42,9 +42,8 @@ COPY services/watcher ./services/watcher
 COPY services/website ./services/website
 COPY services/qcgsecret ./services/qcgsecret
 
-RUN yarn turbo run build --filter=helper
+RUN yarn turbo run build --filter=watcher
 
 COPY locales/ ./locales
-COPY services/helper/banners ./services/helper/banners
 
-CMD ["node", "--trace-warnings", "-r", "source-map-support/register", "services/helper/dist/index.js"]
+CMD ["node", "--trace-warnings", "-r", "source-map-support/register", "services/watcher/dist/index.js"]

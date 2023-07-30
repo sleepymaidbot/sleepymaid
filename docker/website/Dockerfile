@@ -22,6 +22,7 @@ COPY packages/util/package.json ./packages/util/package.json
 COPY services/api/package.json ./services/api/package.json
 COPY services/helper/package.json ./services/helper/package.json
 COPY services/bot/package.json ./services/bot/package.json
+COPY services/watcher/package.json ./services/watcher/package.json
 COPY services/website/package.json ./services/website/package.json
 COPY services/qcgsecret/package.json ./services/qcgsecret/package.json
 
@@ -37,6 +38,7 @@ RUN yarn turbo run build --filter=website^
 COPY services/api/ ./services/api
 COPY services/bot ./services/bot
 COPY services/helper/ ./services/helper
+COPY services/watcher ./services/watcher
 COPY services/website ./services/website
 COPY services/qcgsecret ./services/qcgsecret
 

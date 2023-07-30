@@ -105,6 +105,18 @@ services:
       - 'postgres'
       - 'redis'
 
+  watcher:
+    build:
+      context: ../
+      dockerfile: ./docker/watcher/Dockerfile
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: 'postgresql://sleepymaid:admin@postgres:5432/sleepymaid'
+      REDIS_URL: 'redis://redis:6379/0'
+    depends_on:
+      - 'postgres'
+      - 'redis'
+
   #website:
   #  build:
   #    context: ../

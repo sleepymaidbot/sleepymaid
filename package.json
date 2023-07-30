@@ -9,7 +9,8 @@
 		"packages/*",
 		"services/bot/",
 		"services/helper/",
-		"services/qcgsecret/"
+		"services/qcgsecret/",
+		"services/watcher/"
 	],
 	"packageManager": "yarn@3.6.1",
 	"scripts": {
