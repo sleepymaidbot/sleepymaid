@@ -232,16 +232,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@astrojs/node@npm:^5.3.0":
-  version: 5.3.0
-  resolution: "@astrojs/node@npm:5.3.0"
+"@astrojs/node@npm:^5.3.1":
+  version: 5.3.1
+  resolution: "@astrojs/node@npm:5.3.1"
   dependencies:
     "@astrojs/webapi": ^2.2.0
     send: ^0.18.0
     server-destroy: ^1.0.1
   peerDependencies:
-    astro: ^2.7.0
-  checksum: 8486c1eb553bcbd30e5d1b2e439815ad35d19afae89fc79bd53314d929cb8230bfddd69e60a5dd37400f3bb6f59cf349fd897de60c48d03feb773282e909fd31
+    astro: ^2.9.7
+  checksum: c964e1b83c7b3d0bae0747f04edccc4cd42f363d62359587d43db7a7e64768b9186087b92000808d673c0871591d069058be0fa95f6fbe5dc33681fd97719548
   languageName: node
   linkType: hard
 
@@ -2148,31 +2148,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/client@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "@prisma/client@npm:5.0.0"
+"@prisma/client@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "@prisma/client@npm:5.1.0"
   dependencies:
-    "@prisma/engines-version": 4.17.0-26.6b0aef69b7cdfc787f822ecd7cdc76d5f1991584
+    "@prisma/engines-version": 5.1.0-28.a9b7003df90aa623086e4d6f4e43c72468e6339b
   peerDependencies:
     prisma: "*"
   peerDependenciesMeta:
     prisma:
       optional: true
-  checksum: 332c2af44e880ffc9dd1223992bf6f45910094c7a3a540cbbfdda45d6caf3e82998376338abdf85e34a12f1082ae932f2385d6396c62fe4bba7ec6b84de54466
+  checksum: d04c4cbbd1df7a8dda37544afb219eab23c31a48cdc2b78ec32edf27594682757b1b4ce0d74c7945863ae583390a97a33773ee34dba591cd7efe564751df0a09
   languageName: node
   linkType: hard
 
-"@prisma/engines-version@npm:4.17.0-26.6b0aef69b7cdfc787f822ecd7cdc76d5f1991584":
-  version: 4.17.0-26.6b0aef69b7cdfc787f822ecd7cdc76d5f1991584
-  resolution: "@prisma/engines-version@npm:4.17.0-26.6b0aef69b7cdfc787f822ecd7cdc76d5f1991584"
-  checksum: 8fcbceef3b554ee7fa404bead50be5286412a097b21723272aff298b289caf2802b01b84bb85c4c9f3b592eeac114c8d6e79db083f271dc8c54f453b4a515233
+"@prisma/engines-version@npm:5.1.0-28.a9b7003df90aa623086e4d6f4e43c72468e6339b":
+  version: 5.1.0-28.a9b7003df90aa623086e4d6f4e43c72468e6339b
+  resolution: "@prisma/engines-version@npm:5.1.0-28.a9b7003df90aa623086e4d6f4e43c72468e6339b"
+  checksum: 8c88311d29e0f7f218d0eddc6bc462e6447e68f147dfb683a51583a00248d668f86928536c30ce812f022d761cb80bf297fe3139716b72f9b0705a3e75f390fa
   languageName: node
   linkType: hard
 
-"@prisma/engines@npm:5.0.0":
-  version: 5.0.0
-  resolution: "@prisma/engines@npm:5.0.0"
-  checksum: 31271d85c29709059f91051d4cef7acf874014ba0128b674ca2f842e5fac61d3011e9db246dfa67ba4803081d36dbc9e31492716bab677128588343c92117b2b
+"@prisma/engines@npm:5.1.0":
+  version: 5.1.0
+  resolution: "@prisma/engines@npm:5.1.0"
+  checksum: d84adb1ebaa3f1eac43b1e7bb35ab5de1306719b9ef7bf4a32fe6fa8801130801620e9585c986e69f929065b38699e9f988f01c4d25e4e921925b0dcccb482fb
   languageName: node
   linkType: hard
 
@@ -2274,7 +2274,7 @@ __metadata:
   resolution: "@sleepymaid/bot@workspace:services/bot"
   dependencies:
     "@discordjs/brokers": ^0.2.1
-    "@prisma/client": ^5.0.0
+    "@prisma/client": ^5.1.0
     "@sapphire/result": ^2.6.4
     "@sapphire/stopwatch": 1.5.0
     "@sleepymaid/handler": "workspace:^"
@@ -2288,7 +2288,7 @@ __metadata:
     i18next-fs-backend: ^2.1.5
     murmurhash-v3: ^1.0.2
     path: 0.12.7
-    prisma: ^5.0.0
+    prisma: ^5.1.0
     reflect-metadata: 0.1.13
     rimraf: ^5.0.1
     source-map-support: 0.5.21
@@ -2362,7 +2362,7 @@ __metadata:
   dependencies:
     "@ariakit/react": ^0.2.14
     "@astrojs/mdx": ^0.19.7
-    "@astrojs/node": ^5.3.0
+    "@astrojs/node": ^5.3.1
     "@astrojs/react": ^2.2.1
     "@astrojs/tailwind": ^4.0.0
     "@fontsource/inter": ^5.0.5
@@ -2370,7 +2370,7 @@ __metadata:
     "@types/react": ^18.2.18
     "@types/react-dom": ^18.2.7
     ariakit: ^2.0.0-next.44
-    astro: ^2.9.6
+    astro: ^2.9.7
     astro-compress: ^1.1.50
     astro-critters: ^1.1.40
     classnames: ^2.3.2
@@ -2411,8 +2411,8 @@ __metadata:
     source-map-support: 0.5.21
     tsup: ^7.1.0
     typescript: ^5.1.6
-    vite: ^4.4.7
-    vitest: ^0.33.0
+    vite: ^4.4.8
+    vitest: ^0.34.1
   languageName: unknown
   linkType: soft
 
@@ -3399,56 +3399,56 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/expect@npm:0.33.0":
-  version: 0.33.0
-  resolution: "@vitest/expect@npm:0.33.0"
+"@vitest/expect@npm:0.34.1":
+  version: 0.34.1
+  resolution: "@vitest/expect@npm:0.34.1"
   dependencies:
-    "@vitest/spy": 0.33.0
-    "@vitest/utils": 0.33.0
+    "@vitest/spy": 0.34.1
+    "@vitest/utils": 0.34.1
     chai: ^4.3.7
-  checksum: da6bf8e4a4f23218088b4e7dcdf6eb9f8d92e82a98a674edf8be2f333625179da6802936a948e7a60e0918da53e7ec548183d1d9d42f0e1c4e2d3f66fd63e11f
+  checksum: a2bc76f9242a05987983c6c6ad24091fb34282b0704b844e31d94d4ee2564fbd5e566a1ea8344240770dc8ae619a532e316155785d0ff6bee5e57be6c3e3d028
   languageName: node
   linkType: hard
 
-"@vitest/runner@npm:0.33.0":
-  version: 0.33.0
-  resolution: "@vitest/runner@npm:0.33.0"
+"@vitest/runner@npm:0.34.1":
+  version: 0.34.1
+  resolution: "@vitest/runner@npm:0.34.1"
   dependencies:
-    "@vitest/utils": 0.33.0
+    "@vitest/utils": 0.34.1
     p-limit: ^4.0.0
     pathe: ^1.1.1
-  checksum: de731aa0687cf15f141e81fb11027ff52860292f6d8957678c9fcd307502e4f9fd679bcaff93b53d29eeeb694d403d6aa52d49d341f998ec2b794e7abe061572
+  checksum: c8108c8f8eb75c9995422689b0c7da6a4793425a673d32d6ce7df99f84be8c2037f0acc46c6f8b55d9bd90a864ff7c5dce2ddc3656b41888b125b9311ae20559
   languageName: node
   linkType: hard
 
-"@vitest/snapshot@npm:0.33.0":
-  version: 0.33.0
-  resolution: "@vitest/snapshot@npm:0.33.0"
+"@vitest/snapshot@npm:0.34.1":
+  version: 0.34.1
+  resolution: "@vitest/snapshot@npm:0.34.1"
   dependencies:
     magic-string: ^0.30.1
     pathe: ^1.1.1
     pretty-format: ^29.5.0
-  checksum: ff2604d5bf09342eab45109df06f4e2e9e78698bf26b0eed1f4871d7757312e43de90ead938698be3e03e9873d4081ebeb69c94928b8065c53d1e9f28742185e
+  checksum: 5f98d38ecdefd899628d253e3283f42f035fd013dcb2084e8060ebfc73884ab6071f5510ff8c75e8af726e3a41901f2a04bafa72786626f9be31f999f7e14a4f
   languageName: node
   linkType: hard
 
-"@vitest/spy@npm:0.33.0":
-  version: 0.33.0
-  resolution: "@vitest/spy@npm:0.33.0"
+"@vitest/spy@npm:0.34.1":
+  version: 0.34.1
+  resolution: "@vitest/spy@npm:0.34.1"
   dependencies:
     tinyspy: ^2.1.1
-  checksum: 501a704a10b411f407fbcedeaf1f469e6fcac4894af11fa89c74e6f64bf3eebbcd006cf86377ae379708c0b8c860243db504f5d4e90d382419aa666458b76800
+  checksum: 7a3f676096fdf201cb057588cfe3ea1199beb29b50581593c2a9c37be0a7d8b11b0986eeec4f67e358a1b8144b1675154ec5f29b339791f97bc5656fc39d8791
   languageName: node
   linkType: hard
 
-"@vitest/utils@npm:0.33.0":
-  version: 0.33.0
-  resolution: "@vitest/utils@npm:0.33.0"
+"@vitest/utils@npm:0.34.1":
+  version: 0.34.1
+  resolution: "@vitest/utils@npm:0.34.1"
   dependencies:
     diff-sequences: ^29.4.3
     loupe: ^2.3.6
     pretty-format: ^29.5.0
-  checksum: 8c5b381f5599ca517bedd0e46805e91b1150564473d37b2b80ef45aa9c16cb59d296513dd34bc2171904beb28be73b89e5333056539d49a0ba9d513ae7672a0a
+  checksum: 0015504f3af725ef84f9759f08bc051071d29b0024d6bbd27276450cdb9dccde367bb86cfede2ccfef803965f29f0ffb76104e92bf569169f87e0e74e5a720f1
   languageName: node
   linkType: hard
 
@@ -4045,9 +4045,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"astro@npm:^2.9.6":
-  version: 2.9.6
-  resolution: "astro@npm:2.9.6"
+"astro@npm:^2.9.7":
+  version: 2.9.7
+  resolution: "astro@npm:2.9.7"
   dependencies:
     "@astrojs/compiler": ^1.6.3
     "@astrojs/internal-helpers": ^0.1.1
@@ -4114,7 +4114,7 @@ __metadata:
       optional: true
   bin:
     astro: astro.js
-  checksum: 0eef7dd857c1e2ff997dbb10142d7d53eb740ebd6068dbe1311d55d09d137b39a58882789c7be24176586493a6179586473497e48ed94197d659835ecacd6b7b
+  checksum: 40a80740aac88ea3bfda710afef7df94980914bc66470b71471caeeefec84f8ca4eb54b7d2d314ffde4ff4e7357ac4083f3667a08e2c2e7b32a4ef0cc197a181
   languageName: node
   linkType: hard
 
@@ -12421,14 +12421,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prisma@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "prisma@npm:5.0.0"
+"prisma@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "prisma@npm:5.1.0"
   dependencies:
-    "@prisma/engines": 5.0.0
+    "@prisma/engines": 5.1.0
   bin:
     prisma: build/index.js
-  checksum: fdc62377853d25b4db664c736fd0b08d2b0c6db5752e6f6c6ec3bda77634cfb79e6f49d52d4b8f54ddb8ec9c28fc3fb0c13f95caf61085447d0929e258af9284
+  checksum: c37719438d84cdee27907704312725f3c4c91a339182f819654d0864e9fbf5e156bdf3b97d39fca0c1fee778f63e936880083f9f6cea4fdab489ce13af940375
   languageName: node
   linkType: hard
 
@@ -13836,7 +13836,7 @@ __metadata:
     lint-staged: ^13.2.3
     prettier: ^3.0.0
     prettier-plugin-astro: ^0.11.0
-    prisma: ^5.0.0
+    prisma: ^5.1.0
     rimraf: ^5.0.1
     tsup: ^7.1.0
     turbo: ^1.7.4
@@ -14666,10 +14666,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinypool@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "tinypool@npm:0.6.0"
-  checksum: 996bf3a922993cec568d6b6ddc72531700b2a8aea24623ed6946a8929557b0f17629955d20defda09cb3b12fc94087159f14cb8e06570adce7d1b7d2eef00a91
+"tinypool@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "tinypool@npm:0.7.0"
+  checksum: fdcccd5c750574fce51f8801a877f8284e145d12b79cd5f2d72bfbddfe20c895e915555bc848e122bb6aa968098e7ac4fe1e8e88104904d518dc01cccd18a510
   languageName: node
   linkType: hard
 
@@ -15640,9 +15640,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-node@npm:0.33.0":
-  version: 0.33.0
-  resolution: "vite-node@npm:0.33.0"
+"vite-node@npm:0.34.1":
+  version: 0.34.1
+  resolution: "vite-node@npm:0.34.1"
   dependencies:
     cac: ^6.7.14
     debug: ^4.3.4
@@ -15652,7 +15652,7 @@ __metadata:
     vite: ^3.0.0 || ^4.0.0
   bin:
     vite-node: vite-node.mjs
-  checksum: 7c37911251d3e318fe4ad6b4093207498336ce190a58afb43a9ae701eee7f110ef80920b79061710cf6abcc6335ce58f6ca412ee6b268f25fe10f278c94cc264
+  checksum: 0a95034377027aebd75ee1d1ca95105e6bdbb0896a7a4b52b553a66fafa2adacd38856a5782416cf8725e8f3e9e0a1e5c02a780225822cb5ea501161fefa1482
   languageName: node
   linkType: hard
 
@@ -15734,9 +15734,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^4.4.7":
-  version: 4.4.7
-  resolution: "vite@npm:4.4.7"
+"vite@npm:^4.4.8":
+  version: 4.4.8
+  resolution: "vite@npm:4.4.8"
   dependencies:
     esbuild: ^0.18.10
     fsevents: ~2.3.2
@@ -15770,7 +15770,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 787c4d891da18d0a0545bee07dec73c3201979dcf2b1ea3dc13fdd2d3b9ad76d413bcc0e68502183e309007a612c1f4116adefe0093d95fbbb9cf1c1755f7e41
+  checksum: e8ffe688f8a7396b1357778f00cb06d1f3dadad200823c47a1955cf52774a0cbff5ac4d6a8f8d09e26c1d4e588e5815956f9eba02ae301e77a36c3d181a1bc86
   languageName: node
   linkType: hard
 
@@ -15786,18 +15786,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitest@npm:^0.33.0":
-  version: 0.33.0
-  resolution: "vitest@npm:0.33.0"
+"vitest@npm:^0.34.1":
+  version: 0.34.1
+  resolution: "vitest@npm:0.34.1"
   dependencies:
     "@types/chai": ^4.3.5
     "@types/chai-subset": ^1.3.3
     "@types/node": "*"
-    "@vitest/expect": 0.33.0
-    "@vitest/runner": 0.33.0
-    "@vitest/snapshot": 0.33.0
-    "@vitest/spy": 0.33.0
-    "@vitest/utils": 0.33.0
+    "@vitest/expect": 0.34.1
+    "@vitest/runner": 0.34.1
+    "@vitest/snapshot": 0.34.1
+    "@vitest/spy": 0.34.1
+    "@vitest/utils": 0.34.1
     acorn: ^8.9.0
     acorn-walk: ^8.2.0
     cac: ^6.7.14
@@ -15810,9 +15810,9 @@ __metadata:
     std-env: ^3.3.3
     strip-literal: ^1.0.1
     tinybench: ^2.5.0
-    tinypool: ^0.6.0
+    tinypool: ^0.7.0
     vite: ^3.0.0 || ^4.0.0
-    vite-node: 0.33.0
+    vite-node: 0.34.1
     why-is-node-running: ^2.2.2
   peerDependencies:
     "@edge-runtime/vm": "*"
@@ -15842,7 +15842,7 @@ __metadata:
       optional: true
   bin:
     vitest: vitest.mjs
-  checksum: c1884b2a1a41af81ee54c86a986a32b6a4c69ec3b3f7d2322f92c8fad5532d6a12160e7efb7927e4c53d95806ef4ede9549bdd82c66604e281c71056212f56e7
+  checksum: 39d270e78be0ce06cb348c6c1e92517aa7269ad8c51f5432349849ca1615c18eeaeb635a49d16eedcb9b77a7a19186723f906d286d819368c15d086cecacfb0d
   languageName: node
   linkType: hard
 

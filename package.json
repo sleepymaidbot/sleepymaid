@@ -41,7 +41,7 @@
 		"lint-staged": "^13.2.3",
 		"prettier": "^3.0.0",
 		"prettier-plugin-astro": "^0.11.0",
-		"prisma": "^5.0.0",
+		"prisma": "^5.1.0",
 		"rimraf": "^5.0.1",
 		"tsup": "^7.1.0",
 		"turbo": "^1.7.4",
