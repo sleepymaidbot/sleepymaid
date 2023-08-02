@@ -11,5 +11,10 @@
 			"no_resources": "Il n'y a pas de {{ resource }} disponible"
 		}
 	},
-	"commands": {}
+	"commands": {
+		"reason": {
+			"name": "raison",
+			"description": "Modifier la raison d'un cas"
+		}
+	}
 }

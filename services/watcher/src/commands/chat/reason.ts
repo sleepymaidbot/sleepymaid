@@ -1,10 +1,11 @@
 import type { SlashCommandInterface } from '@sleepymaid/handler';
+import { getLocalizedProp } from '@sleepymaid/shared';
 import { ChatInputCommandInteraction, PermissionFlagsBits, PermissionsBitField } from 'discord.js';
 
 export default class ReasonCommand implements SlashCommandInterface {
 	public readonly data = {
-		name: 'reason',
-		description: 'Change the reason of an infraction',
+		...getLocalizedProp('name', 'commands.reason.name'),
+		...getLocalizedProp('description', 'commands.reason.description'),
 		defaultMemberPermissions: new PermissionsBitField([PermissionFlagsBits.ModerateMembers]),
 	};
 	public async execute(interaction: ChatInputCommandInteraction<'cached'>) {
