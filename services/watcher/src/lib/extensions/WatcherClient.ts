@@ -43,7 +43,7 @@ export class WatcherClient extends HandlerClient {
 			//debug: this.config.environment === 'development',
 			supportedLngs,
 			backend: {
-				loadPath: resolve(__dirname, '../../../../../locales/{{lng}}/{{ns}}.json'),
+				loadPath: resolve(__dirname, '../../../../../locales/watcher/{{lng}}/{{ns}}.json'),
 			},
 			cleanCode: true,
 			fallbackLng: 'en-US',

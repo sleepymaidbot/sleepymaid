@@ -44,7 +44,7 @@ export class HelperClient extends HandlerClient {
 			//debug: this.config.environment === 'development',
 			supportedLngs,
 			backend: {
-				loadPath: resolve(__dirname, '../../../../../locales/{{lng}}/{{ns}}.json'),
+				loadPath: resolve(__dirname, '../../../../../locales/sleepymaid/{{lng}}/{{ns}}.json'),
 			},
 			cleanCode: true,
 			fallbackLng: 'en-US',
