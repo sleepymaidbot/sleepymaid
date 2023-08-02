@@ -14,7 +14,15 @@
 	"commands": {
 		"reason": {
 			"name": "raison",
-			"description": "Modifier la raison d'un cas"
+			"description": "Modifier la raison d'un cas",
+			"caseNumber": {
+				"name": "numéro du cas",
+				"description": "Le numéro du cas à modifier"
+			},
+			"reason": {
+				"name": "raison",
+				"description": "La nouvelle raison du cas"
+			}
 		}
 	}
 }

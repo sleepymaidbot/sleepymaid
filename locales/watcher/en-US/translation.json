@@ -14,7 +14,15 @@
 	"commands": {
 		"reason": {
 			"name": "reason",
-			"description": "Change the reason of a case"
+			"description": "Change the reason of a case",
+			"caseNumber": {
+				"name": "caseNumber",
+				"description": "The case number of the case you want to change the reason of"
+			},
+			"reason": {
+				"name": "reason",
+				"description": "The new reason of the case"
+			}
 		}
 	}
 }
