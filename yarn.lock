@@ -99,9 +99,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ariakit/react-core@npm:0.2.14":
-  version: 0.2.14
-  resolution: "@ariakit/react-core@npm:0.2.14"
+"@ariakit/react-core@npm:0.2.15":
+  version: 0.2.15
+  resolution: "@ariakit/react-core@npm:0.2.15"
   dependencies:
     "@ariakit/core": 0.2.7
     "@floating-ui/dom": ^1.0.0
@@ -109,19 +109,19 @@ __metadata:
   peerDependencies:
     react: ^17.0.0 || ^18.0.0
     react-dom: ^17.0.0 || ^18.0.0
-  checksum: 34391ffc3b8587c14d5663bd4b0a582f6e9dab4674c08f0103f7bdb035690f404a24c9e79bfbb58cb9fad43edc6eb00ae5e928463fd358705466cd09e59afd24
+  checksum: 47a9cddd6bae86300b564b159e93ae3d005d13b1d095ac2862b09c986f4dee11e5a73dd7f494cb36519abf5360b8457dd9eeb28434d5b273ca9ff004d72d909a
   languageName: node
   linkType: hard
 
-"@ariakit/react@npm:^0.2.14":
-  version: 0.2.14
-  resolution: "@ariakit/react@npm:0.2.14"
+"@ariakit/react@npm:^0.2.15":
+  version: 0.2.15
+  resolution: "@ariakit/react@npm:0.2.15"
   dependencies:
-    "@ariakit/react-core": 0.2.14
+    "@ariakit/react-core": 0.2.15
   peerDependencies:
     react: ^17.0.0 || ^18.0.0
     react-dom: ^17.0.0 || ^18.0.0
-  checksum: 7c2836484fb15c76871172b276a53640def873052dca489f520155bc80c9c7e11b4acc0a44baf055239b59c46e1221ab4c1c41ba9186ffbc89ff59d5ed685bb8
+  checksum: b20fb428f80768f6ef90658503ddfb56df23117077a2d3f53c3e6dc7362a57692b39f900c0a347831c83cf1e33159cb247e9813cb3310e8fbe57a93b6074b6f1
   languageName: node
   linkType: hard
 
@@ -146,17 +146,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@astrojs/compiler@npm:^1.6.3":
-  version: 1.6.3
-  resolution: "@astrojs/compiler@npm:1.6.3"
-  checksum: 29b16ad16ffe95374e96d89a6b4e03af99562b6351b3e27f7e9206d365b95622d0494a0744bf8b4932d38ea01c001f88434e044d288b00a25436f5b2bc4eb070
+"@astrojs/compiler@npm:^1.8.0":
+  version: 1.8.0
+  resolution: "@astrojs/compiler@npm:1.8.0"
+  checksum: 7d697e90a0638f76955f0e4ad23948ed9e1cd20e6ce41ab2adef39bb78e58cf157be9d02734f8ae88c882afad7c2099295074f3d2814027e09e68ccb62e87e1d
   languageName: node
   linkType: hard
 
-"@astrojs/internal-helpers@npm:^0.1.1":
-  version: 0.1.1
-  resolution: "@astrojs/internal-helpers@npm:0.1.1"
-  checksum: 8e2077ef486d5cb108a8fb1080792806aef1690979d35624fa60cd936605f4963b48a9d009d44efd3e66d855cbb9d7709064faf3b0a986549feef7f2e5682b3d
+"@astrojs/internal-helpers@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "@astrojs/internal-helpers@npm:0.1.2"
+  checksum: cfe2e674684e0a72ee51fffe0576eac559d7992064ecc2e1dae9244c39733817b14fd465dee732cea2469c142a1c9dfc77cfd1c6d2ce14143b8d34f059866fde
   languageName: node
   linkType: hard
 
@@ -232,16 +232,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@astrojs/node@npm:^5.3.1":
-  version: 5.3.1
-  resolution: "@astrojs/node@npm:5.3.1"
+"@astrojs/node@npm:^5.3.2":
+  version: 5.3.2
+  resolution: "@astrojs/node@npm:5.3.2"
   dependencies:
     "@astrojs/webapi": ^2.2.0
     send: ^0.18.0
     server-destroy: ^1.0.1
   peerDependencies:
-    astro: ^2.9.7
-  checksum: c964e1b83c7b3d0bae0747f04edccc4cd42f363d62359587d43db7a7e64768b9186087b92000808d673c0871591d069058be0fa95f6fbe5dc33681fd97719548
+    astro: ^2.10.0
+  checksum: 87b0a014dd5d67f93de2144f45afffa10440909580a08e387540cf9e475126f08fff7bc0e4565b3b1fff23f11dc3a427a8d657dcbaee74f7c59ed751b95b633f
   languageName: node
   linkType: hard
 
@@ -1812,10 +1812,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource/inter@npm:^5.0.6":
-  version: 5.0.6
-  resolution: "@fontsource/inter@npm:5.0.6"
-  checksum: dc497c11363e96aa4bbbff3810b0b96e622069d59265488c5e9d758feeba85c6cc3af137eae47b301ecb6cc791567ec88e7b0c63aa929957058fc5fa29d8d782
+"@fontsource/inter@npm:^5.0.7":
+  version: 5.0.7
+  resolution: "@fontsource/inter@npm:5.0.7"
+  checksum: 2b9f40f20c2d0bf97247f86f94bf0666e0fe281f96d45bae56f0fb80ee5358af5629b639537aae2935f54d08c6650345bd7af85bcb2466ccbe8cd9da74631b56
   languageName: node
   linkType: hard
 
@@ -1924,7 +1924,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jridgewell/sourcemap-codec@npm:1.4.14, @jridgewell/sourcemap-codec@npm:^1.4.10, @jridgewell/sourcemap-codec@npm:^1.4.13, @jridgewell/sourcemap-codec@npm:^1.4.14":
+"@jridgewell/sourcemap-codec@npm:1.4.14, @jridgewell/sourcemap-codec@npm:^1.4.10, @jridgewell/sourcemap-codec@npm:^1.4.14":
   version: 1.4.14
   resolution: "@jridgewell/sourcemap-codec@npm:1.4.14"
   checksum: 61100637b6d173d3ba786a5dff019e1a74b1f394f323c1fee337ff390239f053b87266c7a948777f4b1ee68c01a8ad0ab61e5ff4abb5a012a0b091bec391ab97
@@ -2148,31 +2148,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/client@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "@prisma/client@npm:5.1.0"
+"@prisma/client@npm:^5.1.1":
+  version: 5.1.1
+  resolution: "@prisma/client@npm:5.1.1"
   dependencies:
-    "@prisma/engines-version": 5.1.0-28.a9b7003df90aa623086e4d6f4e43c72468e6339b
+    "@prisma/engines-version": 5.1.1-1.6a3747c37ff169c90047725a05a6ef02e32ac97e
   peerDependencies:
     prisma: "*"
   peerDependenciesMeta:
     prisma:
       optional: true
-  checksum: d04c4cbbd1df7a8dda37544afb219eab23c31a48cdc2b78ec32edf27594682757b1b4ce0d74c7945863ae583390a97a33773ee34dba591cd7efe564751df0a09
+  checksum: 0236462afc722eb6a8dc0cc53843e5f0092cfe41a5dd5e794e41ba34be4d2166ba564c21dbb3c4436111b7a40ba4f66fc1e8328d7f17cdbfb3ac616b7efd4232
   languageName: node
   linkType: hard
 
-"@prisma/engines-version@npm:5.1.0-28.a9b7003df90aa623086e4d6f4e43c72468e6339b":
-  version: 5.1.0-28.a9b7003df90aa623086e4d6f4e43c72468e6339b
-  resolution: "@prisma/engines-version@npm:5.1.0-28.a9b7003df90aa623086e4d6f4e43c72468e6339b"
-  checksum: 8c88311d29e0f7f218d0eddc6bc462e6447e68f147dfb683a51583a00248d668f86928536c30ce812f022d761cb80bf297fe3139716b72f9b0705a3e75f390fa
+"@prisma/engines-version@npm:5.1.1-1.6a3747c37ff169c90047725a05a6ef02e32ac97e":
+  version: 5.1.1-1.6a3747c37ff169c90047725a05a6ef02e32ac97e
+  resolution: "@prisma/engines-version@npm:5.1.1-1.6a3747c37ff169c90047725a05a6ef02e32ac97e"
+  checksum: cfea78fe98cff694eea31335c4167f375cdd8a848d6699bd0035d4a9c05184bf6fe57959249220c098c6214a424c9519f7cd17c51119234866840bd1030c87e1
   languageName: node
   linkType: hard
 
-"@prisma/engines@npm:5.1.0":
-  version: 5.1.0
-  resolution: "@prisma/engines@npm:5.1.0"
-  checksum: d84adb1ebaa3f1eac43b1e7bb35ab5de1306719b9ef7bf4a32fe6fa8801130801620e9585c986e69f929065b38699e9f988f01c4d25e4e921925b0dcccb482fb
+"@prisma/engines@npm:5.1.1":
+  version: 5.1.1
+  resolution: "@prisma/engines@npm:5.1.1"
+  checksum: 561c85def110279eb7c764e7c1ea1f8f54d9a2948ed5e5db9b11321c2bef362d178b756e39e7e022ee27cb2be5ac8d9b835967ce341ad8f6a1e8502f988140ee
   languageName: node
   linkType: hard
 
@@ -2274,7 +2274,7 @@ __metadata:
   resolution: "@sleepymaid/bot@workspace:services/bot"
   dependencies:
     "@discordjs/brokers": ^0.2.1
-    "@prisma/client": ^5.1.0
+    "@prisma/client": ^5.1.1
     "@sapphire/result": ^2.6.4
     "@sapphire/stopwatch": 1.5.0
     "@sleepymaid/handler": "workspace:^"
@@ -2282,13 +2282,13 @@ __metadata:
     "@sleepymaid/shared": "workspace:^"
     "@sleepymaid/util": "*"
     "@types/i18next-fs-backend": ^1.1.2
-    "@types/node": ^18.17.1
+    "@types/node": ^18.17.2
     discord.js: ^14.12.1
     i18next: ^23.4.1
     i18next-fs-backend: ^2.1.5
     murmurhash-v3: ^1.0.2
     path: 0.12.7
-    prisma: ^5.1.0
+    prisma: ^5.1.1
     reflect-metadata: 0.1.13
     rimraf: ^5.0.1
     source-map-support: 0.5.21
@@ -2305,7 +2305,7 @@ __metadata:
     "@sapphire/node-utilities": ^1.0.0
     "@sleepymaid/util": "workspace:^"
     "@swc/core": ^1.3.74
-    "@types/node": ^18.17.1
+    "@types/node": ^18.17.2
     "@types/node-cron": ^3.0.8
     discord.js: ^14.12.1
     node-cron: ^3.0.2
@@ -2327,7 +2327,7 @@ __metadata:
     "@sleepymaid/logger": "workspace:^"
     "@sleepymaid/shared": "workspace:^"
     "@types/i18next-fs-backend": ^1.1.2
-    "@types/node": ^18.17.1
+    "@types/node": ^18.17.2
     discord.js: ^14.12.1
     i18next: ^23.4.1
     i18next-fs-backend: ^2.1.5
@@ -2347,7 +2347,7 @@ __metadata:
     "@favware/cliff-jumper": ^2.1.1
     "@sleepymaid/handler": "workspace:^"
     "@swc/core": ^1.3.74
-    "@types/node": ^18.17.1
+    "@types/node": ^18.17.2
     ansi-colors: 4.1.3
     rimraf: ^5.0.1
     source-map-support: 0.5.21
@@ -2360,17 +2360,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@sleepymaid/qcgsecret@workspace:services/qcgsecret"
   dependencies:
-    "@ariakit/react": ^0.2.14
+    "@ariakit/react": ^0.2.15
     "@astrojs/mdx": ^0.19.7
-    "@astrojs/node": ^5.3.1
+    "@astrojs/node": ^5.3.2
     "@astrojs/react": ^2.2.1
     "@astrojs/tailwind": ^4.0.0
-    "@fontsource/inter": ^5.0.6
+    "@fontsource/inter": ^5.0.7
     "@react-icons/all-files": ^4.1.0
     "@types/react": ^18.2.18
     "@types/react-dom": ^18.2.7
     ariakit: ^2.0.0-next.44
-    astro: ^2.9.7
+    astro: ^2.10.1
     astro-compress: ^1.1.50
     astro-critters: ^1.1.40
     classnames: ^2.3.2
@@ -2390,7 +2390,7 @@ __metadata:
   resolution: "@sleepymaid/shared@workspace:packages/shared"
   dependencies:
     "@swc/core": ^1.3.74
-    "@types/node": ^18.17.1
+    "@types/node": ^18.17.2
     fuse.js: ^6.6.2
     i18next: ^23.4.1
     rimraf: ^5.0.1
@@ -2406,7 +2406,7 @@ __metadata:
   dependencies:
     "@favware/cliff-jumper": ^2.1.1
     "@swc/core": ^1.3.74
-    "@types/node": ^18.17.1
+    "@types/node": ^18.17.2
     rimraf: ^5.0.1
     source-map-support: 0.5.21
     tsup: ^7.2.0
@@ -2425,7 +2425,7 @@ __metadata:
     "@sleepymaid/logger": "workspace:^"
     "@sleepymaid/shared": "workspace:^"
     "@types/i18next-fs-backend": ^1.1.2
-    "@types/node": ^18.17.1
+    "@types/node": ^18.17.2
     discord.js: ^14.12.1
     i18next: ^23.4.1
     i18next-fs-backend: ^2.1.5
@@ -2851,10 +2851,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.17.1":
-  version: 18.17.1
-  resolution: "@types/node@npm:18.17.1"
-  checksum: 56201bda9a2d05d68602df63b4e67b0545ac8c6d0280bd5fb31701350a978a577a027501fbf49db99bf177f2242ebd1244896bfd35e89042d5bd7dfebff28d4e
+"@types/node@npm:^18.17.2":
+  version: 18.17.2
+  resolution: "@types/node@npm:18.17.2"
+  checksum: 2e08acaeb30e05f96fbf3d974fc2203bf10ed9020cafd511018dbba8023044bb8758f9d5a2a8e68da3bca827ccef7628202de9b7ca3b515374a7b094b128930a
   languageName: node
   linkType: hard
 
@@ -4045,12 +4045,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"astro@npm:^2.9.7":
-  version: 2.9.7
-  resolution: "astro@npm:2.9.7"
+"astro@npm:^2.10.1":
+  version: 2.10.1
+  resolution: "astro@npm:2.10.1"
   dependencies:
-    "@astrojs/compiler": ^1.6.3
-    "@astrojs/internal-helpers": ^0.1.1
+    "@astrojs/compiler": ^1.8.0
+    "@astrojs/internal-helpers": ^0.1.2
     "@astrojs/language-server": ^1.0.0
     "@astrojs/markdown-remark": ^2.2.1
     "@astrojs/telemetry": ^2.1.1
@@ -4084,7 +4084,7 @@ __metadata:
     html-escaper: ^3.0.3
     js-yaml: ^4.1.0
     kleur: ^4.1.4
-    magic-string: ^0.27.0
+    magic-string: ^0.30.2
     mime: ^3.0.0
     network-information-types: ^0.1.1
     ora: ^6.3.1
@@ -4114,7 +4114,7 @@ __metadata:
       optional: true
   bin:
     astro: astro.js
-  checksum: 40a80740aac88ea3bfda710afef7df94980914bc66470b71471caeeefec84f8ca4eb54b7d2d314ffde4ff4e7357ac4083f3667a08e2c2e7b32a4ef0cc197a181
+  checksum: 1fad46de4e1f36cbbd1a7e336bcce5ae9cf02b0967e0936614e753f2a8402edb77b158f43645eed88614cd6cfa5715f44b10f63d4238719a8f1e897df1977065
   languageName: node
   linkType: hard
 
@@ -10087,21 +10087,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-string@npm:^0.27.0":
-  version: 0.27.0
-  resolution: "magic-string@npm:0.27.0"
-  dependencies:
-    "@jridgewell/sourcemap-codec": ^1.4.13
-  checksum: 273faaa50baadb7a2df6e442eac34ad611304fc08fe16e24fe2e472fd944bfcb73ffb50d2dc972dc04e92784222002af46868cb9698b1be181c81830fd95a13e
-  languageName: node
-  linkType: hard
-
 "magic-string@npm:^0.30.1":
   version: 0.30.1
   resolution: "magic-string@npm:0.30.1"
   dependencies:
     "@jridgewell/sourcemap-codec": ^1.4.15
   checksum: 7bc7e4493e32a77068f3753bf8652d4ab44142122eb7fb9fa871af83bef2cd2c57518a6769701cd5d0379bd624a13bc8c72ca25ac5655b27e5a61adf1fd38db2
+  languageName: node
+  linkType: hard
+
+"magic-string@npm:^0.30.2":
+  version: 0.30.2
+  resolution: "magic-string@npm:0.30.2"
+  dependencies:
+    "@jridgewell/sourcemap-codec": ^1.4.15
+  checksum: c0bbb9b27b2772e6bfaa5d0f6452d47c462d588ae7c43fbaac062b07836d3ec0140fcdd42a57aa53ed990abafcdd0fc17907813921b5df04eccf43e67674bc57
   languageName: node
   linkType: hard
 
@@ -12430,14 +12430,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prisma@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "prisma@npm:5.1.0"
+"prisma@npm:^5.1.1":
+  version: 5.1.1
+  resolution: "prisma@npm:5.1.1"
   dependencies:
-    "@prisma/engines": 5.1.0
+    "@prisma/engines": 5.1.1
   bin:
     prisma: build/index.js
-  checksum: c37719438d84cdee27907704312725f3c4c91a339182f819654d0864e9fbf5e156bdf3b97d39fca0c1fee778f63e936880083f9f6cea4fdab489ce13af940375
+  checksum: ab0879fdff3a5e3f50956e18308bd996708519824802b2528c80d1639bbb4d8dd499ef17670db27986695811a9e28b2c9d5ab0753031441ee12878b30bace8b7
   languageName: node
   linkType: hard
 
@@ -13845,7 +13845,7 @@ __metadata:
     lint-staged: ^13.2.3
     prettier: ^3.0.1
     prettier-plugin-astro: ^0.11.0
-    prisma: ^5.1.0
+    prisma: ^5.1.1
     rimraf: ^5.0.1
     tsup: ^7.2.0
     turbo: ^1.7.4
