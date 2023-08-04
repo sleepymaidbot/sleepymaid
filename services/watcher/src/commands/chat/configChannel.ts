@@ -130,25 +130,24 @@ export default class ConfigCommand implements SlashCommandInterface {
 								};
 								if (!channel.parent) return;
 								if (!client.user) return;
+								let webhook: Webhook;
 								if (channel.isThread()) {
-									const webhook = await channel.parent.createWebhook({
+									webhook = await channel.parent.createWebhook({
 										name: 'Watcher',
 										avatar: client.user.displayAvatarURL() ?? undefined,
 										reason: 'New log channel created by ' + interaction.user.tag,
 									});
-									webhookInfo.webhookId = webhook.id;
-									webhookInfo.webhookToken = webhook.token ?? '';
 									webhookInfo.threadId = channel.id;
 								} else {
-									const webhook = await channel.createWebhook({
+									webhook = await channel.createWebhook({
 										name: 'Watcher',
 										avatar: client.user.displayAvatarURL() ?? undefined,
 										reason: 'New log channel created by ' + interaction.user.tag,
 									});
-									webhookInfo.webhookId = webhook.id;
-									webhookInfo.webhookToken = webhook.token ?? '';
 									webhookInfo.threadId = null;
 								}
+								webhookInfo.webhookId = webhook.id;
+								webhookInfo.webhookToken = webhook.token ?? '';
 
 								await client.prisma.guildsSettings.update({
 									where: {
