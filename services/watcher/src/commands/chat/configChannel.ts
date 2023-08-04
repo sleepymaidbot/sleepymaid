@@ -78,6 +78,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 						i.user.id === interaction.user.id && i.customId.startsWith('configChannel:newChannel:new') && i.isButton(),
 				})
 				.then(async (i) => {
+					await i.deferUpdate();
 					if (i.customId === 'configChannel:newChannel:yes') {
 						if (!i.channel) return;
 						await interaction.editReply({
@@ -118,6 +119,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 									i.isStringSelectMenu(),
 							})
 							.then(async (i) => {
+								await i.deferUpdate();
 								if (!i.isStringSelectMenu()) return;
 								const type = i.values[0] as LogChannelType;
 								const webhookInfo: {
