@@ -1,12 +1,10 @@
 import type { SlashCommandInterface } from '@sleepymaid/handler';
-import { getLocalizedProp } from '@sleepymaid/shared';
 import {
 	ApplicationCommandOptionType,
 	ButtonStyle,
 	ChannelType,
 	ChatInputApplicationCommandData,
 	ChatInputCommandInteraction,
-	Collector,
 	ComponentType,
 	PermissionFlagsBits,
 	PermissionsBitField,
