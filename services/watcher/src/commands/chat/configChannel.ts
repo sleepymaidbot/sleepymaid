@@ -79,7 +79,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 				.then(async (i) => {
 					if (i.customId === 'configChannel:newChannel:yes') {
 						if (!i.channel) return;
-						await i.update({
+						await interaction.editReply({
 							content: 'Which type of logs do you want in that channel.',
 							components: [
 								{
@@ -165,7 +165,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 									},
 								});
 
-								await i.update({
+								await interaction.editReply({
 									content:
 										// TODO: Add a way to configure the subscribed logs.
 										'This channel has been configured. Reuse this command to configure which logs you want to receive.',
