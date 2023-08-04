@@ -1,4 +1,5 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
 # [@sleepymaid/util@3.2.0](https://github.com/sleepymaidbot/sleepymaid/tree/@sleepymaid/util@3.2.0) - (2022-10-09)
@@ -36,7 +37,7 @@ All notable changes to this project will be documented in this file.
 
 ## Styling
 
-- ***:** Lint for new eslint config ([9990f6c](https://github.com/sleepymaidbot/sleepymaid/commit/9990f6cb44a98a8b9c9d146e94668e4b4ee3a68b))
+- **\*:** Lint for new eslint config ([9990f6c](https://github.com/sleepymaidbot/sleepymaid/commit/9990f6cb44a98a8b9c9d146e94668e4b4ee3a68b))
 
 ## Typings
 
@@ -77,9 +78,8 @@ All notable changes to this project will be documented in this file.
 
 ## Styling
 
-- ***:** Lint for new eslint config ([9990f6c](https://github.com/sleepymaidbot/sleepymaid/commit/9990f6cb44a98a8b9c9d146e94668e4b4ee3a68b))
+- **\*:** Lint for new eslint config ([9990f6c](https://github.com/sleepymaidbot/sleepymaid/commit/9990f6cb44a98a8b9c9d146e94668e4b4ee3a68b))
 
 ## Typings
 
 - Auto generate types for packages ([797ec30](https://github.com/sleepymaidbot/sleepymaid/commit/797ec3073e63c1282f0409537ce6d9bd8d58d0a3))
-
