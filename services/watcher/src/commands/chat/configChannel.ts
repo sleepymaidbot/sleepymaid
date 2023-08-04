@@ -11,7 +11,6 @@ import {
 } from 'discord.js';
 import { WatcherClient } from '../../lib/extensions/WatcherClient';
 import { LogChannelType } from '@prisma/client';
-import { createEmptySubscribedLogsObject } from '../../lib/functions/subscribedLogs';
 
 export default class ConfigCommand implements SlashCommandInterface {
 	public readonly data = {
@@ -89,7 +88,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 										{
 											type: ComponentType.StringSelect,
 											placeholder: 'Select a log type',
-											custom_id: 'configChannel:newChannel:TypeSelect',
+											custom_id: 'configChannel:newChannel:typeSelect',
 											max_values: 1,
 											min_values: 1,
 											options: [
@@ -114,7 +113,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 								time: 60000,
 								filter: (i) =>
 									i.user.id === interaction.user.id &&
-									i.customId.startsWith('configChannel:newChannel:TypeSelect') &&
+									i.customId.startsWith('configChannel:newChannel:typeSelect') &&
 									i.isStringSelectMenu(),
 							})
 							.then(async (i) => {
@@ -160,7 +159,6 @@ export default class ConfigCommand implements SlashCommandInterface {
 											create: {
 												channelId: channel.id,
 												type: type,
-												subscribedLogs: createEmptySubscribedLogsObject(type),
 												...webhookInfo,
 											},
 										},
@@ -169,6 +167,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 
 								await i.update({
 									content:
+										// TODO: Add a way to configure the subscribed logs.
 										'This channel has been configured. Reuse this command to configure which logs you want to receive.',
 									components: [],
 								});
