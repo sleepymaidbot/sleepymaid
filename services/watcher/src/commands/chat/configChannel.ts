@@ -8,6 +8,7 @@ import {
 	ComponentType,
 	PermissionFlagsBits,
 	PermissionsBitField,
+	Webhook,
 } from 'discord.js';
 import { WatcherClient } from '../../lib/extensions/WatcherClient';
 import { LogChannelType } from '@prisma/client';
