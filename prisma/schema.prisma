@@ -160,15 +160,43 @@ enum CaseType {
 }
 
 model LogChannel {
-  guildId        String
-  channelId      String         @id
-  type           LogChannelType
-  subscribedLogs Json
-  webhookId      String
-  webhookToken   String
-  threadId       String?
+  guildId      String
+  channelId    String         @id
+  type         LogChannelType
+  webhookId    String
+  webhookToken String
+  threadId     String?
 
   settings GuildsSettings @relation(fields: [guildId], references: [guildId], onDelete: Cascade, onUpdate: NoAction)
+
+  // MOD
+  timeout   Boolean @default(false)
+  untimeout Boolean @default(false)
+  kick      Boolean @default(false)
+  ban       Boolean @default(false)
+  unban     Boolean @default(false)
+
+  // SERVER
+  messageEdit            Boolean @default(false)
+  messageDelete          Boolean @default(false)
+  memberJoin             Boolean @default(false)
+  memberLeave            Boolean @default(false)
+  memberNicknameChange   Boolean @default(false)
+  memberRoleChange       Boolean @default(false)
+  memberAvatarChange     Boolean @default(false)
+  memberUsernameChange   Boolean @default(false)
+  memberVoiceStateUpdate Boolean @default(false)
+  roleCreate             Boolean @default(false)
+  roleDelete             Boolean @default(false)
+  roleUpdate             Boolean @default(false)
+  channelCreate          Boolean @default(false)
+  channelDelete          Boolean @default(false)
+  channelUpdate          Boolean @default(false)
+  emojiCreate            Boolean @default(false)
+  emojiDelete            Boolean @default(false)
+  emojiUpdate            Boolean @default(false)
+  inviteCreate           Boolean @default(false)
+  inviteDelete           Boolean @default(false)
 }
 
 model Case {
