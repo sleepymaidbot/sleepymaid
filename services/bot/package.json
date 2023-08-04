@@ -12,14 +12,14 @@
 	"license": "MIT",
 	"devDependencies": {
 		"@types/i18next-fs-backend": "^1.1.2",
-		"@types/node": "^18.17.1",
+		"@types/node": "^18.17.2",
 		"rimraf": "^5.0.1",
 		"source-map-support": "0.5.21",
 		"typescript": "^5.1.6"
 	},
 	"dependencies": {
 		"@discordjs/brokers": "^0.2.1",
-		"@prisma/client": "^5.1.0",
+		"@prisma/client": "^5.1.1",
 		"@sapphire/result": "^2.6.4",
 		"@sapphire/stopwatch": "1.5.0",
 		"@sleepymaid/handler": "workspace:^",
@@ -31,7 +31,7 @@
 		"i18next-fs-backend": "^2.1.5",
 		"murmurhash-v3": "^1.0.2",
 		"path": "0.12.7",
-		"prisma": "^5.1.0",
+		"prisma": "^5.1.1",
 		"reflect-metadata": "0.1.13",
 		"tsyringe": "4.8.0"
 	}
