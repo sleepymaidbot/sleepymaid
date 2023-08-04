@@ -171,7 +171,13 @@ export default class ConfigCommand implements SlashCommandInterface {
 									components: [],
 								});
 							})
-							.catch(client.logger.error);
+							.catch(client.logger.error)
+							.finally(async () => {
+								await interaction.editReply({
+									content: 'This message is now inactive.',
+									components: [],
+								});
+							});
 					} else {
 						i.update({
 							content: 'This channel will not be configured.',
@@ -179,7 +185,13 @@ export default class ConfigCommand implements SlashCommandInterface {
 						});
 					}
 				})
-				.catch(client.logger.error);
+				.catch(client.logger.error)
+				.finally(async () => {
+					await interaction.editReply({
+						content: 'This message is now inactive.',
+						components: [],
+					});
+				});
 		}
 	}
 }
