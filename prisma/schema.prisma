@@ -164,6 +164,9 @@ model LogChannel {
   channelId      String         @id
   type           LogChannelType
   subscribedLogs Json
+  webhookId      String
+  webhookToken   String
+  threadId       String?
 
   settings GuildsSettings @relation(fields: [guildId], references: [guildId], onDelete: Cascade, onUpdate: NoAction)
 }

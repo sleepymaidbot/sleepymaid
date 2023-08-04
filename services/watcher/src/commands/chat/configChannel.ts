@@ -120,6 +120,36 @@ export default class ConfigCommand implements SlashCommandInterface {
 							.then(async (i) => {
 								if (!i.isStringSelectMenu()) return;
 								const type = i.values[0] as LogChannelType;
+								const webhookInfo: {
+									webhookId: string;
+									webhookToken: string;
+									threadId: string | null;
+								} = {
+									webhookId: '',
+									webhookToken: '',
+									threadId: null,
+								};
+								if (!channel.parent) return;
+								if (!client.user) return;
+								if (channel.isThread()) {
+									const webhook = await channel.parent.createWebhook({
+										name: 'Watcher',
+										avatar: client.user.displayAvatarURL() ?? undefined,
+										reason: 'New log channel created by ' + interaction.user.tag,
+									});
+									webhookInfo.webhookId = webhook.id;
+									webhookInfo.webhookToken = webhook.token ?? '';
+									webhookInfo.threadId = channel.id;
+								} else {
+									const webhook = await channel.createWebhook({
+										name: 'Watcher',
+										avatar: client.user.displayAvatarURL() ?? undefined,
+										reason: 'New log channel created by ' + interaction.user.tag,
+									});
+									webhookInfo.webhookId = webhook.id;
+									webhookInfo.webhookToken = webhook.token ?? '';
+									webhookInfo.threadId = null;
+								}
 
 								await client.prisma.guildsSettings.update({
 									where: {
@@ -131,6 +161,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 												channelId: channel.id,
 												type: type,
 												subscribedLogs: createEmptySubscribedLogsObject(type),
+												...webhookInfo,
 											},
 										},
 									},
