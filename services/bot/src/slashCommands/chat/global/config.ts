@@ -39,7 +39,6 @@ export default class ConfigCommand implements SlashCommandInterface {
 				options: [
 					{
 						...getLocalizedProp('name', 'commands.config.admin-role.add.name'),
-
 						...getLocalizedProp('description', 'commands.config.admin-role.add.description'),
 						type: ApplicationCommandOptionType.Subcommand,
 						options: [
