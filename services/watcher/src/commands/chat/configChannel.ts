@@ -13,7 +13,7 @@ import { WatcherClient } from '../../lib/extensions/WatcherClient';
 import { LogChannelType } from '@prisma/client';
 import { createEmptySubscribedLogsObject } from '../../lib/functions/subscribedLogs';
 
-export default class ReasonCommand implements SlashCommandInterface {
+export default class ConfigCommand implements SlashCommandInterface {
 	public readonly data = {
 		name: 'configchannel',
 		description: 'Configure a channel for the bot to send messages to.',
