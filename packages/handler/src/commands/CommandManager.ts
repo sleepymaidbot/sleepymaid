@@ -166,30 +166,24 @@ export class CommandManager extends BaseManager {
 		const globalCommands = this.globalCommands;
 		const guildCommands = this.guildCommands;
 		// Global commands
-		if (this.client.env === 'dev') {
-			const array = guildCommands.get(this.client.devServerId) ?? [];
-			array.push(...globalCommands);
-			guildCommands.set(this.client.devServerId, array);
-		} else {
-			const applicationCommand = globalCommands.sort((a, b) => {
+		const applicationCommand = globalCommands.sort((a, b) => {
+			if (a.name < b.name) return -1;
+			if (a.name > b.name) return 1;
+			return 0;
+		}) as ApplicationCommandData[];
+		const currentGlobalCommands =
+			(await this.client.application?.commands.fetch()) ??
+			([].sort((a: ApplicationCommandData, b: ApplicationCommandData) => {
 				if (a.name < b.name) return -1;
 				if (a.name > b.name) return 1;
 				return 0;
-			}) as ApplicationCommandData[];
-			const currentGlobalCommands =
-				(await this.client.application?.commands.fetch()) ??
-				([].sort((a: ApplicationCommandData, b: ApplicationCommandData) => {
-					if (a.name < b.name) return -1;
-					if (a.name > b.name) return 1;
-					return 0;
-				}) as ApplicationCommandData[]);
+			}) as ApplicationCommandData[]);
 
-			if (!isEqualObjects(applicationCommand, currentGlobalCommands)) {
-				this.client.logger.info('Command Handler: -> Global commands have changed, updating...');
-				await this.client.application?.commands.set(globalCommands).catch((e) => this.client.logger.error(e));
-			} else {
-				this.client.logger.info('Command Handler: -> Global commands have not changed.');
-			}
+		if (!isEqualObjects(applicationCommand, currentGlobalCommands)) {
+			this.client.logger.info('Command Handler: -> Global commands have changed, updating...');
+			await this.client.application?.commands.set(globalCommands).catch((e) => this.client.logger.error(e));
+		} else {
+			this.client.logger.info('Command Handler: -> Global commands have not changed.');
 		}
 
 		// Guild commands
