@@ -18,6 +18,15 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
+		<script>
+			window.onload = function () {
+				const hash = new URL(window.location.href).hash.substring(1);
+				if (hash) {
+					const element = document.getElementById(hash);
+					element?.scrollIntoView();
+				}
+			};
+		</script>
 		<slot />
 	</body>
 </html>

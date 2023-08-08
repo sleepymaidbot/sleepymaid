@@ -3,11 +3,12 @@ import '../styles/Header.css';
 
 export type IHeader = {
 	title: string;
+	id: string;
 };
 
-export default function Header({ title, children }: PropsWithChildren<IHeader>) {
+export default function Header({ title, id, children }: PropsWithChildren<IHeader>) {
 	return (
-		<div className="header-component">
+		<div id={id} className="header-component">
 			<h1>{title}</h1>
 			<p>{children}</p>
 		</div>
