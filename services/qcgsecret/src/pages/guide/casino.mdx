@@ -11,7 +11,7 @@ import Step from '../../components/Step.jsx';
 import Alert from '../../components/Alert.jsx';
 import { Underline } from '../../components/Formatters.jsx';
 
-<Header title="Blockers" id="blockers">
+<Header title="Blockers" id="blockers" client:only="react">
 	3 players
 </Header>
 
@@ -57,11 +57,11 @@ This steps gives a **_60_** seconds time bonus when completed.
 <Underline>**Video Clip**</Underline> <br />
 Here's a video of us doing it.
 
-<video src="https://u.ecorte.xyz/u/hQGPuv.mp4" controls title="Clip" width="721"></video>
+<video src="https://u.ecorte.xyz/u/hQGPuv.mp4" controls title="Clip" width="721" client:visible></video>
 
 </Step>
 
-<Header title="Roulette" id="roulette">
+<Header title="Roulette" id="roulette" client:only="react">
 	2-3 players
 </Header>
 
@@ -98,7 +98,7 @@ This steps gives a 60 seconds time bonus when completed.
 
 </Step>
 
-<Header title="Hammer" id="hammer">
+<Header title="Hammer" id="hammer" client:only="react">
 	1-2 players
 </Header>
 
@@ -129,11 +129,11 @@ Then activate the lasers. This will burn the box and give the hammer that can be
 <Underline>**Video Clip**</Underline> <br />
 Here's a video of us doing it.
 
-<video src="http://u.ecorte.xyz/u/slce4l.mp4" controls title="Clip" width="721"></video>
+<video src="http://u.ecorte.xyz/u/slce4l.mp4" controls title="Clip" width="721" client:visible></video>
 
 </Step>
 
-<Header title="Control room lasers" id="lasers">
+<Header title="Control room lasers" id="lasers" client:only="react">
 	3 players
 </Header>
 
@@ -165,7 +165,7 @@ Then you need to shoot knifes, axes or props on the buttons in the control room.
 
 </Step>
 
-<Header title="Simon says" id="simon">
+<Header title="Simon says" id="simon" client:only="react">
 	2 players
 </Header>
 
@@ -188,11 +188,11 @@ This steps gives a 120 seconds time bonus when completed.
 <Underline>**Video Clip**</Underline> <br />
 Here's a video of us doing it.
 
-<video src="http://u.ecorte.xyz/u/cm8HVe.mp4" controls title="Clip" width="721"></video>
+<video src="http://u.ecorte.xyz/u/cm8HVe.mp4" controls title="Clip" width="721" client:visible></video>
 
 </Step>
 
-<Header title="Fire trial" id="firetrial">
+<Header title="Fire trial" id="firetrial" client:only="react">
 	Murderer & Gunner & 3 Bystander
 </Header>
 
@@ -278,7 +278,7 @@ This steps gives a 120 seconds time bonus when completed.
 
 </Step>
 
-<Header title="Hacking game" id="hackinggame">
+<Header title="Hacking game" id="hackinggame" client:only="react">
 	2 players
 </Header>
 
@@ -308,7 +308,7 @@ This steps gives a 45 seconds time bonus when completed.
 
 </Step>
 
-<Header title="Bankrupt" id="bankrupt">
+<Header title="Bankrupt" id="bankrupt" client:only="react">
 	2 players
 </Header>
 
@@ -359,7 +359,7 @@ The code will be: 3472
 
 </Step>
 
-<Header title="Credits" id="credits"></Header>
+<Header title="Credits" id="credits" client:only="react"></Header>
 
 <Step>
 
