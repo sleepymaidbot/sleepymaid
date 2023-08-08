@@ -10,8 +10,9 @@ import Dropdown from '../../components/Dropdown.jsx';
 import Step from '../../components/Step.jsx';
 import Alert from '../../components/Alert.jsx';
 import { Underline } from '../../components/Formatters.jsx';
+import Video from '../../components/Video.jsx';
 
-<Header title="Blockers" id="blockers" client:only="react">
+<Header title="Blockers" id="blockers" client:load client:only="react">
 	3 players
 </Header>
 
@@ -54,14 +55,14 @@ main door.
 <Underline>**Bonus time**</Underline> <br />
 This steps gives a **_60_** seconds time bonus when completed.
 
-<Underline>**Video Clip**</Underline> <br />
-Here's a video of us doing it.
-
-<video src="https://u.ecorte.xyz/u/hQGPuv.mp4" controls title="Clip" width="721" client:visible></video>
+<Dropdown title="Video Clip" client:only="react">
+	Here's a video of us doing it.
+	<Video link="https://u.ecorte.xyz/u/hQGPuv.mp4" width="672" client:visible />
+</Dropdown>
 
 </Step>
 
-<Header title="Roulette" id="roulette" client:only="react">
+<Header title="Roulette" id="roulette" client:load client:only="react">
 	2-3 players
 </Header>
 
@@ -98,7 +99,7 @@ This steps gives a 60 seconds time bonus when completed.
 
 </Step>
 
-<Header title="Hammer" id="hammer" client:only="react">
+<Header title="Hammer" id="hammer" client:load client:only="react">
 	1-2 players
 </Header>
 
@@ -126,14 +127,14 @@ Then activate the lasers. This will burn the box and give the hammer that can be
 
 <img src="/assets/guide/casino/hammer/blockeddoor.png" width="721" alt="The blocked door." />
 
-<Underline>**Video Clip**</Underline> <br />
-Here's a video of us doing it.
-
-<video src="http://u.ecorte.xyz/u/slce4l.mp4" controls title="Clip" width="721" client:visible></video>
+<Dropdown title="Video Clip" client:only="react">
+	Here's a video of us doing it.
+	<Video link="http://u.ecorte.xyz/u/slce4l.mp4" width="672" client:visible />
+</Dropdown>
 
 </Step>
 
-<Header title="Control room lasers" id="lasers" client:only="react">
+<Header title="Control room lasers" id="lasers" client:load client:only="react">
 	3 players
 </Header>
 
@@ -165,7 +166,7 @@ Then you need to shoot knifes, axes or props on the buttons in the control room.
 
 </Step>
 
-<Header title="Simon says" id="simon" client:only="react">
+<Header title="Simon says" id="simon" client:load client:only="react">
 	2 players
 </Header>
 
@@ -185,14 +186,14 @@ You then need to input that order in control room. You need to do this 6 times a
 
 This steps gives a 120 seconds time bonus when completed.
 
-<Underline>**Video Clip**</Underline> <br />
-Here's a video of us doing it.
-
-<video src="http://u.ecorte.xyz/u/cm8HVe.mp4" controls title="Clip" width="721" client:visible></video>
+<Dropdown title="Video Clip" client:only="react">
+	Here's a video of us doing it.
+	<Video link="http://u.ecorte.xyz/u/cm8HVe.mp4" width="672" client:visible />
+</Dropdown>
 
 </Step>
 
-<Header title="Fire trial" id="firetrial" client:only="react">
+<Header title="Fire trial" id="firetrial" client:load client:only="react">
 	Murderer & Gunner & 3 Bystander
 </Header>
 
@@ -278,7 +279,7 @@ This steps gives a 120 seconds time bonus when completed.
 
 </Step>
 
-<Header title="Hacking game" id="hackinggame" client:only="react">
+<Header title="Hacking game" id="hackinggame" client:load client:only="react">
 	2 players
 </Header>
 
@@ -308,7 +309,7 @@ This steps gives a 45 seconds time bonus when completed.
 
 </Step>
 
-<Header title="Bankrupt" id="bankrupt" client:only="react">
+<Header title="Bankrupt" id="bankrupt" client:load client:only="react">
 	2 players
 </Header>
 
@@ -359,7 +360,7 @@ The code will be: 3472
 
 </Step>
 
-<Header title="Credits" id="credits" client:only="react"></Header>
+<Header title="Credits" id="credits" client:load client:only="react"></Header>
 
 <Step>
 
