@@ -253,13 +253,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 						}
 					}
 				})
-				.catch(client.logger.error)
-				.finally(async () => {
-					await interaction.editReply({
-						content: 'This message is now inactive.',
-						components: [],
-					});
-				});
+				.catch(client.logger.error);
 		} else {
 			await interaction.reply({
 				content: 'This channel is not yet configured. Do you want to configure it?',
@@ -388,13 +382,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 									components: [],
 								});
 							})
-							.catch(client.logger.error)
-							.finally(async () => {
-								await interaction.editReply({
-									content: 'This message is now inactive.',
-									components: [],
-								});
-							});
+							.catch(client.logger.error);
 					} else {
 						i.update({
 							content: 'This channel will not be configured.',
@@ -402,13 +390,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 						});
 					}
 				})
-				.catch(client.logger.error)
-				.finally(async () => {
-					await interaction.editReply({
-						content: 'This message is now inactive.',
-						components: [],
-					});
-				});
+				.catch(client.logger.error);
 		}
 	}
 }
