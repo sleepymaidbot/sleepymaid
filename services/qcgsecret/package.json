@@ -20,7 +20,7 @@
 		"@otterlord/astro-compress": "^1.1.48",
 		"@otterlord/astro-critters": "^1.1.41",
 		"@react-icons/all-files": "^4.1.0",
-		"@types/react": "^18.2.18",
+		"@types/react": "^18.2.19",
 		"@types/react-dom": "^18.2.7",
 		"ariakit": "^2.0.0-next.44",
 		"astro": "^2.10.3",
