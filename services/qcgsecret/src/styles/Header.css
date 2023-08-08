@@ -8,3 +8,19 @@
 	justify-content: center;
 	text-align: center;
 }
+
+.component-aligned {
+	display: flex;
+	align-items: center;
+	text-align: center;
+}
+
+.component-icon {
+	margin-left: 10px;
+	margin-top: 10px;
+}
+
+.anchor-icon {
+	text-decoration: none;
+	color: white;
+}
