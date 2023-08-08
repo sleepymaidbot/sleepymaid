@@ -4,8 +4,8 @@ import node from '@astrojs/node';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 import { defineConfig } from 'astro/config';
-import compress from 'astro-compress';
-import critters from 'astro-critters';
+import compress from '@otterlord/astro-compress';
+import critters from '@otterlord/astro-critters';
 
 const rootDir = new URL('../../', import.meta.url);
 
