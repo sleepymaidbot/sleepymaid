@@ -2376,10 +2376,10 @@ __metadata:
     "@otterlord/astro-compress": ^1.1.48
     "@otterlord/astro-critters": ^1.1.41
     "@react-icons/all-files": ^4.1.0
-    "@types/react": ^18.2.19
+    "@types/react": ^18.2.20
     "@types/react-dom": ^18.2.7
     ariakit: ^2.0.0-next.44
-    astro: ^2.10.3
+    astro: ^2.10.4
     classnames: ^2.3.2
     hast-util-to-string: ^2.0.0
     react: ^18.2.0
@@ -2885,14 +2885,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.2.19":
-  version: 18.2.19
-  resolution: "@types/react@npm:18.2.19"
+"@types/react@npm:^18.2.20":
+  version: 18.2.20
+  resolution: "@types/react@npm:18.2.20"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 1ef657b90c7413451bbac2fd2fbce4f8a093941bc5041d344ab9833bc113c8eebf6318dae8aeeb1a0f922f15bc772507e6aaa0c7b51847b5f7302921c8dd6740
+  checksum: 30f699c60e5e4bfef273ce64d320651cdd60f5c6a08361c6c7eca8cebcccda1ac953d2ee57c9f321b5ae87f8a62c72b6d35ca42df0e261d337849952daab2141
   languageName: node
   linkType: hard
 
@@ -4037,9 +4037,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"astro@npm:^2.10.3":
-  version: 2.10.3
-  resolution: "astro@npm:2.10.3"
+"astro@npm:^2.10.4":
+  version: 2.10.4
+  resolution: "astro@npm:2.10.4"
   dependencies:
     "@astrojs/compiler": ^1.8.0
     "@astrojs/internal-helpers": ^0.1.2
@@ -4106,7 +4106,7 @@ __metadata:
       optional: true
   bin:
     astro: astro.js
-  checksum: 310deff2c2da877c413382eb6ce96ce2181a48899f78e072e3f9a1907f6300186b04804c0d9a305385abfe076b1cf7d64df461c4c8b664939acf9a73e0c92b13
+  checksum: 5b3b9309c9bea9cea30c871886cfedfebe621db042df8f3030d0ee1c0856bd24ea00f2958c0e0bf707308dccfcec8cb3fd0ef8ebd0b207f945360fe0d9644583
   languageName: node
   linkType: hard
 
