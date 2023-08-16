@@ -39,6 +39,7 @@ This server is made to help and contribute to the completion of the secret on th
 <@&1131655038473879634> » The moderator role. They moderate the server.
 <@&1131659418648445010> » Given to the admins of the Québec Games servers.
 <@&1131658226363015339> » Given to people that have done a significant contribution to any of the secret completion.
+<@&1139282350929346560> » Gives access to a text and voice channel that are non-secret related.
 <@&1131656791118336071> » The default role. Given to everyone.
 ## Useful links
 Guides » <https://qcgsecret.ecorte.xyz/>
