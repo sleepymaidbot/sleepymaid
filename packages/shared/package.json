@@ -24,8 +24,8 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
-		"@swc/core": "^1.3.76",
-		"@types/node": "^18.17.4",
+		"@swc/core": "^1.3.77",
+		"@types/node": "^18.17.5",
 		"rimraf": "^5.0.1",
 		"source-map-support": "0.5.21",
 		"tsup": "^7.2.0",
