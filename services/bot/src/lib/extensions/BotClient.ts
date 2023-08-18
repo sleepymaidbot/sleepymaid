@@ -34,7 +34,7 @@ export class BotClient extends HandlerClient {
 					activities: [
 						{
 							name: 'yo allo ?',
-							type: ActivityType.Watching,
+							type: ActivityType.Custom,
 						},
 					],
 				},
