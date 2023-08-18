@@ -18,7 +18,7 @@
 		"typescript": "^5.1.6"
 	},
 	"dependencies": {
-		"@discordjs/brokers": "^0.2.1",
+		"@discordjs/brokers": "^0.2.2",
 		"@prisma/client": "^5.1.1",
 		"@sapphire/result": "^2.6.4",
 		"@sapphire/stopwatch": "1.5.0",
@@ -26,7 +26,7 @@
 		"@sleepymaid/logger": "workspace:^",
 		"@sleepymaid/shared": "workspace:^",
 		"@sleepymaid/util": "*",
-		"discord.js": "^14.12.1",
+		"discord.js": "^14.13.0",
 		"i18next": "^23.4.4",
 		"i18next-fs-backend": "^2.1.5",
 		"murmurhash-v3": "^1.0.2",
