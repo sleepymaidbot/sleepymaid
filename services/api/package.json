@@ -17,7 +17,7 @@
 		"typescript": "^5.1.6"
 	},
 	"dependencies": {
-		"@discordjs/brokers": "^0.2.1",
+		"@discordjs/brokers": "^0.2.2",
 		"@hapi/boom": "^10.0.1",
 		"@prisma/client": "^5.1.1",
 		"@sapphire/node-utilities": "^1.0.0",

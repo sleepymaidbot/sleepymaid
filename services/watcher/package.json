@@ -18,11 +18,11 @@
 		"typescript": "^5.1.6"
 	},
 	"dependencies": {
-		"@discordjs/brokers": "^0.2.1",
+		"@discordjs/brokers": "^0.2.2",
 		"@sleepymaid/handler": "workspace:^",
 		"@sleepymaid/logger": "workspace:^",
 		"@sleepymaid/shared": "workspace:^",
-		"discord.js": "^14.12.1",
+		"discord.js": "^14.13.0",
 		"i18next": "^23.4.4",
 		"i18next-fs-backend": "^2.1.5",
 		"path": "0.12.7",
