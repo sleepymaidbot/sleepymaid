@@ -1,0 +1,65 @@
+<style>
+	.container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		margin: 0;
+		padding: 0;
+	}
+
+	#list-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin: 0;
+		padding: 0;
+	}
+
+	#list-container ul {
+		padding: 0;
+	}
+
+	#list-container li {
+		text-align: left;
+		list-style: none;
+		position: relative;
+		display: flex;
+		align-items: center;
+	}
+
+	#list-container li::before {
+		content: '•';
+		margin-right: 10px;
+		color: white;
+	}
+
+	#list-container a {
+		margin: 0;
+		padding: 0;
+		text-decoration: none;
+		color: white;
+	}
+
+	h3 {
+		text-align: center;
+		color: white;
+		margin-bottom: 10px;
+	}
+</style>
+
+<div class="container">
+	<h3>Table of contents:</h3>
+	<div id="list-container">
+		<ul>
+			<li><a href="#blockers">Blockers</a></li>
+			<li><a href="#roulette">Roulette</a></li>
+			<li><a href="#hammer">Hammer</a></li>
+			<li><a href="#lasers">Control room lasers</a></li>
+			<li><a href="#simon">Simon says</a></li>
+			<li><a href="#firetrial">Fire trial</a></li>
+			<li><a href="#hackinggame">Hacking game</a></li>
+			<li><a href="#bankrupt">Bankrupt</a></li>
+		</ul>
+	</div>
+</div>
