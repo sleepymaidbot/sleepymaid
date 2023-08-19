@@ -3,7 +3,7 @@ import { Channel, ChannelType, TextChannel } from 'discord.js';
 import { pointToRemoveForPoints } from '@sleepymaid/shared';
 import { ActivityRewardManager } from '../../lib/managers/lme/activityRewardManager';
 import { container } from 'tsyringe';
-import { BotClient } from '../../lib/extensions/BotClient';
+import { SleepyMaidClient } from '../../lib/extensions/SleepyMaidClient';
 import type { TaskInterface } from '@sleepymaid/handler';
 
 function isTextChannel(channel: Channel): channel is TextChannel {
@@ -14,7 +14,7 @@ export default class HourPointsTask implements TaskInterface {
 	public readonly interval = '0 * * * *';
 
 	// @ts-ignore
-	public async execute(client: BotClient) {
+	public async execute(client: SleepyMaidClient) {
 		if (client.config.nodeEnv === 'prod') return;
 		client.logger.debug('Hourpoints task started');
 		const usersArray = [];
@@ -40,7 +40,7 @@ export default class HourPointsTask implements TaskInterface {
 				try {
 					const dUser = guild?.members.cache.get(user.user_id);
 					if (dUser) {
-						container.register(BotClient, { useValue: client });
+						container.register(SleepyMaidClient, { useValue: client });
 						container.resolve(ActivityRewardManager).checkActivityReward(dUser);
 					}
 				} catch (e) {

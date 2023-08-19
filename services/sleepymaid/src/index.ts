@@ -1,2 +1,2 @@
-import { BotClient } from './lib/extensions/BotClient';
-new BotClient().start();
+import { SleepyMaidClient } from './lib/extensions/SleepyMaidClient';
+new SleepyMaidClient().start();

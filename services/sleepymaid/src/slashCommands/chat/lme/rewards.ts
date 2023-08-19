@@ -1,7 +1,7 @@
 import { EmbedBuilder, SlashCommandBuilder } from '@discordjs/builders';
 import { ChatInputApplicationCommandData, CommandInteraction, GuildMember, resolveColor } from 'discord.js';
 import { container } from 'tsyringe';
-import { BotClient } from '../../../lib/extensions/BotClient';
+import { SleepyMaidClient } from '../../../lib/extensions/SleepyMaidClient';
 import { pointToRemoveForPoints } from '@sleepymaid/shared';
 import 'reflect-metadata';
 import type { SlashCommandInterface } from '@sleepymaid/handler';
@@ -13,7 +13,7 @@ export default class RewardsCommand implements SlashCommandInterface {
 		.setDescription('Show my rewards.')
 		.toJSON() as ChatInputApplicationCommandData;
 	// @ts-ignore
-	public async execute(interaction: CommandInteraction, client: BotClient) {
+	public async execute(interaction: CommandInteraction, client: SleepyMaidClient) {
 		await interaction.deferReply();
 		const userInDb = await client.prisma.mondecorte.findUnique({
 			where: {
@@ -80,7 +80,7 @@ export default class RewardsCommand implements SlashCommandInterface {
 			}
 		}
 
-		container.register(BotClient, { useValue: client });
+		container.register(SleepyMaidClient, { useValue: client });
 
 		embed.setDescription(`Voici une liste des récompense que tu a obtenu:
   - Rôle <@&857324294791364639>: ${hasColorful}

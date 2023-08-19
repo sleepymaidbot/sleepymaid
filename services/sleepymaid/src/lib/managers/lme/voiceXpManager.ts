@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { Collection, GuildMember } from 'discord.js';
 import { singleton, container } from 'tsyringe';
-import { BotClient } from '../../extensions/BotClient';
+import { SleepyMaidClient } from '../../extensions/SleepyMaidClient';
 import { Stopwatch } from '@sapphire/stopwatch';
 import { pointsMultiplier } from '@sleepymaid/shared';
 import { ActivityRewardManager } from './activityRewardManager';
@@ -54,13 +54,13 @@ export class voiceXpManager extends baseManager {
 			});
 			this.client.logger.info('Added ' + pointsToAdd + ' points to ' + member.user.tag);
 			const c = container;
-			c.register(BotClient, { useValue: this.client });
+			c.register(SleepyMaidClient, { useValue: this.client });
 			c.resolve(ActivityRewardManager).checkActivityReward(member);
 		}
 	}
 }
 
-export async function stopAll(client: BotClient) {
+export async function stopAll(client: SleepyMaidClient) {
 	for (const [key, value] of stopwatchs.entries()) {
 		const stopwatch = value;
 		const time = Math.floor(stopwatch.duration / 300000);

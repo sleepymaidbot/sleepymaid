@@ -2,14 +2,14 @@ import type { Message } from 'discord.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import { inspect } from 'util';
 import type { ListenerInterface } from '@sleepymaid/handler';
-import type { BotClient } from '../../lib/extensions/BotClient';
+import type { SleepyMaidClient } from '../../lib/extensions/SleepyMaidClient';
 
 export default class SetupListener implements ListenerInterface {
 	public readonly name = 'messageCreate';
 	public readonly once = false;
 
 	// @ts-expect-error
-	public async execute(message: Message, client: BotClient) {
+	public async execute(message: Message, client: SleepyMaidClient) {
 		if (message.author.id !== '324281236728053760') return;
 		if (!client.user) return;
 		if (!message.content.startsWith('<@' + client.user.id + '> eval')) return;

@@ -16,7 +16,7 @@ import type {
 	ChatInputApplicationCommandData,
 	AutocompleteInteraction,
 } from 'discord.js';
-import type { BotClient } from '../../../lib/extensions/BotClient';
+import type { SleepyMaidClient } from '../../../lib/extensions/SleepyMaidClient';
 import { getAutocompleteResults } from '@sleepymaid/shared';
 
 interface MessagesType {
@@ -107,7 +107,7 @@ export default class LaserSetupCommand implements SlashCommandInterface {
 	} as ChatInputApplicationCommandData;
 
 	// @ts-ignore
-	public async execute(interaction: ChatInputCommandInteraction, client: BotClient) {
+	public async execute(interaction: ChatInputCommandInteraction, client: SleepyMaidClient) {
 		if (!interaction.inCachedGuild()) return;
 		if (!interaction.memberPermissions.has(PermissionFlagsBits.Administrator)) return;
 		const name = interaction.options.getString('name')!;

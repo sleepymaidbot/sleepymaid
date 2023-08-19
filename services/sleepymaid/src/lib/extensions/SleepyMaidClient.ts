@@ -9,7 +9,7 @@ import i18next from 'i18next';
 import FsBackend from 'i18next-fs-backend';
 import Redis from 'ioredis';
 
-export class BotClient extends HandlerClient {
+export class SleepyMaidClient extends HandlerClient {
 	public declare prisma: PrismaClient;
 	public declare redis: Redis;
 	public declare brokers: PubSubRedisBroker<any>;

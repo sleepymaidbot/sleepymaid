@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import type { SlashCommandInterface } from '@sleepymaid/handler';
 import { ChatInputApplicationCommandData, ChatInputCommandInteraction, PermissionsBitField } from 'discord.js';
 import { container, DependencyContainer } from 'tsyringe';
-import { BotClient } from '../../../lib/extensions/BotClient';
+import { SleepyMaidClient } from '../../../lib/extensions/SleepyMaidClient';
 import { configManager, SpecialRoleType } from '../../../lib/managers/global/configManager';
 import {
 	APIEmbed,
@@ -112,7 +112,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 	} as ChatInputApplicationCommandData;
 
 	// @ts-ignore
-	public async execute(interaction: ChatInputCommandInteraction, client: BotClient) {
+	public async execute(interaction: ChatInputCommandInteraction, client: SleepyMaidClient) {
 		if (!interaction.inCachedGuild()) return;
 		if (!interaction.guild) return;
 		await interaction.deferReply();
@@ -150,7 +150,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 				}
 				if (action === undefined || cleanAction === undefined) return;
 				const c: DependencyContainer = container;
-				c.register<BotClient>(BotClient, { useValue: client });
+				c.register<SleepyMaidClient>(SleepyMaidClient, { useValue: client });
 				switch (subcommand) {
 					case 'add': {
 						const roleId = interaction.options.getRole('role')!.id;

@@ -1,7 +1,7 @@
 import { unlink } from 'fs';
 import type { ListenerInterface } from '@sleepymaid/handler';
 import type { Message } from 'discord.js';
-import type { BotClient } from '../../lib/extensions/BotClient';
+import type { SleepyMaidClient } from '../../lib/extensions/SleepyMaidClient';
 import { shell } from '@sleepymaid/util';
 import { join } from 'path';
 import { Result } from '@sapphire/result';
@@ -22,7 +22,7 @@ export default class VidListener implements ListenerInterface {
 	public readonly name = 'messageCreate';
 	public readonly once = false;
 
-	public async execute(message: Message, client: BotClient) {
+	public async execute(message: Message, client: SleepyMaidClient) {
 		if (message.author.bot) return;
 
 		const args = message.content.split(' ');

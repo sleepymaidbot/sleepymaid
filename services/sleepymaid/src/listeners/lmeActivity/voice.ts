@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { BotClient } from '../../lib/extensions/BotClient';
+import { SleepyMaidClient } from '../../lib/extensions/SleepyMaidClient';
 import { voiceXpManager } from '../../lib/managers/lme/voiceXpManager';
 import { container } from 'tsyringe';
 import { pointsBlacklistedVoiceChannel } from '@sleepymaid/shared';
@@ -16,7 +16,7 @@ export default class VoiceListener implements ListenerInterface {
 	public readonly name = 'voiceStateUpdate';
 	public readonly once = false;
 
-	public async execute(oldState: VoiceState, newState: VoiceState, client: BotClient) {
+	public async execute(oldState: VoiceState, newState: VoiceState, client: SleepyMaidClient) {
 		if (oldState.guild.id !== '324284116021542922') return;
 		if (!oldState.member || !newState.member) return;
 		if (oldState?.member?.user.bot) return;
@@ -92,11 +92,11 @@ export default class VoiceListener implements ListenerInterface {
 			case VoiceXpState.None:
 				break;
 			case VoiceXpState.Start:
-				container.register(BotClient, { useValue: client });
+				container.register(SleepyMaidClient, { useValue: client });
 				container.resolve(voiceXpManager).start(newState.member);
 				break;
 			case VoiceXpState.Stop:
-				container.register(BotClient, { useValue: client });
+				container.register(SleepyMaidClient, { useValue: client });
 				container.resolve(voiceXpManager).stop(newState.member);
 				break;
 		}

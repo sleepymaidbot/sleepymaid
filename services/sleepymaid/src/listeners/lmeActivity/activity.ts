@@ -3,7 +3,7 @@ import type { Message } from 'discord.js';
 import { pointsBlacklistedTextChannel, pointsMultiplier } from '@sleepymaid/shared';
 import { ActivityRewardManager } from '../../lib/managers/lme/activityRewardManager';
 import { container } from 'tsyringe';
-import { BotClient } from '../../lib/extensions/BotClient';
+import { SleepyMaidClient } from '../../lib/extensions/SleepyMaidClient';
 import type { ListenerInterface } from '@sleepymaid/handler';
 
 const talkedRecently = new Set();
@@ -12,7 +12,7 @@ export default class ActivityListener implements ListenerInterface {
 	public readonly name = 'messageCreate';
 	public readonly once = false;
 
-	public async execute(message: Message, client: BotClient) {
+	public async execute(message: Message, client: SleepyMaidClient) {
 		if (message.guild == null) return;
 		if (message.guild.id != '324284116021542922') return;
 		if (message.author.bot) return;
@@ -45,7 +45,7 @@ export default class ActivityListener implements ListenerInterface {
 			});
 
 			const c = container;
-			c.register(BotClient, { useValue: client });
+			c.register(SleepyMaidClient, { useValue: client });
 			c.resolve(ActivityRewardManager).checkActivityReward(message.member!);
 		}
 

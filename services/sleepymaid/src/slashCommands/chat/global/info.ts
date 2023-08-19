@@ -3,7 +3,7 @@ import { ChatInputApplicationCommandData, ChatInputCommandInteraction, version a
 import { ApplicationCommandType } from 'discord-api-types/v10';
 import { prettyBytes, shell } from '@sleepymaid/util';
 import * as os from 'os';
-import type { BotClient } from '../../../lib/extensions/BotClient';
+import type { SleepyMaidClient } from '../../../lib/extensions/SleepyMaidClient';
 
 export default class InfoCommand implements SlashCommandInterface {
 	public readonly data = {
@@ -13,7 +13,7 @@ export default class InfoCommand implements SlashCommandInterface {
 	} as ChatInputApplicationCommandData;
 
 	// @ts-ignore
-	public async execute(interaction: ChatInputCommandInteraction, client: BotClient) {
+	public async execute(interaction: ChatInputCommandInteraction, client: SleepyMaidClient) {
 		const currentCommit = (await shell('git rev-parse HEAD')).stdout.replace('\n', '') || 'unknown';
 		let repoUrl = (await shell('git remote get-url origin')).stdout.replace('\n', '') || 'unknown';
 		if (repoUrl.includes('.git')) repoUrl = repoUrl.substring(0, repoUrl.length - 4);

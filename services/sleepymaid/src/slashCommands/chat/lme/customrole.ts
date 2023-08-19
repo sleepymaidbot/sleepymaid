@@ -8,7 +8,7 @@ import {
 	GuildMember,
 	resolveColor,
 } from 'discord.js';
-import type { BotClient } from '../../../lib/extensions/BotClient';
+import type { SleepyMaidClient } from '../../../lib/extensions/SleepyMaidClient';
 
 export default class CustomRoleCommand implements SlashCommandInterface {
 	public readonly guildIds = ['324284116021542922'];
@@ -44,7 +44,7 @@ export default class CustomRoleCommand implements SlashCommandInterface {
 		.toJSON() as ChatInputApplicationCommandData;
 
 	// @ts-ignore
-	public async execute(interaction: ChatInputCommandInteraction, client: BotClient) {
+	public async execute(interaction: ChatInputCommandInteraction, client: SleepyMaidClient) {
 		if (!interaction.inCachedGuild()) return;
 		await interaction.deferReply({ ephemeral: true });
 		const subcommand = interaction.options.getSubcommand();

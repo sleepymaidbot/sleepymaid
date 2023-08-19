@@ -13,7 +13,7 @@ import {
 	resolveColor,
 } from 'discord.js';
 import { APIEmbed, ButtonStyle } from 'discord-api-types/v10';
-import type { BotClient } from '../../../lib/extensions/BotClient';
+import type { SleepyMaidClient } from '../../../lib/extensions/SleepyMaidClient';
 import type { mondecorte } from '@prisma/client';
 
 const intForEmote = {
@@ -48,7 +48,7 @@ export default class PointsCommand implements SlashCommandInterface {
 		)
 		.toJSON() as ChatInputApplicationCommandData;
 	// @ts-ignore
-	public async execute(interaction: ChatInputCommandInteraction, client: BotClient) {
+	public async execute(interaction: ChatInputCommandInteraction, client: SleepyMaidClient) {
 		if (!interaction.inCachedGuild()) return;
 		switch (interaction.options.getSubcommand()) {
 			case 'user': {

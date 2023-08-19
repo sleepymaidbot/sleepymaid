@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { ChannelType, GuildMember } from 'discord.js';
 import { pointsBlacklistedVoiceChannel } from '@sleepymaid/shared';
 import { container } from 'tsyringe';
-import { BotClient } from '../../lib/extensions/BotClient';
+import { SleepyMaidClient } from '../../lib/extensions/SleepyMaidClient';
 import { voiceXpManager } from '../../lib/managers/lme/voiceXpManager';
 import type { ListenerInterface } from '@sleepymaid/handler';
 
@@ -10,7 +10,7 @@ export default class VoiceReadyListener implements ListenerInterface {
 	public readonly name = 'ready';
 	public readonly once = true;
 
-	public async execute(client: BotClient) {
+	public async execute(client: SleepyMaidClient) {
 		const guild = client.guilds.cache.get('324284116021542922');
 		if (!guild) return;
 		guild.channels.cache.forEach(async (channel) => {
@@ -19,7 +19,7 @@ export default class VoiceReadyListener implements ListenerInterface {
 				channel.members.each(async (member: GuildMember) => {
 					if (member.user.bot) return;
 					if (member.voice.mute || member.voice.deaf) return;
-					container.register(BotClient, { useValue: client });
+					container.register(SleepyMaidClient, { useValue: client });
 					container.resolve(voiceXpManager).start(member);
 				});
 			}

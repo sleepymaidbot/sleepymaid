@@ -8,7 +8,7 @@ import {
 	Message,
 } from 'discord.js';
 import i18next from 'i18next';
-import type { BotClient } from '../../../lib/extensions/BotClient';
+import type { SleepyMaidClient } from '../../../lib/extensions/SleepyMaidClient';
 
 export default class PingCommand implements SlashCommandInterface {
 	public readonly data = {
@@ -18,7 +18,7 @@ export default class PingCommand implements SlashCommandInterface {
 	} as ChatInputApplicationCommandData;
 
 	// @ts-ignore
-	public async execute(interaction: ChatInputCommandInteraction, client: BotClient) {
+	public async execute(interaction: ChatInputCommandInteraction, client: SleepyMaidClient) {
 		if (!interaction.inCachedGuild()) return;
 		const timestamp1 = interaction.createdTimestamp;
 		await interaction.reply('Pong!');
