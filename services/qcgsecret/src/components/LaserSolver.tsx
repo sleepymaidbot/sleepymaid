@@ -3,6 +3,7 @@ import '../styles/LaserSolver.css';
 import Alert from './Alert';
 
 const isValidNumber = (num: string): boolean => /^[1-4]*$/.test(num);
+const hasUniqueDigits = (num: string): boolean => new Set(num.split('')).size === num.length;
 
 // Reference
 // Number 1 = control
@@ -15,14 +16,14 @@ const LaserSolver: React.FC = () => {
 
 	const handleNumber1Change = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const newValue = event.target.value;
-		if (isValidNumber(newValue) && newValue.length <= 4) {
+		if (isValidNumber(newValue) && newValue.length <= 4 && hasUniqueDigits(newValue)) {
 			setNumber1(newValue);
 		}
 	};
 
 	const handleNumber2Change = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const newValue = event.target.value;
-		if (isValidNumber(newValue) && newValue.length <= 4) {
+		if (isValidNumber(newValue) && newValue.length <= 4 && hasUniqueDigits(newValue)) {
 			setNumber2(newValue);
 		}
 	};
