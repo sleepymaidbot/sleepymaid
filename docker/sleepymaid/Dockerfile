@@ -21,7 +21,7 @@ COPY packages/util/package.json ./packages/util/package.json
 
 COPY services/api/package.json ./services/api/package.json
 COPY services/helper/package.json ./services/helper/package.json
-COPY services/bot/package.json ./services/bot/package.json
+COPY services/sleepymaid/package.json ./services/sleepymaid/package.json
 COPY services/watcher/package.json ./services/watcher/package.json
 COPY services/website/package.json ./services/website/package.json
 COPY services/qcgsecret/package.json ./services/qcgsecret/package.json
@@ -33,18 +33,18 @@ COPY packages/logger ./packages/logger
 COPY packages/shared ./packages/shared
 COPY packages/util ./packages/util
 
-RUN yarn turbo run build --filter=bot^
+RUN yarn turbo run build --filter=sleepymaid^
 
 COPY services/api/ ./services/api
-COPY services/bot ./services/bot
+COPY services/sleepymaid ./services/sleepymaid
 COPY services/helper/ ./services/helper
 COPY services/watcher ./services/watcher
 COPY services/website ./services/website
 COPY services/qcgsecret ./services/qcgsecret
 
-RUN yarn turbo run build --filter=bot
+RUN yarn turbo run build --filter=sleepymaid
 
 COPY locales/ ./locales
-COPY services/bot/downloads ./services/bot/downloads
+COPY services/sleepymaid/downloads ./services/sleepymaid/downloads
 
 CMD ["node", "--trace-warnings", "-r", "source-map-support/register", "services/bot/dist/index.js"]
