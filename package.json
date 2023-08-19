@@ -7,7 +7,7 @@
 	"private": true,
 	"workspaces": [
 		"packages/*",
-		"services/bot/",
+		"services/sleepymaid/",
 		"services/helper/",
 		"services/qcgsecret/",
 		"services/watcher/"
