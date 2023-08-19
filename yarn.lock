@@ -232,16 +232,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@astrojs/node@npm:^5.3.4":
-  version: 5.3.4
-  resolution: "@astrojs/node@npm:5.3.4"
+"@astrojs/node@npm:^5.3.5":
+  version: 5.3.5
+  resolution: "@astrojs/node@npm:5.3.5"
   dependencies:
     "@astrojs/webapi": ^2.2.0
     send: ^0.18.0
     server-destroy: ^1.0.1
   peerDependencies:
-    astro: ^2.10.8
-  checksum: 00b7857e3a6795df2b498a83cb091fa1f27134a1ad8ed201bb9dc5ca06520c33cb64c8ad997811a0127486940db84f898876750a27ba5a84588a50f13b585762
+    astro: ^2.10.12
+  checksum: c5522f9953bd8065ecde559b674c5fac81e1d23c1cc755d144574bd81508cee19f97590e0e84771739f5442866cd62cb9e88710a9ee4717d7ca30787136976cb
   languageName: node
   linkType: hard
 
@@ -254,18 +254,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@astrojs/react@npm:^2.2.2":
-  version: 2.2.2
-  resolution: "@astrojs/react@npm:2.2.2"
+"@astrojs/react@npm:^2.3.2":
+  version: 2.3.2
+  resolution: "@astrojs/react@npm:2.3.2"
   dependencies:
     "@babel/core": ^7.22.5
     "@babel/plugin-transform-react-jsx": ^7.22.5
+    ultrahtml: ^1.2.0
   peerDependencies:
     "@types/react": ^17.0.50 || ^18.0.21
     "@types/react-dom": ^17.0.17 || ^18.0.6
     react: ^17.0.2 || ^18.0.0
     react-dom: ^17.0.2 || ^18.0.0
-  checksum: 4f0545d6b4e28e5da94709db5828653a456f0cd17b944bd69605aeb344e78bcb949435bf895ff6089f5334aa84bc888859a70badbc76db62acc7a21078feca16
+  checksum: 8ff6fdf4d4fd47e839131c579d71db52a29d8861d79663c83c689c37a90bf5d9be1746d1015c00f95ac3575687acd7f5ef0631dd2e00f4a171e432bdc7c8df7e
   languageName: node
   linkType: hard
 
@@ -2029,12 +2030,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:13.4.18":
-  version: 13.4.18
-  resolution: "@next/eslint-plugin-next@npm:13.4.18"
+"@next/eslint-plugin-next@npm:13.4.19":
+  version: 13.4.19
+  resolution: "@next/eslint-plugin-next@npm:13.4.19"
   dependencies:
     glob: 7.1.7
-  checksum: b94a24191df576fbabc506036e9b71722213587baa4a9838427e9ed263a0d589966b0f5cf5e068648550737057d5969068a43efe6c50d24a81fe8d68a26d2d04
+  checksum: d60c136e4a8d156b50d4b248eef9918bbf4bd7da293487cdf1f7bc172b07beeae4a2822798942d2f87999af86c53d871ebea592f3d6099ae23a0746d2abf7c73
   languageName: node
   linkType: hard
 
@@ -2287,7 +2288,7 @@ __metadata:
     "@sapphire/node-utilities": ^1.0.0
     "@sleepymaid/util": "workspace:^"
     "@swc/core": ^1.3.78
-    "@types/node": ^18.17.5
+    "@types/node": ^18.17.6
     "@types/node-cron": ^3.0.8
     discord.js: ^14.13.0
     node-cron: ^3.0.2
@@ -2309,7 +2310,7 @@ __metadata:
     "@sleepymaid/logger": "workspace:^"
     "@sleepymaid/shared": "workspace:^"
     "@types/i18next-fs-backend": ^1.1.2
-    "@types/node": ^18.17.5
+    "@types/node": ^18.17.6
     discord.js: ^14.13.0
     i18next: ^23.4.4
     i18next-fs-backend: ^2.1.5
@@ -2329,7 +2330,7 @@ __metadata:
     "@favware/cliff-jumper": ^2.1.1
     "@sleepymaid/handler": "workspace:^"
     "@swc/core": ^1.3.78
-    "@types/node": ^18.17.5
+    "@types/node": ^18.17.6
     ansi-colors: 4.1.3
     rimraf: ^5.0.1
     source-map-support: 0.5.21
@@ -2344,15 +2345,15 @@ __metadata:
   dependencies:
     "@ariakit/react": ^0.2.16
     "@astrojs/mdx": ^0.19.7
-    "@astrojs/node": ^5.3.4
-    "@astrojs/react": ^2.2.2
+    "@astrojs/node": ^5.3.5
+    "@astrojs/react": ^2.3.2
     "@astrojs/tailwind": ^4.0.0
     "@fontsource/inter": ^5.0.8
     "@react-icons/all-files": ^4.1.0
     "@types/react": ^18.2.20
     "@types/react-dom": ^18.2.7
     ariakit: ^2.0.0-next.44
-    astro: ^2.10.9
+    astro: ^2.10.12
     astro-compress: ^2.0.14
     astro-critters: ^2.0.11
     classnames: ^2.3.2
@@ -2372,7 +2373,7 @@ __metadata:
   resolution: "@sleepymaid/shared@workspace:packages/shared"
   dependencies:
     "@swc/core": ^1.3.78
-    "@types/node": ^18.17.5
+    "@types/node": ^18.17.6
     fuse.js: ^6.6.2
     i18next: ^23.4.4
     rimraf: ^5.0.1
@@ -2395,7 +2396,7 @@ __metadata:
     "@sleepymaid/shared": "workspace:^"
     "@sleepymaid/util": "*"
     "@types/i18next-fs-backend": ^1.1.2
-    "@types/node": ^18.17.5
+    "@types/node": ^18.17.6
     discord.js: ^14.13.0
     i18next: ^23.4.4
     i18next-fs-backend: ^2.1.5
@@ -2416,7 +2417,7 @@ __metadata:
   dependencies:
     "@favware/cliff-jumper": ^2.1.1
     "@swc/core": ^1.3.78
-    "@types/node": ^18.17.5
+    "@types/node": ^18.17.6
     rimraf: ^5.0.1
     source-map-support: 0.5.21
     tsup: ^7.2.0
@@ -2435,7 +2436,7 @@ __metadata:
     "@sleepymaid/logger": "workspace:^"
     "@sleepymaid/shared": "workspace:^"
     "@types/i18next-fs-backend": ^1.1.2
-    "@types/node": ^18.17.5
+    "@types/node": ^18.17.6
     discord.js: ^14.13.0
     i18next: ^23.4.4
     i18next-fs-backend: ^2.1.5
@@ -2875,10 +2876,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.17.5":
-  version: 18.17.5
-  resolution: "@types/node@npm:18.17.5"
-  checksum: b8c658a99234b99425243c324b641ed7b9ceb6bee6b06421fdc9bb7c58f9a5552e353225cc549e6982462ac384abe1985022ed76e2e4728797f59b21f659ca2b
+"@types/node@npm:^18.17.6":
+  version: 18.17.6
+  resolution: "@types/node@npm:18.17.6"
+  checksum: 70bc92adde47d569f25c5ed40b55040cdf189518d6149e0c3041c6e60b1098cad9c48a856f0b7868ebd74d4098a0ca508b0ec4373dd96216eb8a387ee898e14c
   languageName: node
   linkType: hard
 
@@ -4116,9 +4117,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"astro@npm:^2.10.9":
-  version: 2.10.9
-  resolution: "astro@npm:2.10.9"
+"astro@npm:^2.10.12":
+  version: 2.10.12
+  resolution: "astro@npm:2.10.12"
   dependencies:
     "@astrojs/compiler": ^1.8.0
     "@astrojs/internal-helpers": ^0.1.2
@@ -4152,6 +4153,7 @@ __metadata:
     github-slugger: ^2.0.0
     gray-matter: ^4.0.3
     html-escaper: ^3.0.3
+    http-cache-semantics: ^4.1.1
     js-yaml: ^4.1.0
     kleur: ^4.1.4
     magic-string: ^0.30.2
@@ -4184,7 +4186,7 @@ __metadata:
       optional: true
   bin:
     astro: astro.js
-  checksum: 5919b89d4d17db54d455feb65150fbf06af4c488d3de87c4b8fe20144924e170cc8c947ca7eb96297f64c9c3e67c47882156d7ab3c5bb7314dab4d4559d18133
+  checksum: 22e4fb55b1e98e9fb8eb918a699c518fd3fe149867d46e389d8d6ba0244f9e8c36e99e735ab3e286d0b87ab1a0de97dbbc5726b883be8731948ad31692f78c12
   languageName: node
   linkType: hard
 
@@ -6541,11 +6543,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-next@npm:^13.4.18":
-  version: 13.4.18
-  resolution: "eslint-config-next@npm:13.4.18"
+"eslint-config-next@npm:^13.4.19":
+  version: 13.4.19
+  resolution: "eslint-config-next@npm:13.4.19"
   dependencies:
-    "@next/eslint-plugin-next": 13.4.18
+    "@next/eslint-plugin-next": 13.4.19
     "@rushstack/eslint-patch": ^1.1.3
     "@typescript-eslint/parser": ^5.4.2 || ^6.0.0
     eslint-import-resolver-node: ^0.3.6
@@ -6560,7 +6562,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 95c5a86d9abff396a8b6222b5278c83f7ebe742498d8653f631bc5d7f33f5e9e38312296ce71fc5dd74c364c35d0103ee3dd8782316976109a08b8d92ff037f9
+  checksum: 2b2e527facf98326486b2ce806043f41d1f5a969405d2e546d4726462de3fdd05f720ec97d27952abacb09c34e31f3896da05c0c135e65f587376db9ddd71424
   languageName: node
   linkType: hard
 
@@ -6760,9 +6762,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-import@npm:^2.28.0":
-  version: 2.28.0
-  resolution: "eslint-plugin-import@npm:2.28.0"
+"eslint-plugin-import@npm:^2.28.1":
+  version: 2.28.1
+  resolution: "eslint-plugin-import@npm:2.28.1"
   dependencies:
     array-includes: ^3.1.6
     array.prototype.findlastindex: ^1.2.2
@@ -6773,18 +6775,17 @@ __metadata:
     eslint-import-resolver-node: ^0.3.7
     eslint-module-utils: ^2.8.0
     has: ^1.0.3
-    is-core-module: ^2.12.1
+    is-core-module: ^2.13.0
     is-glob: ^4.0.3
     minimatch: ^3.1.2
     object.fromentries: ^2.0.6
     object.groupby: ^1.0.0
     object.values: ^1.1.6
-    resolve: ^1.22.3
     semver: ^6.3.1
     tsconfig-paths: ^3.14.2
   peerDependencies:
     eslint: ^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0 || ^8
-  checksum: f9eba311b93ca1bb89311856b1f7285bd79e0181d7eb70fe115053ff77e2235fea749b30f538b78927dc65769340b5be61f4c9581d1c82bcdcccb2061f440ad1
+  checksum: e8ae6dd8f06d8adf685f9c1cfd46ac9e053e344a05c4090767e83b63a85c8421ada389807a39e73c643b9bff156715c122e89778169110ed68d6428e12607edf
   languageName: node
   linkType: hard
 
@@ -9057,12 +9058,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-core-module@npm:^2.12.0, is-core-module@npm:^2.12.1":
+"is-core-module@npm:^2.12.0":
   version: 2.12.1
   resolution: "is-core-module@npm:2.12.1"
   dependencies:
     has: ^1.0.3
   checksum: f04ea30533b5e62764e7b2e049d3157dc0abd95ef44275b32489ea2081176ac9746ffb1cdb107445cf1ff0e0dfcad522726ca27c27ece64dadf3795428b8e468
+  languageName: node
+  linkType: hard
+
+"is-core-module@npm:^2.13.0":
+  version: 2.13.0
+  resolution: "is-core-module@npm:2.13.0"
+  dependencies:
+    has: ^1.0.3
+  checksum: 053ab101fb390bfeb2333360fd131387bed54e476b26860dc7f5a700bbf34a0ec4454f7c8c4d43e8a0030957e4b3db6e16d35e1890ea6fb654c833095e040355
   languageName: node
   linkType: hard
 
@@ -13166,7 +13176,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@npm:^1.1.7, resolve@npm:^1.17.0, resolve@npm:^1.22.2, resolve@npm:^1.22.3":
+"resolve@npm:^1.1.7, resolve@npm:^1.17.0, resolve@npm:^1.22.2":
   version: 1.22.3
   resolution: "resolve@npm:1.22.3"
   dependencies:
@@ -13215,7 +13225,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@patch:resolve@^1.1.7#~builtin<compat/resolve>, resolve@patch:resolve@^1.17.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.2#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.3#~builtin<compat/resolve>":
+"resolve@patch:resolve@^1.1.7#~builtin<compat/resolve>, resolve@patch:resolve@^1.17.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.2#~builtin<compat/resolve>":
   version: 1.22.3
   resolution: "resolve@patch:resolve@npm%3A1.22.3#~builtin<compat/resolve>::version=1.22.3&hash=c3c19d"
   dependencies:
@@ -13848,9 +13858,9 @@ __metadata:
     astro-eslint-parser: ^0.14.0
     eslint: ^8.47.0
     eslint-config-neon: ^0.1.47
-    eslint-config-next: ^13.4.18
+    eslint-config-next: ^13.4.19
     eslint-config-prettier: 9.0.0
-    eslint-plugin-import: ^2.28.0
+    eslint-plugin-import: ^2.28.1
     eslint-plugin-prettier: ^5.0.0
     eslint-plugin-typescript-sort-keys: ^2.3.0
     husky: ^8.0.3
@@ -15205,6 +15215,13 @@ __metadata:
   version: 1.1.2
   resolution: "ufo@npm:1.1.2"
   checksum: 83c940a6a23b6d4fc0cd116265bb5dcf88ab34a408ad9196e413270ca607a4781c09b547dc518f43caee128a096f20fe80b5a0e62b4bcc0a868619896106d048
+  languageName: node
+  linkType: hard
+
+"ultrahtml@npm:^1.2.0":
+  version: 1.3.0
+  resolution: "ultrahtml@npm:1.3.0"
+  checksum: 8ef5c51aa15c7a376f18a98d71536aa7b97f0de494e290ed811378e57c5c2e71f2e72b4afc5a544f944a594bd39aac98fc6073011ae83bfb590361aa136d3351
   languageName: node
   linkType: hard
 
