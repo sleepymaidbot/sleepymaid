@@ -1,4 +1,4 @@
-import { Client, ClientOptions, Snowflake } from 'discord.js';
+import { Client, ClientOptions } from 'discord.js';
 import { BaseLogger } from './BaseLogger';
 import { CommandManager, CommandManagerStartAllOptionsType } from './commands/CommandManager';
 import { ListenerManager, ListenerManagerStartAllOptionsType } from './listeners/ListenerManager';
