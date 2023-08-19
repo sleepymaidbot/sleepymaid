@@ -46,27 +46,6 @@ export class CommandManager extends BaseManager {
 		this.folderPath = options.folder;
 		await this.loadCommands(options.extraGlobalCommands, options.extraGuildCommands);
 		await this.RegisterApplicationCommands();
-		this.client.on('interactionCreate', (i: Interaction) => {
-			this.HandleInteractionEvent(i);
-		});
-	}
-
-	private HandleInteractionEvent(i: Interaction) {
-		if (i.type === InteractionType.ApplicationCommand) {
-			this.HandleApplicationCommands(i as CommandInteraction);
-			this.client.emit('commandRun', i);
-		} else if (i.isSelectMenu()) {
-			this.client.emit('selectChanged', i as SelectMenuInteraction);
-		} else if (i.isButton()) {
-			this.client.emit('buttonClicked', i as ButtonInteraction);
-		} else if (i.type === InteractionType.ModalSubmit) {
-			this.client.emit('modalSubmit', i as ModalSubmitInteraction);
-		} else if (i.isContextMenuCommand()) {
-			this.client.emit('contextMenuRun', i as ContextMenuCommandInteraction);
-		} else if (i.type === InteractionType.ApplicationCommandAutocomplete) {
-			this.HandleAutocomplete(i as AutocompleteInteraction);
-			this.client.emit('autocomplete', i as AutocompleteInteraction);
-		}
 	}
 
 	private async loadCommands(
