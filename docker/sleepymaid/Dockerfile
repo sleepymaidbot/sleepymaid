@@ -47,4 +47,4 @@ RUN yarn turbo run build --filter=sleepymaid
 COPY locales/ ./locales
 COPY services/sleepymaid/downloads ./services/sleepymaid/downloads
 
-CMD ["node", "--trace-warnings", "-r", "source-map-support/register", "services/bot/dist/index.js"]
+CMD ["node", "--trace-warnings", "-r", "source-map-support/register", "services/sleepymaid/dist/index.js"]
