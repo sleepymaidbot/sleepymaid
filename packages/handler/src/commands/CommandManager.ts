@@ -3,14 +3,10 @@ import { isEqualObjects } from '@sleepymaid/util';
 import {
 	ApplicationCommandData,
 	AutocompleteInteraction,
-	ButtonInteraction,
 	Collection,
 	CommandInteraction,
-	ContextMenuCommandInteraction,
 	Interaction,
 	InteractionType,
-	ModalSubmitInteraction,
-	SelectMenuInteraction,
 	Snowflake,
 } from 'discord.js';
 import { join } from 'path';
@@ -46,6 +42,13 @@ export class CommandManager extends BaseManager {
 		this.folderPath = options.folder;
 		await this.loadCommands(options.extraGlobalCommands, options.extraGuildCommands);
 		await this.RegisterApplicationCommands();
+		this.client.on('interactionCreate', (i: Interaction) => {
+			if (i.type === InteractionType.ApplicationCommand) {
+				this.HandleApplicationCommands(i as CommandInteraction);
+			} else if (i.type === InteractionType.ApplicationCommandAutocomplete) {
+				this.HandleAutocomplete(i as AutocompleteInteraction);
+			}
+		});
 	}
 
 	private async loadCommands(
