@@ -23,11 +23,7 @@ const { title } = Astro.props;
 				const hash = new URL(window.location.href).hash.substring(1);
 				if (hash) {
 					const element = document.getElementById(hash);
-					try {
-						element.scrollIntoView();
-					} catch (e) {
-						setTimeout(goToHash, 100);
-					}
+					element.scrollIntoView();
 				}
 			}
 
