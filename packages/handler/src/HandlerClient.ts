@@ -42,18 +42,16 @@ export interface ErrorLogFn {
 export class HandlerClient extends Client {
 	public declare logger: Logger;
 	public declare env: env;
-	public declare devServerId: Snowflake;
 	public declare commandManager: CommandManager;
 	public declare listenerManager: ListenerManager;
 	public declare taskManager: TaskManager;
 	constructor(options: HandlerClientOptions, djsOptions: ClientOptions) {
 		super(djsOptions);
 
-		const { env, devServerId } = options ?? {};
+		const { env } = options ?? {};
 
 		this.env = env ?? 'dev';
 		this.logger = options.logger ?? (new BaseLogger(this.env) as Logger);
-		this.devServerId = devServerId;
 		this.commandManager = new CommandManager(this);
 		this.listenerManager = new ListenerManager(this);
 		this.taskManager = new TaskManager(this);
