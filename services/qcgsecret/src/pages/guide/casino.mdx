@@ -5,7 +5,7 @@ map: Casino
 category: Guide
 ---
 
-import Header from '../../components/Header.jsx';
+import Header from '../../components/Header.astro';
 import LaserSolver from '../../components/LaserSolver.jsx';
 import Dropdown from '../../components/Dropdown.jsx';
 import Step from '../../components/Step.jsx';
@@ -24,7 +24,7 @@ Table of contents:
  - <a href="/guide/casino#hackinggame">Hacking game</a>
  - <a href="/guide/casino#bankrupt">Bankrupt</a>
 </Step>
-<Header title="Blockers" id="blockers" client:load client:only="react">
+<Header title="Blockers" id="blockers">
 	3 players
 </Header>
 
@@ -74,7 +74,7 @@ This steps gives a **_60_** seconds time bonus when completed.
 
 </Step>
 
-<Header title="Roulette" id="roulette" client:load client:only="react">
+<Header title="Roulette" id="roulette">
 	2-3 players
 </Header>
 
@@ -111,7 +111,7 @@ This steps gives a 60 seconds time bonus when completed.
 
 </Step>
 
-<Header title="Hammer" id="hammer" client:load client:only="react">
+<Header title="Hammer" id="hammer">
 	1-2 players
 </Header>
 
@@ -146,7 +146,7 @@ Then activate the lasers. This will burn the box and give the hammer that can be
 
 </Step>
 
-<Header title="Control room lasers" id="lasers" client:load client:only="react">
+<Header title="Control room lasers" id="lasers">
 	3 players
 </Header>
 
@@ -179,7 +179,7 @@ Then you need to shoot knifes, axes or props on the buttons in the control room.
 
 </Step>
 
-<Header title="Simon says" id="simon" client:load client:only="react">
+<Header title="Simon says" id="simon">
 	2 players
 </Header>
 
@@ -206,7 +206,7 @@ This steps gives a 120 seconds time bonus when completed.
 
 </Step>
 
-<Header title="Fire trial" id="firetrial" client:load client:only="react">
+<Header title="Fire trial" id="firetrial">
 	Murderer & Gunner & 3 Bystander
 </Header>
 
@@ -292,7 +292,7 @@ This steps gives a 120 seconds time bonus when completed.
 
 </Step>
 
-<Header title="Hacking game" id="hackinggame" client:load client:only="react">
+<Header title="Hacking game" id="hackinggame">
 	2 players
 </Header>
 
@@ -322,7 +322,7 @@ This steps gives a 45 seconds time bonus when completed.
 
 </Step>
 
-<Header title="Bankrupt" id="bankrupt" client:load client:only="react">
+<Header title="Bankrupt" id="bankrupt">
 	2 players
 </Header>
 
@@ -373,7 +373,7 @@ The code will be: 3472
 
 </Step>
 
-<Header title="Credits" id="credits" client:load client:only="react"></Header>
+<Header title="Credits" id="credits"/>
 
 <Step>
 
