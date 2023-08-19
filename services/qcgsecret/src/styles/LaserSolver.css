@@ -1,0 +1,32 @@
+.laser-input-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+}
+
+.laser-input-field {
+	width: 300px; /* Adjust the width as needed */
+	padding: 15px; /* Adjust the padding as needed */
+	border: none;
+	border-radius: 10px;
+	background-color: #313338;
+	color: white;
+}
+
+.laser-input-field::placeholder {
+	color: white; /* Set the placeholder text color to white */
+}
+
+.laser-button {
+	padding: 10px 20px;
+	border: none;
+	border-radius: 10px;
+	background-color: #007bff;
+	color: white;
+	cursor: pointer;
+}
+
+.laser-result {
+	margin-top: 10px;
+}
