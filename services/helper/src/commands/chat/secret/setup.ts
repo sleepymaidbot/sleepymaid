@@ -89,7 +89,6 @@ export default class QCGSecretSetupCommand implements SlashCommandInterface {
 
 	// @ts-ignore
 	public async execute(interaction: ChatInputCommandInteraction, client: HelperClient) {
-		console.log('yo');
 		if (!interaction.inCachedGuild()) return;
 		if (!interaction.memberPermissions.has(PermissionFlagsBits.Administrator)) return;
 		const name = interaction.options.getString('name');
@@ -97,7 +96,6 @@ export default class QCGSecretSetupCommand implements SlashCommandInterface {
 		const msg = messages[name];
 		if (!msg) return;
 		const messageId = interaction.options.getString('message_id');
-		console.log('b4');
 		if (messageId) {
 			const message = await interaction.channel?.messages.fetch(messageId);
 			if (!message) {
@@ -142,12 +140,10 @@ export default class QCGSecretSetupCommand implements SlashCommandInterface {
 						.catch(client.logger.error);
 			}
 		} else {
-			console.log('not an edit');
 			await msg
 				.function(interaction)
 				.then((msgs) =>
 					msgs.forEach(async (msg) => {
-						console.log('sending msg');
 						await interaction?.channel?.send({ ...msg, allowedMentions: { parse: [] } }).catch(client.logger.error);
 					}),
 				)
