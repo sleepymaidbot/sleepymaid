@@ -19,17 +19,9 @@ const { title } = Astro.props;
 	</head>
 	<body>
 		<script type="text/typescript">
-			function goToHash() {
-				const hash = new URL(window.location.href).hash.substring(1);
-				if (hash) {
-					const element = document.getElementById(hash);
-					element.scrollIntoView();
-				}
-			}
-
-			window.addEventListener('load', (event) => {
-				goToHash();
-			});
+			window.addEventListener('load', (event) =>
+				document.getElementById(new URL(window.location.href).hash.substring(1))?.scrollIntoView(),
+			);
 		</script>
 		<slot />
 	</body>
