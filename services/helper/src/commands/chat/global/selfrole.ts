@@ -10,10 +10,10 @@ import {
 import type { HelperClient } from '../../../lib/extensions/HelperClient';
 import { ButtonStyle } from 'discord-api-types/v10';
 
-export default class QCGSecretSetupCommand implements SlashCommandInterface {
+export default class SelfRoleCommand implements SlashCommandInterface {
 	public readonly guildIds = ['1131653884377579651'];
 	public readonly data = {
-		name: 'qcgsselfrole',
+		name: 'selfrole',
 		description: '[Admin only] Allow you to post a simple self role message.',
 		type: ApplicationCommandType.ChatInput,
 		defaultMemberPermissions: new PermissionsBitField([PermissionFlagsBits.Administrator]),
@@ -83,7 +83,7 @@ export default class QCGSecretSetupCommand implements SlashCommandInterface {
 							type: 2,
 							style: ButtonStyle.Primary,
 							label: 'Add/Remove the role',
-							custom_id: 'qcgselfrole:' + role.id,
+							custom_id: 'selfrole:' + role.id,
 						},
 					],
 				},

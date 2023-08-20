@@ -1,14 +1,14 @@
 import type { ListenerInterface } from '@sleepymaid/handler';
 import { BaseInteraction } from 'discord.js';
 
-export default class DebugListener implements ListenerInterface {
+export default class SelfRoleListener implements ListenerInterface {
 	public readonly name = 'interactionCreate';
 	public readonly once = false;
 
 	public async execute(interaction: BaseInteraction) {
 		if (!interaction.isButton()) return;
 		if (!interaction.inCachedGuild()) return;
-		if (!interaction.customId.startsWith('qcgselfrole:')) return;
+		if (!interaction.customId.startsWith('selfrole:')) return;
 		const roleId = interaction.customId.split(':')[1];
 		if (!roleId) return;
 		const role = interaction.guild?.roles.cache.get(roleId);
