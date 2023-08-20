@@ -14,14 +14,14 @@ const { title, id } = Astro.props;
 			<h1>{title}</h1>
 		</span>
 		<span class="component-icon">
-			{' '}
-			<a class="anchor-icon" href=`#${id}`>
+			<a class="anchor-icon" href={`#${id}`}>
 				<BsLink45Deg size={20} />
 			</a>
 		</span>
 	</div>
 	<p><slot /></p>
 </div>
+
 <style>
 	.header-component {
 		background-color: rgb(0, 0, 0);
@@ -32,21 +32,39 @@ const { title, id } = Astro.props;
 		align-items: center;
 		justify-content: center;
 		text-align: center;
+		width: 100%;
+		margin: 0;
+		box-sizing: border-box;
 	}
 
 	.component-aligned {
 		display: flex;
+		flex-direction: column;
 		align-items: center;
 		text-align: center;
+		width: 100%;
+		max-width: 768px; /* Add a max-width for better readability on larger screens */
+		margin: 0 auto; /* Center horizontally */
 	}
 
 	.component-icon {
-		margin-left: 10px;
 		margin-top: 10px;
 	}
 
 	.anchor-icon {
 		text-decoration: none;
 		color: white;
+	}
+
+	@media screen and (min-width: 768px) {
+		.component-aligned {
+			flex-direction: row;
+			justify-content: center;
+		}
+
+		.component-icon {
+			margin-left: 10px;
+			margin-top: 0;
+		}
 	}
 </style>
