@@ -7084,6 +7084,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-plugin-typescript-sort-keys@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "eslint-plugin-typescript-sort-keys@npm:3.0.0"
+  dependencies:
+    "@typescript-eslint/experimental-utils": ^5.0.0
+    json-schema: ^0.4.0
+    natural-compare-lite: ^1.4.0
+  peerDependencies:
+    "@typescript-eslint/parser": ^6
+    eslint: ^7 || ^8
+    typescript: ^3 || ^4 || ^5
+  checksum: 230f869e1d43f3ec27b3cbcd33add304fb9f607b224dcb0653054d7528e365c7c3694deb0e72942f039e871782ae57e37609aae5f6dd6ee72c9023bdbabd0031
+  languageName: node
+  linkType: hard
+
 "eslint-plugin-unicorn@npm:^47.0.0":
   version: 47.0.0
   resolution: "eslint-plugin-unicorn@npm:47.0.0"
@@ -13862,7 +13877,7 @@ __metadata:
     eslint-config-prettier: 9.0.0
     eslint-plugin-import: ^2.28.1
     eslint-plugin-prettier: ^5.0.0
-    eslint-plugin-typescript-sort-keys: ^2.3.0
+    eslint-plugin-typescript-sort-keys: ^3.0.0
     husky: ^8.0.3
     lint-staged: ^14.0.1
     prettier: ^3.0.2
