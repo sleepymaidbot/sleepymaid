@@ -18,7 +18,7 @@
 		"dist"
 	],
 	"scripts": {
-		"build": "yarn rimraf dist/ && yarn tsup",
+		"build": "pnpm rimraf dist/ && pnpm tsup",
 		"changelog": "git cliff --prepend ./CHANGELOG.md -u -c ./cliff.toml -r ../../ --include-path 'packages/handlers/*'",
 		"release": "cliff-jumper"
 	},

@@ -20,7 +20,6 @@
 		"@react-icons/all-files": "^4.1.0",
 		"@types/react": "^18.2.20",
 		"@types/react-dom": "^18.2.7",
-		"ariakit": "^2.0.0-next.44",
 		"astro": "^3.0.2",
 		"astro-compress": "^2.0.14",
 		"astro-critters": "^2.0.11",

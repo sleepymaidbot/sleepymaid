@@ -5,20 +5,13 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"private": true,
-	"workspaces": [
-		"packages/*",
-		"services/sleepymaid/",
-		"services/helper/",
-		"services/qcgsecret/",
-		"services/watcher/"
-	],
-	"packageManager": "yarn@3.6.2",
+	"packageManager": "pnpm@8.6.3",
 	"scripts": {
-		"build": "yarn turbo run build",
-		"test": "yarn turbo run test --parallel",
-		"lint": "yarn eslint --fix --ext ts,tsx,astro",
-		"format": "yarn prettier --write . --plugin-search-dir=. .",
-		"prepare": "yarn husky install"
+		"build": "pnpm turbo run build",
+		"test": "pnpm turbo run test --parallel",
+		"lint": "pnpm eslint --fix --ext ts,tsx,astro",
+		"format": "pnpm prettier --write . --plugin-search-dir=. .",
+		"prepare": "pnpm husky install"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^17.7.1",
@@ -34,7 +27,9 @@
 		"eslint-config-neon": "^0.1.47",
 		"eslint-config-next": "^13.4.19",
 		"eslint-config-prettier": "9.0.0",
+		"eslint-plugin-astro": "^0.29.0",
 		"eslint-plugin-import": "^2.28.1",
+		"eslint-plugin-mdx": "^2.2.0",
 		"eslint-plugin-prettier": "^5.0.0",
 		"eslint-plugin-typescript-sort-keys": "^3.0.0",
 		"husky": "^8.0.3",
@@ -44,12 +39,7 @@
 		"prisma": "^5.1.1",
 		"rimraf": "^5.0.1",
 		"tsup": "^7.2.0",
-		"turbo": "^1.7.4",
+		"turbo": "^1.10.13",
 		"typescript": "^5.1.6"
-	},
-	"resolutions": {
-		"turbo": "1.7.4",
-		"turbo-linux-64": "1.7.4",
-		"discord-api-types": "0.37.20"
 	}
 }

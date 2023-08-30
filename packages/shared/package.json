@@ -19,7 +19,7 @@
 		"dist"
 	],
 	"scripts": {
-		"build": "yarn rimraf dist/ && yarn tsup"
+		"build": "pnpm rimraf dist/ && pnpm tsup"
 	},
 	"author": "Ecorte",
 	"license": "MIT",

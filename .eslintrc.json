@@ -5,10 +5,12 @@
 		"node": true
 	},
 	"extends": [
+		"neon/astro",
 		"neon/common",
 		"neon/node",
 		"neon/typescript",
 		"neon/prettier",
+		"neon/jsx",
 		"neon/module",
 		"neon/next",
 		"neon/react",
@@ -21,7 +23,12 @@
 		"sourceType": "module",
 		"project": "./tsconfig.json"
 	},
-	"plugins": ["@typescript-eslint", "prettier", "import", "typescript-sort-keys"],
+	"plugins": ["@typescript-eslint", "prettier", "import", "typescript-sort-keys", "mdx", "astro"],
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	},
 	"ignorePatterns": ["dist"],
 	"overrides": [
 		{
@@ -47,6 +54,7 @@
 				"ts-check": "allow-with-description",
 				"minimumDescriptionLength": 5
 			}
-		]
+		],
+		"react/jsx-filename-extension": [1, { "extensions": [".tsx", ".astro"] }]
 	}
 }
