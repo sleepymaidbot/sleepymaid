@@ -28,6 +28,12 @@ const LaserSolver: React.FC = () => {
 		}
 	};
 
+	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleCalculate();
+    }
+  };
+
 	const handleCalculate = () => {
 		if (number1.length === 4 && number2.length === 4) {
 			const paddedNumber1 = number1.padStart(4, '0');
@@ -57,6 +63,7 @@ const LaserSolver: React.FC = () => {
 					maxLength={4}
 					value={number1}
 					onChange={handleNumber1Change}
+					onKeyDown={handleKeyDown}
 					placeholder="Enter the control room laser order"
 				/>
 				<input
@@ -65,6 +72,7 @@ const LaserSolver: React.FC = () => {
 					maxLength={4}
 					value={number2}
 					onChange={handleNumber2Change}
+					onKeyDown={handleKeyDown}
 					placeholder="Enter the middle laser order"
 				/>
 				<button className="laser-button" onClick={handleCalculate}>
