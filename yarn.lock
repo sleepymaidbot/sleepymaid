@@ -2354,7 +2354,7 @@ __metadata:
     astro-compress: ^2.0.14
     astro-critters: ^2.0.11
     classnames: ^2.3.2
-    hast-util-to-string: ^2.0.0
+    hast-util-to-string: ^3.0.0
     react: ^18.2.0
     react-custom-scrollbars-2: ^4.5.0
     react-dom: ^18.2.0
@@ -2731,6 +2731,15 @@ __metadata:
   dependencies:
     "@types/unist": "*"
   checksum: fff47998f4c11e21a7454b58673f70478740ecdafd95aaf50b70a3daa7da9cdc57315545bf9c039613732c40b7b0e9e49d11d03fe9a4304721cdc3b29a88141e
+  languageName: node
+  linkType: hard
+
+"@types/hast@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@types/hast@npm:3.0.0"
+  dependencies:
+    "@types/unist": "*"
+  checksum: ac4c74bdc910101ece1b3cbce98ad559dc333f8d537756c2f1f136a03396e9d25e506fcd5db85663780a9a2683f5401bf42fa0935dc092171e622bfba1497172
   languageName: node
   linkType: hard
 
@@ -8499,12 +8508,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hast-util-to-string@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "hast-util-to-string@npm:2.0.0"
+"hast-util-to-string@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "hast-util-to-string@npm:3.0.0"
   dependencies:
-    "@types/hast": ^2.0.0
-  checksum: 0c087f8dee4238741cbad65d28adb8bf800252c763a3c643df2fcb4ef97232056837928c2ae73f841f310e4d336c3b183ee380a5e6eb24bda5c117f78ed600d4
+    "@types/hast": ^3.0.0
+  checksum: 64f7f4f2b7a69b2ebddd1c87a29eae5f718d593d2154a46de2fa21f6ca8bfbda50ad71a5794f5952ae450f4da23a8bc811db348098b09916b9553cd933aefe9a
   languageName: node
   linkType: hard
 
