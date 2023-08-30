@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../styles/LaserSolver.css';
 import Alert from './Alert';
 
 const isValidNumber = (num: string): boolean => /^[1-4]*$/.test(num);
@@ -56,9 +55,9 @@ const LaserSolver: React.FC = () => {
 
 	return (
 		<Alert title="Laser Solver" type="info">
-			<div className="laser-input-container">
+			<div className="flex flex-col items-center gap-2.5">
 				<input
-					className="laser-input-field"
+					className="w-72 px-4 py-3 rounded-lg bg-gray-800 text-white placeholder-white border border-transparent"
 					type="text"
 					maxLength={4}
 					value={number1}
@@ -67,7 +66,7 @@ const LaserSolver: React.FC = () => {
 					placeholder="Enter the control room laser order"
 				/>
 				<input
-					className="laser-input-field"
+					className="w-72 px-4 py-3 rounded-lg bg-gray-800 text-white placeholder-white border border-transparent"
 					type="text"
 					maxLength={4}
 					value={number2}
@@ -75,10 +74,10 @@ const LaserSolver: React.FC = () => {
 					onKeyDown={handleKeyDown}
 					placeholder="Enter the middle laser order"
 				/>
-				<button className="laser-button" onClick={handleCalculate}>
+				<button className="px-5 py-2 border-none rounded-lg bg-blue-500 text-white cursor-pointer" onClick={handleCalculate}>
 					Calculate
 				</button>
-				<div className="laser-result">
+				<div className="mt-4">
 					<p>Result: {result}</p>
 				</div>
 			</div>
