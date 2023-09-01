@@ -161,7 +161,6 @@ temp/
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,node,yarn
 
-packages/config/src/config/
 *.disable
 *.exe
 services/helper/banners/
