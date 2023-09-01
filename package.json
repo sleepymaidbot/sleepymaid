@@ -21,7 +21,6 @@
 		"@types/prettier": "2.7.3",
 		"@typescript-eslint/eslint-plugin": "^6.4.1",
 		"@typescript-eslint/parser": "^6.4.1",
-		"@yarnpkg/cli-dist": "^3.6.2",
 		"astro-eslint-parser": "^0.14.0",
 		"eslint": "^8.47.0",
 		"eslint-config-neon": "^0.1.47",

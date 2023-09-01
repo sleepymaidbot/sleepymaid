@@ -5,7 +5,7 @@
 	"private": true,
 	"main": "dist/index.js",
 	"scripts": {
-		"build": "pnpm rimraf dist/ && pnpm tsc",
+		"build": "pnpm exec rimraf dist/ && pnpm exec tsc",
 		"start": "pnpm build && node --trace-warnings -r source-map-support/register dist/index.js"
 	},
 	"author": "Ecorte",

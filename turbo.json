@@ -5,6 +5,10 @@
 			"dependsOn": ["^build"],
 			"outputs": ["dist/**", "types/**"]
 		},
+		"start": {
+			"dependsOn": ["^build"],
+			"outputs": []
+		},
 		"lint": {
 			"dependsOn": [],
 			"outputs": []
