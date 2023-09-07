@@ -2,5 +2,4 @@ packages:
   - 'packages/*'
   - 'services/sleepymaid/'
   - 'services/helper/'
-  - 'services/qcgsecret/'
   - 'services/watcher/'

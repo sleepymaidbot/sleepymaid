@@ -20,7 +20,6 @@ COPY packages/util ./packages/util
 COPY services/sleepymaid ./services/sleepymaid
 COPY services/helper/ ./services/helper
 COPY services/watcher ./services/watcher
-COPY services/qcgsecret ./services/qcgsecret
 
 RUN pnpm install --frozen-lockfile --ignore-scripts
 COPY prisma/ ./prisma

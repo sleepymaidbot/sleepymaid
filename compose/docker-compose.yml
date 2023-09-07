@@ -60,16 +60,6 @@ services:
   #    DATABASE_URL: 'postgresql://sleepymaid:admin@postgres:5432/sleepymaid'
   #    REDIS_URL: 'redis://redis:6379/0'
 
-  qcgsecret:
-    build:
-      context: ../
-      dockerfile: ./docker/qcgsecret/Dockerfile
-    restart: unless-stopped
-    expose:
-      - 3001
-    ports:
-      - '3001:3001'
-
   sleepymaid:
     build:
       context: ../
