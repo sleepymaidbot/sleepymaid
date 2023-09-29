@@ -13,6 +13,7 @@ import { ButtonStyle } from 'discord-api-types/v10';
 export default class SelfRoleCommand implements SlashCommandInterface {
 	public readonly guildIds = [
 		'1131653884377579651', //QCGSecret
+		'1150379660128047104', //Whiteout
 		'1156009175600611501', //Whiteout Test
 	];
 	public readonly data = {
