@@ -41,7 +41,7 @@ export default class SelfRoleCommand implements SlashCommandInterface {
 				PermissionFlagsBits.BanMembers,
 				PermissionFlagsBits.KickMembers,
 				PermissionFlagsBits.ManageChannels,
-				PermissionFlagsBits.ManageEmojisAndStickers,
+				PermissionFlagsBits.ManageGuildExpressions,
 				PermissionFlagsBits.ManageGuild,
 				PermissionFlagsBits.ManageMessages,
 				PermissionFlagsBits.ManageRoles,
