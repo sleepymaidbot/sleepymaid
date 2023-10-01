@@ -19,7 +19,7 @@ export default class SelfRoleListener implements ListenerInterface {
 		if (interaction.member.roles.cache.has(roleId)) {
 			await interaction.member.roles.remove(
 				roleId,
-				`Selfrole in #${interaction.channel.name} (${interaction.channel.id}))`,
+				`Selfrole in #${interaction.channel.name} (${interaction.channel.id})`,
 			);
 			return await interaction.editReply({
 				content: `You no longer have the role ${role.toString()}`,
@@ -28,7 +28,7 @@ export default class SelfRoleListener implements ListenerInterface {
 		} else {
 			await interaction.member.roles.add(
 				roleId,
-				`Selfrole in #${interaction.channel.name} (${interaction.channel.id}))`,
+				`Selfrole in #${interaction.channel.name} (${interaction.channel.id})`,
 			);
 			return await interaction.editReply({
 				content: `You now have the role ${role.toString()}`,
