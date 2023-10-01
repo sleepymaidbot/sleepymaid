@@ -18,11 +18,14 @@ const sites = [
 	'fb.watch',
 ];
 
+const enabled = false;
+
 export default class VidListener implements ListenerInterface {
 	public readonly name = 'messageCreate';
 	public readonly once = false;
 
 	public async execute(message: Message, client: SleepyMaidClient) {
+		if (!enabled) return;
 		if (message.author.bot) return;
 
 		const args = message.content.split(' ');
