@@ -6,26 +6,25 @@ export default class SelfRoleListener implements ListenerInterface {
 	public readonly once = false;
 
 	public async execute(interaction: BaseInteraction) {
-		if (!interaction.isButton()) return;
 		if (!interaction.inCachedGuild()) return;
+		if (!interaction.isButton()) return;
+		await interaction.deferReply({ ephemeral: true });
 		if (!interaction.customId.startsWith('selfrole:')) return;
 		const roleId = interaction.customId.split(':')[1];
-		if (!roleId) return;
+		if (!roleId) return await interaction.editReply({ content: 'Something went wrong.' });
 		const role = interaction.guild?.roles.cache.get(roleId);
-		if (!role) return;
-		if (!interaction.member) return;
+		if (!role) return await interaction.editReply({ content: 'Something went wrong.' });
+		if (!interaction.member) return await interaction.editReply({ content: 'Something went wrong.' });
 		if (interaction.member.roles.cache.has(roleId)) {
 			await interaction.member.roles.remove(roleId);
-			await interaction.reply({
+			return await interaction.editReply({
 				content: `You no longer have the role ${role.toString()}`,
-				ephemeral: true,
 				allowedMentions: { parse: [] },
 			});
 		} else {
 			await interaction.member.roles.add(roleId);
-			await interaction.reply({
+			return await interaction.editReply({
 				content: `You now have the role ${role.toString()}`,
-				ephemeral: true,
 				allowedMentions: { parse: [] },
 			});
 		}
