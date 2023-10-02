@@ -37,7 +37,27 @@ These roles allow you to access the game channels.
 					.setEmoji({ id: '1150535021162152016', name: 'rocketleague' }),
 			]);
 
-			return [{ content: msg1, components: [row1] }];
+			const msg2 = `## Notifications
+These roles allow you to get notified when something happens. Here's a list of the notifications you can get:
+<@&1158226261479538758> » When one of our team has a game.
+<@&1158226358338584636> » Announcements about our partners.
+			`;
+
+			const row2 = new ActionRowBuilder<ButtonBuilder>().addComponents([
+				new ButtonBuilder()
+					.setCustomId('selfrole:1158226261479538758')
+					.setLabel('Game Announcements')
+					.setStyle(ButtonStyle.Primary),
+				new ButtonBuilder()
+					.setCustomId('selfrole:1158226358338584636')
+					.setLabel('Partner Announcements')
+					.setStyle(ButtonStyle.Primary),
+			]);
+
+			return [
+				{ content: msg1, components: [row1] },
+				{ content: msg2, components: [row2] },
+			];
 		},
 	},
 };
