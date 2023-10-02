@@ -23,6 +23,7 @@ COPY services/watcher ./services/watcher
 
 RUN pnpm install --frozen-lockfile --ignore-scripts
 COPY prisma/ ./prisma
+COPY locales/ ./locales
 RUN pnpm prisma generate
 RUN pnpm turbo run build --filter=helper...
 
