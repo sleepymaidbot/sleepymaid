@@ -112,6 +112,9 @@
 					"button-cancel": "Cancel"
 				}
 			}
+		},
+		"raw_content": {
+			"name": "Raw Content"
 		}
 	}
 }

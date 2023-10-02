@@ -90,6 +90,9 @@
 				"role_list": "Liste des rôles modérateurs:"
 			},
 			"no_permission": "Tu n'a pas la permission d'utliser cette command. Tu doit avoir la permission ``ADMINISTRATOR`` ou avoir un rôle dans la liste des rôles administrateurs."
+		},
+		"raw_content": {
+			"name": "Contenu Brut"
 		}
 	}
 }
