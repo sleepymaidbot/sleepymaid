@@ -1,4 +1,48 @@
 # Changelog
+All notable changes to this project will be documented in this file.
+
+# [@sleepymaid/util@3.3.0](https://github.com/sleepymaidbot/sleepymaid/compare/@sleepymaid/util@3.3.0...@sleepymaid/util@3.3.0) - (2023-10-03)
+
+## Bug Fixes
+
+- **deps:** Update all non-major dependencies (#554) ([1d5e33f](https://github.com/sleepymaidbot/sleepymaid/commit/1d5e33f936ff6c6d77fdea5f5df04167255410cc))
+- **deps:** Update all non-major dependencies (#551) ([0af1f00](https://github.com/sleepymaidbot/sleepymaid/commit/0af1f0066d04f3daa65a6fe966f582f7cc9bcfc9))
+- **deps:** Update all non-major dependencies (#550) ([0e6e95d](https://github.com/sleepymaidbot/sleepymaid/commit/0e6e95d0ae74749ee0cd82e5303fb6e1cec51237))
+- **deps:** Update all non-major dependencies (#547) ([3dec5e7](https://github.com/sleepymaidbot/sleepymaid/commit/3dec5e7c0b3a8115bb1e61845400f1b1013169b3))
+- **deps:** Update all non-major dependencies (#534) ([30fc4ff](https://github.com/sleepymaidbot/sleepymaid/commit/30fc4ffa6b199d7949ac14161d010afda93ce06d))
+- **deps:** Update all non-major dependencies ([ee9c323](https://github.com/sleepymaidbot/sleepymaid/commit/ee9c323d6b5c9b07d2bf4a7daebfc642288972e2))
+- **deps:** Update all non-major dependencies (#530) ([55d132a](https://github.com/sleepymaidbot/sleepymaid/commit/55d132adcf30a75f5da2e30bf9ca46852120fff0))
+- **deps:** Update all non-major dependencies (#527) ([c6bc800](https://github.com/sleepymaidbot/sleepymaid/commit/c6bc800db07ad7c9b3a314ef54069c3a62f3cd1a))
+- **deps:** Update all non-major dependencies (#508) ([9eee993](https://github.com/sleepymaidbot/sleepymaid/commit/9eee993683a520d8433c9b8761bcf5c7c1ae1fb8))
+- **deps:** Update all non-major dependencies (#501) ([57843d3](https://github.com/sleepymaidbot/sleepymaid/commit/57843d32687ad9ba8fd27f36e6dbe1d315ff5fdc))
+- **deps:** Update all non-major dependencies (#498) ([e1f5e07](https://github.com/sleepymaidbot/sleepymaid/commit/e1f5e073b77525a4bba501237dcc2cfa1cb257aa))
+- **deps:** Update all non-major dependencies (#482) ([5da8dad](https://github.com/sleepymaidbot/sleepymaid/commit/5da8dad0edf4604d4dd349040b709f9f8375993a))
+- **deps:** Update all non-major dependencies (#481) ([8f4a0fb](https://github.com/sleepymaidbot/sleepymaid/commit/8f4a0fbde2d82d0d7eecb4b0e4df56c73b8bef5b))
+- **deps:** Update all non-major dependencies (#478) ([7534586](https://github.com/sleepymaidbot/sleepymaid/commit/7534586b72e30c395be5b0eca41b0c79d2f8fda6))
+- **deps:** Update all non-major dependencies (#469) ([136d174](https://github.com/sleepymaidbot/sleepymaid/commit/136d1746465ccf68930771ae169666745085c4ea))
+- **deps:** Update all non-major dependencies ([faf43a6](https://github.com/sleepymaidbot/sleepymaid/commit/faf43a6f42eb0a8c63c5e8d3a0472b4e05cc9a77))
+- **deps:** Update all non-major dependencies ([14150e4](https://github.com/sleepymaidbot/sleepymaid/commit/14150e4052649121239b54f9507ff8d005d6cf73))
+- **deps:** Update all non-major dependencies (#457) ([48ccef7](https://github.com/sleepymaidbot/sleepymaid/commit/48ccef7ff6ff0700349efa6c038a243c1e14a327))
+- **deps:** Update all non-major dependencies (#452) ([8e4051e](https://github.com/sleepymaidbot/sleepymaid/commit/8e4051ec49c2f2dfe024faef8eba552a6d1f25a7))
+- **deps:** Update all non-major dependencies (#451) ([2fc2d32](https://github.com/sleepymaidbot/sleepymaid/commit/2fc2d32e781fc36903e3248e13c6c0d5db278534))
+- **deps:** Update all non-major dependencies ([5ac6e16](https://github.com/sleepymaidbot/sleepymaid/commit/5ac6e16e80b33955091c5cc7b2e0822eeec32541))
+- **deps:** Update all non-major dependencies (#442) ([b0048f8](https://github.com/sleepymaidbot/sleepymaid/commit/b0048f8f09375dcfbfc257b5f9d7a528bcea241c))
+- **test:** Add vite ([d759dc6](https://github.com/sleepymaidbot/sleepymaid/commit/d759dc61bf235553c19b53bb213c55a082254002))
+
+## Features
+
+- **ci:** Update deps ([03cfb3b](https://github.com/sleepymaidbot/sleepymaid/commit/03cfb3b6fba7cfe70c83e18f302b22d4fb1d3014))
+- **packages:** Add @swc/core ([c552ab1](https://github.com/sleepymaidbot/sleepymaid/commit/c552ab1f89da642558a99463f4a6b6380e0a8334))
+
+## Refactor
+
+- **Util:** Remove loadFolder ([ce76a8d](https://github.com/sleepymaidbot/sleepymaid/commit/ce76a8db2a5aecefd4922f0bb2d04da14c822580))
+
+## Styling
+
+- Format files ([63efb64](https://github.com/sleepymaidbot/sleepymaid/commit/63efb6431fcac59eeb77d88edcca4d82edc037a9))
+
+# Changelog
 
 All notable changes to this project will be documented in this file.
 
