@@ -17,7 +17,7 @@
 		"@types/concat-stream": "^2.0.0",
 		"@types/i18next-fs-backend": "^1.1.2",
 		"@types/node": "^18.18.3",
-		"@types/react-dom": "^18.2.8",
+		"@types/react-dom": "^18.2.10",
 		"@types/sax": "^1.2.5",
 		"@types/ws": "^8.5.6",
 		"rimraf": "^5.0.5",
@@ -26,7 +26,7 @@
 	},
 	"dependencies": {
 		"@discordjs/brokers": "^0.2.2",
-		"@prisma/client": "^5.3.1",
+		"@prisma/client": "^5.4.0",
 		"@sapphire/result": "^2.6.4",
 		"@sapphire/stopwatch": "1.5.0",
 		"@sleepymaid/handler": "workspace:^",
@@ -39,7 +39,7 @@
 		"i18next-fs-backend": "^2.2.0",
 		"murmurhash-v3": "^1.0.2",
 		"path": "0.12.7",
-		"prisma": "^5.3.1",
+		"prisma": "^5.4.0",
 		"reflect-metadata": "0.1.13",
 		"tslib": "^2.6.2",
 		"tsyringe": "4.8.0"
