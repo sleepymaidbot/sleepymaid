@@ -10,6 +10,6 @@ export default class WelcomeListener implements ListenerInterface {
 		if (member.user.bot) return;
 		const role = member.guild.roles.cache.get('1150541368498856017');
 		if (!role) return;
-		await member.roles.add(role);
+		await member.roles.add(role, 'Auto-role');
 	}
 }
