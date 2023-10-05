@@ -2,9 +2,7 @@ version: '3.9'
 
 services:
   postgres:
-    build:
-      context: ../docker/postgresql
-      dockerfile: ./Dockerfile
+    image: postgres:15.4-alpine
     environment:
       POSTGRES_USER: 'sleepymaid'
       POSTGRES_PASSWORD: 'admin'
@@ -18,9 +16,6 @@ services:
       timeout: 5s
 
   redis:
-    build:
-      context: ../docker/redis
-      dockerfile: ./Dockerfile
     image: redis:7-alpine
     volumes:
       - redis-data:/data
@@ -31,9 +26,6 @@ services:
       timeout: 5s
 
   ghost:
-    build:
-      context: ../docker/ghost
-      dockerfile: ./Dockerfile
     image: ghost:5-alpine
     restart: unless-stopped
     expose:
