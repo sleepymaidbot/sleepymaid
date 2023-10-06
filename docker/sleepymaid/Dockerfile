@@ -22,8 +22,9 @@ COPY services/helper/ ./services/helper
 COPY services/watcher ./services/watcher
 
 RUN pnpm install --frozen-lockfile --ignore-scripts
-COPY prisma/ ./prisma
 COPY locales/ ./locales
+COPY .git/ ./.git
+COPY prisma/ ./prisma
 RUN pnpm prisma generate
 RUN pnpm turbo run build --filter=sleepymaid...
 
