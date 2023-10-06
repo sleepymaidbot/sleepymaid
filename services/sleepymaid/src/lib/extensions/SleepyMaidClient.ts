@@ -65,7 +65,7 @@ export class SleepyMaidClient extends HandlerClient {
 
 		await this.loadHandlers({
 			commands: {
-				folder: resolve(__dirname, '..', '..', 'slashCommands'),
+				folder: resolve(__dirname, '..', '..', 'commands'),
 			},
 			listeners: {
 				folder: resolve(__dirname, '..', '..', 'listeners'),
