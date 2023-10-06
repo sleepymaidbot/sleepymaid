@@ -2,7 +2,7 @@ import { PubSubRedisBroker } from '@discordjs/brokers';
 import { Logger } from '@sleepymaid/logger';
 import { initConfig, Config, supportedLngs } from '@sleepymaid/shared';
 import { PrismaClient } from '@prisma/client';
-import { GatewayIntentBits } from 'discord-api-types/v10';
+import { ActivityType, GatewayIntentBits } from 'discord-api-types/v10';
 import { HandlerClient } from '@sleepymaid/handler';
 import { resolve } from 'path';
 import i18next from 'i18next';
@@ -28,6 +28,15 @@ export class HelperClient extends HandlerClient {
 					GatewayIntentBits.MessageContent,
 				],
 				allowedMentions: { parse: ['users', 'roles'], repliedUser: false },
+				presence: {
+					status: 'online',
+					activities: [
+						{
+							name: 'you',
+							type: ActivityType.Watching,
+						},
+					],
+				},
 			},
 		);
 	}
