@@ -8,8 +8,8 @@ export default class SelfRoleListener implements ListenerInterface {
 	public async execute(interaction: BaseInteraction) {
 		if (!interaction.inCachedGuild()) return;
 		if (!interaction.isButton()) return;
-		await interaction.deferReply({ ephemeral: true });
 		if (!interaction.customId.startsWith('selfrole:')) return;
+		await interaction.deferReply({ ephemeral: true });
 		const roleId = interaction.customId.split(':')[1];
 		if (!roleId) return await interaction.editReply({ content: 'Something went wrong.' });
 		const role = interaction.guild?.roles.cache.get(roleId);
