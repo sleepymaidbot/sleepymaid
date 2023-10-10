@@ -12,6 +12,7 @@ import {
 } from 'discord-api-types/v10';
 import { getLocalizedProp } from '@sleepymaid/shared';
 import i18next from 'i18next';
+import { AdminRole, ModRole } from '@prisma/client';
 
 const getBaseEmbed = (i: ChatInputCommandInteraction<'cached'>): APIEmbed => {
 	return {
@@ -124,14 +125,14 @@ export default class ConfigCommand implements SlashCommandInterface {
 					guildId: interaction.guild.id,
 				},
 			})
-		).map((role) => role.roleId);
+		).map((role: AdminRole) => role.roleId);
 		const modRoles = (
 			await client.prisma.modRole.findMany({
 				where: {
 					guildId: interaction.guild.id,
 				},
 			})
-		).map((role) => role.roleId);
+		).map((role: ModRole) => role.roleId);
 
 		if (subcommandGroup === 'admin-role' || subcommandGroup === 'mod-role') {
 			if (
