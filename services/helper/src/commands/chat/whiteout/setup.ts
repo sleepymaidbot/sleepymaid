@@ -60,6 +60,34 @@ These roles allow you to get notified when something happens. Here's a list of t
 			];
 		},
 	},
+	rocketLeagueLFG: {
+		fancyName: 'Rocket League LFG',
+		function: async () => {
+			const msg = `# Rocket League LFG
+
+Click the button below to get the <@&1159606226833916035> role. The role is used to look for Rocket League players.
+You can remove the role by clicking the button again.
+
+If you are looking for some players, you can use the second button to ping the role.
+You need to have the role to use this button.
+
+The <@&1159606226833916035> role ping is on a 10 minutes cooldown.
+			`;
+
+			const row = new ActionRowBuilder<ButtonBuilder>().addComponents([
+				new ButtonBuilder()
+					.setCustomId('selfrole:1159606226833916035')
+					.setLabel('Get the role')
+					.setStyle(ButtonStyle.Primary),
+				new ButtonBuilder()
+					.setCustomId('whiteout:lfg:1159606226833916035')
+					.setLabel('Ping the role')
+					.setStyle(ButtonStyle.Primary),
+			]);
+
+			return [{ content: msg, components: [row] }];
+		},
+	},
 };
 
 export default class WhiteoutSetupCommand implements SlashCommandInterface {
