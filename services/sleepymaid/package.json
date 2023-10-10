@@ -11,15 +11,8 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
-		"@types/babel__core": "^7.20.2",
-		"@types/babel__traverse": "^7.20.2",
-		"@types/chai-subset": "^1.3.3",
-		"@types/concat-stream": "^2.0.0",
 		"@types/i18next-fs-backend": "^1.1.3",
 		"@types/node": "^18.18.4",
-		"@types/react-dom": "^18.2.13",
-		"@types/sax": "^1.2.5",
-		"@types/ws": "^8.5.7",
 		"rimraf": "^5.0.5",
 		"source-map-support": "0.5.21",
 		"typescript": "^5.2.2"
