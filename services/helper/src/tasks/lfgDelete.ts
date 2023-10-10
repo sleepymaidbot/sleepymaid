@@ -15,8 +15,10 @@ export default class BannerTask implements TaskInterface {
 			if (!channel.isTextBased()) continue;
 			const messages = await channel.messages.fetch({ limit: 100 });
 			for (const message of messages.values()) {
-				if (message.createdTimestamp < Date.now() - 600000) await message.delete();
-				else continue;
+				if (message.createdTimestamp < Date.now() - 600000) {
+					if (message.pinned) continue;
+					await message.delete();
+				} else continue;
 			}
 		}
 	}
