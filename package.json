@@ -5,7 +5,7 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"private": true,
-	"packageManager": "pnpm@8.9.0",
+	"packageManager": "pnpm@8.9.1",
 	"scripts": {
 		"build": "pnpm turbo run build",
 		"test": "pnpm turbo run test --parallel",
@@ -30,7 +30,7 @@
 		"eslint-plugin-import": "^2.28.1",
 		"eslint-plugin-mdx": "^2.2.0",
 		"eslint-plugin-prettier": "^5.0.1",
-		"eslint-plugin-typescript-sort-keys": "^3.0.0",
+		"eslint-plugin-typescript-sort-keys": "^3.1.0",
 		"husky": "^8.0.3",
 		"lint-staged": "^14.0.1",
 		"prettier": "^3.0.3",
