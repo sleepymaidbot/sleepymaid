@@ -23,7 +23,7 @@
 		"@sleepymaid/logger": "workspace:^",
 		"@sleepymaid/shared": "workspace:^",
 		"discord.js": "^14.13.0",
-		"i18next": "^23.5.1",
+		"i18next": "^23.6.0",
 		"i18next-fs-backend": "^2.2.0",
 		"path": "0.12.7",
 		"reflect-metadata": "^0.1.13",
