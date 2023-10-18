@@ -35,6 +35,6 @@
 		"@sleepymaid/handler": "workspace:^",
 		"discord.js": "^14.13.0",
 		"fuse.js": "^6.6.2",
-		"i18next": "^23.5.1"
+		"i18next": "^23.6.0"
 	}
 }
