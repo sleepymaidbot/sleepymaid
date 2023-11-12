@@ -1,11 +1,12 @@
-import { ButtonStyle } from 'discord-api-types/v10';
 import { ButtonBuilder, ActionRowBuilder, SelectMenuBuilder, SelectMenuOptionBuilder } from '@discordjs/builders';
-import { pingRoleIds, colorRoleIds } from '@sleepymaid/shared';
 import type { ListenerInterface } from '@sleepymaid/handler';
+import { pingRoleIds, colorRoleIds } from '@sleepymaid/shared';
+import { ButtonStyle } from 'discord-api-types/v10';
 import type { ButtonInteraction, SelectMenuInteraction } from 'discord.js';
 
 export default class MetahandlerListener implements ListenerInterface {
 	public readonly name = 'interactionCreate';
+
 	public readonly once = false;
 
 	public async execute(interaction: ButtonInteraction | SelectMenuInteraction) {
@@ -61,6 +62,7 @@ export default class MetahandlerListener implements ListenerInterface {
 						});
 						break;
 					}
+
 					case 'color': {
 						if (interaction.member.roles.cache.has('857324294791364639')) {
 							const colorOptions = [
@@ -126,8 +128,10 @@ export default class MetahandlerListener implements ListenerInterface {
 									"<:redX:948606748334358559> Pour pouvoir bénéficier des **couleurs**, vous devez posséder l'un des **rôles** suivant: ``Nitro Booster``, ``Actif``.",
 							});
 						}
+
 						break;
 					}
+
 					case 'viewRoles': {
 						const pingRole = interaction.member.roles.cache.filter((role) => pingRoleIds.includes(role.id));
 						const colorRole = interaction.member.roles.cache.filter((role) => colorRoleIds.includes(role.id));
@@ -137,12 +141,14 @@ export default class MetahandlerListener implements ListenerInterface {
 						} else {
 							cleanPingRole = '**Notifications:** Aucune';
 						}
+
 						let cleanColorRole;
 						if (colorRole.size > 0) {
 							cleanColorRole = '**Couleurs:**' + colorRole.map((role) => '<@&' + role.id + '>').join(', ');
 						} else {
 							cleanColorRole = '**Couleurs:** Aucune';
 						}
+
 						await interaction.editReply({
 							content: cleanPingRole + '\n' + cleanColorRole,
 						});
@@ -170,6 +176,7 @@ export default class MetahandlerListener implements ListenerInterface {
 						});
 						break;
 					}
+
 					case 'color': {
 						const currentColorRole = interaction.member.roles.cache
 							.filter((role) => colorRoleIds.includes(role.id))
@@ -201,6 +208,7 @@ export default class MetahandlerListener implements ListenerInterface {
 						});
 						break;
 					}
+
 					case 'color': {
 						const currentColorRole = interaction.member.roles.cache
 							.filter((role) => colorRoleIds.includes(role.id))
@@ -222,13 +230,16 @@ export default class MetahandlerListener implements ListenerInterface {
 						content: 'Tu es déjà membre.',
 					});
 				else {
-					const role = await interaction.guild.roles.cache.find((r) => r.id === '884149070757769227');
+					await interaction.editReply({
+						content: "Le rôle n'est plus disponible.",
+					});
+					/* const role = await interaction.guild.roles.cache.find((r) => r.id === '884149070757769227');
 					if (!role) return;
 					await interaction.member.roles.add(role);
 
 					await interaction.editReply({
 						content: `<:wave:948626464432083014> **__Bienvenue sur le serveur__**`,
-					});
+					});*/
 				}
 			}
 		}
