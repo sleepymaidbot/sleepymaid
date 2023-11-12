@@ -23,6 +23,9 @@ jobs:
       - name: Ensure prisma schema is up to date
         run: pnpm prisma generate
 
+      - name: Build
+        run: pnpm build
+
       - name: Check Build
         run: pnpm check
 
