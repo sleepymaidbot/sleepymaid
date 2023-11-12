@@ -56,11 +56,10 @@ export default class MetahandlerListener implements ListenerInterface {
 								.setStyle(ButtonStyle.Secondary),
 						]);
 
-						await interaction.editReply({
+						return interaction.editReply({
 							content: 'Sélectionnez ci-dessous les notifications que vous souhaitez recevoir.',
 							components: [row1, row2],
 						});
-						break;
 					}
 
 					case 'color': {
@@ -86,10 +85,9 @@ export default class MetahandlerListener implements ListenerInterface {
 							cleanColorRole = '**Couleurs:** Aucune';
 						}*/
 
-						await interaction.editReply({
+						return interaction.editReply({
 							content: cleanPingRole /* + '\n' + cleanColorRole*/,
 						});
-						break;
 					}
 
 					default: {
@@ -105,7 +103,7 @@ export default class MetahandlerListener implements ListenerInterface {
 							.filter((role) => pingRoleIds.includes(role.id))
 							.map((role) => role.id);
 
-						if (!interaction.isSelectMenu()) return;
+						if (!interaction.isStringSelectMenu()) return;
 						const newPingRole = interaction.values;
 
 						const toAdd = newPingRole.filter((role) => !currentPingRole.includes(role));
@@ -114,10 +112,9 @@ export default class MetahandlerListener implements ListenerInterface {
 						await interaction.member.roles.add(toAdd);
 						await interaction.member.roles.remove(toRemove);
 
-						await interaction.editReply({
+						return interaction.editReply({
 							content: '<:greenTick:948620600144982026> Tes rôles de notifications ont été mis à jour.',
 						});
-						break;
 					}
 
 					case 'color': {
@@ -138,22 +135,20 @@ export default class MetahandlerListener implements ListenerInterface {
 						const currentPingRole = interaction.member.roles.cache
 							.filter((role) => pingRoleIds.includes(role.id))
 							.map((role) => role.id);
-						interaction.member.roles.remove(currentPingRole);
-						await interaction.editReply({
+						await interaction.member.roles.remove(currentPingRole);
+						return interaction.editReply({
 							content: "<:greenTick:948620600144982026> L'ensemble de tes rôles de notifications ont bien été retirés.",
 						});
-						break;
 					}
 
 					case 'color': {
 						const currentColorRole = interaction.member.roles.cache
 							.filter((role) => colorRoleIds.includes(role.id))
 							.map((role) => role.id);
-						interaction.member.roles.remove(currentColorRole);
-						await interaction.editReply({
+						await interaction.member.roles.remove(currentColorRole);
+						return interaction.editReply({
 							content: '<:greenTick:948620600144982026> Ton rôle de couleur à bien été retiré.',
 						});
-						break;
 					}
 
 					default: {
@@ -168,11 +163,11 @@ export default class MetahandlerListener implements ListenerInterface {
 					interaction.member.roles.cache.has('862462288345694210') ||
 					interaction.member.roles.cache.has('403681300940193804')
 				)
-					await interaction.editReply({
+					return interaction.editReply({
 						content: 'Tu es déjà membre.',
 					});
 				else {
-					await interaction.editReply({
+					return interaction.editReply({
 						content: "Le rôle n'est plus disponible.",
 					});
 					/* const role = await interaction.guild.roles.cache.find((r) => r.id === '884149070757769227');
@@ -183,7 +178,15 @@ export default class MetahandlerListener implements ListenerInterface {
 						content: `<:wave:948626464432083014> **__Bienvenue sur le serveur__**`,
 					});*/
 				}
+			} else {
+				return interaction.editReply({
+					content: 'Erreur',
+				});
 			}
+		} else {
+			return interaction.editReply({
+				content: 'Erreur',
+			});
 		}
 	}
 }
