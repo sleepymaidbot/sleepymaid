@@ -26,11 +26,11 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
-		"@favware/cliff-jumper": "^2.2.0",
+		"@favware/cliff-jumper": "^2.2.1",
 		"@sleepymaid/util": "workspace:^",
-		"@swc/core": "^1.3.95",
+		"@swc/core": "^1.3.96",
 		"@types/node": "^20.9.0",
-		"@types/node-cron": "^3.0.10",
+		"@types/node-cron": "^3.0.11",
 		"rimraf": "^5.0.5",
 		"source-map-support": "0.5.21",
 		"tsup": "^7.2.0",
@@ -38,8 +38,8 @@
 	},
 	"dependencies": {
 		"@sapphire/node-utilities": "^1.0.0",
-		"discord.js": "^14.13.0",
-		"node-cron": "^3.0.2",
+		"discord.js": "^14.14.0",
+		"node-cron": "^3.0.3",
 		"reflect-metadata": "^0.1.13",
 		"tsyringe": "^4.8.0"
 	}
