@@ -55,6 +55,7 @@
 				"minimumDescriptionLength": 5
 			}
 		],
-		"react/jsx-filename-extension": [1, { "extensions": [".tsx", ".astro"] }]
+		"react/jsx-filename-extension": [1, { "extensions": [".tsx", ".astro"] }],
+		"import/no-extraneous-dependencies": [1]
 	}
 }
