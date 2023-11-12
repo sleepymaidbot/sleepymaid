@@ -35,7 +35,7 @@
 	"dependencies": {
 		"@sleepymaid/handler": "workspace:^",
 		"discord.js": "^14.13.0",
-		"fuse.js": "^6.6.2",
+		"fuse.js": "^7.0.0",
 		"i18next": "^23.6.0"
 	}
 }
