@@ -23,7 +23,7 @@
 		"sourceType": "module",
 		"project": "./tsconfig.json"
 	},
-	"plugins": ["@typescript-eslint", "prettier", "import", "typescript-sort-keys", "mdx", "astro"],
+	"plugins": ["@typescript-eslint", "prettier", "import", "typescript-sort-keys"],
 	"settings": {
 		"react": {
 			"version": "detect"
