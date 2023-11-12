@@ -5,6 +5,10 @@
 			"dependsOn": ["^build"],
 			"outputs": ["dist/**", "types/**"]
 		},
+		"check": {
+			"dependsOn": [],
+			"outputs": []
+		},
 		"start": {
 			"dependsOn": ["^build"],
 			"outputs": []

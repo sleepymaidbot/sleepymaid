@@ -19,6 +19,7 @@
 	],
 	"scripts": {
 		"build": "pnpm rimraf dist/ && pnpm tsup",
+		"check": "pnpm tsc --noEmit --pretty --skipLibCheck",
 		"test": "vitest run",
 		"changelog": "git cliff --prepend ./CHANGELOG.md -u -c ./cliff.toml -r ../../ --include-path 'packages/util/*'",
 		"release": "cliff-jumper"

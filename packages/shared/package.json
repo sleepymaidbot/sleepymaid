@@ -19,7 +19,8 @@
 		"dist"
 	],
 	"scripts": {
-		"build": "pnpm rimraf dist/ && pnpm tsup"
+		"build": "pnpm rimraf dist/ && pnpm tsup",
+		"check": "pnpm tsc --noEmit --pretty --skipLibCheck"
 	},
 	"author": "Ecorte",
 	"license": "MIT",

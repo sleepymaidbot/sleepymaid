@@ -8,6 +8,7 @@
 	"packageManager": "pnpm@8.9.2",
 	"scripts": {
 		"build": "pnpm turbo run build",
+		"check": "pnpm turbo run check",
 		"test": "pnpm turbo run test --parallel",
 		"lint": "pnpm eslint --fix --ext ts,tsx,astro",
 		"format": "pnpm prettier --write . --plugin-search-dir=. .",
