@@ -64,77 +64,14 @@ export default class MetahandlerListener implements ListenerInterface {
 					}
 
 					case 'color': {
-						if (interaction.member.roles.cache.has('857324294791364639')) {
-							const colorOptions = [
-								{
-									label: 'Maya',
-									value: '857372101748719656',
-								},
-								{
-									label: 'Mikado',
-									value: '857372291855679538',
-								},
-								{
-									label: 'Rose',
-									value: '857372400440967198',
-								},
-								{
-									label: 'Lavender',
-									value: '857372585552773120',
-								},
-								{
-									label: 'Coral',
-									value: '857372666141736981',
-								},
-								{
-									label: 'Cantaloupe',
-									value: '857372789139963925',
-								},
-								{
-									label: 'Mint',
-									value: '857372929598947368',
-								},
-								{
-									label: 'Weed',
-									value: '857431586202189835',
-								},
-								{
-									label: 'Smoked',
-									value: '857432207534981151',
-								},
-							];
-							const row1 = new ActionRowBuilder<SelectMenuBuilder>().addComponents([
-								new SelectMenuBuilder()
-									.setCustomId('lmeMeta:bienvenue:select:color')
-									.setPlaceholder('Choisis ici ton rôle de couleur')
-									.addOptions(colorOptions.map((options) => new SelectMenuOptionBuilder(options))),
-							]);
-
-							const row2 = new ActionRowBuilder<ButtonBuilder>().addComponents([
-								new ButtonBuilder()
-									.setLabel('Supprimer ma couleur')
-									.setCustomId('lmeMeta:bienvenue:delete:color')
-									.setEmoji({ id: '948606748334358559' })
-									.setStyle(ButtonStyle.Secondary),
-							]);
-
-							await interaction.editReply({
-								content: 'Sélectionnez ci-dessous un rôle de couleur.',
-								components: [row1, row2],
-							});
-						} else {
-							await interaction.editReply({
-								content:
-									"<:redX:948606748334358559> Pour pouvoir bénéficier des **couleurs**, vous devez posséder l'un des **rôles** suivant: ``Nitro Booster``, ``Actif``.",
-							});
-						}
-
-						break;
+						return interaction.editReply({
+							content: "Le rôle n'est plus disponible.",
+						});
 					}
 
 					case 'viewRoles': {
 						const pingRole = interaction.member.roles.cache.filter((role) => pingRoleIds.includes(role.id));
-						const colorRole = interaction.member.roles.cache.filter((role) => colorRoleIds.includes(role.id));
+						//const colorRole = interaction.member.roles.cache.filter((role) => colorRoleIds.includes(role.id));
 						let cleanPingRole;
 						if (pingRole.size > 0) {
 							cleanPingRole = '**Notifications:**' + pingRole.map((role) => '<@&' + role.id + '>').join(', ');
@@ -142,17 +79,23 @@ export default class MetahandlerListener implements ListenerInterface {
 							cleanPingRole = '**Notifications:** Aucune';
 						}
 
-						let cleanColorRole;
+						/*let cleanColorRole;
 						if (colorRole.size > 0) {
 							cleanColorRole = '**Couleurs:**' + colorRole.map((role) => '<@&' + role.id + '>').join(', ');
 						} else {
 							cleanColorRole = '**Couleurs:** Aucune';
-						}
+						}*/
 
 						await interaction.editReply({
-							content: cleanPingRole + '\n' + cleanColorRole,
+							content: cleanPingRole /*+ '\n' + cleanColorRole*/,
 						});
 						break;
+					}
+
+					default: {
+						return interaction.editReply({
+							content: 'Erreur',
+						});
 					}
 				}
 			} else if (Ids[2] === 'select') {
@@ -178,22 +121,9 @@ export default class MetahandlerListener implements ListenerInterface {
 					}
 
 					case 'color': {
-						const currentColorRole = interaction.member.roles.cache
-							.filter((role) => colorRoleIds.includes(role.id))
-							.map((role) => role.id);
-						if (!interaction.isSelectMenu()) return;
-						const newColorRole = interaction.values;
-
-						const toAdd = newColorRole.filter((role) => !currentColorRole.includes(role));
-						const toRemove = currentColorRole.filter((role) => !newColorRole.includes(role));
-
-						await interaction.member.roles.add(toAdd);
-						await interaction.member.roles.remove(toRemove);
-
-						await interaction.editReply({
-							content: '<:greenTick:948620600144982026> Ton rôle de couleur à été mis à jour.',
+						return interaction.editReply({
+							content: "Le rôle n'est plus disponible.",
 						});
-						break;
 					}
 				}
 			} else if (Ids[2] === 'delete') {
