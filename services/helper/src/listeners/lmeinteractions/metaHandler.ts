@@ -71,7 +71,7 @@ export default class MetahandlerListener implements ListenerInterface {
 
 					case 'viewRoles': {
 						const pingRole = interaction.member.roles.cache.filter((role) => pingRoleIds.includes(role.id));
-						//const colorRole = interaction.member.roles.cache.filter((role) => colorRoleIds.includes(role.id));
+						// const colorRole = interaction.member.roles.cache.filter((role) => colorRoleIds.includes(role.id));
 						let cleanPingRole;
 						if (pingRole.size > 0) {
 							cleanPingRole = '**Notifications:**' + pingRole.map((role) => '<@&' + role.id + '>').join(', ');
@@ -79,7 +79,7 @@ export default class MetahandlerListener implements ListenerInterface {
 							cleanPingRole = '**Notifications:** Aucune';
 						}
 
-						/*let cleanColorRole;
+						/* let cleanColorRole;
 						if (colorRole.size > 0) {
 							cleanColorRole = '**Couleurs:**' + colorRole.map((role) => '<@&' + role.id + '>').join(', ');
 						} else {
@@ -87,7 +87,7 @@ export default class MetahandlerListener implements ListenerInterface {
 						}*/
 
 						await interaction.editReply({
-							content: cleanPingRole /*+ '\n' + cleanColorRole*/,
+							content: cleanPingRole /* + '\n' + cleanColorRole*/,
 						});
 						break;
 					}
@@ -125,6 +125,12 @@ export default class MetahandlerListener implements ListenerInterface {
 							content: "Le rôle n'est plus disponible.",
 						});
 					}
+
+					default: {
+						return interaction.editReply({
+							content: 'Erreur',
+						});
+					}
 				}
 			} else if (Ids[2] === 'delete') {
 				switch (Ids[3]) {
@@ -148,6 +154,12 @@ export default class MetahandlerListener implements ListenerInterface {
 							content: '<:greenTick:948620600144982026> Ton rôle de couleur à bien été retiré.',
 						});
 						break;
+					}
+
+					default: {
+						return interaction.editReply({
+							content: 'Erreur',
+						});
 					}
 				}
 			} else if (Ids[2] === 'join') {
