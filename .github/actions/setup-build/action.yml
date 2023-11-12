@@ -6,4 +6,4 @@ runs:
     - name: Build
       shell: bash
       run: |
-        yarn build
+        pnpm build

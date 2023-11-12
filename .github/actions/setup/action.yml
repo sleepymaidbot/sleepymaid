@@ -14,4 +14,4 @@ runs:
         CI: true
       shell: bash
       run: |
-        yarn install
+        pnpm install
