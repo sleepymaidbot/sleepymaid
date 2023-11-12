@@ -41,6 +41,12 @@
 		{
 			"files": ["*.astro"],
 			"parser": "astro-eslint-parser"
+		},
+		{
+			"files": ["*.ts"],
+			"rules": {
+				"import/no-extraneous-dependencies": "off"
+			}
 		}
 	],
 	"rules": {
@@ -55,7 +61,6 @@
 				"minimumDescriptionLength": 5
 			}
 		],
-		"react/jsx-filename-extension": [1, { "extensions": [".tsx", ".astro"] }],
-		"import/no-extraneous-dependencies": [1]
+		"react/jsx-filename-extension": [1, { "extensions": [".tsx", ".astro"] }]
 	}
 }
