@@ -74,17 +74,6 @@ export class HelperClient extends HandlerClient {
 			},
 		});
 
-		// @ts-expect-error
-		this.ws.on('CHANNEL_TOPIC_UPDATE', (data) => {
-			if (data.topic !== null) {
-				if (data.guild_id !== '1131653884377579651') return;
-				const channel = this.channels.cache.get(data.id);
-				if (!channel) return;
-				if (!channel.isVoiceBased()) return;
-				channel.edit({ topic: null });
-			}
-		});
-
 		this.login(this.config.discordToken);
 
 		process.on('unhandledRejection', (error: Error) => {
