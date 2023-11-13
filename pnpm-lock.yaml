@@ -55,7 +55,7 @@ importers:
         version: 2.2.0(eslint@8.53.0)
       eslint-plugin-prettier:
         specifier: ^5.0.1
-        version: 5.0.1(eslint-config-prettier@9.0.0)(eslint@8.53.0)(prettier@3.0.3)
+        version: 5.0.1(eslint-config-prettier@9.0.0)(eslint@8.53.0)(prettier@3.1.0)
       eslint-plugin-typescript-sort-keys:
         specifier: ^3.1.0
         version: 3.1.0(@typescript-eslint/parser@6.10.0)(eslint@8.53.0)(typescript@5.2.2)
@@ -66,8 +66,8 @@ importers:
         specifier: ^15.1.0
         version: 15.1.0
       prettier:
-        specifier: ^3.0.3
-        version: 3.0.3
+        specifier: ^3.1.0
+        version: 3.1.0
       prettier-plugin-astro:
         specifier: ^0.12.1
         version: 0.12.1
@@ -93,8 +93,8 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0
       discord.js:
-        specifier: ^14.14.0
-        version: 14.14.0
+        specifier: ^14.14.1
+        version: 14.14.1
       node-cron:
         specifier: ^3.0.3
         version: 3.0.3
@@ -170,8 +170,8 @@ importers:
         specifier: workspace:^
         version: link:../handler
       discord.js:
-        specifier: ^14.14.0
-        version: 14.14.0
+        specifier: ^14.14.1
+        version: 14.14.1
       fuse.js:
         specifier: ^7.0.0
         version: 7.0.0
@@ -243,8 +243,8 @@ importers:
         specifier: workspace:^
         version: link:../../packages/shared
       discord.js:
-        specifier: ^14.14.0
-        version: 14.14.0
+        specifier: ^14.14.1
+        version: 14.14.1
       i18next:
         specifier: ^23.7.3
         version: 23.7.3
@@ -307,8 +307,8 @@ importers:
         specifier: ^0.37.55
         version: 0.37.55
       discord.js:
-        specifier: ^14.14.0
-        version: 14.14.0
+        specifier: ^14.14.1
+        version: 14.14.1
       i18next:
         specifier: ^23.7.3
         version: 23.7.3
@@ -365,8 +365,8 @@ importers:
         specifier: workspace:^
         version: link:../../packages/shared
       discord.js:
-        specifier: ^14.14.0
-        version: 14.14.0
+        specifier: ^14.14.1
+        version: 14.14.1
       i18next:
         specifier: ^23.7.3
         version: 23.7.3
@@ -2787,8 +2787,8 @@ packages:
     resolution: {integrity: sha512-o/dXNFfhBpYHpQFdT6FWzeO7pKc838QeeZ9d91CfVAtpr5XLK4B/zYxQbYgPdoMiTDvJfzcsLW5naXgmHGDNXw==}
     dev: false
 
-  /discord.js@14.14.0:
-    resolution: {integrity: sha512-ovreSRM365CLfKnfdxB2j56kPnE9lysZS0ZushWCOqFzg1i0jhtA7TbWGFVVqSDP6HVSElNpxhINCdfCVwsaNw==}
+  /discord.js@14.14.1:
+    resolution: {integrity: sha512-/hUVzkIerxKHyRKopJy5xejp4MYKDPTszAnpYxzVVv4qJYf+Tkt+jnT2N29PIPschicaEEpXwF2ARrTYHYwQ5w==}
     engines: {node: '>=16.11.0'}
     dependencies:
       '@discordjs/builders': 1.7.0
@@ -3395,7 +3395,7 @@ packages:
       semver: 7.5.4
     dev: true
 
-  /eslint-plugin-prettier@5.0.1(eslint-config-prettier@9.0.0)(eslint@8.53.0)(prettier@3.0.3):
+  /eslint-plugin-prettier@5.0.1(eslint-config-prettier@9.0.0)(eslint@8.53.0)(prettier@3.1.0):
     resolution: {integrity: sha512-m3u5RnR56asrwV/lDC4GHorlW75DsFfmUcjfCYylTUs85dBRnB7VM6xG8eCMJdeDRnppzmxZVf1GEPJvl1JmNg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -3411,7 +3411,7 @@ packages:
     dependencies:
       eslint: 8.53.0
       eslint-config-prettier: 9.0.0(eslint@8.53.0)
-      prettier: 3.0.3
+      prettier: 3.1.0
       prettier-linter-helpers: 1.0.0
       synckit: 0.8.5
     dev: true
@@ -6131,12 +6131,12 @@ packages:
     engines: {node: ^14.15.0 || >=16.0.0}
     dependencies:
       '@astrojs/compiler': 1.8.2
-      prettier: 3.0.3
+      prettier: 3.1.0
       sass-formatter: 0.7.7
     dev: true
 
-  /prettier@3.0.3:
-    resolution: {integrity: sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==}
+  /prettier@3.1.0:
+    resolution: {integrity: sha512-TQLvXjq5IAibjh8EpBIkNKxO749UEWABoiIZehEPiY4GNpVdhaFKqSTu+QrlU6D2dPAfubRmtJTi4K4YkQ5eXw==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
