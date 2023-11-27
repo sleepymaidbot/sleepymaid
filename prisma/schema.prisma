@@ -17,12 +17,21 @@ model mondecorte {
 }
 
 model GuildsSettings {
-  guildId        String          @id
+  guildId        String             @id
   modRoles       ModRole[]
   adminRoles     AdminRole[]
   levelingTracks LevelingTrack[]
   logChannels    LogChannel[]
   cases          Case[]
+  sanitizer      SanitizerSettings?
+}
+
+model SanitizerSettings {
+  guildId      String   @id
+  enabled      Boolean  @default(false)
+  ignoredRoles String[]
+
+  settings GuildsSettings @relation(fields: [guildId], references: [guildId], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model ModRole {
