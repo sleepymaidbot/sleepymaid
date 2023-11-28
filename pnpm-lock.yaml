@@ -229,6 +229,9 @@ importers:
 
   services/helper:
     dependencies:
+      '@aero/sanitizer':
+        specifier: ^1.3.2
+        version: 1.3.2
       '@discordjs/brokers':
         specifier: ^0.2.2
         version: 0.2.2
