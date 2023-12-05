@@ -6,8 +6,8 @@
 	"typescript.enablePromptUseWorkspaceTsdk": true,
 	"editor.formatOnSave": true,
 	"editor.codeActionsOnSave": {
-		"source.fixAll": true,
-		"source.organizeImports": false
+		"source.fixAll": "explicit",
+		"source.organizeImports": "never"
 	},
 	"files.exclude": {
 		"**/node_modules": true
