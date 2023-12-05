@@ -12,7 +12,8 @@ export default class JoinSanitizerListener implements ListenerInterface {
 		const sanitizerSettings = await client.prisma.sanitizerSettings.findUnique({
 			where: { guildId: member.guild.id },
 		});
-		if (sanitizerSettings?.enabled === false) return;
+		if (!sanitizerSettings) return;
+		if (sanitizerSettings.enabled === false) return;
 		if (member.displayName !== sanitized) await member.setNickname(sanitized, 'Sanitizer');
 	}
 }

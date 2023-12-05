@@ -12,8 +12,10 @@ export default class JoinSanitizerListener implements ListenerInterface {
 		const sanitizerSettings = await client.prisma.sanitizerSettings.findUnique({
 			where: { guildId: newMember.guild.id },
 		});
-		if (sanitizerSettings?.ignoredRoles.length) {
-			if (sanitizerSettings.ignoredRoles.some((role) => userRole.includes(role))) return;
+		if (!sanitizerSettings) return;
+		if (sanitizerSettings.enabled === false) return;
+		if (sanitizerSettings.ignoredRoles.length) {
+			if (sanitizerSettings.ignoredRoles.some((role: string) => userRole.includes(role))) return;
 		}
 		if (newMember.nickname !== null && oldMember.nickname !== newMember.nickname) {
 			const sanitized = sanitize(newMember.nickname);
