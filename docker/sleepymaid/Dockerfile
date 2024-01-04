@@ -5,7 +5,7 @@ WORKDIR /opt/build
 
 RUN apk add --update \
   && apk add --no-cache ca-certificates \
-  && apk add --no-cache --virtual .build-deps curl git python3 alpine-sdk libc6-compat openssl1.1-compat-dev yt-dlp
+  && apk add --no-cache --virtual .build-deps curl git python3 alpine-sdk libc6-compat openssl-dev yt-dlp
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
