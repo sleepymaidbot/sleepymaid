@@ -8,6 +8,7 @@ export default class JoinSanitizerListener implements ListenerInterface {
 	public readonly once = false;
 
 	public async execute(member: GuildMember, client: SleepyMaidClient) {
+		if (member.user.bot) return;
 		const sanitizerSettings = await client.prisma.sanitizerSettings.findUnique({
 			where: { guildId: member.guild.id },
 		});
