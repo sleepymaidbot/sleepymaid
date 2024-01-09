@@ -23,7 +23,7 @@ export class SleepyMaidClient extends HandlerClient {
 				intents: [
 					GatewayIntentBits.Guilds,
 					GatewayIntentBits.GuildMembers,
-					GatewayIntentBits.GuildBans,
+					GatewayIntentBits.GuildModeration,
 					GatewayIntentBits.GuildVoiceStates,
 					GatewayIntentBits.GuildMessages,
 					GatewayIntentBits.MessageContent,
