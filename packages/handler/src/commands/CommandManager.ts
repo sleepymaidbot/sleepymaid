@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { isEqualObjects } from '@sleepymaid/util';
+//import { isEqualObjects } from '@sleepymaid/util';
 import {
 	ApplicationCommandData,
 	AutocompleteInteraction,
@@ -20,28 +20,31 @@ import { findFilesRecursively } from '@sapphire/node-utilities';
 
 export interface CommandManagerStartAllOptionsType {
 	folder: string;
-	extraGlobalCommands?: Array<ApplicationCommandData>;
-	extraGuildCommands?: GuildCommandsType;
 }
 
 export interface GuildCommandsType {
 	[key: Snowflake]: ApplicationCommandData[];
 }
 
+interface Commands {
+	name: string;
+	file: string;
+	id: Snowflake | null;
+	guildId: Snowflake | null;
+	data: ApplicationCommandData;
+}
+
+interface CommandInterface {
+	guildIds?: string[] | null;
+	data: ApplicationCommandData;
+}
+
 export class CommandManager extends BaseManager {
-	private commands: Collection<string, string> = new Collection<string, string>();
-	public readonly globalCommands: ApplicationCommandData[] = [];
-	public readonly guildCommands: Collection<string, ApplicationCommandData[]> = new Collection<
-		string,
-		ApplicationCommandData[]
-	>();
-	private declare folderPath: string;
+	private _commands: Collection<string, Commands> = new Collection<string, Commands>();
 
 	public async startAll(options: CommandManagerStartAllOptionsType): Promise<void> {
 		if (!options.folder) throw new Error('No folder path provided!');
-		this.folderPath = options.folder;
-		await this.loadCommands(options.extraGlobalCommands, options.extraGuildCommands);
-		await this.RegisterApplicationCommands();
+		await this.loadCommand(options.folder);
 		this.client.on('interactionCreate', (i: Interaction) => {
 			if (i.type === InteractionType.ApplicationCommand) {
 				this.HandleApplicationCommands(i as CommandInteraction);
@@ -51,148 +54,126 @@ export class CommandManager extends BaseManager {
 		});
 	}
 
-	private async loadCommands(
-		extraGlobalCommands?: Array<ApplicationCommandData>,
-		extraGuildCommands?: GuildCommandsType,
-	): Promise<void> {
+	private async loadCommand(folderPath: string): Promise<void> {
 		this.client.logger.info('Command Handler: -> Registering application commands...');
-		const topLevelFolders = await readdir(this.folderPath);
-		this.globalCommands.push(...(extraGlobalCommands ?? []));
-		for (const [key, value] of Object.entries(extraGuildCommands ?? {})) {
-			this.guildCommands.set(key, value);
-		}
-		let count = 0;
+		const topLevelFolders = await readdir(folderPath);
 		for await (const folderName of topLevelFolders) {
 			switch (folderName) {
 				case 'chat': {
-					count = count + (await this.loadChatCommands(join(this.folderPath, folderName)));
+					await this.loadCommands(join(folderPath, folderName));
 					break;
 				}
 				case 'message': {
-					count = count + (await this.loadMessageCommands(join(this.folderPath, folderName)));
+					await this.loadCommands(join(folderPath, folderName));
 					break;
 				}
 				case 'user': {
-					count = count + (await this.loadUserCommands(join(this.folderPath, folderName)));
+					await this.loadCommands(join(folderPath, folderName));
+					break;
+				}
+				default: {
+					this.client.logger.info(`Command Handler: -> Unknown folder -> ${folderName}`);
 					break;
 				}
 			}
 		}
-		this.client.logger.info(`Command Handler: -> Registered ${count} application commands!`);
+		this.client.logger.info(
+			`Command Handler: -> Successfully found ${[...this._commands].length} application commands!`,
+		);
+		await this.RegisterApplicationCommands();
 	}
 
-	private async loadChatCommands(folderPath: string): Promise<number> {
-		let count = 0;
+	private async loadCommands(folderPath: string): Promise<boolean> {
 		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith('.js'))) {
-			const cmd_ = container.resolve<SlashCommandInterface>((await import(file)).default.default);
+			const cmd_ = container.resolve<CommandInterface>((await import(file)).default.default);
 
-			this.commands.set(cmd_.data.name, file);
 			if (cmd_.guildIds) {
 				for (const id of cmd_.guildIds) {
-					const array = this.guildCommands.get(id) ?? [];
-					array.push(cmd_.data);
-					this.guildCommands.set(id, array);
+					this._commands.set('n:' + cmd_.data.name, {
+						name: cmd_.data.name,
+						file: file,
+						id: null,
+						guildId: id,
+						data: cmd_.data,
+					});
 				}
 			} else {
-				this.globalCommands.push(cmd_.data);
+				this._commands.set('n:' + cmd_.data.name, {
+					name: cmd_.data.name,
+					file: file,
+					id: null,
+					guildId: null,
+					data: cmd_.data,
+				});
 			}
 			this.client.logger.info(`Command Handler: -> Command loaded -> ${cmd_.data.name}`);
-			count++;
 		}
-		return count;
-	}
-
-	private async loadMessageCommands(folderPath: string): Promise<number> {
-		let count = 0;
-		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith('.js'))) {
-			const cmd_ = container.resolve<MessageCommandInterface>((await import(file)).default.default);
-
-			this.commands.set(cmd_.data.name, file);
-			if (cmd_.guildIds) {
-				for (const id of cmd_.guildIds) {
-					const array = this.guildCommands.get(id) ?? [];
-					array.push(cmd_.data);
-					this.guildCommands.set(id, array);
-				}
-			} else {
-				this.globalCommands.push(cmd_.data);
-			}
-			this.client.logger.info(`Command Handler: -> Command loaded -> ${cmd_.data.name}`);
-			count++;
-		}
-		return count;
-	}
-
-	private async loadUserCommands(folderPath: string): Promise<number> {
-		let count = 0;
-		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith('.js'))) {
-			const cmd_ = container.resolve<UserCommandInterface>((await import(file)).default.default);
-
-			this.commands.set(cmd_.data.name, file);
-			if (cmd_.guildIds) {
-				for (const id of cmd_.guildIds) {
-					const array = this.guildCommands.get(id) ?? [];
-					array.push(cmd_.data);
-					this.guildCommands.set(id, array);
-				}
-			} else {
-				this.globalCommands.push(cmd_.data);
-			}
-			this.client.logger.info(`Command Handler: -> Command loaded -> ${cmd_.data.name}`);
-			count++;
-		}
-		return count;
+		return true;
 	}
 
 	private async RegisterApplicationCommands() {
-		const globalCommands = this.globalCommands;
-		const guildCommands = this.guildCommands;
 		// Global commands
-		const applicationCommand = globalCommands.sort((a, b) => {
-			if (a.name < b.name) return -1;
-			if (a.name > b.name) return 1;
-			return 0;
-		}) as ApplicationCommandData[];
-		const currentGlobalCommands =
-			(await this.client.application?.commands.fetch()) ??
-			([].sort((a: ApplicationCommandData, b: ApplicationCommandData) => {
-				if (a.name < b.name) return -1;
-				if (a.name > b.name) return 1;
-				return 0;
-			}) as ApplicationCommandData[]);
+		const globalCommands = Array.from(this._commands.values()).filter((cmd) => cmd.guildId === null);
 
-		if (!isEqualObjects(applicationCommand, currentGlobalCommands)) {
-			this.client.logger.info('Command Handler: -> Global commands have changed, updating...');
-			await this.client.application?.commands.set(globalCommands).catch((e) => this.client.logger.error(e));
-		} else {
-			this.client.logger.info('Command Handler: -> Global commands have not changed.');
-		}
+		await this.client.application?.commands
+			.set(globalCommands.map((cmd) => cmd.data) as ApplicationCommandData[])
+			.then((cmds) => {
+				for (const cmd of cmds.values()) {
+					const current = globalCommands.find((c) => c.name === cmd.name);
+					if (current) {
+						this._commands.set(cmd.id, {
+							id: cmd.id,
+							name: current.name,
+							file: current.file,
+							guildId: null,
+							data: current.data,
+						});
+					}
+				}
+				this.client.logger.info(
+					'Command Handler: -> Successfully registered ' + [...cmds].length + ' global commands!',
+				);
+			});
 
 		// Guild commands
-		if (guildCommands) {
-			guildCommands.forEach(async (value, key) => {
-				const guild = this.client.guilds.cache.get(key);
-				if (!guild) return;
 
-				const sortedCommands = value.sort((a, b) => {
-					if (a.name < b.name) return -1;
-					if (a.name > b.name) return 1;
-					return 0;
-				});
+		const guildCommands = this._commands.filter((cmd) => cmd.guildId !== null);
 
-				const currentGuildCommands = (await guild.commands.fetch()).sort((a, b) => {
-					if (a.name < b.name) return -1;
-					if (a.name > b.name) return 1;
-					return 0;
-				});
+		const guildIdsArray = Array.from(guildCommands.values())
+			.map((command) => command.guildId)
+			.filter((guildId, index, array) => guildId !== null && array.indexOf(guildId) === index);
 
-				if (!isEqualObjects(sortedCommands, currentGuildCommands)) {
-					this.client.logger.info(`Command Handler: -> Guild commands for ${guild.name} have changed, updating...`);
-					await guild.commands.set(value).catch((e) => this.client.logger.error(e));
-				} else {
-					this.client.logger.info(`Command Handler: -> Guild commands for ${guild.name} have not changed.`);
+		for (const guildId of guildIdsArray) {
+			const guildCmds = guildCommands.filter((cmd) => cmd.guildId === guildId);
+			const guild = this.client.guilds.cache.get(guildId!);
+			if (!guild) continue;
+			guild.commands.set(guildCmds.map((cmd) => cmd.data)).then((cmds) => {
+				for (const cmd of cmds.values()) {
+					const current = guildCmds.find((c) => c.name === cmd.name);
+					if (current) {
+						this._commands.set(cmd.id, {
+							id: cmd.id,
+							name: current.name,
+							file: current.file,
+							guildId: current.guildId,
+							data: current.data,
+						});
+					}
 				}
+				this.client.logger.info(
+					'Command Handler: -> Successfully registered ' +
+						[...cmds].length +
+						' guild commands for ' +
+						guild.name +
+						' (' +
+						guild.id +
+						')',
+				);
 			});
+		}
+
+		for (const [key, _value] of this._commands) {
+			if (key?.startsWith('n:')) this._commands.delete(key);
 		}
 	}
 
@@ -201,10 +182,10 @@ export class CommandManager extends BaseManager {
 			`${i.guild?.name} (${i.guild?.id}) > ${i.member?.user.username} (${i.member?.user.id}) > /${i.commandName} (${i.commandId})`,
 		);
 		try {
-			const file = this.commands.get(i.commandName);
+			const file = this._commands.get(i.commandId);
 			if (!file) return;
 			const cmd = container.resolve<SlashCommandInterface | UserCommandInterface | MessageCommandInterface>(
-				(await import(file)).default.default,
+				(await import(file.file)).default.default,
 			);
 			if (!i.inCachedGuild()) return;
 			await cmd.execute(i as never, this.client);
@@ -229,9 +210,9 @@ export class CommandManager extends BaseManager {
 
 	private async HandleAutocomplete(i: AutocompleteInteraction) {
 		try {
-			const file = this.commands.get(i.commandName);
+			const file = this._commands.get(i.commandId);
 			if (!file) return;
-			const cmd = container.resolve<SlashCommandInterface>((await import(file)).default.default);
+			const cmd = container.resolve<SlashCommandInterface>((await import(file.file)).default.default);
 			if (!i.inCachedGuild()) return;
 			if (!cmd.autocomplete) return;
 			await cmd.autocomplete(i, this.client);
