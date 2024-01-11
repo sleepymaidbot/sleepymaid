@@ -29,7 +29,7 @@
 		"@favware/cliff-jumper": "^2.2.3",
 		"@sleepymaid/handler": "workspace:^",
 		"@swc/core": "^1.3.102",
-		"@types/node": "^20.10.8",
+		"@types/node": "^20.11.0",
 		"rimraf": "^5.0.5",
 		"source-map-support": "0.5.21",
 		"tsup": "^8.0.1",
