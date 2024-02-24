@@ -8,17 +8,33 @@ import { Result } from '@sapphire/result';
 
 const sites = [
 	'tiktok.com',
-	'redd.it',
-	'v.redd.it',
+	'https://redd.it',
+	'https://v.redd.it',
 	'reddit.com',
-	'twitter.com',
-	't.co',
+	'https://t.co',
 	'facebook.com',
 	'instagram.com',
-	'fb.watch',
+	'nicovideo.jp/watch',
+	'https://twitter.com',
+	'https://x.com',
+	'https://mobile.twitter.com',
 ];
 
-const enabled = false;
+const sitesDelEmbed = [
+	'https://redd.it',
+	'https://v.redd.it',
+	'reddit.com',
+	'https://twitter.com',
+	'https://x.com',
+	'https://mobile.twitter.com',
+	'https://vm.tiktok.com',
+	'https://vt.tiktok.com',
+	'https://www.tiktok.com',
+	'https://tiktok.com',
+	'instagram.com',
+];
+
+const enabled = true;
 
 export default class VidListener implements ListenerInterface {
 	public readonly name = 'messageCreate';
@@ -30,7 +46,9 @@ export default class VidListener implements ListenerInterface {
 
 		const args = message.content.split(' ');
 
-		for (const arg of args) {
+		for (let arg of args) {
+			if (arg.includes('tiktok.com/t/')) arg = arg.replaceAll('www.tiktok.com', 'vm.tiktok.com');
+
 			if (arg.startsWith('https://') && sites.some((a) => arg.includes(a))) {
 				const nameReturn = await Result.fromAsync(
 					async () => await shell('yt-dlp --print filename -o "%(id)s.%(ext)s" ' + arg),
@@ -46,14 +64,20 @@ export default class VidListener implements ListenerInterface {
 				if (dlReturn.isErr()) return client.logger.error(dlReturn.unwrapErr() as Error);
 				const messageReturn = await Result.fromAsync(
 					async () =>
-						await message.reply({
-							files: [
-								{
-									attachment: join(__dirname, `../../../downloads/${fileName}`),
-									name: fileName,
-								},
-							],
-						}),
+						await message
+							.reply({
+								files: [
+									{
+										attachment: join(__dirname, `../../../downloads/${fileName}`),
+										name: fileName,
+									},
+								],
+							})
+							.then(() => {
+								if (sitesDelEmbed.some((a) => arg.includes(a))) {
+									message.suppressEmbeds(true).catch(console.error);
+								}
+							}),
 				);
 				if (messageReturn.isErr()) return client.logger.error(messageReturn.unwrapErr() as Error);
 
