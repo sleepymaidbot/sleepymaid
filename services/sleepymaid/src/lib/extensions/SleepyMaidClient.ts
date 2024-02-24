@@ -12,7 +12,7 @@ import Redis from 'ioredis';
 export class SleepyMaidClient extends HandlerClient {
 	public declare prisma: PrismaClient;
 	public declare redis: Redis;
-	public declare brokers: PubSubRedisBroker<any>;
+	public declare brokers: PubSubRedisBroker<Redis>;
 	public declare config: Config;
 	constructor() {
 		super(
