@@ -1,4 +1,4 @@
-export const ratioGuildIds = ['324284116021542922', '860721584373497887', '821717486217986098'];
+export const ratioGuildIds = ['324284116021542922', '860721584373497887', '821717486217986098', '796534493535928320'];
 
 export const colorRole = ['Maya', 'Mikado', 'Rose', 'Lavender', 'Coral', 'Cantaloupe', 'Mint', 'Smoked', 'Weed'];
 
