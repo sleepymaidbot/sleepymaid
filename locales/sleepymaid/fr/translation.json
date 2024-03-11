@@ -35,7 +35,7 @@
 				"name": "user",
 				"description": "The user to goon with"
 			},
-			"goon": "<@{{target}}> goon avec <@{{author}}>."
+			"goon": "<@{{author}}> goon avec <@{{target}}>."
 		},
 		"config": {
 			"name": "config",
