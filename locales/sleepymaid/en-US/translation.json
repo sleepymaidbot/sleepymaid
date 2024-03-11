@@ -19,13 +19,22 @@
 			"api_latency": "API Latency"
 		},
 		"ratio": {
-			"name": "ratio",
+			"name": "Ratio someone",
 			"description": "Ratio someone",
 			"user": {
 				"name": "user",
 				"description": "The user to ratio"
 			},
 			"ratio": "Ratio to <@{{target}}> from <@{{author}}>."
+		},
+		"goon": {
+			"name": "Goon with someone",
+			"description": "Ratio someone",
+			"user": {
+				"name": "user",
+				"description": "The user to goon with"
+			},
+			"goon": "<@{{target}}> is gooning with <@{{author}}>."
 		},
 		"config": {
 			"name": "config",
