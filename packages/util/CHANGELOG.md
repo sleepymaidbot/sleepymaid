@@ -1,4 +1,5 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
 # [@sleepymaid/util@3.3.0](https://github.com/sleepymaidbot/sleepymaid/compare/@sleepymaid/util@3.3.0...@sleepymaid/util@3.3.0) - (2023-10-03)
