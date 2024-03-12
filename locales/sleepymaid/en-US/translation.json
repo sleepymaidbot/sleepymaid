@@ -25,7 +25,7 @@
 				"name": "user",
 				"description": "The user to ratio"
 			},
-			"ratio": "Ratio to <@{{target}}> from <@{{author}}>."
+			"ratio": "<@{{target}}> got ratioed by <@{{author}}>."
 		},
 		"goon": {
 			"name": "Goon with someone",

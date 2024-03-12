@@ -1,4 +1,5 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
 # [@sleepymaid/logger@0.2.0](https://github.com/sleepymaidbot/sleepymaid/compare/@sleepymaid/logger@0.2.0...@sleepymaid/logger@0.2.0) - (2023-10-03)
@@ -73,10 +74,9 @@ All notable changes to this project will be documented in this file.
 
 ## Styling
 
-- ***:** Lint for new eslint config ([9990f6c](https://github.com/sleepymaidbot/sleepymaid/commit/9990f6cb44a98a8b9c9d146e94668e4b4ee3a68b))
+- **\*:** Lint for new eslint config ([9990f6c](https://github.com/sleepymaidbot/sleepymaid/commit/9990f6cb44a98a8b9c9d146e94668e4b4ee3a68b))
 
 ## Typings
 
 - Add types to logger ([0309879](https://github.com/sleepymaidbot/sleepymaid/commit/030987943e71f59495f597e8fec524bdf2eb71a3))
 - Auto generate types for packages ([797ec30](https://github.com/sleepymaidbot/sleepymaid/commit/797ec3073e63c1282f0409537ce6d9bd8d58d0a3))
-
