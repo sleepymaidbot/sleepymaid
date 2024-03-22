@@ -19,7 +19,7 @@
 		"@commitlint/config-angular": "^18.4.4",
 		"@favware/cliff-jumper": "^2.2.3",
 		"@favware/npm-deprecate": "^1.0.7",
-		"@types/prettier": "2.7.3",
+		"@types/prettier": "3.0.0",
 		"@typescript-eslint/eslint-plugin": "^7.0.2",
 		"@typescript-eslint/parser": "^7.0.2",
 		"astro-eslint-parser": "^0.16.0",
