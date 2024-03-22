@@ -4,8 +4,6 @@ services:
   postgres:
     image: postgres:15.5-alpine
     environment:
-      POSTGRES_USER: 'sleepymaid'
-      POSTGRES_PASSWORD: 'admin'
       POSTGRES_DB: 'sleepymaid'
     volumes:
       - postgres-data:/var/lib/postgresql/data
@@ -57,9 +55,6 @@ services:
       context: ../
       dockerfile: ./docker/sleepymaid/Dockerfile
     restart: unless-stopped
-    environment:
-      DATABASE_URL: 'postgresql://sleepymaid:admin@postgres:5432/sleepymaid'
-      REDIS_URL: 'redis://redis:6379/0'
     depends_on:
       - 'postgres'
       - 'redis'
@@ -69,9 +64,6 @@ services:
       context: ../
       dockerfile: ./docker/helper/Dockerfile
     restart: unless-stopped
-    environment:
-      DATABASE_URL: 'postgresql://sleepymaid:admin@postgres:5432/sleepymaid'
-      REDIS_URL: 'redis://redis:6379/0'
     depends_on:
       - 'postgres'
       - 'redis'
@@ -81,9 +73,6 @@ services:
       context: ../
       dockerfile: ./docker/watcher/Dockerfile
     restart: unless-stopped
-    environment:
-      DATABASE_URL: 'postgresql://sleepymaid:admin@postgres:5432/sleepymaid'
-      REDIS_URL: 'redis://redis:6379/0'
     depends_on:
       - 'postgres'
       - 'redis'
@@ -113,7 +102,6 @@ services:
       - CORE_RETURN_HTTPS=false
       - CORE_HOST=0.0.0.0
       - CORE_PORT=3002
-      - CORE_DATABASE_URL=postgresql://sleepymaid:admin@postgres:5432/zipline
       - CORE_LOGGER=true
     volumes:
       - './uploads:/zipline/uploads'
