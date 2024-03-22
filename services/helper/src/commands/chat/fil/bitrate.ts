@@ -3,7 +3,7 @@ import { ApplicationCommandType } from 'discord-api-types/v10';
 import { ChatInputCommandInteraction, ChatInputApplicationCommandData } from 'discord.js';
 import type { HelperClient } from '../../../lib/extensions/HelperClient';
 
-export default class QCGSecretSetupCommand implements SlashCommandInterface {
+export default class RandomBitrateCommand implements SlashCommandInterface {
 	public readonly guildIds = ['796534493535928320', '821717486217986098'];
 	public readonly data = {
 		name: 'randombitrate',
