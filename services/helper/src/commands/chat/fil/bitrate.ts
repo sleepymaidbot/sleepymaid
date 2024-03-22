@@ -4,7 +4,7 @@ import { ChatInputCommandInteraction, ChatInputApplicationCommandData } from 'di
 import type { HelperClient } from '../../../lib/extensions/HelperClient';
 
 export default class RandomBitrateCommand implements SlashCommandInterface {
-	public readonly guildIds = ['796534493535928320', '821717486217986098'];
+	public readonly guildIds = ['796534493535928320'];
 	public readonly data = {
 		name: 'randombitrate',
 		description: 'Random bitrate for the voice channel.',
