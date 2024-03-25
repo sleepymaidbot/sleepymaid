@@ -51,27 +51,33 @@ services:
   #    REDIS_URL: 'redis://redis:6379/0'
 
   sleepymaid:
+    container_name: sleepymaid_sleepymaid
     build:
       context: ../
-      dockerfile: ./docker/sleepymaid/Dockerfile
+      dockerfile: ./docker/services/Dockerfile
+    command: node --trace-warnings -r source-map-support/register services/sleepymaid/dist/index.js
     restart: unless-stopped
     depends_on:
       - 'postgres'
       - 'redis'
 
   helper:
+    container_name: sleepymaid_helper
     build:
       context: ../
-      dockerfile: ./docker/helper/Dockerfile
+      dockerfile: ./docker/services/Dockerfile
+    command: node --trace-warnings -r source-map-support/register services/helper/dist/index.js
     restart: unless-stopped
     depends_on:
       - 'postgres'
       - 'redis'
 
   watcher:
+    container_name: sleepymaid_watcher
     build:
       context: ../
-      dockerfile: ./docker/watcher/Dockerfile
+      dockerfile: ./docker/services/Dockerfile
+    command: node --trace-warnings -r source-map-support/register services/watcher/dist/index.js
     restart: unless-stopped
     depends_on:
       - 'postgres'

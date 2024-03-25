@@ -1,11 +1,10 @@
 FROM node:21-alpine
-LABEL name "sleepymaid helper"
 
 WORKDIR /opt/build
 
 RUN apk add --update \
   && apk add --no-cache ca-certificates \
-  && apk add --no-cache --virtual .build-deps curl git python3 alpine-sdk libc6-compat openssl-dev
+  && apk add --no-cache --virtual .build-deps curl git python3 alpine-sdk libc6-compat openssl-dev yt-dlp
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
@@ -25,9 +24,7 @@ COPY services/watcher ./services/watcher
 RUN pnpm install --frozen-lockfile --ignore-scripts
 COPY locales/ ./locales
 COPY .git/ ./.git
-RUN pnpm turbo run build --filter=helper...
+RUN pnpm turbo run build
 
 COPY locales/ ./locales
 COPY services/helper/banners ./services/helper/banners
-
-CMD ["node", "--trace-warnings", "-r", "source-map-support/register", "services/helper/dist/index.js"]
