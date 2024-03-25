@@ -14,10 +14,9 @@ I plan on making this bot public but for now its only available for some specifi
 
 ## Running the bot
 
-1. Copy the `.env.example` file to `.env` and fill in the values.
-2. Copy the `compose/docker-compose.config.[ENV].yml.example` file to `compose/docker-compose.config.[ENV].yml` and fill in the values.
-3. Run `./dc.sh [ENV] build` to build the bot.
-4. Run `./dc.sh [ENV] up -d --remove-orphans` to start the bot.
+1. Copy the `compose/docker-compose.config.[ENV].yml.example` file to `compose/docker-compose.config.[ENV].yml` and fill in the values.
+2. Run `./dc.sh [ENV] build` to build the bot.
+3. Run `./dc.sh [ENV] up -d --remove-orphans` to start the bot.
 
 ## Contact me
 
