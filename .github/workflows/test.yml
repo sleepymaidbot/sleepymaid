@@ -20,9 +20,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Ensure prisma schema is up to date
-        run: pnpm prisma generate
-
       - name: Build
         run: pnpm build
 
