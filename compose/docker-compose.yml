@@ -112,7 +112,10 @@ services:
 volumes:
   redis-data:
     name: 'sleepymaid-redis-data'
+    external: true
   postgres-data:
     name: 'sleepymaid-postgres-data'
+    external: true
   ghost-data:
     name: 'sleepymaid-ghost-data'
+    external: true
