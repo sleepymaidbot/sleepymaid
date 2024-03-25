@@ -12,6 +12,7 @@ RUN corepack enable
 
 COPY tsup.config.js turbo.json package.json tsconfig.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 
+COPY packages/db ./packages/db
 COPY packages/handler ./packages/handler
 COPY packages/logger ./packages/logger
 COPY packages/shared ./packages/shared
@@ -24,8 +25,6 @@ COPY services/watcher ./services/watcher
 RUN pnpm install --frozen-lockfile --ignore-scripts
 COPY locales/ ./locales
 COPY .git/ ./.git
-COPY prisma/ ./prisma
-RUN pnpm prisma generate
 RUN pnpm turbo run build --filter=sleepymaid...
 
 CMD ["node", "--trace-warnings", "-r", "source-map-support/register", "services/sleepymaid/dist/index.js"]

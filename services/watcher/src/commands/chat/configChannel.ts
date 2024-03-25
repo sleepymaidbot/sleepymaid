@@ -12,7 +12,8 @@ import {
 	Webhook,
 } from 'discord.js';
 import { WatcherClient } from '../../lib/extensions/WatcherClient';
-import { LogChannelType } from '@prisma/client';
+import { logChannel } from '@sleepymaid/db';
+import { eq } from 'drizzle-orm';
 
 export const subscribedLogsSelectOptions = {
 	mod: [
@@ -145,12 +146,9 @@ export default class ConfigCommand implements SlashCommandInterface {
 		if (!channel) return;
 		if (!channel.id) return;
 
-		const channelConfig = await client.prisma.logChannel.findUnique({
-			where: {
-				guildId: interaction.guild.id,
-				channelId: channel.id,
-			},
-		});
+		const channelConfig = (
+			await client.drizzle.select().from(logChannel).where(eq(logChannel.channelId, channel.id))
+		)[0];
 
 		if (channelConfig) {
 			const options = (): APISelectMenuOption[] => {
@@ -207,44 +205,25 @@ export default class ConfigCommand implements SlashCommandInterface {
 							if (!i.isStringSelectMenu()) return;
 							const selected = i.values;
 							const typeValue = subscribedLogsSelectOptions[channelConfig.type].map((v) => v.value);
-							const transaction = [];
-							for (const v of typeValue) {
-								if (!selected.includes(v)) {
-									transaction.push(
-										client.prisma.logChannel.update({
-											where: {
-												guildId: interaction.guild.id,
-												channelId: channel.id,
-											},
-											data: {
-												[v]: false,
-											},
-										}),
-									);
-								} else {
-									transaction.push(
-										client.prisma.logChannel.update({
-											where: {
-												guildId: interaction.guild.id,
-												channelId: channel.id,
-											},
-											data: {
-												[v]: true,
-											},
-										}),
-									);
+							await client.drizzle.transaction(async (tx) => {
+								for (const v of typeValue) {
+									if (!selected.includes(v)) {
+										await tx
+											.update(logChannel)
+											.set({ [v]: false })
+											.where(eq(logChannel.channelId, channel.id));
+									} else {
+										await tx
+											.update(logChannel)
+											.set({ [v]: true })
+											.where(eq(logChannel.channelId, channel.id));
+									}
 								}
-							}
-							await client.prisma.$transaction(transaction);
+							});
 							break;
 						}
 						case 'configChannel:config:removeLogs': {
-							await client.prisma.logChannel.delete({
-								where: {
-									guildId: interaction.guild.id,
-									channelId: channel.id,
-								},
-							});
+							await client.drizzle.delete(logChannel).where(eq(logChannel.channelId, channel.id));
 							await i.update({
 								content: 'Successfully removed logs from this channel.',
 								components: [],
@@ -329,7 +308,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 							.then(async (i) => {
 								await i.deferUpdate();
 								if (!i.isStringSelectMenu()) return;
-								const type = i.values[0] as LogChannelType;
+								const type = i.values[0] as keyof typeof subscribedLogsSelectOptions;
 								const webhookInfo: {
 									webhookId: string;
 									webhookToken: string;
@@ -360,19 +339,11 @@ export default class ConfigCommand implements SlashCommandInterface {
 								webhookInfo.webhookId = webhook.id;
 								webhookInfo.webhookToken = webhook.token ?? '';
 
-								await client.prisma.guildsSettings.update({
-									where: {
-										guildId: interaction.guild.id,
-									},
-									data: {
-										logChannels: {
-											create: {
-												channelId: channel.id,
-												type: type,
-												...webhookInfo,
-											},
-										},
-									},
+								await client.drizzle.insert(logChannel).values({
+									guildId: interaction.guild.id,
+									channelId: channel.id,
+									type,
+									...webhookInfo,
 								});
 
 								await interaction.editReply({

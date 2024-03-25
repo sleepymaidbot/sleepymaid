@@ -3,6 +3,8 @@ import type { SlashCommandInterface } from '@sleepymaid/handler';
 import { ChatInputApplicationCommandData, ChatInputCommandInteraction, PermissionsBitField } from 'discord.js';
 import { SleepyMaidClient } from '../../../lib/extensions/SleepyMaidClient';
 import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from 'discord-api-types/v10';
+import { guildsSettings } from '@sleepymaid/db';
+import { eq } from 'drizzle-orm';
 
 export default class SanitizerConfigCommand implements SlashCommandInterface {
 	public readonly data = {
@@ -71,92 +73,63 @@ export default class SanitizerConfigCommand implements SlashCommandInterface {
 	// @ts-ignore
 	public async execute(interaction: ChatInputCommandInteraction, client: SleepyMaidClient) {
 		if (!interaction.inCachedGuild()) return;
-		const sanitizerSettings = await client.prisma.sanitizerSettings.findUnique({
-			where: {
-				guildId: interaction.guildId,
-			},
-		});
-		if (!sanitizerSettings) {
-			await client.prisma.guildsSettings.update({
-				where: {
-					guildId: interaction.guildId,
-				},
-				data: {
-					sanitizer: {
-						create: { enabled: false, ignoredRoles: [] },
-					},
-				},
-			});
-		}
+		const guildSettings = (
+			await client.drizzle.select().from(guildsSettings).where(eq(guildsSettings.guildId, interaction.guildId))
+		)[0]!;
 		if (interaction.options.getSubcommand() === 'toggle') {
 			const state = interaction.options.getBoolean('state', true);
-			if (sanitizerSettings != null) {
-				if (sanitizerSettings.enabled === state) {
-					return await interaction.reply({
-						content: `Username sanitizer is already ${state ? 'enabled' : 'disabled'}.`,
-						ephemeral: true,
-					});
-				}
-				await client.prisma.sanitizerSettings.update({
-					where: {
-						guildId: interaction.guildId,
-					},
-					data: {
-						enabled: state,
-					},
-				});
+			if (guildSettings.sanitizerEnabled === state) {
 				return await interaction.reply({
-					content: `Username sanitizer has been ${state ? 'enabled' : 'disabled'}.`,
+					content: `Username sanitizer is already ${state ? 'enabled' : 'disabled'}.`,
 					ephemeral: true,
 				});
 			}
+			await client.drizzle
+				.update(guildsSettings)
+				.set({ sanitizerEnabled: state })
+				.where(eq(guildsSettings.guildId, interaction.guildId));
+			return await interaction.reply({
+				content: `Username sanitizer has been ${state ? 'enabled' : 'disabled'}.`,
+				ephemeral: true,
+			});
 		} else if (interaction.options.getSubcommandGroup() === 'ignoredroles') {
 			if (interaction.options.getSubcommand() === 'add') {
 				const role = interaction.options.getRole('role', true);
-				if (sanitizerSettings!.ignoredRoles.includes(role.id)) {
+				if (guildSettings!.sanitizerIgnoredRoles!.includes(role.id)) {
 					return await interaction.reply({
 						content: 'That role is already ignored.',
 						ephemeral: true,
 					});
 				}
-				await client.prisma.sanitizerSettings.update({
-					where: {
-						guildId: interaction.guildId,
-					},
-					data: {
-						ignoredRoles: {
-							push: role.id,
-						},
-					},
-				});
+				await client.drizzle
+					.update(guildsSettings)
+					.set({ sanitizerIgnoredRoles: [...guildSettings!.sanitizerIgnoredRoles!, role.id] })
+					.where(eq(guildsSettings.guildId, interaction.guildId));
 				return await interaction.reply({
 					content: 'Role has been added to the ignored roles.',
 					ephemeral: true,
 				});
 			} else if (interaction.options.getSubcommand() === 'remove') {
 				const role = interaction.options.getRole('role', true);
-				if (!sanitizerSettings!.ignoredRoles.includes(role.id)) {
+				if (!guildSettings.sanitizerIgnoredRoles!.includes(role.id)) {
 					return await interaction.reply({
 						content: 'That role is not ignored.',
 						ephemeral: true,
 					});
 				}
-				await client.prisma.sanitizerSettings.update({
-					where: {
-						guildId: interaction.guildId,
-					},
-					data: {
-						ignoredRoles: {
-							set: sanitizerSettings!.ignoredRoles.filter((r) => r !== role.id),
-						},
-					},
-				});
+				await client.drizzle
+					.update(guildsSettings)
+					.set({
+						sanitizerIgnoredRoles: guildSettings!.sanitizerIgnoredRoles!.filter((r) => r !== role.id),
+					})
+					.where(eq(guildsSettings.guildId, interaction.guildId));
+
 				return await interaction.reply({
 					content: 'Role has been removed from the ignored roles.',
 					ephemeral: true,
 				});
 			} else if (interaction.options.getSubcommand() === 'list') {
-				if (sanitizerSettings!.ignoredRoles.length === 0) {
+				if (guildSettings!.sanitizerIgnoredRoles!.length === 0) {
 					return await interaction.reply({
 						content: 'There are no ignored roles.',
 						ephemeral: true,
@@ -164,24 +137,22 @@ export default class SanitizerConfigCommand implements SlashCommandInterface {
 				}
 				const roles = await interaction.guild!.roles.fetch();
 				const deletedRoles: String[] = [];
-				const ignoredRoles = sanitizerSettings!.ignoredRoles
-					.map((r) => {
+				const ignoredRoles = guildSettings!
+					.sanitizerIgnoredRoles!.map((r) => {
 						const role = roles.get(r);
 						if (role === undefined) return deletedRoles.push(r);
 						return '<@&' + r + '>';
 					})
 					.filter((r) => r !== undefined);
 
-				await client.prisma.sanitizerSettings.update({
-					where: {
-						guildId: interaction.guildId,
-					},
-					data: {
-						ignoredRoles: {
-							set: [...new Set(sanitizerSettings!.ignoredRoles.filter((r) => !deletedRoles.includes(r)))],
-						},
-					},
-				});
+				await client.drizzle
+					.update(guildsSettings)
+					.set({
+						sanitizerIgnoredRoles: [
+							...new Set(guildSettings!.sanitizerIgnoredRoles!.filter((r) => !deletedRoles.includes(r))),
+						],
+					})
+					.where(eq(guildsSettings.guildId, interaction.guildId));
 
 				return await interaction.reply({
 					content: `Ignored roles: ${ignoredRoles.join(', ')}`,

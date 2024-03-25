@@ -1,16 +1,19 @@
 import { PubSubRedisBroker } from '@discordjs/brokers';
-import { Logger } from '@sleepymaid/logger';
-import { initConfig, Config, supportedLngs } from '@sleepymaid/shared';
-import { PrismaClient } from '@prisma/client';
-import { GatewayIntentBits } from 'discord-api-types/v10';
+import { schema } from '@sleepymaid/db';
 import { HandlerClient } from '@sleepymaid/handler';
-import { resolve } from 'path';
+import { Logger } from '@sleepymaid/logger';
+import { Config, initConfig, supportedLngs } from '@sleepymaid/shared';
+import { GatewayIntentBits } from 'discord-api-types/v10';
+import { drizzle } from 'drizzle-orm/node-postgres';
 import i18next from 'i18next';
 import FsBackend from 'i18next-fs-backend';
 import Redis from 'ioredis';
+import { resolve } from 'path';
+import { Client } from 'pg';
 
 export class WatcherClient extends HandlerClient {
-	public declare prisma: PrismaClient;
+	public declare PGClient: Client;
+	public declare drizzle: ReturnType<typeof drizzle>;
 	public declare redis: Redis;
 	public declare brokers: PubSubRedisBroker<any>;
 	public declare config: Config;
@@ -35,9 +38,14 @@ export class WatcherClient extends HandlerClient {
 		this.config = initConfig();
 		this.logger = new Logger(this.env);
 		this.env = this.config.nodeEnv;
-		this.prisma = new PrismaClient();
 		this.redis = new Redis(this.config.redisUrl);
 		this.brokers = new PubSubRedisBroker({ redisClient: this.redis });
+
+		this.PGClient = new Client({
+			connectionString: process.env.DATABASE_URL,
+		});
+		await this.PGClient.connect();
+		this.drizzle = drizzle(this.PGClient, { schema });
 
 		await i18next.use(FsBackend).init({
 			//debug: this.config.environment === 'development',
@@ -68,10 +76,6 @@ export class WatcherClient extends HandlerClient {
 
 		process.on('unhandledRejection', (error: Error) => {
 			this.logger.error(error);
-		});
-
-		process.on('exit', async () => {
-			await this.prisma.$disconnect();
 		});
 	}
 }

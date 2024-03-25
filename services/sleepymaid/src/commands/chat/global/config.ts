@@ -12,7 +12,8 @@ import {
 } from 'discord-api-types/v10';
 import { getLocalizedProp } from '@sleepymaid/shared';
 import i18next from 'i18next';
-import { AdminRole, ModRole } from '@prisma/client';
+import { guildsSettings } from '@sleepymaid/db';
+import { eq } from 'drizzle-orm';
 
 const getBaseEmbed = (i: ChatInputCommandInteraction<'cached'>): APIEmbed => {
 	return {
@@ -24,6 +25,14 @@ const getBaseEmbed = (i: ChatInputCommandInteraction<'cached'>): APIEmbed => {
 		timestamp: new Date(Date.now()).toISOString(),
 	};
 };
+
+function removeRoleFromArray(array: string[], roleId: string) {
+	const index = array.indexOf(roleId);
+	if (index > -1) {
+		array.splice(index, 1);
+	}
+	return array;
+}
 
 export default class ConfigCommand implements SlashCommandInterface {
 	public readonly data = {
@@ -119,20 +128,11 @@ export default class ConfigCommand implements SlashCommandInterface {
 		await interaction.deferReply();
 		const subcommandGroup = interaction.options.getSubcommandGroup();
 		const subcommand = interaction.options.getSubcommand();
-		const adminRoles = (
-			await client.prisma.adminRole.findMany({
-				where: {
-					guildId: interaction.guild.id,
-				},
-			})
-		).map((role: AdminRole) => role.roleId);
-		const modRoles = (
-			await client.prisma.modRole.findMany({
-				where: {
-					guildId: interaction.guild.id,
-				},
-			})
-		).map((role: ModRole) => role.roleId);
+		const guildSettings = (
+			await client.drizzle.select().from(guildsSettings).where(eq(guildsSettings.guildId, interaction.guild.id))
+		)[0]!;
+		const adminRoles = guildSettings.adminRoles ?? [];
+		const modRoles = guildSettings.modRoles ?? [];
 
 		if (subcommandGroup === 'admin-role' || subcommandGroup === 'mod-role') {
 			if (
@@ -291,17 +291,15 @@ export default class ConfigCommand implements SlashCommandInterface {
 							if (!guildRoles.has(roleId)) {
 								roles = roles.filter((r) => r !== roleId);
 								if (action === SpecialRoleType.admin) {
-									await client.prisma.adminRole.delete({
-										where: {
-											roleId: roleId,
-										},
-									});
+									await client.drizzle
+										.update(guildsSettings)
+										.set({ adminRoles: removeRoleFromArray(adminRoles, roleId) })
+										.where(eq(guildsSettings.guildId, interaction.guild.id));
 								} else if (action === SpecialRoleType.mod) {
-									await client.prisma.modRole.delete({
-										where: {
-											roleId: roleId,
-										},
-									});
+									await client.drizzle
+										.update(guildsSettings)
+										.set({ modRoles: removeRoleFromArray(modRoles, roleId) })
+										.where(eq(guildsSettings.guildId, interaction.guild.id));
 								}
 							}
 						}

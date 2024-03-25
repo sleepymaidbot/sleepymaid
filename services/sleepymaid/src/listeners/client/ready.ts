@@ -1,7 +1,7 @@
-import type { GuildsSettings } from '@prisma/client';
 import type { ListenerInterface } from '@sleepymaid/handler';
 import type { Guild } from 'discord.js';
 import type { SleepyMaidClient } from '../../lib/extensions/SleepyMaidClient';
+import { guildsSettings } from '@sleepymaid/db';
 
 export default class ReadyListener implements ListenerInterface {
 	public readonly name = 'ready';
@@ -16,9 +16,9 @@ export default class ReadyListener implements ListenerInterface {
 
 			await g.members.fetch().catch((e) => client.logger.error(e));
 		}
-		const guildSettings: Array<GuildsSettings> = await client.prisma.guildsSettings.findMany();
+		const guildSettings = await client.drizzle.select().from(guildsSettings);
 
-		const guildsInDb: Array<string> = guildSettings.map((guild) => guild.guildId);
+		const guildsInDb = guildSettings.map((guild) => guild.guildId);
 
 		const notInDbGuilds = client.guilds.cache
 			.filter((g) => !guildsInDb.includes(g.id))
@@ -28,8 +28,6 @@ export default class ReadyListener implements ListenerInterface {
 
 		if (notInDbGuilds.length < 0) return;
 
-		await client.prisma.guildsSettings.createMany({
-			data: notInDbGuilds,
-		});
+		await client.drizzle.insert(guildsSettings).values(notInDbGuilds);
 	}
 }

@@ -1,0 +1,38 @@
+{
+	"id": "5353a63a-98d2-4877-b308-dfccd4d58b86",
+	"prevId": "00000000-0000-0000-0000-000000000000",
+	"version": "5",
+	"dialect": "pg",
+	"tables": {
+		"random_bitrate": {
+			"name": "random_bitrate",
+			"schema": "",
+			"columns": {
+				"bigint": {
+					"name": "bigint",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"boolean": {
+					"name": "boolean",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false,
+					"default": false
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {}
+		}
+	},
+	"enums": {},
+	"schemas": {},
+	"_meta": {
+		"columns": {},
+		"schemas": {},
+		"tables": {}
+	}
+}

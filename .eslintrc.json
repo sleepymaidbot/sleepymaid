@@ -15,7 +15,8 @@
 		"neon/next",
 		"neon/react",
 		"next/core-web-vitals",
-		"plugin:@typescript-eslint/recommended"
+		"plugin:@typescript-eslint/recommended",
+		"plugin:drizzle/all"
 	],
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
@@ -23,7 +24,7 @@
 		"sourceType": "module",
 		"project": "./tsconfig.json"
 	},
-	"plugins": ["@typescript-eslint", "prettier", "import", "typescript-sort-keys"],
+	"plugins": ["@typescript-eslint", "prettier", "import", "typescript-sort-keys", "drizzle"],
 	"settings": {
 		"react": {
 			"version": "detect"
@@ -61,6 +62,8 @@
 				"minimumDescriptionLength": 5
 			}
 		],
-		"react/jsx-filename-extension": [1, { "extensions": [".tsx", ".astro"] }]
+		"react/jsx-filename-extension": [1, { "extensions": [".tsx", ".astro"] }],
+		"drizzle/enforce-delete-with-where": "error",
+		"drizzle/enforce-update-with-delete": "error"
 	}
 }
