@@ -1,5 +1,5 @@
 #!/bin/bash
-docker-compose \
+docker compose \
   -p sleepymaid \
   --env-file ./.env \
   -f compose/docker-compose.yml \
