@@ -5,7 +5,6 @@
 		"node": true
 	},
 	"extends": [
-		"neon/astro",
 		"neon/common",
 		"neon/node",
 		"neon/typescript",
@@ -40,10 +39,6 @@
 			}
 		},
 		{
-			"files": ["*.astro"],
-			"parser": "astro-eslint-parser"
-		},
-		{
 			"files": ["*.ts"],
 			"rules": {
 				"import/no-extraneous-dependencies": "off"
@@ -62,7 +57,7 @@
 				"minimumDescriptionLength": 5
 			}
 		],
-		"react/jsx-filename-extension": [1, { "extensions": [".tsx", ".astro"] }],
+		"react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
 		"drizzle/enforce-delete-with-where": "error",
 		"drizzle/enforce-update-with-delete": "error"
 	}
