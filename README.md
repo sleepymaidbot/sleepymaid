@@ -9,9 +9,7 @@ I plan on making this bot public but for now its only available for some specifi
 
 ## Dependencies
 
-- Nodejs
-- Yarn
-- Postgresql
+- Pnpm
 - Docker
 
 ## Running the bot
