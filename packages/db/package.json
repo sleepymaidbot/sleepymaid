@@ -39,7 +39,7 @@
 		"vitest": "^1.4.0"
 	},
 	"dependencies": {
-		"drizzle-orm": "^0.30.4",
+		"drizzle-orm": "^0.30.6",
 		"pg": "^8.11.3",
 		"postgres": "^3.4.4"
 	}
