@@ -28,18 +28,18 @@
 	"devDependencies": {
 		"@favware/cliff-jumper": "^3.0.1",
 		"@swc/core": "^1.4.11",
-		"@types/node": "^20.11.30",
+		"@types/node": "^20.12.2",
 		"@types/pg": "^8.11.4",
 		"drizzle-kit": "^0.20.14",
 		"rimraf": "^5.0.5",
 		"source-map-support": "0.5.21",
 		"tsup": "^8.0.2",
 		"typescript": "^5.4.3",
-		"vite": "^5.2.6",
+		"vite": "^5.2.7",
 		"vitest": "^1.4.0"
 	},
 	"dependencies": {
-		"drizzle-orm": "^0.30.4",
+		"drizzle-orm": "^0.30.6",
 		"pg": "^8.11.3",
 		"postgres": "^3.4.4"
 	}
