@@ -40,7 +40,7 @@
 	},
 	"dependencies": {
 		"drizzle-orm": "^0.30.6",
-		"pg": "^8.11.3",
+		"pg": "^8.11.4",
 		"postgres": "^3.4.4"
 	}
 }
