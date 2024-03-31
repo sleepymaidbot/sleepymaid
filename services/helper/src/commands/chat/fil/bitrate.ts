@@ -7,7 +7,7 @@ import { and, eq } from 'drizzle-orm';
 import { randomBitrate } from '@sleepymaid/db';
 
 export default class RandomBitrateCommand implements SlashCommandInterface {
-	public readonly guildIds = ['796534493535928320', '821717486217986098'];
+	public readonly guildIds = ['796534493535928320'];
 
 	public readonly data = {
 		name: 'randombitrate',
