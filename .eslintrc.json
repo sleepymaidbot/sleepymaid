@@ -57,8 +57,6 @@
 				"minimumDescriptionLength": 5
 			}
 		],
-		"react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
-		"drizzle/enforce-delete-with-where": "error",
-		"drizzle/enforce-update-with-delete": "error"
+		"react/jsx-filename-extension": [1, { "extensions": [".tsx"] }]
 	}
 }
