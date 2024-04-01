@@ -87,6 +87,7 @@ export default class RandomBitrateCommand implements SlashCommandInterface {
 						.delete(randomBitrate)
 						.where(and(eq(randomBitrate.guildId, interaction.guild.id), eq(randomBitrate.channelId, target.id)));
 					await interaction.reply(`The random bitrate has been disabled for ${target.toString()}.`);
+					await target.setBitrate(interaction.guild.maximumBitrate);
 				}
 			}
 		}
