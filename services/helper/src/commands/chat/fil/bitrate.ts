@@ -7,7 +7,7 @@ import { and, eq } from 'drizzle-orm';
 import { randomBitrate } from '@sleepymaid/db';
 
 export default class RandomBitrateCommand implements SlashCommandInterface {
-	public readonly guildIds = ['796534493535928320'];
+	public readonly guildIds = ['796534493535928320', '821717486217986098'];
 
 	public readonly data = {
 		name: 'randombitrate',
@@ -28,13 +28,14 @@ export default class RandomBitrateCommand implements SlashCommandInterface {
 						name: 'channel',
 						description: 'The channel to toggle the random bitrate.',
 						type: ApplicationCommandOptionType.Channel,
-						required: true,
+						channel_types: [ChannelType.GuildVoice],
+						required: false,
 					},
 					{
 						name: 'state',
 						description: 'The state of the random bitrate.',
 						type: ApplicationCommandOptionType.Boolean,
-						required: true,
+						required: false,
 					},
 				],
 			},
@@ -57,15 +58,20 @@ export default class RandomBitrateCommand implements SlashCommandInterface {
 			await interaction.member.voice.channel.setBitrate(roundedBitrate);
 			await interaction.reply(`The bitrate for the voice channel has been set to ${Math.ceil(bitrate / 1_000)}kbps.`);
 		} else if (interaction.options.getSubcommand() === 'toggle') {
-			const target = interaction.options.getChannel('channel', true);
-			const state = interaction.options.getBoolean('state', true);
+			let target = interaction.options.getChannel('channel', false);
+			const state = interaction.options.getBoolean('state', false);
+			if (!target) {
+				if (!interaction.member.voice.channel)
+					return interaction.reply('You need to be in a voice channel to use this command.');
+				target = interaction.member.voice.channel;
+			}
 			if (target.type !== ChannelType.GuildVoice) return interaction.reply('The channel must be a voice channel.');
 			if (target.members.size === 0) return interaction.reply('There are no members in the voice channel.');
 			const channelSettings = await client.drizzle.query.randomBitrate.findFirst({
 				where: and(eq(randomBitrate.guildId, interaction.guild.id), eq(randomBitrate.channelId, target.id)),
 			});
 			if (!channelSettings) {
-				if (state === true) {
+				if (state === true || !state) {
 					await client.drizzle.insert(randomBitrate).values({
 						guildId: interaction.guild.id,
 						channelId: target.id,
@@ -82,7 +88,7 @@ export default class RandomBitrateCommand implements SlashCommandInterface {
 						.set({ enabled: true })
 						.where(and(eq(randomBitrate.guildId, interaction.guild.id), eq(randomBitrate.channelId, target.id)));
 					await interaction.reply(`The random bitrate has been enabled for ${target.toString()}.`);
-				} else {
+				} else if (!state || state === false) {
 					await client.drizzle
 						.delete(randomBitrate)
 						.where(and(eq(randomBitrate.guildId, interaction.guild.id), eq(randomBitrate.channelId, target.id)));
