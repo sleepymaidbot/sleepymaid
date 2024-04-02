@@ -1,43 +1,41 @@
 import 'reflect-metadata';
-//import { isEqualObjects } from '@sleepymaid/util';
-import {
+import { readdir } from 'node:fs/promises';
+import { join } from 'node:path';
+import { findFilesRecursively } from '@sapphire/node-utilities';
+import type {
 	ApplicationCommandData,
 	AutocompleteInteraction,
-	Collection,
 	CommandInteraction,
 	Interaction,
-	InteractionType,
 	Snowflake,
 } from 'discord.js';
-import { join } from 'path';
+import { Collection, InteractionType } from 'discord.js';
 import { container } from 'tsyringe';
-import type { SlashCommandInterface } from './SlashCommand';
-import { readdir } from 'fs/promises';
-import type { UserCommandInterface } from './UserCommand';
-import type { MessageCommandInterface } from './MessageCommand';
 import { BaseManager } from '../BaseManager';
-import { findFilesRecursively } from '@sapphire/node-utilities';
+import type { MessageCommandInterface } from './MessageCommand';
+import type { SlashCommandInterface } from './SlashCommand';
+import type { UserCommandInterface } from './UserCommand';
 
-export interface CommandManagerStartAllOptionsType {
+export type CommandManagerStartAllOptionsType = {
 	folder: string;
-}
+};
 
-export interface GuildCommandsType {
+export type GuildCommandsType = {
 	[key: Snowflake]: ApplicationCommandData[];
-}
+};
 
-interface Commands {
-	name: string;
+type Commands = {
+	data: ApplicationCommandData;
 	file: string;
-	id: Snowflake | null;
 	guildId: Snowflake | null;
-	data: ApplicationCommandData;
-}
+	id: Snowflake | null;
+	name: string;
+};
 
-interface CommandInterface {
-	guildIds?: string[] | null;
+type CommandInterface = {
 	data: ApplicationCommandData;
-}
+	guildIds?: string[] | null;
+};
 
 export class CommandManager extends BaseManager {
 	private _commands: Collection<string, Commands> = new Collection<string, Commands>();
@@ -49,7 +47,7 @@ export class CommandManager extends BaseManager {
 			if (i.type === InteractionType.ApplicationCommand) {
 				this.HandleApplicationCommands(i as CommandInteraction);
 			} else if (i.type === InteractionType.ApplicationCommandAutocomplete) {
-				this.HandleAutocomplete(i as AutocompleteInteraction);
+				this.HandleAutocomplete(i);
 			}
 		});
 	}
@@ -63,20 +61,24 @@ export class CommandManager extends BaseManager {
 					await this.loadCommands(join(folderPath, folderName));
 					break;
 				}
+
 				case 'message': {
 					await this.loadCommands(join(folderPath, folderName));
 					break;
 				}
+
 				case 'user': {
 					await this.loadCommands(join(folderPath, folderName));
 					break;
 				}
+
 				default: {
 					this.client.logger.info(`Command Handler: -> Unknown folder -> ${folderName}`);
 					break;
 				}
 			}
 		}
+
 		this.client.logger.info(
 			`Command Handler: -> Successfully found ${[...this._commands].length} application commands!`,
 		);
@@ -91,7 +93,7 @@ export class CommandManager extends BaseManager {
 				for (const id of cmd_.guildIds) {
 					this._commands.set('n:' + cmd_.data.name, {
 						name: cmd_.data.name,
-						file: file,
+						file,
 						id: null,
 						guildId: id,
 						data: cmd_.data,
@@ -100,14 +102,16 @@ export class CommandManager extends BaseManager {
 			} else {
 				this._commands.set('n:' + cmd_.data.name, {
 					name: cmd_.data.name,
-					file: file,
+					file,
 					id: null,
 					guildId: null,
 					data: cmd_.data,
 				});
 			}
+
 			this.client.logger.info(`Command Handler: -> Command loaded -> ${cmd_.data.name}`);
 		}
+
 		return true;
 	}
 
@@ -115,25 +119,22 @@ export class CommandManager extends BaseManager {
 		// Global commands
 		const globalCommands = Array.from(this._commands.values()).filter((cmd) => cmd.guildId === null);
 
-		await this.client.application?.commands
-			.set(globalCommands.map((cmd) => cmd.data) as ApplicationCommandData[])
-			.then((cmds) => {
-				for (const cmd of cmds.values()) {
-					const current = globalCommands.find((c) => c.name === cmd.name);
-					if (current) {
-						this._commands.set(cmd.id, {
-							id: cmd.id,
-							name: current.name,
-							file: current.file,
-							guildId: null,
-							data: current.data,
-						});
-					}
+		await this.client.application?.commands.set(globalCommands.map((cmd) => cmd.data)).then((cmds) => {
+			for (const cmd of cmds.values()) {
+				const current = globalCommands.find((c) => c.name === cmd.name);
+				if (current) {
+					this._commands.set(cmd.id, {
+						id: cmd.id,
+						name: current.name,
+						file: current.file,
+						guildId: null,
+						data: current.data,
+					});
 				}
-				this.client.logger.info(
-					'Command Handler: -> Successfully registered ' + [...cmds].length + ' global commands!',
-				);
-			});
+			}
+
+			this.client.logger.info('Command Handler: -> Successfully registered ' + [...cmds].length + ' global commands!');
+		});
 
 		// Guild commands
 
@@ -143,11 +144,13 @@ export class CommandManager extends BaseManager {
 			.map((command) => command.guildId)
 			.filter((guildId, index, array) => guildId !== null && array.indexOf(guildId) === index);
 
+		await this.client.guilds.fetch();
+
 		for (const guildId of guildIdsArray) {
 			const guildCmds = guildCommands.filter((cmd) => cmd.guildId === guildId);
 			const guild = this.client.guilds.cache.get(guildId!);
 			if (!guild) continue;
-			guild.commands.set(guildCmds.map((cmd) => cmd.data)).then((cmds) => {
+			void guild.commands.set(guildCmds.map((cmd) => cmd.data)).then((cmds) => {
 				for (const cmd of cmds.values()) {
 					const current = guildCmds.find((c) => c.name === cmd.name);
 					if (current) {
@@ -160,6 +163,7 @@ export class CommandManager extends BaseManager {
 						});
 					}
 				}
+
 				this.client.logger.info(
 					'Command Handler: -> Successfully registered ' +
 						[...cmds].length +
@@ -184,7 +188,7 @@ export class CommandManager extends BaseManager {
 		try {
 			const file = this._commands.get(i.commandId);
 			if (!file) return;
-			const cmd = container.resolve<SlashCommandInterface | UserCommandInterface | MessageCommandInterface>(
+			const cmd = container.resolve<MessageCommandInterface | SlashCommandInterface | UserCommandInterface>(
 				(await import(file.file)).default.default,
 			);
 			if (!i.inCachedGuild()) return;
@@ -196,7 +200,7 @@ export class CommandManager extends BaseManager {
 					content: 'There was an error while executing this command!',
 					ephemeral: true,
 				});
-			} catch (error) {
+			} catch {
 				try {
 					await i.editReply({
 						content: 'There was an error while executing this command!',
@@ -220,7 +224,7 @@ export class CommandManager extends BaseManager {
 			this.client.logger.error(error as Error);
 			try {
 				await i.respond([]);
-			} catch (error) {
+			} catch {
 				try {
 					await i.respond([]);
 				} catch (error) {
