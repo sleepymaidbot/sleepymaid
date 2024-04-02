@@ -1,21 +1,22 @@
-import { SlashCommandInterface } from '@sleepymaid/handler';
+import type { SlashCommandInterface } from '@sleepymaid/handler';
+import { ButtonStyle } from 'discord-api-types/v10';
+import type { ChatInputCommandInteraction, ChatInputApplicationCommandData } from 'discord.js';
 import {
-	ChatInputCommandInteraction,
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
-	ChatInputApplicationCommandData,
 	PermissionFlagsBits,
 	PermissionsBitField,
 } from 'discord.js';
 import type { HelperClient } from '../../../lib/extensions/HelperClient';
-import { ButtonStyle } from 'discord-api-types/v10';
 
 export default class SelfRoleCommand implements SlashCommandInterface {
 	public readonly guildIds = [
-		'1131653884377579651', //QCGSecret
-		'1150379660128047104', //Whiteout
-		'1156009175600611501', //Whiteout Test
+		'1131653884377579651', // QCGSecret
+		'1150379660128047104', // Whiteout
+		'1156009175600611501', // Whiteout Test
+		'796534493535928320', // Fil
 	];
+
 	public readonly data = {
 		name: 'selfrole',
 		description: '[Admin only] Allow you to post a simple self role message.',
@@ -31,7 +32,7 @@ export default class SelfRoleCommand implements SlashCommandInterface {
 		],
 	} as ChatInputApplicationCommandData;
 
-	// @ts-ignore
+	// @ts-expect-error client overriden
 	public async execute(interaction: ChatInputCommandInteraction, client: HelperClient) {
 		if (!interaction.inCachedGuild()) return;
 		const role = interaction.options.getRole('role');
@@ -71,12 +72,12 @@ export default class SelfRoleCommand implements SlashCommandInterface {
 				allowedMentions: { parse: [] },
 			});
 		if (!interaction.channel) return;
-		interaction.reply({
+		await interaction.reply({
 			content: 'Self role message created!',
 			ephemeral: true,
 			allowedMentions: { parse: [] },
 		});
-		interaction.channel.send({
+		await interaction.channel.send({
 			content: 'Click the button below to get the ' + role.toString() + ' role!',
 			allowedMentions: { parse: [] },
 			components: [
