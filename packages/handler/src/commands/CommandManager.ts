@@ -32,10 +32,7 @@ type Commands = {
 	name: string;
 };
 
-type CommandInterface = {
-	data: ApplicationCommandData;
-	guildIds?: string[] | null;
-};
+type CommandInterface = MessageCommandInterface | SlashCommandInterface | UserCommandInterface;
 
 export class CommandManager extends BaseManager {
 	private _commands: Collection<string, Commands> = new Collection<string, Commands>();
