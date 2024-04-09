@@ -39,6 +39,7 @@
 		"vitest": "^1.4.0"
 	},
 	"dependencies": {
+		"@paralleldrive/cuid2": "^2.2.2",
 		"drizzle-orm": "^0.30.6",
 		"pg": "^8.11.5",
 		"postgres": "^3.4.4"
