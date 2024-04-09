@@ -1,6 +1,7 @@
 import { relations, sql } from 'drizzle-orm';
 import { pgTable, text, boolean } from 'drizzle-orm/pg-core';
 import { randomBitrate } from '../helper/randombitrate';
+import { roleMenu } from './rolemenu';
 
 export const guildsSettings = pgTable('GuildsSettings', {
 	guildId: text('guildId').primaryKey().notNull(),
@@ -22,5 +23,8 @@ export const guildsSettings = pgTable('GuildsSettings', {
 export const guildsSettingsRelations = relations(guildsSettings, ({ many }) => ({
 	randomBitrateChannels: many(randomBitrate, {
 		relationName: 'randomBitrateChannels',
+	}),
+	roleMenus: many(roleMenu, {
+		relationName: 'roleMenus',
 	}),
 }));
