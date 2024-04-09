@@ -4,6 +4,7 @@ import type { ChatInputCommandInteraction, ChatInputApplicationCommandData } fro
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
+	ComponentType,
 	PermissionFlagsBits,
 	PermissionsBitField,
 } from 'discord.js';
@@ -85,7 +86,7 @@ export default class SelfRoleCommand implements SlashCommandInterface {
 					type: 1,
 					components: [
 						{
-							type: 2,
+							type: ComponentType.Button,
 							style: ButtonStyle.Primary,
 							label: 'Add/Remove the role',
 							custom_id: 'selfrole:' + role.id,
