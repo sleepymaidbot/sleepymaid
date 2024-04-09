@@ -134,6 +134,7 @@ services:
       # replace eu-nl with your instance's distinctive name
       API_NAME: 'us4'
       # see docs/run-an-instance.md for more information
+      COOKIE_PATH: '/cookies.json'
     labels:
       - com.centurylinklabs.watchtower.scope=cobalt
 
