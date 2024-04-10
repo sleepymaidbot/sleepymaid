@@ -1,2 +1,3 @@
 import { HelperClient } from './lib/extensions/HelperClient';
-new HelperClient().start();
+
+void new HelperClient().start();
