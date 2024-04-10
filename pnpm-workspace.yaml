@@ -3,3 +3,4 @@ packages:
   - 'services/sleepymaid/'
   - 'services/helper/'
   - 'services/watcher/'
+  - 'services/website/'
