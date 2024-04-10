@@ -2,7 +2,12 @@ import type { Config } from 'drizzle-kit';
 import connectionString from './env';
 
 export default {
-	schema: ['./src/schema/sleepymaid/*.ts', './src/schema/helper/*.ts'],
+	schema: [
+		'./src/schema/helper/*.ts',
+		'./src/schema/sleepymaid/*.ts',
+		'./src/schema/watcher/*.ts',
+		'./src/schema/*.ts',
+	],
 	out: './drizzle',
 	driver: 'pg',
 	dbCredentials: {
