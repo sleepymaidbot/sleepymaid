@@ -12,6 +12,6 @@ export const randomBitrateRelations = relations(randomBitrate, ({ one }) => ({
 	guildsSettings: one(guildsSettings, {
 		fields: [randomBitrate.guildId],
 		references: [guildsSettings.guildId],
-		relationName: 'guildsSettings',
+		relationName: 'randomBitrateChannels',
 	}),
 }));
