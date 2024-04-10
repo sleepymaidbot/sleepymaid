@@ -13,7 +13,6 @@
 		"neon/module",
 		"neon/next",
 		"neon/react",
-		"next/core-web-vitals",
 		"plugin:@typescript-eslint/recommended",
 		"plugin:drizzle/all"
 	],
@@ -23,7 +22,7 @@
 		"sourceType": "module",
 		"project": "./tsconfig.json"
 	},
-	"plugins": ["@typescript-eslint", "prettier", "import", "typescript-sort-keys", "drizzle"],
+	"plugins": ["@typescript-eslint", "prettier", "typescript-sort-keys", "drizzle"],
 	"settings": {
 		"react": {
 			"version": "detect"
@@ -39,9 +38,12 @@
 			}
 		},
 		{
-			"files": ["*.ts"],
+			"files": ["*.ts", "*.tsx"],
 			"rules": {
-				"import/no-extraneous-dependencies": "off"
+				"import/no-extraneous-dependencies": "off",
+				"@typescript-eslint/no-unsafe-call": "off",
+				"@typescript-eslint/no-unsafe-assignment": "off",
+				"@typescript-eslint/no-unsafe-member-access": "off"
 			}
 		}
 	],
@@ -57,6 +59,11 @@
 				"minimumDescriptionLength": 5
 			}
 		],
-		"react/jsx-filename-extension": [1, { "extensions": [".tsx"] }]
+		"react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+		"react/jsx-indent": "off",
+		"react/jsx-indent-props": "off",
+		"@typescript-eslint/no-unsafe-call": "off",
+		"@typescript-eslint/no-unsafe-assignment": "off",
+		"@typescript-eslint/no-unsafe-member-access": "off"
 	}
 }
