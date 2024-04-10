@@ -179,7 +179,6 @@ compose/docker-compose.config.prod.yml
 # Temporary WIP dev files
 .turbo
 *.ignore
-/services/qcgguides
-/services/website
 /services/api
 compose/cookies.json
+packages/db/env.js
