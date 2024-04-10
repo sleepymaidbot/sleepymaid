@@ -4,7 +4,7 @@ import { guildsSettings } from '../sleepymaid/schema';
 export const logChannelType = pgEnum('LogChannelType', ['server', 'mod']);
 export const caseType = pgEnum('CaseType', ['untimeout', 'timeout', 'kick', 'unban', 'ban']);
 
-export const logChannel = pgTable('LogChannel', {
+export const logChannel = pgTable('logChannel', {
 	guildId: text('guildId')
 		.notNull()
 		.references(() => guildsSettings.guildId, { onDelete: 'cascade' }),
@@ -40,7 +40,7 @@ export const logChannel = pgTable('LogChannel', {
 	inviteDelete: boolean('inviteDelete').default(false).notNull(),
 });
 
-export const modCase = pgTable('Case', {
+export const modCase = pgTable('case', {
 	guildId: text('guildId')
 		.notNull()
 		.references(() => guildsSettings.guildId, { onDelete: 'cascade' }),
