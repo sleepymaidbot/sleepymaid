@@ -11,7 +11,7 @@ export default {
 	out: './drizzle',
 	driver: 'pg',
 	dbCredentials: {
-		connectionString: connectionString,
+		connectionString,
 	},
 	strict: true,
 } satisfies Config;
