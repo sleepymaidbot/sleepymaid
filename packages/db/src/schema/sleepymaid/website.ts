@@ -1,5 +1,5 @@
 import { relations, sql } from 'drizzle-orm';
-import { index, integer, pgTable, primaryKey, serial, text, timestamp, varchar } from 'drizzle-orm/pg-core';
+import { index, integer, pgTable, primaryKey, text, timestamp, varchar } from 'drizzle-orm/pg-core';
 import { type AdapterAccount } from 'next-auth/adapters';
 
 export const users = pgTable('user', {
@@ -40,25 +40,6 @@ export const accounts = pgTable(
 export const usersRelations = relations(users, ({ many }) => ({
 	accounts: many(accounts),
 }));
-
-export const posts = pgTable(
-	'post',
-	{
-		id: serial('id').primaryKey(),
-		name: varchar('name', { length: 256 }),
-		createdById: varchar('createdById', { length: 255 })
-			.notNull()
-			.references(() => users.id),
-		createdAt: timestamp('created_at')
-			.default(sql`CURRENT_TIMESTAMP`)
-			.notNull(),
-		updatedAt: timestamp('updatedAt'),
-	},
-	(example) => ({
-		createdByIdIdx: index('createdById_idx').on(example.createdById),
-		nameIndex: index('name_idx').on(example.name),
-	}),
-);
 
 export const accountsRelations = relations(accounts, ({ one }) => ({
 	user: one(users, { fields: [accounts.userId], references: [users.id] }),
