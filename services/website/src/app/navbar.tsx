@@ -28,11 +28,18 @@ export default function NavBar({
     <div className="ml-5 flex h-[5%] py-2">
       <NavigationMenu>
         <NavigationMenuList>
-          <Avatar>
-            <AvatarImage src="https://avatars.githubusercontent.com/u/81372048?s=200&v=4" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="text-sm font-medium">Sleepy Maid</div>
+          <Link
+            className="flex items-center justify-center align-middle"
+            href="/"
+          >
+            <Avatar className="mr-2">
+              <AvatarImage src="https://avatars.githubusercontent.com/u/81372048?s=200&v=4" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+            <div className="align-baseline text-sm font-medium">
+              Sleepy Maid
+            </div>
+          </Link>
         </NavigationMenuList>
       </NavigationMenu>
       <div className="absolute right-0 mr-5 flex">
@@ -46,7 +53,7 @@ export default function NavBar({
                 <NavigationMenuItem>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="outline">
+                      <Button variant="ghost">
                         <Avatar>
                           <AvatarImage
                             src={
@@ -67,13 +74,16 @@ export default function NavBar({
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem>
-                        <Server className="pr-2" />
-                        <Link href="/dashboard">Servers</Link>
+                      <DropdownMenuItem asChild>
+                        <Link className="flex" href="/dashboard" passHref>
+                          <Server className="pr-2" /> Servers
+                        </Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem>
-                        <LogOut className="pr-2" />
-                        <Link href="/api/auth/signout">Sign out</Link>
+                        <Link className="flex" href="/api/auth/signout">
+                          <LogOut className="pr-2" />
+                          Sign out
+                        </Link>
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
