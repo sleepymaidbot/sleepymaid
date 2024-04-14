@@ -38,7 +38,6 @@ export const usersRouter = createTRPCRouter({
 
     const userGuilds: UserGuilds[] = await Promise.all(
       guilds.map((guild) => {
-        // TODO: Implement this
         const hasBot = undefined;
 
         return {

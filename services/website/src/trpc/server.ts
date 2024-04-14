@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/promise-function-async */
 import "server-only";
 
 import { headers } from "next/headers";

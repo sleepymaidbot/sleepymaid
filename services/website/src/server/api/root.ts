@@ -1,5 +1,5 @@
-import { usersRouter } from "./routers/users";
 import { postRouter } from "@/server/api/routers/post";
+import { usersRouter } from "@/server/api/routers/users";
 import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
 
 /**

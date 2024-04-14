@@ -4,7 +4,7 @@ import { ChevronDown, LogOut, Server } from "lucide-react";
 import Link from "next/link";
 import type { Session } from "next-auth";
 import React from "react";
-import { ModeToggle } from "../components/theme-toggle";
+import { ModeToggle } from "@/components/theme-toggle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
