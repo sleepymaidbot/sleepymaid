@@ -11,13 +11,13 @@ services:
       interval: 10s
       timeout: 5s
 
-  redis:
-    image: redis:7-alpine
+  valkey:
+    image: valkey:7.2-alpine
     volumes:
-      - redis-data:/data
+      - valkey-data:/data
     restart: unless-stopped
     healthcheck:
-      test: ['CMD-SHELL', 'redis-cli ping']
+      test: ['CMD-SHELL', 'valkey-cli ping']
       interval: 10s
       timeout: 5s
 
@@ -113,8 +113,8 @@ services:
       - 'postgres'
 
 volumes:
-  redis-data:
-    name: 'sleepymaid-redis-data'
+  valkey-data:
+    name: 'sleepymaid-valkey-data'
     external: true
   postgres-data:
     name: 'sleepymaid-postgres-data'
