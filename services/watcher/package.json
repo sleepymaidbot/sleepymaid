@@ -19,7 +19,6 @@
 		"typescript": "^5.4.3"
 	},
 	"dependencies": {
-		"@discordjs/brokers": "^0.2.2",
 		"@sleepymaid/db": "workspace:^",
 		"@sleepymaid/handler": "workspace:^",
 		"@sleepymaid/logger": "workspace:^",

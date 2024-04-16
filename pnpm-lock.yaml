@@ -266,9 +266,6 @@ importers:
       '@aero/sanitizer':
         specifier: ^1.3.2
         version: 1.3.2
-      '@discordjs/brokers':
-        specifier: ^0.2.2
-        version: 0.2.2
       '@sleepymaid/db':
         specifier: workspace:^
         version: link:../../packages/db
@@ -324,9 +321,6 @@ importers:
       '@aero/sanitizer':
         specifier: ^1.3.2
         version: 1.3.2
-      '@discordjs/brokers':
-        specifier: ^0.2.2
-        version: 0.2.2
       '@sapphire/result':
         specifier: ^2.6.6
         version: 2.6.6
@@ -397,9 +391,6 @@ importers:
 
   services/watcher:
     dependencies:
-      '@discordjs/brokers':
-        specifier: ^0.2.2
-        version: 0.2.2
       '@sleepymaid/db':
         specifier: workspace:^
         version: link:../../packages/db
@@ -1042,18 +1033,6 @@ packages:
       '@types/conventional-commits-parser': 5.0.0
       chalk: 5.3.0
     dev: true
-
-  /@discordjs/brokers@0.2.2:
-    resolution:
-      { integrity: sha512-iTU6oP945kYUZYwlIKkntrIehkHruNmE2hztXg3SZqAwBa1kQXxXNQA+EI2ShUcgXyqe/9azVVrIgAXUaZjzeQ== }
-    engines: { node: '>=16.11.0' }
-    dependencies:
-      '@msgpack/msgpack': 3.0.0-beta2
-      '@vladfrangu/async_event_emitter': 2.2.2
-      ioredis: 5.3.2
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
 
   /@discordjs/builders@1.7.0:
     resolution:
@@ -1991,11 +1970,6 @@ packages:
       { integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA== }
     dev: true
 
-  /@ioredis/commands@1.2.0:
-    resolution:
-      { integrity: sha512-Sx1pU8EM64o2BrqNpEO1CNLtKQwyhuXuqyfH7oGKCk+1a33d2r5saW8zNwm3j6BTExtjrv2BxTgzzkMwts6vGg== }
-    dev: false
-
   /@isaacs/cliui@8.0.2:
     resolution:
       { integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA== }
@@ -2061,12 +2035,6 @@ packages:
     resolution:
       { integrity: sha512-9b8mPpKrfeGRuhFH5iO1iwCLeIIsV6+H1sRfxbkoGXIyQE2BTsPd9zqSqQJ+pv5sJ/hT5M1zvOFL02MnEezFug== }
     dev: true
-
-  /@msgpack/msgpack@3.0.0-beta2:
-    resolution:
-      { integrity: sha512-y+l1PNV0XDyY8sM3YtuMLK5vE3/hkfId+Do8pLo/OPxfxuFAUwcGz3oiiUuV46/aBpwTzZ+mRWVMtlSKbradhw== }
-    engines: { node: '>= 14' }
-    dev: false
 
   /@next/env@14.1.4:
     resolution:
@@ -4981,12 +4949,6 @@ packages:
     engines: { node: '>=6' }
     dev: false
 
-  /cluster-key-slot@1.1.2:
-    resolution:
-      { integrity: sha512-RMr0FhtfXemyinomL4hrWcYJxmX6deFdCxpJzhDttxgO1+bcCnkk+9drydLVDmAMG7NE6aN/fl4F7ucU/90gAA== }
-    engines: { node: '>=0.10.0' }
-    dev: false
-
   /color-convert@1.9.3:
     resolution:
       { integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg== }
@@ -5281,6 +5243,7 @@ packages:
         optional: true
     dependencies:
       ms: 2.1.2
+    dev: true
 
   /decamelize@5.0.1:
     resolution:
@@ -5337,12 +5300,6 @@ packages:
       has-property-descriptors: 1.0.1
       object-keys: 1.1.1
     dev: true
-
-  /denque@2.1.0:
-    resolution:
-      { integrity: sha512-HVQE3AAb/pxF8fQAoiqpvg9i3evqug3hoiwakOyZAwJm+6vZehbkYXZ0l4JxS+I3QxM97v5aaRNhj8v5oBhekw== }
-    engines: { node: '>=0.10' }
-    dev: false
 
   /dequal@2.0.3:
     resolution:
@@ -7733,24 +7690,6 @@ packages:
       loose-envify: 1.4.0
     dev: false
 
-  /ioredis@5.3.2:
-    resolution:
-      { integrity: sha512-1DKMMzlIHM02eBBVOFQ1+AolGjs6+xEcM4PDL7NqOS6szq7H9jSaEkIUH6/a5Hl241LzW6JLSiAbNvTQjUupUA== }
-    engines: { node: '>=12.22.0' }
-    dependencies:
-      '@ioredis/commands': 1.2.0
-      cluster-key-slot: 1.1.2
-      debug: 4.3.4
-      denque: 2.1.0
-      lodash.defaults: 4.2.0
-      lodash.isarguments: 3.1.0
-      redis-errors: 1.2.0
-      redis-parser: 3.0.0
-      standard-as-callback: 2.1.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
   /ip@2.0.0:
     resolution:
       { integrity: sha512-WKa+XuLG1A1R0UWhl2+1XQSi+fZWMsYKffMZTTYsiZaUD8k2yDAj5atimTUD2TZkyCkNEeYE5NhFZmupOGtjYQ== }
@@ -8434,16 +8373,6 @@ packages:
     resolution:
       { integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA== }
     dev: true
-
-  /lodash.defaults@4.2.0:
-    resolution:
-      { integrity: sha512-qjxPLHd3r5DnsdGacqOMU6pb/avJzdh9tFX2ymgoZE27BmjXrNy/y4LoaiTeAb+O3gL8AfpJGtqfX/ae2leYYQ== }
-    dev: false
-
-  /lodash.isarguments@3.1.0:
-    resolution:
-      { integrity: sha512-chi4NHZlZqZD18a0imDHnZPrDeBbTtVN7GXMwuGdRH9qotxAjYs3aVLKc7zNOG9eddR5Ksd8rvFEBc9SsggPpg== }
-    dev: false
 
   /lodash.isplainobject@4.0.6:
     resolution:
@@ -9236,6 +9165,7 @@ packages:
   /ms@2.1.2:
     resolution:
       { integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w== }
+    dev: true
 
   /ms@2.1.3:
     resolution:
@@ -10404,20 +10334,6 @@ packages:
     dependencies:
       picomatch: 2.3.1
 
-  /redis-errors@1.2.0:
-    resolution:
-      { integrity: sha512-1qny3OExCf0UvUV/5wpYKf2YwPcOqXzkwKKSmKHiE6ZMQs5heeE/c8eXK+PNllPvmjgAbfnsbpkGZWy8cBpn9w== }
-    engines: { node: '>=4' }
-    dev: false
-
-  /redis-parser@3.0.0:
-    resolution:
-      { integrity: sha512-DJnGAeenTdpMEH6uAJRK/uiyEIH9WVsUmoLwzudwGJUwZPp80PDBWPHXSAGNPwNvIXAbe7MSUB1zQFugFml66A== }
-    engines: { node: '>=4' }
-    dependencies:
-      redis-errors: 1.2.0
-    dev: false
-
   /reflect-metadata@0.2.1:
     resolution:
       { integrity: sha512-i5lLI6iw9AU3Uu4szRNPPEkomnkjRTaVt9hy/bn5g/oSzekBSMeLZblcjP74AW0vBabqERLLIrz+gR8QYR54Tw== }
@@ -10998,11 +10914,6 @@ packages:
     resolution:
       { integrity: sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw== }
     dev: true
-
-  /standard-as-callback@2.1.0:
-    resolution:
-      { integrity: sha512-qoRRSyROncaz1z0mvYqIE4lCd9p2R90i6GxW3uZv5ucSu8tU7B5HXUP1gG8pVZsYNVaXjk8ClXHPttLyxAL48A== }
-    dev: false
 
   /std-env@3.5.0:
     resolution:

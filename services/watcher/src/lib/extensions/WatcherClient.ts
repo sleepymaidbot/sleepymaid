@@ -1,22 +1,22 @@
-import { PubSubRedisBroker } from '@discordjs/brokers';
+import { resolve } from 'node:path';
 import { schema } from '@sleepymaid/db';
 import { HandlerClient } from '@sleepymaid/handler';
 import { Logger } from '@sleepymaid/logger';
-import { Config, initConfig, supportedLngs } from '@sleepymaid/shared';
+import type { Config } from '@sleepymaid/shared';
+import { initConfig, supportedLngs } from '@sleepymaid/shared';
 import { GatewayIntentBits } from 'discord-api-types/v10';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import i18next from 'i18next';
 import FsBackend from 'i18next-fs-backend';
-import Redis from 'ioredis';
-import { resolve } from 'path';
 import { Client } from 'pg';
 
 export class WatcherClient extends HandlerClient {
 	public declare PGClient: Client;
+
 	public declare drizzle: ReturnType<typeof drizzle>;
-	public declare redis: Redis;
-	public declare brokers: PubSubRedisBroker<any>;
+
 	public declare config: Config;
+
 	constructor() {
 		super(
 			{
@@ -38,8 +38,6 @@ export class WatcherClient extends HandlerClient {
 		this.config = initConfig();
 		this.logger = new Logger(this.env);
 		this.env = this.config.nodeEnv;
-		this.redis = new Redis(this.config.redisUrl);
-		this.brokers = new PubSubRedisBroker({ redisClient: this.redis });
 
 		this.PGClient = new Client({
 			connectionString: process.env.DATABASE_URL,
@@ -48,7 +46,7 @@ export class WatcherClient extends HandlerClient {
 		this.drizzle = drizzle(this.PGClient, { schema });
 
 		await i18next.use(FsBackend).init({
-			//debug: this.config.environment === 'development',
+			// debug: this.config.environment === 'development',
 			supportedLngs,
 			backend: {
 				loadPath: resolve(__dirname, '../../../../../locales/watcher/{{lng}}/{{ns}}.json'),
@@ -67,7 +65,7 @@ export class WatcherClient extends HandlerClient {
 			listeners: {
 				folder: resolve(__dirname, '..', '..', 'listeners'),
 			},
-			/*tasks: {
+			/* tasks: {
 				folder: resolve(__dirname, '..', '..', 'tasks'),
 			},*/
 		});
