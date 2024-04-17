@@ -12,7 +12,7 @@ services:
       timeout: 5s
 
   valkey:
-    image: valkey:7.2-alpine
+    image: valkey/valkey:7.2-alpine
     volumes:
       - valkey-data:/data
     restart: unless-stopped
@@ -56,7 +56,7 @@ services:
     restart: unless-stopped
     depends_on:
       - 'postgres'
-      - 'redis'
+      - 'valkey'
 
   helper:
     container_name: sleepymaid_helper
@@ -67,7 +67,7 @@ services:
     restart: unless-stopped
     depends_on:
       - 'postgres'
-      - 'redis'
+      - 'valkey'
 
   watcher:
     container_name: sleepymaid_watcher
@@ -78,7 +78,7 @@ services:
     restart: unless-stopped
     depends_on:
       - 'postgres'
-      - 'redis'
+      - 'valkey'
 
   #website:
   #  build:
