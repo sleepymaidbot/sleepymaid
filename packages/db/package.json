@@ -36,7 +36,8 @@
 		"tsup": "^8.0.2",
 		"typescript": "^5.4.3",
 		"vite": "^5.2.7",
-		"vitest": "^1.4.0"
+		"vitest": "^1.4.0",
+		"next-auth": "^4.24.6"
 	},
 	"dependencies": {
 		"@paralleldrive/cuid2": "^2.2.2",
