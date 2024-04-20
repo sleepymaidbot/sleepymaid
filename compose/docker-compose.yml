@@ -26,6 +26,8 @@ services:
     restart: unless-stopped
     expose:
       - '5672'
+    ports:
+      - '5672:5672'
     healthcheck:
       test: ['CMD', 'rabbitmq-diagnostics', '-q', 'ping']
       interval: 60s
@@ -56,7 +58,7 @@ services:
     restart: unless-stopped
     depends_on:
       - 'postgres'
-      - 'valkey'
+      - 'rabbitmq'
 
   helper:
     container_name: sleepymaid_helper
@@ -67,7 +69,6 @@ services:
     restart: unless-stopped
     depends_on:
       - 'postgres'
-      - 'valkey'
 
   watcher:
     container_name: sleepymaid_watcher
@@ -78,7 +79,6 @@ services:
     restart: unless-stopped
     depends_on:
       - 'postgres'
-      - 'valkey'
 
   #website:
   #  build:
