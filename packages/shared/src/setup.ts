@@ -1,23 +1,24 @@
-import { ChatInputCommandInteraction, MessageCreateOptions, MessageEditOptions } from 'discord.js';
-import { HandlerClient } from '@sleepymaid/handler';
+import type { HandlerClient } from '@sleepymaid/handler';
+import type { ChatInputCommandInteraction, MessageCreateOptions, MessageEditOptions } from 'discord.js';
 
-export interface MessagesType {
+export type MessagesType = {
 	[key: string]: MessageType;
-}
+};
 
-interface MessageType {
+type MessageType = {
 	fancyName: string;
-	function: (i: ChatInputCommandInteraction) => Promise<Array<MessageCreateOptions & MessageEditOptions>>;
-}
+	function(i: ChatInputCommandInteraction): Promise<(MessageCreateOptions & MessageEditOptions)[]>;
+};
 
 export const getChoices = (messages: MessagesType) => {
 	const choices = [];
-	for (const [k, v] of Object.entries(messages)) {
+	for (const [key, value] of Object.entries(messages)) {
 		choices.push({
-			name: v.fancyName,
-			value: k,
+			name: value.fancyName,
+			value: key,
 		});
 	}
+
 	return choices;
 };
 
@@ -38,7 +39,7 @@ export const setupInteraction = async (
 				.reply({
 					embeds: [
 						{
-							color: 3553599,
+							color: 3_553_599,
 							description: '<:redX:948606748334358559> Message not found.',
 						},
 					],
@@ -46,33 +47,34 @@ export const setupInteraction = async (
 				})
 				.catch(client.logger.error);
 		}
-		if (message?.author.id !== client.user?.id) {
-			await interaction
-				.reply({
-					embeds: [
-						{
-							color: 3553599,
-							description: '<:redX:948606748334358559> You can only edit messages sent by the bot.',
-						},
-					],
-					ephemeral: true,
-				})
-				.catch(client.logger.error);
-		} else {
+
+		if (message?.author.id === client.user?.id) {
 			const msgs = await msg.function(interaction);
-			if (msgs.length === 1) await message?.edit((await msgs[0]) as MessageEditOptions);
+			if (msgs.length === 1) await message?.edit(msgs[0] as MessageEditOptions);
 			else
 				await interaction
 					.reply({
 						embeds: [
 							{
-								color: 3553599,
+								color: 3_553_599,
 								description: '<:redX:948606748334358559> Message too big.',
 							},
 						],
 						ephemeral: true,
 					})
 					.catch(client.logger.error);
+		} else {
+			await interaction
+				.reply({
+					embeds: [
+						{
+							color: 3_553_599,
+							description: '<:redX:948606748334358559> You can only edit messages sent by the bot.',
+						},
+					],
+					ephemeral: true,
+				})
+				.catch(client.logger.error);
 		}
 	} else {
 		await msg
@@ -84,11 +86,12 @@ export const setupInteraction = async (
 			)
 			.catch(client.logger.error);
 	}
+
 	await interaction
 		.reply({
 			embeds: [
 				{
-					color: 3553599,
+					color: 3_553_599,
 					description: '<:greenTick:948620600144982026> Done!',
 				},
 			],

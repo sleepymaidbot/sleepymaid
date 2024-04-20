@@ -15,9 +15,8 @@ const options = {
 
 export const getAutocompleteResults = (choices: AutocompleteChoices, focusedValue: string) => {
 	if (!focusedValue) return choices.slice(0, 25);
-	else
-		return new Fuse(choices, options)
-			.search(focusedValue)
-			.slice(0, 25)
-			.map((item) => item.item);
+	return new Fuse(choices, options)
+		.search(focusedValue)
+		.slice(0, 25)
+		.map((item) => item.item);
 };

@@ -43,15 +43,15 @@ export const pointsBlacklistedVoiceChannel = [
 ];
 
 export const pointToRemoveForPoints = [
-	{ need: 2000, remove: 2 },
-	{ need: 3000, remove: 4 },
-	{ need: 4000, remove: 6 },
-	{ need: 5000, remove: 10 },
-	{ need: 6000, remove: 12 },
-	{ need: 7000, remove: 15 },
-	{ need: 8000, remove: 18 },
-	{ need: 9000, remove: 20 },
-	{ need: 10000, remove: 72 },
+	{ need: 2_000, remove: 2 },
+	{ need: 3_000, remove: 4 },
+	{ need: 4_000, remove: 6 },
+	{ need: 5_000, remove: 10 },
+	{ need: 6_000, remove: 12 },
+	{ need: 7_000, remove: 15 },
+	{ need: 8_000, remove: 18 },
+	{ need: 9_000, remove: 20 },
+	{ need: 10_000, remove: 72 },
 ];
 
 export const pointsMultiplier = 1;
@@ -67,10 +67,10 @@ export const actifRoles = [
 	},
 	{
 		roleId: '927358871939481690',
-		points: 1000,
+		points: 1_000,
 	},
 	{
 		roleId: '927359635709628447',
-		points: 2000,
+		points: 2_000,
 	},
 ];
