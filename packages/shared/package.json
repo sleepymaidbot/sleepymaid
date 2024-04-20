@@ -26,7 +26,9 @@
 	"license": "MIT",
 	"devDependencies": {
 		"@swc/core": "^1.4.11",
+		"@types/amqplib": "^0.10.5",
 		"@types/node": "^20.12.3",
+		"@types/uuid": "^9.0.8",
 		"rimraf": "^5.0.5",
 		"source-map-support": "0.5.21",
 		"tsup": "^8.0.2",
@@ -34,8 +36,10 @@
 	},
 	"dependencies": {
 		"@sleepymaid/handler": "workspace:^",
+		"amqplib": "^0.10.4",
 		"discord.js": "^14.14.1",
 		"fuse.js": "^7.0.0",
-		"i18next": "^23.10.1"
+		"i18next": "^23.10.1",
+		"uuid": "^9.0.1"
 	}
 }

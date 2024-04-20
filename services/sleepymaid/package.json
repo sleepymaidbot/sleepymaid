@@ -27,6 +27,7 @@
 		"@sleepymaid/logger": "workspace:^",
 		"@sleepymaid/shared": "workspace:^",
 		"@sleepymaid/util": "workspace:^",
+		"amqplib": "^0.10.4",
 		"discord-api-types": "^0.37.55",
 		"discord.js": "^14.14.1",
 		"drizzle-orm": "^0.30.6",
