@@ -26,16 +26,16 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
-		"@favware/cliff-jumper": "^3.0.1",
-		"@swc/core": "^1.4.11",
-		"@types/node": "^20.12.3",
-		"@types/pg": "^8.11.4",
+		"@favware/cliff-jumper": "^3.0.2",
+		"@swc/core": "^1.4.16",
+		"@types/node": "^20.12.7",
+		"@types/pg": "^8.11.5",
 		"drizzle-kit": "^0.20.17",
-		"next-auth": "^4.24.6",
+		"next-auth": "^4.24.7",
 		"rimraf": "^5.0.5",
 		"source-map-support": "0.5.21",
 		"tsup": "^8.0.2",
-		"typescript": "^5.4.3"
+		"typescript": "^5.4.5"
 	},
 	"dependencies": {
 		"@paralleldrive/cuid2": "^2.2.2",
