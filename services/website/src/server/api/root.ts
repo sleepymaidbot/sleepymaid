@@ -1,3 +1,4 @@
+import { guildsRouter } from "@/server/api/routers/guilds";
 import { usersRouter } from "@/server/api/routers/users";
 import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
 
@@ -7,6 +8,7 @@ import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
+  guilds: guildsRouter,
   users: usersRouter,
 });
 
