@@ -1,9 +1,9 @@
 import 'reflect-metadata';
+import { guildsSettings } from '@sleepymaid/db';
 import type { Snowflake } from 'discord.js';
+import { eq } from 'drizzle-orm';
 import { singleton } from 'tsyringe';
 import { baseManager } from '../BaseManager';
-import { guildsSettings } from '@sleepymaid/db';
-import { eq } from 'drizzle-orm';
 
 export enum SpecialRoleType {
 	'admin',
@@ -13,19 +13,26 @@ export enum SpecialRoleType {
 @singleton()
 export class configManager extends baseManager {
 	public async getConfig(guildId: Snowflake): Promise<{
+		adminRoles: string[] | null;
 		guildId: string;
+		modRoles: string[] | null;
 		sanitizerEnabled: boolean;
 		sanitizerIgnoredRoles: string[] | null;
-		adminRoles: string[] | null;
-		modRoles: string[] | null;
 	}> {
 		const config = (
 			await this.client.drizzle.select().from(guildsSettings).where(eq(guildsSettings.guildId, guildId))
 		)[0]!;
 		if (!config) {
-			await this.client.drizzle.insert(guildsSettings).values({ guildId });
+			await this.client.drizzle.insert(guildsSettings).values({
+				guildId,
+				// eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+				guildName: this.client.guilds.cache.get(guildId)?.name!,
+				// eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+				guildIcon: this.client.guilds.cache.get(guildId)?.iconURL()!,
+			});
 			return this.getConfig(guildId);
 		}
+
 		return config;
 	}
 
@@ -36,12 +43,12 @@ export class configManager extends baseManager {
 		if (type === SpecialRoleType.admin) {
 			return this.client.drizzle
 				.update(guildsSettings)
-				.set({ adminRoles: [...guildSettings.adminRoles!, roleId] })
+				.set({ adminRoles: [...guildSettings.adminRoles, roleId] })
 				.where(eq(guildsSettings.guildId, guildId));
 		} else if (type === SpecialRoleType.mod) {
 			return this.client.drizzle
 				.update(guildsSettings)
-				.set({ modRoles: [...guildSettings.modRoles!, roleId] })
+				.set({ modRoles: [...guildSettings.modRoles, roleId] })
 				.where(eq(guildsSettings.guildId, guildId));
 		} else return null;
 	}
@@ -51,6 +58,7 @@ export class configManager extends baseManager {
 		if (index > -1) {
 			array.splice(index, 1);
 		}
+
 		return array;
 	}
 
@@ -61,12 +69,12 @@ export class configManager extends baseManager {
 		if (type === SpecialRoleType.admin) {
 			return this.client.drizzle
 				.update(guildsSettings)
-				.set({ adminRoles: this.removeRoleFromArray(guildSettings.adminRoles!, roleId) })
+				.set({ adminRoles: this.removeRoleFromArray(guildSettings.adminRoles, roleId) })
 				.where(eq(guildsSettings.guildId, guildId));
 		} else if (type === SpecialRoleType.mod) {
 			return this.client.drizzle
 				.update(guildsSettings)
-				.set({ modRoles: this.removeRoleFromArray(guildSettings.modRoles!, roleId) })
+				.set({ modRoles: this.removeRoleFromArray(guildSettings.modRoles, roleId) })
 				.where(eq(guildsSettings.guildId, guildId));
 		} else return null;
 	}
