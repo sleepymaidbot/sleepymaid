@@ -5,6 +5,8 @@ import { roleMenu } from './rolemenu';
 
 export const guildsSettings = pgTable('GuildsSettings', {
 	guildId: text('guildId').primaryKey().notNull(),
+	guildName: text('guildname').notNull(),
+	guildIcon: text('icon'),
 	sanitizerEnabled: boolean('sanitizerEnabled').default(false).notNull(),
 	sanitizerIgnoredRoles: text('sanitizerIgnoredRoles')
 		.array()
