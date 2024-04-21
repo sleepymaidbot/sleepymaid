@@ -25,7 +25,7 @@ export default function NavBar({
   readonly session: Session | null;
 }) {
   return (
-    <div className="ml-5 flex h-[5%] py-2">
+    <div className="flex h-[5%] py-2 pl-5">
       <NavigationMenu>
         <NavigationMenuList>
           <Link
