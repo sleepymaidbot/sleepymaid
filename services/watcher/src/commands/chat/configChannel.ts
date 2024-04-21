@@ -1,19 +1,21 @@
+import { logChannel } from '@sleepymaid/db';
 import type { SlashCommandInterface } from '@sleepymaid/handler';
-import {
+import type {
 	APISelectMenuOption,
+	ChatInputApplicationCommandData,
+	ChatInputCommandInteraction,
+	Webhook,
+} from 'discord.js';
+import {
 	ApplicationCommandOptionType,
 	ButtonStyle,
 	ChannelType,
-	ChatInputApplicationCommandData,
-	ChatInputCommandInteraction,
 	ComponentType,
 	PermissionFlagsBits,
 	PermissionsBitField,
-	Webhook,
 } from 'discord.js';
-import { WatcherClient } from '../../lib/extensions/WatcherClient';
-import { logChannel } from '@sleepymaid/db';
 import { eq } from 'drizzle-orm';
+import type { WatcherClient } from '../../lib/extensions/WatcherClient';
 
 export const subscribedLogsSelectOptions = {
 	mod: [
@@ -138,7 +140,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 		],
 	} as ChatInputApplicationCommandData;
 
-	// @ts-expect-error
+	// @ts-expect-error - This is a valid function signature
 	public async execute(interaction: ChatInputCommandInteraction<'cached'>, client: WatcherClient) {
 		if (!interaction.guild) return;
 		if (!interaction.channel) return;
@@ -146,17 +148,18 @@ export default class ConfigCommand implements SlashCommandInterface {
 		if (!channel) return;
 		if (!channel.id) return;
 
-		const channelConfig = (
-			await client.drizzle.select().from(logChannel).where(eq(logChannel.channelId, channel.id))
-		)[0];
+		const channelConfig = await client.drizzle.query.logChannel.findFirst({
+			where: eq(logChannel.channelId, channel.id),
+		});
 
 		if (channelConfig) {
 			const options = (): APISelectMenuOption[] => {
-				const o: APISelectMenuOption[] = [];
+				const options: APISelectMenuOption[] = [];
 				for (const values of subscribedLogsSelectOptions[channelConfig.type]) {
-					o.push({ ...values, default: channelConfig[values.value as keyof typeof channelConfig] as boolean });
+					options.push({ ...values, default: channelConfig[values.value as keyof typeof channelConfig] as boolean });
 				}
-				return o;
+
+				return options;
 			};
 
 			await interaction.reply({
@@ -195,7 +198,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 
 			await interaction.channel
 				.awaitMessageComponent({
-					time: 15_0000,
+					time: 150_000,
 					filter: (i) => i.user.id === interaction.user.id && i.customId.startsWith('configChannel:config:'),
 				})
 				.then(async (i) => {
@@ -206,22 +209,23 @@ export default class ConfigCommand implements SlashCommandInterface {
 							const selected = i.values;
 							const typeValue = subscribedLogsSelectOptions[channelConfig.type].map((v) => v.value);
 							await client.drizzle.transaction(async (tx) => {
-								for (const v of typeValue) {
-									if (!selected.includes(v)) {
+								for (const value of typeValue) {
+									if (selected.includes(value)) {
 										await tx
 											.update(logChannel)
-											.set({ [v]: false })
+											.set({ [value]: true })
 											.where(eq(logChannel.channelId, channel.id));
 									} else {
 										await tx
 											.update(logChannel)
-											.set({ [v]: true })
+											.set({ [value]: false })
 											.where(eq(logChannel.channelId, channel.id));
 									}
 								}
 							});
 							break;
 						}
+
 						case 'configChannel:config:removeLogs': {
 							await client.drizzle.delete(logChannel).where(eq(logChannel.channelId, channel.id));
 							await i.update({
@@ -260,7 +264,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 
 			await interaction.channel
 				.awaitMessageComponent({
-					time: 60000,
+					time: 60_000,
 					filter: (i) =>
 						i.user.id === interaction.user.id && i.customId.startsWith('configChannel:newChannel:new') && i.isButton(),
 				})
@@ -299,7 +303,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 						});
 						await i.channel
 							.awaitMessageComponent({
-								time: 60000,
+								time: 60_000,
 								filter: (i) =>
 									i.user.id === interaction.user.id &&
 									i.customId.startsWith('configChannel:newChannel:typeSelect') &&
@@ -310,9 +314,9 @@ export default class ConfigCommand implements SlashCommandInterface {
 								if (!i.isStringSelectMenu()) return;
 								const type = i.values[0] as keyof typeof subscribedLogsSelectOptions;
 								const webhookInfo: {
+									threadId: string | null;
 									webhookId: string;
 									webhookToken: string;
-									threadId: string | null;
 								} = {
 									webhookId: '',
 									webhookToken: '',
@@ -336,6 +340,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 									});
 									webhookInfo.threadId = null;
 								}
+
 								webhookInfo.webhookId = webhook.id;
 								webhookInfo.webhookToken = webhook.token ?? '';
 
