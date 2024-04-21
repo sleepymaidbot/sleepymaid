@@ -7,9 +7,11 @@
  * need to use are documented accordingly near the end.
  */
 
+import { mqConnection } from "@sleepymaid/shared";
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
+import { env } from "@/env";
 import { getServerAuthSession } from "@/server/auth";
 import { db } from "@/server/db";
 
@@ -28,8 +30,16 @@ import { db } from "@/server/db";
 export const createTRPCContext = async (opts: { headers: Headers }) => {
   const session = await getServerAuthSession();
 
+  if (!session) {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
+  }
+
+  await mqConnection.connect(env.RABBITMQ_URL);
+
   return {
     db,
+    mqConnection: mqConnection.connection,
+    mqChannel: mqConnection.channel,
     session,
     ...opts,
   };
