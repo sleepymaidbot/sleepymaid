@@ -3,7 +3,6 @@
 	"extends": ["config:base", "helpers:pinGitHubActionDigests", "group:allNonMajor"],
 	"labels": ["Dependencies"],
 	"ignoreDeps": ["turbo", "turbo-linux-64", "discord-api-types"],
-	"ignorePaths": ["**/services/website/**", "**/services/website"],
 	"npm": {
 		"rangeStrategy": "bump",
 		"packageRules": [
