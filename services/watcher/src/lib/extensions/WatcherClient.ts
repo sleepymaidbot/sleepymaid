@@ -1,4 +1,6 @@
+/* eslint-disable unicorn/prefer-module */
 import { resolve } from 'node:path';
+import process from 'node:process';
 import { schema } from '@sleepymaid/db';
 import { HandlerClient } from '@sleepymaid/handler';
 import { Logger } from '@sleepymaid/logger';
@@ -13,11 +15,11 @@ import { Client } from 'pg';
 export class WatcherClient extends HandlerClient {
 	public declare PGClient: Client;
 
-	public declare drizzle: ReturnType<typeof drizzle>;
+	public declare drizzle: ReturnType<typeof drizzle<typeof schema>>;
 
 	public declare config: Config;
 
-	constructor() {
+	public constructor() {
 		super(
 			{
 				devServerId: '821717486217986098',
@@ -58,7 +60,7 @@ export class WatcherClient extends HandlerClient {
 			ns: 'translation',
 		});
 
-		this.loadHandlers({
+		void this.loadHandlers({
 			commands: {
 				folder: resolve(__dirname, '..', '..', 'commands'),
 			},
@@ -70,7 +72,7 @@ export class WatcherClient extends HandlerClient {
 			},*/
 		});
 
-		this.login(this.config.discordToken);
+		void this.login(this.config.discordToken);
 
 		process.on('unhandledRejection', (error: Error) => {
 			this.logger.error(error);
