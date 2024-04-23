@@ -14,7 +14,7 @@ const inter = Inter({
 export const metadata = {
   title: "Sleepy Maid Dashboard",
   description: "Dashboard for Sleepy Maid",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/icon.png" }],
 };
 
 export default async function RootLayout({
