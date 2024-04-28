@@ -26,9 +26,9 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
-		"@favware/cliff-jumper": "^3.0.2",
+		"@favware/cliff-jumper": "^3.0.3",
 		"@sleepymaid/util": "workspace:^",
-		"@swc/core": "^1.4.16",
+		"@swc/core": "^1.4.17",
 		"@types/node": "^20.12.7",
 		"@types/node-cron": "^3.0.11",
 		"rimraf": "^5.0.5",
