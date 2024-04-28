@@ -1,4 +1,4 @@
-import type { env } from './HandlerClient';
+import type { env } from "./HandlerClient";
 
 export class BaseLogger {
 	public declare env: env;
@@ -7,7 +7,7 @@ export class BaseLogger {
 	}
 
 	debug(message: string, ...args: string[]): void {
-		if (this.env === 'prod') return;
+		if (this.env === "prod") return;
 		console.debug(message, ...args);
 	}
 

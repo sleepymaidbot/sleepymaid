@@ -1,5 +1,5 @@
-import { singleton } from 'tsyringe';
-import { HelperClient } from '../extensions/HelperClient';
+import { singleton } from "tsyringe";
+import { HelperClient } from "../extensions/HelperClient";
 
 @singleton()
 export class baseManager {

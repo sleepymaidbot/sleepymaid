@@ -1,10 +1,10 @@
 // eslint is dumb af
 /* eslint-disable @typescript-eslint/no-unused-vars  */
-import { Collection, Guild, GuildMember, resolveColor, Role, Snowflake } from 'discord.js';
-import { container, singleton } from 'tsyringe';
-import { HelperClient } from '../../extensions/HelperClient';
-import { baseManager } from '../BaseManager';
-import { colorRoleIds } from '@sleepymaid/shared';
+import { Collection, Guild, GuildMember, resolveColor, Role, Snowflake } from "discord.js";
+import { container, singleton } from "tsyringe";
+import { HelperClient } from "../../extensions/HelperClient";
+import { baseManager } from "../BaseManager";
+import { colorRoleIds } from "@sleepymaid/shared";
 
 interface RoleSync {
 	id: string;
@@ -14,13 +14,13 @@ interface RoleSync {
 }
 
 export const ColorfulNeedRole = [
-	'797650029278920714', // Mods
-	'719221506047213638', // nitro booster
-	'842387653394563074', // actif
-	'852884649646227476', // cute
+	"797650029278920714", // Mods
+	"719221506047213638", // nitro booster
+	"842387653394563074", // actif
+	"852884649646227476", // cute
 ];
 
-const ColorfulRoleId = '857324294791364639';
+const ColorfulRoleId = "857324294791364639";
 
 interface RoleSyncReturn {
 	toAdd: string[];
@@ -33,7 +33,7 @@ export class ServerRoleSyncerManager extends baseManager {
 	public async reloadSeparatorRoles(guild: Guild): Promise<void> {
 		const separatedRoles: RoleSync[] = [];
 		for await (const role of guild.roles.cache.values()) {
-			if (role.name.startsWith('─') && role.color === resolveColor('#292b2f')) {
+			if (role.name.startsWith("─") && role.color === resolveColor("#292b2f")) {
 				separatedRoles.push({
 					id: role.id,
 					pos: role.position,

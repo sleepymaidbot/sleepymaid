@@ -1,12 +1,12 @@
-import type { SlashCommandInterface } from '@sleepymaid/handler';
-import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from 'discord-api-types/v10';
-import { ChatInputCommandInteraction, ChatInputApplicationCommandData, PermissionsBitField } from 'discord.js';
-import type { HelperClient } from '../../../lib/extensions/HelperClient';
-import { MessagesType, setupInteraction, getChoices } from '@sleepymaid/shared';
+import type { SlashCommandInterface } from "@sleepymaid/handler";
+import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from "discord-api-types/v10";
+import { ChatInputCommandInteraction, ChatInputApplicationCommandData, PermissionsBitField } from "discord.js";
+import type { HelperClient } from "../../../lib/extensions/HelperClient";
+import { MessagesType, setupInteraction, getChoices } from "@sleepymaid/shared";
 
 const messages: MessagesType = {
 	setupWelcome: {
-		fancyName: 'Welcome',
+		fancyName: "Welcome",
 		function: async () => {
 			const msg1 = `# QCG Secret
 This server is made to help and contribute to the completion of the secret on the Québec Games servers.
@@ -39,23 +39,23 @@ Québec Games Discord » <https://discord.gg/qcgames>
 };
 
 export default class QCGSecretSetupCommand implements SlashCommandInterface {
-	public readonly guildIds = ['1131653884377579651'];
+	public readonly guildIds = ["1131653884377579651"];
 	public readonly data = {
-		name: 'qcgssetup',
-		description: '[Admin only] Allow you to post pre-made messages.',
+		name: "qcgssetup",
+		description: "[Admin only] Allow you to post pre-made messages.",
 		type: ApplicationCommandType.ChatInput,
 		defaultMemberPermissions: new PermissionsBitField([PermissionFlagsBits.Administrator]),
 		options: [
 			{
-				name: 'name',
-				description: 'The name of the command',
+				name: "name",
+				description: "The name of the command",
 				type: ApplicationCommandOptionType.String,
 				choices: getChoices(messages),
 				required: true,
 			},
 			{
-				name: 'message_id',
-				description: 'The id of the message you want to edit',
+				name: "message_id",
+				description: "The id of the message you want to edit",
 				type: ApplicationCommandOptionType.String,
 				required: false,
 			},

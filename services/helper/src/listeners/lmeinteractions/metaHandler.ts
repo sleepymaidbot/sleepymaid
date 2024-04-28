@@ -1,48 +1,48 @@
-import { ButtonBuilder, ActionRowBuilder, SelectMenuBuilder, SelectMenuOptionBuilder } from '@discordjs/builders';
-import type { ListenerInterface } from '@sleepymaid/handler';
-import { pingRoleIds, colorRoleIds } from '@sleepymaid/shared';
-import { ButtonStyle } from 'discord-api-types/v10';
-import type { ButtonInteraction, SelectMenuInteraction } from 'discord.js';
+import { ButtonBuilder, ActionRowBuilder, SelectMenuBuilder, SelectMenuOptionBuilder } from "@discordjs/builders";
+import type { ListenerInterface } from "@sleepymaid/handler";
+import { pingRoleIds, colorRoleIds } from "@sleepymaid/shared";
+import { ButtonStyle } from "discord-api-types/v10";
+import type { ButtonInteraction, SelectMenuInteraction } from "discord.js";
 
 export default class MetahandlerListener implements ListenerInterface {
-	public readonly name = 'interactionCreate';
+	public readonly name = "interactionCreate";
 
 	public readonly once = false;
 
 	public async execute(interaction: ButtonInteraction | SelectMenuInteraction) {
-		if (!interaction.customId?.startsWith('lmeMeta')) return;
+		if (!interaction.customId?.startsWith("lmeMeta")) return;
 		if (!interaction.inCachedGuild()) return;
-		const Ids = interaction.customId.split(':');
-		if (Ids[0] !== 'lmeMeta') return;
+		const Ids = interaction.customId.split(":");
+		if (Ids[0] !== "lmeMeta") return;
 		await interaction.deferReply({ ephemeral: true });
-		if (Ids[1] === 'bienvenue') {
-			if (Ids[2] === 'init') {
+		if (Ids[1] === "bienvenue") {
+			if (Ids[2] === "init") {
 				switch (Ids[3]) {
-					case 'ping': {
+					case "ping": {
 						const pingOptions = [
 							{
-								label: 'Annonce',
-								description: 'Notification pour les annonces importantes',
-								emoji: { name: '📢' },
-								value: '879465272669528098',
+								label: "Annonce",
+								description: "Notification pour les annonces importantes",
+								emoji: { name: "📢" },
+								value: "879465272669528098",
 							},
 							{
-								label: 'Free Stuff',
-								description: 'Notification pour quand un jeux deviens gratuit',
-								emoji: { name: '🎮' },
-								value: '879465303795466240',
+								label: "Free Stuff",
+								description: "Notification pour quand un jeux deviens gratuit",
+								emoji: { name: "🎮" },
+								value: "879465303795466240",
 							},
 							{
-								label: 'Giveaway',
-								description: 'Notification pour quand il y a un giveaway',
-								emoji: { name: '🎉' },
-								value: '879465436922642462',
+								label: "Giveaway",
+								description: "Notification pour quand il y a un giveaway",
+								emoji: { name: "🎉" },
+								value: "879465436922642462",
 							},
 						];
 						const row1 = new ActionRowBuilder<SelectMenuBuilder>().addComponents([
 							new SelectMenuBuilder()
-								.setCustomId('lmeMeta:bienvenue:select:ping')
-								.setPlaceholder('Choisis ici tes rôles de notification')
+								.setCustomId("lmeMeta:bienvenue:select:ping")
+								.setPlaceholder("Choisis ici tes rôles de notification")
 								.setMaxValues(3)
 								.setMinValues(0)
 								.addOptions(pingOptions.map((option) => new SelectMenuOptionBuilder(option))),
@@ -50,32 +50,32 @@ export default class MetahandlerListener implements ListenerInterface {
 
 						const row2 = new ActionRowBuilder<ButtonBuilder>().addComponents([
 							new ButtonBuilder()
-								.setLabel('Supprimer mes notifications')
-								.setCustomId('lmeMeta:bienvenue:delete:ping')
-								.setEmoji({ id: '948606748334358559' })
+								.setLabel("Supprimer mes notifications")
+								.setCustomId("lmeMeta:bienvenue:delete:ping")
+								.setEmoji({ id: "948606748334358559" })
 								.setStyle(ButtonStyle.Secondary),
 						]);
 
 						return interaction.editReply({
-							content: 'Sélectionnez ci-dessous les notifications que vous souhaitez recevoir.',
+							content: "Sélectionnez ci-dessous les notifications que vous souhaitez recevoir.",
 							components: [row1, row2],
 						});
 					}
 
-					case 'color': {
+					case "color": {
 						return interaction.editReply({
 							content: "Le rôle n'est plus disponible.",
 						});
 					}
 
-					case 'viewRoles': {
+					case "viewRoles": {
 						const pingRole = interaction.member.roles.cache.filter((role) => pingRoleIds.includes(role.id));
 						// const colorRole = interaction.member.roles.cache.filter((role) => colorRoleIds.includes(role.id));
 						let cleanPingRole;
 						if (pingRole.size > 0) {
-							cleanPingRole = '**Notifications:**' + pingRole.map((role) => '<@&' + role.id + '>').join(', ');
+							cleanPingRole = "**Notifications:**" + pingRole.map((role) => "<@&" + role.id + ">").join(", ");
 						} else {
-							cleanPingRole = '**Notifications:** Aucune';
+							cleanPingRole = "**Notifications:** Aucune";
 						}
 
 						/* let cleanColorRole;
@@ -92,13 +92,13 @@ export default class MetahandlerListener implements ListenerInterface {
 
 					default: {
 						return interaction.editReply({
-							content: 'Erreur',
+							content: "Erreur",
 						});
 					}
 				}
-			} else if (Ids[2] === 'select') {
+			} else if (Ids[2] === "select") {
 				switch (Ids[3]) {
-					case 'ping': {
+					case "ping": {
 						const currentPingRole = interaction.member.roles.cache
 							.filter((role) => pingRoleIds.includes(role.id))
 							.map((role) => role.id);
@@ -113,11 +113,11 @@ export default class MetahandlerListener implements ListenerInterface {
 						await interaction.member.roles.remove(toRemove);
 
 						return interaction.editReply({
-							content: '<:greenTick:948620600144982026> Tes rôles de notifications ont été mis à jour.',
+							content: "<:greenTick:948620600144982026> Tes rôles de notifications ont été mis à jour.",
 						});
 					}
 
-					case 'color': {
+					case "color": {
 						return interaction.editReply({
 							content: "Le rôle n'est plus disponible.",
 						});
@@ -125,13 +125,13 @@ export default class MetahandlerListener implements ListenerInterface {
 
 					default: {
 						return interaction.editReply({
-							content: 'Erreur',
+							content: "Erreur",
 						});
 					}
 				}
-			} else if (Ids[2] === 'delete') {
+			} else if (Ids[2] === "delete") {
 				switch (Ids[3]) {
-					case 'ping': {
+					case "ping": {
 						const currentPingRole = interaction.member.roles.cache
 							.filter((role) => pingRoleIds.includes(role.id))
 							.map((role) => role.id);
@@ -141,30 +141,30 @@ export default class MetahandlerListener implements ListenerInterface {
 						});
 					}
 
-					case 'color': {
+					case "color": {
 						const currentColorRole = interaction.member.roles.cache
 							.filter((role) => colorRoleIds.includes(role.id))
 							.map((role) => role.id);
 						await interaction.member.roles.remove(currentColorRole);
 						return interaction.editReply({
-							content: '<:greenTick:948620600144982026> Ton rôle de couleur à bien été retiré.',
+							content: "<:greenTick:948620600144982026> Ton rôle de couleur à bien été retiré.",
 						});
 					}
 
 					default: {
 						return interaction.editReply({
-							content: 'Erreur',
+							content: "Erreur",
 						});
 					}
 				}
-			} else if (Ids[2] === 'join') {
+			} else if (Ids[2] === "join") {
 				if (
-					interaction.member.roles.cache.has('884149070757769227') ||
-					interaction.member.roles.cache.has('862462288345694210') ||
-					interaction.member.roles.cache.has('403681300940193804')
+					interaction.member.roles.cache.has("884149070757769227") ||
+					interaction.member.roles.cache.has("862462288345694210") ||
+					interaction.member.roles.cache.has("403681300940193804")
 				)
 					return interaction.editReply({
-						content: 'Tu es déjà membre.',
+						content: "Tu es déjà membre.",
 					});
 				else {
 					return interaction.editReply({
@@ -180,12 +180,12 @@ export default class MetahandlerListener implements ListenerInterface {
 				}
 			} else {
 				return interaction.editReply({
-					content: 'Erreur',
+					content: "Erreur",
 				});
 			}
 		} else {
 			return interaction.editReply({
-				content: 'Erreur',
+				content: "Erreur",
 			});
 		}
 	}

@@ -1,20 +1,20 @@
-import 'reflect-metadata';
-import { readdir } from 'node:fs/promises';
-import { join } from 'node:path';
-import { findFilesRecursively } from '@sapphire/node-utilities';
+import "reflect-metadata";
+import { readdir } from "node:fs/promises";
+import { join } from "node:path";
+import { findFilesRecursively } from "@sapphire/node-utilities";
 import type {
 	ApplicationCommandData,
 	AutocompleteInteraction,
 	CommandInteraction,
 	Interaction,
 	Snowflake,
-} from 'discord.js';
-import { Collection, InteractionType } from 'discord.js';
-import { container } from 'tsyringe';
-import { BaseManager } from '../BaseManager';
-import type { MessageCommandInterface } from './MessageCommand';
-import type { SlashCommandInterface } from './SlashCommand';
-import type { UserCommandInterface } from './UserCommand';
+} from "discord.js";
+import { Collection, InteractionType } from "discord.js";
+import { container } from "tsyringe";
+import { BaseManager } from "../BaseManager";
+import type { MessageCommandInterface } from "./MessageCommand";
+import type { SlashCommandInterface } from "./SlashCommand";
+import type { UserCommandInterface } from "./UserCommand";
 
 export type CommandManagerStartAllOptionsType = {
 	folder: string;
@@ -38,9 +38,9 @@ export class CommandManager extends BaseManager {
 	private _commands: Collection<string, Commands> = new Collection<string, Commands>();
 
 	public async startAll(options: CommandManagerStartAllOptionsType): Promise<void> {
-		if (!options.folder) throw new Error('No folder path provided!');
+		if (!options.folder) throw new Error("No folder path provided!");
 		await this.loadCommand(options.folder);
-		this.client.on('interactionCreate', (i: Interaction) => {
+		this.client.on("interactionCreate", (i: Interaction) => {
 			if (i.type === InteractionType.ApplicationCommand) {
 				this.HandleApplicationCommands(i as CommandInteraction);
 			} else if (i.type === InteractionType.ApplicationCommandAutocomplete) {
@@ -50,21 +50,21 @@ export class CommandManager extends BaseManager {
 	}
 
 	private async loadCommand(folderPath: string): Promise<void> {
-		this.client.logger.info('Command Handler: -> Registering application commands...');
+		this.client.logger.info("Command Handler: -> Registering application commands...");
 		const topLevelFolders = await readdir(folderPath);
 		for await (const folderName of topLevelFolders) {
 			switch (folderName) {
-				case 'chat': {
+				case "chat": {
 					await this.loadCommands(join(folderPath, folderName));
 					break;
 				}
 
-				case 'message': {
+				case "message": {
 					await this.loadCommands(join(folderPath, folderName));
 					break;
 				}
 
-				case 'user': {
+				case "user": {
 					await this.loadCommands(join(folderPath, folderName));
 					break;
 				}
@@ -83,12 +83,12 @@ export class CommandManager extends BaseManager {
 	}
 
 	private async loadCommands(folderPath: string): Promise<boolean> {
-		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith('.js'))) {
+		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith(".js"))) {
 			const cmd_ = container.resolve<CommandInterface>((await import(file)).default.default);
 
 			if (cmd_.guildIds) {
 				for (const id of cmd_.guildIds) {
-					this._commands.set('n:' + cmd_.data.name, {
+					this._commands.set("n:" + cmd_.data.name, {
 						name: cmd_.data.name,
 						file,
 						id: null,
@@ -97,7 +97,7 @@ export class CommandManager extends BaseManager {
 					});
 				}
 			} else {
-				this._commands.set('n:' + cmd_.data.name, {
+				this._commands.set("n:" + cmd_.data.name, {
 					name: cmd_.data.name,
 					file,
 					id: null,
@@ -130,7 +130,7 @@ export class CommandManager extends BaseManager {
 				}
 			}
 
-			this.client.logger.info('Command Handler: -> Successfully registered ' + [...cmds].length + ' global commands!');
+			this.client.logger.info("Command Handler: -> Successfully registered " + [...cmds].length + " global commands!");
 		});
 
 		// Guild commands
@@ -162,19 +162,19 @@ export class CommandManager extends BaseManager {
 				}
 
 				this.client.logger.info(
-					'Command Handler: -> Successfully registered ' +
+					"Command Handler: -> Successfully registered " +
 						[...cmds].length +
-						' guild commands for ' +
+						" guild commands for " +
 						guild.name +
-						' (' +
+						" (" +
 						guild.id +
-						')',
+						")",
 				);
 			});
 		}
 
 		for (const [key, _value] of this._commands) {
-			if (key?.startsWith('n:')) this._commands.delete(key);
+			if (key?.startsWith("n:")) this._commands.delete(key);
 		}
 	}
 
@@ -194,13 +194,13 @@ export class CommandManager extends BaseManager {
 			this.client.logger.error(error as Error);
 			try {
 				await i.reply({
-					content: 'There was an error while executing this command!',
+					content: "There was an error while executing this command!",
 					ephemeral: true,
 				});
 			} catch {
 				try {
 					await i.editReply({
-						content: 'There was an error while executing this command!',
+						content: "There was an error while executing this command!",
 					});
 				} catch (error) {
 					this.client.logger.error(error as Error);

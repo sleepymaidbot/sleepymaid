@@ -1,13 +1,13 @@
-import 'reflect-metadata';
-import { guildsSettings } from '@sleepymaid/db';
-import type { Snowflake } from 'discord.js';
-import { eq } from 'drizzle-orm';
-import { singleton } from 'tsyringe';
-import { baseManager } from '../BaseManager';
+import "reflect-metadata";
+import { guildsSettings } from "@sleepymaid/db";
+import type { Snowflake } from "discord.js";
+import { eq } from "drizzle-orm";
+import { singleton } from "tsyringe";
+import { baseManager } from "../BaseManager";
 
 export enum SpecialRoleType {
-	'admin',
-	'mod',
+	"admin",
+	"mod",
 }
 
 @singleton()

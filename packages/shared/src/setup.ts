@@ -1,5 +1,5 @@
-import type { HandlerClient } from '@sleepymaid/handler';
-import type { ChatInputCommandInteraction, MessageCreateOptions, MessageEditOptions } from 'discord.js';
+import type { HandlerClient } from "@sleepymaid/handler";
+import type { ChatInputCommandInteraction, MessageCreateOptions, MessageEditOptions } from "discord.js";
 
 export type MessagesType = {
 	[key: string]: MessageType;
@@ -23,15 +23,15 @@ export const getChoices = (messages: MessagesType) => {
 };
 
 export const setupInteraction = async (
-	interaction: ChatInputCommandInteraction<'cached'>,
+	interaction: ChatInputCommandInteraction<"cached">,
 	client: HandlerClient,
 	messages: MessagesType,
 ) => {
-	const name = interaction.options.getString('name');
+	const name = interaction.options.getString("name");
 	if (!name) return;
 	const msg = messages[name];
 	if (!msg) return;
-	const messageId = interaction.options.getString('message_id');
+	const messageId = interaction.options.getString("message_id");
 	if (messageId) {
 		const message = await interaction.channel?.messages.fetch(messageId);
 		if (!message) {
@@ -40,7 +40,7 @@ export const setupInteraction = async (
 					embeds: [
 						{
 							color: 3_553_599,
-							description: '<:redX:948606748334358559> Message not found.',
+							description: "<:redX:948606748334358559> Message not found.",
 						},
 					],
 					ephemeral: true,
@@ -57,7 +57,7 @@ export const setupInteraction = async (
 						embeds: [
 							{
 								color: 3_553_599,
-								description: '<:redX:948606748334358559> Message too big.',
+								description: "<:redX:948606748334358559> Message too big.",
 							},
 						],
 						ephemeral: true,
@@ -69,7 +69,7 @@ export const setupInteraction = async (
 					embeds: [
 						{
 							color: 3_553_599,
-							description: '<:redX:948606748334358559> You can only edit messages sent by the bot.',
+							description: "<:redX:948606748334358559> You can only edit messages sent by the bot.",
 						},
 					],
 					ephemeral: true,
@@ -92,7 +92,7 @@ export const setupInteraction = async (
 			embeds: [
 				{
 					color: 3_553_599,
-					description: '<:greenTick:948620600144982026> Done!',
+					description: "<:greenTick:948620600144982026> Done!",
 				},
 			],
 			ephemeral: true,

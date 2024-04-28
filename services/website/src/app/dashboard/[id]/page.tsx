@@ -1,10 +1,10 @@
-import { Plus } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
-import { api } from '@/trpc/server';
+import { Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+import { api } from "@/trpc/server";
 
 const Page = async ({ params }: { readonly params: { id: string } }) => {
 	const settings = await api.guilds.getGuildSettings({
@@ -18,8 +18,8 @@ const Page = async ({ params }: { readonly params: { id: string } }) => {
 		.filter((role) => settings.settings?.adminRoles?.includes(role.id))
 		.sort((a, b) => b.position - a.position)
 		.map((obj) => {
-			if (obj.color === '0') {
-				return { ...obj, color: 'c4c9ce' };
+			if (obj.color === "0") {
+				return { ...obj, color: "c4c9ce" };
 			}
 
 			return obj;
@@ -29,8 +29,8 @@ const Page = async ({ params }: { readonly params: { id: string } }) => {
 		.filter((role) => settings.settings?.modRoles?.includes(role.id))
 		.sort((a, b) => b.position - a.position)
 		.map((obj) => {
-			if (obj.color === '0') {
-				return { ...obj, color: 'c4c9ce' };
+			if (obj.color === "0") {
+				return { ...obj, color: "c4c9ce" };
 			}
 
 			return obj;
@@ -63,7 +63,7 @@ const Page = async ({ params }: { readonly params: { id: string } }) => {
 							<div>
 								<Label>Admin Roles</Label>
 								{adminRoles.map((role) => (
-									<div className="my-1 rounded-md border-2 p-1" key={role.id} style={{ borderColor: '#' + role.color }}>
+									<div className="my-1 rounded-md border-2 p-1" key={role.id} style={{ borderColor: "#" + role.color }}>
 										{role.name}
 									</div>
 								))}
@@ -74,7 +74,7 @@ const Page = async ({ params }: { readonly params: { id: string } }) => {
 							<div>
 								<Label>Moderator Roles</Label>
 								{moderatorRoles.map((role) => (
-									<div className="my-1 rounded-md border-2 p-1" key={role.id} style={{ borderColor: '#' + role.color }}>
+									<div className="my-1 rounded-md border-2 p-1" key={role.id} style={{ borderColor: "#" + role.color }}>
 										{role.name}
 									</div>
 								))}

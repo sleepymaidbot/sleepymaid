@@ -1,22 +1,22 @@
-import type { SlashCommandInterface } from '@sleepymaid/handler';
-import { ChatInputApplicationCommandData, ChatInputCommandInteraction, version as discordJSVersion } from 'discord.js';
-import { ApplicationCommandType } from 'discord-api-types/v10';
-import { prettyBytes, shell } from '@sleepymaid/util';
-import * as os from 'os';
-import type { SleepyMaidClient } from '../../../lib/extensions/SleepyMaidClient';
+import type { SlashCommandInterface } from "@sleepymaid/handler";
+import { ChatInputApplicationCommandData, ChatInputCommandInteraction, version as discordJSVersion } from "discord.js";
+import { ApplicationCommandType } from "discord-api-types/v10";
+import { prettyBytes, shell } from "@sleepymaid/util";
+import * as os from "os";
+import type { SleepyMaidClient } from "../../../lib/extensions/SleepyMaidClient";
 
 export default class InfoCommand implements SlashCommandInterface {
 	public readonly data = {
-		name: 'info',
-		description: 'Gets information about the bot',
+		name: "info",
+		description: "Gets information about the bot",
 		type: ApplicationCommandType.ChatInput,
 	} as ChatInputApplicationCommandData;
 
 	// @ts-ignore
 	public async execute(interaction: ChatInputCommandInteraction, client: SleepyMaidClient) {
-		const currentCommit = (await shell('git rev-parse HEAD')).stdout.replace('\n', '') || 'unknown';
-		let repoUrl = (await shell('git remote get-url origin')).stdout.replace('\n', '') || 'unknown';
-		if (repoUrl.includes('.git')) repoUrl = repoUrl.substring(0, repoUrl.length - 4);
+		const currentCommit = (await shell("git rev-parse HEAD")).stdout.replace("\n", "") || "unknown";
+		let repoUrl = (await shell("git remote get-url origin")).stdout.replace("\n", "") || "unknown";
+		if (repoUrl.includes(".git")) repoUrl = repoUrl.substring(0, repoUrl.length - 4);
 
 		const uptime = Date.now() - client.uptime!;
 		const formatUptime = Math.floor(uptime / 1000);
@@ -24,15 +24,15 @@ export default class InfoCommand implements SlashCommandInterface {
 		await interaction.reply({
 			embeds: [
 				{
-					title: 'Bot Info:',
+					title: "Bot Info:",
 					fields: [
 						{
-							name: '**Uptime**',
+							name: "**Uptime**",
 							value: `<t:${formatUptime}:R>`,
 							inline: true,
 						},
 						{
-							name: '**Memory Usage**',
+							name: "**Memory Usage**",
 							value: `System: ${prettyBytes(os.totalmem() - os.freemem(), {
 								binary: true,
 							})}/${prettyBytes(os.totalmem(), {
@@ -45,33 +45,33 @@ export default class InfoCommand implements SlashCommandInterface {
 							inline: true,
 						},
 						{
-							name: '**Servers**',
+							name: "**Servers**",
 							value: client.guilds.cache.size.toLocaleString(),
 							inline: true,
 						},
 						{
-							name: '**Users**',
+							name: "**Users**",
 							value: client.users.cache.size.toLocaleString(),
 							inline: true,
 						},
 						{
-							name: '**Discord.js Version**',
+							name: "**Discord.js Version**",
 							value: discordJSVersion,
 							inline: true,
 						},
 						{
-							name: '**Node.js Version**',
+							name: "**Node.js Version**",
 							value: process.version.slice(1),
 							inline: true,
 						},
 						{
-							name: '**Current Commit**',
+							name: "**Current Commit**",
 							value: `[${currentCommit.substring(0, 7)}](${repoUrl}/commit/${currentCommit})`,
 							inline: true,
 						},
 						{
-							name: '**Credits**',
-							value: 'Emotes from [Icons](https://discord.gg/9AtkECMX2P)',
+							name: "**Credits**",
+							value: "Emotes from [Icons](https://discord.gg/9AtkECMX2P)",
 							inline: true,
 						},
 					],

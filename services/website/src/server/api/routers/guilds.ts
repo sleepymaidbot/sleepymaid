@@ -1,12 +1,12 @@
-import { accounts, guildsSettings } from '@sleepymaid/db';
-import { sendRPCRequest, Queue } from '@sleepymaid/shared';
-import { eq } from 'drizzle-orm';
-import { z } from 'zod';
-import { createTRPCRouter, protectedProcedure } from '@/server/api/trpc';
+import { accounts, guildsSettings } from "@sleepymaid/db";
+import { sendRPCRequest, Queue } from "@sleepymaid/shared";
+import { eq } from "drizzle-orm";
+import { z } from "zod";
+import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 
 export const guildsRouter = createTRPCRouter({
 	getGuildSettings: protectedProcedure.input(z.object({ guildId: z.string() })).query(async ({ ctx, input }) => {
-		console.log('getGuildSettings', input);
+		console.log("getGuildSettings", input);
 		const userId = await ctx.db.query.accounts
 			.findFirst({
 				where: eq(accounts.userId, ctx.session.user.id),

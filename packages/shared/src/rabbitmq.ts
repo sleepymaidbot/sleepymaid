@@ -1,11 +1,11 @@
-import { Buffer } from 'node:buffer';
-import type amqp from 'amqplib';
-import type { Channel, Connection } from 'amqplib';
-import { connect } from 'amqplib';
-import { v4 as generateUuid } from 'uuid';
+import { Buffer } from "node:buffer";
+import type amqp from "amqplib";
+import type { Channel, Connection } from "amqplib";
+import { connect } from "amqplib";
+import { v4 as generateUuid } from "uuid";
 
 export enum Queue {
-	CheckGuildInformation = 'check_guild_information',
+	CheckGuildInformation = "check_guild_information",
 	// CheckGuildRoles = 'check_guild_roles',
 }
 
@@ -49,7 +49,7 @@ export async function sendRPCRequest<Q extends Queue>(
 	queueName: Q,
 	channel: amqp.Channel,
 ): Promise<ResponseType[Q]> {
-	const replyQueue = await channel.assertQueue('', { exclusive: true }); // Create a temporary reply queue
+	const replyQueue = await channel.assertQueue("", { exclusive: true }); // Create a temporary reply queue
 	const correlationId = generateUuid();
 
 	channel.sendToQueue(queueName, Buffer.from(JSON.stringify(request)), {

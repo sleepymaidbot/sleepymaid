@@ -1,11 +1,11 @@
-import { accounts } from '@sleepymaid/db';
-import type { RESTAPIPartialCurrentUserGuild } from 'discord-api-types/v10';
-import { PermissionFlagsBits } from 'discord-api-types/v10';
-import { eq } from 'drizzle-orm';
-import type { Session } from 'next-auth';
-import { createTRPCRouter, protectedProcedure } from '@/server/api/trpc';
+import { accounts } from "@sleepymaid/db";
+import type { RESTAPIPartialCurrentUserGuild } from "discord-api-types/v10";
+import { PermissionFlagsBits } from "discord-api-types/v10";
+import { eq } from "drizzle-orm";
+import type { Session } from "next-auth";
+import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 
-const BASE_URL = 'https://discord.com/api/v10';
+const BASE_URL = "https://discord.com/api/v10";
 
 export type UserGuilds = RESTAPIPartialCurrentUserGuild & {
 	hasBot: boolean | undefined;

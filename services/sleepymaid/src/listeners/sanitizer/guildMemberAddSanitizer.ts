@@ -1,12 +1,12 @@
-import type { ListenerInterface } from '@sleepymaid/handler';
-import type { GuildMember } from 'discord.js';
-import sanitize from '@aero/sanitizer';
-import { SleepyMaidClient } from '../../lib/extensions/SleepyMaidClient';
-import { guildsSettings } from '@sleepymaid/db';
-import { eq } from 'drizzle-orm';
+import type { ListenerInterface } from "@sleepymaid/handler";
+import type { GuildMember } from "discord.js";
+import sanitize from "@aero/sanitizer";
+import { SleepyMaidClient } from "../../lib/extensions/SleepyMaidClient";
+import { guildsSettings } from "@sleepymaid/db";
+import { eq } from "drizzle-orm";
 
 export default class JoinSanitizerListener implements ListenerInterface {
-	public readonly name = 'guildMemberAdd';
+	public readonly name = "guildMemberAdd";
 	public readonly once = false;
 
 	public async execute(member: GuildMember, client: SleepyMaidClient) {
@@ -17,6 +17,6 @@ export default class JoinSanitizerListener implements ListenerInterface {
 		if (!sanitizerSettings) return;
 		if (sanitizerSettings.sanitizerEnabled === false) return;
 		const sanitized = sanitize(member.displayName);
-		if (member.displayName !== sanitized) await member.setNickname(sanitized, 'Sanitizer');
+		if (member.displayName !== sanitized) await member.setNickname(sanitized, "Sanitizer");
 	}
 }

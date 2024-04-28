@@ -1,4 +1,4 @@
-import LeftBar from './_component/leftbar';
+import LeftBar from "./_component/leftbar";
 
 export default function Layout({
 	children,

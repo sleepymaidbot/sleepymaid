@@ -1,25 +1,25 @@
-import type { Message } from 'discord.js';
-import { EmbedBuilder } from '@discordjs/builders';
-import { inspect } from 'util';
-import type { ListenerInterface } from '@sleepymaid/handler';
-import type { HelperClient } from '../../lib/extensions/HelperClient';
+import type { Message } from "discord.js";
+import { EmbedBuilder } from "@discordjs/builders";
+import { inspect } from "util";
+import type { ListenerInterface } from "@sleepymaid/handler";
+import type { HelperClient } from "../../lib/extensions/HelperClient";
 
 export default class SetupListener implements ListenerInterface {
-	public readonly name = 'messageCreate';
+	public readonly name = "messageCreate";
 	public readonly once = false;
 
 	// @ts-expect-error
 	public async execute(message: Message, client: HelperClient) {
-		if (message.author.id !== '324281236728053760') return;
+		if (message.author.id !== "324281236728053760") return;
 		if (!client.user) return;
-		if (!message.content.startsWith('<@' + client.user.id + '> eval')) return;
-		const codetoeval = message.content.split(' ').slice(2).join(' ');
+		if (!message.content.startsWith("<@" + client.user.id + "> eval")) return;
+		const codetoeval = message.content.split(" ").slice(2).join(" ");
 		try {
 			if (codetoeval.includes(`token` || `env` || `message.channel.delete` || `message.guild.delete` || `delete`)) {
 				return message.channel.send(`no`);
 			}
 
-			const evalOutputEmbed = new EmbedBuilder().setTitle('Evaluated Code').addFields([
+			const evalOutputEmbed = new EmbedBuilder().setTitle("Evaluated Code").addFields([
 				{
 					name: `:inbox_tray: **Input**`,
 					value: `\`\`\`js\n${codetoeval}\`\`\``,
@@ -28,7 +28,7 @@ export default class SetupListener implements ListenerInterface {
 
 			try {
 				const output = await eval(`(async () => {${codetoeval}})()`);
-				if (await inspect(output).includes(client.config.discordToken || 'message.channel.delete()')) {
+				if (await inspect(output).includes(client.config.discordToken || "message.channel.delete()")) {
 					return message.channel.send(`no`);
 				}
 
@@ -46,7 +46,7 @@ export default class SetupListener implements ListenerInterface {
 			} catch (e) {
 				// @ts-ignore
 				const output = e.message;
-				if (inspect(output).includes(client.config.discordToken || 'message.channel.delete()')) {
+				if (inspect(output).includes(client.config.discordToken || "message.channel.delete()")) {
 					return message.channel.send(`no`);
 				}
 

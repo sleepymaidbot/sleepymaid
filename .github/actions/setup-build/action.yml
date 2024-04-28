@@ -1,6 +1,6 @@
 name: Setup and Build
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - uses: ./.github/actions/setup
     - name: Build

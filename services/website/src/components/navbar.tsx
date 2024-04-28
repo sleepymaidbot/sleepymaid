@@ -1,16 +1,16 @@
-import { ChevronDown, LogOut, Server } from 'lucide-react';
-import Link from 'next/link';
-import type { Session } from 'next-auth';
-import React from 'react';
-import { ModeToggle } from '@/components/theme-toggle';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
+import { ChevronDown, LogOut, Server } from "lucide-react";
+import Link from "next/link";
+import type { Session } from "next-auth";
+import React from "react";
+import { ModeToggle } from "@/components/theme-toggle";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
 	DropdownMenuTrigger,
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
-} from '@/components/ui/dropdown-menu';
+} from "@/components/ui/dropdown-menu";
 
 export default function NavBar({ session }: { readonly session: Session | null }) {
 	return (
@@ -32,8 +32,8 @@ export default function NavBar({ session }: { readonly session: Session | null }
 							<DropdownMenuTrigger asChild>
 								<Button variant="ghost">
 									<Avatar>
-										<AvatarImage src={session.user?.image ?? 'https://github.com/sleepymaidbot.png'} />
-										<AvatarFallback>{session.user?.name?.split(' ').map((name) => name[0])}</AvatarFallback>
+										<AvatarImage src={session.user?.image ?? "https://github.com/sleepymaidbot.png"} />
+										<AvatarFallback>{session.user?.name?.split(" ").map((name) => name[0])}</AvatarFallback>
 									</Avatar>
 									<div className="ml-2 align-middle">{session.user?.name}</div>
 									<ChevronDown />

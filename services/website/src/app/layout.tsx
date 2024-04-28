@@ -1,16 +1,16 @@
-import '@/styles/globals.css';
+import "@/styles/globals.css";
 
-import { GeistSans } from 'geist/font/sans';
-import { ViewTransitions } from 'next-view-transitions';
-import NavBar from '@/components/navbar';
-import { ThemeProvider } from '@/components/theme-provider';
-import { getServerAuthSession } from '@/server/auth';
-import { TRPCReactProvider } from '@/trpc/react';
+import { GeistSans } from "geist/font/sans";
+import { ViewTransitions } from "next-view-transitions";
+import NavBar from "@/components/navbar";
+import { ThemeProvider } from "@/components/theme-provider";
+import { getServerAuthSession } from "@/server/auth";
+import { TRPCReactProvider } from "@/trpc/react";
 
 export const metadata = {
-	title: 'Sleepy Maid Dashboard',
-	description: 'Dashboard for Sleepy Maid',
-	icons: [{ rel: 'icon', url: '/icon.png' }],
+	title: "Sleepy Maid Dashboard",
+	description: "Dashboard for Sleepy Maid",
+	icons: [{ rel: "icon", url: "/icon.png" }],
 };
 
 export default async function RootLayout({ children }: { readonly children: React.ReactNode }) {

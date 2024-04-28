@@ -1,19 +1,19 @@
 services:
   ghost:
     environment:
-      NODE_ENV: 'production'
+      NODE_ENV: "production"
   sleepymaid:
     environment:
-      NODE_ENV: 'prod'
+      NODE_ENV: "prod"
   helper:
     environment:
-      NODE_ENV: 'prod'
+      NODE_ENV: "prod"
   watcher:
     environment:
-      NODE_ENV: 'prod'
+      NODE_ENV: "prod"
   #website:
   #  environment:
   #    NODE_ENV: 'production'
   postgres:
     ports:
-      - '127.0.0.1:5432:5432'
+      - "127.0.0.1:5432:5432"

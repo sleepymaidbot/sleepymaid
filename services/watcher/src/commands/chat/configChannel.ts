@@ -1,11 +1,11 @@
-import { logChannel } from '@sleepymaid/db';
-import type { SlashCommandInterface } from '@sleepymaid/handler';
+import { logChannel } from "@sleepymaid/db";
+import type { SlashCommandInterface } from "@sleepymaid/handler";
 import type {
 	APISelectMenuOption,
 	ChatInputApplicationCommandData,
 	ChatInputCommandInteraction,
 	Webhook,
-} from 'discord.js';
+} from "discord.js";
 import {
 	ApplicationCommandOptionType,
 	ButtonStyle,
@@ -13,126 +13,126 @@ import {
 	ComponentType,
 	PermissionFlagsBits,
 	PermissionsBitField,
-} from 'discord.js';
-import { eq } from 'drizzle-orm';
-import type { WatcherClient } from '../../lib/extensions/WatcherClient';
+} from "discord.js";
+import { eq } from "drizzle-orm";
+import type { WatcherClient } from "../../lib/extensions/WatcherClient";
 
 export const subscribedLogsSelectOptions = {
 	mod: [
 		{
-			label: 'Timeout',
-			value: 'timeout',
+			label: "Timeout",
+			value: "timeout",
 		},
 		{
-			label: 'Untimeout',
-			value: 'untimeout',
+			label: "Untimeout",
+			value: "untimeout",
 		},
 		{
-			label: 'Kick',
-			value: 'kick',
+			label: "Kick",
+			value: "kick",
 		},
 		{
-			label: 'Ban',
-			value: 'ban',
+			label: "Ban",
+			value: "ban",
 		},
 		{
-			label: 'Unban',
-			value: 'unban',
+			label: "Unban",
+			value: "unban",
 		},
 	],
 	server: [
 		{
-			label: 'Message Edit',
-			value: 'messageEdit',
+			label: "Message Edit",
+			value: "messageEdit",
 		},
 		{
-			label: 'Message Delete',
-			value: 'messageDelete',
+			label: "Message Delete",
+			value: "messageDelete",
 		},
 		{
-			label: 'Member Join',
-			value: 'memberJoin',
+			label: "Member Join",
+			value: "memberJoin",
 		},
 		{
-			label: 'Member Leave',
-			value: 'memberLeave',
+			label: "Member Leave",
+			value: "memberLeave",
 		},
 		{
-			label: 'Member Nickname Update',
-			value: 'memberNicknameUpdate',
+			label: "Member Nickname Update",
+			value: "memberNicknameUpdate",
 		},
 		{
-			label: 'Member Role Update',
-			value: 'memberRoleUpdate',
+			label: "Member Role Update",
+			value: "memberRoleUpdate",
 		},
 		{
-			label: 'Member Voice Update',
-			value: 'memberVoiceUpdate',
+			label: "Member Voice Update",
+			value: "memberVoiceUpdate",
 		},
 		{
-			label: 'Member Avatar Update',
-			value: 'memberAvatarUpdate',
+			label: "Member Avatar Update",
+			value: "memberAvatarUpdate",
 		},
 		{
-			label: 'Member Username Update',
-			value: 'memberUsernameUpdate',
+			label: "Member Username Update",
+			value: "memberUsernameUpdate",
 		},
 		{
-			label: 'Role Create',
-			value: 'roleCreate',
+			label: "Role Create",
+			value: "roleCreate",
 		},
 		{
-			label: 'Role Delete',
-			value: 'roleDelete',
+			label: "Role Delete",
+			value: "roleDelete",
 		},
 		{
-			label: 'Role Update',
-			value: 'roleUpdate',
+			label: "Role Update",
+			value: "roleUpdate",
 		},
 		{
-			label: 'Channel Create',
-			value: 'channelCreate',
+			label: "Channel Create",
+			value: "channelCreate",
 		},
 		{
-			label: 'Channel Delete',
-			value: 'channelDelete',
+			label: "Channel Delete",
+			value: "channelDelete",
 		},
 		{
-			label: 'Channel Update',
-			value: 'channelUpdate',
+			label: "Channel Update",
+			value: "channelUpdate",
 		},
 		{
-			label: 'Emoji Create',
-			value: 'emojiCreate',
+			label: "Emoji Create",
+			value: "emojiCreate",
 		},
 		{
-			label: 'Emoji Delete',
-			value: 'emojiDelete',
+			label: "Emoji Delete",
+			value: "emojiDelete",
 		},
 		{
-			label: 'Emoji Update',
-			value: 'emojiUpdate',
+			label: "Emoji Update",
+			value: "emojiUpdate",
 		},
 		{
-			label: 'Invite Create',
-			value: 'inviteCreate',
+			label: "Invite Create",
+			value: "inviteCreate",
 		},
 		{
-			label: 'Invite Delete',
-			value: 'inviteDelete',
+			label: "Invite Delete",
+			value: "inviteDelete",
 		},
 	],
 };
 
 export default class ConfigCommand implements SlashCommandInterface {
 	public readonly data = {
-		name: 'configchannel',
-		description: 'Configure a channel for the bot to send messages to.',
+		name: "configchannel",
+		description: "Configure a channel for the bot to send messages to.",
 		defaultMemberPermissions: new PermissionsBitField([PermissionFlagsBits.ManageChannels]),
 		options: [
 			{
-				name: 'channel',
-				description: 'The channel to configure.',
+				name: "channel",
+				description: "The channel to configure.",
 				type: ApplicationCommandOptionType.Channel,
 				required: true,
 				channelTypes: [ChannelType.PublicThread, ChannelType.GuildText],
@@ -141,10 +141,10 @@ export default class ConfigCommand implements SlashCommandInterface {
 	} as ChatInputApplicationCommandData;
 
 	// @ts-expect-error - This is a valid function signature
-	public async execute(interaction: ChatInputCommandInteraction<'cached'>, client: WatcherClient) {
+	public async execute(interaction: ChatInputCommandInteraction<"cached">, client: WatcherClient) {
 		if (!interaction.guild) return;
 		if (!interaction.channel) return;
-		const channel = interaction.options.getChannel('channel', true, [ChannelType.PublicThread, ChannelType.GuildText]);
+		const channel = interaction.options.getChannel("channel", true, [ChannelType.PublicThread, ChannelType.GuildText]);
 		if (!channel) return;
 		if (!channel.id) return;
 
@@ -163,7 +163,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 			};
 
 			await interaction.reply({
-				content: 'Please select which logs you want to subscribe to.',
+				content: "Please select which logs you want to subscribe to.",
 				ephemeral: true,
 				components: [
 					{
@@ -171,8 +171,8 @@ export default class ConfigCommand implements SlashCommandInterface {
 						components: [
 							{
 								type: ComponentType.StringSelect,
-								placeholder: 'Select a log type',
-								custom_id: 'configChannel:config:subSelect',
+								placeholder: "Select a log type",
+								custom_id: "configChannel:config:subSelect",
 								max_values: 1,
 								min_values: 1,
 								options: options(),
@@ -184,11 +184,11 @@ export default class ConfigCommand implements SlashCommandInterface {
 						components: [
 							{
 								type: ComponentType.Button,
-								label: 'Remove logs from this channel',
+								label: "Remove logs from this channel",
 								style: ButtonStyle.Danger,
-								customId: 'configChannel:config:removeLogs',
+								customId: "configChannel:config:removeLogs",
 								emoji: {
-									id: '948606748334358559',
+									id: "948606748334358559",
 								},
 							},
 						],
@@ -199,12 +199,12 @@ export default class ConfigCommand implements SlashCommandInterface {
 			await interaction.channel
 				.awaitMessageComponent({
 					time: 150_000,
-					filter: (i) => i.user.id === interaction.user.id && i.customId.startsWith('configChannel:config:'),
+					filter: (i) => i.user.id === interaction.user.id && i.customId.startsWith("configChannel:config:"),
 				})
 				.then(async (i) => {
 					await i.deferUpdate();
 					switch (i.customId) {
-						case 'configChannel:config:subSelect': {
+						case "configChannel:config:subSelect": {
 							if (!i.isStringSelectMenu()) return;
 							const selected = i.values;
 							const typeValue = subscribedLogsSelectOptions[channelConfig.type].map((v) => v.value);
@@ -226,10 +226,10 @@ export default class ConfigCommand implements SlashCommandInterface {
 							break;
 						}
 
-						case 'configChannel:config:removeLogs': {
+						case "configChannel:config:removeLogs": {
 							await client.drizzle.delete(logChannel).where(eq(logChannel.channelId, channel.id));
 							await i.update({
-								content: 'Successfully removed logs from this channel.',
+								content: "Successfully removed logs from this channel.",
 								components: [],
 							});
 							break;
@@ -239,7 +239,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 				.catch(client.logger.error);
 		} else {
 			await interaction.reply({
-				content: 'This channel is not yet configured. Do you want to configure it?',
+				content: "This channel is not yet configured. Do you want to configure it?",
 				ephemeral: true,
 				components: [
 					{
@@ -247,15 +247,15 @@ export default class ConfigCommand implements SlashCommandInterface {
 						components: [
 							{
 								type: ComponentType.Button,
-								label: 'Yes',
+								label: "Yes",
 								style: ButtonStyle.Success,
-								customId: 'configChannel:newChannel:new:yes',
+								customId: "configChannel:newChannel:new:yes",
 							},
 							{
 								type: ComponentType.Button,
-								label: 'No',
+								label: "No",
 								style: ButtonStyle.Danger,
-								customId: 'configChannel:newChannel:new:no',
+								customId: "configChannel:newChannel:new:no",
 							},
 						],
 					},
@@ -266,34 +266,34 @@ export default class ConfigCommand implements SlashCommandInterface {
 				.awaitMessageComponent({
 					time: 60_000,
 					filter: (i) =>
-						i.user.id === interaction.user.id && i.customId.startsWith('configChannel:newChannel:new') && i.isButton(),
+						i.user.id === interaction.user.id && i.customId.startsWith("configChannel:newChannel:new") && i.isButton(),
 				})
 				.then(async (i) => {
 					await i.deferUpdate();
-					if (i.customId === 'configChannel:newChannel:yes') {
+					if (i.customId === "configChannel:newChannel:yes") {
 						if (!i.channel) return;
 						await interaction.editReply({
-							content: 'Which type of logs do you want in that channel.',
+							content: "Which type of logs do you want in that channel.",
 							components: [
 								{
 									type: ComponentType.ActionRow,
 									components: [
 										{
 											type: ComponentType.StringSelect,
-											placeholder: 'Select a log type',
-											custom_id: 'configChannel:newChannel:typeSelect',
+											placeholder: "Select a log type",
+											custom_id: "configChannel:newChannel:typeSelect",
 											max_values: 1,
 											min_values: 1,
 											options: [
 												{
-													label: 'Moderation',
-													description: 'Timeout, bans, kicks, etc.',
-													value: 'mod',
+													label: "Moderation",
+													description: "Timeout, bans, kicks, etc.",
+													value: "mod",
 												},
 												{
-													label: 'Server',
-													description: 'Message updates, Channel updates, etc.',
-													value: 'server',
+													label: "Server",
+													description: "Message updates, Channel updates, etc.",
+													value: "server",
 												},
 											],
 										},
@@ -306,7 +306,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 								time: 60_000,
 								filter: (i) =>
 									i.user.id === interaction.user.id &&
-									i.customId.startsWith('configChannel:newChannel:typeSelect') &&
+									i.customId.startsWith("configChannel:newChannel:typeSelect") &&
 									i.isStringSelectMenu(),
 							})
 							.then(async (i) => {
@@ -318,8 +318,8 @@ export default class ConfigCommand implements SlashCommandInterface {
 									webhookId: string;
 									webhookToken: string;
 								} = {
-									webhookId: '',
-									webhookToken: '',
+									webhookId: "",
+									webhookToken: "",
 									threadId: null,
 								};
 								if (!channel.parent) return;
@@ -327,22 +327,22 @@ export default class ConfigCommand implements SlashCommandInterface {
 								let webhook: Webhook;
 								if (channel.isThread()) {
 									webhook = await channel.parent.createWebhook({
-										name: 'Watcher',
+										name: "Watcher",
 										avatar: client.user.displayAvatarURL() ?? undefined,
-										reason: 'New log channel created by ' + interaction.user.tag,
+										reason: "New log channel created by " + interaction.user.tag,
 									});
 									webhookInfo.threadId = channel.id;
 								} else {
 									webhook = await channel.createWebhook({
-										name: 'Watcher',
+										name: "Watcher",
 										avatar: client.user.displayAvatarURL() ?? undefined,
-										reason: 'New log channel created by ' + interaction.user.tag,
+										reason: "New log channel created by " + interaction.user.tag,
 									});
 									webhookInfo.threadId = null;
 								}
 
 								webhookInfo.webhookId = webhook.id;
-								webhookInfo.webhookToken = webhook.token ?? '';
+								webhookInfo.webhookToken = webhook.token ?? "";
 
 								await client.drizzle.insert(logChannel).values({
 									guildId: interaction.guild.id,
@@ -354,14 +354,14 @@ export default class ConfigCommand implements SlashCommandInterface {
 								await interaction.editReply({
 									content:
 										// TODO: Add a way to configure the subscribed logs.
-										'This channel has been configured. Reuse this command to configure which logs you want to receive.',
+										"This channel has been configured. Reuse this command to configure which logs you want to receive.",
 									components: [],
 								});
 							})
 							.catch(client.logger.error);
 					} else {
 						i.update({
-							content: 'This channel will not be configured.',
+							content: "This channel will not be configured.",
 							components: [],
 						});
 					}

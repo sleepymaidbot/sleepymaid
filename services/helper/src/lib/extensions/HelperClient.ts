@@ -1,17 +1,17 @@
 /* eslint-disable n/prefer-global/process */
 /* eslint-disable unicorn/prefer-module */
-import { resolve } from 'node:path';
-import process from 'node:process';
-import { schema } from '@sleepymaid/db';
-import { HandlerClient } from '@sleepymaid/handler';
-import { Logger } from '@sleepymaid/logger';
-import type { Config } from '@sleepymaid/shared';
-import { initConfig, supportedLngs } from '@sleepymaid/shared';
-import { ActivityType, GatewayIntentBits } from 'discord-api-types/v10';
-import { drizzle } from 'drizzle-orm/node-postgres';
-import i18next from 'i18next';
-import FsBackend from 'i18next-fs-backend';
-import { Client } from 'pg';
+import { resolve } from "node:path";
+import process from "node:process";
+import { schema } from "@sleepymaid/db";
+import { HandlerClient } from "@sleepymaid/handler";
+import { Logger } from "@sleepymaid/logger";
+import type { Config } from "@sleepymaid/shared";
+import { initConfig, supportedLngs } from "@sleepymaid/shared";
+import { ActivityType, GatewayIntentBits } from "discord-api-types/v10";
+import { drizzle } from "drizzle-orm/node-postgres";
+import i18next from "i18next";
+import FsBackend from "i18next-fs-backend";
+import { Client } from "pg";
 
 export class HelperClient extends HandlerClient {
 	public declare PGClient: Client;
@@ -23,7 +23,7 @@ export class HelperClient extends HandlerClient {
 	public constructor() {
 		super(
 			{
-				devServerId: '821717486217986098',
+				devServerId: "821717486217986098",
 			},
 			{
 				intents: [
@@ -33,12 +33,12 @@ export class HelperClient extends HandlerClient {
 					GatewayIntentBits.GuildVoiceStates,
 					GatewayIntentBits.MessageContent,
 				],
-				allowedMentions: { parse: ['users', 'roles'], repliedUser: false },
+				allowedMentions: { parse: ["users", "roles"], repliedUser: false },
 				presence: {
-					status: 'online',
+					status: "online",
 					activities: [
 						{
-							name: 'you',
+							name: "you",
 							type: ActivityType.Watching,
 						},
 					],
@@ -62,30 +62,30 @@ export class HelperClient extends HandlerClient {
 			// debug: this.config.environment === 'development',
 			supportedLngs,
 			backend: {
-				loadPath: resolve(__dirname, '../../../../../locales/sleepymaid/{{lng}}/{{ns}}.json'),
+				loadPath: resolve(__dirname, "../../../../../locales/sleepymaid/{{lng}}/{{ns}}.json"),
 			},
 			cleanCode: true,
-			fallbackLng: 'en-US',
-			preload: ['en-US', 'fr'],
-			defaultNS: 'translation',
-			ns: 'translation',
+			fallbackLng: "en-US",
+			preload: ["en-US", "fr"],
+			defaultNS: "translation",
+			ns: "translation",
 		});
 
 		void this.loadHandlers({
 			commands: {
-				folder: resolve(__dirname, '..', '..', 'commands'),
+				folder: resolve(__dirname, "..", "..", "commands"),
 			},
 			listeners: {
-				folder: resolve(__dirname, '..', '..', 'listeners'),
+				folder: resolve(__dirname, "..", "..", "listeners"),
 			},
 			tasks: {
-				folder: resolve(__dirname, '..', '..', 'tasks'),
+				folder: resolve(__dirname, "..", "..", "tasks"),
 			},
 		});
 
 		void this.login(this.config.discordToken);
 
-		process.on('unhandledRejection', (error: Error) => {
+		process.on("unhandledRejection", (error: Error) => {
 			this.logger.error(error);
 		});
 	}

@@ -1,5 +1,5 @@
-import { singleton } from 'tsyringe';
-import { SleepyMaidClient } from '../extensions/SleepyMaidClient';
+import { singleton } from "tsyringe";
+import { SleepyMaidClient } from "../extensions/SleepyMaidClient";
 
 @singleton()
 export class baseManager {

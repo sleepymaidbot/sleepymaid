@@ -1,4 +1,4 @@
-import 'server-only';
+import "server-only";
 
 /**
  * YOU PROBABLY DON'T NEED TO EDIT THIS FILE, UNLESS:
@@ -9,13 +9,13 @@ import 'server-only';
  * need to use are documented accordingly near the end.
  */
 
-import { mqConnection } from '@sleepymaid/shared';
-import { initTRPC, TRPCError } from '@trpc/server';
-import superjson from 'superjson';
-import { ZodError } from 'zod';
-import { env } from '@/env';
-import { getServerAuthSession } from '@/server/auth';
-import { db } from '@/server/db';
+import { mqConnection } from "@sleepymaid/shared";
+import { initTRPC, TRPCError } from "@trpc/server";
+import superjson from "superjson";
+import { ZodError } from "zod";
+import { env } from "@/env";
+import { getServerAuthSession } from "@/server/auth";
+import { db } from "@/server/db";
 
 /**
  * 1. CONTEXT
@@ -33,7 +33,7 @@ export const createTRPCContext = async (opts: { headers: Headers }) => {
 	const session = await getServerAuthSession();
 
 	if (!session) {
-		throw new TRPCError({ code: 'UNAUTHORIZED' });
+		throw new TRPCError({ code: "UNAUTHORIZED" });
 	}
 
 	await mqConnection.connect(env.RABBITMQ_URL);
@@ -107,7 +107,7 @@ export const publicProcedure = trpc.procedure;
  */
 export const protectedProcedure = trpc.procedure.use(async ({ ctx, next }) => {
 	if (!ctx.session?.user) {
-		throw new TRPCError({ code: 'UNAUTHORIZED' });
+		throw new TRPCError({ code: "UNAUTHORIZED" });
 	}
 
 	return next({

@@ -3,8 +3,8 @@ import type {
 	ChatInputApplicationCommandData,
 	ChatInputCommandInteraction,
 	Snowflake,
-} from 'discord.js';
-import type { HandlerClient } from '../HandlerClient';
+} from "discord.js";
+import type { HandlerClient } from "../HandlerClient";
 
 export interface SlashCommandInterface {
 	data: ChatInputApplicationCommandData;

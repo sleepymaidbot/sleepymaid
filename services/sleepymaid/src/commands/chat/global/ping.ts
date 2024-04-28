@@ -1,19 +1,19 @@
-import type { SlashCommandInterface } from '@sleepymaid/handler';
-import { getLocalizedProp } from '@sleepymaid/shared';
+import type { SlashCommandInterface } from "@sleepymaid/handler";
+import { getLocalizedProp } from "@sleepymaid/shared";
 import {
 	APIEmbed,
 	ApplicationCommandType,
 	ChatInputApplicationCommandData,
 	ChatInputCommandInteraction,
 	Message,
-} from 'discord.js';
-import i18next from 'i18next';
-import type { SleepyMaidClient } from '../../../lib/extensions/SleepyMaidClient';
+} from "discord.js";
+import i18next from "i18next";
+import type { SleepyMaidClient } from "../../../lib/extensions/SleepyMaidClient";
 
 export default class PingCommand implements SlashCommandInterface {
 	public readonly data = {
-		...getLocalizedProp('name', 'commands.ping.name'),
-		...getLocalizedProp('description', 'commands.ping.description'),
+		...getLocalizedProp("name", "commands.ping.name"),
+		...getLocalizedProp("description", "commands.ping.description"),
 		type: ApplicationCommandType.ChatInput,
 	} as ChatInputApplicationCommandData;
 
@@ -21,22 +21,22 @@ export default class PingCommand implements SlashCommandInterface {
 	public async execute(interaction: ChatInputCommandInteraction, client: SleepyMaidClient) {
 		if (!interaction.inCachedGuild()) return;
 		const timestamp1 = interaction.createdTimestamp;
-		await interaction.reply('Pong!');
+		await interaction.reply("Pong!");
 		const timestamp2 = await interaction.fetchReply().then((m) => (m as Message).createdTimestamp);
 		const botLatency = `\`\`\`\n ${Math.floor(timestamp2 - timestamp1)}ms \`\`\``;
 		const apiLatency = `\`\`\`\n ${Math.round(client.ws.ping)}ms \`\`\``;
 		const embed: APIEmbed = {
-			title: 'Pong!  🏓',
+			title: "Pong!  🏓",
 			fields: [
 				{
-					name: i18next.t('commands.ping.bot_latency', {
+					name: i18next.t("commands.ping.bot_latency", {
 						lng: interaction.locale,
 					}),
 					value: botLatency,
 					inline: true,
 				},
 				{
-					name: i18next.t('commands.ping.api_latency', {
+					name: i18next.t("commands.ping.api_latency", {
 						lng: interaction.locale,
 					}),
 					value: apiLatency,

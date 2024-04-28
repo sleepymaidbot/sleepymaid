@@ -2,12 +2,12 @@ services:
   postgres:
     image: postgres:15.6-alpine
     environment:
-      POSTGRES_DB: 'sleepymaid'
+      POSTGRES_DB: "sleepymaid"
     volumes:
       - postgres-data:/var/lib/postgresql/data
     restart: unless-stopped
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U sleepymaid']
+      test: ["CMD-SHELL", "pg_isready -U sleepymaid"]
       interval: 10s
       timeout: 5s
 
@@ -17,7 +17,7 @@ services:
       - valkey-data:/data
     restart: unless-stopped
     healthcheck:
-      test: ['CMD-SHELL', 'valkey-cli ping']
+      test: ["CMD-SHELL", "valkey-cli ping"]
       interval: 10s
       timeout: 5s
 
@@ -25,11 +25,11 @@ services:
     image: rabbitmq:management-alpine
     restart: unless-stopped
     expose:
-      - '5672'
+      - "5672"
     ports:
-      - '5672:5672'
+      - "5672:5672"
     healthcheck:
-      test: ['CMD', 'rabbitmq-diagnostics', '-q', 'ping']
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
       interval: 60s
       timeout: 5s
 
@@ -39,13 +39,13 @@ services:
     expose:
       - 2368
     ports:
-      - '2368:2368'
+      - "2368:2368"
     environment:
-      url: 'https://blog.ecorte.xyz'
-      database__client: 'sqlite3'
-      database__connection__filename: '/var/lib/ghost/content/data/ghost.db'
-      mail__transport: 'SMTP'
-      mail__options__service: 'Mailgun'
+      url: "https://blog.ecorte.xyz"
+      database__client: "sqlite3"
+      database__connection__filename: "/var/lib/ghost/content/data/ghost.db"
+      mail__transport: "SMTP"
+      mail__options__service: "Mailgun"
     volumes:
       - ghost-data:/var/lib/ghost/content
 
@@ -57,8 +57,8 @@ services:
     command: node --trace-warnings -r source-map-support/register services/sleepymaid/dist/index.js
     restart: unless-stopped
     depends_on:
-      - 'postgres'
-      - 'rabbitmq'
+      - "postgres"
+      - "rabbitmq"
 
   helper:
     container_name: sleepymaid_helper
@@ -68,7 +68,7 @@ services:
     command: node --trace-warnings -r source-map-support/register services/helper/dist/index.js
     restart: unless-stopped
     depends_on:
-      - 'postgres'
+      - "postgres"
 
   watcher:
     container_name: sleepymaid_watcher
@@ -78,7 +78,7 @@ services:
     command: node --trace-warnings -r source-map-support/register services/watcher/dist/index.js
     restart: unless-stopped
     depends_on:
-      - 'postgres'
+      - "postgres"
 
   #website:
   #  build:
@@ -99,7 +99,7 @@ services:
   zipline:
     image: ghcr.io/diced/zipline
     ports:
-      - '3002:3002'
+      - "3002:3002"
     restart: unless-stopped
     environment:
       - CORE_RETURN_HTTPS=false
@@ -107,18 +107,18 @@ services:
       - CORE_PORT=3002
       - CORE_LOGGER=true
     volumes:
-      - './uploads:/zipline/uploads'
-      - './public:/zipline/public'
+      - "./uploads:/zipline/uploads"
+      - "./public:/zipline/public"
     depends_on:
-      - 'postgres'
+      - "postgres"
 
 volumes:
   valkey-data:
-    name: 'sleepymaid-valkey-data'
+    name: "sleepymaid-valkey-data"
     external: true
   postgres-data:
-    name: 'sleepymaid-postgres-data'
+    name: "sleepymaid-postgres-data"
     external: true
   ghost-data:
-    name: 'sleepymaid-ghost-data'
+    name: "sleepymaid-ghost-data"
     external: true

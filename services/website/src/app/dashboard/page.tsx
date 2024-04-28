@@ -1,13 +1,13 @@
-import { ChevronRight } from 'lucide-react';
-import Link from 'next/link';
-import { Suspense } from 'react';
-import Loading from './loading';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
-import type { UserGuilds } from '@/server/api/routers/users';
-import { api } from '@/trpc/server';
+import { ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { Suspense } from "react";
+import Loading from "./loading";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+import type { UserGuilds } from "@/server/api/routers/users";
+import { api } from "@/trpc/server";
 
 export default async function Dashboard() {
 	const guilds: UserGuilds[] | null = await api.users.getUserGuilds();
@@ -35,7 +35,7 @@ export default async function Dashboard() {
 												<Link href={`/dashboard/${guild.id}`}>
 													<Avatar>
 														<AvatarImage
-															src={`https://cdn.discordapp.com/icons/` + guild.id + '/' + guild.icon + '.png'}
+															src={`https://cdn.discordapp.com/icons/` + guild.id + "/" + guild.icon + ".png"}
 														/>
 														<AvatarFallback>Icon</AvatarFallback>
 													</Avatar>
@@ -52,7 +52,7 @@ export default async function Dashboard() {
 											<Button className="items-left flex w-[100%] text-left" disabled variant="ghost">
 												<Avatar>
 													<AvatarImage
-														src={`https://cdn.discordapp.com/icons/` + guild.id + '/' + guild.icon + '.png'}
+														src={`https://cdn.discordapp.com/icons/` + guild.id + "/" + guild.icon + ".png"}
 													/>
 													<AvatarFallback>Icon</AvatarFallback>
 												</Avatar>

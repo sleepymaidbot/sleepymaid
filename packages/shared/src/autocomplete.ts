@@ -1,4 +1,4 @@
-import Fuse from 'fuse.js';
+import Fuse from "fuse.js";
 
 export type AutocompleteChoices = {
 	name: string;
@@ -10,7 +10,7 @@ const options = {
 	includeScore: true,
 	shouldSort: true,
 	findAllMatches: true,
-	keys: ['name', 'value'],
+	keys: ["name", "value"],
 };
 
 export const getAutocompleteResults = (choices: AutocompleteChoices, focusedValue: string) => {

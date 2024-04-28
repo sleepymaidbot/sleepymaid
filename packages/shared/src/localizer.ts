@@ -1,7 +1,7 @@
-import { Locale } from 'discord-api-types/v10';
-import i18next from 'i18next';
+import { Locale } from "discord-api-types/v10";
+import i18next from "i18next";
 
-export const supportedLngs = ['en-US', 'fr'];
+export const supportedLngs = ["en-US", "fr"];
 
 type PropAsIndexSignature<T extends string> = {
 	[P in T]: string;

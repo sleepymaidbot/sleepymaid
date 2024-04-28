@@ -1,6 +1,6 @@
 packages:
-  - 'packages/*'
-  - 'services/sleepymaid/'
-  - 'services/helper/'
-  - 'services/watcher/'
-  - 'services/website/'
+  - "packages/*"
+  - "services/sleepymaid/"
+  - "services/helper/"
+  - "services/watcher/"
+  - "services/website/"

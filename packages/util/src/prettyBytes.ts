@@ -5,13 +5,13 @@
 
 */
 
-const BYTE_UNITS = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+const BYTE_UNITS = ["B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
 
-const BIBYTE_UNITS = ['B', 'kiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
+const BIBYTE_UNITS = ["B", "kiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"];
 
-const BIT_UNITS = ['b', 'kbit', 'Mbit', 'Gbit', 'Tbit', 'Pbit', 'Ebit', 'Zbit', 'Ybit'];
+const BIT_UNITS = ["b", "kbit", "Mbit", "Gbit", "Tbit", "Pbit", "Ebit", "Zbit", "Ybit"];
 
-const BIBIT_UNITS = ['b', 'kibit', 'Mibit', 'Gibit', 'Tibit', 'Pibit', 'Eibit', 'Zibit', 'Yibit'];
+const BIBIT_UNITS = ["b", "kibit", "Mibit", "Gibit", "Tibit", "Pibit", "Eibit", "Zibit", "Yibit"];
 
 /*
 Formats the given number using `Number#toLocaleString`.
@@ -21,7 +21,7 @@ Formats the given number using `Number#toLocaleString`.
 */
 const toLocaleString = (number: Number | string, locale: boolean | string, options: any) => {
 	let result = number;
-	if (typeof locale === 'string' || Array.isArray(locale)) {
+	if (typeof locale === "string" || Array.isArray(locale)) {
 		result = number.toLocaleString(locale, options);
 	} else if (locale === true || options !== undefined) {
 		result = number.toLocaleString(undefined, options);
@@ -55,7 +55,7 @@ export function prettyBytes(number: Number, options: Options): string {
 
 	// @ts-ignore
 	const isNegative = number < 0;
-	const prefix = isNegative ? '-' : options.signed ? '+' : '';
+	const prefix = isNegative ? "-" : options.signed ? "+" : "";
 
 	if (isNegative) {
 		number = -number;
@@ -78,7 +78,7 @@ export function prettyBytes(number: Number, options: Options): string {
 	if (number < 1) {
 		// @ts-ignore
 		const numberString = toLocaleString(number, options.locale || false, localeOptions);
-		return prefix + numberString + ' ' + UNITS[0];
+		return prefix + numberString + " " + UNITS[0];
 	}
 
 	const exponent = Math.min(
@@ -99,7 +99,7 @@ export function prettyBytes(number: Number, options: Options): string {
 
 	const unit = UNITS[exponent];
 
-	return prefix + numberString + ' ' + unit;
+	return prefix + numberString + " " + unit;
 }
 
 export interface Options {

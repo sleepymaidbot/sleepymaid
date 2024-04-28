@@ -1,4 +1,4 @@
-import type { HandlerClient } from './HandlerClient';
+import type { HandlerClient } from "./HandlerClient";
 
 export class BaseManager {
 	declare client: HandlerClient;

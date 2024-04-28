@@ -1,4 +1,4 @@
-import type { SlashCommandInterface } from '@sleepymaid/handler';
+import type { SlashCommandInterface } from "@sleepymaid/handler";
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
@@ -8,16 +8,16 @@ import {
 	APIActionRowComponent,
 	APIButtonComponent,
 	APIEmbed,
-} from 'discord-api-types/v10';
+} from "discord-api-types/v10";
 import type {
 	ChatInputCommandInteraction,
 	MessageCreateOptions,
 	MessageEditOptions,
 	ChatInputApplicationCommandData,
 	AutocompleteInteraction,
-} from 'discord.js';
-import type { SleepyMaidClient } from '../../../lib/extensions/SleepyMaidClient';
-import { getAutocompleteResults } from '@sleepymaid/shared';
+} from "discord.js";
+import type { SleepyMaidClient } from "../../../lib/extensions/SleepyMaidClient";
+import { getAutocompleteResults } from "@sleepymaid/shared";
 
 interface MessagesType {
 	[key: string]: MessageType;
@@ -29,45 +29,45 @@ interface MessageType {
 }
 
 const messages: MessagesType = {
-	'self-roles-setup': {
-		fancyName: 'Self-Roles Setup',
+	"self-roles-setup": {
+		fancyName: "Self-Roles Setup",
 		function: async () => {
 			const row: APIActionRowComponent<APIButtonComponent> = {
 				type: 1,
 				components: [
 					{
 						type: ComponentType.Button,
-						label: 'Manage my roles',
+						label: "Manage my roles",
 						style: ButtonStyle.Success,
-						custom_id: 'laser-role-ping:manage',
+						custom_id: "laser-role-ping:manage",
 						emoji: {
-							id: '975870168251113545',
+							id: "975870168251113545",
 						},
 					},
 					{
 						type: ComponentType.Button,
-						label: 'Remove all my roles',
+						label: "Remove all my roles",
 						style: ButtonStyle.Danger,
-						custom_id: 'laser-role-ping:removeall',
+						custom_id: "laser-role-ping:removeall",
 						emoji: {
-							id: '948606748334358559',
+							id: "948606748334358559",
 						},
 					},
 				],
 			};
 
 			const embed: APIEmbed = {
-				title: 'Self-assignable roles',
-				description: 'With this message you can assign yourself some roles.',
+				title: "Self-assignable roles",
+				description: "With this message you can assign yourself some roles.",
 				fields: [
 					{
-						name: 'Why ?',
+						name: "Why ?",
 						value:
-							'Those roles are use to only get pings when we are doing a specific map secret on a specific server.',
+							"Those roles are use to only get pings when we are doing a specific map secret on a specific server.",
 						inline: true,
 					},
 					{
-						name: 'How ?',
+						name: "How ?",
 						value:
 							"Click the button 'Manage my roles' to select the servers you are willing to complete map secrets on! \n Click the button 'Remove all my roles' to remove all your roles.",
 						inline: true,
@@ -84,22 +84,22 @@ const messages: MessagesType = {
 };
 
 export default class LaserSetupCommand implements SlashCommandInterface {
-	public readonly guildIds = ['860721584373497887'];
+	public readonly guildIds = ["860721584373497887"];
 	public readonly data = {
-		name: 'setup',
-		description: '[Admin only] Allow you to post pre-made messages.',
+		name: "setup",
+		description: "[Admin only] Allow you to post pre-made messages.",
 		type: ApplicationCommandType.ChatInput,
 		options: [
 			{
-				name: 'name',
-				description: 'The name of the command',
+				name: "name",
+				description: "The name of the command",
 				type: ApplicationCommandOptionType.String,
 				autocomplete: true,
 				required: true,
 			},
 			{
-				name: 'message_id',
-				description: 'The id of the message you want to edit',
+				name: "message_id",
+				description: "The id of the message you want to edit",
 				type: ApplicationCommandOptionType.String,
 				required: false,
 			},
@@ -110,10 +110,10 @@ export default class LaserSetupCommand implements SlashCommandInterface {
 	public async execute(interaction: ChatInputCommandInteraction, client: SleepyMaidClient) {
 		if (!interaction.inCachedGuild()) return;
 		if (!interaction.memberPermissions.has(PermissionFlagsBits.Administrator)) return;
-		const name = interaction.options.getString('name')!;
+		const name = interaction.options.getString("name")!;
 		const msg = messages[name];
 		if (!msg) return;
-		const messageId = interaction.options.getString('message_id');
+		const messageId = interaction.options.getString("message_id");
 		if (messageId) {
 			const message = await interaction.channel?.messages.fetch(messageId);
 			if (!message) {
@@ -121,7 +121,7 @@ export default class LaserSetupCommand implements SlashCommandInterface {
 					embeds: [
 						{
 							color: 3553599,
-							description: '<:redX:948606748334358559> Message not found.',
+							description: "<:redX:948606748334358559> Message not found.",
 						},
 					],
 					ephemeral: true,
@@ -132,7 +132,7 @@ export default class LaserSetupCommand implements SlashCommandInterface {
 					embeds: [
 						{
 							color: 3553599,
-							description: '<:redX:948606748334358559> You can only edit messages sent by the bot.',
+							description: "<:redX:948606748334358559> You can only edit messages sent by the bot.",
 						},
 					],
 					ephemeral: true,
@@ -147,7 +147,7 @@ export default class LaserSetupCommand implements SlashCommandInterface {
 			embeds: [
 				{
 					color: 3553599,
-					description: '<:greenTick:948620600144982026> Done!',
+					description: "<:greenTick:948620600144982026> Done!",
 				},
 			],
 			ephemeral: true,

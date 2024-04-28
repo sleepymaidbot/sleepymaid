@@ -1,6 +1,6 @@
-import { guildsRouter } from '@/server/api/routers/guilds';
-import { usersRouter } from '@/server/api/routers/users';
-import { createCallerFactory, createTRPCRouter } from '@/server/api/trpc';
+import { guildsRouter } from "@/server/api/routers/guilds";
+import { usersRouter } from "@/server/api/routers/users";
+import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
 
 /**
  * This is the primary router for your server.

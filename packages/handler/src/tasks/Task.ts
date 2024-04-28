@@ -1,4 +1,4 @@
-import type { HandlerClient } from '../HandlerClient';
+import type { HandlerClient } from "../HandlerClient";
 
 export interface TaskInterface {
 	interval: string;

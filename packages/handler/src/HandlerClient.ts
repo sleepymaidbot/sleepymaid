@@ -1,10 +1,10 @@
-import { Client, ClientOptions } from 'discord.js';
-import { BaseLogger } from './BaseLogger';
-import { CommandManager, CommandManagerStartAllOptionsType } from './commands/CommandManager';
-import { ListenerManager, ListenerManagerStartAllOptionsType } from './listeners/ListenerManager';
-import { TaskManager, TaskManagerStartAllOptionsType } from './tasks/TaskManager';
+import { Client, ClientOptions } from "discord.js";
+import { BaseLogger } from "./BaseLogger";
+import { CommandManager, CommandManagerStartAllOptionsType } from "./commands/CommandManager";
+import { ListenerManager, ListenerManagerStartAllOptionsType } from "./listeners/ListenerManager";
+import { TaskManager, TaskManagerStartAllOptionsType } from "./tasks/TaskManager";
 
-export type env = 'dev' | 'prod';
+export type env = "dev" | "prod";
 
 export interface HandlerClientOptions {
 	env?: env;
@@ -50,7 +50,7 @@ export class HandlerClient extends Client {
 
 		const { env } = options ?? {};
 
-		this.env = env ?? 'dev';
+		this.env = env ?? "dev";
 		this.logger = options.logger ?? (new BaseLogger(this.env) as Logger);
 		this.commandManager = new CommandManager(this);
 		this.listenerManager = new ListenerManager(this);
@@ -62,7 +62,7 @@ export class HandlerClient extends Client {
 		if (options.listeners) {
 			this.listenerManager.startAll(options.listeners);
 		}
-		this.once('ready', async () => {
+		this.once("ready", async () => {
 			// commands
 			if (options.commands) {
 				this.commandManager.startAll(options.commands);

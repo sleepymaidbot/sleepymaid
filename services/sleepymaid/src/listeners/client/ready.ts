@@ -1,12 +1,12 @@
 /* eslint-disable id-length */
-import { guildsSettings } from '@sleepymaid/db';
-import type { ListenerInterface } from '@sleepymaid/handler';
-import type { Guild } from 'discord.js';
-import { eq } from 'drizzle-orm';
-import type { SleepyMaidClient } from '../../lib/extensions/SleepyMaidClient';
+import { guildsSettings } from "@sleepymaid/db";
+import type { ListenerInterface } from "@sleepymaid/handler";
+import type { Guild } from "discord.js";
+import { eq } from "drizzle-orm";
+import type { SleepyMaidClient } from "../../lib/extensions/SleepyMaidClient";
 
 export default class ReadyListener implements ListenerInterface {
-	public readonly name = 'ready';
+	public readonly name = "ready";
 
 	public readonly once = true;
 

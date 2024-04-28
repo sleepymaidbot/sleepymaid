@@ -1,5 +1,5 @@
-import { gray, blue, red, cyan } from 'ansi-colors';
-import { BaseLogger } from '@sleepymaid/handler';
+import { gray, blue, red, cyan } from "ansi-colors";
+import { BaseLogger } from "@sleepymaid/handler";
 
 export enum Loglevels {
 	Debug,
@@ -8,9 +8,9 @@ export enum Loglevels {
 }
 
 export const prefixes = new Map<Loglevels, string>([
-	[Loglevels.Debug, 'DEBUG'],
-	[Loglevels.Info, 'INFO'],
-	[Loglevels.Error, 'ERROR'],
+	[Loglevels.Debug, "DEBUG"],
+	[Loglevels.Info, "INFO"],
+	[Loglevels.Error, "ERROR"],
 ]);
 
 export const noColor: (str: string) => string = (msg) => msg;
@@ -28,8 +28,8 @@ export class Logger extends BaseLogger {
 		if (!color) color = noColor;
 
 		const date = new Date();
-		const log = [`[${date.toLocaleDateString()} ${date.toLocaleTimeString()}]`, `: ${message} ${args.join(' ')}`];
-		return log.join(' ');
+		const log = [`[${date.toLocaleDateString()} ${date.toLocaleTimeString()}]`, `: ${message} ${args.join(" ")}`];
+		return log.join(" ");
 	}
 
 	override debug(message: string, ...args: string[]): void {

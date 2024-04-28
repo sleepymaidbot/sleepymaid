@@ -1,55 +1,55 @@
-import { unlink } from 'fs';
-import type { ListenerInterface } from '@sleepymaid/handler';
-import type { Message } from 'discord.js';
-import type { SleepyMaidClient } from '../../lib/extensions/SleepyMaidClient';
-import { shell } from '@sleepymaid/util';
-import { join } from 'path';
-import { Result } from '@sapphire/result';
+import { unlink } from "fs";
+import type { ListenerInterface } from "@sleepymaid/handler";
+import type { Message } from "discord.js";
+import type { SleepyMaidClient } from "../../lib/extensions/SleepyMaidClient";
+import { shell } from "@sleepymaid/util";
+import { join } from "path";
+import { Result } from "@sapphire/result";
 
 const sites = [
-	'tiktok.com',
-	'https://redd.it',
-	'https://v.redd.it',
-	'reddit.com',
-	'https://t.co',
-	'facebook.com',
-	'instagram.com',
-	'nicovideo.jp/watch',
-	'https://twitter.com',
-	'https://x.com',
-	'https://mobile.twitter.com',
+	"tiktok.com",
+	"https://redd.it",
+	"https://v.redd.it",
+	"reddit.com",
+	"https://t.co",
+	"facebook.com",
+	"instagram.com",
+	"nicovideo.jp/watch",
+	"https://twitter.com",
+	"https://x.com",
+	"https://mobile.twitter.com",
 ];
 
 const sitesDelEmbed = [
-	'https://redd.it',
-	'https://v.redd.it',
-	'reddit.com',
-	'https://twitter.com',
-	'https://x.com',
-	'https://mobile.twitter.com',
-	'https://vm.tiktok.com',
-	'https://vt.tiktok.com',
-	'https://www.tiktok.com',
-	'https://tiktok.com',
-	'instagram.com',
+	"https://redd.it",
+	"https://v.redd.it",
+	"reddit.com",
+	"https://twitter.com",
+	"https://x.com",
+	"https://mobile.twitter.com",
+	"https://vm.tiktok.com",
+	"https://vt.tiktok.com",
+	"https://www.tiktok.com",
+	"https://tiktok.com",
+	"instagram.com",
 ];
 
 const enabled = true;
 
 export default class VidListener implements ListenerInterface {
-	public readonly name = 'messageCreate';
+	public readonly name = "messageCreate";
 	public readonly once = false;
 
 	public async execute(message: Message, client: SleepyMaidClient) {
 		if (!enabled) return;
 		if (message.author.bot) return;
 
-		const args = message.content.split(' ');
+		const args = message.content.split(" ");
 
 		for (let arg of args) {
-			if (arg.includes('tiktok.com/t/')) arg = arg.replaceAll('www.tiktok.com', 'vm.tiktok.com');
+			if (arg.includes("tiktok.com/t/")) arg = arg.replaceAll("www.tiktok.com", "vm.tiktok.com");
 
-			if (arg.startsWith('https://') && sites.some((a) => arg.includes(a))) {
+			if (arg.startsWith("https://") && sites.some((a) => arg.includes(a))) {
 				const nameReturn = await Result.fromAsync(
 					async () => await shell('yt-dlp --print filename -o "%(id)s.%(ext)s" ' + arg),
 				);
@@ -59,7 +59,7 @@ export default class VidListener implements ListenerInterface {
 				const fileName = nameReturn.unwrap().stdout.trim();
 				const dlReturn = await Result.fromAsync(
 					async () =>
-						await shell(`yt-dlp -P "${join(__dirname, '../../../downloads/')}" -o "${fileName}" "${arg}" -f mp4`),
+						await shell(`yt-dlp -P "${join(__dirname, "../../../downloads/")}" -o "${fileName}" "${arg}" -f mp4`),
 				);
 				if (dlReturn.isErr()) return client.logger.error(dlReturn.unwrapErr() as Error);
 				const messageReturn = await Result.fromAsync(

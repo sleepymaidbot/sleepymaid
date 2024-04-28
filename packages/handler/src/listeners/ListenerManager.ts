@@ -1,8 +1,8 @@
-import 'reflect-metadata';
-import { container } from 'tsyringe';
-import type { ListenerInterface } from './Listener';
-import { BaseManager } from '../BaseManager';
-import { findFilesRecursively } from '@sapphire/node-utilities';
+import "reflect-metadata";
+import { container } from "tsyringe";
+import type { ListenerInterface } from "./Listener";
+import { BaseManager } from "../BaseManager";
+import { findFilesRecursively } from "@sapphire/node-utilities";
 
 export interface ListenerManagerStartAllOptionsType {
 	folder: string;
@@ -15,7 +15,7 @@ export class ListenerManager extends BaseManager {
 
 	private async loadListeners(folderPath: string): Promise<void> {
 		let count = 0;
-		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith('.js'))) {
+		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith(".js"))) {
 			const event = container.resolve<ListenerInterface>((await import(file)).default.default);
 			if (event.once) {
 				try {
@@ -36,7 +36,7 @@ export class ListenerManager extends BaseManager {
 					this.client.logger.error(error as Error);
 				}
 			}
-			this.client.logger.info(`Listener handler: -> Loaded listener -> ${file?.split('/')?.pop()?.split('.')[0]}`);
+			this.client.logger.info(`Listener handler: -> Loaded listener -> ${file?.split("/")?.pop()?.split(".")[0]}`);
 		}
 		this.client.logger.info(`
 			Listener handler: -> Loaded ${count} listeners`);
