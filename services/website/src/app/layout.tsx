@@ -1,15 +1,11 @@
 import "@/styles/globals.css";
 
-import { Inter } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { ViewTransitions } from "next-view-transitions";
 import NavBar from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { getServerAuthSession } from "@/server/auth";
 import { TRPCReactProvider } from "@/trpc/react";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
 
 export const metadata = {
   title: "Sleepy Maid Dashboard",
@@ -25,17 +21,21 @@ export default async function RootLayout({
   const session = await getServerAuthSession();
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable} overflow-hidden`}>
+      <body
+        className={`font-sans ${GeistSans.className} flex h-screen flex-col`}
+      >
         <TRPCReactProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            disableTransitionOnChange
-            enableSystem
-          >
-            <NavBar session={session} />
-            {children}
-          </ThemeProvider>
+          <ViewTransitions>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              disableTransitionOnChange
+              enableSystem
+            >
+              <NavBar session={session} />
+              {children}
+            </ThemeProvider>
+          </ViewTransitions>
         </TRPCReactProvider>
       </body>
     </html>
