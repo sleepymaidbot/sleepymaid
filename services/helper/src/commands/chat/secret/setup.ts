@@ -1,22 +1,14 @@
-import type { SlashCommandInterface } from "@sleepymaid/handler";
-import {
-  ApplicationCommandOptionType,
-  ApplicationCommandType,
-  PermissionFlagsBits,
-} from "discord-api-types/v10";
-import {
-  ChatInputCommandInteraction,
-  ChatInputApplicationCommandData,
-  PermissionsBitField,
-} from "discord.js";
-import type { HelperClient } from "../../../lib/extensions/HelperClient";
-import { MessagesType, setupInteraction, getChoices } from "@sleepymaid/shared";
+import type { SlashCommandInterface } from '@sleepymaid/handler';
+import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from 'discord-api-types/v10';
+import { ChatInputCommandInteraction, ChatInputApplicationCommandData, PermissionsBitField } from 'discord.js';
+import type { HelperClient } from '../../../lib/extensions/HelperClient';
+import { MessagesType, setupInteraction, getChoices } from '@sleepymaid/shared';
 
 const messages: MessagesType = {
-  setupWelcome: {
-    fancyName: "Welcome",
-    function: async () => {
-      const msg1 = `# QCG Secret
+	setupWelcome: {
+		fancyName: 'Welcome',
+		function: async () => {
+			const msg1 = `# QCG Secret
 This server is made to help and contribute to the completion of the secret on the Québec Games servers.
 ## Rules
 - Be respectful to everyone.
@@ -41,45 +33,39 @@ Permanent invite link » <https://discord.gg/h65PAkZgru>
 Québec Games Discord » <https://discord.gg/qcgames>
 			`;
 
-      return [{ content: msg1 }];
-    },
-  },
+			return [{ content: msg1 }];
+		},
+	},
 };
 
 export default class QCGSecretSetupCommand implements SlashCommandInterface {
-  public readonly guildIds = ["1131653884377579651"];
-  public readonly data = {
-    name: "qcgssetup",
-    description: "[Admin only] Allow you to post pre-made messages.",
-    type: ApplicationCommandType.ChatInput,
-    defaultMemberPermissions: new PermissionsBitField([
-      PermissionFlagsBits.Administrator,
-    ]),
-    options: [
-      {
-        name: "name",
-        description: "The name of the command",
-        type: ApplicationCommandOptionType.String,
-        choices: getChoices(messages),
-        required: true,
-      },
-      {
-        name: "message_id",
-        description: "The id of the message you want to edit",
-        type: ApplicationCommandOptionType.String,
-        required: false,
-      },
-    ],
-  } as ChatInputApplicationCommandData;
+	public readonly guildIds = ['1131653884377579651'];
+	public readonly data = {
+		name: 'qcgssetup',
+		description: '[Admin only] Allow you to post pre-made messages.',
+		type: ApplicationCommandType.ChatInput,
+		defaultMemberPermissions: new PermissionsBitField([PermissionFlagsBits.Administrator]),
+		options: [
+			{
+				name: 'name',
+				description: 'The name of the command',
+				type: ApplicationCommandOptionType.String,
+				choices: getChoices(messages),
+				required: true,
+			},
+			{
+				name: 'message_id',
+				description: 'The id of the message you want to edit',
+				type: ApplicationCommandOptionType.String,
+				required: false,
+			},
+		],
+	} as ChatInputApplicationCommandData;
 
-  // @ts-ignore
-  public async execute(
-    interaction: ChatInputCommandInteraction,
-    client: HelperClient,
-  ) {
-    if (!interaction.inCachedGuild()) return;
-    if (!interaction.memberPermissions.has(PermissionFlagsBits.Administrator))
-      return;
-    await setupInteraction(interaction, client, messages);
-  }
+	// @ts-ignore
+	public async execute(interaction: ChatInputCommandInteraction, client: HelperClient) {
+		if (!interaction.inCachedGuild()) return;
+		if (!interaction.memberPermissions.has(PermissionFlagsBits.Administrator)) return;
+		await setupInteraction(interaction, client, messages);
+	}
 }

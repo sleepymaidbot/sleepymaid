@@ -1,0 +1,12 @@
+**/node_modules/
+
+**/types
+!**/src/types
+**/dist
+
+.git
+.yarn/**
+.pnp.*
+
+**/.next
+**/out

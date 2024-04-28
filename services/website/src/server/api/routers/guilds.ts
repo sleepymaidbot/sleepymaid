@@ -10,17 +10,16 @@ export const guildsRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       console.log("getGuildSettings", input);
       const userId = await ctx.db.query.accounts
-        .findFirst({ where: eq(accounts.userId, ctx.session.user.id) })
+        .findFirst({
+          where: eq(accounts.userId, ctx.session.user.id),
+        })
         .then((user) => user?.providerAccountId);
       if (!userId) {
         return null;
       }
 
       const response = await sendRPCRequest(
-        {
-          guildId: input.guildId,
-          userId,
-        },
+        { guildId: input.guildId, userId },
         Queue.CheckGuildInformation,
         ctx.mqChannel,
       );
