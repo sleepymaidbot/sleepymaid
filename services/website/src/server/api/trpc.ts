@@ -1,4 +1,4 @@
-import "server-only";
+import 'server-only';
 
 /**
  * YOU PROBABLY DON'T NEED TO EDIT THIS FILE, UNLESS:
@@ -9,13 +9,13 @@ import "server-only";
  * need to use are documented accordingly near the end.
  */
 
-import { mqConnection } from "@sleepymaid/shared";
-import { initTRPC, TRPCError } from "@trpc/server";
-import superjson from "superjson";
-import { ZodError } from "zod";
-import { env } from "@/env";
-import { getServerAuthSession } from "@/server/auth";
-import { db } from "@/server/db";
+import { mqConnection } from '@sleepymaid/shared';
+import { initTRPC, TRPCError } from '@trpc/server';
+import superjson from 'superjson';
+import { ZodError } from 'zod';
+import { env } from '@/env';
+import { getServerAuthSession } from '@/server/auth';
+import { db } from '@/server/db';
 
 /**
  * 1. CONTEXT
@@ -30,21 +30,21 @@ import { db } from "@/server/db";
  * @see https://trpc.io/docs/server/context
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
-  const session = await getServerAuthSession();
+	const session = await getServerAuthSession();
 
-  if (!session) {
-    throw new TRPCError({ code: "UNAUTHORIZED" });
-  }
+	if (!session) {
+		throw new TRPCError({ code: 'UNAUTHORIZED' });
+	}
 
-  await mqConnection.connect(env.RABBITMQ_URL);
+	await mqConnection.connect(env.RABBITMQ_URL);
 
-  return {
-    db,
-    mqConnection: mqConnection.connection,
-    mqChannel: mqConnection.channel,
-    session,
-    ...opts,
-  };
+	return {
+		db,
+		mqConnection: mqConnection.connection,
+		mqChannel: mqConnection.channel,
+		session,
+		...opts,
+	};
 };
 
 /**
@@ -55,17 +55,16 @@ export const createTRPCContext = async (opts: { headers: Headers }) => {
  * errors on the backend.
  */
 const trpc = initTRPC.context<typeof createTRPCContext>().create({
-  transformer: superjson,
-  errorFormatter({ shape, error }) {
-    return {
-      ...shape,
-      data: {
-        ...shape.data,
-        zodError:
-          error.cause instanceof ZodError ? error.cause.flatten() : null,
-      },
-    };
-  },
+	transformer: superjson,
+	errorFormatter({ shape, error }) {
+		return {
+			...shape,
+			data: {
+				...shape.data,
+				zodError: error.cause instanceof ZodError ? error.cause.flatten() : null,
+			},
+		};
+	},
 });
 
 /**
@@ -107,14 +106,14 @@ export const publicProcedure = trpc.procedure;
  * @see https://trpc.io/docs/procedures
  */
 export const protectedProcedure = trpc.procedure.use(async ({ ctx, next }) => {
-  if (!ctx.session?.user) {
-    throw new TRPCError({ code: "UNAUTHORIZED" });
-  }
+	if (!ctx.session?.user) {
+		throw new TRPCError({ code: 'UNAUTHORIZED' });
+	}
 
-  return next({
-    ctx: {
-      // infers the `session` as non-nullable
-      session: { ...ctx.session, user: ctx.session.user },
-    },
-  });
+	return next({
+		ctx: {
+			// infers the `session` as non-nullable
+			session: { ...ctx.session, user: ctx.session.user },
+		},
+	});
 });

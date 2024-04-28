@@ -1,16 +1,16 @@
-import LeftBar from "./_component/leftbar";
+import LeftBar from './_component/leftbar';
 
 export default function Layout({
-  children,
-  params,
+	children,
+	params,
 }: {
-  readonly children: React.ReactNode;
-  readonly params: { id: string };
+	readonly children: React.ReactNode;
+	readonly params: { id: string };
 }) {
-  return (
-    <div className="flex h-full">
-      <LeftBar params={params} />
-      {children}
-    </div>
-  );
+	return (
+		<div className="flex h-full">
+			<LeftBar params={params} />
+			{children}
+		</div>
+	);
 }

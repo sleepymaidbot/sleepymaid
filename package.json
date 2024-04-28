@@ -11,7 +11,7 @@
 		"check": "pnpm turbo run check",
 		"test": "pnpm turbo run test --parallel",
 		"lint": "pnpm eslint --fix --ext ts,tsx",
-		"format": "pnpm prettier --write . --plugin-search-dir=. .",
+		"format": "pnpm prettier --write .",
 		"prepare": "pnpm husky"
 	},
 	"devDependencies": {
