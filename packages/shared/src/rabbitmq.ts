@@ -15,11 +15,21 @@ export type CheckGuildInformationRequestMessage = {
 };
 
 export type CheckGuildInformationResponseMessage = {
+	botNickname: string;
+	channels: {
+		id: string;
+		name: string;
+	}[];
+	emojis: {
+		id: string;
+		name: string;
+	}[];
 	hasPermission: boolean;
 	roles: {
 		color: string;
 		id: string;
 		name: string;
+		position: number;
 	}[];
 	userPermissions: string;
 };

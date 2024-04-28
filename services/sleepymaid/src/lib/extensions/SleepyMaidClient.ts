@@ -115,39 +115,60 @@ export class SleepyMaidClient extends HandlerClient {
 				return;
 			}
 
+			const baseResponse: CheckGuildInformationResponseMessage = {
+				botNickname: '',
+				hasPermission: false,
+				userPermissions: '0',
+				roles: [],
+				channels: [],
+				emojis: [],
+			};
+
 			const message: CheckGuildInformationRequestMessage = JSON.parse(msg.content.toString());
 
 			const guild = await this.guilds.fetch(message.guildId);
 			const member = await guild.members.fetch(message.userId);
-			if (!member) {
-				const response: CheckGuildInformationResponseMessage = {
-					hasPermission: false,
-					userPermissions: '0',
-					roles: [],
-				};
-				this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(response)), {
+			if (!member || !guild || !this.user) {
+				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
 					correlationId: msg.properties.correlationId,
 				});
-				return;
 			}
 
 			await member.fetch();
 			let hasPermission = false;
 			if (guild.ownerId === member.id || member.permissions.any(PermissionFlagsBits.ManageGuild, true)) {
 				hasPermission = true;
+			} else {
+				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
+					correlationId: msg.properties.correlationId,
+				});
 			}
+
+			const botMember = await guild.members.fetch(this.user.id);
 
 			const response: CheckGuildInformationResponseMessage = {
 				hasPermission,
 				userPermissions: member.permissions.bitfield.toString(),
+				botNickname: botMember?.nickname ?? this.user.username,
 				roles: guild.roles.cache.map((role) => ({
 					color: role.color.toString(16),
 					id: role.id,
 					name: role.name,
+					position: role.position,
 				})),
+				channels: guild.channels.cache.map((channel) => ({
+					id: channel.id,
+					name: channel.name,
+				})),
+				emojis: guild.emojis.cache
+					.map((emoji) => ({
+						id: emoji.id,
+						name: emoji.name ?? '',
+					}))
+					.filter((emoji) => emoji.name !== ''),
 			};
 
-			this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(response)), {
+			return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(response)), {
 				correlationId: msg.properties.correlationId,
 			});
 		});

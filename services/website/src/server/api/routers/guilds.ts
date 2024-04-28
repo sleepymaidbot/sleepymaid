@@ -8,6 +8,7 @@ export const guildsRouter = createTRPCRouter({
   getGuildSettings: protectedProcedure
     .input(z.object({ guildId: z.string() }))
     .query(async ({ ctx, input }) => {
+      console.log("getGuildSettings", input);
       const userId = await ctx.db.query.accounts
         .findFirst({
           where: eq(accounts.userId, ctx.session.user.id),
@@ -33,7 +34,7 @@ export const guildsRouter = createTRPCRouter({
 
       return {
         settings,
-        roles: response.roles,
+        ...response,
       };
     }),
 });
