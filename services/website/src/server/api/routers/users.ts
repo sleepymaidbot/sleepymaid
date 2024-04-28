@@ -7,7 +7,7 @@ import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 
 const BASE_URL = "https://discord.com/api/v10";
 
-type UserGuilds = RESTAPIPartialCurrentUserGuild & {
+export type UserGuilds = RESTAPIPartialCurrentUserGuild & {
   hasBot: boolean | undefined;
   hasPermission: boolean;
 };
@@ -35,6 +35,10 @@ export const usersRouter = createTRPCRouter({
         },
       },
     ).then(async (res) => res.json());
+
+    if (!Array.isArray(guilds)) {
+      return null;
+    }
 
     const userGuilds: UserGuilds[] = await Promise.all(
       guilds.map((guild) => {
