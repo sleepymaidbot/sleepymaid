@@ -1,39 +1,39 @@
 {
-	"name": "@sleepymaid/util",
-	"version": "3.3.0",
-	"description": "",
-	"main": "./dist/index.js",
-	"module": "./dist/index.mjs",
-	"types": "./dist/index.d.ts",
-	"exports": {
-		"import": "./dist/index.mjs",
-		"require": "./dist/index.js",
-		"types": "./dist/index.d.ts"
-	},
-	"directories": {
-		"lib": "src",
-		"test": "__tests__"
-	},
-	"files": [
-		"dist"
-	],
-	"scripts": {
-		"build": "pnpm rimraf dist/ && pnpm tsup",
-		"check": "pnpm tsc --noEmit --pretty --skipLibCheck",
-		"test": "vitest run",
-		"changelog": "git cliff --prepend ./CHANGELOG.md -u -c ./cliff.toml -r ../../ --include-path 'packages/util/*'",
-		"release": "cliff-jumper"
-	},
-	"author": "Ecorte",
-	"license": "MIT",
-	"devDependencies": {
-		"@favware/cliff-jumper": "^3.0.3",
-		"@swc/core": "^1.4.17",
-		"@types/node": "^20.12.7",
-		"rimraf": "^5.0.5",
-		"source-map-support": "0.5.21",
-		"tsup": "^8.0.2",
-		"typescript": "^5.4.5",
-		"vitest": "^1.5.2"
-	}
+  "name": "@sleepymaid/util",
+  "version": "3.3.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js",
+    "types": "./dist/index.d.ts"
+  },
+  "directories": {
+    "lib": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "pnpm rimraf dist/ && pnpm tsup",
+    "check": "pnpm tsc --noEmit --pretty --skipLibCheck",
+    "test": "vitest run",
+    "changelog": "git cliff --prepend ./CHANGELOG.md -u -c ./cliff.toml -r ../../ --include-path 'packages/util/*'",
+    "release": "cliff-jumper"
+  },
+  "author": "Ecorte",
+  "license": "MIT",
+  "devDependencies": {
+    "@favware/cliff-jumper": "^3.0.3",
+    "@swc/core": "^1.4.17",
+    "@types/node": "^20.12.7",
+    "rimraf": "^5.0.5",
+    "source-map-support": "0.5.21",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5",
+    "vitest": "^1.5.2"
+  }
 }
