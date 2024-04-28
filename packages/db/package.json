@@ -26,8 +26,8 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
-		"@favware/cliff-jumper": "^3.0.2",
-		"@swc/core": "^1.4.16",
+		"@favware/cliff-jumper": "^3.0.3",
+		"@swc/core": "^1.4.17",
 		"@types/node": "^20.12.7",
 		"@types/pg": "^8.11.5",
 		"drizzle-kit": "^0.20.17",
@@ -39,7 +39,7 @@
 	},
 	"dependencies": {
 		"@paralleldrive/cuid2": "^2.2.2",
-		"drizzle-orm": "^0.30.8",
+		"drizzle-orm": "^0.30.9",
 		"pg": "^8.11.5",
 		"postgres": "^3.4.4"
 	}
