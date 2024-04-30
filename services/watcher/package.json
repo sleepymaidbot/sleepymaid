@@ -25,7 +25,7 @@
 		"@sleepymaid/shared": "workspace:^",
 		"discord.js": "^14.14.1",
 		"drizzle-orm": "^0.30.9",
-		"i18next": "^23.11.2",
+		"i18next": "^23.11.3",
 		"i18next-fs-backend": "^2.3.1",
 		"path": "0.12.7",
 		"reflect-metadata": "^0.2.1",
