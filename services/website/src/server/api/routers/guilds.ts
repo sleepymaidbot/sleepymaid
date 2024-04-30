@@ -5,7 +5,7 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 
 export const guildsRouter = createTRPCRouter({
-	getGuildSettings: protectedProcedure.input(z.object({ guildId: z.string() })).query(async ({ ctx, input }) => {
+	getGuildSettings: protectedProcedure.input(z.string()).query(async ({ ctx, input }) => {
 		console.log("getGuildSettings", input);
 		const userId = await ctx.db.query.accounts
 			.findFirst({
@@ -16,18 +16,14 @@ export const guildsRouter = createTRPCRouter({
 			return null;
 		}
 
-		const response = await sendRPCRequest(
-			{ guildId: input.guildId, userId },
-			Queue.CheckGuildInformation,
-			ctx.mqChannel,
-		);
+		const response = await sendRPCRequest({ guildId: input, userId }, Queue.CheckGuildInformation, ctx.mqChannel);
 
 		if (!response.hasPermission) {
 			return null;
 		}
 
 		const settings = await ctx.db.query.guildsSettings.findFirst({
-			where: eq(guildsSettings.guildId, input.guildId),
+			where: eq(guildsSettings.guildId, input),
 		});
 
 		return {
