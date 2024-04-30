@@ -1,19 +1,22 @@
-import { Plus } from "lucide-react";
+"use client";
+
+import { Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
-import { api } from "@/trpc/server";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { RouterOutputs, api } from "@/trpc/react";
+import { useState } from "react";
 
 const Page = async ({ params }: { readonly params: { id: string } }) => {
-	const settings = await api.guilds.getGuildSettings({
-		guildId: params.id,
-	});
-	if (!settings?.settings) {
-		return null;
-	}
+	const settingsQuery = api.guilds.getGuildSettings.useQuery(params.id);
+	const [settings, _settings] = useState<RouterOutputs["guilds"]["getGuildSettings"]>(settingsQuery.data ?? null);
 
+	if (!settings?.settings) {
+		return <div className="right-content w-full flex-grow p-4">{JSON.stringify(settings)}</div>;
+	}
 	const adminRoles = settings.roles
 		.filter((role) => settings.settings?.adminRoles?.includes(role.id))
 		.sort((a, b) => b.position - a.position)
@@ -35,6 +38,17 @@ const Page = async ({ params }: { readonly params: { id: string } }) => {
 
 			return obj;
 		});
+
+	const canBeAdmin = settings.roles
+		.filter((role) => {
+			return !settings.settings?.adminRoles?.includes(role.id) && !settings.settings?.modRoles?.includes(role.id);
+		})
+		.sort((a, b) => b.position - a.position);
+	const canBeModerator = settings.roles
+		.filter((role) => {
+			return !settings.settings?.modRoles?.includes(role.id) && !settings.settings?.adminRoles?.includes(role.id);
+		})
+		.sort((a, b) => b.position - a.position);
 
 	return (
 		<div className="right-content w-full flex-grow p-4">
@@ -63,21 +77,74 @@ const Page = async ({ params }: { readonly params: { id: string } }) => {
 							<div>
 								<Label>Admin Roles</Label>
 								{adminRoles.map((role) => (
-									<div className="my-1 rounded-md border-2 p-1" key={role.id} style={{ borderColor: "#" + role.color }}>
+									<div
+										className="my-1 rounded-md border-2 p-1 px-4"
+										key={role.id}
+										style={{ borderColor: "#" + role.color }}
+									>
 										{role.name}
 									</div>
 								))}
-								<Button>
-									<Plus />
-								</Button>
+								<Popover>
+									<PopoverTrigger className="my-1 w-full">
+										<Button className="my-1 w-full" variant="outline">
+											<Plus />
+										</Button>
+									</PopoverTrigger>
+									<PopoverContent className="my-1 w-full">
+										<ScrollArea className="flex h-[200px] w-[350px] flex-col gap-2">
+											<div className="pr-4">
+												{canBeAdmin.map((role) => (
+													<div
+														className="my-1 rounded-md border-2 p-1 px-4"
+														key={role.id}
+														style={{ borderColor: "#" + role.color }}
+													>
+														{role.name}
+													</div>
+												))}
+											</div>
+										</ScrollArea>
+									</PopoverContent>
+								</Popover>
 							</div>
 							<div>
 								<Label>Moderator Roles</Label>
 								{moderatorRoles.map((role) => (
-									<div className="my-1 rounded-md border-2 p-1" key={role.id} style={{ borderColor: "#" + role.color }}>
+									<div
+										className="my-1 flex rounded-md border-2 p-1 px-4"
+										key={role.id}
+										style={{ borderColor: "#" + role.color }}
+									>
+										<div>
+											{" "}
+											<Minus />{" "}
+										</div>
 										{role.name}
 									</div>
 								))}
+								<Popover>
+									<PopoverTrigger className="my-1 w-full">
+										<Button className="my-1 w-full" variant="outline">
+											<Plus />
+										</Button>
+									</PopoverTrigger>
+									<PopoverContent className="my-1 w-full">
+										<ScrollArea className="flex h-[200px] w-[350px] flex-col gap-2">
+											<div className="pr-4">
+												{canBeModerator.map((role) => (
+													<div
+														className="my-1 rounded-md border-2 p-1 px-4"
+														key={role.id}
+														style={{ borderColor: "#" + role.color }}
+													>
+														{role.name}
+													</div>
+												))}
+											</div>
+										</ScrollArea>
+									</PopoverContent>
+								</Popover>
 							</div>
 						</div>
 					</div>
