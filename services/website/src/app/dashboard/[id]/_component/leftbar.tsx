@@ -2,23 +2,15 @@
 
 import { HomeIcon, ListTodo, MessageCircleMore } from "lucide-react";
 import Link from "next/link";
+import { useContext } from "react";
+import { SettingContext } from "../settingContext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { useRouter } from "next/navigation";
-import { RouterOutputs, api } from "@/trpc/react";
-import { useState } from "react";
 
-const LeftBar = async ({ params }: { readonly params: { id: string } }) => {
-	const [settings, _setSettings] = useState<RouterOutputs["guilds"]["getGuildSettings"]>(
-		api.guilds.getGuildSettings.useQuery(params.id)!.data!,
-	);
-	const router = useRouter();
+const LeftBar = () => {
+	const settings = useContext(SettingContext);
 	if (!settings?.settings) {
-		return null;
-	}
-	if (!settings.hasBot) {
-		router.push("/invite" + params.id);
 		return null;
 	}
 
