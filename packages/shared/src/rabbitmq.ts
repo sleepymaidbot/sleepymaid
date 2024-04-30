@@ -15,6 +15,7 @@ export type CheckGuildInformationRequestMessage = {
 };
 
 export type CheckGuildInformationResponseMessage = {
+	hasBot: boolean;
 	botNickname: string;
 	channels: {
 		id: string;

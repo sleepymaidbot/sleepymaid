@@ -116,6 +116,7 @@ export class SleepyMaidClient extends HandlerClient {
 			}
 
 			const baseResponse: CheckGuildInformationResponseMessage = {
+				hasBot: false,
 				botNickname: "",
 				hasPermission: false,
 				userPermissions: "0",
@@ -147,6 +148,7 @@ export class SleepyMaidClient extends HandlerClient {
 			const botMember = await guild.members.fetch(this.user.id);
 
 			const response: CheckGuildInformationResponseMessage = {
+				hasBot: true,
 				hasPermission,
 				userPermissions: member.permissions.bitfield.toString(),
 				botNickname: botMember?.nickname ?? this.user.username,
