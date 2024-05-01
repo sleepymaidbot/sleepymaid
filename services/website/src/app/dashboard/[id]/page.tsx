@@ -2,7 +2,7 @@
 
 import { Minus, Plus } from "lucide-react";
 import { useContext } from "react";
-import { SettingContext } from "./settingContext";
+import { SettingContext } from "./_settingContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

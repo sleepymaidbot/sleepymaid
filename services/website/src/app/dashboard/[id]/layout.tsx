@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import Loading from "../loading";
 import LeftBar from "./_component/leftbar";
-import { SettingContext } from "./settingContext";
+import { SettingContext } from "./_settingContext";
 import { api } from "@/trpc/react";
 
 export default function Layout({

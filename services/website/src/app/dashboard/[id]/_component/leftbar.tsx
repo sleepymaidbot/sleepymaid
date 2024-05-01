@@ -3,7 +3,7 @@
 import { HomeIcon, ListTodo, MessageCircleMore } from "lucide-react";
 import Link from "next/link";
 import { useContext } from "react";
-import { SettingContext } from "../settingContext";
+import { SettingContext } from "../_settingContext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
