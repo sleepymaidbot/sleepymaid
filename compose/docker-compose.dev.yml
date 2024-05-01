@@ -5,12 +5,27 @@ services:
   sleepymaid:
     environment:
       NODE_ENV: "dev"
+      DISCORD_CLIENT_ID: ${DEVELOPMENT_SLEEPYMAID_CLIENT_ID}
+      DISCORD_TOKEN: ${DEVELOPMENT_SLEEPYMAID_TOKEN}
+      DEV_IDS: ${DEV_IDS}
+      DATABASE_URL: ${DATABASE_URL}
+      RABBITMQ_URL: ${RABBITMQ_URL}
   helper:
     environment:
       NODE_ENV: "dev"
+      DISCORD_CLIENT_ID: ${DEVELOPMENT_HELPER_CLIENT_ID}
+      DISCORD_TOKEN: ${DEVELOPMENT_HELPER_TOKEN}
+      DEV_IDS: ${DEV_IDS}
+      DATABASE_URL: ${DATABASE_URL}
+      RABBITMQ_URL: ${RABBITMQ_URL}
   watcher:
     environment:
       NODE_ENV: "dev"
+      DISCORD_CLIENT_ID: ${DEVELOPMENT_WATCHER_CLIENT_ID}
+      DISCORD_TOKEN: ${DEVELOPMENT_WATCHER_TOKEN}
+      DEV_IDS: ${DEV_IDS}
+      DATABASE_URL: ${DATABASE_URL}
+      RABBITMQ_URL: ${RABBITMQ_URL}
   #website:
   #  environment:
   #    NODE_ENV: 'development'
