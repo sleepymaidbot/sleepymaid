@@ -10,7 +10,7 @@ importers:
     devDependencies:
       '@commitlint/cli':
         specifier: ^19.3.0
-        version: 19.3.0(@types/node@20.12.7)(typescript@5.4.5)
+        version: 19.3.0(@types/node@20.12.8)(typescript@5.4.5)
       '@commitlint/config-angular':
         specifier: ^19.3.0
         version: 19.3.0
@@ -78,8 +78,8 @@ importers:
         specifier: ^2.2.2
         version: 2.2.2
       drizzle-orm:
-        specifier: ^0.30.9
-        version: 0.30.9(@types/pg@8.11.5)(@types/react@18.3.1)(pg@8.11.5)(postgres@3.4.4)(react@18.3.1)
+        specifier: ^0.30.10
+        version: 0.30.10(@types/pg@8.11.5)(@types/react@18.3.1)(pg@8.11.5)(postgres@3.4.4)(react@18.3.1)
       pg:
         specifier: ^8.11.5
         version: 8.11.5
@@ -94,8 +94,8 @@ importers:
         specifier: ^1.4.17
         version: 1.4.17(@swc/helpers@0.5.5)
       '@types/node':
-        specifier: ^20.12.7
-        version: 20.12.7
+        specifier: ^20.12.8
+        version: 20.12.8
       '@types/pg':
         specifier: ^8.11.5
         version: 8.11.5
@@ -146,8 +146,8 @@ importers:
         specifier: ^1.4.17
         version: 1.4.17(@swc/helpers@0.5.5)
       '@types/node':
-        specifier: ^20.12.7
-        version: 20.12.7
+        specifier: ^20.12.8
+        version: 20.12.8
       '@types/node-cron':
         specifier: ^3.0.11
         version: 3.0.11
@@ -180,8 +180,8 @@ importers:
         specifier: ^1.4.17
         version: 1.4.17(@swc/helpers@0.5.5)
       '@types/node':
-        specifier: ^20.12.7
-        version: 20.12.7
+        specifier: ^20.12.8
+        version: 20.12.8
       rimraf:
         specifier: ^5.0.5
         version: 5.0.5
@@ -223,8 +223,8 @@ importers:
         specifier: ^0.10.5
         version: 0.10.5
       '@types/node':
-        specifier: ^20.12.7
-        version: 20.12.7
+        specifier: ^20.12.8
+        version: 20.12.8
       '@types/uuid':
         specifier: ^9.0.8
         version: 9.0.8
@@ -250,8 +250,8 @@ importers:
         specifier: ^1.4.17
         version: 1.4.17(@swc/helpers@0.5.5)
       '@types/node':
-        specifier: ^20.12.7
-        version: 20.12.7
+        specifier: ^20.12.8
+        version: 20.12.8
       rimraf:
         specifier: ^5.0.5
         version: 5.0.5
@@ -266,7 +266,7 @@ importers:
         version: 5.4.5
       vitest:
         specifier: ^1.5.3
-        version: 1.5.3(@types/node@20.12.7)
+        version: 1.5.3(@types/node@20.12.8)
 
   services/helper:
     dependencies:
@@ -289,8 +289,8 @@ importers:
         specifier: ^14.14.1
         version: 14.14.1
       drizzle-orm:
-        specifier: ^0.30.9
-        version: 0.30.9(@types/pg@8.11.5)(@types/react@18.3.1)(pg@8.11.5)(postgres@3.4.4)(react@18.3.1)
+        specifier: ^0.30.10
+        version: 0.30.10(@types/pg@8.11.5)(@types/react@18.3.1)(pg@8.11.5)(postgres@3.4.4)(react@18.3.1)
       i18next:
         specifier: ^23.11.3
         version: 23.11.3
@@ -311,8 +311,8 @@ importers:
         specifier: ^1.1.5
         version: 1.1.5
       '@types/node':
-        specifier: ^20.12.7
-        version: 20.12.7
+        specifier: ^20.12.8
+        version: 20.12.8
       rimraf:
         specifier: ^5.0.5
         version: 5.0.5
@@ -359,8 +359,8 @@ importers:
         specifier: ^14.14.1
         version: 14.14.1
       drizzle-orm:
-        specifier: ^0.30.9
-        version: 0.30.9(@types/pg@8.11.5)(@types/react@18.3.1)(pg@8.11.5)(postgres@3.4.4)(react@18.3.1)
+        specifier: ^0.30.10
+        version: 0.30.10(@types/pg@8.11.5)(@types/react@18.3.1)(pg@8.11.5)(postgres@3.4.4)(react@18.3.1)
       i18next:
         specifier: ^23.11.3
         version: 23.11.3
@@ -387,8 +387,8 @@ importers:
         specifier: ^1.1.5
         version: 1.1.5
       '@types/node':
-        specifier: ^20.12.7
-        version: 20.12.7
+        specifier: ^20.12.8
+        version: 20.12.8
       rimraf:
         specifier: ^5.0.5
         version: 5.0.5
@@ -417,8 +417,8 @@ importers:
         specifier: ^14.14.1
         version: 14.14.1
       drizzle-orm:
-        specifier: ^0.30.9
-        version: 0.30.9(@types/pg@8.11.5)(@types/react@18.3.1)(pg@8.11.5)(postgres@3.4.4)(react@18.3.1)
+        specifier: ^0.30.10
+        version: 0.30.10(@types/pg@8.11.5)(@types/react@18.3.1)(pg@8.11.5)(postgres@3.4.4)(react@18.3.1)
       i18next:
         specifier: ^23.11.3
         version: 23.11.3
@@ -439,8 +439,8 @@ importers:
         specifier: ^1.1.5
         version: 1.1.5
       '@types/node':
-        specifier: ^20.12.7
-        version: 20.12.7
+        specifier: ^20.12.8
+        version: 20.12.8
       rimraf:
         specifier: ^5.0.5
         version: 5.0.5
@@ -491,22 +491,22 @@ importers:
         version: link:../../packages/shared
       '@t3-oss/env-nextjs':
         specifier: ^0.10.1
-        version: 0.10.1(typescript@5.4.5)(zod@3.23.5)
+        version: 0.10.1(typescript@5.4.5)(zod@3.23.6)
       '@tanstack/react-query':
         specifier: ^5.32.1
         version: 5.32.1(react@18.3.1)
       '@trpc/client':
         specifier: next
-        version: 11.0.0-rc.361(@trpc/server@11.0.0-rc.361)
+        version: 11.0.0-rc.364(@trpc/server@11.0.0-rc.364)
       '@trpc/next':
         specifier: next
-        version: 11.0.0-rc.361(@tanstack/react-query@5.32.1(react@18.3.1))(@trpc/client@11.0.0-rc.361(@trpc/server@11.0.0-rc.361))(@trpc/react-query@11.0.0-rc.361(@tanstack/react-query@5.32.1(react@18.3.1))(@trpc/client@11.0.0-rc.361(@trpc/server@11.0.0-rc.361))(@trpc/server@11.0.0-rc.361)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/server@11.0.0-rc.361)(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 11.0.0-rc.364(@tanstack/react-query@5.32.1(react@18.3.1))(@trpc/client@11.0.0-rc.364(@trpc/server@11.0.0-rc.364))(@trpc/react-query@11.0.0-rc.364(@tanstack/react-query@5.32.1(react@18.3.1))(@trpc/client@11.0.0-rc.364(@trpc/server@11.0.0-rc.364))(@trpc/server@11.0.0-rc.364)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/server@11.0.0-rc.364)(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@trpc/react-query':
         specifier: next
-        version: 11.0.0-rc.361(@tanstack/react-query@5.32.1(react@18.3.1))(@trpc/client@11.0.0-rc.361(@trpc/server@11.0.0-rc.361))(@trpc/server@11.0.0-rc.361)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 11.0.0-rc.364(@tanstack/react-query@5.32.1(react@18.3.1))(@trpc/client@11.0.0-rc.364(@trpc/server@11.0.0-rc.364))(@trpc/server@11.0.0-rc.364)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@trpc/server':
         specifier: next
-        version: 11.0.0-rc.361
+        version: 11.0.0-rc.364
       amqplib:
         specifier: ^0.10.4
         version: 0.10.4
@@ -523,14 +523,14 @@ importers:
         specifier: ^0.37.55
         version: 0.37.61
       drizzle-orm:
-        specifier: ^0.30.9
-        version: 0.30.9(@types/pg@8.11.5)(@types/react@18.3.1)(pg@8.11.5)(postgres@3.4.4)(react@18.3.1)
+        specifier: ^0.30.10
+        version: 0.30.10(@types/pg@8.11.5)(@types/react@18.3.1)(pg@8.11.5)(postgres@3.4.4)(react@18.3.1)
       geist:
         specifier: ^1.3.0
         version: 1.3.0(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       lucide-react:
-        specifier: ^0.376.0
-        version: 0.376.0(react@18.3.1)
+        specifier: ^0.377.0
+        version: 0.377.0(react@18.3.1)
       next:
         specifier: ^14.2.3
         version: 14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -571,8 +571,8 @@ importers:
         specifier: ^9.0.1
         version: 9.0.1
       zod:
-        specifier: ^3.23.5
-        version: 3.23.5
+        specifier: ^3.23.6
+        version: 3.23.6
     devDependencies:
       '@types/amqplib':
         specifier: ^0.10.5
@@ -581,8 +581,8 @@ importers:
         specifier: ^8.56.10
         version: 8.56.10
       '@types/node':
-        specifier: ^20.12.7
-        version: 20.12.7
+        specifier: ^20.12.8
+        version: 20.12.8
       '@types/react':
         specifier: ^18.3.1
         version: 18.3.1
@@ -2130,18 +2130,18 @@ packages:
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
     engines: {node: '>= 10'}
 
-  '@trpc/client@11.0.0-rc.361':
-    resolution: {integrity: sha512-4qMMtVtT+Yd5169OWfAhZYc0Cvi+HTSn0ZOnMnyHdWF6cOMHKBPGFDOl9RQjndhfPyuLzz175FulxbE9xJKeYg==}
+  '@trpc/client@11.0.0-rc.364':
+    resolution: {integrity: sha512-k9ZH7I0OOBFME9fZJ1JI0ZjvPEV64bvoT20kWHkFeMH5trJmK1tzcc/q7c7cLBY4pziLPqBDPFw2qax09vyRTg==}
     peerDependencies:
-      '@trpc/server': 11.0.0-rc.361+5ad570aa5
+      '@trpc/server': 11.0.0-rc.364+d95fb467b
 
-  '@trpc/next@11.0.0-rc.361':
-    resolution: {integrity: sha512-p0zWf7CncdhtPelIUFSgySXzJ+Y+quWWSakpYwAtEAqgB9mW0xImIDVBtnBm2CMVx3NNKsmTRlHR1J+aR6LQnQ==}
+  '@trpc/next@11.0.0-rc.364':
+    resolution: {integrity: sha512-iwwvGcA5h3//EIRImda8KH15nlS7uDV1wR0y2+RLLotLGmnbbKvxiZWoIyKdvQVwgjDhLgPxaXur2Jw19m6fjg==}
     peerDependencies:
       '@tanstack/react-query': ^5.25.0
-      '@trpc/client': 11.0.0-rc.361+5ad570aa5
-      '@trpc/react-query': 11.0.0-rc.361+5ad570aa5
-      '@trpc/server': 11.0.0-rc.361+5ad570aa5
+      '@trpc/client': 11.0.0-rc.364+d95fb467b
+      '@trpc/react-query': 11.0.0-rc.364+d95fb467b
+      '@trpc/server': 11.0.0-rc.364+d95fb467b
       next: '*'
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
@@ -2151,17 +2151,17 @@ packages:
       '@trpc/react-query':
         optional: true
 
-  '@trpc/react-query@11.0.0-rc.361':
-    resolution: {integrity: sha512-nOiI93wEuaIImtjm3wdeYPtd+O7oBTW0omCFECup15STcb5RNCetkL9aabjchUccZgEgdk09Ygs1GLQFovnjhQ==}
+  '@trpc/react-query@11.0.0-rc.364':
+    resolution: {integrity: sha512-updB1uOVHS/1NK+hclt8OK/Im0GYD8mIRTxs96hZhfaT6tqUhij/wWWG0U6OofxPGC/MZs75ojQeq8Uag9Tr5g==}
     peerDependencies:
       '@tanstack/react-query': ^5.25.0
-      '@trpc/client': 11.0.0-rc.361+5ad570aa5
-      '@trpc/server': 11.0.0-rc.361+5ad570aa5
+      '@trpc/client': 11.0.0-rc.364+d95fb467b
+      '@trpc/server': 11.0.0-rc.364+d95fb467b
       react: '>=18.2.0'
       react-dom: '>=18.2.0'
 
-  '@trpc/server@11.0.0-rc.361':
-    resolution: {integrity: sha512-Ius+nlvY57i76rv7g3QQDr6HK1bwz45ogc3vpl6C2OKjA6eSNw4C8yTQQFpha6iQqMwH9KOHLxAWc+GPW02hYQ==}
+  '@trpc/server@11.0.0-rc.364':
+    resolution: {integrity: sha512-sGlrb2jSCiU74TrJ+N+WxIcJIUDyo0WOy0y30vIArw6oHFXjeithgxjvIu+PbN+VWt/Gt4ee8kVhnmxCW4X/Qw==}
 
   '@types/acorn@4.0.6':
     resolution: {integrity: sha512-veQTnWP+1D/xbxVrPC3zHnCZRjSrKfhbMUlEA43iMZLu7EsnTtkJklIuwrCPbOi8YkvDQAiW05VQQFvvz9oieQ==}
@@ -2217,11 +2217,8 @@ packages:
   '@types/node-cron@3.0.11':
     resolution: {integrity: sha512-0ikrnug3/IyneSHqCBeslAhlK2aBfYek1fGo4bP4QnZPmiqSGRK+Oy7ZMisLWkesffJvQ1cqAcBnJC+8+nxIAg==}
 
-  '@types/node@20.12.5':
-    resolution: {integrity: sha512-BD+BjQ9LS/D8ST9p5uqBxghlN+S42iuNxjsUGjeZobe/ciXzk2qb1B6IXc6AnRLS+yFJRpN2IPEHMzwspfDJNw==}
-
-  '@types/node@20.12.7':
-    resolution: {integrity: sha512-wq0cICSkRLVaf3UGLMGItu/PtdY7oaXaI/RVU+xliKVOtRna3PRY57ZDfztpDL0n11vfymMUnXv8QwYCO7L1wg==}
+  '@types/node@20.12.8':
+    resolution: {integrity: sha512-NU0rJLJnshZWdE/097cdCBbyW1h4hEg0xpovcoAQYHl8dnEyp/NAOiE45pvc+Bd1Dt+2r94v2eGFpQJ4R7g+2w==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -3082,8 +3079,8 @@ packages:
     resolution: {integrity: sha512-mLVDS4nXmO09wFVlzGrdshWnAL+U9eQGC5zRs6hTN6Q9arwQGWU2XnZ17I8BM8Quau8CQRx3Ms6VPgRWJFVp7Q==}
     hasBin: true
 
-  drizzle-orm@0.30.9:
-    resolution: {integrity: sha512-VOiCFsexErmgqvNCOmbzmqDCZzZsHoz6SkWAjTFxsTr1AllKDbDJ2+GgedLXsXMDgpg/ljDG1zItIFeZtiO2LA==}
+  drizzle-orm@0.30.10:
+    resolution: {integrity: sha512-IRy/QmMWw9lAQHpwbUh1b8fcn27S/a9zMIzqea1WNOxK9/4EB8gIo+FZWLiPXzl2n9ixGSv8BhsLZiOppWEwBw==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
@@ -4342,8 +4339,8 @@ packages:
   lru-queue@0.1.0:
     resolution: {integrity: sha512-BpdYkt9EvGl8OfWHDQPISVpcl5xZthb+XPsbELj5AQXxIC8IriDZIQYjBJPEm5rS420sjZ0TLEzRcq5KdBhYrQ==}
 
-  lucide-react@0.376.0:
-    resolution: {integrity: sha512-g91IX3ERD6yUR1TL2dsL4BkcGygpZz/EsqjAeL/kcRQV0EApIOr/9eBfKhYOVyQIcGGuotFGjF3xKLHMEz+b7g==}
+  lucide-react@0.377.0:
+    resolution: {integrity: sha512-o0weTZC4j8YiSi5VIE6RTwPt5uOA+YtuXejvkOxbLghLwIloNkI20INgWigrhBthvgdDcuULp0XRTr0wokqKMw==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
 
@@ -6133,8 +6130,8 @@ packages:
   zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
 
-  zod@3.23.5:
-    resolution: {integrity: sha512-fkwiq0VIQTksNNA131rDOsVJcns0pfVUjHzLrNBiF/O/Xxb5lQyEXkhZWcJ7npWsYlvs+h0jFWXXy4X46Em1JA==}
+  zod@3.23.6:
+    resolution: {integrity: sha512-RTHJlZhsRbuA8Hmp/iNL7jnfc4nZishjsanDAfEY1QpDQZCahUp3xDzl+zfweE9BklxMUcgBgS1b7Lvie/ZVwA==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -6292,11 +6289,11 @@ snapshots:
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
 
-  '@commitlint/cli@19.3.0(@types/node@20.12.7)(typescript@5.4.5)':
+  '@commitlint/cli@19.3.0(@types/node@20.12.8)(typescript@5.4.5)':
     dependencies:
       '@commitlint/format': 19.3.0
       '@commitlint/lint': 19.2.2
-      '@commitlint/load': 19.2.0(@types/node@20.12.7)(typescript@5.4.5)
+      '@commitlint/load': 19.2.0(@types/node@20.12.8)(typescript@5.4.5)
       '@commitlint/read': 19.2.1
       '@commitlint/types': 19.0.3
       execa: 8.0.1
@@ -6344,7 +6341,7 @@ snapshots:
       '@commitlint/rules': 19.0.3
       '@commitlint/types': 19.0.3
 
-  '@commitlint/load@19.2.0(@types/node@20.12.7)(typescript@5.4.5)':
+  '@commitlint/load@19.2.0(@types/node@20.12.8)(typescript@5.4.5)':
     dependencies:
       '@commitlint/config-validator': 19.0.3
       '@commitlint/execute-rule': 19.0.0
@@ -6352,7 +6349,7 @@ snapshots:
       '@commitlint/types': 19.0.3
       chalk: 5.3.0
       cosmiconfig: 9.0.0(typescript@5.4.5)
-      cosmiconfig-typescript-loader: 5.0.0(@types/node@20.12.7)(cosmiconfig@9.0.0(typescript@5.4.5))(typescript@5.4.5)
+      cosmiconfig-typescript-loader: 5.0.0(@types/node@20.12.8)(cosmiconfig@9.0.0(typescript@5.4.5))(typescript@5.4.5)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -7454,16 +7451,16 @@ snapshots:
 
   '@swc/types@0.1.5': {}
 
-  '@t3-oss/env-core@0.10.1(typescript@5.4.5)(zod@3.23.5)':
+  '@t3-oss/env-core@0.10.1(typescript@5.4.5)(zod@3.23.6)':
     dependencies:
-      zod: 3.23.5
+      zod: 3.23.6
     optionalDependencies:
       typescript: 5.4.5
 
-  '@t3-oss/env-nextjs@0.10.1(typescript@5.4.5)(zod@3.23.5)':
+  '@t3-oss/env-nextjs@0.10.1(typescript@5.4.5)(zod@3.23.6)':
     dependencies:
-      '@t3-oss/env-core': 0.10.1(typescript@5.4.5)(zod@3.23.5)
-      zod: 3.23.5
+      '@t3-oss/env-core': 0.10.1(typescript@5.4.5)(zod@3.23.6)
+      zod: 3.23.6
     optionalDependencies:
       typescript: 5.4.5
 
@@ -7476,30 +7473,30 @@ snapshots:
 
   '@tootallnate/once@2.0.0': {}
 
-  '@trpc/client@11.0.0-rc.361(@trpc/server@11.0.0-rc.361)':
+  '@trpc/client@11.0.0-rc.364(@trpc/server@11.0.0-rc.364)':
     dependencies:
-      '@trpc/server': 11.0.0-rc.361
+      '@trpc/server': 11.0.0-rc.364
 
-  '@trpc/next@11.0.0-rc.361(@tanstack/react-query@5.32.1(react@18.3.1))(@trpc/client@11.0.0-rc.361(@trpc/server@11.0.0-rc.361))(@trpc/react-query@11.0.0-rc.361(@tanstack/react-query@5.32.1(react@18.3.1))(@trpc/client@11.0.0-rc.361(@trpc/server@11.0.0-rc.361))(@trpc/server@11.0.0-rc.361)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/server@11.0.0-rc.361)(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@trpc/next@11.0.0-rc.364(@tanstack/react-query@5.32.1(react@18.3.1))(@trpc/client@11.0.0-rc.364(@trpc/server@11.0.0-rc.364))(@trpc/react-query@11.0.0-rc.364(@tanstack/react-query@5.32.1(react@18.3.1))(@trpc/client@11.0.0-rc.364(@trpc/server@11.0.0-rc.364))(@trpc/server@11.0.0-rc.364)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/server@11.0.0-rc.364)(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@trpc/client': 11.0.0-rc.361(@trpc/server@11.0.0-rc.361)
-      '@trpc/server': 11.0.0-rc.361
+      '@trpc/client': 11.0.0-rc.364(@trpc/server@11.0.0-rc.364)
+      '@trpc/server': 11.0.0-rc.364
       next: 14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     optionalDependencies:
       '@tanstack/react-query': 5.32.1(react@18.3.1)
-      '@trpc/react-query': 11.0.0-rc.361(@tanstack/react-query@5.32.1(react@18.3.1))(@trpc/client@11.0.0-rc.361(@trpc/server@11.0.0-rc.361))(@trpc/server@11.0.0-rc.361)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@trpc/react-query': 11.0.0-rc.364(@tanstack/react-query@5.32.1(react@18.3.1))(@trpc/client@11.0.0-rc.364(@trpc/server@11.0.0-rc.364))(@trpc/server@11.0.0-rc.364)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
-  '@trpc/react-query@11.0.0-rc.361(@tanstack/react-query@5.32.1(react@18.3.1))(@trpc/client@11.0.0-rc.361(@trpc/server@11.0.0-rc.361))(@trpc/server@11.0.0-rc.361)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@trpc/react-query@11.0.0-rc.364(@tanstack/react-query@5.32.1(react@18.3.1))(@trpc/client@11.0.0-rc.364(@trpc/server@11.0.0-rc.364))(@trpc/server@11.0.0-rc.364)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@tanstack/react-query': 5.32.1(react@18.3.1)
-      '@trpc/client': 11.0.0-rc.361(@trpc/server@11.0.0-rc.361)
-      '@trpc/server': 11.0.0-rc.361
+      '@trpc/client': 11.0.0-rc.364(@trpc/server@11.0.0-rc.364)
+      '@trpc/server': 11.0.0-rc.364
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@trpc/server@11.0.0-rc.361': {}
+  '@trpc/server@11.0.0-rc.364': {}
 
   '@types/acorn@4.0.6':
     dependencies:
@@ -7507,15 +7504,15 @@ snapshots:
 
   '@types/amqplib@0.10.5':
     dependencies:
-      '@types/node': 20.12.5
+      '@types/node': 20.12.8
 
   '@types/concat-stream@2.0.3':
     dependencies:
-      '@types/node': 20.12.7
+      '@types/node': 20.12.8
 
   '@types/conventional-commits-parser@5.0.0':
     dependencies:
-      '@types/node': 20.12.7
+      '@types/node': 20.12.8
 
   '@types/cookie@0.6.0': {}
 
@@ -7560,11 +7557,7 @@ snapshots:
 
   '@types/node-cron@3.0.11': {}
 
-  '@types/node@20.12.5':
-    dependencies:
-      undici-types: 5.26.5
-
-  '@types/node@20.12.7':
+  '@types/node@20.12.8':
     dependencies:
       undici-types: 5.26.5
 
@@ -7572,7 +7565,7 @@ snapshots:
 
   '@types/pg@8.11.5':
     dependencies:
-      '@types/node': 20.12.7
+      '@types/node': 20.12.8
       pg-protocol: 1.6.1
       pg-types: 4.0.2
 
@@ -7599,7 +7592,7 @@ snapshots:
 
   '@types/ws@8.5.9':
     dependencies:
-      '@types/node': 20.12.7
+      '@types/node': 20.12.8
 
   '@types/yargs-parser@21.0.3': {}
 
@@ -8410,9 +8403,9 @@ snapshots:
 
   core-util-is@1.0.3: {}
 
-  cosmiconfig-typescript-loader@5.0.0(@types/node@20.12.7)(cosmiconfig@9.0.0(typescript@5.4.5))(typescript@5.4.5):
+  cosmiconfig-typescript-loader@5.0.0(@types/node@20.12.8)(cosmiconfig@9.0.0(typescript@5.4.5))(typescript@5.4.5):
     dependencies:
-      '@types/node': 20.12.7
+      '@types/node': 20.12.8
       cosmiconfig: 9.0.0(typescript@5.4.5)
       jiti: 1.21.0
       typescript: 5.4.5
@@ -8587,7 +8580,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.30.9(@types/pg@8.11.5)(@types/react@18.3.1)(pg@8.11.5)(postgres@3.4.4)(react@18.3.1):
+  drizzle-orm@0.30.10(@types/pg@8.11.5)(@types/react@18.3.1)(pg@8.11.5)(postgres@3.4.4)(react@18.3.1):
     optionalDependencies:
       '@types/pg': 8.11.5
       '@types/react': 18.3.1
@@ -10143,7 +10136,7 @@ snapshots:
     dependencies:
       es5-ext: 0.10.64
 
-  lucide-react@0.376.0(react@18.3.1):
+  lucide-react@0.377.0(react@18.3.1):
     dependencies:
       react: 18.3.1
 
@@ -11875,7 +11868,7 @@ snapshots:
       '@types/concat-stream': 2.0.3
       '@types/debug': 4.1.12
       '@types/is-empty': 1.2.3
-      '@types/node': 20.12.7
+      '@types/node': 20.12.8
       '@types/unist': 3.0.2
       '@ungap/structured-clone': 1.2.0
       concat-stream: 2.0.0
@@ -12040,13 +12033,13 @@ snapshots:
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
 
-  vite-node@1.5.3(@types/node@20.12.7):
+  vite-node@1.5.3(@types/node@20.12.8):
     dependencies:
       cac: 6.7.14
       debug: 4.3.4
       pathe: 1.1.1
       picocolors: 1.0.0
-      vite: 5.2.7(@types/node@20.12.7)
+      vite: 5.2.7(@types/node@20.12.8)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -12057,16 +12050,16 @@ snapshots:
       - supports-color
       - terser
 
-  vite@5.2.7(@types/node@20.12.7):
+  vite@5.2.7(@types/node@20.12.8):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.4.38
       rollup: 4.13.0
     optionalDependencies:
-      '@types/node': 20.12.7
+      '@types/node': 20.12.8
       fsevents: 2.3.3
 
-  vitest@1.5.3(@types/node@20.12.7):
+  vitest@1.5.3(@types/node@20.12.8):
     dependencies:
       '@vitest/expect': 1.5.3
       '@vitest/runner': 1.5.3
@@ -12085,11 +12078,11 @@ snapshots:
       strip-literal: 2.0.0
       tinybench: 2.5.1
       tinypool: 0.8.4
-      vite: 5.2.7(@types/node@20.12.7)
-      vite-node: 1.5.3(@types/node@20.12.7)
+      vite: 5.2.7(@types/node@20.12.8)
+      vite-node: 1.5.3(@types/node@20.12.8)
       why-is-node-running: 2.2.2
     optionalDependencies:
-      '@types/node': 20.12.7
+      '@types/node': 20.12.8
     transitivePeerDependencies:
       - less
       - lightningcss
@@ -12228,6 +12221,6 @@ snapshots:
 
   zod@3.22.4: {}
 
-  zod@3.23.5: {}
+  zod@3.23.6: {}
 
   zwitch@2.0.4: {}
