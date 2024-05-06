@@ -1,4 +1,33 @@
 # Changelog
+All notable changes to this project will be documented in this file.
+
+# [@sleepymaid/handler@3.1.0](https://github.com/sleepymaidbot/sleepymaid/compare/@sleepymaid/handler@3.0.0...@sleepymaid/handler@3.1.0) - (2024-05-06)
+
+## Bug Fixes
+
+- **deps:** Update all non-major dependencies (#642) ([8a4efad](https://github.com/sleepymaidbot/sleepymaid/commit/8a4efada153f76c47d31dd19010c66b20c3a584c))
+- **deps:** Update all non-major dependencies (#626) ([23657be](https://github.com/sleepymaidbot/sleepymaid/commit/23657beff3d79ec9121b9737141876e29caab0f6))
+- **deps:** Update all non-major dependencies ([9f68657](https://github.com/sleepymaidbot/sleepymaid/commit/9f68657bd8085024942e88c7114c4396b54d181d))
+- **deps:** Update all non-major dependencies (#614) ([632377c](https://github.com/sleepymaidbot/sleepymaid/commit/632377cf07a72486dcb95bbf8bdb4c10f73c38f9))
+- **deps:** Update all non-major dependencies ([11cdac3](https://github.com/sleepymaidbot/sleepymaid/commit/11cdac3248836397725428d54cd68f4e80a33ced))
+- **deps:** Update all non-major dependencies ([eb7dbb2](https://github.com/sleepymaidbot/sleepymaid/commit/eb7dbb27e6b8e13de461ba9420f5e6c0f70099f5))
+
+## Features
+
+- **scripts:** Add check script ([f2ce1b1](https://github.com/sleepymaidbot/sleepymaid/commit/f2ce1b1541a72fdef83adcf5ea5243bd0b465022))
+- **handler:** Add changelog ([4e235e9](https://github.com/sleepymaidbot/sleepymaid/commit/4e235e95ab4d632b630982df5d199e060e7cb6bb))
+
+## Refactor
+
+- **CommandManager:** Simplify CommandINterface ([1600654](https://github.com/sleepymaidbot/sleepymaid/commit/1600654857f858bd22735a99ad7ec9a9a17bf23f))
+- **CommandHandler:** Rewrite CommandManager ([6a9c139](https://github.com/sleepymaidbot/sleepymaid/commit/6a9c139c907196dddcb3f8abc24da41397bdb677))
+
+## Styling
+
+- **prettier:** Use double quotes ([49fba5c](https://github.com/sleepymaidbot/sleepymaid/commit/49fba5c8da22ecf04997efba6db0bbd8289018fd))
+- **CommandManager:** Run eslint ([f0cb6db](https://github.com/sleepymaidbot/sleepymaid/commit/f0cb6db308b3f462d7f6cce509efbd71ccb354e3))
+
+# Changelog
 
 All notable changes to this project will be documented in this file.
 
