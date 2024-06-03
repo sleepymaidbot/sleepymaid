@@ -24,7 +24,7 @@ export default function Layout({
 		return <span>Error: {error.message}</span>;
 	}
 
-	if (!data?.settings) {
+	if (!data?.guildSettings) {
 		router.push("/dashboard");
 		return;
 	}

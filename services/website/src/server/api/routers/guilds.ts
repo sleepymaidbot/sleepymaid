@@ -22,12 +22,12 @@ export const guildsRouter = createTRPCRouter({
 			return null;
 		}
 
-		const settings = await ctx.db.query.guildsSettings.findFirst({
+		const guildSettings = await ctx.db.query.guildsSettings.findFirst({
 			where: eq(guildsSettings.guildId, input),
 		});
 
 		return {
-			settings,
+			guildSettings,
 			...response,
 		};
 	}),

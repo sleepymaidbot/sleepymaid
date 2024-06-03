@@ -1,7 +1,10 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable drizzle/enforce-delete-with-where */
 "use client";
 
-import { Minus, Plus } from "lucide-react";
-import { useContext } from "react";
+import type { CheckGuildInformationResponseRolesMessage } from "@sleepymaid/shared";
+import { Minus, Plus, Save } from "lucide-react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { SettingContext } from "./_settingContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,58 +13,106 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 
-const Page = () => {
-	const settings = useContext(SettingContext);
-	if (!settings?.settings) {
+const Role = ({
+	role,
+	guildRoles,
+}: {
+	readonly guildRoles: Map<string, CheckGuildInformationResponseRolesMessage>;
+	readonly role: string;
+}) => {
+	const roleInfo = guildRoles.get(role);
+	if (!roleInfo) {
+		console.log("Role not found", role);
 		return null;
 	}
 
-	if (!settings?.settings) {
-		return <div className="right-content w-full flex-grow p-4">{JSON.stringify(settings)}</div>;
+	return (
+		<div
+			className="my-1 rounded-md border-2 p-1 px-4"
+			key={role}
+			style={{ borderColor: "#" + roleInfo.color ?? "c4c9ce" }}
+		>
+			{roleInfo.name}
+		</div>
+	);
+};
+
+const Page = () => {
+	const settings = useContext(SettingContext)!;
+	if (!settings!.guildSettings) {
+		return null;
 	}
 
-	const adminRoles = settings.roles
-		.filter((role) => settings.settings?.adminRoles?.includes(role.id))
-		.sort((a, b) => b.position - a.position)
-		.map((obj) => {
-			if (obj.color === "0") {
-				return { ...obj, color: "c4c9ce" };
-			}
+	const [saveButtonDisabled, setSaveButtonDisabled] = useState(true);
 
-			return obj;
-		});
+	const guildRoles = useMemo(() => {
+		return new Map<string, CheckGuildInformationResponseRolesMessage>(
+			settings.roles
+				.sort((a, b) => b.position - a.position)
+				.map((role) => {
+					if (role.color !== "0") {
+						return [role.id, role];
+					}
 
-	const moderatorRoles = settings.roles
-		.filter((role) => settings.settings?.modRoles?.includes(role.id))
-		.sort((a, b) => b.position - a.position)
-		.map((obj) => {
-			if (obj.color === "0") {
-				return { ...obj, color: "c4c9ce" };
-			}
+					return [role.id, { ...role, color: "c4c9ce" }];
+				}),
+		);
+	}, [settings.roles]);
 
-			return obj;
-		});
+	const [adminRoles, setAdminRoles] = useState(new Set(settings.guildSettings.adminRoles));
+	const [moderatorRoles, setModeratorRoles] = useState(new Set(settings.guildSettings.modRoles));
 
-	const canBeAdmin = settings.roles
-		.filter((role) => {
-			return !settings.settings?.adminRoles?.includes(role.id) && !settings.settings?.modRoles?.includes(role.id);
-		})
-		.sort((a, b) => b.position - a.position);
-	const canBeModerator = settings.roles
-		.filter((role) => {
-			return !settings.settings?.modRoles?.includes(role.id) && !settings.settings?.adminRoles?.includes(role.id);
-		})
-		.sort((a, b) => b.position - a.position);
+	const canBeAdmin = useMemo(() => {
+		return settings.roles
+			.filter((role) => {
+				return (
+					!settings.guildSettings?.adminRoles?.includes(role.id) && !settings.guildSettings?.modRoles?.includes(role.id)
+				);
+			})
+			.sort((a, b) => b.position - a.position)
+			.map((role) => role.id);
+	}, [settings.guildSettings, settings.roles]);
+
+	const canBeModerator = useMemo(() => {
+		return settings.roles
+			.filter((role) => {
+				return (
+					!settings.guildSettings?.modRoles?.includes(role.id) && !settings.guildSettings?.adminRoles?.includes(role.id)
+				);
+			})
+			.sort((a, b) => b.position - a.position)
+			.map((role) => role.id);
+	}, [settings.guildSettings, settings.roles]);
+
+	useEffect(() => {
+		setSaveButtonDisabled(
+			!adminRoles.size ||
+				!moderatorRoles.size ||
+				adminRoles.size !== settings.guildSettings!.adminRoles.length ||
+				moderatorRoles.size !== settings.guildSettings!.modRoles.length,
+		);
+	}, [adminRoles, moderatorRoles, settings.guildSettings]);
 
 	return (
 		<div className="right-content w-full flex-grow p-4">
 			<div className="h-full w-full border-spacing-1 rounded-lg border-2 border-solid">
 				<ScrollArea className="h-full w-full">
 					<div className="p-4">
-						<div className="text-2xl font-bold">{settings.settings.guildName}</div>
-						<div className="text-sm">
-							<div className="font-medium">
-								{settings.roles.length} Roles・ {settings.channels.length} Channels ・ {settings.emojis.length} Emojis
+						<div className="flex justify-between">
+							<div>
+								<div className="text-2xl font-bold">{settings.guildSettings.guildName}</div>
+								<div className="text-sm">
+									<div className="font-medium">
+										{settings.roles.length} Roles・ {settings.channels.length} Channels ・ {settings.emojis.length}{" "}
+										Emojis
+									</div>
+								</div>
+							</div>
+							<div className="flex gap-4">
+								<Button className="my-1" disabled={saveButtonDisabled}>
+									<Save />
+									Save
+								</Button>
 							</div>
 						</div>
 						<Separator className="my-4" />
@@ -79,14 +130,8 @@ const Page = () => {
 						<div className="flex gap-4">
 							<div>
 								<Label>Admin Roles</Label>
-								{adminRoles.map((role) => (
-									<div
-										className="my-1 rounded-md border-2 p-1 px-4"
-										key={role.id}
-										style={{ borderColor: "#" + role.color }}
-									>
-										{role.name}
-									</div>
+								{[...adminRoles].map((role) => (
+									<Role guildRoles={guildRoles} key={role} role={role} />
 								))}
 								<Popover>
 									<PopoverTrigger className="my-1 w-full">
@@ -98,13 +143,7 @@ const Page = () => {
 										<ScrollArea className="flex h-[200px] w-[350px] flex-col gap-2">
 											<div className="pr-4">
 												{canBeAdmin.map((role) => (
-													<div
-														className="my-1 rounded-md border-2 p-1 px-4"
-														key={role.id}
-														style={{ borderColor: "#" + role.color }}
-													>
-														{role.name}
-													</div>
+													<Role guildRoles={guildRoles} key={role} role={role} />
 												))}
 											</div>
 										</ScrollArea>
@@ -113,18 +152,8 @@ const Page = () => {
 							</div>
 							<div>
 								<Label>Moderator Roles</Label>
-								{moderatorRoles.map((role) => (
-									<div
-										className="my-1 flex rounded-md border-2 p-1 px-4"
-										key={role.id}
-										style={{ borderColor: "#" + role.color }}
-									>
-										<div>
-											{" "}
-											<Minus />{" "}
-										</div>
-										{role.name}
-									</div>
+								{[...moderatorRoles].map((role) => (
+									<Role guildRoles={guildRoles} key={role} role={role} />
 								))}
 								<Popover>
 									<PopoverTrigger className="my-1 w-full">
@@ -136,13 +165,7 @@ const Page = () => {
 										<ScrollArea className="flex h-[200px] w-[350px] flex-col gap-2">
 											<div className="pr-4">
 												{canBeModerator.map((role) => (
-													<div
-														className="my-1 rounded-md border-2 p-1 px-4"
-														key={role.id}
-														style={{ borderColor: "#" + role.color }}
-													>
-														{role.name}
-													</div>
+													<Role guildRoles={guildRoles} key={role} role={role} />
 												))}
 											</div>
 										</ScrollArea>

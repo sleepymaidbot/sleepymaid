@@ -14,8 +14,14 @@ export type CheckGuildInformationRequestMessage = {
 	userId: string;
 };
 
+export type CheckGuildInformationResponseRolesMessage = {
+	color: string;
+	id: string;
+	name: string;
+	position: number;
+};
+
 export type CheckGuildInformationResponseMessage = {
-	hasBot: boolean;
 	botNickname: string;
 	channels: {
 		id: string;
@@ -25,13 +31,9 @@ export type CheckGuildInformationResponseMessage = {
 		id: string;
 		name: string;
 	}[];
+	hasBot: boolean;
 	hasPermission: boolean;
-	roles: {
-		color: string;
-		id: string;
-		name: string;
-		position: number;
-	}[];
+	roles: CheckGuildInformationResponseRolesMessage[];
 	userPermissions: string;
 };
 

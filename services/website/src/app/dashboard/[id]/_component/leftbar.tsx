@@ -10,7 +10,7 @@ import { Separator } from "@/components/ui/separator";
 
 const LeftBar = () => {
 	const settings = useContext(SettingContext);
-	if (!settings?.settings) {
+	if (!settings?.guildSettings) {
 		return null;
 	}
 
@@ -22,11 +22,11 @@ const LeftBar = () => {
 						<Link href="/dashboard/">
 							<div className="flex items-center ">
 								<Avatar className="mr-2">
-									<AvatarImage alt="Guild Icon" src={settings.settings.guildIcon ?? ""} />
+									<AvatarImage alt="Guild Icon" src={settings.guildSettings.guildIcon ?? ""} />
 									<AvatarFallback>GI</AvatarFallback>
 								</Avatar>
 								<div className="ml-2 space-y-1 text-sm ">
-									<div className="font-medium">{settings.settings.guildName}</div>
+									<div className="font-medium">{settings.guildSettings.guildName}</div>
 									<div>Change guild</div>
 								</div>
 							</div>
@@ -35,7 +35,7 @@ const LeftBar = () => {
 				</div>
 				<Separator className="my-2" />
 				<Button asChild className="my-1 w-full py-4" variant="ghost">
-					<Link href={"/dashboard/" + settings.settings.guildId + "/overview"}>
+					<Link href={"/dashboard/" + settings.guildSettings.guildId + "/overview"}>
 						<div className="flex items-center">
 							<HomeIcon className="mr-2" />
 							<div className="text-sm">Overview</div>
@@ -43,7 +43,7 @@ const LeftBar = () => {
 					</Link>
 				</Button>
 				<Button asChild className="my-1 w-full py-4" variant="ghost">
-					<Link href={"/dashboard/" + settings.settings.guildId + "/messages"}>
+					<Link href={"/dashboard/" + settings.guildSettings.guildId + "/messages"}>
 						<div className="flex items-center">
 							<MessageCircleMore className="mr-2" />
 							<div className="text-sm">Messages</div>
@@ -51,7 +51,7 @@ const LeftBar = () => {
 					</Link>
 				</Button>
 				<Button asChild className="my-1 w-full py-4" variant="ghost">
-					<Link href={"/dashboard/" + settings.settings.guildId + "/rolemenu"}>
+					<Link href={"/dashboard/" + settings.guildSettings.guildId + "/rolemenu"}>
 						<div className="flex items-center">
 							<ListTodo className="mr-2" />
 							<div className="text-sm">Role Menus</div>
