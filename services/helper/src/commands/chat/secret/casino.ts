@@ -1,14 +1,11 @@
+/* eslint-disable radix */
 import type { SlashCommandInterface } from "@sleepymaid/handler";
-import {
-	ChatInputApplicationCommandData,
-	ChatInputCommandInteraction,
-	ApplicationCommandType,
-	ApplicationCommandOptionType,
-	resolveColor,
-} from "discord.js";
+import type { ChatInputApplicationCommandData, ChatInputCommandInteraction } from "discord.js";
+import { ApplicationCommandType, ApplicationCommandOptionType, resolveColor } from "discord.js";
 
 export default class SecretCasinoCommand implements SlashCommandInterface {
 	public readonly guildIds = ["860721584373497887", "324284116021542922", "1131653884377579651"];
+
 	public readonly data = {
 		name: "casino",
 		description: "Base command for the casino secret.",
@@ -24,23 +21,23 @@ export default class SecretCasinoCommand implements SlashCommandInterface {
 						description: "The code of the control room lasers.",
 						type: ApplicationCommandOptionType.Integer,
 						required: true,
-						min_value: 1234,
-						max_value: 4321,
+						min_value: 1_234,
+						max_value: 4_321,
 					},
 					{
 						name: "mid",
 						description: "The code of the middle lasers.",
 						type: ApplicationCommandOptionType.Integer,
 						required: true,
-						min_value: 1234,
-						max_value: 4321,
+						min_value: 1_234,
+						max_value: 4_321,
 					},
 				],
 			},
 		],
 	} as ChatInputApplicationCommandData;
 
-	//@ts-expect-error
+	// @ts-expect-error client overriden
 	public async execute(interaction: ChatInputCommandInteraction<"cached">) {
 		switch (interaction.options.getSubcommand()) {
 			case "getbuttonorder": {
@@ -51,16 +48,17 @@ export default class SecretCasinoCommand implements SlashCommandInterface {
 				if (!imidNumber) return;
 				await this.checkNumber(interaction, imidNumber);
 
-				const roomNumbers = ("" + iroomNumber).split("");
-				const midNumbers = ("" + imidNumber).split("");
+				const roomNumbers = String(iroomNumber).split("");
+				const midNumbers = String(imidNumber).split("");
 
 				const finalOrder = [0, 0, 0, 0];
-				for (let i = 0; i < 4; i++) {
-					const int = parseInt(midNumbers[i]!);
-					const pos = parseInt(roomNumbers[i]!) - 1;
+				for (let ii = 0; ii < 4; ii++) {
+					const int = Number.parseInt(midNumbers[ii]!);
+					const pos = Number.parseInt(roomNumbers[ii]!) - 1;
 					finalOrder[pos] = int;
 				}
-				return await interaction.reply({
+
+				return interaction.reply({
 					embeds: [
 						{
 							description: `<:greenTick:948620600144982026> The order of the buttons is: \`\`${finalOrder.join(
@@ -77,11 +75,12 @@ export default class SecretCasinoCommand implements SlashCommandInterface {
 
 	private async checkNumber(interaction: ChatInputCommandInteraction<"cached">, number: number) {
 		const validNumbers = [
-			1234, 1243, 1324, 1342, 1423, 1432, 2134, 2143, 2314, 2341, 2413, 2431, 3124, 3142, 3214, 3241, 3412, 3421, 4123,
-			4132, 4213, 4231, 4321, 4312,
+			1_234, 1_243, 1_324, 1_342, 1_423, 1_432, 2_134, 2_143, 2_314, 2_341, 2_413, 2_431, 3_124, 3_142, 3_214, 3_241,
+			3_412, 3_421, 4_123, 4_132, 4_213, 4_231, 4_321, 4_312,
 		];
-		if (!validNumbers.includes(number))
-			return await interaction.reply({
+		if (validNumbers.includes(number)) return true;
+		else
+			return interaction.reply({
 				embeds: [
 					{
 						description: "<:redX:948606748334358559> Invalid numbers.",
@@ -90,6 +89,5 @@ export default class SecretCasinoCommand implements SlashCommandInterface {
 				],
 				ephemeral: true,
 			});
-		else return true;
 	}
 }
