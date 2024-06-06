@@ -9,6 +9,7 @@ import type { HelperClient } from "../../../lib/extensions/HelperClient";
 const messages: MessagesType = {
 	setupWelcome: {
 		fancyName: "Welcome",
+		// eslint-disable-next-line @typescript-eslint/require-await
 		function: async () => {
 			const msg1 = `# QCG Secret
 This server is made to help and contribute to the completion of the secret on the Québec Games servers.
