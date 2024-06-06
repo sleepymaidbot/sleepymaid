@@ -5,9 +5,11 @@ export type MessagesType = {
 	[key: string]: MessageType;
 };
 
+type MessageFunctionType = (MessageCreateOptions & MessageEditOptions)[];
+
 type MessageType = {
 	fancyName: string;
-	function(i: ChatInputCommandInteraction): Promise<(MessageCreateOptions & MessageEditOptions)[]>;
+	function(i: ChatInputCommandInteraction): MessageFunctionType | Promise<MessageFunctionType>;
 };
 
 export const getChoices = (messages: MessagesType) => {
@@ -77,14 +79,10 @@ export const setupInteraction = async (
 				.catch(client.logger.error);
 		}
 	} else {
-		await msg
-			.function(interaction)
-			.then((msgs) =>
-				msgs.forEach(async (msg) => {
-					await interaction?.channel?.send({ ...msg, allowedMentions: { parse: [] } }).catch(client.logger.error);
-				}),
-			)
-			.catch(client.logger.error);
+		const msgs = await msg.function(interaction);
+		for (const msg of msgs) {
+			await interaction?.channel?.send({ ...msg, allowedMentions: { parse: [] } }).catch(client.logger.error);
+		}
 	}
 
 	await interaction
