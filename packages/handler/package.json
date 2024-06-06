@@ -28,17 +28,17 @@
 	"devDependencies": {
 		"@favware/cliff-jumper": "^3.0.3",
 		"@sleepymaid/util": "workspace:^",
-		"@swc/core": "^1.4.17",
-		"@types/node": "^20.12.8",
+		"@swc/core": "^1.5.25",
+		"@types/node": "^20.14.2",
 		"@types/node-cron": "^3.0.11",
-		"rimraf": "^5.0.5",
+		"rimraf": "^5.0.7",
 		"source-map-support": "0.5.21",
-		"tsup": "^8.0.2",
+		"tsup": "^8.1.0",
 		"typescript": "^5.4.5"
 	},
 	"dependencies": {
 		"@sapphire/node-utilities": "^1.0.2",
-		"discord.js": "^14.14.1",
+		"discord.js": "^14.15.3",
 		"node-cron": "^3.0.3",
 		"reflect-metadata": "^0.2.1",
 		"tsyringe": "^4.8.0"
