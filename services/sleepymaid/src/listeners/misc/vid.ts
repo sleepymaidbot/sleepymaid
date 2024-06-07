@@ -1,10 +1,11 @@
-import { unlink } from "fs";
+/* eslint-disable unicorn/prefer-module */
+import { unlink } from "node:fs";
+import { join } from "node:path";
+import { Result } from "@sapphire/result";
 import type { ListenerInterface } from "@sleepymaid/handler";
+import { shell } from "@sleepymaid/util";
 import type { Message } from "discord.js";
 import type { SleepyMaidClient } from "../../lib/extensions/SleepyMaidClient";
-import { shell } from "@sleepymaid/util";
-import { join } from "path";
-import { Result } from "@sapphire/result";
 
 const sites = [
 	"tiktok.com",
@@ -38,6 +39,7 @@ const enabled = true;
 
 export default class VidListener implements ListenerInterface {
 	public readonly name = "messageCreate";
+
 	public readonly once = false;
 
 	public async execute(message: Message, client: SleepyMaidClient) {
@@ -48,41 +50,53 @@ export default class VidListener implements ListenerInterface {
 
 		for (let arg of args) {
 			if (arg.includes("tiktok.com/t/")) arg = arg.replaceAll("www.tiktok.com", "vm.tiktok.com");
+			if (arg.includes("x.com")) arg = arg.replaceAll("x.com", "twitter.com");
 
 			if (arg.startsWith("https://") && sites.some((a) => arg.includes(a))) {
-				const nameReturn = await Result.fromAsync(
-					async () => await shell('yt-dlp --print filename -o "%(id)s.%(ext)s" ' + arg),
+				const nameReturn = await Result.fromAsync(async () =>
+					shell('yt-dlp --print filename -o "%(id)s.%(ext)s" ' + arg),
 				);
 				if (nameReturn.isErr()) {
-					return client.logger.error(nameReturn.unwrapErr() as Error);
+					client.logger.error(nameReturn.unwrapErr() as Error);
+					return;
 				}
-				const fileName = nameReturn.unwrap().stdout.trim();
-				const dlReturn = await Result.fromAsync(
-					async () =>
-						await shell(`yt-dlp -P "${join(__dirname, "../../../downloads/")}" -o "${fileName}" "${arg}" -f mp4`),
-				);
-				if (dlReturn.isErr()) return client.logger.error(dlReturn.unwrapErr() as Error);
-				const messageReturn = await Result.fromAsync(
-					async () =>
-						await message
-							.reply({
-								files: [
-									{
-										attachment: join(__dirname, `../../../downloads/${fileName}`),
-										name: fileName,
-									},
-								],
-							})
-							.then(() => {
-								if (sitesDelEmbed.some((a) => arg.includes(a))) {
-									message.suppressEmbeds(true).catch(console.error);
-								}
-							}),
-				);
-				if (messageReturn.isErr()) return client.logger.error(messageReturn.unwrapErr() as Error);
 
+				const fileName = nameReturn.unwrap().stdout.trim();
+				const dlReturn = await Result.fromAsync(async () =>
+					shell(`yt-dlp -P "${join(__dirname, "../../../downloads/")}" -o "${fileName}" "${arg}" -f mp4`),
+				);
+				if (dlReturn.isErr()) {
+					client.logger.error(dlReturn.unwrapErr() as Error);
+					return;
+				}
+
+				const messageReturn = await Result.fromAsync(async () =>
+					message
+						.reply({
+							files: [
+								{
+									attachment: join(__dirname, `../../../downloads/${fileName}`),
+									name: fileName,
+								},
+							],
+						})
+						.then(() => {
+							if (sitesDelEmbed.some((a) => arg.includes(a))) {
+								message.suppressEmbeds(true).catch(console.error);
+							}
+						}),
+				);
+				if (messageReturn.isErr()) {
+					client.logger.error(messageReturn.unwrapErr() as Error);
+					return;
+				}
+
+				// eslint-disable-next-line promise/prefer-await-to-callbacks
 				const unlinkReturn = Result.from(() => unlink(join(__dirname, `../../../downloads/${fileName}`), (err) => err));
-				if (unlinkReturn.isErr()) return client.logger.error(unlinkReturn.unwrapErr() as Error);
+				if (unlinkReturn.isErr()) {
+					client.logger.error(unlinkReturn.unwrapErr() as Error);
+					return;
+				}
 			}
 		}
 	}
