@@ -31,9 +31,12 @@ export const usersRouter = createTRPCRouter({
 			headers: {
 				Authorization: `Bearer ${account.access_token}`,
 			},
-		}).then(async (res) => res.json());
+		})
+			.then(async (res) => res.json())
+			.catch((error) => console.log(error));
 
 		if (!Array.isArray(guilds)) {
+			console.log("guilds", guilds);
 			return null;
 		}
 
