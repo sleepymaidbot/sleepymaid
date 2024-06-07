@@ -19,7 +19,7 @@ export default async function Dashboard() {
 
 	return (
 		<div className="h-[95%] overflow-hidden">
-			<div className="container flex  min-h-screen flex-col items-center justify-center ">
+			<div className="container flex min-h-screen flex-col items-center justify-center">
 				<ScrollArea className="w-100 h-96 rounded-md border">
 					<div className="p-4">
 						<Suspense fallback={<Loading />}>
