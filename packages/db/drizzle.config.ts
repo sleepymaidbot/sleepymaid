@@ -9,9 +9,9 @@ export default {
 		"./src/schema/*.ts",
 	],
 	out: "./drizzle",
-	driver: "pg",
+	dialect: "postgresql",
 	dbCredentials: {
-		connectionString,
+		url: connectionString,
 	},
 	strict: true,
 } satisfies Config;
