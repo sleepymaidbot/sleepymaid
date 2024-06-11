@@ -1,51 +1,56 @@
-import { Client, ClientOptions } from "discord.js";
+import type { ClientOptions } from "discord.js";
+import { Client } from "discord.js";
 import { BaseLogger } from "./BaseLogger";
-import { CommandManager, CommandManagerStartAllOptionsType } from "./commands/CommandManager";
-import { ListenerManager, ListenerManagerStartAllOptionsType } from "./listeners/ListenerManager";
-import { TaskManager, TaskManagerStartAllOptionsType } from "./tasks/TaskManager";
+import type { CommandManagerStartAllOptionsType } from "./commands/CommandManager";
+import { CommandManager } from "./commands/CommandManager";
+import type { ListenerManagerStartAllOptionsType } from "./listeners/ListenerManager";
+import { ListenerManager } from "./listeners/ListenerManager";
+import type { TaskManagerStartAllOptionsType } from "./tasks/TaskManager";
+import { TaskManager } from "./tasks/TaskManager";
 
 export type env = "dev" | "prod";
 
-export interface HandlerClientOptions {
-	env?: env;
+export type HandlerClientOptions = {
 	devServerId: string;
+	env?: env;
 	logger?: Logger;
-}
+};
 
-export interface loadHandlersOptions {
+export type loadHandlersOptions = {
 	commands?: CommandManagerStartAllOptionsType;
 	listeners?: ListenerManagerStartAllOptionsType;
 	tasks?: TaskManagerStartAllOptionsType;
 	// TODO: Add modules
-	/*modules?: {
+	/* modules?: {
 		folder: string
 		entryFile?: string
 		blacklist?: string[]
 		whitelist?: string[]
 	}*/
-}
+};
 
-export interface Logger {
-	info: LogFn;
+export type Logger = {
 	debug: LogFn;
 	error: ErrorLogFn;
-}
+	info: LogFn;
+};
 
-export interface LogFn {
-	(message: string, ...args: string[]): void;
-}
+export type LogFn = (message: string, ...args: string[]) => void;
 
-export interface ErrorLogFn {
-	(error: Error | string, ...args: string[]): void;
-}
+export type ErrorLogFn = (error: Error | string, ...args: string[]) => void;
 
 export class HandlerClient extends Client {
 	public declare logger: Logger;
+
 	public declare env: env;
+
 	public declare commandManager: CommandManager;
+
 	public declare listenerManager: ListenerManager;
+
 	public declare taskManager: TaskManager;
-	constructor(options: HandlerClientOptions, djsOptions: ClientOptions) {
+
+	public constructor(options: HandlerClientOptions, djsOptions: ClientOptions) {
 		super(djsOptions);
 
 		const { env } = options ?? {};
@@ -57,19 +62,21 @@ export class HandlerClient extends Client {
 		this.taskManager = new TaskManager(this);
 	}
 
-	public async loadHandlers(options: loadHandlersOptions): Promise<void> {
+	public loadHandlers(options: loadHandlersOptions): void {
 		// listeners
 		if (options.listeners) {
-			this.listenerManager.startAll(options.listeners);
+			void this.listenerManager.startAll(options.listeners);
 		}
-		this.once("ready", async () => {
+
+		this.once("ready", () => {
 			// commands
 			if (options.commands) {
-				this.commandManager.startAll(options.commands);
+				void this.commandManager.startAll(options.commands);
 			}
+
 			// tasks
 			if (options.tasks) {
-				this.taskManager.startAll(options.tasks);
+				void this.taskManager.startAll(options.tasks);
 			}
 		});
 	}

@@ -1,6 +1,24 @@
-export interface ListenerInterface {
-	name: string;
-	once: boolean;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	execute: (...args: any[]) => unknown | Promise<unknown>;
+import type { Awaitable, ClientEvents } from "discord.js";
+import type { BaseContainer, Context } from "../BaseContainer";
+import type { HandlerClient } from "../HandlerClient";
+
+export class Listener<Event extends keyof ClientEvents, Client extends HandlerClient> {
+	public container: BaseContainer<Client>;
+
+	public name: keyof ClientEvents;
+
+	public once: boolean;
+
+	public constructor(context: Context<Client>, options: ListenerOptions = {} as ListenerOptions) {
+		this.container = context.container;
+		this.name = options.name;
+		this.once = options.once ?? false;
+	}
+
+	public execute?(...args: ClientEvents[Event]): Awaitable<unknown>;
 }
+
+export type ListenerOptions = {
+	name: keyof ClientEvents;
+	once?: boolean;
+};

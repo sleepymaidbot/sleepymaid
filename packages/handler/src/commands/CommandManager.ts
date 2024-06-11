@@ -1,4 +1,3 @@
-import "reflect-metadata";
 import { readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { findFilesRecursively } from "@sapphire/node-utilities";
@@ -10,11 +9,12 @@ import type {
 	Snowflake,
 } from "discord.js";
 import { Collection, InteractionType } from "discord.js";
-import { container } from "tsyringe";
+import { BaseContainer, Context } from "../BaseContainer";
 import { BaseManager } from "../BaseManager";
-import type { MessageCommandInterface } from "./MessageCommand";
-import type { SlashCommandInterface } from "./SlashCommand";
-import type { UserCommandInterface } from "./UserCommand";
+import type { HandlerClient } from "../HandlerClient";
+import { MessageCommand } from "./MessageCommand";
+import { SlashCommand } from "./SlashCommand";
+import { UserCommand } from "./UserCommand";
 
 export type CommandManagerStartAllOptionsType = {
 	folder: string;
@@ -32,19 +32,48 @@ type Commands = {
 	name: string;
 };
 
-type CommandInterface = MessageCommandInterface | SlashCommandInterface | UserCommandInterface;
+async function checkAndInstantiateCommand(
+	file: string,
+	context: Context<HandlerClient>,
+): Promise<MessageCommand<HandlerClient> | SlashCommand<HandlerClient> | UserCommand<HandlerClient> | null> {
+	try {
+		const importedModule = await import(file);
+		if (importedModule.default) {
+			const nestedDefault = importedModule.default.default;
+			if (typeof nestedDefault === "function") {
+				if (nestedDefault.prototype instanceof MessageCommand) {
+					return new nestedDefault(context) as MessageCommand<HandlerClient>;
+				} else if (nestedDefault.prototype instanceof SlashCommand) {
+					return new nestedDefault(context) as SlashCommand<HandlerClient>;
+				} else if (nestedDefault.prototype instanceof UserCommand) {
+					return new nestedDefault(context) as UserCommand<HandlerClient>;
+				} else {
+					return null;
+				}
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	} catch {
+		return null;
+	}
+}
 
 export class CommandManager extends BaseManager {
 	private _commands: Collection<string, Commands> = new Collection<string, Commands>();
 
+	private _tempCommands: Collection<string, Commands> = new Collection<string, Commands>();
+
 	public async startAll(options: CommandManagerStartAllOptionsType): Promise<void> {
 		if (!options.folder) throw new Error("No folder path provided!");
 		await this.loadCommand(options.folder);
-		this.client.on("interactionCreate", (i: Interaction) => {
-			if (i.type === InteractionType.ApplicationCommand) {
-				this.HandleApplicationCommands(i as CommandInteraction);
-			} else if (i.type === InteractionType.ApplicationCommandAutocomplete) {
-				this.HandleAutocomplete(i);
+		this.client.on("interactionCreate", (interaction: Interaction) => {
+			if (interaction.type === InteractionType.ApplicationCommand) {
+				void this.HandleApplicationCommands(interaction as CommandInteraction);
+			} else if (interaction.type === InteractionType.ApplicationCommandAutocomplete) {
+				void this.HandleAutocomplete(interaction);
 			}
 		});
 	}
@@ -52,6 +81,7 @@ export class CommandManager extends BaseManager {
 	private async loadCommand(folderPath: string): Promise<void> {
 		this.client.logger.info("Command Handler: -> Registering application commands...");
 		const topLevelFolders = await readdir(folderPath);
+
 		for await (const folderName of topLevelFolders) {
 			switch (folderName) {
 				case "chat": {
@@ -84,11 +114,15 @@ export class CommandManager extends BaseManager {
 
 	private async loadCommands(folderPath: string): Promise<boolean> {
 		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith(".js"))) {
-			const cmd_ = container.resolve<CommandInterface>((await import(file)).default.default);
+			const container = new BaseContainer<HandlerClient>(this.client);
+			const context = new Context<HandlerClient>(container);
+
+			const cmd_ = await checkAndInstantiateCommand(file, context);
+			if (!cmd_) continue;
 
 			if (cmd_.guildIds) {
 				for (const id of cmd_.guildIds) {
-					this._commands.set("n:" + cmd_.data.name, {
+					this._tempCommands.set(cmd_.data.name, {
 						name: cmd_.data.name,
 						file,
 						id: null,
@@ -97,7 +131,7 @@ export class CommandManager extends BaseManager {
 					});
 				}
 			} else {
-				this._commands.set("n:" + cmd_.data.name, {
+				this._tempCommands.set(cmd_.data.name, {
 					name: cmd_.data.name,
 					file,
 					id: null,
@@ -112,13 +146,12 @@ export class CommandManager extends BaseManager {
 		return true;
 	}
 
-	private async RegisterApplicationCommands() {
-		// Global commands
-		const globalCommands = Array.from(this._commands.values()).filter((cmd) => cmd.guildId === null);
+	private async RegisterGlobalApplicationCommands() {
+		const globalCommands = Array.from(this._tempCommands.values()).filter((cmd) => cmd.guildId === null);
 
 		await this.client.application?.commands.set(globalCommands.map((cmd) => cmd.data)).then((cmds) => {
 			for (const cmd of cmds.values()) {
-				const current = globalCommands.find((c) => c.name === cmd.name);
+				const current = globalCommands.find((cc) => cc.name === cmd.name);
 				if (current) {
 					this._commands.set(cmd.id, {
 						id: cmd.id,
@@ -132,10 +165,10 @@ export class CommandManager extends BaseManager {
 
 			this.client.logger.info("Command Handler: -> Successfully registered " + [...cmds].length + " global commands!");
 		});
+	}
 
-		// Guild commands
-
-		const guildCommands = this._commands.filter((cmd) => cmd.guildId !== null);
+	private async RegisterGuildApplicationCommands() {
+		const guildCommands = this._tempCommands.filter((cmd) => cmd.guildId !== null);
 
 		const guildIdsArray = Array.from(guildCommands.values())
 			.map((command) => command.guildId)
@@ -146,60 +179,68 @@ export class CommandManager extends BaseManager {
 		for (const guildId of guildIdsArray) {
 			const guildCmds = guildCommands.filter((cmd) => cmd.guildId === guildId);
 			const guild = this.client.guilds.cache.get(guildId!);
-			if (!guild) continue;
-			void guild.commands.set(guildCmds.map((cmd) => cmd.data)).then((cmds) => {
-				for (const cmd of cmds.values()) {
-					const current = guildCmds.find((c) => c.name === cmd.name);
-					if (current) {
-						this._commands.set(cmd.id, {
-							id: cmd.id,
-							name: current.name,
-							file: current.file,
-							guildId: current.guildId,
-							data: current.data,
-						});
-					}
+			if (!guild) {
+				this.client.logger.error(`Command Handler: -> Guild ${guildId} not found!`);
+				continue;
+			}
+
+			const cmds = await guild.commands.set(guildCmds.map((cmd) => cmd.data));
+
+			for (const cmd of cmds.values()) {
+				const current = guildCmds.find((cc) => cc.name === cmd.name);
+				if (current) {
+					this._commands.set(cmd.id, {
+						id: cmd.id,
+						name: current.name,
+						file: current.file,
+						guildId: current.guildId,
+						data: current.data,
+					});
 				}
+			}
 
-				this.client.logger.info(
-					"Command Handler: -> Successfully registered " +
-						[...cmds].length +
-						" guild commands for " +
-						guild.name +
-						" (" +
-						guild.id +
-						")",
-				);
-			});
-		}
-
-		for (const [key, _value] of this._commands) {
-			if (key?.startsWith("n:")) this._commands.delete(key);
+			this.client.logger.info(
+				"Command Handler: -> Successfully registered " +
+					[...cmds].length +
+					" guild commands for " +
+					guild.name +
+					" (" +
+					guild.id +
+					")",
+			);
 		}
 	}
 
-	private async HandleApplicationCommands(i: CommandInteraction) {
+	private async RegisterApplicationCommands() {
+		await this.RegisterGlobalApplicationCommands();
+		await this.RegisterGuildApplicationCommands();
+	}
+
+	private async HandleApplicationCommands(interaction: CommandInteraction) {
 		this.client.logger.info(
-			`${i.guild?.name} (${i.guild?.id}) > ${i.member?.user.username} (${i.member?.user.id}) > /${i.commandName} (${i.commandId})`,
+			`${interaction.guild?.name} (${interaction.guild?.id}) > ${interaction.member?.user.username} (${interaction.member?.user.id}) > /${interaction.commandName} (${interaction.commandId})`,
 		);
 		try {
-			const file = this._commands.get(i.commandId);
+			const file = this._commands.get(interaction.commandId);
 			if (!file) return;
-			const cmd = container.resolve<MessageCommandInterface | SlashCommandInterface | UserCommandInterface>(
-				(await import(file.file)).default.default,
-			);
-			if (!i.inCachedGuild()) return;
-			await cmd.execute(i as never, this.client);
+
+			const container = new BaseContainer<HandlerClient>(this.client);
+			const context = new Context<HandlerClient>(container);
+			const cmd = await checkAndInstantiateCommand(file.file, context);
+			if (!cmd) return;
+
+			if (!interaction.inCachedGuild()) return;
+			await cmd.execute!(interaction as never);
 		} catch (error) {
 			this.client.logger.error(error as Error);
 			try {
-				await i.reply({
+				await interaction.reply({
 					content: "There was an error while executing this command!",
 					ephemeral: true,
 				});
 			} catch {
 				try {
-					await i.editReply({
+					await interaction.editReply({
 						content: "There was an error while executing this command!",
 					});
 				} catch (error) {
@@ -209,21 +250,26 @@ export class CommandManager extends BaseManager {
 		}
 	}
 
-	private async HandleAutocomplete(i: AutocompleteInteraction) {
+	private async HandleAutocomplete(interaction: AutocompleteInteraction) {
 		try {
-			const file = this._commands.get(i.commandId);
+			const file = this._commands.get(interaction.commandId);
 			if (!file) return;
-			const cmd = container.resolve<SlashCommandInterface>((await import(file.file)).default.default);
-			if (!i.inCachedGuild()) return;
+
+			const container = new BaseContainer<HandlerClient>(this.client);
+			const context = new Context<HandlerClient>(container);
+			const cmd = (await checkAndInstantiateCommand(file.file, context)) as SlashCommand<HandlerClient>;
+			if (!cmd) return;
+
+			if (!interaction.inCachedGuild()) return;
 			if (!cmd.autocomplete) return;
-			await cmd.autocomplete(i, this.client);
+			await cmd.autocomplete(interaction);
 		} catch (error) {
 			this.client.logger.error(error as Error);
 			try {
-				await i.respond([]);
+				await interaction.respond([]);
 			} catch {
 				try {
-					await i.respond([]);
+					await interaction.respond([]);
 				} catch (error) {
 					this.client.logger.error(error as Error);
 				}

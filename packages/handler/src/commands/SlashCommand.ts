@@ -1,14 +1,27 @@
 import type {
 	AutocompleteInteraction,
+	Awaitable,
 	ChatInputApplicationCommandData,
 	ChatInputCommandInteraction,
-	Snowflake,
 } from "discord.js";
+import type { Context } from "../BaseContainer";
 import type { HandlerClient } from "../HandlerClient";
+import type { CommandOptions } from "./Command";
+import { Command } from "./Command";
 
-export interface SlashCommandInterface {
-	data: ChatInputApplicationCommandData;
-	guildIds?: Snowflake[];
-	execute: (interaction: ChatInputCommandInteraction<`cached`>, client: HandlerClient) => unknown | Promise<unknown>;
-	autocomplete?: (interaction: AutocompleteInteraction, client: HandlerClient) => unknown | Promise<unknown>;
+export class SlashCommand<Client extends HandlerClient> extends Command<Client> {
+	public declare data: ChatInputApplicationCommandData;
+
+	public constructor(context: Context<Client>, options: SlashCommandOptions) {
+		super(context, options);
+		this.data = options.data;
+	}
+
+	public override execute?(interaction: ChatInputCommandInteraction<`cached`>): Awaitable<unknown>;
+
+	public autocomplete?(interaction: AutocompleteInteraction): Awaitable<unknown>;
 }
+
+export type SlashCommandOptions = CommandOptions & {
+	data: ChatInputApplicationCommandData;
+};
