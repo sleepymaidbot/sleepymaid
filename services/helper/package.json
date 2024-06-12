@@ -7,7 +7,8 @@
 	"scripts": {
 		"build": "pnpm exec rimraf dist/ && pnpm exec tsc",
 		"check": "pnpm tsc --noEmit --pretty --skipLibCheck",
-		"start": "pnpm build && node --trace-warnings -r source-map-support/register dist/index.js"
+		"start": "pnpm build && node --trace-warnings -r source-map-support/register dist/index.js",
+		"dev": "pnpm build && node --trace-warnings -r source-map-support/register --env-file .env dist/index.js"
 	},
 	"author": "Ecorte",
 	"license": "MIT",
@@ -26,6 +27,7 @@
 		"@sleepymaid/shared": "workspace:^",
 		"discord.js": "^14.15.3",
 		"drizzle-orm": "^0.31.1",
+		"gamedig": "^5.0.0",
 		"i18next": "^23.11.5",
 		"i18next-fs-backend": "^2.3.1",
 		"path": "0.12.7",
