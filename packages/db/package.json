@@ -27,10 +27,10 @@
 	"license": "MIT",
 	"devDependencies": {
 		"@favware/cliff-jumper": "^3.0.3",
-		"@swc/core": "^1.5.25",
+		"@swc/core": "^1.5.28",
 		"@types/node": "^20.14.2",
 		"@types/pg": "^8.11.6",
-		"drizzle-kit": "^0.22.4",
+		"drizzle-kit": "^0.22.7",
 		"next-auth": "^4.24.7",
 		"rimraf": "^5.0.7",
 		"source-map-support": "0.5.21",
@@ -39,7 +39,7 @@
 	},
 	"dependencies": {
 		"@paralleldrive/cuid2": "^2.2.2",
-		"drizzle-orm": "^0.31.1",
+		"drizzle-orm": "^0.31.2",
 		"pg": "^8.12.0",
 		"postgres": "^3.4.4"
 	}

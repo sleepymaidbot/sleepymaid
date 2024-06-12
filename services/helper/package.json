@@ -26,7 +26,7 @@
 		"@sleepymaid/logger": "workspace:^",
 		"@sleepymaid/shared": "workspace:^",
 		"discord.js": "^14.15.3",
-		"drizzle-orm": "^0.31.1",
+		"drizzle-orm": "^0.31.2",
 		"gamedig": "^5.0.0",
 		"i18next": "^23.11.5",
 		"i18next-fs-backend": "^2.3.1",
