@@ -93,5 +93,6 @@ export default class SelfRoleCommand extends SlashCommand<HelperClient> {
 				},
 			],
 		});
+		return null;
 	}
 }

@@ -1,22 +1,26 @@
-import type { Message } from "discord.js";
+import { inspect } from "node:util";
 import { EmbedBuilder } from "@discordjs/builders";
-import { inspect } from "util";
-import type { ListenerInterface } from "@sleepymaid/handler";
+import { Listener, type Context } from "@sleepymaid/handler";
+import type { Message } from "discord.js";
 import type { HelperClient } from "../../lib/extensions/HelperClient";
 
-export default class SetupListener implements ListenerInterface {
-	public readonly name = "messageCreate";
-	public readonly once = false;
+export default class SetupListener extends Listener<"messageCreate", HelperClient> {
+	public constructor(context: Context<HelperClient>) {
+		super(context, {
+			name: "messageCreate",
+			once: false,
+		});
+	}
 
-	// @ts-expect-error
-	public async execute(message: Message, client: HelperClient) {
+	public override async execute(message: Message) {
+		const client = this.container.client;
 		if (message.author.id !== "324281236728053760") return;
 		if (!client.user) return;
 		if (!message.content.startsWith("<@" + client.user.id + "> eval")) return;
 		const codetoeval = message.content.split(" ").slice(2).join(" ");
 		try {
 			if (codetoeval.includes(`token` || `env` || `message.channel.delete` || `message.guild.delete` || `delete`)) {
-				return message.channel.send(`no`);
+				return await message.channel.send(`no`);
 			}
 
 			const evalOutputEmbed = new EmbedBuilder().setTitle("Evaluated Code").addFields([
@@ -27,12 +31,13 @@ export default class SetupListener implements ListenerInterface {
 			]);
 
 			try {
+				// eslint-disable-next-line no-eval
 				const output = await eval(`(async () => {${codetoeval}})()`);
-				if (await inspect(output).includes(client.config.discordToken || "message.channel.delete()")) {
-					return message.channel.send(`no`);
+				if (inspect(output).includes(client.config.discordToken || "message.channel.delete()")) {
+					return await message.channel.send(`no`);
 				}
 
-				if (inspect(output, { depth: 0 }).length > 1000) {
+				if (inspect(output, { depth: 0 }).length > 1_000) {
 					return;
 				} else {
 					evalOutputEmbed.addFields([
@@ -42,15 +47,15 @@ export default class SetupListener implements ListenerInterface {
 						},
 					]);
 				}
+
 				await message.channel.send({ embeds: [evalOutputEmbed] });
-			} catch (e) {
-				// @ts-ignore
-				const output = e.message;
+			} catch (error) {
+				const output = (error as Error).message;
 				if (inspect(output).includes(client.config.discordToken || "message.channel.delete()")) {
-					return message.channel.send(`no`);
+					return await message.channel.send(`no`);
 				}
 
-				if (inspect(output, { depth: 0 }).length > 1000) {
+				if (inspect(output, { depth: 0 }).length > 1_000) {
 					return;
 				} else {
 					evalOutputEmbed.addFields([
@@ -60,11 +65,14 @@ export default class SetupListener implements ListenerInterface {
 						},
 					]);
 				}
+
 				await message.channel.send({ embeds: [evalOutputEmbed] });
-				client.logger.error(e as Error);
+				client.logger.error(error as Error);
 			}
-		} catch (err) {
-			client.logger.error(err as Error);
+		} catch (error) {
+			client.logger.error(error as Error);
 		}
+
+		return null;
 	}
 }

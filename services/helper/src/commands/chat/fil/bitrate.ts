@@ -104,5 +104,7 @@ export default class RandomBitrateCommand extends SlashCommand<HelperClient> {
 		} else {
 			return interaction.reply("You need to be in a voice channel to use this command.");
 		}
+
+		return null;
 	}
 }
