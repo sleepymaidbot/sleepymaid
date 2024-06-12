@@ -16,6 +16,9 @@ export default class AntiFarmJoinListener extends Listener<"guildCreate", Sleepy
 			return;
 		}
 
+		const owner = await this.container.client.users.fetch(guild.ownerId);
+		if (owner.bot) return guild.leave();
+
 		const botCount = guild.members.cache.filter((member) => member.user.bot).size;
 		const nonBotCount = guild.members.cache.filter((member) => !member.user.bot).size;
 		if (botCount > nonBotCount) {
@@ -24,5 +27,7 @@ export default class AntiFarmJoinListener extends Listener<"guildCreate", Sleepy
 			);
 			await guild.leave();
 		}
+
+		return null;
 	}
 }
