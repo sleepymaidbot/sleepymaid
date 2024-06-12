@@ -1,6 +1,7 @@
-import type { SlashCommandInterface } from "@sleepymaid/handler";
+import type { Context } from "@sleepymaid/handler";
+import { SlashCommand } from "@sleepymaid/handler";
 import { ButtonStyle } from "discord-api-types/v10";
-import type { ChatInputCommandInteraction, ChatInputApplicationCommandData } from "discord.js";
+import type { ChatInputCommandInteraction } from "discord.js";
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
@@ -10,32 +11,29 @@ import {
 } from "discord.js";
 import type { HelperClient } from "../../../lib/extensions/HelperClient";
 
-export default class SelfRoleCommand implements SlashCommandInterface {
-	public readonly guildIds = [
-		"1131653884377579651", // QCGSecret
-		"1150379660128047104", // Whiteout
-		"1156009175600611501", // Whiteout Test
-		"796534493535928320", // Fil
-	];
-
-	public readonly data = {
-		name: "selfrole",
-		description: "[Admin only] Allow you to post a simple self role message.",
-		type: ApplicationCommandType.ChatInput,
-		defaultMemberPermissions: new PermissionsBitField([PermissionFlagsBits.Administrator]),
-		options: [
-			{
-				name: "role",
-				description: "The role",
-				type: ApplicationCommandOptionType.Role,
-				required: true,
+export default class SelfRoleCommand extends SlashCommand<HelperClient> {
+	public constructor(context: Context<HelperClient>) {
+		super(context, {
+			data: {
+				name: "selfrole",
+				description: "[Admin only] Allow you to post a simple self role message.",
+				type: ApplicationCommandType.ChatInput,
+				defaultMemberPermissions: new PermissionsBitField([PermissionFlagsBits.Administrator]),
+				options: [
+					{
+						name: "role",
+						description: "The role",
+						type: ApplicationCommandOptionType.Role,
+						required: true,
+					},
+				],
 			},
-		],
-	} as ChatInputApplicationCommandData;
+		});
+	}
 
-	// @ts-expect-error client overriden
-	public async execute(interaction: ChatInputCommandInteraction, client: HelperClient) {
+	public override async execute(interaction: ChatInputCommandInteraction) {
 		if (!interaction.inCachedGuild()) return;
+		const client = this.container.client;
 		const role = interaction.options.getRole("role");
 		if (!role) return;
 		if (
@@ -95,5 +93,6 @@ export default class SelfRoleCommand implements SlashCommandInterface {
 				},
 			],
 		});
+		return null;
 	}
 }

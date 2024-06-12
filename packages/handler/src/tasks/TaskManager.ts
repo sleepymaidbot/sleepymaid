@@ -1,12 +1,37 @@
-import "reflect-metadata";
 import { findFilesRecursively } from "@sapphire/node-utilities";
-import { container } from "tsyringe";
-import type { TaskInterface } from "./Task";
-import { BaseManager } from "../BaseManager";
 import { schedule } from "node-cron";
+import { BaseContainer, Context } from "../BaseContainer";
+import { BaseManager } from "../BaseManager";
+import type { HandlerClient } from "../HandlerClient";
+import { Task } from "./Task";
 
-export interface TaskManagerStartAllOptionsType {
+export type TaskManagerStartAllOptionsType = {
 	folder: string;
+};
+
+async function checkAndInstantiateTask(
+	file: string,
+	context: Context<HandlerClient>,
+): Promise<Task<HandlerClient> | null> {
+	try {
+		const importedModule = await import(file);
+		if (importedModule.default) {
+			const nestedDefault = importedModule.default.default;
+			if (typeof nestedDefault === "function") {
+				if (nestedDefault.prototype instanceof Task) {
+					return new nestedDefault(context);
+				} else {
+					return null;
+				}
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	} catch {
+		return null;
+	}
 }
 
 export class TaskManager extends BaseManager {
@@ -17,16 +42,23 @@ export class TaskManager extends BaseManager {
 	public async loadTasks(folderPath: string): Promise<void> {
 		let count = 0;
 		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith(".js"))) {
-			const task = container.resolve<TaskInterface>((await import(file)).default.default);
+			const container = new BaseContainer<HandlerClient>(this.client);
+			const context = new Context<HandlerClient>(container);
+
+			const task = await checkAndInstantiateTask(file, context);
+
+			if (!task) continue;
+
 			try {
-				schedule(task.interval, () => task.execute(this.client));
+				schedule(task.interval, () => task.execute!());
 			} catch (error) {
 				this.client.logger.error(error as Error);
 			}
+
 			count++;
 			this.client.logger.info(`Task handler: -> Loaded task -> ${file?.split("/")?.pop()?.split(".")[0]}`);
 		}
-		this.client.logger.info(`
-			Task handler: -> Loaded ${count} tasks`);
+
+		this.client.logger.info(`Task handler: -> Loaded ${count} tasks`);
 	}
 }

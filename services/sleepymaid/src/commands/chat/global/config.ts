@@ -1,26 +1,25 @@
 import "reflect-metadata";
-import type { SlashCommandInterface } from "@sleepymaid/handler";
-import { ChatInputApplicationCommandData, ChatInputCommandInteraction, PermissionsBitField } from "discord.js";
-import { container, DependencyContainer } from "tsyringe";
+import { guildsSettings } from "@sleepymaid/db";
+import type { Context } from "@sleepymaid/handler";
+import { SlashCommand } from "@sleepymaid/handler";
+import { getLocalizedProp } from "@sleepymaid/shared";
+import type { APIEmbed } from "discord-api-types/v10";
+import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from "discord-api-types/v10";
+import type { ChatInputCommandInteraction } from "discord.js";
+import { PermissionsBitField } from "discord.js";
+import { eq } from "drizzle-orm";
+import i18next from "i18next";
+import type { DependencyContainer } from "tsyringe";
+import { container } from "tsyringe";
 import { SleepyMaidClient } from "../../../lib/extensions/SleepyMaidClient";
 import { configManager, SpecialRoleType } from "../../../lib/managers/global/configManager";
-import {
-	APIEmbed,
-	ApplicationCommandOptionType,
-	ApplicationCommandType,
-	PermissionFlagsBits,
-} from "discord-api-types/v10";
-import { getLocalizedProp } from "@sleepymaid/shared";
-import i18next from "i18next";
-import { guildsSettings } from "@sleepymaid/db";
-import { eq } from "drizzle-orm";
 
-const getBaseEmbed = (i: ChatInputCommandInteraction<"cached">): APIEmbed => {
+const getBaseEmbed = (interaction: ChatInputCommandInteraction<"cached">): APIEmbed => {
 	return {
-		color: 3553599,
+		color: 3_553_599,
 		author: {
-			name: i.member.user.tag,
-			icon_url: i.member.user.avatarURL() ?? "",
+			name: interaction.member.user.tag,
+			icon_url: interaction.member.user.avatarURL() ?? "",
 		},
 		timestamp: new Date(Date.now()).toISOString(),
 	};
@@ -31,100 +30,105 @@ function removeRoleFromArray(array: string[], roleId: string) {
 	if (index > -1) {
 		array.splice(index, 1);
 	}
+
 	return array;
 }
 
-export default class ConfigCommand implements SlashCommandInterface {
-	public readonly data = {
-		...getLocalizedProp("name", "commands.config.name"),
-		...getLocalizedProp("description", "commands.config.description"),
-		type: ApplicationCommandType.ChatInput,
-		defaultMemberPermissions: new PermissionsBitField([PermissionFlagsBits.Administrator]),
-		dmPermission: false,
-		options: [
-			{
-				...getLocalizedProp("name", "commands.config.admin-role.name"),
-				...getLocalizedProp("description", "commands.config.admin-role.description"),
-				type: ApplicationCommandOptionType.SubcommandGroup,
+export default class ConfigCommand extends SlashCommand<SleepyMaidClient> {
+	public constructor(context: Context<SleepyMaidClient>) {
+		super(context, {
+			data: {
+				...getLocalizedProp("name", "commands.config.name"),
+				...getLocalizedProp("description", "commands.config.description"),
+				type: ApplicationCommandType.ChatInput,
+				defaultMemberPermissions: new PermissionsBitField([PermissionFlagsBits.Administrator]),
+				dmPermission: false,
 				options: [
 					{
-						...getLocalizedProp("name", "commands.config.admin-role.add.name"),
-						...getLocalizedProp("description", "commands.config.admin-role.add.description"),
-						type: ApplicationCommandOptionType.Subcommand,
+						...getLocalizedProp("name", "commands.config.admin-role.name"),
+						...getLocalizedProp("description", "commands.config.admin-role.description"),
+						type: ApplicationCommandOptionType.SubcommandGroup,
 						options: [
 							{
-								...getLocalizedProp("name", "commands.config.admin-role.add.role.name"),
-								...getLocalizedProp("description", "commands.config.admin-role.add.role.description"),
-								type: ApplicationCommandOptionType.Role,
-								required: true,
+								...getLocalizedProp("name", "commands.config.admin-role.add.name"),
+								...getLocalizedProp("description", "commands.config.admin-role.add.description"),
+								type: ApplicationCommandOptionType.Subcommand,
+								options: [
+									{
+										...getLocalizedProp("name", "commands.config.admin-role.add.role.name"),
+										...getLocalizedProp("description", "commands.config.admin-role.add.role.description"),
+										type: ApplicationCommandOptionType.Role,
+										required: true,
+									},
+								],
+							},
+							{
+								...getLocalizedProp("name", "commands.config.admin-role.remove.name"),
+								...getLocalizedProp("description", "commands.config.admin-role.remove.description"),
+								type: ApplicationCommandOptionType.Subcommand,
+								options: [
+									{
+										...getLocalizedProp("name", "commands.config.admin-role.remove.role.name"),
+										...getLocalizedProp("description", "commands.config.admin-role.remove.role.description"),
+										type: ApplicationCommandOptionType.Role,
+										required: true,
+									},
+								],
+							},
+							{
+								...getLocalizedProp("name", "commands.config.admin-role.list.name"),
+								...getLocalizedProp("description", "commands.config.admin-role.list.description"),
+								type: ApplicationCommandOptionType.Subcommand,
 							},
 						],
 					},
 					{
-						...getLocalizedProp("name", "commands.config.admin-role.remove.name"),
-						...getLocalizedProp("description", "commands.config.admin-role.remove.description"),
-						type: ApplicationCommandOptionType.Subcommand,
+						...getLocalizedProp("name", "commands.config.mod-role.name"),
+						...getLocalizedProp("description", "commands.config.mod-role.description"),
+						type: ApplicationCommandOptionType.SubcommandGroup,
 						options: [
 							{
-								...getLocalizedProp("name", "commands.config.admin-role.remove.role.name"),
-								...getLocalizedProp("description", "commands.config.admin-role.remove.role.description"),
-								type: ApplicationCommandOptionType.Role,
-								required: true,
+								...getLocalizedProp("name", "commands.config.mod-role.add.name"),
+								...getLocalizedProp("description", "commands.config.mod-role.add.description"),
+								type: ApplicationCommandOptionType.Subcommand,
+								options: [
+									{
+										...getLocalizedProp("name", "commands.config.mod-role.add.role.name"),
+										...getLocalizedProp("description", "commands.config.mod-role.add.role.description"),
+										type: ApplicationCommandOptionType.Role,
+										required: true,
+									},
+								],
+							},
+							{
+								...getLocalizedProp("name", "commands.config.mod-role.remove.name"),
+								...getLocalizedProp("description", "commands.config.mod-role.remove.description"),
+								type: ApplicationCommandOptionType.Subcommand,
+								options: [
+									{
+										...getLocalizedProp("name", "commands.config.mod-role.remove.role.name"),
+										...getLocalizedProp("description", "commands.config.mod-role.remove.role.description"),
+										type: ApplicationCommandOptionType.Role,
+										required: true,
+									},
+								],
+							},
+							{
+								...getLocalizedProp("name", "commands.config.mod-role.list.name"),
+								...getLocalizedProp("description", "commands.config.mod-role.list.description"),
+								type: ApplicationCommandOptionType.Subcommand,
 							},
 						],
-					},
-					{
-						...getLocalizedProp("name", "commands.config.admin-role.list.name"),
-						...getLocalizedProp("description", "commands.config.admin-role.list.description"),
-						type: ApplicationCommandOptionType.Subcommand,
 					},
 				],
 			},
-			{
-				...getLocalizedProp("name", "commands.config.mod-role.name"),
-				...getLocalizedProp("description", "commands.config.mod-role.description"),
-				type: ApplicationCommandOptionType.SubcommandGroup,
-				options: [
-					{
-						...getLocalizedProp("name", "commands.config.mod-role.add.name"),
-						...getLocalizedProp("description", "commands.config.mod-role.add.description"),
-						type: ApplicationCommandOptionType.Subcommand,
-						options: [
-							{
-								...getLocalizedProp("name", "commands.config.mod-role.add.role.name"),
-								...getLocalizedProp("description", "commands.config.mod-role.add.role.description"),
-								type: ApplicationCommandOptionType.Role,
-								required: true,
-							},
-						],
-					},
-					{
-						...getLocalizedProp("name", "commands.config.mod-role.remove.name"),
-						...getLocalizedProp("description", "commands.config.mod-role.remove.description"),
-						type: ApplicationCommandOptionType.Subcommand,
-						options: [
-							{
-								...getLocalizedProp("name", "commands.config.mod-role.remove.role.name"),
-								...getLocalizedProp("description", "commands.config.mod-role.remove.role.description"),
-								type: ApplicationCommandOptionType.Role,
-								required: true,
-							},
-						],
-					},
-					{
-						...getLocalizedProp("name", "commands.config.mod-role.list.name"),
-						...getLocalizedProp("description", "commands.config.mod-role.list.description"),
-						type: ApplicationCommandOptionType.Subcommand,
-					},
-				],
-			},
-		],
-	} as ChatInputApplicationCommandData;
+		});
+	}
 
-	// @ts-ignore
-	public async execute(interaction: ChatInputCommandInteraction, client: SleepyMaidClient) {
+	public override async execute(interaction: ChatInputCommandInteraction) {
 		if (!interaction.inCachedGuild()) return;
 		if (!interaction.guild) return;
+		const client = this.container.client;
 		await interaction.deferReply();
 		const subcommandGroup = interaction.options.getSubcommandGroup();
 		const subcommand = interaction.options.getSubcommand();
@@ -149,6 +153,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 					action = SpecialRoleType.mod;
 					cleanAction = "mod-role";
 				}
+
 				if (action === undefined || cleanAction === undefined) return;
 				const c: DependencyContainer = container;
 				c.register<SleepyMaidClient>(SleepyMaidClient, { useValue: client });
@@ -157,7 +162,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 						const roleId = interaction.options.getRole("role")!.id;
 						if (action === SpecialRoleType.admin) {
 							if (adminRoles.includes(roleId)) {
-								return await interaction.editReply({
+								return interaction.editReply({
 									embeds: [
 										{
 											...getBaseEmbed(interaction),
@@ -171,7 +176,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 									],
 								});
 							} else if (modRoles.includes(roleId)) {
-								return await interaction.editReply({
+								return interaction.editReply({
 									embeds: [
 										{
 											...getBaseEmbed(interaction),
@@ -187,7 +192,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 							}
 						} else if (action === SpecialRoleType.mod) {
 							if (modRoles.includes(roleId)) {
-								return await interaction.editReply({
+								return interaction.editReply({
 									embeds: [
 										{
 											...getBaseEmbed(interaction),
@@ -201,7 +206,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 									],
 								});
 							} else if (adminRoles.includes(roleId)) {
-								return await interaction.editReply({
+								return interaction.editReply({
 									embeds: [
 										{
 											...getBaseEmbed(interaction),
@@ -218,7 +223,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 						}
 
 						await c.resolve(configManager).addSpecialRole(interaction.guild.id, roleId, action);
-						return await interaction.editReply({
+						return interaction.editReply({
 							embeds: [
 								{
 									...getBaseEmbed(interaction),
@@ -232,10 +237,11 @@ export default class ConfigCommand implements SlashCommandInterface {
 							],
 						});
 					}
+
 					case "remove": {
 						const roleId = interaction.options.getRole("role")!.id;
 						if (action === SpecialRoleType.admin && !adminRoles.includes(roleId)) {
-							return await interaction.editReply({
+							return interaction.editReply({
 								embeds: [
 									{
 										...getBaseEmbed(interaction),
@@ -249,7 +255,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 								],
 							});
 						} else if (action === SpecialRoleType.mod && !modRoles.includes(roleId)) {
-							return await interaction.editReply({
+							return interaction.editReply({
 								embeds: [
 									{
 										...getBaseEmbed(interaction),
@@ -265,7 +271,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 						}
 
 						await c.resolve(configManager).removeSpecialRole(interaction.guild.id, roleId, action);
-						return await interaction.editReply({
+						return interaction.editReply({
 							embeds: [
 								{
 									...getBaseEmbed(interaction),
@@ -279,6 +285,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 							],
 						});
 					}
+
 					case "list": {
 						let roles: string[] = [];
 						if (action === SpecialRoleType.admin) {
@@ -286,6 +293,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 						} else if (action === SpecialRoleType.mod) {
 							roles = [...modRoles];
 						}
+
 						const guildRoles = await interaction.guild.roles.fetch();
 						for (const roleId of roles) {
 							if (!guildRoles.has(roleId)) {
@@ -303,6 +311,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 								}
 							}
 						}
+
 						await interaction.editReply({
 							embeds: [
 								{
@@ -318,7 +327,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 					}
 				}
 			} else {
-				return await interaction.editReply({
+				return interaction.editReply({
 					embeds: [
 						{
 							...getBaseEmbed(interaction),
@@ -332,5 +341,7 @@ export default class ConfigCommand implements SlashCommandInterface {
 				});
 			}
 		}
+
+		return null;
 	}
 }

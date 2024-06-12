@@ -1,25 +1,21 @@
-import type { SlashCommandInterface } from "@sleepymaid/handler";
+import type { Context } from "@sleepymaid/handler";
+import { SlashCommand } from "@sleepymaid/handler";
+import type { MessagesType } from "@sleepymaid/shared";
+import { setupInteraction, getChoices } from "@sleepymaid/shared";
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ButtonStyle,
 	PermissionFlagsBits,
 } from "discord-api-types/v10";
-import {
-	ChatInputCommandInteraction,
-	ChatInputApplicationCommandData,
-	EmbedBuilder,
-	resolveColor,
-	ActionRowBuilder,
-	ButtonBuilder,
-} from "discord.js";
+import type { ChatInputCommandInteraction } from "discord.js";
+import { EmbedBuilder, resolveColor, ActionRowBuilder, ButtonBuilder } from "discord.js";
 import type { HelperClient } from "../../../lib/extensions/HelperClient";
-import { MessagesType, setupInteraction, getChoices } from "@sleepymaid/shared";
 
 const messages: MessagesType = {
 	setupBienvenue: {
 		fancyName: "Bienvenue",
-		function: async () => {
+		function: () => {
 			// Message 1
 			const embed1 = new EmbedBuilder()
 				.setTitle(":otter: Bienvenue sur Le monde d'Ecorte")
@@ -113,7 +109,7 @@ const messages: MessagesType = {
 					.setEmoji({ name: "✅" }),
 			]);
 
-			const r = [
+			return [
 				{
 					embeds: [embed1, embed2],
 				},
@@ -132,39 +128,40 @@ const messages: MessagesType = {
 					components: [row2],
 				},
 			];
-
-			return r;
 		},
 	},
 };
 
-export default class LmeSetupCommand implements SlashCommandInterface {
-	public readonly guildIds = ["324284116021542922"];
-	public readonly data = {
-		name: "lmesetup",
-		description: "[Admin only] Allow you to post pre-made messages.",
-		type: ApplicationCommandType.ChatInput,
-		options: [
-			{
-				name: "name",
-				description: "The name of the command",
-				type: ApplicationCommandOptionType.String,
-				choices: getChoices(messages),
-				required: true,
+export default class LmeSetupCommand extends SlashCommand<HelperClient> {
+	public constructor(context: Context<HelperClient>) {
+		super(context, {
+			guildIds: ["324284116021542922"],
+			data: {
+				name: "lmesetup",
+				description: "[Admin only] Allow you to post pre-made messages.",
+				type: ApplicationCommandType.ChatInput,
+				options: [
+					{
+						name: "name",
+						description: "The name of the command",
+						type: ApplicationCommandOptionType.String,
+						choices: getChoices(messages),
+						required: true,
+					},
+					{
+						name: "message_id",
+						description: "The id of the message you want to edit",
+						type: ApplicationCommandOptionType.String,
+						required: false,
+					},
+				],
 			},
-			{
-				name: "message_id",
-				description: "The id of the message you want to edit",
-				type: ApplicationCommandOptionType.String,
-				required: false,
-			},
-		],
-	} as ChatInputApplicationCommandData;
+		});
+	}
 
-	// @ts-ignore
-	public async execute(interaction: ChatInputCommandInteraction, client: HelperClient) {
+	public override async execute(interaction: ChatInputCommandInteraction) {
 		if (!interaction.inCachedGuild()) return;
 		if (!interaction.memberPermissions.has(PermissionFlagsBits.Administrator)) return;
-		await setupInteraction(interaction, client, messages);
+		await setupInteraction(interaction, this.container.client, messages);
 	}
 }

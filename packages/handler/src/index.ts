@@ -1,5 +1,7 @@
 export * from "./HandlerClient";
 
+export * from "./BaseContainer";
+
 export * from "./BaseLogger";
 
 // ./commands

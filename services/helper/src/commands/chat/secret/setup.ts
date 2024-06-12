@@ -1,16 +1,16 @@
-import type { SlashCommandInterface } from "@sleepymaid/handler";
+import type { Context } from "@sleepymaid/handler";
+import { SlashCommand } from "@sleepymaid/handler";
 import type { MessagesType } from "@sleepymaid/shared";
 import { setupInteraction, getChoices } from "@sleepymaid/shared";
 import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from "discord-api-types/v10";
-import type { ChatInputCommandInteraction, ChatInputApplicationCommandData } from "discord.js";
+import type { ChatInputCommandInteraction } from "discord.js";
 import { PermissionsBitField } from "discord.js";
 import type { HelperClient } from "../../../lib/extensions/HelperClient";
 
 const messages: MessagesType = {
 	setupWelcome: {
 		fancyName: "Welcome",
-		// eslint-disable-next-line @typescript-eslint/require-await
-		function: async () => {
+		function: () => {
 			const msg1 = `# QCG Secret
 This server is made to help and contribute to the completion of the secret on the Québec Games servers.
 ## Rules
@@ -42,36 +42,37 @@ Québec Games Discord » <https://discord.gg/qcgames>
 	},
 };
 
-export default class QCGSecretSetupCommand implements SlashCommandInterface {
-	public readonly guildIds = ["1131653884377579651"];
-
-	public readonly data = {
-		name: "qcgssetup",
-		description: "[Admin only] Allow you to post pre-made messages.",
-		type: ApplicationCommandType.ChatInput,
-		defaultMemberPermissions: new PermissionsBitField([PermissionFlagsBits.Administrator]),
-		options: [
-			{
-				name: "name",
-				description: "The name of the command",
-				type: ApplicationCommandOptionType.String,
-				choices: getChoices(messages),
-				required: true,
+export default class QCGSecretSetupCommand extends SlashCommand<HelperClient> {
+	public constructor(context: Context<HelperClient>) {
+		super(context, {
+			guildIds: ["1131653884377579651"],
+			data: {
+				name: "qcgssetup",
+				description: "[Admin only] Allow you to post pre-made messages.",
+				type: ApplicationCommandType.ChatInput,
+				defaultMemberPermissions: new PermissionsBitField([PermissionFlagsBits.Administrator]),
+				options: [
+					{
+						name: "name",
+						description: "The name of the command",
+						type: ApplicationCommandOptionType.String,
+						choices: getChoices(messages),
+						required: true,
+					},
+					{
+						name: "message_id",
+						description: "The id of the message you want to edit",
+						type: ApplicationCommandOptionType.String,
+						required: false,
+					},
+				],
 			},
-			{
-				name: "message_id",
-				description: "The id of the message you want to edit",
-				type: ApplicationCommandOptionType.String,
-				required: false,
-			},
-		],
-	} as ChatInputApplicationCommandData;
+		});
+	}
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-expect-error
-	public async execute(interaction: ChatInputCommandInteraction, client: HelperClient) {
+	public override async execute(interaction: ChatInputCommandInteraction) {
 		if (!interaction.inCachedGuild()) return;
 		if (!interaction.memberPermissions.has(PermissionFlagsBits.Administrator)) return;
-		await setupInteraction(interaction, client, messages);
+		await setupInteraction(interaction, this.container.client, messages);
 	}
 }

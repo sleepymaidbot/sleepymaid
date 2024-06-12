@@ -1,0 +1,35 @@
+{
+	"name": "@sleepymaid/testbot",
+	"version": "0.0.0",
+	"description": "",
+	"private": true,
+	"main": "dist/index.js",
+	"scripts": {
+		"build": "pnpm rimraf dist/ && pnpm tsc",
+		"check": "pnpm tsc --noEmit --pretty --skipLibCheck",
+		"start": "pnpm build && node --trace-warnings -r source-map-support/register dist/index.js",
+		"dev": "pnpm build && node --trace-warnings -r source-map-support/register --env-file .env dist/index.js"
+	},
+	"author": "Ecorte",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/i18next-fs-backend": "^1.1.5",
+		"@types/node": "^20.14.2",
+		"rimraf": "^5.0.7",
+		"source-map-support": "0.5.21",
+		"typescript": "^5.4.5"
+	},
+	"dependencies": {
+		"@sleepymaid/db": "workspace:^",
+		"@sleepymaid/handler": "workspace:^",
+		"@sleepymaid/logger": "workspace:^",
+		"@sleepymaid/shared": "workspace:^",
+		"discord.js": "^14.15.3",
+		"drizzle-orm": "^0.31.1",
+		"i18next": "^23.11.5",
+		"i18next-fs-backend": "^2.3.1",
+		"path": "0.12.7",
+		"reflect-metadata": "^0.2.1",
+		"tsyringe": "^4.8.0"
+	}
+}

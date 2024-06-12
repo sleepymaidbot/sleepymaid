@@ -1,14 +1,21 @@
-import type { MessageCommandInterface } from "@sleepymaid/handler";
+import type { Context } from "@sleepymaid/handler";
+import { MessageCommand } from "@sleepymaid/handler";
 import { getLocalizedProp } from "@sleepymaid/shared";
-import { ApplicationCommandType, MessageContextMenuCommandInteraction } from "discord.js";
+import type { MessageContextMenuCommandInteraction } from "discord.js";
+import { ApplicationCommandType } from "discord.js";
+import type { SleepyMaidClient } from "../../lib/extensions/SleepyMaidClient";
 
-export default class RatioUserCommand implements MessageCommandInterface {
-	public readonly data = {
-		...getLocalizedProp("name", "commands.raw_content.name"),
-		type: ApplicationCommandType.Message,
-	} as const;
+export default class RatioUserCommand extends MessageCommand<SleepyMaidClient> {
+	public constructor(context: Context<SleepyMaidClient>) {
+		super(context, {
+			data: {
+				...getLocalizedProp("name", "commands.raw_content.name"),
+				type: ApplicationCommandType.Message,
+			},
+		});
+	}
 
-	public async execute(interaction: MessageContextMenuCommandInteraction) {
+	public override async execute(interaction: MessageContextMenuCommandInteraction) {
 		await interaction.reply({
 			content: "```" + interaction.targetMessage.content + "```",
 			ephemeral: true,

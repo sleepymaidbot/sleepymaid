@@ -1,12 +1,16 @@
-import type { ListenerInterface } from "@sleepymaid/handler";
+import type { Context } from "@sleepymaid/handler";
+import { Listener } from "@sleepymaid/handler";
 import type { HelperClient } from "../../lib/extensions/HelperClient";
 
-export default class DebugListener implements ListenerInterface {
-	public readonly name = "debug";
-	public readonly once = false;
+export default class DebugListener extends Listener<"debug", HelperClient> {
+	public constructor(context: Context<HelperClient>) {
+		super(context, {
+			name: "debug",
+			once: false,
+		});
+	}
 
-	public async execute(info: string, client: HelperClient) {
-		//if (client.config.nodeEnv === 'dev')
-		client.logger.debug(info);
+	public override execute(info: string) {
+		if (this.container.client.config.nodeEnv === "dev") this.container.logger.debug(info);
 	}
 }

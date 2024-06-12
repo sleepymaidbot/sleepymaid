@@ -1,15 +1,20 @@
 import { ButtonBuilder, ActionRowBuilder, SelectMenuBuilder, SelectMenuOptionBuilder } from "@discordjs/builders";
-import type { ListenerInterface } from "@sleepymaid/handler";
+import type { Context } from "@sleepymaid/handler";
+import { Listener } from "@sleepymaid/handler";
 import { pingRoleIds, colorRoleIds } from "@sleepymaid/shared";
 import { ButtonStyle } from "discord-api-types/v10";
 import type { ButtonInteraction, SelectMenuInteraction } from "discord.js";
+import type { HelperClient } from "../../lib/extensions/HelperClient";
 
-export default class MetahandlerListener implements ListenerInterface {
-	public readonly name = "interactionCreate";
+export default class MetahandlerListener extends Listener<"interactionCreate", HelperClient> {
+	public constructor(context: Context<HelperClient>) {
+		super(context, {
+			name: "interactionCreate",
+			once: false,
+		});
+	}
 
-	public readonly once = false;
-
-	public async execute(interaction: ButtonInteraction | SelectMenuInteraction) {
+	public override async execute(interaction: ButtonInteraction | SelectMenuInteraction) {
 		if (!interaction.customId?.startsWith("lmeMeta")) return;
 		if (!interaction.inCachedGuild()) return;
 		const Ids = interaction.customId.split(":");

@@ -1,28 +1,27 @@
-import type { SlashCommandInterface } from "@sleepymaid/handler";
+import { SlashCommand, type Context } from "@sleepymaid/handler";
 import { getLocalizedProp } from "@sleepymaid/shared";
-import {
-	APIEmbed,
-	ApplicationCommandType,
-	ChatInputApplicationCommandData,
-	ChatInputCommandInteraction,
-	Message,
-} from "discord.js";
+import type { APIEmbed, ChatInputCommandInteraction, Message } from "discord.js";
+import { ApplicationCommandType } from "discord.js";
 import i18next from "i18next";
 import type { SleepyMaidClient } from "../../../lib/extensions/SleepyMaidClient";
 
-export default class PingCommand implements SlashCommandInterface {
-	public readonly data = {
-		...getLocalizedProp("name", "commands.ping.name"),
-		...getLocalizedProp("description", "commands.ping.description"),
-		type: ApplicationCommandType.ChatInput,
-	} as ChatInputApplicationCommandData;
+export default class PingCommand extends SlashCommand<SleepyMaidClient> {
+	public constructor(context: Context<SleepyMaidClient>) {
+		super(context, {
+			data: {
+				...getLocalizedProp("name", "commands.ping.name"),
+				...getLocalizedProp("description", "commands.ping.description"),
+				type: ApplicationCommandType.ChatInput,
+			},
+		});
+	}
 
-	// @ts-ignore
-	public async execute(interaction: ChatInputCommandInteraction, client: SleepyMaidClient) {
+	public override async execute(interaction: ChatInputCommandInteraction) {
 		if (!interaction.inCachedGuild()) return;
+		const client = this.container.client;
 		const timestamp1 = interaction.createdTimestamp;
 		await interaction.reply("Pong!");
-		const timestamp2 = await interaction.fetchReply().then((m) => (m as Message).createdTimestamp);
+		const timestamp2 = await interaction.fetchReply().then((message) => (message as Message).createdTimestamp);
 		const botLatency = `\`\`\`\n ${Math.floor(timestamp2 - timestamp1)}ms \`\`\``;
 		const apiLatency = `\`\`\`\n ${Math.round(client.ws.ping)}ms \`\`\``;
 		const embed: APIEmbed = {
