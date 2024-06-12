@@ -1,11 +1,16 @@
-import type { ListenerInterface } from "@sleepymaid/handler";
+import { Listener, type Context } from "@sleepymaid/handler";
 import type { WatcherClient } from "../../lib/extensions/WatcherClient";
 
-export default class ReadyListener implements ListenerInterface {
-	public readonly name = "ready";
-	public readonly once = true;
+export default class ReadyListener extends Listener<"ready", WatcherClient> {
+	public constructor(context: Context<WatcherClient>) {
+		super(context, {
+			name: "ready",
+			once: true,
+		});
+	}
 
-	public async execute(client: WatcherClient) {
+	public override async execute() {
+		const client = this.container.client;
 		client.logger.info(`Logged in as ${client.user!.tag} | ${client.guilds.cache.size} servers`);
 		const guilds = await client.guilds.fetch();
 		for (const guild of guilds.values()) {

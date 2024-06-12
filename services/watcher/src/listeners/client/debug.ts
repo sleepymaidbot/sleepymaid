@@ -1,12 +1,16 @@
-import type { ListenerInterface } from "@sleepymaid/handler";
+import { Listener, type Context } from "@sleepymaid/handler";
 import type { WatcherClient } from "../../lib/extensions/WatcherClient";
 
-export default class DebugListener implements ListenerInterface {
-	public readonly name = "debug";
-	public readonly once = false;
+export default class DebugListener extends Listener<"debug", WatcherClient> {
+	public constructor(context: Context<WatcherClient>) {
+		super(context, {
+			name: "debug",
+			once: true,
+		});
+	}
 
-	public async execute(info: string, client: WatcherClient) {
+	public override async execute(info: string) {
 		//if (client.config.nodeEnv === 'dev')
-		client.logger.debug(info);
+		this.container.client.logger.debug(info);
 	}
 }

@@ -1,11 +1,7 @@
 import { logChannel } from "@sleepymaid/db";
-import type { SlashCommandInterface } from "@sleepymaid/handler";
-import type {
-	APISelectMenuOption,
-	ChatInputApplicationCommandData,
-	ChatInputCommandInteraction,
-	Webhook,
-} from "discord.js";
+import type { Context } from "@sleepymaid/handler";
+import { SlashCommand } from "@sleepymaid/handler";
+import type { APISelectMenuOption, ChatInputCommandInteraction, Webhook } from "discord.js";
 import {
 	ApplicationCommandOptionType,
 	ButtonStyle,
@@ -124,24 +120,28 @@ export const subscribedLogsSelectOptions = {
 	],
 };
 
-export default class ConfigCommand implements SlashCommandInterface {
-	public readonly data = {
-		name: "configchannel",
-		description: "Configure a channel for the bot to send messages to.",
-		defaultMemberPermissions: new PermissionsBitField([PermissionFlagsBits.ManageChannels]),
-		options: [
-			{
-				name: "channel",
-				description: "The channel to configure.",
-				type: ApplicationCommandOptionType.Channel,
-				required: true,
-				channelTypes: [ChannelType.PublicThread, ChannelType.GuildText],
+export default class ConfigCommand extends SlashCommand<WatcherClient> {
+	public constructor(context: Context<WatcherClient>) {
+		super(context, {
+			data: {
+				name: "configchannel",
+				description: "Configure a channel for the bot to send messages to.",
+				defaultMemberPermissions: new PermissionsBitField([PermissionFlagsBits.ManageChannels]),
+				options: [
+					{
+						name: "channel",
+						description: "The channel to configure.",
+						type: ApplicationCommandOptionType.Channel,
+						required: true,
+						channelTypes: [ChannelType.PublicThread, ChannelType.GuildText],
+					},
+				],
 			},
-		],
-	} as ChatInputApplicationCommandData;
+		});
+	}
 
-	// @ts-expect-error - This is a valid function signature
-	public async execute(interaction: ChatInputCommandInteraction<"cached">, client: WatcherClient) {
+	public override async execute(interaction: ChatInputCommandInteraction<"cached">) {
+		const client = this.container.client;
 		if (!interaction.guild) return;
 		if (!interaction.channel) return;
 		const channel = interaction.options.getChannel("channel", true, [ChannelType.PublicThread, ChannelType.GuildText]);
