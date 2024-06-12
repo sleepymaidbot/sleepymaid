@@ -1,17 +1,24 @@
 /* eslint-disable id-length */
 import { guildsSettings } from "@sleepymaid/db";
-import type { ListenerInterface } from "@sleepymaid/handler";
+import type { Context } from "@sleepymaid/handler";
+import { Listener } from "@sleepymaid/handler";
 import type { Guild } from "discord.js";
 import { eq } from "drizzle-orm";
 import type { SleepyMaidClient } from "../../lib/extensions/SleepyMaidClient";
 
-export default class ReadyListener implements ListenerInterface {
-	public readonly name = "ready";
+export default class ReadyListener extends Listener<"ready", SleepyMaidClient> {
+	public constructor(context: Context<SleepyMaidClient>) {
+		super(context, {
+			name: "ready",
+			once: true,
+		});
+	}
 
-	public readonly once = true;
-
-	public async execute(client: SleepyMaidClient) {
-		client.logger.info(`Logged in as ${client.user!.tag} | ${client.guilds.cache.size} servers`);
+	public override async execute() {
+		const client = this.container.client;
+		client.logger.info(
+			`Logged in as ${this.container.client.user!.tag} | ${this.container.client.guilds.cache.size} servers`,
+		);
 
 		const guilds = await client.guilds.fetch();
 		for (const guild of guilds.values()) {

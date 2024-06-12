@@ -1,25 +1,32 @@
-import type { SlashCommandInterface } from "@sleepymaid/handler";
-import { ChatInputApplicationCommandData, ChatInputCommandInteraction, version as discordJSVersion } from "discord.js";
-import { ApplicationCommandType } from "discord-api-types/v10";
+import * as os from "node:os";
+import process from "node:process";
+import type { Context } from "@sleepymaid/handler";
+import { SlashCommand } from "@sleepymaid/handler";
 import { prettyBytes, shell } from "@sleepymaid/util";
-import * as os from "os";
+import { ApplicationCommandType } from "discord-api-types/v10";
+import type { ChatInputCommandInteraction } from "discord.js";
+import { version as discordJSVersion } from "discord.js";
 import type { SleepyMaidClient } from "../../../lib/extensions/SleepyMaidClient";
 
-export default class InfoCommand implements SlashCommandInterface {
-	public readonly data = {
-		name: "info",
-		description: "Gets information about the bot",
-		type: ApplicationCommandType.ChatInput,
-	} as ChatInputApplicationCommandData;
+export default class InfoCommand extends SlashCommand<SleepyMaidClient> {
+	public constructor(context: Context<SleepyMaidClient>) {
+		super(context, {
+			data: {
+				name: "info",
+				description: "Gets information about the bot",
+				type: ApplicationCommandType.ChatInput,
+			},
+		});
+	}
 
-	// @ts-ignore
-	public async execute(interaction: ChatInputCommandInteraction, client: SleepyMaidClient) {
+	public override async execute(interaction: ChatInputCommandInteraction) {
+		const client = this.container.client;
 		const currentCommit = (await shell("git rev-parse HEAD")).stdout.replace("\n", "") || "unknown";
 		let repoUrl = (await shell("git remote get-url origin")).stdout.replace("\n", "") || "unknown";
-		if (repoUrl.includes(".git")) repoUrl = repoUrl.substring(0, repoUrl.length - 4);
+		if (repoUrl.includes(".git")) repoUrl = repoUrl.slice(0, Math.max(0, repoUrl.length - 4));
 
 		const uptime = Date.now() - client.uptime!;
-		const formatUptime = Math.floor(uptime / 1000);
+		const formatUptime = Math.floor(uptime / 1_000);
 
 		await interaction.reply({
 			embeds: [
@@ -66,7 +73,7 @@ export default class InfoCommand implements SlashCommandInterface {
 						},
 						{
 							name: "**Current Commit**",
-							value: `[${currentCommit.substring(0, 7)}](${repoUrl}/commit/${currentCommit})`,
+							value: `[${currentCommit.slice(0, 7)}](${repoUrl}/commit/${currentCommit})`,
 							inline: true,
 						},
 						{

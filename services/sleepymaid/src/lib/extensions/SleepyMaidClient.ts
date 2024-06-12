@@ -88,16 +88,16 @@ export class SleepyMaidClient extends HandlerClient {
 			ns: "translation",
 		});
 
-		await this.loadHandlers({
+		this.loadHandlers({
 			commands: {
 				folder: resolve(__dirname, "..", "..", "commands"),
 			},
 			listeners: {
 				folder: resolve(__dirname, "..", "..", "listeners"),
 			},
-			tasks: {
+			/* tasks: {
 				folder: resolve(__dirname, "..", "..", "tasks"),
-			},
+			},*/
 		});
 		if (mqConnection.rabbitMQConnected) await this.startRPCListeners();
 

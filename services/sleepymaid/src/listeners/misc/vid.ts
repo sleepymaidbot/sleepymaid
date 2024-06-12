@@ -2,7 +2,8 @@
 import { unlink } from "node:fs";
 import { join } from "node:path";
 import { Result } from "@sapphire/result";
-import type { ListenerInterface } from "@sleepymaid/handler";
+import type { Context } from "@sleepymaid/handler";
+import { Listener } from "@sleepymaid/handler";
 import { shell } from "@sleepymaid/util";
 import type { Message } from "discord.js";
 import type { SleepyMaidClient } from "../../lib/extensions/SleepyMaidClient";
@@ -37,14 +38,18 @@ const sitesDelEmbed = [
 
 const enabled = true;
 
-export default class VidListener implements ListenerInterface {
-	public readonly name = "messageCreate";
+export default class VidListener extends Listener<"messageCreate", SleepyMaidClient> {
+	public constructor(context: Context<SleepyMaidClient>) {
+		super(context, {
+			name: "messageCreate",
+			once: false,
+		});
+	}
 
-	public readonly once = false;
-
-	public async execute(message: Message, client: SleepyMaidClient) {
+	public override async execute(message: Message) {
 		if (!enabled) return;
 		if (message.author.bot) return;
+		const client = this.container.client;
 
 		const args = message.content.split(" ");
 

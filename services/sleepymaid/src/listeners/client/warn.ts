@@ -1,11 +1,16 @@
-import type { ListenerInterface } from "@sleepymaid/handler";
+import type { Context } from "@sleepymaid/handler";
+import { Listener } from "@sleepymaid/handler";
 import type { SleepyMaidClient } from "../../lib/extensions/SleepyMaidClient";
 
-export default class WarnListener implements ListenerInterface {
-	public readonly name = "warn";
-	public readonly once = false;
+export default class WarnListener extends Listener<"warn", SleepyMaidClient> {
+	public constructor(context: Context<SleepyMaidClient>) {
+		super(context, {
+			name: "warn",
+			once: false,
+		});
+	}
 
-	public async execute(warn: string, client: SleepyMaidClient) {
-		client.logger.debug(warn);
+	public override execute(warn: string) {
+		this.container.logger.debug(warn);
 	}
 }
