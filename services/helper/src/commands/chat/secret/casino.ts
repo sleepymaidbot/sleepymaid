@@ -1,44 +1,48 @@
 /* eslint-disable radix */
-import type { SlashCommandInterface } from "@sleepymaid/handler";
-import type { ChatInputApplicationCommandData, ChatInputCommandInteraction } from "discord.js";
+import type { Context } from "@sleepymaid/handler";
+import { SlashCommand } from "@sleepymaid/handler";
+import type { ChatInputCommandInteraction } from "discord.js";
 import { ApplicationCommandType, ApplicationCommandOptionType, resolveColor } from "discord.js";
+import type { HelperClient } from "../../../lib/extensions/HelperClient";
 
-export default class SecretCasinoCommand implements SlashCommandInterface {
-	public readonly guildIds = ["860721584373497887", "324284116021542922", "1131653884377579651"];
-
-	public readonly data = {
-		name: "casino",
-		description: "Base command for the casino secret.",
-		type: ApplicationCommandType.ChatInput,
-		options: [
-			{
-				name: "getbuttonorder",
-				description: "Get the order of the buttons.",
-				type: ApplicationCommandOptionType.Subcommand,
+export default class SecretCasinoCommand extends SlashCommand<HelperClient> {
+	public constructor(context: Context<HelperClient>) {
+		super(context, {
+			guildIds: ["860721584373497887", "324284116021542922", "1131653884377579651"],
+			data: {
+				name: "casino",
+				description: "Base command for the casino secret.",
+				type: ApplicationCommandType.ChatInput,
 				options: [
 					{
-						name: "control",
-						description: "The code of the control room lasers.",
-						type: ApplicationCommandOptionType.Integer,
-						required: true,
-						min_value: 1_234,
-						max_value: 4_321,
-					},
-					{
-						name: "mid",
-						description: "The code of the middle lasers.",
-						type: ApplicationCommandOptionType.Integer,
-						required: true,
-						min_value: 1_234,
-						max_value: 4_321,
+						name: "getbuttonorder",
+						description: "Get the order of the buttons.",
+						type: ApplicationCommandOptionType.Subcommand,
+						options: [
+							{
+								name: "control",
+								description: "The code of the control room lasers.",
+								type: ApplicationCommandOptionType.Integer,
+								required: true,
+								min_value: 1_234,
+								max_value: 4_321,
+							},
+							{
+								name: "mid",
+								description: "The code of the middle lasers.",
+								type: ApplicationCommandOptionType.Integer,
+								required: true,
+								min_value: 1_234,
+								max_value: 4_321,
+							},
+						],
 					},
 				],
 			},
-		],
-	} as ChatInputApplicationCommandData;
+		});
+	}
 
-	// @ts-expect-error client overriden
-	public async execute(interaction: ChatInputCommandInteraction<"cached">) {
+	public override async execute(interaction: ChatInputCommandInteraction<"cached">) {
 		switch (interaction.options.getSubcommand()) {
 			case "getbuttonorder": {
 				const iroomNumber = interaction.options.getInteger("control");
@@ -70,6 +74,12 @@ export default class SecretCasinoCommand implements SlashCommandInterface {
 					ephemeral: true,
 				});
 			}
+
+			default:
+				return interaction.reply({
+					content: "Invalid subcommand.",
+					ephemeral: true,
+				});
 		}
 	}
 

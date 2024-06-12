@@ -1,12 +1,16 @@
-import type { TaskInterface } from "@sleepymaid/handler";
+import { Task, type Context } from "@sleepymaid/handler";
 import { ChannelType } from "discord.js";
 import type { HelperClient } from "../lib/extensions/HelperClient";
 
-export default class BannerTask implements TaskInterface {
-	public readonly interval = "* * * * *";
+export default class BannerTask extends Task<HelperClient> {
+	public constructor(context: Context<HelperClient>) {
+		super(context, {
+			interval: "* * * * *",
+		});
+	}
 
-	// @ts-expect-error client overriden
-	public async execute(client: HelperClient) {
+	public override async execute() {
+		const client = this.container.client;
 		client.logger.debug("Random bitrate task started");
 		const channels = await client.drizzle.query.randomBitrate.findMany();
 		for (const channelObject of channels) {

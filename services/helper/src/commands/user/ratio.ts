@@ -1,17 +1,24 @@
-import type { UserCommandInterface } from "@sleepymaid/handler";
+import type { Context } from "@sleepymaid/handler";
+import { UserCommand } from "@sleepymaid/handler";
 import { getLocalizedProp, ratioGuildIds } from "@sleepymaid/shared";
 import { ApplicationCommandType } from "discord-api-types/v10";
 import type { UserContextMenuCommandInteraction } from "discord.js";
 import i18next from "i18next";
+import type { HelperClient } from "../../lib/extensions/HelperClient";
 
-export default class RatioUserCommand implements UserCommandInterface {
-	public readonly guildIds = ratioGuildIds;
-	public readonly data = {
-		...getLocalizedProp("name", "commands.ratio.name"),
-		type: ApplicationCommandType.User,
-	} as const;
+export default class RatioUserCommand extends UserCommand<HelperClient> {
+	public constructor(context: Context<HelperClient>) {
+		super(context, {
+			guildIds: ratioGuildIds,
+			data: {
+				...getLocalizedProp("name", "commands.ratio.name"),
+				...getLocalizedProp("description", "commands.ratio.description"),
+				type: ApplicationCommandType.User,
+			},
+		});
+	}
 
-	public async execute(interaction: UserContextMenuCommandInteraction) {
+	public override async execute(interaction: UserContextMenuCommandInteraction) {
 		const target = interaction.options.get("user");
 		if (target === null) return;
 		await interaction.reply({

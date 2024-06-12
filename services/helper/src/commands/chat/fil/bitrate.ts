@@ -1,51 +1,55 @@
-import type { SlashCommandInterface } from "@sleepymaid/handler";
-import { ApplicationCommandType } from "discord-api-types/v10";
-import type { ChatInputCommandInteraction, ChatInputApplicationCommandData } from "discord.js";
-import { ApplicationCommandOptionType, ChannelType } from "discord.js";
-import type { HelperClient } from "../../../lib/extensions/HelperClient";
-import { and, eq } from "drizzle-orm";
 import { randomBitrate } from "@sleepymaid/db";
+import type { Context } from "@sleepymaid/handler";
+import { SlashCommand } from "@sleepymaid/handler";
+import { ApplicationCommandType } from "discord-api-types/v10";
+import type { ChatInputCommandInteraction } from "discord.js";
+import { ApplicationCommandOptionType, ChannelType } from "discord.js";
+import { and, eq } from "drizzle-orm";
+import type { HelperClient } from "../../../lib/extensions/HelperClient";
 
-export default class RandomBitrateCommand implements SlashCommandInterface {
-	public readonly guildIds = ["796534493535928320"];
-
-	public readonly data = {
-		name: "randombitrate",
-		description: "Random bitrate for the voice channel.",
-		type: ApplicationCommandType.ChatInput,
-		options: [
-			{
-				name: "now",
-				description: "Randomize the bitrate now.",
-				type: ApplicationCommandOptionType.Subcommand,
-			},
-			{
-				name: "toggle",
-				description: "Toggle the random bitrate in a channel.",
-				type: ApplicationCommandOptionType.Subcommand,
+export default class RandomBitrateCommand extends SlashCommand<HelperClient> {
+	public constructor(context: Context<HelperClient>) {
+		super(context, {
+			guildIds: ["796534493535928320"],
+			data: {
+				name: "randombitrate",
+				description: "Random bitrate for the voice channel.",
+				type: ApplicationCommandType.ChatInput,
 				options: [
 					{
-						name: "channel",
-						description: "The channel to toggle the random bitrate.",
-						type: ApplicationCommandOptionType.Channel,
-						channel_types: [ChannelType.GuildVoice],
-						required: false,
+						name: "now",
+						description: "Randomize the bitrate now.",
+						type: ApplicationCommandOptionType.Subcommand,
 					},
 					{
-						name: "state",
-						description: "The state of the random bitrate.",
-						type: ApplicationCommandOptionType.Boolean,
-						required: false,
+						name: "toggle",
+						description: "Toggle the random bitrate in a channel.",
+						type: ApplicationCommandOptionType.Subcommand,
+						options: [
+							{
+								name: "channel",
+								description: "The channel to toggle the random bitrate.",
+								type: ApplicationCommandOptionType.Channel,
+								channel_types: [ChannelType.GuildVoice],
+								required: false,
+							},
+							{
+								name: "state",
+								description: "The state of the random bitrate.",
+								type: ApplicationCommandOptionType.Boolean,
+								required: false,
+							},
+						],
 					},
 				],
 			},
-		],
-	} as ChatInputApplicationCommandData;
+		});
+	}
 
-	// @ts-expect-error client overriden
-	public async execute(interaction: ChatInputCommandInteraction, client: HelperClient) {
+	public override async execute(interaction: ChatInputCommandInteraction<"cached">) {
 		if (!interaction.inCachedGuild()) return;
 		if (!interaction.guild) return;
+		const client = this.container.client;
 		if (interaction.options.getSubcommand() === "now") {
 			if (!interaction.member.voice.channel)
 				return interaction.reply("You need to be in a voice channel to use this command.");
@@ -65,6 +69,7 @@ export default class RandomBitrateCommand implements SlashCommandInterface {
 					return interaction.reply("You need to be in a voice channel to use this command.");
 				target = interaction.member.voice.channel;
 			}
+
 			if (target.type !== ChannelType.GuildVoice) return interaction.reply("The channel must be a voice channel.");
 			if (target.members.size === 0) return interaction.reply("There are no members in the voice channel.");
 			const channelSettings = await client.drizzle.query.randomBitrate.findFirst({
@@ -81,21 +86,23 @@ export default class RandomBitrateCommand implements SlashCommandInterface {
 				} else {
 					await interaction.reply(`The random bitrate is already disabled for ${target.toString()}.`);
 				}
+			} else if (state === true) {
+				await client.drizzle
+					.update(randomBitrate)
+					.set({ enabled: true })
+					.where(and(eq(randomBitrate.guildId, interaction.guild.id), eq(randomBitrate.channelId, target.id)));
+				await interaction.reply(`The random bitrate has been enabled for ${target.toString()}.`);
+			} else if (!state || state === false) {
+				await client.drizzle
+					.delete(randomBitrate)
+					.where(and(eq(randomBitrate.guildId, interaction.guild.id), eq(randomBitrate.channelId, target.id)));
+				await interaction.reply(`The random bitrate has been disabled for ${target.toString()}.`);
+				await target.setBitrate(interaction.guild.maximumBitrate);
 			} else {
-				if (state === true) {
-					await client.drizzle
-						.update(randomBitrate)
-						.set({ enabled: true })
-						.where(and(eq(randomBitrate.guildId, interaction.guild.id), eq(randomBitrate.channelId, target.id)));
-					await interaction.reply(`The random bitrate has been enabled for ${target.toString()}.`);
-				} else if (!state || state === false) {
-					await client.drizzle
-						.delete(randomBitrate)
-						.where(and(eq(randomBitrate.guildId, interaction.guild.id), eq(randomBitrate.channelId, target.id)));
-					await interaction.reply(`The random bitrate has been disabled for ${target.toString()}.`);
-					await target.setBitrate(interaction.guild.maximumBitrate);
-				}
+				return interaction.reply("Invalid state.");
 			}
+		} else {
+			return interaction.reply("You need to be in a voice channel to use this command.");
 		}
 	}
 }
