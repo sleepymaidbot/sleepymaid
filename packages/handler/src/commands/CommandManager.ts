@@ -1,5 +1,6 @@
 import { readdir } from "node:fs/promises";
 import { join } from "node:path";
+import { pathToFileURL } from "node:url";
 import { findFilesRecursively } from "@sapphire/node-utilities";
 import type {
 	ApplicationCommandData,
@@ -57,7 +58,30 @@ async function checkAndInstantiateCommand(
 			return null;
 		}
 	} catch {
-		return null;
+		try {
+			const newFile = pathToFileURL(file).toString();
+			const importedModule = await import(newFile);
+			if (importedModule.default) {
+				const nestedDefault = importedModule.default.default;
+				if (typeof nestedDefault === "function") {
+					if (nestedDefault.prototype instanceof MessageCommand) {
+						return new nestedDefault(context) as MessageCommand<HandlerClient>;
+					} else if (nestedDefault.prototype instanceof SlashCommand) {
+						return new nestedDefault(context) as SlashCommand<HandlerClient>;
+					} else if (nestedDefault.prototype instanceof UserCommand) {
+						return new nestedDefault(context) as UserCommand<HandlerClient>;
+					} else {
+						return null;
+					}
+				} else {
+					return null;
+				}
+			} else {
+				return null;
+			}
+		} catch {
+			return null;
+		}
 	}
 }
 

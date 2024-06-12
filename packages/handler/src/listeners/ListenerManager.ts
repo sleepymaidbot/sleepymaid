@@ -1,3 +1,4 @@
+import { pathToFileURL } from "node:url";
 import { findFilesRecursively } from "@sapphire/node-utilities";
 import type { ClientEvents } from "discord.js";
 import { Context, BaseContainer } from "../BaseContainer";
@@ -30,7 +31,27 @@ async function checkAndInstantiateListener(
 			return null;
 		}
 	} catch {
-		return null;
+		try {
+			const newFile = pathToFileURL(file).toString();
+			const importedModule = await import(newFile);
+			if (importedModule.default) {
+				const nestedDefault = importedModule.default.default;
+				if (typeof nestedDefault === "function") {
+					if (nestedDefault.prototype instanceof Listener) {
+						return new nestedDefault(context);
+					} else {
+						return null;
+					}
+				} else {
+					return null;
+				}
+			} else {
+				return null;
+			}
+		} catch (error) {
+			console.error(error);
+			return null;
+		}
 	}
 }
 
