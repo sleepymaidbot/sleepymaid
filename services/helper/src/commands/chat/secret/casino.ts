@@ -62,6 +62,10 @@ export default class SecretCasinoCommand extends SlashCommand<HelperClient> {
 					finalOrder[pos] = int;
 				}
 
+				if (!interaction.channel) return;
+
+				const ephemeral = interaction.channel.id !== "1250961898120413325";
+
 				return interaction.reply({
 					embeds: [
 						{
@@ -71,7 +75,7 @@ export default class SecretCasinoCommand extends SlashCommand<HelperClient> {
 							color: resolveColor("#2f3136"),
 						},
 					],
-					ephemeral: true,
+					ephemeral,
 				});
 			}
 
