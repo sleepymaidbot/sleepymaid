@@ -12,7 +12,6 @@ export default class RatioUserCommand extends UserCommand<HelperClient> {
 			guildIds: ratioGuildIds,
 			data: {
 				...getLocalizedProp("name", "commands.ratio.name"),
-				...getLocalizedProp("description", "commands.ratio.description"),
 				type: ApplicationCommandType.User,
 			},
 		});
