@@ -27,7 +27,7 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
-		"@favware/cliff-jumper": "^3.0.3",
+		"@favware/cliff-jumper": "^4.0.2",
 		"@swc/core": "^1.5.28",
 		"@types/node": "^20.14.2",
 		"rimraf": "^5.0.7",
