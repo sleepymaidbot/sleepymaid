@@ -28,13 +28,13 @@
 	"devDependencies": {
 		"@favware/cliff-jumper": "^3.0.3",
 		"@sleepymaid/util": "workspace:^",
-		"@swc/core": "^1.5.28",
-		"@types/node": "^20.14.2",
+		"@swc/core": "^1.7.5",
+		"@types/node": "^20.14.14",
 		"@types/node-cron": "^3.0.11",
-		"rimraf": "^5.0.7",
+		"rimraf": "^5.0.10",
 		"source-map-support": "0.5.21",
-		"tsup": "^8.1.0",
-		"typescript": "^5.4.5"
+		"tsup": "^8.2.4",
+		"typescript": "^5.5.4"
 	},
 	"dependencies": {
 		"@sapphire/node-utilities": "^1.0.2",
