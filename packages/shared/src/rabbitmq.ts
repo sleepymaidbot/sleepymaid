@@ -1,8 +1,8 @@
 import { Buffer } from "node:buffer";
+import { createId } from "@paralleldrive/cuid2";
 import type amqp from "amqplib";
 import type { Channel, Connection } from "amqplib";
 import { connect } from "amqplib";
-import { v4 as generateUuid } from "uuid";
 
 export enum Queue {
 	CheckGuildInformation = "check_guild_information",
@@ -53,7 +53,7 @@ export async function sendRPCRequest<Q extends Queue>(
 	channel: amqp.Channel,
 ): Promise<ResponseType[Q]> {
 	const replyQueue = await channel.assertQueue("", { exclusive: true }); // Create a temporary reply queue
-	const correlationId = generateUuid();
+	const correlationId = createId();
 
 	channel.sendToQueue(queueName, Buffer.from(JSON.stringify(request)), {
 		// Send request to specified queue
