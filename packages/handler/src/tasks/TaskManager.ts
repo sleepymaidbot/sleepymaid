@@ -15,43 +15,17 @@ async function checkAndInstantiateTask(
 	context: Context<HandlerClient>,
 ): Promise<Task<HandlerClient> | null> {
 	try {
-		const importedModule = await import(file);
-		if (importedModule.default) {
-			const nestedDefault = importedModule.default.default;
-			if (typeof nestedDefault === "function") {
-				if (nestedDefault.prototype instanceof Task) {
-					return new nestedDefault(context);
-				} else {
-					return null;
-				}
-			} else {
-				return null;
-			}
-		} else {
-			return null;
+		const { default: importedModule } = await import(file).catch(async () => import(pathToFileURL(file).toString()));
+		const nestedDefault = importedModule?.default;
+
+		if (typeof nestedDefault === "function" && nestedDefault.prototype instanceof Task) {
+			return new nestedDefault(context);
 		}
-	} catch {
-		try {
-			const newFile = pathToFileURL(file).toString();
-			const importedModule = await import(newFile);
-			if (importedModule.default) {
-				const nestedDefault = importedModule.default.default;
-				if (typeof nestedDefault === "function") {
-					if (nestedDefault.prototype instanceof Task) {
-						return new nestedDefault(context);
-					} else {
-						return null;
-					}
-				} else {
-					return null;
-				}
-			} else {
-				return null;
-			}
-		} catch (error) {
-			console.error(error);
-			return null;
-		}
+
+		return null;
+	} catch (error) {
+		console.error(error);
+		return null;
 	}
 }
 
