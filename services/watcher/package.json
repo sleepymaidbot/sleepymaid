@@ -28,8 +28,6 @@
 		"drizzle-orm": "^0.32.1",
 		"i18next": "^23.12.2",
 		"i18next-fs-backend": "^2.3.2",
-		"path": "0.12.7",
-		"reflect-metadata": "^0.2.1",
-		"tsyringe": "^4.8.0"
+		"path": "0.12.7"
 	}
 }
