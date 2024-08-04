@@ -60,7 +60,7 @@ export class WatcherClient extends HandlerClient {
 			ns: "translation",
 		});
 
-		void this.loadHandlers({
+		this.loadHandlers({
 			commands: {
 				folder: resolve(__dirname, "..", "..", "commands"),
 			},
