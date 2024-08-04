@@ -360,7 +360,7 @@ export default class ConfigCommand extends SlashCommand<WatcherClient> {
 							})
 							.catch(client.logger.error);
 					} else {
-						i.update({
+						void i.update({
 							content: "This channel will not be configured.",
 							components: [],
 						});
