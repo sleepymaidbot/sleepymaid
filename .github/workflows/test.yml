@@ -21,10 +21,10 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: SKIP_ENV_VALIDATION=true pnpm build --filter=!website
+        run: SKIP_ENV_VALIDATION=true pnpm build --filter=!@sleepymaid/website
 
       - name: Check Build
-        run: pnpm check --filter=!website
+        run: pnpm check --filter=!@sleepymaid/website
 
       - name: Test
         run: pnpm test
