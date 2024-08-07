@@ -31,7 +31,7 @@
 		"amqplib": "^0.10.4",
 		"discord-api-types": "^0.37.55",
 		"discord.js": "^14.15.3",
-		"drizzle-orm": "^0.32.1",
+		"drizzle-orm": "^0.32.2",
 		"i18next": "^23.12.2",
 		"i18next-fs-backend": "^2.3.2",
 		"murmurhash-v3": "^1.0.2",
