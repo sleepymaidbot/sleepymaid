@@ -13,6 +13,10 @@ export default class GuildCreateListener extends Listener<"guildCreate", SleepyM
 	}
 
 	public override async execute(guild: Guild) {
+		this.container.client.logger.info(
+			`Joined guild ${guild.name} (${guild.id}) (${guild.memberCount} members) owned by ${guild.ownerId}`,
+		);
+
 		return this.container.client.drizzle
 			.insert(guildsSettings)
 			.values({ guildId: guild.id, guildName: guild.name, guildIcon: guild.iconURL() });
