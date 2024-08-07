@@ -6,48 +6,50 @@ import { connect } from "amqplib";
 
 export enum Queue {
 	CheckGuildInformation = "check_guild_information",
-	// CheckGuildRoles = 'check_guild_roles',
+	SendQuickMessage = "send_quick_message",
 }
 
-export type CheckGuildInformationRequestMessage = {
-	guildId: string;
-	userId: string;
-};
-
-export type CheckGuildInformationResponseRolesMessage = {
-	color: string;
-	id: string;
-	name: string;
-	position: number;
-};
-
-export type CheckGuildInformationResponseMessage = {
-	botNickname: string;
-	channels: {
-		id: string;
-		name: string;
-	}[];
-	emojis: {
-		id: string;
-		name: string;
-	}[];
-	hasBot: boolean;
-	hasPermission: boolean;
-	roles: CheckGuildInformationResponseRolesMessage[];
-	userPermissions: string;
-};
-
 export type RequestType = {
-	[Queue.CheckGuildInformation]: CheckGuildInformationRequestMessage;
-	// [Queue.CheckGuildRoles]: CheckGuildRolesRequestMessage;
+	[Queue.CheckGuildInformation]: {
+		guildId: string;
+		userId: string;
+	};
+	[Queue.SendQuickMessage]: {
+		userId: string;
+		guildId: string;
+		channelId: string;
+		messageId: string;
+		messageJson: string;
+	};
 };
 
 export type ResponseType = {
-	[Queue.CheckGuildInformation]: CheckGuildInformationResponseMessage;
-	// [Queue.CheckGuildRoles]: CheckGuildRolesResponseMessage;
+	[Queue.CheckGuildInformation]: {
+		botNickname: string;
+		channels: {
+			id: string;
+			name: string;
+		}[];
+		emojis: {
+			id: string;
+			name: string;
+		}[];
+		hasBot: boolean;
+		hasPermission: boolean;
+		roles: {
+			color: string;
+			id: string;
+			name: string;
+			position: number;
+		}[];
+		userPermissions: string;
+	};
+	[Queue.SendQuickMessage]: {
+		messageId: string;
+	};
 };
 
-export async function sendRPCRequest<Q extends Queue>(
+export async function sendRPCRequest<Q extends keyof ResponseType>(
 	request: RequestType[Q],
 	queueName: Q,
 	channel: amqp.Channel,

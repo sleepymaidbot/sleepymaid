@@ -3,22 +3,19 @@
 /* eslint-disable unicorn/prefer-module */
 import { Buffer } from "node:buffer";
 import { resolve } from "node:path";
-import { schema } from "@sleepymaid/db";
+import { guildsSettings, schema } from "@sleepymaid/db";
 import { HandlerClient } from "@sleepymaid/handler";
 import { Logger } from "@sleepymaid/logger";
-import type {
-	CheckGuildInformationRequestMessage,
-	CheckGuildInformationResponseMessage,
-	Config,
-} from "@sleepymaid/shared";
+import type { Config, RequestType, ResponseType } from "@sleepymaid/shared";
 import { initConfig, supportedLngs, mqConnection, Queue } from "@sleepymaid/shared";
 import type { Channel, Connection } from "amqplib";
 import { ActivityType, GatewayIntentBits } from "discord-api-types/v10";
-import { PermissionFlagsBits } from "discord.js";
+import { MessagePayload, PermissionFlagsBits } from "discord.js";
 import { drizzle } from "drizzle-orm/node-postgres";
 import i18next from "i18next";
 import FsBackend from "i18next-fs-backend";
 import { Client } from "pg";
+import { eq } from "drizzle-orm";
 
 export class SleepyMaidClient extends HandlerClient {
 	public declare PGClient: Client;
@@ -99,9 +96,10 @@ export class SleepyMaidClient extends HandlerClient {
 				folder: resolve(__dirname, "..", "..", "tasks"),
 			},*/
 		});
-		if (mqConnection.rabbitMQConnected) await this.startRPCListeners();
 
 		void this.login(this.config.discordToken);
+
+		if (mqConnection.rabbitMQConnected) await this.startRPCListeners();
 
 		process.on("unhandledRejection", (error: Error) => {
 			this.logger.error(error);
@@ -115,7 +113,7 @@ export class SleepyMaidClient extends HandlerClient {
 				return;
 			}
 
-			const baseResponse: CheckGuildInformationResponseMessage = {
+			const baseResponse: ResponseType[Queue.CheckGuildInformation] = {
 				hasBot: false,
 				botNickname: "",
 				hasPermission: false,
@@ -125,7 +123,7 @@ export class SleepyMaidClient extends HandlerClient {
 				emojis: [],
 			};
 
-			const message: CheckGuildInformationRequestMessage = JSON.parse(msg.content.toString());
+			const message: RequestType[Queue.CheckGuildInformation] = JSON.parse(msg.content.toString());
 
 			const guild = await this.guilds.fetch(message.guildId);
 			const member = await guild.members.fetch(message.userId);
@@ -147,7 +145,7 @@ export class SleepyMaidClient extends HandlerClient {
 
 			const botMember = await guild.members.fetch(this.user.id);
 
-			const response: CheckGuildInformationResponseMessage = {
+			const response: ResponseType[Queue.CheckGuildInformation] = {
 				hasBot: true,
 				hasPermission,
 				userPermissions: member.permissions.bitfield.toString(),
@@ -168,6 +166,94 @@ export class SleepyMaidClient extends HandlerClient {
 						name: emoji.name ?? "",
 					}))
 					.filter((emoji) => emoji.name !== ""),
+			};
+
+			return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(response)), {
+				correlationId: msg.properties.correlationId,
+			});
+		});
+
+		await this.channel.assertQueue(Queue.SendQuickMessage, { durable: false });
+		void this.channel.consume(Queue.SendQuickMessage, async (msg) => {
+			if (!msg) {
+				return;
+			}
+
+			const baseResponse: ResponseType[Queue.SendQuickMessage] = {
+				messageId: "",
+			};
+
+			const message: RequestType[Queue.SendQuickMessage] = JSON.parse(msg.content.toString());
+			const messageJson: MessagePayload = JSON.parse(message.messageJson);
+
+			const guild = await this.guilds.fetch(message.guildId);
+			if (!guild || !this.user) {
+				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
+					correlationId: msg.properties.correlationId,
+				});
+			}
+
+			// Check user permissions
+			const member = await guild.members.fetch(message.userId);
+			if (!member || !guild || !this.user) {
+				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
+					correlationId: msg.properties.correlationId,
+				});
+			}
+
+			const guildSettings = await this.drizzle.query.guildsSettings.findFirst({
+				where: eq(guildsSettings.guildId, message.guildId),
+			});
+			if (!guildSettings || !guildSettings.guildId) {
+				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
+					correlationId: msg.properties.correlationId,
+				});
+			}
+
+			await member.fetch();
+			let hasPermission = false;
+
+			const adminRoles = guildSettings.adminRoles;
+
+			if (guild.ownerId === member.id) {
+				hasPermission = true;
+			} else if (member.permissions.any(PermissionFlagsBits.ManageGuild, true)) {
+				hasPermission = true;
+			} else if (adminRoles.length !== 0 && adminRoles.some((role) => member.roles.cache.has(role))) {
+				hasPermission = true;
+			}
+
+			if (!hasPermission) {
+				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
+					correlationId: msg.properties.correlationId,
+				});
+			}
+
+			const channel = guild.channels.cache.get(message.channelId);
+			if (!channel || !channel.isTextBased()) {
+				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
+					correlationId: msg.properties.correlationId,
+				});
+			}
+
+			if (message.messageId) {
+				const messageToEdit = await channel.messages.fetch(message.messageId);
+				if (!messageToEdit) {
+					return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
+						correlationId: msg.properties.correlationId,
+					});
+				}
+
+				await messageToEdit.edit(messageJson);
+				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
+					correlationId: msg.properties.correlationId,
+				});
+			}
+
+			const messageId = await (await channel.send(messageJson)).id;
+
+			const response: ResponseType[Queue.SendQuickMessage] = {
+				messageId,
 			};
 
 			return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(response)), {

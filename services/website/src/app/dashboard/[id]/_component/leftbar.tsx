@@ -20,12 +20,12 @@ const LeftBar = () => {
 				<div className="flex items-center">
 					<Button asChild className="w-full py-4" variant="ghost">
 						<Link href="/dashboard/">
-							<div className="flex items-center ">
+							<div className="flex items-center">
 								<Avatar className="mr-2">
 									<AvatarImage alt="Guild Icon" src={settings.guildSettings.guildIcon ?? ""} />
 									<AvatarFallback>GI</AvatarFallback>
 								</Avatar>
-								<div className="ml-2 space-y-1 text-sm ">
+								<div className="ml-2 space-y-1 text-sm">
 									<div className="font-medium">{settings.guildSettings.guildName}</div>
 									<div>Change guild</div>
 								</div>
@@ -43,6 +43,15 @@ const LeftBar = () => {
 					</Link>
 				</Button>
 				<Button asChild className="my-1 w-full py-4" variant="ghost">
+					<Link href={"/dashboard/" + settings.guildSettings.guildId + "/quickmessage"}>
+						<div className="flex items-center">
+							<MessageCircleMore className="mr-2" />
+							<div className="text-sm">Quick Message</div>
+						</div>
+					</Link>
+				</Button>
+
+				<Button asChild className="my-1 w-full py-4" variant="ghost" disabled>
 					<Link href={"/dashboard/" + settings.guildSettings.guildId + "/messages"}>
 						<div className="flex items-center">
 							<MessageCircleMore className="mr-2" />
@@ -50,7 +59,7 @@ const LeftBar = () => {
 						</div>
 					</Link>
 				</Button>
-				<Button asChild className="my-1 w-full py-4" variant="ghost">
+				<Button asChild className="my-1 w-full py-4" variant="ghost" disabled>
 					<Link href={"/dashboard/" + settings.guildSettings.guildId + "/rolemenu"}>
 						<div className="flex items-center">
 							<ListTodo className="mr-2" />

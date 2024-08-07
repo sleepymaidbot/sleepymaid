@@ -9,13 +9,12 @@ import "server-only";
  * need to use are documented accordingly near the end.
  */
 
-import { mqConnection } from "@sleepymaid/shared";
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
-import { env } from "@/env";
 import { getServerAuthSession } from "@/server/auth";
 import { db } from "@/server/db";
+import { mqConnection, mqChannel } from "@/server/rabbitmq";
 
 /**
  * 1. CONTEXT
@@ -36,12 +35,10 @@ export const createTRPCContext = async (opts: { headers: Headers }) => {
 		throw new TRPCError({ code: "UNAUTHORIZED" });
 	}
 
-	await mqConnection.connect(env.RABBITMQ_URL);
-
 	return {
 		db,
-		mqConnection: mqConnection.connection,
-		mqChannel: mqConnection.channel,
+		mqConnection,
+		mqChannel,
 		session,
 		...opts,
 	};
