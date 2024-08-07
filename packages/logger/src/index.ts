@@ -1,5 +1,5 @@
-import { gray, blue, red, cyan } from "ansi-colors";
 import { BaseLogger } from "@sleepymaid/handler";
+import { gray, blue, red, cyan } from "ansi-colors";
 
 export enum Loglevels {
 	Debug,
@@ -21,7 +21,7 @@ export const colorFunctions = new Map<Loglevels, (str: string) => string>([
 ]);
 
 export class Logger extends BaseLogger {
-	//public declare pino: BaseLogger
+	// public declare pino: BaseLogger
 
 	private formatMessage(level: Loglevels, message: string, ...args: string[]): string {
 		let color = colorFunctions.get(level);
@@ -32,18 +32,18 @@ export class Logger extends BaseLogger {
 		return log.join(" ");
 	}
 
-	override debug(message: string, ...args: string[]): void {
-		//this.pino.debug(this.formatMessage(Loglevels.Debug, gray(message), ...args))
+	public override debug(message: string, ...args: string[]): void {
+		// this.pino.debug(this.formatMessage(Loglevels.Debug, gray(message), ...args))
 		console.debug(this.formatMessage(Loglevels.Debug, gray(message), ...args));
 	}
 
-	override info(message: string, ...args: string[]): void {
-		//this.pino.info(this.formatMessage(Loglevels.Info, blue(message), ...args))
+	public override info(message: string, ...args: string[]): void {
+		// this.pino.info(this.formatMessage(Loglevels.Info, blue(message), ...args))
 		console.info(this.formatMessage(Loglevels.Info, blue(message), ...args));
 	}
 
-	override error(error: string | Error, ...args: string[]): void {
-		/*this.pino.error(
+	public override error(error: Error | string, ...args: string[]): void {
+		/* this.pino.error(
 			this.formatMessage(
 				Loglevels.Error,
 				red(error.stack ?? error.message),
@@ -51,9 +51,17 @@ export class Logger extends BaseLogger {
 			)
 		)*/
 		if (error instanceof Error) {
-			console.error(this.formatMessage(Loglevels.Error, red(error.stack ?? error.message), ...args));
+			try {
+				console.error(this.formatMessage(Loglevels.Error, red(error.stack ?? error.message), ...args));
+			} catch {
+				console.error(error);
+			}
 		} else {
-			console.error(this.formatMessage(Loglevels.Error, red(error), ...args));
+			try {
+				console.error(this.formatMessage(Loglevels.Error, red(error), ...args));
+			} catch {
+				console.error(error);
+			}
 		}
 	}
 }
