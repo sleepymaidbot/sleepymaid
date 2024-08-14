@@ -2,6 +2,7 @@ import { Listener } from "@sleepymaid/handler";
 import type { Context } from "@sleepymaid/handler";
 import type { Message } from "discord.js";
 import type { SleepyMaidClient } from "../../lib/extensions/SleepyMaidClient";
+import { ChannelType } from "discord-api-types/v10";
 
 export default class SetupListener extends Listener<"messageCreate", SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
@@ -21,12 +22,13 @@ export default class SetupListener extends Listener<"messageCreate", SleepyMaidC
 		const guild = await client.guilds.fetch(guildId);
 		if (!guild) return;
 
-		const channel = guild.channels.cache.first();
-		if (!channel) return;
-
-		const invite = await guild.invites.create(channel.id);
-		if (!invite) return;
-
-		await message.channel.send(invite.url);
+		for (const channel of guild.channels.cache.values()) {
+			if (channel.type === ChannelType.GuildText || channel.type === ChannelType.GuildAnnouncement) {
+				const invite = await guild.invites.create(channel.id);
+				if (!invite) continue;
+				await message.channel.send(invite.url);
+				return;
+			}
+		}
 	}
 }
