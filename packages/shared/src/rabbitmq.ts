@@ -6,6 +6,7 @@ import { connect } from "amqplib";
 
 export enum Queue {
 	CheckGuildInformation = "check_guild_information",
+	CheckUserGuildPermissions = "check_user_guild_permissions",
 	SendQuickMessage = "send_quick_message",
 }
 
@@ -14,11 +15,15 @@ export type RequestType = {
 		guildId: string;
 		userId: string;
 	};
+	[Queue.CheckUserGuildPermissions]: {
+		guildId: string;
+		userId: string;
+	};
 	[Queue.SendQuickMessage]: {
 		userId: string;
 		guildId: string;
 		channelId: string;
-		messageId: string;
+		messageId?: string;
 		messageJson: string;
 	};
 };
@@ -42,6 +47,11 @@ export type ResponseType = {
 			name: string;
 			position: number;
 		}[];
+		userPermissions: string;
+	};
+	[Queue.CheckUserGuildPermissions]: {
+		admin: boolean;
+		mod: boolean;
 		userPermissions: string;
 	};
 	[Queue.SendQuickMessage]: {

@@ -173,6 +173,69 @@ export class SleepyMaidClient extends HandlerClient {
 			});
 		});
 
+		await this.channel.assertQueue(Queue.CheckUserGuildPermissions, { durable: false });
+		void this.channel.consume(Queue.CheckUserGuildPermissions, async (msg) => {
+			if (!msg) {
+				return;
+			}
+
+			const baseResponse: ResponseType[Queue.CheckUserGuildPermissions] = {
+				admin: false,
+				mod: false,
+				userPermissions: "0",
+			};
+
+			const message: RequestType[Queue.CheckUserGuildPermissions] = JSON.parse(msg.content.toString());
+
+			const guild = await this.guilds.fetch(message.guildId);
+			const member = await guild.members.fetch(message.userId);
+			if (!member || !guild || !this.user) {
+				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
+					correlationId: msg.properties.correlationId,
+				});
+			}
+
+			await member.fetch();
+
+			if (guild.ownerId === member.id) {
+				return this.channel.sendToQueue(
+					msg.properties.replyTo,
+					Buffer.from(
+						JSON.stringify({
+							admin: true,
+							mod: true,
+							userPermissions: member.permissions.bitfield.toString(),
+						}),
+					),
+					{
+						correlationId: msg.properties.correlationId,
+					},
+				);
+			}
+
+			const guildSettings = await this.drizzle.query.guildsSettings.findFirst({
+				where: eq(guildsSettings.guildId, message.guildId),
+			});
+			if (!guildSettings || !guildSettings.guildId) {
+				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
+					correlationId: msg.properties.correlationId,
+				});
+			}
+
+			const adminRoles = guildSettings.adminRoles;
+			const modRoles = guildSettings.modRoles;
+
+			const response: ResponseType[Queue.CheckUserGuildPermissions] = {
+				admin: adminRoles.length !== 0 && adminRoles.some((role) => member.roles.cache.has(role)),
+				mod: modRoles.length !== 0 && modRoles.some((role) => member.roles.cache.has(role)),
+				userPermissions: member.permissions.bitfield.toString(),
+			};
+
+			return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(response)), {
+				correlationId: msg.properties.correlationId,
+			});
+		});
+
 		await this.channel.assertQueue(Queue.SendQuickMessage, { durable: false });
 		void this.channel.consume(Queue.SendQuickMessage, async (msg) => {
 			if (!msg) {

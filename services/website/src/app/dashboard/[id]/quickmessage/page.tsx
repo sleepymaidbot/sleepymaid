@@ -14,6 +14,7 @@ import { api } from "@/trpc/react";
 
 const quickMessageSchema = z.object({
 	guildId: z.string(),
+	messageName: z.string(),
 	channelId: z.string(),
 	messageId: z.string().optional(),
 	messageJson: z.string(),
@@ -50,6 +51,20 @@ export default function QuickMessage() {
 					<div className="p-4">
 						<Form {...form}>
 							<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+								<FormField
+									control={form.control}
+									name="messageName"
+									render={({ field }) => (
+										<FormItem>
+											<FormLabel>Message Name</FormLabel>
+											<FormControl>
+												<Input placeholder="Message Name" {...field} />
+											</FormControl>
+											<FormDescription>This is the name of the message.</FormDescription>
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
 								<FormField
 									control={form.control}
 									name="channelId"

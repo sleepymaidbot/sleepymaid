@@ -3,9 +3,12 @@ import { sendRPCRequest, Queue } from "@sleepymaid/shared";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
+import { createId } from "@paralleldrive/cuid2";
+import { quickMessage } from "@sleepymaid/db";
 
 const quickMessageSchema = z.object({
 	guildId: z.string(),
+	messageName: z.string(),
 	channelId: z.string(),
 	messageId: z.string().optional(),
 	messageJson: z.string(),
@@ -50,14 +53,31 @@ export const guildsRouter = createTRPCRouter({
 			return null;
 		}
 
+		const userPermissions = await sendRPCRequest(
+			{ guildId: input.guildId, userId },
+			Queue.CheckUserGuildPermissions,
+			ctx.mqChannel,
+		);
+
+		if (!userPermissions.admin) {
+			return null;
+		}
+
+		const messageUUID = createId();
+
+		await ctx.db.insert(quickMessage).values({
+			guildId: input.guildId,
+			channelId: input.channelId,
+			messageId: input.messageId,
+			messageName: input.messageName,
+			messageUUID,
+			messageData: input.messageJson,
+		});
+
 		const response = await sendRPCRequest({ ...input, userId }, Queue.SendQuickMessage, ctx.mqChannel);
 
 		if (!response.messageId) {
 			return null;
 		}
-
-		return {
-			messageId: response.messageId,
-		};
 	}),
 });

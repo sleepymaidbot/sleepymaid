@@ -2,6 +2,7 @@ import { relations, sql } from "drizzle-orm";
 import { pgTable, text, boolean } from "drizzle-orm/pg-core";
 import { randomBitrate } from "../helper/randombitrate";
 import { roleMenu } from "./rolemenu";
+import { quickMessage } from "./quickMessage";
 
 export const guildsSettings = pgTable("GuildsSettings", {
 	guildId: text("guildId").primaryKey().notNull(),
@@ -28,5 +29,8 @@ export const guildsSettingsRelations = relations(guildsSettings, ({ many }) => (
 	}),
 	roleMenus: many(roleMenu, {
 		relationName: "roleMenus",
+	}),
+	quickMessages: many(quickMessage, {
+		relationName: "quickMessages",
 	}),
 }));
