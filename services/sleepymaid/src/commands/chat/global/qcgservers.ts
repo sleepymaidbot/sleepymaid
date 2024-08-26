@@ -67,7 +67,7 @@ export default class QCGServersCommand extends SlashCommand<SleepyMaidClient> {
 			givenPortOnly: true,
 		});
 
-		await interaction.reply({
+		return await interaction.reply({
 			embeds: [
 				{
 					title: data.fancyName,
@@ -75,13 +75,13 @@ export default class QCGServersCommand extends SlashCommand<SleepyMaidClient> {
 					color: Colors.Blue,
 					fields: [
 						{
-							name: "Players",
-							value: query.players.length.toString(),
+							name: "Player Count",
+							value: query.players.length.toString() + "/" + query.maxplayers.toString(),
 							inline: true,
 						},
 						{
-							name: "Max Players",
-							value: query.maxplayers.toString(),
+							name: "Map",
+							value: query.map,
 							inline: true,
 						},
 						{
