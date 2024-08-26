@@ -1,6 +1,5 @@
 import type { Context } from "@sleepymaid/handler";
 import { SlashCommand } from "@sleepymaid/handler";
-import { ButtonStyle } from "discord-api-types/v10";
 import type { ChatInputCommandInteraction } from "discord.js";
 import {
 	ApplicationCommandOptionType,
@@ -85,7 +84,7 @@ export default class SelfRoleCommand extends SlashCommand<HelperClient> {
 					components: [
 						{
 							type: ComponentType.Button,
-							style: ButtonStyle.Primary,
+							style: 1,
 							label: "Add/Remove the role",
 							custom_id: "selfrole:" + role.id,
 						},

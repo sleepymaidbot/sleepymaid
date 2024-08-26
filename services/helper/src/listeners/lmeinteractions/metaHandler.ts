@@ -2,7 +2,6 @@ import { ButtonBuilder, ActionRowBuilder, SelectMenuBuilder, SelectMenuOptionBui
 import type { Context } from "@sleepymaid/handler";
 import { Listener } from "@sleepymaid/handler";
 import { pingRoleIds, colorRoleIds } from "@sleepymaid/shared";
-import { ButtonStyle } from "discord-api-types/v10";
 import type { ButtonInteraction, SelectMenuInteraction } from "discord.js";
 import type { HelperClient } from "../../lib/extensions/HelperClient";
 
@@ -58,7 +57,7 @@ export default class MetahandlerListener extends Listener<"interactionCreate", H
 								.setLabel("Supprimer mes notifications")
 								.setCustomId("lmeMeta:bienvenue:delete:ping")
 								.setEmoji({ id: "948606748334358559" })
-								.setStyle(ButtonStyle.Secondary),
+								.setStyle(2),
 						]);
 
 						return interaction.editReply({

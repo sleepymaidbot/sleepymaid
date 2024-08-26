@@ -2,12 +2,7 @@ import type { Context } from "@sleepymaid/handler";
 import { SlashCommand } from "@sleepymaid/handler";
 import type { MessagesType } from "@sleepymaid/shared";
 import { setupInteraction, getChoices } from "@sleepymaid/shared";
-import {
-	ApplicationCommandOptionType,
-	ApplicationCommandType,
-	ButtonStyle,
-	PermissionFlagsBits,
-} from "discord-api-types/v10";
+import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from "discord-api-types/v10";
 import type { ChatInputCommandInteraction } from "discord.js";
 import { EmbedBuilder, resolveColor, ActionRowBuilder, ButtonBuilder } from "discord.js";
 import type { HelperClient } from "../../../lib/extensions/HelperClient";
