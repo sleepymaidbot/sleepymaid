@@ -80,19 +80,13 @@ const messages: MessagesType = {
 				);
 
 			const row1 = new ActionRowBuilder<ButtonBuilder>().addComponents([
-				new ButtonBuilder()
-					.setCustomId("lmeMeta:bienvenue:init:ping")
-					.setLabel("Notifications")
-					.setStyle(ButtonStyle.Primary),
-				new ButtonBuilder()
-					.setCustomId("lmeMeta:bienvenue:init:color")
-					.setLabel("Couleur")
-					.setStyle(ButtonStyle.Primary),
+				new ButtonBuilder().setCustomId("lmeMeta:bienvenue:init:ping").setLabel("Notifications").setStyle(1),
+				new ButtonBuilder().setCustomId("lmeMeta:bienvenue:init:color").setLabel("Couleur").setStyle(1),
 				new ButtonBuilder()
 					.setCustomId("lmeMeta:bienvenue:init:viewRoles")
 					.setLabel("Voir mes rôles")
 					.setEmoji({ name: "❔" })
-					.setStyle(ButtonStyle.Secondary),
+					.setStyle(1),
 			]);
 
 			// Message 4
@@ -105,7 +99,7 @@ const messages: MessagesType = {
 				new ButtonBuilder()
 					.setCustomId("lmeMeta:bienvenue:join")
 					.setLabel("J'ai lu et j'accepte les règlements")
-					.setStyle(ButtonStyle.Success)
+					.setStyle(3)
 					.setEmoji({ name: "✅" }),
 			]);
 
