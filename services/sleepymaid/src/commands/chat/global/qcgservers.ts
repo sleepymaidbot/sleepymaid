@@ -62,8 +62,6 @@ export default class QCGServersCommand extends SlashCommand<SleepyMaidClient> {
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction) {
-		if (!interaction.inCachedGuild()) return;
-
 		const server = interaction.options.getString("server") as keyof typeof serversData;
 
 		if (!server) return;
