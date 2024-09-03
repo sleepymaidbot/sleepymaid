@@ -225,7 +225,6 @@ export class CommandManager extends BaseManager {
 			const cmd = await checkAndInstantiateCommand(file.file, context);
 			if (!cmd) return;
 
-			if (!interaction.inCachedGuild()) return;
 			await cmd.execute!(interaction as never);
 		} catch (error) {
 			this.client.logger.error(error as Error);
@@ -256,7 +255,6 @@ export class CommandManager extends BaseManager {
 			const cmd = (await checkAndInstantiateCommand(file.file, context)) as SlashCommand<HandlerClient>;
 			if (!cmd) return;
 
-			if (!interaction.inCachedGuild()) return;
 			if (!cmd.autocomplete) return;
 			await cmd.autocomplete(interaction);
 		} catch (error) {
