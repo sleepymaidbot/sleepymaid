@@ -1,6 +1,13 @@
 import { SlashCommand, type Context } from "@sleepymaid/handler";
 import type { ChatInputCommandInteraction } from "discord.js";
-import { ApplicationCommandOptionType, ApplicationCommandType, ButtonStyle, Colors, ComponentType } from "discord.js";
+import {
+	ApplicationCommandOptionType,
+	ApplicationCommandType,
+	ApplicationIntegrationType,
+	ButtonStyle,
+	Colors,
+	ComponentType,
+} from "discord.js";
 import type { SleepyMaidClient } from "../../../lib/extensions/SleepyMaidClient";
 import { GameDig } from "gamedig";
 import { getUnixTime, sub } from "date-fns";
@@ -29,6 +36,7 @@ export default class QCGServersCommand extends SlashCommand<SleepyMaidClient> {
 				name: "qcgservers",
 				description: "Query a Québec Game server",
 				type: ApplicationCommandType.ChatInput,
+				integrationTypes: [ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall],
 				options: [
 					{
 						name: "server",

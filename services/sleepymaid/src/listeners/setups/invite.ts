@@ -26,7 +26,10 @@ export default class SetupListener extends Listener<"messageCreate", SleepyMaidC
 			if (channel.type === ChannelType.GuildText || channel.type === ChannelType.GuildAnnouncement) {
 				const invite = await guild.invites.create(channel.id);
 				if (!invite) continue;
-				await message.channel.send(invite.url);
+				const cmdchannel = message.channel;
+				if (!cmdchannel.isTextBased()) return;
+				if (cmdchannel.isDMBased()) return;
+				await cmdchannel.send(invite.url);
 				return;
 			}
 		}
