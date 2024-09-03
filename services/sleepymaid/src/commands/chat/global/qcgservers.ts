@@ -7,6 +7,7 @@ import {
 	ButtonStyle,
 	Colors,
 	ComponentType,
+	InteractionContextType,
 } from "discord.js";
 import type { SleepyMaidClient } from "../../../lib/extensions/SleepyMaidClient";
 import { GameDig } from "gamedig";
@@ -37,6 +38,7 @@ export default class QCGServersCommand extends SlashCommand<SleepyMaidClient> {
 				description: "Query a Québec Game server",
 				type: ApplicationCommandType.ChatInput,
 				integrationTypes: [ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall],
+				contexts: [InteractionContextType.BotDM, InteractionContextType.Guild, InteractionContextType.PrivateChannel],
 				options: [
 					{
 						name: "server",
