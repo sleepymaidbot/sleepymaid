@@ -28,8 +28,8 @@
 	"devDependencies": {
 		"@favware/cliff-jumper": "^3.0.3",
 		"@sleepymaid/handler": "workspace:^",
-		"@swc/core": "^1.7.6",
-		"@types/node": "^20.14.14",
+		"@swc/core": "^1.7.23",
+		"@types/node": "^20.16.3",
 		"rimraf": "^6.0.1",
 		"source-map-support": "0.5.21",
 		"tsup": "^8.2.4",
