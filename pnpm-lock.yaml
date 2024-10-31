@@ -10,7 +10,7 @@ importers:
     devDependencies:
       '@commitlint/cli':
         specifier: ^19.5.0
-        version: 19.5.0(@types/node@20.17.5)(typescript@5.6.3)
+        version: 19.5.0(@types/node@22.8.6)(typescript@5.6.3)
       '@commitlint/config-angular':
         specifier: ^19.5.0
         version: 19.5.0
@@ -94,8 +94,8 @@ importers:
         specifier: ^1.7.42
         version: 1.7.42(@swc/helpers@0.5.5)
       '@types/node':
-        specifier: ^20.17.5
-        version: 20.17.5
+        specifier: ^22.8.6
+        version: 22.8.6
       '@types/pg':
         specifier: ^8.11.10
         version: 8.11.10
@@ -140,8 +140,8 @@ importers:
         specifier: ^1.7.42
         version: 1.7.42(@swc/helpers@0.5.5)
       '@types/node':
-        specifier: ^20.17.5
-        version: 20.17.5
+        specifier: ^22.8.6
+        version: 22.8.6
       '@types/node-cron':
         specifier: ^3.0.11
         version: 3.0.11
@@ -174,8 +174,8 @@ importers:
         specifier: ^1.7.42
         version: 1.7.42(@swc/helpers@0.5.5)
       '@types/node':
-        specifier: ^20.17.5
-        version: 20.17.5
+        specifier: ^22.8.6
+        version: 22.8.6
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
@@ -217,8 +217,8 @@ importers:
         specifier: ^0.10.5
         version: 0.10.5
       '@types/node':
-        specifier: ^20.17.5
-        version: 20.17.5
+        specifier: ^22.8.6
+        version: 22.8.6
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
@@ -241,8 +241,8 @@ importers:
         specifier: ^1.7.42
         version: 1.7.42(@swc/helpers@0.5.5)
       '@types/node':
-        specifier: ^20.17.5
-        version: 20.17.5
+        specifier: ^22.8.6
+        version: 22.8.6
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
@@ -257,7 +257,7 @@ importers:
         version: 5.6.3
       vitest:
         specifier: ^2.1.4
-        version: 2.1.4(@types/node@20.17.5)
+        version: 2.1.4(@types/node@22.8.6)
 
   services/helper:
     dependencies:
@@ -305,8 +305,8 @@ importers:
         specifier: ^1.1.5
         version: 1.1.5
       '@types/node':
-        specifier: ^20.17.5
-        version: 20.17.5
+        specifier: ^22.8.6
+        version: 22.8.6
       '@types/pg':
         specifier: ^8.11.10
         version: 8.11.10
@@ -399,8 +399,8 @@ importers:
         specifier: ^1.1.5
         version: 1.1.5
       '@types/node':
-        specifier: ^20.17.5
-        version: 20.17.5
+        specifier: ^22.8.6
+        version: 22.8.6
       '@types/pg':
         specifier: ^8.11.10
         version: 8.11.10
@@ -457,8 +457,8 @@ importers:
         specifier: ^1.1.5
         version: 1.1.5
       '@types/node':
-        specifier: ^20.17.5
-        version: 20.17.5
+        specifier: ^22.8.6
+        version: 22.8.6
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
@@ -506,8 +506,8 @@ importers:
         specifier: ^1.1.5
         version: 1.1.5
       '@types/node':
-        specifier: ^20.17.5
-        version: 20.17.5
+        specifier: ^22.8.6
+        version: 22.8.6
       '@types/pg':
         specifier: ^8.11.10
         version: 8.11.10
@@ -657,8 +657,8 @@ importers:
         specifier: ^8.56.12
         version: 8.56.12
       '@types/node':
-        specifier: ^20.17.5
-        version: 20.17.5
+        specifier: ^22.8.6
+        version: 22.8.6
       '@types/react':
         specifier: ^18.3.12
         version: 18.3.12
@@ -2581,6 +2581,9 @@ packages:
 
   '@types/node@20.17.5':
     resolution: {integrity: sha512-n8FYY/pRxu496441gIcAQFZPKXbhsd6VZygcq+PTSZ75eMh/Ke0hCAROdUa21qiFqKNsPPYic46yXDO1JGiPBQ==}
+
+  '@types/node@22.8.6':
+    resolution: {integrity: sha512-tosuJYKrIqjQIlVCM4PEGxOmyg3FCPa/fViuJChnGeEIhjA46oy8FMVoF9su1/v8PNs2a8Q0iFNyOx0uOF91nw==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -6912,11 +6915,11 @@ snapshots:
       '@babel/helper-validator-identifier': 7.24.7
       to-fast-properties: 2.0.0
 
-  '@commitlint/cli@19.5.0(@types/node@20.17.5)(typescript@5.6.3)':
+  '@commitlint/cli@19.5.0(@types/node@22.8.6)(typescript@5.6.3)':
     dependencies:
       '@commitlint/format': 19.5.0
       '@commitlint/lint': 19.5.0
-      '@commitlint/load': 19.5.0(@types/node@20.17.5)(typescript@5.6.3)
+      '@commitlint/load': 19.5.0(@types/node@22.8.6)(typescript@5.6.3)
       '@commitlint/read': 19.5.0
       '@commitlint/types': 19.5.0
       tinyexec: 0.3.1
@@ -6964,7 +6967,7 @@ snapshots:
       '@commitlint/rules': 19.5.0
       '@commitlint/types': 19.5.0
 
-  '@commitlint/load@19.5.0(@types/node@20.17.5)(typescript@5.6.3)':
+  '@commitlint/load@19.5.0(@types/node@22.8.6)(typescript@5.6.3)':
     dependencies:
       '@commitlint/config-validator': 19.5.0
       '@commitlint/execute-rule': 19.5.0
@@ -6972,7 +6975,7 @@ snapshots:
       '@commitlint/types': 19.5.0
       chalk: 5.3.0
       cosmiconfig: 9.0.0(typescript@5.6.3)
-      cosmiconfig-typescript-loader: 5.0.0(@types/node@20.17.5)(cosmiconfig@9.0.0(typescript@5.6.3))(typescript@5.6.3)
+      cosmiconfig-typescript-loader: 5.0.0(@types/node@22.8.6)(cosmiconfig@9.0.0(typescript@5.6.3))(typescript@5.6.3)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -8272,15 +8275,15 @@ snapshots:
 
   '@types/amqplib@0.10.5':
     dependencies:
-      '@types/node': 20.17.5
+      '@types/node': 22.8.6
 
   '@types/concat-stream@2.0.3':
     dependencies:
-      '@types/node': 20.17.5
+      '@types/node': 22.8.6
 
   '@types/conventional-commits-parser@5.0.0':
     dependencies:
-      '@types/node': 20.17.5
+      '@types/node': 22.8.6
 
   '@types/cookie@0.6.0': {}
 
@@ -8341,11 +8344,15 @@ snapshots:
     dependencies:
       undici-types: 6.19.8
 
+  '@types/node@22.8.6':
+    dependencies:
+      undici-types: 6.19.8
+
   '@types/normalize-package-data@2.4.4': {}
 
   '@types/pg@8.11.10':
     dependencies:
-      '@types/node': 20.17.5
+      '@types/node': 22.8.6
       pg-protocol: 1.6.1
       pg-types: 4.0.2
 
@@ -8370,7 +8377,7 @@ snapshots:
 
   '@types/ws@8.5.10':
     dependencies:
-      '@types/node': 20.17.5
+      '@types/node': 22.8.6
 
   '@types/yargs-parser@21.0.3': {}
 
@@ -8598,13 +8605,13 @@ snapshots:
       chai: 5.1.2
       tinyrainbow: 1.2.0
 
-  '@vitest/mocker@2.1.4(vite@5.2.13(@types/node@20.17.5))':
+  '@vitest/mocker@2.1.4(vite@5.2.13(@types/node@22.8.6))':
     dependencies:
       '@vitest/spy': 2.1.4
       estree-walker: 3.0.3
       magic-string: 0.30.12
     optionalDependencies:
-      vite: 5.2.13(@types/node@20.17.5)
+      vite: 5.2.13(@types/node@22.8.6)
 
   '@vitest/pretty-format@2.1.4':
     dependencies:
@@ -9162,9 +9169,9 @@ snapshots:
 
   core-util-is@1.0.3: {}
 
-  cosmiconfig-typescript-loader@5.0.0(@types/node@20.17.5)(cosmiconfig@9.0.0(typescript@5.6.3))(typescript@5.6.3):
+  cosmiconfig-typescript-loader@5.0.0(@types/node@22.8.6)(cosmiconfig@9.0.0(typescript@5.6.3))(typescript@5.6.3):
     dependencies:
-      '@types/node': 20.17.5
+      '@types/node': 22.8.6
       cosmiconfig: 9.0.0(typescript@5.6.3)
       jiti: 1.21.6
       typescript: 5.6.3
@@ -13006,12 +13013,12 @@ snapshots:
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
 
-  vite-node@2.1.4(@types/node@20.17.5):
+  vite-node@2.1.4(@types/node@22.8.6):
     dependencies:
       cac: 6.7.14
       debug: 4.3.7
       pathe: 1.1.2
-      vite: 5.2.13(@types/node@20.17.5)
+      vite: 5.2.13(@types/node@22.8.6)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -13022,19 +13029,19 @@ snapshots:
       - supports-color
       - terser
 
-  vite@5.2.13(@types/node@20.17.5):
+  vite@5.2.13(@types/node@22.8.6):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.4.47
       rollup: 4.19.2
     optionalDependencies:
-      '@types/node': 20.17.5
+      '@types/node': 22.8.6
       fsevents: 2.3.3
 
-  vitest@2.1.4(@types/node@20.17.5):
+  vitest@2.1.4(@types/node@22.8.6):
     dependencies:
       '@vitest/expect': 2.1.4
-      '@vitest/mocker': 2.1.4(vite@5.2.13(@types/node@20.17.5))
+      '@vitest/mocker': 2.1.4(vite@5.2.13(@types/node@22.8.6))
       '@vitest/pretty-format': 2.1.4
       '@vitest/runner': 2.1.4
       '@vitest/snapshot': 2.1.4
@@ -13050,11 +13057,11 @@ snapshots:
       tinyexec: 0.3.1
       tinypool: 1.0.1
       tinyrainbow: 1.2.0
-      vite: 5.2.13(@types/node@20.17.5)
-      vite-node: 2.1.4(@types/node@20.17.5)
+      vite: 5.2.13(@types/node@22.8.6)
+      vite-node: 2.1.4(@types/node@22.8.6)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@types/node': 20.17.5
+      '@types/node': 22.8.6
     transitivePeerDependencies:
       - less
       - lightningcss
