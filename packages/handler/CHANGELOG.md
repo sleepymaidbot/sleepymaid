@@ -1,5 +1,20 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
+
+# [@sleepymaid/handler@3.1.1](https://github.com/sleepymaidbot/sleepymaid/compare/@sleepymaid/handler@3.1.0...@sleepymaid/handler@3.1.1) - (2024-10-31)
+
+## Bug Fixes
+
+- **handler:** Allow uncached guilds ([ca06e9c](https://github.com/sleepymaidbot/sleepymaid/commit/ca06e9cfb237bf1a3ce638a431255f3746895a93))
+- **deps:** Update all non-major dependencies (#659) ([88da573](https://github.com/sleepymaidbot/sleepymaid/commit/88da573c4e9b84a195f05c60bfa6d43fc74f323f))
+- **handler:** Add support for windows ([1f4be22](https://github.com/sleepymaidbot/sleepymaid/commit/1f4be22aa85d4c788b18bbbc513fc808f62e759c))
+- **deps:** Update all non-major dependencies (#649) ([3d33059](https://github.com/sleepymaidbot/sleepymaid/commit/3d33059cc9c5d0a508da3101e33052a1f8b24093))
+
+## Refactor
+
+- **Handler:** Simplify class loading ([862a072](https://github.com/sleepymaidbot/sleepymaid/commit/862a07294f2bc5e0b6c4ce54939a658f459320ad))
+- **handler:** Use classes instead of interfaces (#656) ([af6bf61](https://github.com/sleepymaidbot/sleepymaid/commit/af6bf61861a25363306f6871ef5b6cd3d530eddf))
 
 # [@sleepymaid/handler@3.1.0](https://github.com/sleepymaidbot/sleepymaid/compare/@sleepymaid/handler@3.0.0...@sleepymaid/handler@3.1.0) - (2024-05-06)
 
