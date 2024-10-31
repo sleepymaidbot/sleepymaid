@@ -5,7 +5,7 @@ import { SlashCommand } from "@sleepymaid/handler";
 import { prettyBytes, shell } from "@sleepymaid/util";
 import { ApplicationCommandType } from "discord-api-types/v10";
 import type { ChatInputCommandInteraction } from "discord.js";
-import { version as discordJSVersion } from "discord.js";
+import { ApplicationIntegrationType, version as discordJSVersion, InteractionContextType } from "discord.js";
 import type { SleepyMaidClient } from "../../../lib/extensions/SleepyMaidClient";
 
 export default class InfoCommand extends SlashCommand<SleepyMaidClient> {
@@ -15,6 +15,8 @@ export default class InfoCommand extends SlashCommand<SleepyMaidClient> {
 				name: "info",
 				description: "Gets information about the bot",
 				type: ApplicationCommandType.ChatInput,
+				integrationTypes: [ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall],
+				contexts: [InteractionContextType.BotDM, InteractionContextType.Guild, InteractionContextType.PrivateChannel],
 			},
 		});
 	}

@@ -1,7 +1,7 @@
 import { SlashCommand, type Context } from "@sleepymaid/handler";
 import { getLocalizedProp } from "@sleepymaid/shared";
 import type { APIEmbed, ChatInputCommandInteraction, Message } from "discord.js";
-import { ApplicationCommandType } from "discord.js";
+import { ApplicationCommandType, ApplicationIntegrationType, InteractionContextType } from "discord.js";
 import i18next from "i18next";
 import type { SleepyMaidClient } from "../../../lib/extensions/SleepyMaidClient";
 
@@ -12,6 +12,8 @@ export default class PingCommand extends SlashCommand<SleepyMaidClient> {
 				...getLocalizedProp("name", "commands.ping.name"),
 				...getLocalizedProp("description", "commands.ping.description"),
 				type: ApplicationCommandType.ChatInput,
+				integrationTypes: [ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall],
+				contexts: [InteractionContextType.BotDM, InteractionContextType.Guild, InteractionContextType.PrivateChannel],
 			},
 		});
 	}
