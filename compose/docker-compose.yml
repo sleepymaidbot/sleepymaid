@@ -12,7 +12,7 @@ services:
       timeout: 5s
 
   valkey:
-    image: valkey/valkey:7.2-alpine
+    image: valkey/valkey:8.0-alpine
     volumes:
       - valkey-data:/data
     restart: unless-stopped
