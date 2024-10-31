@@ -73,6 +73,7 @@ export default class QCGServersCommand extends SlashCommand<SleepyMaidClient> {
 			host: data.ip,
 			port: data.port,
 			givenPortOnly: true,
+			maxRetries: 3,
 		});
 
 		return await interaction.reply({
