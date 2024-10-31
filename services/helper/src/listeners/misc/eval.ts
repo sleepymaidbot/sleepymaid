@@ -22,8 +22,14 @@ export default class SetupListener extends Listener<"messageCreate", HelperClien
 		if (channel.isDMBased()) return;
 		const codetoeval = message.content.split(" ").slice(2).join(" ");
 		try {
-			if (codetoeval.includes(`token` || `env` || `message.channel.delete` || `message.guild.delete` || `delete`)) {
-				return await channel.send(`no`);
+			if (
+				codetoeval.includes("token") ||
+				codetoeval.includes("env") ||
+				codetoeval.includes("message.channel.delete") ||
+				codetoeval.includes("message.guild.delete") ||
+				codetoeval.includes("delete")
+			) {
+				return await channel.send("no");
 			}
 
 			const evalOutputEmbed = new EmbedBuilder().setTitle("Evaluated Code").addFields([

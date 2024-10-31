@@ -25,20 +25,20 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
-		"@swc/core": "^1.7.23",
+		"@swc/core": "^1.7.42",
 		"@types/amqplib": "^0.10.5",
-		"@types/node": "^20.16.3",
+		"@types/node": "^20.17.5",
 		"rimraf": "^6.0.1",
 		"source-map-support": "0.5.21",
-		"tsup": "^8.2.4",
-		"typescript": "^5.5.4"
+		"tsup": "^8.3.5",
+		"typescript": "^5.6.3"
 	},
 	"dependencies": {
 		"@sleepymaid/handler": "workspace:^",
 		"@paralleldrive/cuid2": "^2.2.2",
 		"amqplib": "^0.10.4",
-		"discord.js": "^14.16.1",
+		"discord.js": "^14.16.3",
 		"fuse.js": "^7.0.0",
-		"i18next": "^23.14.0"
+		"i18next": "^23.16.4"
 	}
 }
