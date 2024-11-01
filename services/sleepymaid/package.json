@@ -15,7 +15,7 @@
 	"devDependencies": {
 		"@types/gamedig": "^5.0.3",
 		"@types/i18next-fs-backend": "^1.1.5",
-		"@types/node": "^20.17.5",
+		"@types/node": "^22.8.6",
 		"@types/pg": "^8.11.10",
 		"drizzle-kit": "^0.27.0",
 		"rimraf": "^6.0.1",
