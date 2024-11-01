@@ -3,7 +3,7 @@ import { getLocalizedProp } from "@sleepymaid/shared";
 import type { APIEmbed, ChatInputCommandInteraction, Message } from "discord.js";
 import { ApplicationCommandType, ApplicationIntegrationType, InteractionContextType } from "discord.js";
 import i18next from "i18next";
-import type { SleepyMaidClient } from "../../../lib/extensions/SleepyMaidClient";
+import type { SleepyMaidClient } from "@/lib/extensions/SleepyMaidClient";
 
 export default class PingCommand extends SlashCommand<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {

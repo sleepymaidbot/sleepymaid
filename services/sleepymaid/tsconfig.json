@@ -1,6 +1,12 @@
 {
 	"compilerOptions": {
-		"outDir": "dist"
+		"outDir": "dist",
+
+		/* Path Aliases */
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"]
+		}
 	},
 	"extends": "../../tsconfig.json",
 	"include": ["src/**/*", "src/*"]

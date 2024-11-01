@@ -6,7 +6,7 @@ import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBi
 import type { ChatInputCommandInteraction } from "discord.js";
 import { PermissionsBitField } from "discord.js";
 import { eq } from "drizzle-orm";
-import type { SleepyMaidClient } from "../../../lib/extensions/SleepyMaidClient";
+import type { SleepyMaidClient } from "@/lib/extensions/SleepyMaidClient";
 
 export default class SanitizerConfigCommand extends SlashCommand<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {

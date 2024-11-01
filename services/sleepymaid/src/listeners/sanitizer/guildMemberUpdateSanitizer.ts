@@ -4,7 +4,7 @@ import { Listener } from "@sleepymaid/handler";
 import type { Context } from "@sleepymaid/handler";
 import type { GuildMember } from "discord.js";
 import { eq } from "drizzle-orm";
-import type { SleepyMaidClient } from "../../lib/extensions/SleepyMaidClient";
+import type { SleepyMaidClient } from "@/lib/extensions/SleepyMaidClient";
 
 export default class JoinSanitizerListener extends Listener<"guildMemberUpdate", SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {

@@ -8,7 +8,7 @@ import {
 	PermissionFlagsBits,
 	PermissionsBitField,
 } from "discord.js";
-import type { SleepyMaidClient } from "../../../lib/extensions/SleepyMaidClient";
+import type { SleepyMaidClient } from "@/lib/extensions/SleepyMaidClient";
 
 export default class PingCommand extends SlashCommand<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
