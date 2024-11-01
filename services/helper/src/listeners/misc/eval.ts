@@ -18,8 +18,7 @@ export default class SetupListener extends Listener<"messageCreate", HelperClien
 		if (!client.user) return;
 		if (!message.content.startsWith("<@" + client.user.id + "> eval")) return;
 		const channel = message.channel;
-		if (!channel.isTextBased()) return;
-		if (channel.isDMBased()) return;
+		if (!channel.isSendable()) return;
 		const codetoeval = message.content.split(" ").slice(2).join(" ");
 		try {
 			if (
