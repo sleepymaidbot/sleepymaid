@@ -18,7 +18,7 @@
 		"@commitlint/cli": "^19.5.0",
 		"@commitlint/config-angular": "^19.5.0",
 		"@favware/cliff-jumper": "^5.0.0",
-		"@favware/npm-deprecate": "^1.0.7",
+		"@favware/npm-deprecate": "^2.0.0",
 		"@typescript-eslint/eslint-plugin": "^8.12.2",
 		"@typescript-eslint/parser": "^8.12.2",
 		"eslint": "^8.57.1",
