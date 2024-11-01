@@ -20,15 +20,13 @@ export default class RandomMathCommand extends SlashCommand<SleepyMaidClient> {
 				options: [
 					{
 						name: "min",
-						description: "The minimum number",
+						description: "The minimum number. (Default: 0)",
 						type: ApplicationCommandOptionType.Integer,
-						required: true,
 					},
 					{
 						name: "max",
-						description: "The maximum number",
+						description: "The maximum number. (Default: 100)",
 						type: ApplicationCommandOptionType.Integer,
-						required: true,
 					},
 				],
 			},
@@ -36,8 +34,8 @@ export default class RandomMathCommand extends SlashCommand<SleepyMaidClient> {
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction) {
-		const min = interaction.options.getInteger("min", true);
-		const max = interaction.options.getInteger("max", true);
+		const min = interaction.options.getInteger("min") || 0;
+		const max = interaction.options.getInteger("max") || 100;
 		const random = Math.floor(Math.random() * (max - min + 1) + min);
 		await interaction.reply({ content: `🎲 The random number is ${random}` });
 	}
