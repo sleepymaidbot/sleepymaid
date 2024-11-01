@@ -19,7 +19,6 @@ export default class PingCommand extends SlashCommand<SleepyMaidClient> {
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction) {
-		if (!interaction.inCachedGuild()) return;
 		const client = this.container.client;
 		const timestamp1 = interaction.createdTimestamp;
 		await interaction.reply("Pong!");
