@@ -5,7 +5,7 @@ import type { Context } from "@sleepymaid/handler";
 import type { Message } from "discord.js";
 import type { SleepyMaidClient } from "@/lib/extensions/SleepyMaidClient";
 
-export default class SetupListener extends Listener<"messageCreate", SleepyMaidClient> {
+export default class EvalCommandListener extends Listener<"messageCreate", SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
 		super(context, {
 			name: "messageCreate",
