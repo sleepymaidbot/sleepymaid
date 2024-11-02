@@ -1,6 +1,7 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 // Schema imports
 import * as randombitrate from "./schema/helper/randombitrate";
+import * as fun from "./schema/sleepymaid/fun";
 import * as leveling from "./schema/sleepymaid/leveling";
 import * as mondecorte from "./schema/sleepymaid/mondecorte";
 import * as quickMessage from "./schema/sleepymaid/quickMessage";
@@ -12,6 +13,7 @@ import * as watcher from "./schema/watcher/watcher";
 // Schema object
 export const schema = {
 	...randombitrate,
+	...fun,
 	...leveling,
 	...mondecorte,
 	...quickMessage,
@@ -29,6 +31,7 @@ export type DrizzleInstance = ReturnType<typeof createDrizzleInstance>;
 
 // Export all schemas
 export * from "./schema/helper/randombitrate";
+export * from "./schema/sleepymaid/fun";
 export * from "./schema/sleepymaid/leveling";
 export * from "./schema/sleepymaid/mondecorte";
 export * from "./schema/sleepymaid/quickMessage";

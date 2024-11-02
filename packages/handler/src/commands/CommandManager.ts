@@ -145,22 +145,27 @@ export class CommandManager extends BaseManager {
 	private async RegisterGlobalApplicationCommands() {
 		const globalCommands = Array.from(this._tempCommands.values()).filter((cmd) => cmd.guildId === null);
 
-		await this.client.application?.commands.set(globalCommands.map((cmd) => cmd.data)).then((cmds) => {
-			for (const cmd of cmds.values()) {
-				const current = globalCommands.find((cc) => cc.name === cmd.name);
-				if (current) {
-					this._commands.set(cmd.id, {
-						id: cmd.id,
-						name: current.name,
-						file: current.file,
-						guildId: null,
-						data: current.data,
-					});
+		await this.client.application?.commands
+			.set(globalCommands.map((cmd) => cmd.data))
+			.then((cmds) => {
+				for (const cmd of cmds.values()) {
+					const current = globalCommands.find((cc) => cc.name === cmd.name);
+					if (current) {
+						this._commands.set(cmd.id, {
+							id: cmd.id,
+							name: current.name,
+							file: current.file,
+							guildId: null,
+							data: current.data,
+						});
+					}
 				}
-			}
 
-			this.client.logger.info("Command Handler: -> Successfully registered " + [...cmds].length + " global commands!");
-		});
+				this.client.logger.info(
+					"Command Handler: -> Successfully registered " + [...cmds].length + " global commands!",
+				);
+			})
+			.catch((error) => this.client.logger.error(error as Error));
 	}
 
 	private async RegisterGuildApplicationCommands() {
