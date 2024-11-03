@@ -1,5 +1,5 @@
 import { BaseLogger } from "@sleepymaid/handler";
-import { gray, blue, red, cyan } from "ansi-colors";
+import { gray, red, cyan } from "ansi-colors";
 
 export enum Loglevels {
 	Debug,
@@ -39,7 +39,7 @@ export class Logger extends BaseLogger {
 
 	public override info(message: string, ...args: string[]): void {
 		// this.pino.info(this.formatMessage(Loglevels.Info, blue(message), ...args))
-		console.info(this.formatMessage(Loglevels.Info, blue(message), ...args));
+		console.info(this.formatMessage(Loglevels.Info, cyan(message), ...args));
 	}
 
 	public override error(error: Error | string, ...args: string[]): void {
