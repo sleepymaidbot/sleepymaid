@@ -6,6 +6,7 @@ import { serveStatic } from "@hono/node-server/serve-static";
 import loadStaticFolders from "./loadStaticFolders";
 import { readdirSync } from "fs";
 import { join } from "path";
+import { logger as honoLogger } from "hono/logger";
 
 const app = new Hono();
 const logger = new Logger(process.env.NODE_ENV as env);
@@ -16,6 +17,12 @@ if (!secret) {
 	logger.error("API_SECRET is not set");
 	process.exit(1);
 }
+
+const customLogger = (message: string, ...args: string[]) => {
+	logger.debug(message, ...args);
+};
+
+app.use(honoLogger(customLogger));
 
 app.get("/", (c) => {
 	return c.text("Sleepymaid API");
