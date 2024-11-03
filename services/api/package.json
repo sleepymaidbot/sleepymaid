@@ -20,6 +20,7 @@
 	},
 	"dependencies": {
 		"@sleepymaid/db": "workspace:^",
+		"@sleepymaid/handler": "workspace:^",
 		"@sleepymaid/logger": "workspace:^",
 		"@sleepymaid/shared": "workspace:^",
 		"drizzle-orm": "^0.36.0",
