@@ -266,6 +266,9 @@ importers:
       "@sleepymaid/db":
         specifier: workspace:^
         version: link:../../packages/db
+      "@sleepymaid/handler":
+        specifier: workspace:^
+        version: link:../../packages/handler
       "@sleepymaid/logger":
         specifier: workspace:^
         version: link:../../packages/logger
