@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"types": ["node"],
+		"jsx": "react-jsx",
+		"jsxImportSource": "hono/jsx",
+
+		"outDir": "dist",
+
+		/* Path Aliases */
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"]
+		}
+	},
+	"extends": "../../tsconfig.json",
+	"include": ["src/**/*", "src/*"]
+}

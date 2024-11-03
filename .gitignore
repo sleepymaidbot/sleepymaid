@@ -171,14 +171,15 @@ icon.webp
 /**/types
 !/**/src/types
 ignore/
+/**/static/images
 
 compose/docker-compose.config.yml
 compose/docker-compose.config.dev.yml
 compose/docker-compose.config.prod.yml
+compose/*/
 
 # Temporary WIP dev files
 .turbo
 *.ignore
-/services/api
 compose/cookies.json
 packages/db/env.js

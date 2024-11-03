@@ -80,6 +80,16 @@ services:
     depends_on:
       - "postgres"
 
+  api:
+    container_name: sleepymaid_api
+    build:
+      context: ../
+      dockerfile: ./docker/services/Dockerfile
+    command: node --trace-warnings -r source-map-support/register services/api/dist/index.js
+    restart: unless-stopped
+    depends_on:
+      - "postgres"
+
   #website:
   #  build:
   #    context: ../

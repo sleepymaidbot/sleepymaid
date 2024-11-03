@@ -11,6 +11,7 @@ export type Config = {
 	nodeEnv: NodeEnv;
 	rabbitMQUrl: string;
 	redisUrl: string;
+	apiSecret: string;
 };
 
 export const initConfig = () => {
@@ -23,6 +24,7 @@ export const initConfig = () => {
 		rabbitMQUrl: process.env.RABBITMQ_URL!,
 		redisUrl: process.env.REDIS_URL!,
 		nodeEnv: (process.env.NODE_ENV as NodeEnv) ?? "dev",
+		apiSecret: process.env.API_SECRET!,
 	};
 	return config;
 };

@@ -5,6 +5,7 @@ services:
   sleepymaid:
     environment:
       NODE_ENV: "dev"
+      API_SECRET: ${API_SECRET}
       DISCORD_CLIENT_ID: ${DEVELOPMENT_SLEEPYMAID_CLIENT_ID}
       DISCORD_TOKEN: ${DEVELOPMENT_SLEEPYMAID_TOKEN}
       DEV_IDS: ${DEV_IDS}
@@ -13,6 +14,7 @@ services:
   helper:
     environment:
       NODE_ENV: "dev"
+      API_SECRET: ${API_SECRET}
       DISCORD_CLIENT_ID: ${DEVELOPMENT_HELPER_CLIENT_ID}
       DISCORD_TOKEN: ${DEVELOPMENT_HELPER_TOKEN}
       DEV_IDS: ${DEV_IDS}
@@ -21,6 +23,7 @@ services:
   watcher:
     environment:
       NODE_ENV: "dev"
+      API_SECRET: ${API_SECRET}
       DISCORD_CLIENT_ID: ${DEVELOPMENT_WATCHER_CLIENT_ID}
       DISCORD_TOKEN: ${DEVELOPMENT_WATCHER_TOKEN}
       DEV_IDS: ${DEV_IDS}
@@ -29,6 +32,16 @@ services:
   #website:
   #  environment:
   #    NODE_ENV: 'development'
+  api:
+    environment:
+      NODE_ENV: "dev"
+      API_SECRET: ${API_SECRET}
+      DATABASE_URL: ${DATABASE_URL}
+      RABBITMQ_URL: ${RABBITMQ_URL}
+      REDIS_URL: ${REDIS_URL}
+    ports:
+      - "${API_PORT}:3000"
+
   postgres:
     ports:
       - "127.0.0.1:5433:5432"
