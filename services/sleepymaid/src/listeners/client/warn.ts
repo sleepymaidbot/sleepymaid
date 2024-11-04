@@ -1,6 +1,6 @@
 import type { Context } from "@sleepymaid/handler";
 import { Listener } from "@sleepymaid/handler";
-import type { SleepyMaidClient } from "@/lib/extensions/SleepyMaidClient";
+import type { SleepyMaidClient } from "../../lib/extensions/SleepyMaidClient";
 
 export default class WarnListener extends Listener<"warn", SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {

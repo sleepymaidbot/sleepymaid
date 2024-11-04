@@ -1,4 +1,4 @@
-import { SleepyMaidClient } from "@/lib/extensions/SleepyMaidClient";
+import { SleepyMaidClient } from "../lib/extensions/SleepyMaidClient";
 import { guildsSettings } from "@sleepymaid/db";
 import { Context, Precondition, type CommandInteractionTypeUnion } from "@sleepymaid/handler";
 import { eq } from "drizzle-orm";

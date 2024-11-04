@@ -9,7 +9,7 @@ import {
 	ComponentType,
 	InteractionContextType,
 } from "discord.js";
-import type { SleepyMaidClient } from "@/lib/extensions/SleepyMaidClient";
+import type { SleepyMaidClient } from "../../../lib/extensions/SleepyMaidClient";
 import { GameDig } from "gamedig";
 import { getUnixTime, sub } from "date-fns";
 
