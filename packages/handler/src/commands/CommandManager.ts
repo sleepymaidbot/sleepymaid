@@ -1,6 +1,5 @@
 import { readdir } from "node:fs/promises";
 import { join } from "node:path";
-import { pathToFileURL } from "node:url";
 import { findFilesRecursively } from "@sapphire/node-utilities";
 import type {
 	ApplicationCommandData,
@@ -16,6 +15,7 @@ import type { HandlerClient } from "../HandlerClient";
 import { MessageCommand } from "./MessageCommand";
 import { SlashCommand } from "./SlashCommand";
 import { UserCommand } from "./UserCommand";
+import { pathToFileURL } from "node:url";
 
 export type CommandManagerStartAllOptionsType = {
 	folder: string;
@@ -38,21 +38,41 @@ async function checkAndInstantiateCommand(
 	context: Context<HandlerClient>,
 ): Promise<MessageCommand<HandlerClient> | SlashCommand<HandlerClient> | UserCommand<HandlerClient> | null> {
 	try {
-		const { default: importedModule } = await import(file).catch(async () => import(pathToFileURL(file).toString()));
-		const nestedDefault = importedModule?.default;
+		let importedModule;
 
-		if (typeof nestedDefault === "function") {
-			if (nestedDefault.prototype instanceof MessageCommand) {
-				return new nestedDefault(context) as MessageCommand<HandlerClient>;
-			} else if (nestedDefault.prototype instanceof SlashCommand) {
-				return new nestedDefault(context) as SlashCommand<HandlerClient>;
-			} else if (nestedDefault.prototype instanceof UserCommand) {
-				return new nestedDefault(context) as UserCommand<HandlerClient>;
+		try {
+			const fileUrl = pathToFileURL(file).toString();
+			importedModule = await import(fileUrl);
+		} catch (esmError) {
+			try {
+				importedModule = require(file);
+			} catch (cjsError) {
+				console.error("Failed to import module (both ESM and CommonJS):", file);
+				console.error("ESM Error:", esmError);
+				console.error("CommonJS Error:", cjsError);
+				return null;
 			}
 		}
 
+		const CommandClass = importedModule?.default?.default || importedModule?.default || importedModule;
+
+		if (typeof CommandClass !== "function") {
+			console.log("No valid command class found in:", file);
+			return null;
+		}
+
+		if (CommandClass.prototype instanceof MessageCommand) {
+			return new CommandClass(context) as MessageCommand<HandlerClient>;
+		} else if (CommandClass.prototype instanceof SlashCommand) {
+			return new CommandClass(context) as SlashCommand<HandlerClient>;
+		} else if (CommandClass.prototype instanceof UserCommand) {
+			return new CommandClass(context) as UserCommand<HandlerClient>;
+		}
+
+		console.log("Command class does not extend any known command type:", file);
 		return null;
-	} catch {
+	} catch (error) {
+		console.error("Error instantiating command from:", file, error);
 		return null;
 	}
 }
@@ -103,7 +123,7 @@ export class CommandManager extends BaseManager {
 		}
 
 		this.client.logger.info(
-			`Command Handler: -> Successfully found ${[...this._commands].length} application commands!`,
+			`Command Handler: -> Successfully found ${[...this._tempCommands].length} application commands!`,
 		);
 		await this.RegisterApplicationCommands();
 	}
@@ -229,6 +249,18 @@ export class CommandManager extends BaseManager {
 			const context = new Context<HandlerClient>(container);
 			const cmd = await checkAndInstantiateCommand(file.file, context);
 			if (!cmd) return;
+
+			if (cmd.preconditions) {
+				for (const precondition of cmd.preconditions) {
+					const cond = new precondition(context);
+					const preconditionResult = await cond.execute!(interaction as never);
+					if (preconditionResult === false) return;
+					if (preconditionResult instanceof Error) {
+						this.client.logger.error(preconditionResult as Error);
+						return;
+					}
+				}
+			}
 
 			await cmd.execute!(interaction as never);
 		} catch (error) {

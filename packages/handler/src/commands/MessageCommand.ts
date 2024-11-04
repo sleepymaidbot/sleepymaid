@@ -7,14 +7,14 @@ import { Command } from "./Command";
 export class MessageCommand<Client extends HandlerClient> extends Command<Client> {
 	public declare data: MessageApplicationCommandData;
 
-	public constructor(context: Context<Client>, options: MessageCommandOptions) {
+	public constructor(context: Context<Client>, options: MessageCommandOptions<Client>) {
 		super(context, options);
 		this.data = options.data;
 	}
 
-	public override execute?(interaction: MessageContextMenuCommandInteraction<`cached`>): Awaitable<unknown>;
+	public override execute?(interaction: MessageContextMenuCommandInteraction): Awaitable<unknown>;
 }
 
-export type MessageCommandOptions = CommandOptions & {
+export type MessageCommandOptions<Client extends HandlerClient> = CommandOptions<Client> & {
 	data: MessageApplicationCommandData;
 };

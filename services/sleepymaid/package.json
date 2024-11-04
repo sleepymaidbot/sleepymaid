@@ -39,11 +39,15 @@
 		"gamedig": "^5.1.4",
 		"i18next": "^23.16.4",
 		"i18next-fs-backend": "^2.3.2",
+		"module-alias": "^2.2.3",
 		"murmurhash-v3": "^1.0.2",
 		"path": "0.12.7",
 		"pg": "^8.13.1",
 		"reflect-metadata": "0.2.2",
 		"tslib": "^2.8.1",
 		"tsyringe": "4.8.0"
+	},
+	"_moduleAliases": {
+		"@": "dist"
 	}
 }

@@ -12,16 +12,16 @@ import { Command } from "./Command";
 export class SlashCommand<Client extends HandlerClient> extends Command<Client> {
 	public declare data: ChatInputApplicationCommandData;
 
-	public constructor(context: Context<Client>, options: SlashCommandOptions) {
+	public constructor(context: Context<Client>, options: SlashCommandOptions<Client>) {
 		super(context, options);
 		this.data = options.data;
 	}
 
-	public override execute?(interaction: ChatInputCommandInteraction<`cached`>): Awaitable<unknown>;
+	public override execute?(interaction: ChatInputCommandInteraction): Awaitable<unknown>;
 
 	public autocomplete?(interaction: AutocompleteInteraction): Awaitable<unknown>;
 }
 
-export type SlashCommandOptions = CommandOptions & {
+export type SlashCommandOptions<Client extends HandlerClient> = CommandOptions<Client> & {
 	data: ChatInputApplicationCommandData;
 };

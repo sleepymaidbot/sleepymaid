@@ -4,9 +4,10 @@ import type { Context } from "@sleepymaid/handler";
 import { SlashCommand } from "@sleepymaid/handler";
 import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from "discord-api-types/v10";
 import type { ChatInputCommandInteraction } from "discord.js";
-import { PermissionsBitField } from "discord.js";
+import { ApplicationIntegrationType, InteractionContextType, PermissionsBitField } from "discord.js";
 import { eq } from "drizzle-orm";
 import type { SleepyMaidClient } from "@/lib/extensions/SleepyMaidClient";
+import DBCheckPrecondtion from "@/preconditions/dbCheck";
 
 export default class SanitizerConfigCommand extends SlashCommand<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
@@ -17,8 +18,9 @@ export default class SanitizerConfigCommand extends SlashCommand<SleepyMaidClien
 				// ...getLocalizedProp('name', 'commands.sanitizer.name'),
 				// ...getLocalizedProp('description', 'commands.sanitizer.description'),
 				type: ApplicationCommandType.ChatInput,
+				integrationTypes: [ApplicationIntegrationType.GuildInstall],
+				contexts: [InteractionContextType.Guild],
 				defaultMemberPermissions: new PermissionsBitField([PermissionFlagsBits.Administrator]),
-				dmPermission: false,
 				options: [
 					{
 						name: "toggle",
@@ -73,6 +75,7 @@ export default class SanitizerConfigCommand extends SlashCommand<SleepyMaidClien
 					},
 				],
 			},
+			preconditions: [DBCheckPrecondtion],
 		});
 	}
 

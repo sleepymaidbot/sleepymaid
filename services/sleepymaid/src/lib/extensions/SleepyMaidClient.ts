@@ -9,7 +9,7 @@ import { Logger } from "@sleepymaid/logger";
 import type { Config, RequestType, ResponseType } from "@sleepymaid/shared";
 import { initConfig, supportedLngs, Queue, RabbitMQConnection } from "@sleepymaid/shared";
 import type { Channel, Connection } from "amqplib";
-import { ActivityType, GatewayIntentBits } from "discord-api-types/v10";
+import { GatewayIntentBits } from "discord-api-types/v10";
 import { MessagePayload, PermissionFlagsBits } from "discord.js";
 import i18next from "i18next";
 import FsBackend from "i18next-fs-backend";

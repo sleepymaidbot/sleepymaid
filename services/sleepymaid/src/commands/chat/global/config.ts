@@ -6,13 +6,14 @@ import { getLocalizedProp } from "@sleepymaid/shared";
 import type { APIEmbed } from "discord-api-types/v10";
 import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from "discord-api-types/v10";
 import type { ChatInputCommandInteraction } from "discord.js";
-import { PermissionsBitField } from "discord.js";
+import { ApplicationIntegrationType, InteractionContextType, PermissionsBitField } from "discord.js";
 import { eq } from "drizzle-orm";
 import i18next from "i18next";
 import type { DependencyContainer } from "tsyringe";
 import { container } from "tsyringe";
 import { SleepyMaidClient } from "@/lib/extensions/SleepyMaidClient";
 import { configManager, SpecialRoleType } from "@/lib/managers/global/configManager";
+import DBCheckPrecondtion from "@/preconditions/dbCheck";
 
 const getBaseEmbed = (interaction: ChatInputCommandInteraction<"cached">): APIEmbed => {
 	return {
@@ -41,8 +42,9 @@ export default class ConfigCommand extends SlashCommand<SleepyMaidClient> {
 				...getLocalizedProp("name", "commands.config.name"),
 				...getLocalizedProp("description", "commands.config.description"),
 				type: ApplicationCommandType.ChatInput,
+				integrationTypes: [ApplicationIntegrationType.GuildInstall],
+				contexts: [InteractionContextType.Guild],
 				defaultMemberPermissions: new PermissionsBitField([PermissionFlagsBits.Administrator]),
-				dmPermission: false,
 				options: [
 					{
 						...getLocalizedProp("name", "commands.config.admin-role.name"),
@@ -122,6 +124,7 @@ export default class ConfigCommand extends SlashCommand<SleepyMaidClient> {
 					},
 				],
 			},
+			preconditions: [DBCheckPrecondtion],
 		});
 	}
 

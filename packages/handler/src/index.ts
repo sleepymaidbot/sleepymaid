@@ -6,6 +6,10 @@ export * from "./BaseLogger";
 
 // ./commands
 
+export * from "./commands/preconditions/Precondition";
+
+export * from "./commands/Command";
+
 export * from "./commands/SlashCommand";
 
 export * from "./commands/UserCommand";

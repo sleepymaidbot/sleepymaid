@@ -5,6 +5,7 @@ import { Context, BaseContainer } from "../BaseContainer";
 import { BaseManager } from "../BaseManager";
 import type { HandlerClient } from "../HandlerClient";
 import { Listener } from "./Listener";
+import { sep } from "node:path";
 
 export type ListenerManagerStartAllOptionsType = {
 	folder: string;
@@ -15,16 +16,32 @@ async function checkAndInstantiateListener(
 	context: Context<HandlerClient>,
 ): Promise<Listener<keyof ClientEvents, HandlerClient> | null> {
 	try {
-		const { default: importedModule } = await import(file).catch(async () => import(pathToFileURL(file).toString()));
-		const nestedDefault = importedModule?.default;
+		let importedModule;
 
-		if (typeof nestedDefault === "function" && nestedDefault.prototype instanceof Listener) {
-			return new nestedDefault(context);
+		try {
+			const fileUrl = pathToFileURL(file).toString();
+			importedModule = await import(fileUrl);
+		} catch (esmError) {
+			try {
+				importedModule = require(file);
+			} catch (cjsError) {
+				console.error("Failed to import module (both ESM and CommonJS):", file);
+				console.error("ESM Error:", esmError);
+				console.error("CommonJS Error:", cjsError);
+				return null;
+			}
 		}
 
+		const ListenerClass = importedModule?.default?.default || importedModule?.default || importedModule;
+
+		if (typeof ListenerClass === "function" && ListenerClass.prototype instanceof Listener) {
+			return new ListenerClass(context);
+		}
+
+		console.log("No valid listener class found in:", file);
 		return null;
 	} catch (error) {
-		console.error(error);
+		console.error("Error instantiating listener from:", file, error);
 		return null;
 	}
 }
@@ -56,7 +73,7 @@ export class ListenerManager extends BaseManager {
 				}
 
 				count++;
-				this.client.logger.info(`Listener handler: -> Loaded listener -> ${file.split("/").pop()?.split(".")[0]}`);
+				this.client.logger.info(`Listener handler: -> Loaded listener -> ${file.split(sep).pop()?.split(".")[0]}`);
 			} catch (error) {
 				this.client.logger.error(error as Error);
 			}

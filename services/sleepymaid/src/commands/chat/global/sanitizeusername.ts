@@ -5,12 +5,15 @@ import type { ChatInputCommandInteraction } from "discord.js";
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
+	ApplicationIntegrationType,
+	InteractionContextType,
 	PermissionFlagsBits,
 	PermissionsBitField,
 } from "discord.js";
 import type { SleepyMaidClient } from "@/lib/extensions/SleepyMaidClient";
+import DBCheckPrecondtion from "@/preconditions/dbCheck";
 
-export default class PingCommand extends SlashCommand<SleepyMaidClient> {
+export default class SanitizerUserCommand extends SlashCommand<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
 		super(context, {
 			data: {
@@ -20,6 +23,8 @@ export default class PingCommand extends SlashCommand<SleepyMaidClient> {
 				// ...getLocalizedProp('description', 'commands.ping.description'),
 				defaultMemberPermissions: new PermissionsBitField([PermissionFlagsBits.ManageNicknames]),
 				type: ApplicationCommandType.ChatInput,
+				integrationTypes: [ApplicationIntegrationType.GuildInstall],
+				contexts: [InteractionContextType.Guild],
 				options: [
 					{
 						name: "user",
@@ -29,6 +34,7 @@ export default class PingCommand extends SlashCommand<SleepyMaidClient> {
 					},
 				],
 			},
+			preconditions: [DBCheckPrecondtion],
 		});
 	}
 
