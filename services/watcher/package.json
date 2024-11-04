@@ -35,6 +35,6 @@
 		"pg": "^8.13.1"
 	},
 	"_moduleAliases": {
-		"@": "dist"
+		"@": "./dist"
 	}
 }

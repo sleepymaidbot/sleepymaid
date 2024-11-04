@@ -38,6 +38,6 @@
 		"tsyringe": "^4.8.0"
 	},
 	"_moduleAliases": {
-		"@": "dist"
+		"@": "./dist"
 	}
 }
