@@ -7,7 +7,7 @@ import { createDrizzleInstance, DrizzleInstance, guildsSettings } from "@sleepym
 import { HandlerClient } from "@sleepymaid/handler";
 import { Logger } from "@sleepymaid/logger";
 import type { Config, RequestType, ResponseType } from "@sleepymaid/shared";
-import { initConfig, supportedLngs, mqConnection, Queue } from "@sleepymaid/shared";
+import { initConfig, supportedLngs, Queue, RabbitMQConnection } from "@sleepymaid/shared";
 import type { Channel, Connection } from "amqplib";
 import { ActivityType, GatewayIntentBits } from "discord-api-types/v10";
 import { MessagePayload, PermissionFlagsBits } from "discord.js";
@@ -18,7 +18,7 @@ import { eq } from "drizzle-orm";
 export class SleepyMaidClient extends HandlerClient {
 	public declare drizzle: DrizzleInstance;
 
-	public declare connection: Connection;
+	public declare mqConnection: Connection;
 
 	public declare channel: Channel;
 
@@ -59,10 +59,10 @@ export class SleepyMaidClient extends HandlerClient {
 
 		this.drizzle = createDrizzleInstance(process.env.DATABASE_URL as string);
 
-		await mqConnection.connect(this.config.rabbitMQUrl);
-
-		this.connection = mqConnection.connection;
-		if (mqConnection.rabbitMQConnected) this.channel = await this.connection.createChannel();
+		const con = RabbitMQConnection.getInstance();
+		await con.connect(this.config.rabbitMQUrl);
+		this.mqConnection = con.connection;
+		if (con.rabbitMQConnected) this.channel = con.channel;
 
 		await i18next.use(FsBackend).init({
 			// debug: this.config.environment === 'development',
@@ -91,7 +91,7 @@ export class SleepyMaidClient extends HandlerClient {
 
 		void this.login(this.config.discordToken);
 
-		if (mqConnection.rabbitMQConnected) await this.startRPCListeners();
+		if (con.rabbitMQConnected) await this.startRPCListeners();
 
 		process.on("unhandledRejection", (error: Error) => {
 			this.logger.error(error);
@@ -99,6 +99,7 @@ export class SleepyMaidClient extends HandlerClient {
 	}
 
 	private async startRPCListeners(): Promise<void> {
+		this.logger.info("Starting RPC listeners");
 		await this.channel.assertQueue(Queue.CheckGuildInformation, { durable: false });
 		void this.channel.consume(Queue.CheckGuildInformation, async (msg) => {
 			if (!msg) {

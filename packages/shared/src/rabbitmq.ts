@@ -92,33 +92,35 @@ export async function sendRPCRequest<Q extends keyof ResponseType>(
 	});
 }
 
-class RabbitMQConnection {
+export class RabbitMQConnection {
 	public connection!: Connection;
 
 	public channel!: Channel;
 
 	public rabbitMQConnected!: boolean;
 
+	private static instance: RabbitMQConnection | null = null;
+
 	public async connect(url: string): Promise<amqp.Connection | null> {
 		if (this.rabbitMQConnected && this.channel) return null;
 		else this.rabbitMQConnected = true;
 
 		try {
-			console.log(`⌛️ Connecting to Rabbit-MQ Server`);
 			this.connection = await connect(url);
-
-			console.log(`✅ Rabbit MQ Connection is ready`);
 
 			this.channel = await this.connection.createChannel();
 
-			console.log(`🛸 Created RabbitMQ Channel successfully`);
 			return this.connection;
 		} catch (error) {
 			console.error(error);
-			console.error(`Not connected to MQ Server`);
 			return null;
 		}
 	}
-}
 
-export const mqConnection = new RabbitMQConnection();
+	public static getInstance(): RabbitMQConnection {
+		if (!this.instance) {
+			this.instance = new RabbitMQConnection();
+		}
+		return this.instance;
+	}
+}
