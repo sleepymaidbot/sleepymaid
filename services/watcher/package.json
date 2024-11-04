@@ -33,8 +33,5 @@
 		"module-alias": "^2.2.3",
 		"path": "0.12.7",
 		"pg": "^8.13.1"
-	},
-	"_moduleAliases": {
-		"@": "./dist"
 	}
 }

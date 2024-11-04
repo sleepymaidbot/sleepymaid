@@ -63,7 +63,7 @@ importers:
         version: 6.0.1
       tsup:
         specifier: ^8.3.5
-        version: 8.3.5(@swc/core@1.7.42(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.47)(typescript@5.6.3)(yaml@2.5.0)
+        version: 8.3.5(@swc/core@1.7.42)(jiti@1.21.6)(postcss@8.4.47)(typescript@5.6.3)(yaml@2.5.0)
       turbo:
         specifier: ^2.0.11
         version: 2.0.11
@@ -112,7 +112,7 @@ importers:
         version: 0.5.21
       tsup:
         specifier: ^8.3.5
-        version: 8.3.5(@swc/core@1.7.42(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.47)(typescript@5.6.3)(yaml@2.5.0)
+        version: 8.3.5(@swc/core@1.7.42)(jiti@1.21.6)(postcss@8.4.47)(typescript@5.6.3)(yaml@2.5.0)
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
@@ -152,7 +152,7 @@ importers:
         version: 0.5.21
       tsup:
         specifier: ^8.3.5
-        version: 8.3.5(@swc/core@1.7.42(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.47)(typescript@5.6.3)(yaml@2.5.0)
+        version: 8.3.5(@swc/core@1.7.42)(jiti@1.21.6)(postcss@8.4.47)(typescript@5.6.3)(yaml@2.5.0)
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
@@ -183,7 +183,7 @@ importers:
         version: 0.5.21
       tsup:
         specifier: ^8.3.5
-        version: 8.3.5(@swc/core@1.7.42(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.47)(typescript@5.6.3)(yaml@2.5.0)
+        version: 8.3.5(@swc/core@1.7.42)(jiti@1.21.6)(postcss@8.4.47)(typescript@5.6.3)(yaml@2.5.0)
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
@@ -208,6 +208,9 @@ importers:
       i18next:
         specifier: ^23.16.4
         version: 23.16.4
+      module-alias:
+        specifier: ^2.2.3
+        version: 2.2.3
     devDependencies:
       "@swc/core":
         specifier: ^1.7.42
@@ -215,6 +218,9 @@ importers:
       "@types/amqplib":
         specifier: ^0.10.5
         version: 0.10.5
+      "@types/module-alias":
+        specifier: ^2.0.4
+        version: 2.0.4
       "@types/node":
         specifier: ^22.8.7
         version: 22.8.7
@@ -226,7 +232,7 @@ importers:
         version: 0.5.21
       tsup:
         specifier: ^8.3.5
-        version: 8.3.5(@swc/core@1.7.42(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.47)(typescript@5.6.3)(yaml@2.5.0)
+        version: 8.3.5(@swc/core@1.7.42)(jiti@1.21.6)(postcss@8.4.47)(typescript@5.6.3)(yaml@2.5.0)
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
@@ -250,7 +256,7 @@ importers:
         version: 0.5.21
       tsup:
         specifier: ^8.3.5
-        version: 8.3.5(@swc/core@1.7.42(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.47)(typescript@5.6.3)(yaml@2.5.0)
+        version: 8.3.5(@swc/core@1.7.42)(jiti@1.21.6)(postcss@8.4.47)(typescript@5.6.3)(yaml@2.5.0)
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
@@ -3103,6 +3109,10 @@ packages:
   "@types/mdast@4.0.4":
     resolution:
       { integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA== }
+
+  "@types/module-alias@2.0.4":
+    resolution:
+      { integrity: sha512-5+G/QXO/DvHZw60FjvbDzO4JmlD/nG5m2/vVGt25VN1eeP3w2bCoks1Wa7VuptMPM1TxJdx6RjO70N9Fw0nZPA== }
 
   "@types/ms@0.7.34":
     resolution:
@@ -9971,6 +9981,8 @@ snapshots:
     dependencies:
       "@types/unist": 3.0.2
 
+  "@types/module-alias@2.0.4": {}
+
   "@types/ms@0.7.34": {}
 
   "@types/node-cron@3.0.11": {}
@@ -14374,7 +14386,7 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  tsup@8.3.5(@swc/core@1.7.42(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.47)(typescript@5.6.3)(yaml@2.5.0):
+  tsup@8.3.5(@swc/core@1.7.42)(jiti@1.21.6)(postcss@8.4.47)(typescript@5.6.3)(yaml@2.5.0):
     dependencies:
       bundle-require: 5.0.0(esbuild@0.24.0)
       cac: 6.7.14

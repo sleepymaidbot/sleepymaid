@@ -32,8 +32,5 @@
 		"path": "0.12.7",
 		"reflect-metadata": "^0.2.1",
 		"tsyringe": "^4.8.0"
-	},
-	"_moduleAliases": {
-		"@": "./dist"
 	}
 }

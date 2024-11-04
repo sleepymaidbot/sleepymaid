@@ -36,8 +36,5 @@
 		"pg": "^8.13.1",
 		"reflect-metadata": "^0.2.1",
 		"tsyringe": "^4.8.0"
-	},
-	"_moduleAliases": {
-		"@": "./dist"
 	}
 }
