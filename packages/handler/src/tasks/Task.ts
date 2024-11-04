@@ -5,11 +5,14 @@ import type { HandlerClient } from "../HandlerClient";
 export class Task<Client extends HandlerClient> {
 	public interval: string;
 
+	public runOnStart: boolean;
+
 	public container: BaseContainer<Client>;
 
 	public constructor(context: Context<Client>, options: TaskOptions) {
 		this.container = context.container;
 		this.interval = options.interval;
+		this.runOnStart = options.runOnStart ?? false;
 	}
 
 	public execute?(): Awaitable<unknown>;
@@ -17,4 +20,5 @@ export class Task<Client extends HandlerClient> {
 
 export type TaskOptions = {
 	interval: string;
+	runOnStart?: boolean;
 };

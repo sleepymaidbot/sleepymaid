@@ -50,6 +50,8 @@ export class TaskManager extends BaseManager {
 				this.client.logger.error(error as Error);
 			}
 
+			if (task.runOnStart) task.execute!();
+
 			count++;
 			this.client.logger.info(`Task handler: -> Loaded task -> ${file?.split("/")?.pop()?.split(".")[0]}`);
 		}
