@@ -39,15 +39,6 @@ export class SleepyMaidClient extends HandlerClient {
 					GatewayIntentBits.MessageContent,
 				],
 				allowedMentions: { parse: ["users", "roles"], repliedUser: false },
-				presence: {
-					status: "online",
-					activities: [
-						{
-							name: "yo allo ?",
-							type: ActivityType.Custom,
-						},
-					],
-				},
 			},
 		);
 	}
@@ -84,9 +75,9 @@ export class SleepyMaidClient extends HandlerClient {
 			listeners: {
 				folder: resolve(__dirname, "..", "..", "listeners"),
 			},
-			/* tasks: {
+			tasks: {
 				folder: resolve(__dirname, "..", "..", "tasks"),
-			},*/
+			},
 		});
 
 		void this.login(this.config.discordToken);
