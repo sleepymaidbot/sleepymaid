@@ -11,7 +11,7 @@ import { eq } from "drizzle-orm";
 import i18next from "i18next";
 import type { DependencyContainer } from "tsyringe";
 import { container } from "tsyringe";
-import { SleepyMaidClient } from "@/lib/extensions/SleepyMaidClient";
+import { SleepyMaidClient } from "../../../lib/extensions/SleepyMaidClient";
 import { configManager, SpecialRoleType } from "@/lib/managers/global/configManager";
 import DBCheckPrecondtion from "../../../preconditions/dbCheck";
 
