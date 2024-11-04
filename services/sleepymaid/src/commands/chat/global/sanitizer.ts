@@ -7,7 +7,7 @@ import type { ChatInputCommandInteraction } from "discord.js";
 import { ApplicationIntegrationType, InteractionContextType, PermissionsBitField } from "discord.js";
 import { eq } from "drizzle-orm";
 import type { SleepyMaidClient } from "@/lib/extensions/SleepyMaidClient";
-import DBCheckPrecondtion from "@/preconditions/dbCheck";
+import DBCheckPrecondtion from "../../../preconditions/dbCheck";
 
 export default class SanitizerConfigCommand extends SlashCommand<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {

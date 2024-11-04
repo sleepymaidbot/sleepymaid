@@ -13,7 +13,7 @@ import type { DependencyContainer } from "tsyringe";
 import { container } from "tsyringe";
 import { SleepyMaidClient } from "@/lib/extensions/SleepyMaidClient";
 import { configManager, SpecialRoleType } from "@/lib/managers/global/configManager";
-import DBCheckPrecondtion from "@/preconditions/dbCheck";
+import DBCheckPrecondtion from "../../../preconditions/dbCheck";
 
 const getBaseEmbed = (interaction: ChatInputCommandInteraction<"cached">): APIEmbed => {
 	return {
