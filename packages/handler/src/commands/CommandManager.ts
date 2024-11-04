@@ -238,9 +238,15 @@ export class CommandManager extends BaseManager {
 	}
 
 	private async HandleApplicationCommands(interaction: CommandInteraction) {
-		this.client.logger.info(
-			`${interaction.guild?.name} (${interaction.guild?.id}) > ${interaction.member?.user.username} (${interaction.member?.user.id}) > /${interaction.commandName} (${interaction.commandId})`,
-		);
+		if (interaction.guild) {
+			this.client.logger.info(
+				`${interaction.guild?.name} (${interaction.guild?.id}) > ${interaction.user.username} (${interaction.user.id}) > /${interaction.commandName} (${interaction.commandId})`,
+			);
+		} else {
+			this.client.logger.info(
+				`${interaction.user.username} (${interaction.user.id}) > /${interaction.commandName} (${interaction.commandId})`,
+			);
+		}
 		try {
 			const file = this._commands.get(interaction.commandId);
 			if (!file) return;
