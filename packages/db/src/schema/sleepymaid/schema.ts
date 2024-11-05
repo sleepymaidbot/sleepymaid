@@ -5,19 +5,19 @@ import { roleMenu } from "./rolemenu";
 import { quickMessage } from "./quickMessage";
 
 export const guildSetting = pgTable("guild_setting", {
-	guildId: text("guildId").primaryKey().notNull(),
-	guildName: text("guildname").notNull(),
+	guildId: text("guild_id").primaryKey().notNull(),
+	guildName: text("guild_name").notNull(),
 	guildIcon: text("icon"),
-	sanitizerEnabled: boolean("sanitizerEnabled").default(false).notNull(),
-	sanitizerIgnoredRoles: text("sanitizerIgnoredRoles")
+	sanitizerEnabled: boolean("sanitizer_enabled").default(false).notNull(),
+	sanitizerIgnoredRoles: text("sanitizer_ignored_roles")
 		.array()
 		.default(sql`'{}'`)
 		.notNull(),
-	adminRoles: text("adminRoles")
+	adminRoles: text("admin_roles")
 		.array()
 		.default(sql`'{}'`)
 		.notNull(),
-	modRoles: text("modRoles")
+	modRoles: text("mod_roles")
 		.array()
 		.default(sql`'{}'`)
 		.notNull(),

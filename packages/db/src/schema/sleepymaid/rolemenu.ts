@@ -14,17 +14,17 @@ export type roleMenuValuesType = {
 };
 
 export const roleMenu = pgTable("role_menu", {
-	guildId: text("serverId").references(() => guildSetting.guildId, { onDelete: "cascade" }),
-	roleMenuId: text("roleMenuId")
+	guildId: text("server_id").references(() => guildSetting.guildId, { onDelete: "cascade" }),
+	roleMenuId: text("role_menu_id")
 		.primaryKey()
 		.$defaultFn(() => createId()),
-	roleMenuName: text("roleMenuName").notNull(),
-	channelId: text("channelId").notNull(),
-	messageId: text("messageId"),
+	roleMenuName: text("role_menu_name").notNull(),
+	channelId: text("channel_id").notNull(),
+	messageId: text("message_id"),
 	enabled: boolean("boolean").default(false).notNull(),
 	type: roleMenuType("type").notNull(),
-	maxRoles: integer("maxRoles").default(1).notNull(),
-	minRoles: integer("minRoles").default(0).notNull(),
+	maxRoles: integer("max_roles").default(1).notNull(),
+	minRoles: integer("min_roles").default(0).notNull(),
 	values: jsonb("values")
 		.notNull()
 		.$type<roleMenuValuesType[]>()
