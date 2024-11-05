@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { guildsSettings } from "@sleepymaid/db";
+import { guildSetting } from "@sleepymaid/db";
 import type { Snowflake } from "discord.js";
 import { eq } from "drizzle-orm";
 import { singleton } from "tsyringe";
@@ -19,11 +19,9 @@ export class configManager extends baseManager {
 		sanitizerEnabled: boolean;
 		sanitizerIgnoredRoles: string[] | null;
 	}> {
-		const config = (
-			await this.client.drizzle.select().from(guildsSettings).where(eq(guildsSettings.guildId, guildId))
-		)[0]!;
+		const config = (await this.client.drizzle.select().from(guildSetting).where(eq(guildSetting.guildId, guildId)))[0]!;
 		if (!config) {
-			await this.client.drizzle.insert(guildsSettings).values({
+			await this.client.drizzle.insert(guildSetting).values({
 				guildId,
 				// eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
 				guildName: this.client.guilds.cache.get(guildId)?.name!,
@@ -38,18 +36,18 @@ export class configManager extends baseManager {
 
 	public async addSpecialRole(guildId: Snowflake, roleId: Snowflake, type: SpecialRoleType) {
 		const guildSettings = (
-			await this.client.drizzle.select().from(guildsSettings).where(eq(guildsSettings.guildId, guildId))
+			await this.client.drizzle.select().from(guildSetting).where(eq(guildSetting.guildId, guildId))
 		)[0]!;
 		if (type === SpecialRoleType.admin) {
 			return this.client.drizzle
-				.update(guildsSettings)
+				.update(guildSetting)
 				.set({ adminRoles: [...guildSettings.adminRoles, roleId] })
-				.where(eq(guildsSettings.guildId, guildId));
+				.where(eq(guildSetting.guildId, guildId));
 		} else if (type === SpecialRoleType.mod) {
 			return this.client.drizzle
-				.update(guildsSettings)
+				.update(guildSetting)
 				.set({ modRoles: [...guildSettings.modRoles, roleId] })
-				.where(eq(guildsSettings.guildId, guildId));
+				.where(eq(guildSetting.guildId, guildId));
 		} else return null;
 	}
 
@@ -64,22 +62,22 @@ export class configManager extends baseManager {
 
 	public async removeSpecialRole(guildId: Snowflake, roleId: Snowflake, type: SpecialRoleType) {
 		const guildSettings = (
-			await this.client.drizzle.select().from(guildsSettings).where(eq(guildsSettings.guildId, guildId))
+			await this.client.drizzle.select().from(guildSetting).where(eq(guildSetting.guildId, guildId))
 		)[0]!;
 		if (type === SpecialRoleType.admin) {
 			return this.client.drizzle
-				.update(guildsSettings)
+				.update(guildSetting)
 				.set({ adminRoles: this.removeRoleFromArray(guildSettings.adminRoles, roleId) })
-				.where(eq(guildsSettings.guildId, guildId));
+				.where(eq(guildSetting.guildId, guildId));
 		} else if (type === SpecialRoleType.mod) {
 			return this.client.drizzle
-				.update(guildsSettings)
+				.update(guildSetting)
 				.set({ modRoles: this.removeRoleFromArray(guildSettings.modRoles, roleId) })
-				.where(eq(guildsSettings.guildId, guildId));
+				.where(eq(guildSetting.guildId, guildId));
 		} else return null;
 	}
 
 	public async getSpecialRoles(guildId: Snowflake) {
-		return (await this.client.drizzle.select().from(guildsSettings).where(eq(guildsSettings.guildId, guildId)))[0]!;
+		return (await this.client.drizzle.select().from(guildSetting).where(eq(guildSetting.guildId, guildId)))[0]!;
 	}
 }

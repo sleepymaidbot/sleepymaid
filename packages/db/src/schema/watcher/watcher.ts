@@ -1,18 +1,18 @@
 import { boolean, pgEnum, pgTable, serial, text } from "drizzle-orm/pg-core";
-import { guildsSettings } from "../sleepymaid/schema";
+import { guildSetting } from "../sleepymaid/schema";
 
-export const logChannelType = pgEnum("LogChannelType", ["server", "mod"]);
-export const caseType = pgEnum("CaseType", ["untimeout", "timeout", "kick", "unban", "ban"]);
+export const logChannelType = pgEnum("Log_channel_type", ["server", "mod"]);
+export const caseType = pgEnum("case_type", ["untimeout", "timeout", "kick", "unban", "ban"]);
 
-export const logChannel = pgTable("logChannel", {
-	guildId: text("guildId")
+export const logChannel = pgTable("log_channel", {
+	guildId: text("guild_id")
 		.notNull()
-		.references(() => guildsSettings.guildId, { onDelete: "cascade" }),
-	channelId: text("channelId").primaryKey().notNull(),
+		.references(() => guildSetting.guildId, { onDelete: "cascade" }),
+	channelId: text("channel_id").primaryKey().notNull(),
 	type: logChannelType("type").notNull(),
 	webhookId: text("webhookId").notNull(),
-	webhookToken: text("webhookToken").notNull(),
-	threadId: text("threadId"),
+	webhookToken: text("webhook_token").notNull(),
+	threadId: text("thread_id"),
 	timeout: boolean("timeout").default(false).notNull(),
 	untimeout: boolean("untimeout").default(false).notNull(),
 	kick: boolean("kick").default(false).notNull(),
@@ -41,13 +41,13 @@ export const logChannel = pgTable("logChannel", {
 });
 
 export const modCase = pgTable("case", {
-	guildId: text("guildId")
+	guildId: text("guild_id")
 		.notNull()
-		.references(() => guildsSettings.guildId, { onDelete: "cascade" }),
-	caseNumber: serial("caseNumber").primaryKey().notNull(),
-	messageId: text("messageId").notNull(),
-	userId: text("userId").notNull(),
+		.references(() => guildSetting.guildId, { onDelete: "cascade" }),
+	caseNumber: serial("case_number").primaryKey().notNull(),
+	messageId: text("message_id").notNull(),
+	userId: text("user_id").notNull(),
 	reason: text("reason"),
 	type: caseType("type").notNull(),
-	modId: text("modId"),
+	modId: text("mod_id"),
 });

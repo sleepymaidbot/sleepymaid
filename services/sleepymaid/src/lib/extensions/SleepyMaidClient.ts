@@ -3,7 +3,7 @@
 /* eslint-disable unicorn/prefer-module */
 import { Buffer } from "node:buffer";
 import { resolve } from "node:path";
-import { createDrizzleInstance, DrizzleInstance, guildsSettings } from "@sleepymaid/db";
+import { createDrizzleInstance, DrizzleInstance, guildSetting } from "@sleepymaid/db";
 import { HandlerClient } from "@sleepymaid/handler";
 import { Logger } from "@sleepymaid/logger";
 import type { Config, RequestType, ResponseType } from "@sleepymaid/shared";
@@ -197,8 +197,8 @@ export class SleepyMaidClient extends HandlerClient {
 				);
 			}
 
-			const guildSettings = await this.drizzle.query.guildsSettings.findFirst({
-				where: eq(guildsSettings.guildId, message.guildId),
+			const guildSettings = await this.drizzle.query.guildSetting.findFirst({
+				where: eq(guildSetting.guildId, message.guildId),
 			});
 			if (!guildSettings || !guildSettings.guildId) {
 				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
@@ -248,8 +248,8 @@ export class SleepyMaidClient extends HandlerClient {
 				});
 			}
 
-			const guildSettings = await this.drizzle.query.guildsSettings.findFirst({
-				where: eq(guildsSettings.guildId, message.guildId),
+			const guildSettings = await this.drizzle.query.guildSetting.findFirst({
+				where: eq(guildSetting.guildId, message.guildId),
 			});
 			if (!guildSettings || !guildSettings.guildId) {
 				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {

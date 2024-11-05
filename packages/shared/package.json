@@ -39,6 +39,7 @@
 		"@sleepymaid/handler": "workspace:^",
 		"amqplib": "^0.10.4",
 		"discord.js": "^14.16.3",
+		"drizzle-orm": "^0.36.0",
 		"fuse.js": "^7.0.0",
 		"i18next": "^23.16.4",
 		"module-alias": "^2.2.3"

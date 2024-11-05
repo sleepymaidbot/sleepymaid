@@ -99,8 +99,8 @@ importers:
         specifier: ^8.11.10
         version: 8.11.10
       drizzle-kit:
-        specifier: ^0.27.1
-        version: 0.27.1
+        specifier: 0.27.1-2293cf4
+        version: 0.27.1-2293cf4
       next-auth:
         specifier: ^4.24.10
         version: 4.24.10(@auth/core@0.34.2)(next@15.0.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -202,6 +202,9 @@ importers:
       discord.js:
         specifier: ^14.16.3
         version: 14.16.3
+      drizzle-orm:
+        specifier: ^0.36.0
+        version: 0.36.0(@types/pg@8.11.10)(@types/react@18.3.12)(pg@8.13.1)(postgres@3.4.5)(react@18.3.1)
       fuse.js:
         specifier: ^7.0.0
         version: 7.0.0
@@ -361,9 +364,6 @@ importers:
       "@types/pg":
         specifier: ^8.11.10
         version: 8.11.10
-      drizzle-kit:
-        specifier: ^0.27.1
-        version: 0.27.1
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
@@ -458,9 +458,6 @@ importers:
       "@types/pg":
         specifier: ^8.11.10
         version: 8.11.10
-      drizzle-kit:
-        specifier: ^0.27.1
-        version: 0.27.1
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
@@ -571,9 +568,6 @@ importers:
       "@types/pg":
         specifier: ^8.11.10
         version: 8.11.10
-      drizzle-kit:
-        specifier: ^0.27.1
-        version: 0.27.1
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
@@ -4242,9 +4236,9 @@ packages:
       { integrity: sha512-QM8q3zDe58hqUqjraQOmzZ1LIH9SWQJTlEKCH4kJ2oQvLZk7RbQXvtDM2XEq3fwkV9CCvvH4LA0AV+ogFsBM2Q== }
     engines: { node: ">=8" }
 
-  drizzle-kit@0.27.1:
+  drizzle-kit@0.27.1-2293cf4:
     resolution:
-      { integrity: sha512-4BNA0T2blN+jW5wSwhtc+FIlCMuxYSMWCnYYdOBi5rttwq8aVXRUid0d0NCzcBKtZQSPZGAUxy+TXr7Q1OgEug== }
+      { integrity: sha512-xULtwbu4LC57X58oYZCWifZHH/JFVgQ67CpGApJUiEN5fFo/J5xISk/mrTwPc6wmbd5MU0Lme1HylewdN5LE5A== }
     hasBin: true
 
   drizzle-orm@0.36.0:
@@ -11021,7 +11015,7 @@ snapshots:
     dependencies:
       is-obj: 2.0.0
 
-  drizzle-kit@0.27.1:
+  drizzle-kit@0.27.1-2293cf4:
     dependencies:
       "@drizzle-team/brocli": 0.10.2
       "@esbuild-kit/esm-loader": 2.6.5

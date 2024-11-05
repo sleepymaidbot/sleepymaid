@@ -1,5 +1,6 @@
 export * from "./autocomplete";
 export * from "./config";
+export * from "./drizzle";
 export * from "./lists";
 export * from "./localizer";
 export * from "./moduleResolver";

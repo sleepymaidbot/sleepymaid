@@ -1,4 +1,4 @@
-import { guildsSettings } from "@sleepymaid/db";
+import { guildSetting } from "@sleepymaid/db";
 import type { Context } from "@sleepymaid/handler";
 import { Listener } from "@sleepymaid/handler";
 import type { Guild } from "discord.js";
@@ -18,7 +18,7 @@ export default class GuildCreateListener extends Listener<"guildCreate", SleepyM
 		);
 
 		return this.container.client.drizzle
-			.insert(guildsSettings)
+			.insert(guildSetting)
 			.values({ guildId: guild.id, guildName: guild.name, guildIcon: guild.iconURL() });
 	}
 }

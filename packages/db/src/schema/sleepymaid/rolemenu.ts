@@ -1,7 +1,7 @@
 import { createId } from "@paralleldrive/cuid2";
 import { relations, sql } from "drizzle-orm";
 import { text, boolean, pgTable, pgEnum, jsonb, integer } from "drizzle-orm/pg-core";
-import { guildsSettings } from "./schema";
+import { guildSetting } from "./schema";
 
 export const roleMenuType = pgEnum("role_menu_type", ["buttons", "select"]);
 
@@ -14,7 +14,7 @@ export type roleMenuValuesType = {
 };
 
 export const roleMenu = pgTable("role_menu", {
-	guildId: text("serverId").references(() => guildsSettings.guildId, { onDelete: "cascade" }),
+	guildId: text("serverId").references(() => guildSetting.guildId, { onDelete: "cascade" }),
 	roleMenuId: text("roleMenuId")
 		.primaryKey()
 		.$defaultFn(() => createId()),
@@ -32,9 +32,9 @@ export const roleMenu = pgTable("role_menu", {
 });
 
 export const roleMenuRelations = relations(roleMenu, ({ one }) => ({
-	guildsSettings: one(guildsSettings, {
+	guildsSettings: one(guildSetting, {
 		fields: [roleMenu.guildId],
-		references: [guildsSettings.guildId],
+		references: [guildSetting.guildId],
 		relationName: "roleMenus",
 	}),
 }));

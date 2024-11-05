@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { guildsSettings } from "@sleepymaid/db";
+import { guildSetting } from "@sleepymaid/db";
 import type { Context } from "@sleepymaid/handler";
 import { SlashCommand } from "@sleepymaid/handler";
 import { getLocalizedProp } from "@sleepymaid/shared";
@@ -136,7 +136,7 @@ export default class ConfigCommand extends SlashCommand<SleepyMaidClient> {
 		const subcommandGroup = interaction.options.getSubcommandGroup();
 		const subcommand = interaction.options.getSubcommand();
 		const guildSettings = (
-			await client.drizzle.select().from(guildsSettings).where(eq(guildsSettings.guildId, interaction.guild.id))
+			await client.drizzle.select().from(guildSetting).where(eq(guildSetting.guildId, interaction.guild.id))
 		)[0]!;
 		const adminRoles = guildSettings.adminRoles ?? [];
 		const modRoles = guildSettings.modRoles ?? [];
@@ -303,14 +303,14 @@ export default class ConfigCommand extends SlashCommand<SleepyMaidClient> {
 								roles = roles.filter((r) => r !== roleId);
 								if (action === SpecialRoleType.admin) {
 									await client.drizzle
-										.update(guildsSettings)
+										.update(guildSetting)
 										.set({ adminRoles: removeRoleFromArray(adminRoles, roleId) })
-										.where(eq(guildsSettings.guildId, interaction.guild.id));
+										.where(eq(guildSetting.guildId, interaction.guild.id));
 								} else if (action === SpecialRoleType.mod) {
 									await client.drizzle
-										.update(guildsSettings)
+										.update(guildSetting)
 										.set({ modRoles: removeRoleFromArray(modRoles, roleId) })
-										.where(eq(guildsSettings.guildId, interaction.guild.id));
+										.where(eq(guildSetting.guildId, interaction.guild.id));
 								}
 							}
 						}

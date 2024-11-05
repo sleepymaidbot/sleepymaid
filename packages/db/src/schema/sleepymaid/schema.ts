@@ -1,10 +1,10 @@
 import { relations, sql } from "drizzle-orm";
-import { pgTable, text, boolean } from "drizzle-orm/pg-core";
+import { pgTable, text, boolean, bigint, timestamp, integer } from "drizzle-orm/pg-core";
 import { randomBitrate } from "../helper/randombitrate";
 import { roleMenu } from "./rolemenu";
 import { quickMessage } from "./quickMessage";
 
-export const guildsSettings = pgTable("GuildsSettings", {
+export const guildSetting = pgTable("guild_setting", {
 	guildId: text("guildId").primaryKey().notNull(),
 	guildName: text("guildname").notNull(),
 	guildIcon: text("icon"),
@@ -23,7 +23,7 @@ export const guildsSettings = pgTable("GuildsSettings", {
 		.notNull(),
 });
 
-export const guildsSettingsRelations = relations(guildsSettings, ({ many }) => ({
+export const guildSettingRelations = relations(guildSetting, ({ many }) => ({
 	randomBitrateChannels: many(randomBitrate, {
 		relationName: "randomBitrateChannels",
 	}),
@@ -34,3 +34,22 @@ export const guildsSettingsRelations = relations(guildsSettings, ({ many }) => (
 		relationName: "quickMessages",
 	}),
 }));
+
+export const userData = pgTable("user_data", {
+	// Basic Information
+	userId: text("user_id").notNull().primaryKey(),
+	userName: text("user_name").notNull(),
+	userAvatar: text("user_avatar"),
+
+	// Economy
+	currency: bigint({ mode: "number" }).default(0).notNull(),
+
+	// Economy Cooldowns Timestamps
+	dailyTimestamp: timestamp("daily_timestamp"),
+	dailyStreak: integer("daily_streak").default(0),
+	weeklyTimestamp: timestamp("weekly_timestamp"),
+	weeklyStreak: integer("weekly_streak").default(0),
+	monthlyTimestamp: timestamp("monthly_timestamp"),
+	monthlyStreak: integer("monthly_streak").default(0),
+	workTimestamp: timestamp("work_timestamp"),
+});

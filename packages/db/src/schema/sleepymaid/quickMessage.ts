@@ -1,7 +1,7 @@
 import { jsonb, pgTable, text } from "drizzle-orm/pg-core";
 import { type APIEmbed } from "discord-api-types/v10";
 import { relations } from "drizzle-orm";
-import { guildsSettings } from "./schema";
+import { guildSetting } from "./schema";
 
 export const quickMessage = pgTable("quick_message", {
 	guildId: text("guildId").notNull(),
@@ -16,9 +16,9 @@ export const quickMessage = pgTable("quick_message", {
 });
 
 export const quickMessageRelations = relations(quickMessage, ({ one }) => ({
-	guildsSettings: one(guildsSettings, {
+	guildsSettings: one(guildSetting, {
 		fields: [quickMessage.guildId],
-		references: [guildsSettings.guildId],
+		references: [guildSetting.guildId],
 		relationName: "quickMessages",
 	}),
 }));

@@ -1,10 +1,16 @@
-import { pgTable, text, integer, index } from "drizzle-orm/pg-core";
+import { pgTable, text, integer, index, serial } from "drizzle-orm/pg-core";
+import { userData } from "./schema";
 
-export const actions = pgTable(
-	"Actions",
+export const user_actions = pgTable(
+	"user_action",
 	{
-		userId: text("user_id").notNull().primaryKey(),
-		targetId: text("target_id").notNull(),
+		id: serial("id").primaryKey().notNull(),
+		userId: text("user_id")
+			.notNull()
+			.references(() => userData.userId, { onDelete: "cascade" }),
+		targetId: text("target_id")
+			.notNull()
+			.references(() => userData.userId, { onDelete: "cascade" }),
 		hug: integer("hug").default(0).notNull(),
 		pat: integer("pat").default(0).notNull(),
 		bite: integer("bite").default(0).notNull(),

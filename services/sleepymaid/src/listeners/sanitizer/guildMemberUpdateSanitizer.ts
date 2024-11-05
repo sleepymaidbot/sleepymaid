@@ -1,5 +1,5 @@
 import sanitize from "@aero/sanitizer";
-import { guildsSettings } from "@sleepymaid/db";
+import { guildSetting } from "@sleepymaid/db";
 import { Listener } from "@sleepymaid/handler";
 import type { Context } from "@sleepymaid/handler";
 import type { GuildMember } from "discord.js";
@@ -18,14 +18,14 @@ export default class JoinSanitizerListener extends Listener<"guildMemberUpdate",
 		if (newMember.user.bot) return;
 		const client = this.container.client;
 		const userRole = newMember.guild.roles.cache.map((role) => role.id);
-		const sanitizerSettings = (
-			await client.drizzle.select().from(guildsSettings).where(eq(guildsSettings.guildId, newMember.guild.id))
-		)[0]!;
-		if (!sanitizerSettings) return;
-		if (sanitizerSettings.sanitizerEnabled === false) return;
+		const guildSettings = await client.drizzle.query.guildSetting.findFirst({
+			where: eq(guildSetting.guildId, newMember.guild.id),
+		});
+		if (!guildSettings) return;
+		if (guildSettings.sanitizerEnabled === false) return;
 		if (
-			sanitizerSettings.sanitizerIgnoredRoles.length &&
-			sanitizerSettings.sanitizerIgnoredRoles.some((role: string) => userRole.includes(role))
+			guildSettings.sanitizerIgnoredRoles.length &&
+			guildSettings.sanitizerIgnoredRoles.some((role: string) => userRole.includes(role))
 		)
 			return;
 		if (newMember.nickname !== null && oldMember.nickname !== newMember.nickname) {

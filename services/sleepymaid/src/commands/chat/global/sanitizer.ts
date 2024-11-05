@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { guildsSettings } from "@sleepymaid/db";
+import { guildSetting } from "@sleepymaid/db";
 import type { Context } from "@sleepymaid/handler";
 import { SlashCommand } from "@sleepymaid/handler";
 import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from "discord-api-types/v10";
@@ -83,7 +83,7 @@ export default class SanitizerConfigCommand extends SlashCommand<SleepyMaidClien
 		if (!interaction.inCachedGuild()) return;
 		const client = this.container.client;
 		const guildSettings = (
-			await client.drizzle.select().from(guildsSettings).where(eq(guildsSettings.guildId, interaction.guildId))
+			await client.drizzle.select().from(guildSetting).where(eq(guildSetting.guildId, interaction.guildId))
 		)[0]!;
 		if (interaction.options.getSubcommand() === "toggle") {
 			const state = interaction.options.getBoolean("state", true);
@@ -95,9 +95,9 @@ export default class SanitizerConfigCommand extends SlashCommand<SleepyMaidClien
 			}
 
 			await client.drizzle
-				.update(guildsSettings)
+				.update(guildSetting)
 				.set({ sanitizerEnabled: state })
-				.where(eq(guildsSettings.guildId, interaction.guildId));
+				.where(eq(guildSetting.guildId, interaction.guildId));
 			return interaction.reply({
 				content: `Username sanitizer has been ${state ? "enabled" : "disabled"}.`,
 				ephemeral: true,
@@ -113,9 +113,9 @@ export default class SanitizerConfigCommand extends SlashCommand<SleepyMaidClien
 				}
 
 				await client.drizzle
-					.update(guildsSettings)
+					.update(guildSetting)
 					.set({ sanitizerIgnoredRoles: [...guildSettings.sanitizerIgnoredRoles, role.id] })
-					.where(eq(guildsSettings.guildId, interaction.guildId));
+					.where(eq(guildSetting.guildId, interaction.guildId));
 				return interaction.reply({
 					content: "Role has been added to the ignored roles.",
 					ephemeral: true,
@@ -130,11 +130,11 @@ export default class SanitizerConfigCommand extends SlashCommand<SleepyMaidClien
 				}
 
 				await client.drizzle
-					.update(guildsSettings)
+					.update(guildSetting)
 					.set({
 						sanitizerIgnoredRoles: guildSettings.sanitizerIgnoredRoles.filter((r) => r !== role.id),
 					})
-					.where(eq(guildsSettings.guildId, interaction.guildId));
+					.where(eq(guildSetting.guildId, interaction.guildId));
 
 				return interaction.reply({
 					content: "Role has been removed from the ignored roles.",
@@ -159,13 +159,13 @@ export default class SanitizerConfigCommand extends SlashCommand<SleepyMaidClien
 					.filter((r) => r !== undefined);
 
 				await client.drizzle
-					.update(guildsSettings)
+					.update(guildSetting)
 					.set({
 						sanitizerIgnoredRoles: [
 							...new Set(guildSettings.sanitizerIgnoredRoles.filter((r) => !deletedRoles.includes(r))),
 						],
 					})
-					.where(eq(guildsSettings.guildId, interaction.guildId));
+					.where(eq(guildSetting.guildId, interaction.guildId));
 
 				return interaction.reply({
 					content: `Ignored roles: ${ignoredRoles.join(", ")}`,
