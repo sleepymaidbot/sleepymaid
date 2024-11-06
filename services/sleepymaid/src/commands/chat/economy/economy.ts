@@ -236,7 +236,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 		if (data.weeklyTimestamp && Date.now() - data.weeklyTimestamp.getTime() < 7 * 24 * 60 * 60 * 1000) {
 			const timeLeft = new Date(data.weeklyTimestamp.getTime() + 7 * 24 * 60 * 60 * 1000 - Date.now());
 			await interaction.reply(
-				`You have already claimed your weekly reward. Come back in ${timeLeft.getUTCHours()}h ${timeLeft.getUTCMinutes()}m.`,
+				`You have already claimed your weekly reward. Come back in ${timeLeft.getUTCDate() - 1}d ${timeLeft.getUTCHours()}h ${timeLeft.getUTCMinutes()}m.`,
 			);
 			return;
 		}
@@ -275,7 +275,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 		if (data.monthlyTimestamp && Date.now() - data.monthlyTimestamp.getTime() < 30 * 24 * 60 * 60 * 1000) {
 			const timeLeft = new Date(data.monthlyTimestamp.getTime() + 30 * 24 * 60 * 60 * 1000 - Date.now());
 			await interaction.reply(
-				`You have already claimed your monthly reward. Come back in ${timeLeft.getUTCHours()}h ${timeLeft.getUTCMinutes()}m.`,
+				`You have already claimed your monthly reward. Come back in ${timeLeft.getUTCDate() - 1}d ${timeLeft.getUTCHours()}h ${timeLeft.getUTCMinutes()}m.`,
 			);
 			return;
 		}
@@ -314,7 +314,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 		if (data.workTimestamp && Date.now() - data.workTimestamp.getTime() < 10 * 60 * 1000) {
 			const timeLeft = new Date(data.workTimestamp.getTime() + 10 * 60 * 1000 - Date.now());
 			await interaction.reply(
-				`You have already worked today. Come back in ${timeLeft.getUTCHours()}h ${timeLeft.getUTCMinutes()}m.`,
+				`You have already worked today. Come back in ${timeLeft.getUTCMinutes()}m ${timeLeft.getUTCSeconds()}s.`,
 			);
 			return;
 		}
