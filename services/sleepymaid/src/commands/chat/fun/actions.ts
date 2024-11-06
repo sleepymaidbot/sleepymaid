@@ -9,9 +9,11 @@ import {
 	ApplicationCommandOptionData,
 	resolveColor,
 	ColorResolvable,
+	Colors,
 } from "discord.js";
-// import { and, eq } from "drizzle-orm";
-// import { actions } from "@sleepymaid/db";
+import { and, eq } from "drizzle-orm";
+import { userActions } from "@sleepymaid/db";
+import DBCheckPrecondtion from "../../../preconditions/dbCheck";
 
 const actionsObj: { [key: string]: { short: string; past: string; desc: string } } = {
 	hug: {
@@ -162,6 +164,7 @@ export default class ActionsCommand extends SlashCommand<SleepyMaidClient> {
 		}
 
 		super(context, {
+			preconditions: [DBCheckPrecondtion],
 			data: {
 				name: "actions",
 				description: "Get a random action",
@@ -190,48 +193,64 @@ export default class ActionsCommand extends SlashCommand<SleepyMaidClient> {
 
 		await interaction.deferReply();
 
-		// const actionsData = await this.container.client.drizzle.query.actions.findFirst({
-		// 	where: (actions, { eq }) => and(eq(actions.userId, userId), eq(actions.targetId, targetId)),
-		// });
+		const actionsData = await this.container.client.drizzle.query.userActions.findFirst({
+			where: (actions, { eq }) => and(eq(actions.userId, userId), eq(actions.targetId, targetId)),
+		});
 
-		// let count: number = 0;
-		// if (actionsData) {
-		// 	const _count = actionsData[action as keyof typeof actionsData] ?? 0;
-		// 	if (typeof count !== "number") return interaction.editReply({ content: "An error occured." });
-		// 	count = _count as number;
-		// }
+		let count: number = 0;
+		if (actionsData) {
+			const _count = actionsData[action as keyof typeof actionsData] ?? 0;
+			if (typeof count !== "number") return interaction.editReply({ content: "An error occured." });
+			count = _count as number;
+		}
 
-		// const number = count + 1;
+		const number = count + 1;
 
-		let color: ColorResolvable = "#01e6ff";
+		let color: ColorResolvable = Colors.Aqua;
 		if (interaction.member! && interaction.inCachedGuild()) {
 			color = interaction.member!.displayHexColor;
+		}
+
+		const apiUrl = process.env.API_URL ?? "https://api.ecorte.xyz";
+		const apiKey = process.env.API_SECRET ?? "";
+		const response = await fetch(`${apiUrl}/images/${action}`, {
+			headers: {
+				Authorization: apiKey,
+			},
+		});
+		const data = (await response.json()) as { status: string; image: string };
+		let url: string = "";
+		if (data.status === "success" && data.image) {
+			url = `${apiUrl}/${data.image}`;
 		}
 
 		await interaction.editReply({
 			embeds: [
 				{
 					description: `**${interaction.user.displayName}** ${actionData.short} **${user.displayName}**`,
-					// footer: {
-					// 	text: `${interaction.user.displayName} has ${actionData.past} ${number} time${number === 1 ? "" : "s"}.`,
-					// },
+					footer: {
+						text: `${interaction.user.displayName} has ${actionData.past} ${number} time${number === 1 ? "" : "s"}.`,
+					},
+					image: {
+						url,
+					},
 					color: resolveColor(color),
 				},
 			],
 		});
 
-		// if (!actionsData) {
-		// 	await this.container.client.drizzle.insert(actions).values({
-		// 		userId,
-		// 		targetId,
-		// 		[action]: number,
-		// 	});
-		// 	return;
-		// }
-		// await this.container.client.drizzle
-		// 	.update(actions)
-		// 	.set({ [action]: number })
-		// 	.where(and(eq(actions.userId, userId), eq(actions.targetId, targetId)));
+		if (!actionsData) {
+			await this.container.client.drizzle.insert(userActions).values({
+				userId,
+				targetId,
+				[action]: number,
+			});
+			return;
+		}
+		await this.container.client.drizzle
+			.update(userActions)
+			.set({ [action]: number })
+			.where(and(eq(userActions.userId, userId), eq(userActions.targetId, targetId)));
 
 		return;
 	}

@@ -31,7 +31,7 @@
 		"@swc/core": "^1.7.42",
 		"@types/node": "^22.8.7",
 		"@types/pg": "^8.11.10",
-		"drizzle-kit": "0.27.1-2293cf4",
+		"drizzle-kit": "0.27.2",
 		"next-auth": "^4.24.10",
 		"rimraf": "^6.0.1",
 		"source-map-support": "0.5.21",

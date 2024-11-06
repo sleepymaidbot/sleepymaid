@@ -1,16 +1,14 @@
 import { pgTable, text, integer, index, serial } from "drizzle-orm/pg-core";
 import { userData } from "./schema";
 
-export const user_actions = pgTable(
+export const userActions = pgTable(
 	"user_action",
 	{
 		id: serial("id").primaryKey().notNull(),
 		userId: text("user_id")
 			.notNull()
 			.references(() => userData.userId, { onDelete: "cascade" }),
-		targetId: text("target_id")
-			.notNull()
-			.references(() => userData.userId, { onDelete: "cascade" }),
+		targetId: text("target_id").notNull(),
 		hug: integer("hug").default(0).notNull(),
 		pat: integer("pat").default(0).notNull(),
 		bite: integer("bite").default(0).notNull(),
