@@ -78,7 +78,7 @@ export default class SlotCommand extends SlashCommand<SleepyMaidClient> {
 					"https://cdn.discordapp.com/attachments/434861245846519828/1303519924777521282/1c4bba02f0519e1417e2.png",
 			},
 			color: Colors.Gold,
-			description: `${slots.join(" ")} \n${resultMessage}`,
+			description: `# ${slots.join(" ")} \n${resultMessage}`,
 			timestamp: new Date().toISOString(),
 		};
 
