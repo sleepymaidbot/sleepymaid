@@ -32,6 +32,7 @@ const getBaseEmbed = (interaction: ChatInputCommandInteraction) => {
 			name: interaction.user.username,
 			icon_url: interaction.user.avatarURL() ?? interaction.client.user.avatarURL() ?? undefined,
 		},
+		timestamp: new Date().toISOString(),
 	} satisfies APIEmbed;
 };
 
@@ -154,6 +155,18 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 	}
 
 	private async leaderboard(interaction: ChatInputCommandInteraction) {
+		const medals = {
+			0: "🥇",
+			1: "🥈",
+			2: "🥉",
+			3: "4️⃣",
+			4: "5️⃣",
+			5: "6️⃣",
+			6: "7️⃣",
+			7: "8️⃣",
+			8: "9️⃣",
+			9: "🔟",
+		};
 		const leaderboard = await this.container.client.drizzle.query.userData.findMany({
 			orderBy: desc(userData.currency),
 			limit: 10,
@@ -162,7 +175,12 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			embeds: [
 				{
 					...getBaseEmbed(interaction),
-					description: `Leaderboard:\n ${leaderboard.map((user) => `${user.userName}: ${user.currency}`).join("\n")}`,
+					description: `### Leaderboard:\n${leaderboard
+						.map((user, index) => {
+							const prefix = medals[index as keyof typeof medals] ?? `${index + 1}.`;
+							return `${prefix} **${user.userName}**: ${user.currency}`;
+						})
+						.join("\n")}`,
 				},
 			],
 		});
