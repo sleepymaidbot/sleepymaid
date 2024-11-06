@@ -62,12 +62,13 @@ export default class SlotCommand extends SlashCommand<SleepyMaidClient> {
 		if (uniqueSlots === 1) multiplier += 5;
 		else if (uniqueSlots === 2) multiplier += 3;
 
-		await this.container.client.drizzle
+		const returning = await this.container.client.drizzle
 			.update(userData)
 			.set({
 				currency: increment(userData.currency, amount * multiplier),
 			})
-			.where(eq(userData.userId, interaction.user.id));
+			.where(eq(userData.userId, interaction.user.id))
+			.returning({ currency: userData.currency });
 
 		const resultMessage = multiplier > 0 ? `You won ${amount * multiplier} coins! 🎉` : `You lost ${amount} coins 😢`;
 
@@ -78,7 +79,7 @@ export default class SlotCommand extends SlashCommand<SleepyMaidClient> {
 					"https://cdn.discordapp.com/attachments/434861245846519828/1303519924777521282/1c4bba02f0519e1417e2.png",
 			},
 			color: Colors.Gold,
-			description: `# ${slots.join(" ")} \n${resultMessage}`,
+			description: `# ${slots.join(" ")} \n${resultMessage}\nYou now have ${returning[0]?.currency} coins.`,
 			timestamp: new Date().toISOString(),
 		};
 
