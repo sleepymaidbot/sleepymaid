@@ -2,7 +2,6 @@ import type { Context } from "@sleepymaid/handler";
 import { Listener } from "@sleepymaid/handler";
 import type { SleepyMaidClient } from "../../lib/extensions/SleepyMaidClient";
 import { userData } from "@sleepymaid/db";
-import { eq } from "drizzle-orm";
 import { Message } from "discord.js";
 import { increment } from "@sleepymaid/shared";
 
@@ -25,18 +24,22 @@ export default class MessageCreateEconomyListener extends Listener<"messageCreat
 		if (lastMessage && now - lastMessage < 60000) return; // 60 seconds cooldown
 
 		this.cooldowns.set(message.author.id, now);
-
-		const data = await this.container.client.drizzle.query.userData.findFirst({
-			where: eq(userData.userId, message.author.id),
-		});
-		if (!data) return;
 		const reward = Math.floor(Math.random() * 3) + 1;
+
 		await this.container.client.drizzle
-			.update(userData)
-			.set({
-				currency: increment(userData.currency, reward),
+			.insert(userData)
+			.values({
+				userId: message.author.id,
+				userName: message.author.username,
+				userAvatar: message.author.avatarURL() ?? null,
+				currency: reward,
 			})
-			.where(eq(userData.userId, message.author.id));
+			.onConflictDoUpdate({
+				target: userData.userId,
+				set: {
+					currency: increment(userData.currency, reward),
+				},
+			});
 
 		this.container.client.logger.info(
 			`${message.author.username} (${message.author.id}) earned ${reward} coins for sending a message!`,
