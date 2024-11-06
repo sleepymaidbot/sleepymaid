@@ -59,8 +59,8 @@ export default class SlotCommand extends SlashCommand<SleepyMaidClient> {
 			return interaction.reply({ content: "You don't have enough money to bet", ephemeral: true });
 
 		let multiplier = -1;
-		if (uniqueSlots === 1) multiplier += 3;
-		else if (uniqueSlots === 2) multiplier += 2;
+		if (uniqueSlots === 1) multiplier += 5;
+		else if (uniqueSlots === 2) multiplier += 3;
 
 		await this.container.client.drizzle
 			.update(userData)
