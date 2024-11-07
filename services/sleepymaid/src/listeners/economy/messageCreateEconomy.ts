@@ -31,6 +31,7 @@ export default class MessageCreateEconomyListener extends Listener<"messageCreat
 			.values({
 				userId: message.author.id,
 				userName: message.author.username,
+				displayName: message.author.displayName,
 				userAvatar: message.author.avatarURL() ?? null,
 				currency: reward,
 			})

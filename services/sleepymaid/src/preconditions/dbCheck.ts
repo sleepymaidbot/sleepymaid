@@ -18,22 +18,54 @@ export default class DBCheckPrecondtion extends Precondition<SleepyMaidClient> {
 			});
 			if (!guildSettings) {
 				client.logger.info("No guild settings found, inserting...");
-				await this.container.client.drizzle
-					.insert(guildSetting)
-					.values({ guildId: guild.id, guildName: guild.name, guildIcon: guild.iconURL() });
+				await this.container.client.drizzle.insert(guildSetting).values({
+					guildId: guild.id,
+					guildName: guild.name,
+					guildIcon: guild.iconURL(),
+				});
+			} else {
+				const updates: Partial<typeof guildSetting.$inferInsert> = {};
+				if (guildSettings.guildIcon !== (guild.iconURL() || "")) {
+					updates.guildIcon = guild.iconURL() || "";
+				}
+				if (guildSettings.guildName !== guild.name) {
+					updates.guildName = guild.name;
+				}
+				if (Object.keys(updates).length > 0) {
+					await this.container.client.drizzle
+						.update(guildSetting)
+						.set(updates)
+						.where(eq(guildSetting.guildId, guildId));
+				}
 			}
 		}
-		if (interaction.user) {
-			const user = interaction.user;
-			const userId = user.id;
-			const userDatas = await client.drizzle.query.userData.findFirst({
-				where: eq(userData.userId, userId),
+
+		const user = interaction.user;
+		const userId = user.id;
+		const userDatas = await client.drizzle.query.userData.findFirst({
+			where: eq(userData.userId, userId),
+		});
+		if (!userDatas) {
+			client.logger.info("No user data found, inserting...");
+			await this.container.client.drizzle.insert(userData).values({
+				userId: user.id,
+				userName: user.username,
+				displayName: user.displayName,
+				userAvatar: user.avatarURL(),
 			});
-			if (!userDatas) {
-				client.logger.info("No user data found, inserting...");
-				await this.container.client.drizzle
-					.insert(userData)
-					.values({ userId: user.id, userName: user.username, userAvatar: user.avatarURL() });
+		} else {
+			const updates: Partial<typeof userData.$inferInsert> = {};
+			if (userDatas.userName !== user.username) {
+				updates.userName = user.username;
+			}
+			if (userDatas.userAvatar !== (user.avatarURL() || "")) {
+				updates.userAvatar = user.avatarURL() || "";
+			}
+			if (userDatas.displayName !== user.displayName) {
+				updates.displayName = user.displayName;
+			}
+			if (Object.keys(updates).length > 0) {
+				await this.container.client.drizzle.update(userData).set(updates).where(eq(userData.userId, userId));
 			}
 		}
 	}
