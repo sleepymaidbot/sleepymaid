@@ -20,7 +20,7 @@ export default class SlotCommand extends SlashCommand<SleepyMaidClient> {
 		super(context, {
 			data: {
 				name: "slot",
-				description: "Get a random emoji slot",
+				description: "Play the slot machine",
 				type: ApplicationCommandType.ChatInput,
 				integrationTypes: [ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall],
 				contexts: [InteractionContextType.BotDM, InteractionContextType.Guild, InteractionContextType.PrivateChannel],
@@ -29,7 +29,7 @@ export default class SlotCommand extends SlashCommand<SleepyMaidClient> {
 						name: "amount",
 						description: "The amount of money to bet",
 						type: ApplicationCommandOptionType.Integer,
-						required: false,
+						required: true,
 					},
 				],
 			},
@@ -41,7 +41,7 @@ export default class SlotCommand extends SlashCommand<SleepyMaidClient> {
 		const slots = Array.from({ length: 3 }, () => emojis[Math.floor(Math.random() * emojis.length)]);
 		const uniqueSlots = new Set(slots).size;
 
-		if (!amount) {
+		if (!amount || amount <= 0) {
 			let result;
 			if (uniqueSlots === 1) result = "All matching, you won! 🎉";
 			else if (uniqueSlots === 2) result = "2 in a row, you won! 🎉";
@@ -59,8 +59,10 @@ export default class SlotCommand extends SlashCommand<SleepyMaidClient> {
 			return interaction.reply({ content: "You don't have enough money to bet", ephemeral: true });
 
 		let multiplier = -1;
+		// x4
 		if (uniqueSlots === 1) multiplier += 5;
-		else if (uniqueSlots === 2) multiplier += 3;
+		// x10
+		else if (uniqueSlots === 2) multiplier += 11;
 
 		const returning = await this.container.client.drizzle
 			.update(userData)
@@ -82,6 +84,10 @@ export default class SlotCommand extends SlashCommand<SleepyMaidClient> {
 			description: `# ${slots.join(" ")} \n${resultMessage}\nYou now have ${returning[0]?.currency} coins.`,
 			timestamp: new Date().toISOString(),
 		};
+
+		this.container.client.logger.info(
+			`${interaction.user.username} played slot machine and their result is: ${resultMessage}`,
+		);
 
 		return await interaction.reply({ embeds: [embed] });
 	}
