@@ -1,13 +1,12 @@
 import { Context, SlashCommand } from "@sleepymaid/handler";
 import { SleepyMaidClient } from "../../../lib/extensions/SleepyMaidClient";
 import {
-	ActionRowBuilder,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ButtonBuilder,
 	ButtonStyle,
 	ChatInputCommandInteraction,
 	Colors,
+	ComponentType,
 	InteractionContextType,
 	InteractionReplyOptions,
 	InteractionUpdateOptions,
@@ -199,7 +198,6 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 							.map((user, index) => {
 								const displayIndex = index + (page - 1) * 10;
 								const name = user.displayName ?? user.userName;
-								if (page !== 1 && displayIndex > 9) return `${displayIndex + 1}. **${name}**: ${user.currency}`;
 								const prefix = medals[displayIndex as keyof typeof medals] ?? `${displayIndex + 1}.`;
 								return `${prefix} **${name}**: ${user.currency}`;
 							})
@@ -210,24 +208,32 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 					},
 				],
 				components: [
-					new ActionRowBuilder<ButtonBuilder>().addComponents(
-						new ButtonBuilder({
-							customId: `economy_leaderboard_${page - 1}`,
-							label: "Previous",
-							style: ButtonStyle.Secondary,
-						}),
-						new ButtonBuilder({
-							customId: "none",
-							label: `${page}`,
-							style: ButtonStyle.Primary,
-							disabled: true,
-						}),
-						new ButtonBuilder({
-							customId: `economy_leaderboard_${page + 1}`,
-							label: "Next",
-							style: ButtonStyle.Secondary,
-						}),
-					),
+					{
+						type: ComponentType.ActionRow,
+						components: [
+							{
+								type: ComponentType.Button,
+								customId: page === 1 ? "none_prev" : `economy_leaderboard_${page - 1}`,
+								style: ButtonStyle.Primary,
+								emoji: "◀️",
+								disabled: page === 1,
+							},
+							{
+								type: ComponentType.Button,
+								customId: page === 1 ? `economy_leaderboard_${page}` : "none_current",
+								label: `${page}`,
+								style: ButtonStyle.Primary,
+								disabled: page === 1,
+							},
+							{
+								type: ComponentType.Button,
+								customId: leaderboard.length < 10 ? "none_next" : `economy_leaderboard_${page + 1}`,
+								style: ButtonStyle.Primary,
+								emoji: "▶️",
+								disabled: leaderboard.length < 10,
+							},
+						],
+					},
 				],
 			};
 		};
@@ -236,12 +242,19 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			.createMessageComponentCollector({
 				time: 1000 * 60 * 5,
 				filter: (i: MessageComponentInteraction) => {
-					return i.customId.startsWith("economy_leaderboard_") && i.user.id === interaction.user.id;
+					return i.customId.startsWith("economy_leaderboard_");
 				},
 			})
 			.on("collect", async (i: MessageComponentInteraction) => {
-				const page = parseInt(i.customId.split("_")[2] ?? "1");
-				await i.update(await getEmbed(page));
+				if (i.user.id === interaction.user.id) {
+					const page = parseInt(i.customId.split("_")[2] ?? "1");
+					await i.update(await getEmbed(page));
+				} else {
+					await i.reply({ content: "This is not your interaction", ephemeral: true });
+				}
+			})
+			.on("end", () => {
+				interaction.editReply({ components: [] });
 			});
 	}
 
