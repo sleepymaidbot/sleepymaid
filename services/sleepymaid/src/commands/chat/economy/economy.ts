@@ -197,6 +197,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 						...getBaseEmbed(interaction),
 						description: `### Leaderboard:\n${leaderboard
 							.map((user, index) => {
+								index = index + (page - 1) * 10;
 								if (page !== 1 && index > 9) return `${index + 1}.`;
 								const prefix = medals[index as keyof typeof medals] ?? `${index + 1}.`;
 								return `${prefix} **${user.userName}**: ${user.currency}`;
@@ -213,6 +214,12 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 							customId: `economy_leaderboard_${page - 1}`,
 							label: "Previous",
 							style: ButtonStyle.Secondary,
+						}),
+						new ButtonBuilder({
+							customId: "none",
+							label: `${page}`,
+							style: ButtonStyle.Primary,
+							disabled: true,
 						}),
 						new ButtonBuilder({
 							customId: `economy_leaderboard_${page + 1}`,
