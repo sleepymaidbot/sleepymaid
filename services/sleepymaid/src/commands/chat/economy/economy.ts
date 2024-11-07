@@ -197,10 +197,11 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 						...getBaseEmbed(interaction),
 						description: `### Leaderboard:\n${leaderboard
 							.map((user, index) => {
-								index = index + (page - 1) * 10;
-								if (page !== 1 && index > 9) return `${index + 1}.`;
-								const prefix = medals[index as keyof typeof medals] ?? `${index + 1}.`;
-								return `${prefix} **${user.userName}**: ${user.currency}`;
+								const displayIndex = index + (page - 1) * 10;
+								const name = user.displayName ?? user.userName;
+								if (page !== 1 && displayIndex > 9) return `${displayIndex + 1}. **${name}**: ${user.currency}`;
+								const prefix = medals[displayIndex as keyof typeof medals] ?? `${displayIndex + 1}.`;
+								return `${prefix} **${name}**: ${user.currency}`;
 							})
 							.join("\n")}`,
 						footer: {
