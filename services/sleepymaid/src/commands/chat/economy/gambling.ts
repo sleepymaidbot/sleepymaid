@@ -53,7 +53,7 @@ export default class GamblingCommand extends SlashCommand<SleepyMaidClient> {
 		}
 	}
 
-	public async slot(interaction: ChatInputCommandInteraction) {
+	private async slot(interaction: ChatInputCommandInteraction) {
 		const amount = interaction.options.getInteger("amount");
 		const slots = Array.from({ length: 3 }, () => emojis[Math.floor(Math.random() * emojis.length)]);
 		const uniqueSlots = new Set(slots).size;
