@@ -8,7 +8,6 @@ import {
 	ButtonStyle,
 	ChatInputCommandInteraction,
 	Colors,
-	InteractionCollector,
 	InteractionContextType,
 	InteractionReplyOptions,
 	InteractionUpdateOptions,
