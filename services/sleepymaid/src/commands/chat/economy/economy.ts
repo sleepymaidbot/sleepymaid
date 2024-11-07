@@ -1,11 +1,18 @@
 import { Context, SlashCommand } from "@sleepymaid/handler";
 import { SleepyMaidClient } from "../../../lib/extensions/SleepyMaidClient";
 import {
+	ActionRowBuilder,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
+	ButtonBuilder,
+	ButtonStyle,
 	ChatInputCommandInteraction,
 	Colors,
+	InteractionCollector,
 	InteractionContextType,
+	InteractionReplyOptions,
+	InteractionUpdateOptions,
+	MessageComponentInteraction,
 } from "discord.js";
 import { APIEmbed, ApplicationCommandOptionType } from "discord-api-types/v10";
 import { userData } from "@sleepymaid/db";
@@ -64,6 +71,15 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 						name: "leaderboard",
 						description: "Get the leaderboard",
 						type: ApplicationCommandOptionType.Subcommand,
+						options: [
+							{
+								name: "page",
+								description: "The page to get",
+								type: ApplicationCommandOptionType.Integer,
+								required: false,
+								min_value: 1,
+							},
+						],
 					},
 					{
 						name: "daily",
@@ -155,6 +171,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 	}
 
 	private async leaderboard(interaction: ChatInputCommandInteraction) {
+		await interaction.deferReply();
 		const medals = {
 			0: "🥇",
 			1: "🥈",
@@ -167,23 +184,58 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			8: "9️⃣",
 			9: "🔟",
 		};
-		const leaderboard = await this.container.client.drizzle.query.userData.findMany({
-			orderBy: desc(userData.currency),
-			limit: 10,
-		});
-		await interaction.reply({
-			embeds: [
-				{
-					...getBaseEmbed(interaction),
-					description: `### Leaderboard:\n${leaderboard
-						.map((user, index) => {
-							const prefix = medals[index as keyof typeof medals] ?? `${index + 1}.`;
-							return `${prefix} **${user.userName}**: ${user.currency}`;
-						})
-						.join("\n")}`,
+		const page = interaction.options.getInteger("page") ?? 1;
+
+		const getEmbed = async (page: number): Promise<InteractionReplyOptions & InteractionUpdateOptions> => {
+			const leaderboard = await this.container.client.drizzle.query.userData.findMany({
+				orderBy: desc(userData.currency),
+				limit: 10,
+				offset: (page - 1) * 10,
+			});
+			return {
+				embeds: [
+					{
+						...getBaseEmbed(interaction),
+						description: `### Leaderboard:\n${leaderboard
+							.map((user, index) => {
+								if (page === 1 && index > 9) return `${index + 1}.`;
+								const prefix = medals[index as keyof typeof medals] ?? `${index + 1}.`;
+								return `${prefix} **${user.userName}**: ${user.currency}`;
+							})
+							.join("\n")}`,
+						footer: {
+							text: `Page ${page}`,
+						},
+					},
+				],
+				components: [
+					new ActionRowBuilder<ButtonBuilder>().addComponents(
+						new ButtonBuilder({
+							customId: `economy_leaderboard_${page - 1}`,
+							label: "Previous",
+							style: ButtonStyle.Secondary,
+						}),
+						new ButtonBuilder({
+							customId: `economy_leaderboard_${page + 1}`,
+							label: "Next",
+							style: ButtonStyle.Secondary,
+						}),
+					),
+				],
+			};
+		};
+		const message = await interaction.reply(await getEmbed(page));
+		message
+			.createMessageComponentCollector({
+				time: 1000 * 60 * 5,
+				filter: (i: MessageComponentInteraction) => {
+					return i.customId.startsWith("economy_leaderboard_") && i.user.id === interaction.user.id;
 				},
-			],
-		});
+			})
+			.on("collect", async (i: MessageComponentInteraction) => {
+				const page = parseInt(i.customId.split("_")[2] ?? "1");
+				await i.update(await getEmbed(page));
+			});
 	}
 
 	private async daily(interaction: ChatInputCommandInteraction) {
