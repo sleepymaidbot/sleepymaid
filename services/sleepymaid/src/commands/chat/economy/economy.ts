@@ -223,7 +223,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 				],
 			};
 		};
-		const message = await interaction.reply(await getEmbed(page));
+		const message = await interaction.editReply(await getEmbed(page));
 		message
 			.createMessageComponentCollector({
 				time: 1000 * 60 * 5,
