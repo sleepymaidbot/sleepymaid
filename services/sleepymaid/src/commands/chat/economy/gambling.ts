@@ -15,21 +15,28 @@ import { increment } from "@sleepymaid/shared";
 
 const emojis = ["🍎", "🍊", "🍐", "🍋", "🍉", "🍇", "🍓", "🍒"];
 
-export default class SlotCommand extends SlashCommand<SleepyMaidClient> {
+export default class GamblingCommand extends SlashCommand<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
 		super(context, {
 			data: {
-				name: "slot",
-				description: "Play the slot machine",
+				name: "gambling",
+				description: "Play the gambling games",
 				type: ApplicationCommandType.ChatInput,
 				integrationTypes: [ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall],
 				contexts: [InteractionContextType.BotDM, InteractionContextType.Guild, InteractionContextType.PrivateChannel],
 				options: [
 					{
-						name: "amount",
-						description: "The amount of money to bet",
-						type: ApplicationCommandOptionType.Integer,
-						required: true,
+						name: "slot",
+						description: "Play the slot machine",
+						type: ApplicationCommandOptionType.Subcommand,
+						options: [
+							{
+								name: "amount",
+								description: "The amount of money to bet",
+								type: ApplicationCommandOptionType.Integer,
+								required: true,
+							},
+						],
 					},
 				],
 			},
@@ -37,6 +44,16 @@ export default class SlotCommand extends SlashCommand<SleepyMaidClient> {
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction) {
+		const subcommand = interaction.options.getSubcommand();
+		switch (subcommand) {
+			case "slot":
+				return this.slot(interaction);
+			default:
+				return interaction.reply({ content: "Invalid subcommand", ephemeral: true });
+		}
+	}
+
+	public async slot(interaction: ChatInputCommandInteraction) {
 		const amount = interaction.options.getInteger("amount");
 		const slots = Array.from({ length: 3 }, () => emojis[Math.floor(Math.random() * emojis.length)]);
 		const uniqueSlots = new Set(slots).size;
@@ -86,7 +103,7 @@ export default class SlotCommand extends SlashCommand<SleepyMaidClient> {
 		};
 
 		this.container.client.logger.info(
-			`${interaction.user.username} played slot machine and their result is: ${resultMessage}`,
+			`${interaction.user.username} played slot machine and got ${amount * multiplier} coins`,
 		);
 
 		return await interaction.reply({ embeds: [embed] });
