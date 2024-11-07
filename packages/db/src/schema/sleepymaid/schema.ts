@@ -39,7 +39,7 @@ export const userData = pgTable("user_data", {
 	// Basic Information
 	userId: text("user_id").notNull().primaryKey(),
 	userName: text("user_name").notNull(),
-	displayName: text("display_name").notNull(),
+	displayName: text("display_name"),
 	userAvatar: text("user_avatar"),
 
 	// Economy
