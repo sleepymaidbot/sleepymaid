@@ -8,7 +8,7 @@ export default class DBCheckPrecondtion extends Precondition<SleepyMaidClient> {
 		super(context);
 	}
 
-	public override async execute(interaction: CommandInteractionTypeUnion) {
+	public override async CommandRun(interaction: CommandInteractionTypeUnion) {
 		const client = this.container.client;
 		if (interaction.guild) {
 			const guild = interaction.guild;
