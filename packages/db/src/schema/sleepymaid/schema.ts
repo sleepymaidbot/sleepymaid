@@ -25,11 +25,6 @@ export const guildSetting = pgTable("guild_setting", {
 		.array()
 		.default(sql`'{}'`)
 		.notNull(),
-	// New way
-	rolePermissions: jsonb("role_permissions")
-		.default(sql`'{}'`)
-		.notNull()
-		.$type<Record<Snowflake, Record<(typeof permissionKeys)[number], boolean>>>(),
 
 	// Sanitizer
 	sanitizerEnabled: boolean("sanitizer_enabled").default(false).notNull(),
@@ -37,6 +32,22 @@ export const guildSetting = pgTable("guild_setting", {
 		.array()
 		.default(sql`'{}'`)
 		.notNull(),
+});
+
+export const rolePermissions = pgTable("role_permissions", {
+	guildId: text("guild_id")
+		.notNull()
+		.references(() => guildSetting.guildId, { onDelete: "cascade" }),
+	roleId: text("role_id").notNull(),
+	permission: text("permission").notNull().$type<keyof typeof permissionKeys>(),
+	value: boolean("value").notNull().default(false),
+});
+
+export const autoRoles = pgTable("auto_roles", {
+	guildId: text("guild_id")
+		.notNull()
+		.references(() => guildSetting.guildId, { onDelete: "cascade" }),
+	roleId: text("role_id").notNull(),
 });
 
 export const guildSettingRelations = relations(guildSetting, ({ many }) => ({
@@ -48,6 +59,12 @@ export const guildSettingRelations = relations(guildSetting, ({ many }) => ({
 	}),
 	quickMessages: many(quickMessage, {
 		relationName: "quickMessages",
+	}),
+	autoRoles: many(autoRoles, {
+		relationName: "autoRoles",
+	}),
+	rolePermissions: many(rolePermissions, {
+		relationName: "rolePermissions",
 	}),
 }));
 
