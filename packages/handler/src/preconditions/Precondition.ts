@@ -4,8 +4,8 @@ import type {
 	MessageContextMenuCommandInteraction,
 	UserContextMenuCommandInteraction,
 } from "discord.js";
-import type { BaseContainer, Context } from "../../BaseContainer";
-import type { HandlerClient } from "../../HandlerClient";
+import type { BaseContainer, Context } from "../BaseContainer";
+import type { HandlerClient } from "../HandlerClient";
 
 export class Precondition<Client extends HandlerClient> {
 	public container: BaseContainer<Client>;
@@ -14,7 +14,7 @@ export class Precondition<Client extends HandlerClient> {
 		this.container = context.container;
 	}
 
-	public execute?(
+	public CommandRun?(
 		interaction:
 			| ChatInputCommandInteraction<`cached`>
 			| MessageContextMenuCommandInteraction<`cached`>

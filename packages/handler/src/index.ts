@@ -6,7 +6,7 @@ export * from "./BaseLogger";
 
 // ./commands
 
-export * from "./commands/preconditions/Precondition";
+export * from "./preconditions/Precondition";
 
 export * from "./commands/Command";
 

@@ -259,7 +259,7 @@ export class CommandManager extends BaseManager {
 			if (cmd.preconditions) {
 				for (const precondition of cmd.preconditions) {
 					const cond = new precondition(context);
-					const preconditionResult = await cond.execute!(interaction as never);
+					const preconditionResult = await cond.CommandRun!(interaction as never);
 					if (preconditionResult === false) return;
 					if (preconditionResult instanceof Error) {
 						this.client.logger.error(preconditionResult as Error);

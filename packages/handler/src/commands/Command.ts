@@ -10,7 +10,7 @@ import type {
 } from "discord.js";
 import type { BaseContainer, Context } from "../BaseContainer";
 import type { HandlerClient } from "../HandlerClient";
-import type { Precondition } from "./preconditions/Precondition";
+import type { Precondition } from "../preconditions/Precondition";
 
 export type CommandInteractionTypeUnion =
 	| ChatInputCommandInteraction
