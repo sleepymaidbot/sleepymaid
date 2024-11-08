@@ -1,5 +1,5 @@
 import type { Awaitable } from "discord.js";
-import type { BaseContainer, Context } from "../BaseContainer";
+import type { Context } from "../BaseContainer";
 import type { HandlerClient } from "../HandlerClient";
 
 export class Task<Client extends HandlerClient> {
@@ -7,7 +7,7 @@ export class Task<Client extends HandlerClient> {
 
 	public runOnStart: boolean;
 
-	public container: BaseContainer<Client>;
+	public container: Client["container"];
 
 	public constructor(context: Context<Client>, options: TaskOptions) {
 		this.container = context.container;

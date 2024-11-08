@@ -1,7 +1,7 @@
 import { pathToFileURL } from "node:url";
 import { findFilesRecursively } from "@sapphire/node-utilities";
 import type { ClientEvents } from "discord.js";
-import { Context, BaseContainer } from "../BaseContainer";
+import { Context } from "../BaseContainer";
 import { BaseManager } from "../BaseManager";
 import type { HandlerClient } from "../HandlerClient";
 import { Listener } from "./Listener";
@@ -55,7 +55,7 @@ export class ListenerManager extends BaseManager {
 		let count = 0;
 		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith(".js"))) {
 			try {
-				const container = new BaseContainer<HandlerClient>(this.client);
+				const container = this.client.container;
 				const context = new Context<HandlerClient>(container);
 
 				const listener = await checkAndInstantiateListener(file, context);

@@ -1,7 +1,7 @@
 import { pathToFileURL } from "node:url";
 import { findFilesRecursively } from "@sapphire/node-utilities";
 import { schedule } from "node-cron";
-import { BaseContainer, Context } from "../BaseContainer";
+import { Context } from "../BaseContainer";
 import { BaseManager } from "../BaseManager";
 import type { HandlerClient } from "../HandlerClient";
 import { Task } from "./Task";
@@ -54,7 +54,7 @@ export class TaskManager extends BaseManager {
 	public async loadTasks(folderPath: string): Promise<void> {
 		let count = 0;
 		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith(".js"))) {
-			const container = new BaseContainer<HandlerClient>(this.client);
+			const container = this.client.container;
 			const context = new Context<HandlerClient>(container);
 
 			const task = await checkAndInstantiateTask(file, context);

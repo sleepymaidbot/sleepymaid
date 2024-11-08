@@ -8,7 +8,7 @@ import type {
 	UserApplicationCommandData,
 	UserContextMenuCommandInteraction,
 } from "discord.js";
-import type { BaseContainer, Context } from "../BaseContainer";
+import type { Context } from "../BaseContainer";
 import type { HandlerClient } from "../HandlerClient";
 import type { Precondition } from "../preconditions/Precondition";
 
@@ -22,7 +22,7 @@ export class Command<Client extends HandlerClient> {
 
 	public guildIds?: Snowflake[];
 
-	public container: BaseContainer<Client>;
+	public container: Client["container"];
 
 	public preconditions?: (typeof Precondition<Client>)[];
 

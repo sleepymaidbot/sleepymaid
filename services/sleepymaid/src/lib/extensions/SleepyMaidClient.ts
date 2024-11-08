@@ -4,7 +4,7 @@
 import { Buffer } from "node:buffer";
 import { resolve } from "node:path";
 import { createDrizzleInstance, DrizzleInstance, guildSetting } from "@sleepymaid/db";
-import { HandlerClient } from "@sleepymaid/handler";
+import { BaseContainer, HandlerClient } from "@sleepymaid/handler";
 import { Logger } from "@sleepymaid/logger";
 import type { Config, RequestType, ResponseType } from "@sleepymaid/shared";
 import { initConfig, supportedLngs, Queue, RabbitMQConnection } from "@sleepymaid/shared";
@@ -14,6 +14,7 @@ import { MessagePayload, PermissionFlagsBits } from "discord.js";
 import i18next from "i18next";
 import FsBackend from "i18next-fs-backend";
 import { eq } from "drizzle-orm";
+import SleepyMaidContainer from "./SleepyMaidContainer";
 
 export class SleepyMaidClient extends HandlerClient {
 	public declare drizzle: DrizzleInstance;
@@ -67,6 +68,9 @@ export class SleepyMaidClient extends HandlerClient {
 			defaultNS: "translation",
 			ns: "translation",
 		});
+
+		// Override container type
+		this.container = new SleepyMaidContainer(this) as BaseContainer<this>;
 
 		this.loadHandlers({
 			commands: {

@@ -24,9 +24,9 @@ export class BaseContainer<Client extends HandlerClient> {
 }
 
 export class Context<Client extends HandlerClient> {
-	public container: BaseContainer<Client>;
+	public container: Client["container"];
 
-	public constructor(container: BaseContainer<Client>) {
+	public constructor(container: Client["container"]) {
 		this.container = container;
 	}
 }

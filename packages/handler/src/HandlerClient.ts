@@ -7,6 +7,7 @@ import type { ListenerManagerStartAllOptionsType } from "./listeners/ListenerMan
 import { ListenerManager } from "./listeners/ListenerManager";
 import type { TaskManagerStartAllOptionsType } from "./tasks/TaskManager";
 import { TaskManager } from "./tasks/TaskManager";
+import { BaseContainer } from "./BaseContainer";
 
 export type env = "dev" | "prod";
 
@@ -50,6 +51,8 @@ export class HandlerClient extends Client {
 
 	public declare taskManager: TaskManager;
 
+	public declare container: BaseContainer<this>;
+
 	public constructor(options: HandlerClientOptions, djsOptions: ClientOptions) {
 		super(djsOptions);
 
@@ -60,6 +63,7 @@ export class HandlerClient extends Client {
 		this.commandManager = new CommandManager(this);
 		this.listenerManager = new ListenerManager(this);
 		this.taskManager = new TaskManager(this);
+		this.container = this.container ?? new BaseContainer(this);
 	}
 
 	public loadHandlers(options: loadHandlersOptions): void {

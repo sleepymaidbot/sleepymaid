@@ -251,7 +251,7 @@ export class CommandManager extends BaseManager {
 			const file = this._commands.get(interaction.commandId);
 			if (!file) return;
 
-			const container = new BaseContainer<HandlerClient>(this.client);
+			const container = this.client.container;
 			const context = new Context<HandlerClient>(container);
 			const cmd = await checkAndInstantiateCommand(file.file, context);
 			if (!cmd) return;
@@ -293,7 +293,7 @@ export class CommandManager extends BaseManager {
 			const file = this._commands.get(interaction.commandId);
 			if (!file) return;
 
-			const container = new BaseContainer<HandlerClient>(this.client);
+			const container = this.client.container;
 			const context = new Context<HandlerClient>(container);
 			const cmd = (await checkAndInstantiateCommand(file.file, context)) as SlashCommand<HandlerClient>;
 			if (!cmd) return;

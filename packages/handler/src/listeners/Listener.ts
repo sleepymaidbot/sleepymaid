@@ -1,9 +1,9 @@
 import type { Awaitable, ClientEvents } from "discord.js";
-import type { BaseContainer, Context } from "../BaseContainer";
+import type { Context } from "../BaseContainer";
 import type { HandlerClient } from "../HandlerClient";
 
 export class Listener<Event extends keyof ClientEvents, Client extends HandlerClient> {
-	public container: BaseContainer<Client>;
+	public container: Client["container"];
 
 	public name: keyof ClientEvents;
 

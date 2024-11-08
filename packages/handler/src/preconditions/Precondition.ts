@@ -4,11 +4,11 @@ import type {
 	MessageContextMenuCommandInteraction,
 	UserContextMenuCommandInteraction,
 } from "discord.js";
-import type { BaseContainer, Context } from "../BaseContainer";
+import type { Context } from "../BaseContainer";
 import type { HandlerClient } from "../HandlerClient";
 
 export class Precondition<Client extends HandlerClient> {
-	public container: BaseContainer<Client>;
+	public container: Client["container"];
 
 	public constructor(context: Context<Client>) {
 		this.container = context.container;
