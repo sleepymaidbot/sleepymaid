@@ -25,6 +25,8 @@ export class SleepyMaidClient extends HandlerClient {
 
 	public declare config: Config;
 
+	public declare container: BaseContainer<this> & SleepyMaidContainer;
+
 	public constructor() {
 		super(
 			{
@@ -70,7 +72,7 @@ export class SleepyMaidClient extends HandlerClient {
 		});
 
 		// Override container type
-		this.container = new SleepyMaidContainer(this) as BaseContainer<this>;
+		this.container = new SleepyMaidContainer(this) as BaseContainer<this> & SleepyMaidContainer;
 
 		this.loadHandlers({
 			commands: {
