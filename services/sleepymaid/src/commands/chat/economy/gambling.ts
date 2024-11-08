@@ -77,9 +77,9 @@ export default class GamblingCommand extends SlashCommand<SleepyMaidClient> {
 
 		let multiplier = -1;
 		// x4
-		if (uniqueSlots === 1) multiplier += 5;
+		if (uniqueSlots === 2) multiplier += 5;
 		// x10
-		else if (uniqueSlots === 2) multiplier += 11;
+		else if (uniqueSlots === 3) multiplier += 11;
 
 		const returning = await this.container.client.drizzle
 			.update(userData)

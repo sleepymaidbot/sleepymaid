@@ -386,7 +386,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 		if (data.workTimestamp && Date.now() - data.workTimestamp.getTime() < 10 * 60 * 1000) {
 			const timeLeft = new Date(data.workTimestamp.getTime() + 10 * 60 * 1000 - Date.now());
 			await interaction.reply(
-				`You have already worked today. Come back in ${timeLeft.getUTCMinutes()}m ${timeLeft.getUTCSeconds()}s.`,
+				`You're on cooldown. Come back in ${timeLeft.getUTCMinutes()}m ${timeLeft.getUTCSeconds()}s.`,
 			);
 			return;
 		}
