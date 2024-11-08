@@ -1,9 +1,8 @@
 import { relations, sql } from "drizzle-orm";
-import { pgTable, text, boolean, bigint, timestamp, integer, jsonb } from "drizzle-orm/pg-core";
+import { pgTable, text, boolean, bigint, timestamp, integer } from "drizzle-orm/pg-core";
 import { randomBitrate } from "../helper/randombitrate";
 import { roleMenu } from "./rolemenu";
 import { quickMessage } from "./quickMessage";
-import { Snowflake } from "discord.js";
 import { permissionKeys } from "@sleepymaid/shared";
 
 export const guildSetting = pgTable("guild_setting", {
