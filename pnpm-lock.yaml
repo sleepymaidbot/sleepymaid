@@ -89,6 +89,9 @@ importers:
       "@favware/cliff-jumper":
         specifier: ^5.0.0
         version: 5.0.0
+      "@sleepymaid/shared":
+        specifier: workspace:^
+        version: link:../shared
       "@swc/core":
         specifier: ^1.7.42
         version: 1.7.42(@swc/helpers@0.5.13)
