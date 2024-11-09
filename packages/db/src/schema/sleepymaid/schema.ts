@@ -35,7 +35,7 @@ export const autoRoles = pgTable("auto_roles", {
 	guildId: text("guild_id")
 		.notNull()
 		.references(() => guildSettings.guildId, { onDelete: "cascade" }),
-	roleId: text("role_id").notNull().primaryKey().unique(),
+	roleId: text("role_id").notNull().primaryKey(),
 });
 
 export const guildSettingRelations = relations(guildSettings, ({ many }) => ({
