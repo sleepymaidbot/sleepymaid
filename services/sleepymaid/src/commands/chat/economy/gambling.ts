@@ -10,8 +10,7 @@ import {
 	Colors,
 	APIEmbed,
 } from "discord.js";
-import { eq } from "drizzle-orm";
-import { increment } from "@sleepymaid/shared";
+import { eq, sql } from "drizzle-orm";
 
 const emojis = ["🍎", "🍊", "🍐", "🍋", "🍉", "🍇", "🍓", "🍒"];
 
@@ -84,7 +83,7 @@ export default class GamblingCommand extends SlashCommand<SleepyMaidClient> {
 		const returning = await this.container.client.drizzle
 			.update(userData)
 			.set({
-				currency: increment(userData.currency, amount * multiplier),
+				currency: sql`${userData.currency} + ${amount * multiplier}`,
 			})
 			.where(eq(userData.userId, interaction.user.id))
 			.returning({ currency: userData.currency });

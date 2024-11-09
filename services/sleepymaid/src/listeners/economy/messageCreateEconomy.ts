@@ -3,7 +3,7 @@ import { Listener } from "@sleepymaid/handler";
 import type { SleepyMaidClient } from "../../lib/SleepyMaidClient";
 import { userData } from "@sleepymaid/db";
 import { Message } from "discord.js";
-import { increment } from "@sleepymaid/shared";
+import { sql } from "drizzle-orm";
 
 export default class MessageCreateEconomyListener extends Listener<"messageCreate", SleepyMaidClient> {
 	private cooldowns = new Map<string, number>();
@@ -38,7 +38,7 @@ export default class MessageCreateEconomyListener extends Listener<"messageCreat
 			.onConflictDoUpdate({
 				target: userData.userId,
 				set: {
-					currency: increment(userData.currency, reward),
+					currency: sql`${userData.currency} + ${reward}`,
 				},
 			});
 

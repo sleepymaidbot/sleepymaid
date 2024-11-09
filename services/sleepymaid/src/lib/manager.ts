@@ -1,6 +1,8 @@
-import { DrizzleInstance, userData } from "@sleepymaid/db";
+import { DrizzleInstance, rolePermissions, userData } from "@sleepymaid/db";
 import { SleepyMaidClient } from "./SleepyMaidClient";
-import { eq, sql } from "drizzle-orm";
+import { and, eq, sql } from "drizzle-orm";
+import { permissionKeys } from "@sleepymaid/shared";
+import { GuildMember } from "discord.js";
 
 export default class Manager {
 	private declare client: SleepyMaidClient;
@@ -12,32 +14,51 @@ export default class Manager {
 		this.drizzle = client.drizzle;
 	}
 
-	public async addBalance(
-		userId: string,
-		amount: number,
-		extra?: Partial<typeof userData.$inferInsert>,
-	): Promise<void> {
-		await this.drizzle
+	/*
+		Permissions
+	*/
+
+	public async permissionQuery(
+		member: GuildMember,
+		permission: keyof typeof permissionKeys,
+		value: boolean,
+	): Promise<boolean> {
+		const guildId = member.guild.id;
+		const permissions = await this.drizzle.query.rolePermissions.findMany({
+			where: and(
+				eq(rolePermissions.guildId, guildId),
+				eq(rolePermissions.permission, permission),
+				eq(rolePermissions.value, value),
+			),
+		});
+
+		return permissions.some((p) => member.roles.cache.has(p.roleId));
+	}
+
+	/*
+		Balance
+	*/
+
+	public async addBalance(userId: string, amount: number, extra?: Partial<typeof userData.$inferInsert>) {
+		return await this.drizzle
 			.update(userData)
 			.set({
 				currency: sql`${userData.currency} + ${amount}`,
 				...extra,
 			})
-			.where(eq(userData.userId, userId));
+			.where(eq(userData.userId, userId))
+			.returning();
 	}
 
-	public async removeBalance(
-		userId: string,
-		amount: number,
-		extra?: Partial<typeof userData.$inferInsert>,
-	): Promise<void> {
-		await this.drizzle
+	public async removeBalance(userId: string, amount: number, extra?: Partial<typeof userData.$inferInsert>) {
+		return await this.drizzle
 			.update(userData)
 			.set({
 				currency: sql`${userData.currency} - ${amount}`,
 				...extra,
 			})
-			.where(eq(userData.userId, userId));
+			.where(eq(userData.userId, userId))
+			.returning();
 	}
 
 	public async modifyBalance(
@@ -45,8 +66,8 @@ export default class Manager {
 		amount: number,
 		operation: "add" | "remove",
 		extra?: Partial<typeof userData.$inferInsert>,
-	): Promise<void> {
-		if (operation === "add") await this.addBalance(userId, amount, extra);
-		else await this.removeBalance(userId, amount, extra);
+	) {
+		if (operation === "add") return await this.addBalance(userId, amount, extra);
+		else return await this.removeBalance(userId, amount, extra);
 	}
 }

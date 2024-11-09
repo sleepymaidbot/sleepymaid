@@ -16,7 +16,6 @@ import { APIEmbed, ApplicationCommandOptionType } from "discord-api-types/v10";
 import { userData } from "@sleepymaid/db";
 import { desc, eq } from "drizzle-orm";
 import DBCheckPrecondtion from "../../../preconditions/dbCheck";
-import { decrement, increment } from "@sleepymaid/shared";
 
 const rewards = {
 	daily: 1000,
@@ -185,6 +184,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 		const page = interaction.options.getInteger("page") ?? 1;
 
 		const getEmbed = async (page: number): Promise<InteractionReplyOptions & InteractionUpdateOptions> => {
+			page = Math.max(10, page);
 			const leaderboard = await this.container.client.drizzle.query.userData.findMany({
 				orderBy: desc(userData.currency),
 				limit: 10,
@@ -274,14 +274,10 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			return;
 		}
 		const reward = rewards.daily + (data.dailyStreak ?? 0) * 10;
-		await this.container.client.drizzle
-			.update(userData)
-			.set({
-				currency: increment(userData.currency, reward),
-				dailyTimestamp: new Date(),
-				dailyStreak: increment(userData.dailyStreak, 1),
-			})
-			.where(eq(userData.userId, interaction.user.id));
+		await this.container.manager.addBalance(interaction.user.id, reward, {
+			dailyTimestamp: new Date(),
+			dailyStreak: data.dailyStreak ?? 0 + 1,
+		});
 
 		this.container.client.logger.info(
 			`${interaction.user.username} (${interaction.user.id}) claimed their daily reward of ${reward} coins!`,
@@ -313,14 +309,10 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			return;
 		}
 		const reward = rewards.weekly + (data.weeklyStreak ?? 0) * 10;
-		await this.container.client.drizzle
-			.update(userData)
-			.set({
-				currency: increment(userData.currency, reward),
-				weeklyTimestamp: new Date(),
-				weeklyStreak: increment(userData.weeklyStreak, 1),
-			})
-			.where(eq(userData.userId, interaction.user.id));
+		await this.container.manager.addBalance(interaction.user.id, reward, {
+			weeklyTimestamp: new Date(),
+			weeklyStreak: data.weeklyStreak ?? 0 + 1,
+		});
 
 		this.container.client.logger.info(
 			`${interaction.user.username} (${interaction.user.id}) claimed their weekly reward of ${reward} coins!`,
@@ -352,14 +344,10 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			return;
 		}
 		const reward = rewards.monthly + (data.monthlyStreak ?? 0) * 10;
-		await this.container.client.drizzle
-			.update(userData)
-			.set({
-				currency: increment(userData.currency, reward),
-				monthlyTimestamp: new Date(),
-				monthlyStreak: increment(userData.monthlyStreak, 1),
-			})
-			.where(eq(userData.userId, interaction.user.id));
+		await this.container.manager.addBalance(interaction.user.id, reward, {
+			monthlyTimestamp: new Date(),
+			monthlyStreak: data.monthlyStreak ?? 0 + 1,
+		});
 
 		this.container.client.logger.info(
 			`${interaction.user.username} (${interaction.user.id}) claimed their monthly reward of ${reward} coins!`,
@@ -391,13 +379,9 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			return;
 		}
 		const reward = rewards.work;
-		await this.container.client.drizzle
-			.update(userData)
-			.set({
-				currency: increment(userData.currency, reward),
-				workTimestamp: new Date(),
-			})
-			.where(eq(userData.userId, interaction.user.id));
+		await this.container.manager.addBalance(interaction.user.id, reward, {
+			workTimestamp: new Date(),
+		});
 
 		this.container.client.logger.info(
 			`${interaction.user.username} (${interaction.user.id}) worked for ${reward} coins!`,
@@ -436,19 +420,9 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			return;
 		}
 		// Remove
-		await this.container.client.drizzle
-			.update(userData)
-			.set({
-				currency: decrement(userData.currency, amount),
-			})
-			.where(eq(userData.userId, interaction.user.id));
+		await this.container.manager.removeBalance(interaction.user.id, amount);
 		// Add
-		await this.container.client.drizzle
-			.update(userData)
-			.set({
-				currency: increment(userData.currency, amount),
-			})
-			.where(eq(userData.userId, target.id));
+		await this.container.manager.addBalance(target.id, amount);
 
 		this.container.client.logger.info(
 			`${interaction.user.username} (${interaction.user.id}) gave ${amount} coins to ${target.username} (${target.id})`,
