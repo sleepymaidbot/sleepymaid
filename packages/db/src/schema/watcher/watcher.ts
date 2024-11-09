@@ -1,5 +1,5 @@
 import { boolean, pgEnum, pgTable, serial, text } from "drizzle-orm/pg-core";
-import { guildSetting } from "../sleepymaid/schema";
+import { guildSettings } from "../sleepymaid/schema";
 
 export const logChannelType = pgEnum("Log_channel_type", ["server", "mod"]);
 export const caseType = pgEnum("case_type", ["untimeout", "timeout", "kick", "unban", "ban"]);
@@ -7,7 +7,7 @@ export const caseType = pgEnum("case_type", ["untimeout", "timeout", "kick", "un
 export const logChannel = pgTable("log_channel", {
 	guildId: text("guild_id")
 		.notNull()
-		.references(() => guildSetting.guildId, { onDelete: "cascade" }),
+		.references(() => guildSettings.guildId, { onDelete: "cascade" }),
 	channelId: text("channel_id").primaryKey().notNull(),
 	type: logChannelType("type").notNull(),
 	webhookId: text("webhookId").notNull(),
@@ -43,7 +43,7 @@ export const logChannel = pgTable("log_channel", {
 export const modCase = pgTable("case", {
 	guildId: text("guild_id")
 		.notNull()
-		.references(() => guildSetting.guildId, { onDelete: "cascade" }),
+		.references(() => guildSettings.guildId, { onDelete: "cascade" }),
 	caseNumber: serial("case_number").primaryKey().notNull(),
 	messageId: text("message_id").notNull(),
 	userId: text("user_id").notNull(),

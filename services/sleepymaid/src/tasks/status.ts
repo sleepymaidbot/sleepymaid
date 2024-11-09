@@ -1,6 +1,6 @@
 import { Task, type Context } from "@sleepymaid/handler";
 import { ActivityType } from "discord-api-types/v10";
-import { SleepyMaidClient } from "../lib/extensions/SleepyMaidClient";
+import { SleepyMaidClient } from "../lib/SleepyMaidClient";
 
 export default class BannerTask extends Task<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {

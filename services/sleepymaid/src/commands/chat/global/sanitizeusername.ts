@@ -10,7 +10,7 @@ import {
 	PermissionFlagsBits,
 	PermissionsBitField,
 } from "discord.js";
-import type { SleepyMaidClient } from "../../../lib/extensions/SleepyMaidClient";
+import type { SleepyMaidClient } from "../../../lib/SleepyMaidClient";
 import DBCheckPrecondtion from "../../../preconditions/dbCheck";
 
 export default class SanitizerUserCommand extends SlashCommand<SleepyMaidClient> {

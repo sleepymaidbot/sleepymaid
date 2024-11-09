@@ -1,12 +1,12 @@
 import { pgTable, pgEnum, text, integer, serial } from "drizzle-orm/pg-core";
-import { guildSetting } from "./schema";
+import { guildSettings } from "./schema";
 
 export const levelingTrackType = pgEnum("leveling_track_type", ["levels", "points"]);
 
 export const levelingTrack = pgTable("leveling_track", {
 	guildId: text("guild_id")
 		.notNull()
-		.references(() => guildSetting.guildId, { onDelete: "cascade" }),
+		.references(() => guildSettings.guildId, { onDelete: "cascade" }),
 	trackId: serial("track_id").primaryKey().notNull(),
 	trackName: text("track_name").notNull(),
 	type: levelingTrackType("type").notNull(),

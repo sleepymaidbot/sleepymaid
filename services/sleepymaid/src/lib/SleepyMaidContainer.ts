@@ -1,6 +1,6 @@
 import { BaseContainer } from "@sleepymaid/handler";
 import { SleepyMaidClient } from "./SleepyMaidClient";
-import Manager from "../manager";
+import Manager from "./manager";
 import { DrizzleInstance } from "@sleepymaid/db";
 
 export default class SleepyMaidContainer extends BaseContainer<SleepyMaidClient> {

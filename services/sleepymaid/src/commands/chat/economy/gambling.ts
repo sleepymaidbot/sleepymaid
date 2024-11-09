@@ -1,5 +1,5 @@
 import { userData } from "@sleepymaid/db";
-import { SleepyMaidClient } from "../../../lib/extensions/SleepyMaidClient";
+import { SleepyMaidClient } from "../../../lib/SleepyMaidClient";
 import { Context, SlashCommand } from "@sleepymaid/handler";
 import {
 	ApplicationCommandType,

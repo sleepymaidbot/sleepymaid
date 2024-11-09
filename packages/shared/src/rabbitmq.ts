@@ -50,8 +50,6 @@ export type ResponseType = {
 		userPermissions: string;
 	};
 	[Queue.CheckUserGuildPermissions]: {
-		admin: boolean;
-		mod: boolean;
 		userPermissions: string;
 	};
 	[Queue.SendQuickMessage]: {

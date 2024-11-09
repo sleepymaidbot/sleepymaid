@@ -5,7 +5,7 @@ import { roleMenu } from "./rolemenu";
 import { quickMessage } from "./quickMessage";
 import { permissionKeys } from "@sleepymaid/shared";
 
-export const guildSetting = pgTable("guild_setting", {
+export const guildSettings = pgTable("guild_settings", {
 	// Basic Information
 	guildId: text("guild_id").primaryKey().notNull(),
 	guildName: text("guild_name").notNull(),
@@ -13,17 +13,6 @@ export const guildSetting = pgTable("guild_setting", {
 
 	// Premium config
 	premiumLevel: integer("premium_level").default(0).notNull(),
-
-	// Role Config
-	// Old way
-	adminRoles: text("admin_roles")
-		.array()
-		.default(sql`'{}'`)
-		.notNull(),
-	modRoles: text("mod_roles")
-		.array()
-		.default(sql`'{}'`)
-		.notNull(),
 
 	// Sanitizer
 	sanitizerEnabled: boolean("sanitizer_enabled").default(false).notNull(),
@@ -36,7 +25,7 @@ export const guildSetting = pgTable("guild_setting", {
 export const rolePermissions = pgTable("role_permissions", {
 	guildId: text("guild_id")
 		.notNull()
-		.references(() => guildSetting.guildId, { onDelete: "cascade" }),
+		.references(() => guildSettings.guildId, { onDelete: "cascade" }),
 	roleId: text("role_id").notNull(),
 	permission: text("permission").notNull().$type<keyof typeof permissionKeys>(),
 	value: boolean("value").notNull().default(false),
@@ -45,11 +34,11 @@ export const rolePermissions = pgTable("role_permissions", {
 export const autoRoles = pgTable("auto_roles", {
 	guildId: text("guild_id")
 		.notNull()
-		.references(() => guildSetting.guildId, { onDelete: "cascade" }),
+		.references(() => guildSettings.guildId, { onDelete: "cascade" }),
 	roleId: text("role_id").notNull().primaryKey().unique(),
 });
 
-export const guildSettingRelations = relations(guildSetting, ({ many }) => ({
+export const guildSettingRelations = relations(guildSettings, ({ many }) => ({
 	randomBitrateChannels: many(randomBitrate, {
 		relationName: "randomBitrateChannels",
 	}),

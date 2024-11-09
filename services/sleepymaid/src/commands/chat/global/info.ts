@@ -6,7 +6,7 @@ import { prettyBytes, shell } from "@sleepymaid/util";
 import { ApplicationCommandType } from "discord-api-types/v10";
 import type { ChatInputCommandInteraction } from "discord.js";
 import { ApplicationIntegrationType, version as discordJSVersion, InteractionContextType } from "discord.js";
-import type { SleepyMaidClient } from "../../../lib/extensions/SleepyMaidClient";
+import type { SleepyMaidClient } from "../../../lib/SleepyMaidClient";
 
 export default class InfoCommand extends SlashCommand<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {

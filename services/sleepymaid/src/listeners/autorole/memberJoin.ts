@@ -2,7 +2,7 @@ import { autoRoles } from "@sleepymaid/db";
 import { Context, Listener } from "@sleepymaid/handler";
 import { GuildMember } from "discord.js";
 import { eq } from "drizzle-orm";
-import { SleepyMaidClient } from "../../lib/extensions/SleepyMaidClient";
+import { SleepyMaidClient } from "../../lib/SleepyMaidClient";
 
 export default class MemberJoinListener extends Listener<"guildMemberAdd", SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {

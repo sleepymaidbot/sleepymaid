@@ -1,9 +1,9 @@
 import sanitize from "@aero/sanitizer";
-import { guildSetting } from "@sleepymaid/db";
+import { guildSettings } from "@sleepymaid/db";
 import { Listener, type Context } from "@sleepymaid/handler";
 import type { GuildMember } from "discord.js";
 import { eq } from "drizzle-orm";
-import type { SleepyMaidClient } from "../../lib/extensions/SleepyMaidClient";
+import type { SleepyMaidClient } from "../../lib/SleepyMaidClient";
 
 export default class JoinSanitizerListener extends Listener<"guildMemberAdd", SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
@@ -16,11 +16,11 @@ export default class JoinSanitizerListener extends Listener<"guildMemberAdd", Sl
 	public override async execute(member: GuildMember) {
 		if (member.user.bot) return;
 		const client = this.container.client;
-		const guildSettings = await client.drizzle.query.guildSetting.findFirst({
-			where: eq(guildSetting.guildId, member.guild.id),
+		const guildSetting = await client.drizzle.query.guildSettings.findFirst({
+			where: eq(guildSettings.guildId, member.guild.id),
 		});
-		if (!guildSettings) return;
-		if (guildSettings.sanitizerEnabled === false) return;
+		if (!guildSetting) return;
+		if (guildSetting.sanitizerEnabled === false) return;
 		const sanitized = sanitize(member.displayName);
 		if (member.displayName !== sanitized) await member.setNickname(sanitized, "Sanitizer");
 	}

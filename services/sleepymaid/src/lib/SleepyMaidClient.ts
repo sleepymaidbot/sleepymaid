@@ -3,7 +3,7 @@
 /* eslint-disable unicorn/prefer-module */
 import { Buffer } from "node:buffer";
 import { resolve } from "node:path";
-import { createDrizzleInstance, DrizzleInstance, guildSetting } from "@sleepymaid/db";
+import { createDrizzleInstance, DrizzleInstance, guildSettings } from "@sleepymaid/db";
 import { BaseContainer, HandlerClient } from "@sleepymaid/handler";
 import { Logger } from "@sleepymaid/logger";
 import type { Config, RequestType, ResponseType } from "@sleepymaid/shared";
@@ -62,7 +62,7 @@ export class SleepyMaidClient extends HandlerClient {
 			// debug: this.config.environment === 'development',
 			supportedLngs,
 			backend: {
-				loadPath: resolve(__dirname, "../../../../../locales/sleepymaid/{{lng}}/{{ns}}.json"),
+				loadPath: resolve(__dirname, "../../../../locales/sleepymaid/{{lng}}/{{ns}}.json"),
 			},
 			cleanCode: true,
 			fallbackLng: "en-US",
@@ -76,13 +76,13 @@ export class SleepyMaidClient extends HandlerClient {
 
 		this.loadHandlers({
 			commands: {
-				folder: resolve(__dirname, "..", "..", "commands"),
+				folder: resolve(__dirname, "..", "commands"),
 			},
 			listeners: {
-				folder: resolve(__dirname, "..", "..", "listeners"),
+				folder: resolve(__dirname, "..", "listeners"),
 			},
 			tasks: {
-				folder: resolve(__dirname, "..", "..", "tasks"),
+				folder: resolve(__dirname, "..", "tasks"),
 			},
 		});
 
@@ -170,8 +170,6 @@ export class SleepyMaidClient extends HandlerClient {
 			}
 
 			const baseResponse: ResponseType[Queue.CheckUserGuildPermissions] = {
-				admin: false,
-				mod: false,
 				userPermissions: "0",
 			};
 
@@ -192,8 +190,6 @@ export class SleepyMaidClient extends HandlerClient {
 					msg.properties.replyTo,
 					Buffer.from(
 						JSON.stringify({
-							admin: true,
-							mod: true,
 							userPermissions: member.permissions.bitfield.toString(),
 						}),
 					),
@@ -203,21 +199,16 @@ export class SleepyMaidClient extends HandlerClient {
 				);
 			}
 
-			const guildSettings = await this.drizzle.query.guildSetting.findFirst({
-				where: eq(guildSetting.guildId, message.guildId),
+			const guildSetting = await this.drizzle.query.guildSettings.findFirst({
+				where: eq(guildSettings.guildId, message.guildId),
 			});
-			if (!guildSettings || !guildSettings.guildId) {
+			if (!guildSetting || !guildSetting.guildId) {
 				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
 					correlationId: msg.properties.correlationId,
 				});
 			}
 
-			const adminRoles = guildSettings.adminRoles;
-			const modRoles = guildSettings.modRoles;
-
 			const response: ResponseType[Queue.CheckUserGuildPermissions] = {
-				admin: adminRoles.length !== 0 && adminRoles.some((role) => member.roles.cache.has(role)),
-				mod: modRoles.length !== 0 && modRoles.some((role) => member.roles.cache.has(role)),
 				userPermissions: member.permissions.bitfield.toString(),
 			};
 
@@ -254,10 +245,10 @@ export class SleepyMaidClient extends HandlerClient {
 				});
 			}
 
-			const guildSettings = await this.drizzle.query.guildSetting.findFirst({
-				where: eq(guildSetting.guildId, message.guildId),
+			const guildSetting = await this.drizzle.query.guildSettings.findFirst({
+				where: eq(guildSettings.guildId, message.guildId),
 			});
-			if (!guildSettings || !guildSettings.guildId) {
+			if (!guildSetting || !guildSetting.guildId) {
 				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
 					correlationId: msg.properties.correlationId,
 				});
@@ -266,13 +257,9 @@ export class SleepyMaidClient extends HandlerClient {
 			await member.fetch();
 			let hasPermission = false;
 
-			const adminRoles = guildSettings.adminRoles;
-
 			if (guild.ownerId === member.id) {
 				hasPermission = true;
 			} else if (member.permissions.any(PermissionFlagsBits.ManageGuild, true)) {
-				hasPermission = true;
-			} else if (adminRoles.length !== 0 && adminRoles.some((role) => member.roles.cache.has(role))) {
 				hasPermission = true;
 			}
 

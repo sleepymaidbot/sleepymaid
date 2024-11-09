@@ -6,7 +6,7 @@ import type { Context } from "@sleepymaid/handler";
 import { Listener } from "@sleepymaid/handler";
 import { shell } from "@sleepymaid/util";
 import type { Message } from "discord.js";
-import type { SleepyMaidClient } from "../../lib/extensions/SleepyMaidClient";
+import type { SleepyMaidClient } from "../../lib/SleepyMaidClient";
 
 const sites = [
 	"tiktok.com",

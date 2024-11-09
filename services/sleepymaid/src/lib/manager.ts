@@ -1,5 +1,5 @@
 import { DrizzleInstance, userData } from "@sleepymaid/db";
-import { SleepyMaidClient } from "./extensions/SleepyMaidClient";
+import { SleepyMaidClient } from "./SleepyMaidClient";
 import { eq, sql } from "drizzle-orm";
 
 export default class Manager {

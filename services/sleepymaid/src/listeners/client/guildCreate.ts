@@ -1,8 +1,8 @@
-import { guildSetting } from "@sleepymaid/db";
+import { guildSettings } from "@sleepymaid/db";
 import type { Context } from "@sleepymaid/handler";
 import { Listener } from "@sleepymaid/handler";
 import type { Guild } from "discord.js";
-import type { SleepyMaidClient } from "../../lib/extensions/SleepyMaidClient";
+import type { SleepyMaidClient } from "../../lib/SleepyMaidClient";
 
 export default class GuildCreateListener extends Listener<"guildCreate", SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
@@ -18,7 +18,7 @@ export default class GuildCreateListener extends Listener<"guildCreate", SleepyM
 		);
 
 		return this.container.client.drizzle
-			.insert(guildSetting)
+			.insert(guildSettings)
 			.values({ guildId: guild.id, guildName: guild.name, guildIcon: guild.iconURL() });
 	}
 }

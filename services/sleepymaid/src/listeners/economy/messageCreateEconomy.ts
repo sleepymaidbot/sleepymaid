@@ -1,6 +1,6 @@
 import type { Context } from "@sleepymaid/handler";
 import { Listener } from "@sleepymaid/handler";
-import type { SleepyMaidClient } from "../../lib/extensions/SleepyMaidClient";
+import type { SleepyMaidClient } from "../../lib/SleepyMaidClient";
 import { userData } from "@sleepymaid/db";
 import { Message } from "discord.js";
 import { increment } from "@sleepymaid/shared";

@@ -1,5 +1,5 @@
-import { SleepyMaidClient } from "../lib/extensions/SleepyMaidClient";
-import { guildSetting, userData } from "@sleepymaid/db";
+import { SleepyMaidClient } from "../lib/SleepyMaidClient";
+import { guildSettings, userData } from "@sleepymaid/db";
 import { Context, Precondition, type CommandInteractionTypeUnion } from "@sleepymaid/handler";
 import { eq } from "drizzle-orm";
 
@@ -13,29 +13,29 @@ export default class DBCheckPrecondtion extends Precondition<SleepyMaidClient> {
 		if (interaction.guild) {
 			const guild = interaction.guild;
 			const guildId = guild.id;
-			const guildSettings = await client.drizzle.query.guildSetting.findFirst({
-				where: eq(guildSetting.guildId, guildId),
+			const guildSetting = await client.drizzle.query.guildSettings.findFirst({
+				where: eq(guildSettings.guildId, guildId),
 			});
-			if (!guildSettings) {
+			if (!guildSetting) {
 				client.logger.info("No guild settings found, inserting...");
-				await this.container.client.drizzle.insert(guildSetting).values({
+				await this.container.client.drizzle.insert(guildSettings).values({
 					guildId: guild.id,
 					guildName: guild.name,
 					guildIcon: guild.iconURL(),
 				});
 			} else {
-				const updates: Partial<typeof guildSetting.$inferInsert> = {};
-				if (guildSettings.guildIcon !== (guild.iconURL() || "")) {
+				const updates: Partial<typeof guildSettings.$inferInsert> = {};
+				if (guildSetting.guildIcon !== (guild.iconURL() || "")) {
 					updates.guildIcon = guild.iconURL() || "";
 				}
-				if (guildSettings.guildName !== guild.name) {
+				if (guildSetting.guildName !== guild.name) {
 					updates.guildName = guild.name;
 				}
 				if (Object.keys(updates).length > 0) {
 					await this.container.client.drizzle
-						.update(guildSetting)
+						.update(guildSettings)
 						.set(updates)
-						.where(eq(guildSetting.guildId, guildId));
+						.where(eq(guildSettings.guildId, guildId));
 				}
 			}
 		}

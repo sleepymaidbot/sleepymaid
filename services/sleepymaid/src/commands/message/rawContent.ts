@@ -3,7 +3,7 @@ import { MessageCommand } from "@sleepymaid/handler";
 import { getLocalizedProp } from "@sleepymaid/shared";
 import type { MessageContextMenuCommandInteraction } from "discord.js";
 import { ApplicationCommandType } from "discord.js";
-import type { SleepyMaidClient } from "../../lib/extensions/SleepyMaidClient";
+import type { SleepyMaidClient } from "../../lib/SleepyMaidClient";
 
 export default class RatioUserCommand extends MessageCommand<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
