@@ -404,19 +404,26 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			await interaction.reply("Invalid user or amount");
 			return;
 		}
+		if (target.id === interaction.user.id) {
+			await interaction.reply({ content: "You can't give money to yourself", ephemeral: true });
+			return;
+		}
 		if (amount <= 0) {
-			await interaction.reply("Amount must be greater than 0");
+			await interaction.reply({ content: "Amount must be greater than 0", ephemeral: true });
 			return;
 		}
 		const data = await this.container.client.drizzle.query.userData.findFirst({
 			where: eq(userData.userId, interaction.user.id),
 		});
 		if (!data) {
-			await interaction.reply("An error occurred while fetching your data, please try again later.");
+			await interaction.reply({
+				content: "An error occurred while fetching your data, please try again later.",
+				ephemeral: true,
+			});
 			return;
 		}
 		if (data.currency < amount) {
-			await interaction.reply("You don't have enough coins to give");
+			await interaction.reply({ content: "You don't have enough coins to give", ephemeral: true });
 			return;
 		}
 		// Remove
