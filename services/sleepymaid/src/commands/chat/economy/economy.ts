@@ -220,7 +220,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 							},
 							{
 								type: ComponentType.Button,
-								customId: page === 1 ? `economy_leaderboard_${page}` : "none_current",
+								customId: page === 1 ? `economy_leaderboard_reset` : "none_current",
 								label: `${page}`,
 								style: ButtonStyle.Primary,
 								disabled: page === 1,
