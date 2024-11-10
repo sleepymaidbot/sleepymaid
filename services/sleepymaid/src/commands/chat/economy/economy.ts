@@ -184,7 +184,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 		const page = interaction.options.getInteger("page") ?? 1;
 
 		const getEmbed = async (page: number): Promise<InteractionReplyOptions & InteractionUpdateOptions> => {
-			page = Math.max(10, page);
+			page = Math.min(10, page);
 			const leaderboard = await this.container.client.drizzle.query.userData.findMany({
 				orderBy: desc(userData.currency),
 				limit: 10,
