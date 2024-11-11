@@ -4,6 +4,8 @@ import { ApplicationCommandOptionType, AutocompleteInteraction, ChatInputCommand
 import DBCheckPrecondtion from "../../../preconditions/dbCheck";
 import { getAutocompleteResults } from "@sleepymaid/shared";
 import { add, getUnixTime } from "date-fns";
+import { reminders } from "@sleepymaid/db";
+import { and, eq } from "drizzle-orm";
 
 export default class Reminders extends SlashCommand<SleepyMaidClient> {
 	constructor(context: Context<SleepyMaidClient>) {
@@ -125,6 +127,18 @@ export default class Reminders extends SlashCommand<SleepyMaidClient> {
 		const id = interaction.options.getString("id", true);
 
 		await this.container.manager.removeReminder(interaction.user.id, parseInt(id));
+
+		const reminder = await this.container.drizzle.query.reminders.findFirst({
+			where: and(eq(reminders.reminderId, parseInt(id)), eq(reminders.userId, interaction.user.id)),
+		});
+
+		if (!reminder) {
+			return await interaction.reply({ content: "Reminder not found", ephemeral: true });
+		}
+
+		if (reminder.userId !== interaction.user.id) {
+			return await interaction.reply({ content: "You don't have permission to remove this reminder", ephemeral: true });
+		}
 
 		return await interaction.reply({ content: "Reminder removed", ephemeral: true });
 	}
