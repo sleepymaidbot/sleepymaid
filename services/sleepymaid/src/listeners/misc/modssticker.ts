@@ -24,7 +24,7 @@ export default class ModStickerListener extends Listener<"messageCreate", Sleepy
 			if (sticker.name !== "Mods!!!!") continue;
 
 			await channel.send({
-				content: `<@&1301593179216412842>`,
+				content: `<@&1301593179216412842> in ${message.channel}`,
 				allowedMentions: {
 					roles: ["1301593179216412842"],
 				},
