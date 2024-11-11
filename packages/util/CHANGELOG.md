@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+# [@sleepymaid/util@3.11.0](https://github.com/sleepymaidbot/sleepymaid/compare/@sleepymaid/util@3.4.0...@sleepymaid/util@3.11.0) - (2024-11-11)
+
+## Bug Fixes
+
+- **deps:** Update all non-major dependencies ([4a62db0](https://github.com/sleepymaidbot/sleepymaid/commit/4a62db0c3bf96fea09b59db7d07c665260c4e81f))
+- **deps:** Update all non-major dependencies (#671) ([9d4f0c0](https://github.com/sleepymaidbot/sleepymaid/commit/9d4f0c0e5d58c7818361fa26ce2bfbd541546c00))
+- **deps:** Update all non-major dependencies (#659) ([88da573](https://github.com/sleepymaidbot/sleepymaid/commit/88da573c4e9b84a195f05c60bfa6d43fc74f323f))
+- **deps:** Update all non-major dependencies (#649) ([3d33059](https://github.com/sleepymaidbot/sleepymaid/commit/3d33059cc9c5d0a508da3101e33052a1f8b24093))
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
 # [@sleepymaid/util@3.10.0](https://github.com/sleepymaidbot/sleepymaid/compare/@sleepymaid/util@3.4.0...@sleepymaid/util@3.10.0) - (2024-10-31)
 
 ## Bug Fixes
