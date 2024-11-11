@@ -3,9 +3,10 @@ import { SleepyMaidClient } from "../../../lib/SleepyMaidClient";
 import { ApplicationCommandOptionType, AutocompleteInteraction, ChatInputCommandInteraction } from "discord.js";
 import DBCheckPrecondtion from "../../../preconditions/dbCheck";
 import { getAutocompleteResults } from "@sleepymaid/shared";
-import { add, getUnixTime } from "date-fns";
+import { add, getUnixTime, isBefore } from "date-fns";
 import { reminders } from "@sleepymaid/db";
 import { and, eq } from "drizzle-orm";
+import { getTimeTable } from "@sleepymaid/util";
 
 export default class Reminders extends SlashCommand<SleepyMaidClient> {
 	constructor(context: Context<SleepyMaidClient>) {
@@ -27,22 +28,10 @@ export default class Reminders extends SlashCommand<SleepyMaidClient> {
 								required: true,
 							},
 							{
-								name: "days",
-								description: "The number of days to wait before reminding you",
-								type: ApplicationCommandOptionType.Integer,
-								required: false,
-							},
-							{
-								name: "hours",
-								description: "The number of hours to wait before reminding you",
-								type: ApplicationCommandOptionType.Integer,
-								required: false,
-							},
-							{
-								name: "minutes",
-								description: "The number of minutes to wait before reminding you",
-								type: ApplicationCommandOptionType.Integer,
-								required: false,
+								name: "time",
+								description: "The time to wait before reminding you",
+								type: ApplicationCommandOptionType.String,
+								required: true,
 							},
 						],
 					},
@@ -102,16 +91,15 @@ export default class Reminders extends SlashCommand<SleepyMaidClient> {
 			});
 		}
 
-		const days = interaction.options.getInteger("days") ?? 0;
-		const hours = interaction.options.getInteger("hours") ?? 0;
-		const minutes = interaction.options.getInteger("minutes") ?? 0;
-		if (days + hours + minutes === 0) {
+		const time = interaction.options.getString("time", true);
+		const now = new Date();
+		const date = add(now, getTimeTable(time));
+		if (isBefore(date, now)) {
 			return interaction.reply({
-				content: "You must specify a time to wait before reminding you",
+				content: "You must specify a time in the future",
 				ephemeral: true,
 			});
 		}
-		const date = add(new Date(), { days, hours, minutes });
 
 		await this.container.manager.addReminder(interaction.user.id, message, date);
 
