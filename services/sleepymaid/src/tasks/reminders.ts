@@ -24,7 +24,7 @@ export default class RemindersTask extends Task<SleepyMaidClient> {
 			const user = await this.container.client.users.fetch(reminder.userId);
 			if (!user) continue;
 
-			await user.send({ content: reminder.reminderName });
+			await user.send({ content: `Reminder: ${reminder.reminderName}` });
 
 			await this.container.drizzle.delete(reminders).where(eq(reminders.reminderId, reminder.reminderId));
 		}
