@@ -39,6 +39,10 @@ export default class Manager {
 		Balance
 	*/
 
+	public formatNumber(number: number): string {
+		return new Intl.NumberFormat("en-US", { useGrouping: true }).format(number);
+	}
+
 	public async addBalance(userId: string, amount: number, extra?: Partial<typeof userData.$inferInsert>) {
 		return await this.drizzle
 			.update(userData)

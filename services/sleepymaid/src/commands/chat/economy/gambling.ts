@@ -88,7 +88,10 @@ export default class GamblingCommand extends SlashCommand<SleepyMaidClient> {
 			.where(eq(userData.userId, interaction.user.id))
 			.returning({ currency: userData.currency });
 
-		const resultMessage = multiplier > 0 ? `You won ${amount * multiplier} coins! 🎉` : `You lost ${amount} coins 😢`;
+		const resultMessage =
+			multiplier > 0
+				? `You won ${this.container.manager.formatNumber(amount * multiplier)} coins! 🎉`
+				: `You lost ${this.container.manager.formatNumber(amount)} coins 😢`;
 
 		const embed: APIEmbed = {
 			author: {
@@ -97,7 +100,9 @@ export default class GamblingCommand extends SlashCommand<SleepyMaidClient> {
 					"https://cdn.discordapp.com/attachments/434861245846519828/1303519924777521282/1c4bba02f0519e1417e2.png",
 			},
 			color: Colors.Gold,
-			description: `# ${slots.join(" ")} \n${resultMessage}\nYou now have ${returning[0]?.currency} coins.`,
+			description: `# ${slots.join(" ")} \n${resultMessage}\nYou now have ${this.container.manager.formatNumber(
+				returning[0]?.currency ?? 0,
+			)} coins.`,
 			timestamp: new Date().toISOString(),
 		};
 

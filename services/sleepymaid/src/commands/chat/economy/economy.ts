@@ -161,7 +161,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			embeds: [
 				{
 					...getBaseEmbed(interaction),
-					description: `${user} has ${balance?.currency ?? 0} coins`,
+					description: `${user} has ${this.container.manager.formatNumber(balance?.currency ?? 0)} coins`,
 				},
 			],
 		});
@@ -199,7 +199,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 								const displayIndex = index + (page - 1) * 10;
 								const name = user.displayName ?? user.userName;
 								const prefix = medals[displayIndex as keyof typeof medals] ?? `${displayIndex + 1}.`;
-								return `${prefix} **${name}**: ${user.currency}`;
+								return `${prefix} **${name}**: ${this.container.manager.formatNumber(user.currency)}`;
 							})
 							.join("\n")}`,
 						footer: {
