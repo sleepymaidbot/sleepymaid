@@ -41,6 +41,11 @@ export default class InfoCommand extends SlashCommand<SleepyMaidClient> {
 							inline: true,
 						},
 						{
+							name: "**Support Server**",
+							value: "[Click Here](https://discord.gg/UexTYbVFM3)",
+							inline: true,
+						},
+						{
 							name: "**Memory Usage**",
 							value: `System: ${prettyBytes(os.totalmem() - os.freemem(), {
 								binary: true,
