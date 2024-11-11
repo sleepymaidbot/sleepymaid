@@ -43,12 +43,13 @@ export default class GamblingCommand extends SlashCommand<SleepyMaidClient> {
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction) {
+		await interaction.deferReply();
 		const subcommand = interaction.options.getSubcommand();
 		switch (subcommand) {
 			case "slot":
 				return this.slot(interaction);
 			default:
-				return interaction.reply({ content: "Invalid subcommand", ephemeral: true });
+				return interaction.editReply({ content: "Invalid subcommand" });
 		}
 	}
 
@@ -63,7 +64,7 @@ export default class GamblingCommand extends SlashCommand<SleepyMaidClient> {
 			else if (uniqueSlots === 2) result = "2 in a row, you won! 🎉";
 			else result = "No match, you lost 😢";
 
-			await interaction.reply({ content: `${slots.join(" ")} ${result}` });
+			await interaction.editReply({ content: `${slots.join(" ")} ${result}` });
 			return;
 		}
 
@@ -71,8 +72,7 @@ export default class GamblingCommand extends SlashCommand<SleepyMaidClient> {
 			where: eq(userData.userId, interaction.user.id),
 		});
 		if (!data) return;
-		if (data.currency < amount)
-			return interaction.reply({ content: "You don't have enough money to bet", ephemeral: true });
+		if (data.currency < amount) return interaction.editReply({ content: "You don't have enough money to bet" });
 
 		let multiplier = -1;
 		// x4
@@ -110,6 +110,6 @@ export default class GamblingCommand extends SlashCommand<SleepyMaidClient> {
 			`${interaction.user.username} played slot machine and got ${amount * multiplier} coins`,
 		);
 
-		return await interaction.reply({ embeds: [embed] });
+		return await interaction.editReply({ embeds: [embed] });
 	}
 }
