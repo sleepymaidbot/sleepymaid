@@ -1,5 +1,5 @@
 import { relations, sql } from "drizzle-orm";
-import { pgTable, text, boolean, bigint, timestamp, integer } from "drizzle-orm/pg-core";
+import { pgTable, text, boolean, bigint, timestamp, integer, serial } from "drizzle-orm/pg-core";
 import { randomBitrate } from "../helper/randombitrate";
 import { roleMenu } from "./rolemenu";
 import { quickMessage } from "./quickMessage";
@@ -74,4 +74,13 @@ export const userData = pgTable("user_data", {
 	monthlyTimestamp: timestamp("monthly_timestamp"),
 	monthlyStreak: integer("monthly_streak").default(0),
 	workTimestamp: timestamp("work_timestamp"),
+});
+
+export const reminders = pgTable("reminders", {
+	reminderId: serial("reminder_id").primaryKey(),
+	userId: text("user_id")
+		.notNull()
+		.references(() => userData.userId, { onDelete: "cascade" }),
+	reminderName: text("reminder_name").notNull(),
+	reminderTime: timestamp("reminder_time").notNull(),
 });

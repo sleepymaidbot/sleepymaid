@@ -1,4 +1,4 @@
-import { DrizzleInstance, rolePermissions, userData } from "@sleepymaid/db";
+import { DrizzleInstance, reminders, rolePermissions, userData } from "@sleepymaid/db";
 import { SleepyMaidClient } from "./SleepyMaidClient";
 import { and, eq, sql } from "drizzle-orm";
 import { permissionKeys } from "@sleepymaid/shared";
@@ -73,5 +73,25 @@ export default class Manager {
 	) {
 		if (operation === "add") return await this.addBalance(userId, amount, extra);
 		else return await this.removeBalance(userId, amount, extra);
+	}
+
+	/*
+		Reminders
+	*/
+
+	public async getReminders(userId: string) {
+		return await this.drizzle.query.reminders.findMany({ where: eq(reminders.userId, userId) });
+	}
+
+	public async addReminder(userId: string, name: string, time: Date) {
+		return await this.drizzle.insert(reminders).values({ userId, reminderName: name, reminderTime: time });
+	}
+
+	public async removeReminder(userId: string, id: number) {
+		return await this.drizzle.delete(reminders).where(and(eq(reminders.userId, userId), eq(reminders.reminderId, id)));
+	}
+
+	public async clearReminders(userId: string) {
+		return await this.drizzle.delete(reminders).where(eq(reminders.userId, userId));
 	}
 }
