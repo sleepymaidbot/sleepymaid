@@ -20,7 +20,7 @@ export default class Manager {
 
 	public async permissionQuery(
 		member: GuildMember,
-		permission: keyof typeof permissionKeys,
+		permission: (typeof permissionKeys)[number],
 		value: boolean = true,
 	): Promise<boolean> {
 		if (member.permissions.has([PermissionFlagsBits.Administrator])) return value;

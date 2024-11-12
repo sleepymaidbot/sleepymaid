@@ -27,7 +27,7 @@ export const rolePermissions = pgTable("role_permissions", {
 		.notNull()
 		.references(() => guildSettings.guildId, { onDelete: "cascade" }),
 	roleId: text("role_id").notNull(),
-	permission: text("permission").notNull().$type<keyof typeof permissionKeys>(),
+	permission: text("permission").notNull().$type<(typeof permissionKeys)[number]>(),
 	value: boolean("value").notNull().default(false),
 });
 
