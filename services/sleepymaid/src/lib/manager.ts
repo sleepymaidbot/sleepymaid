@@ -21,9 +21,9 @@ export default class Manager {
 	public async permissionQuery(
 		member: GuildMember,
 		permission: keyof typeof permissionKeys,
-		value: boolean,
+		value: boolean = true,
 	): Promise<boolean> {
-		if (member.permissions.has([PermissionFlagsBits.Administrator])) return true;
+		if (member.permissions.has([PermissionFlagsBits.Administrator])) return value;
 
 		const guildId = member.guild.id;
 		const permissions = await this.drizzle.query.rolePermissions.findMany({
