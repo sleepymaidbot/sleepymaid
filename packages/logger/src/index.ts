@@ -1,4 +1,4 @@
-import { BaseLogger } from "@sleepymaid/handler";
+import { BaseLogger, type env } from "@sleepymaid/handler";
 import { gray, red, cyan } from "ansi-colors";
 
 export enum Loglevels {
@@ -7,28 +7,33 @@ export enum Loglevels {
 	Error,
 }
 
-export const prefixes = new Map<Loglevels, string>([
-	[Loglevels.Debug, "DEBUG"],
-	[Loglevels.Info, "INFO"],
-	[Loglevels.Error, "ERROR"],
-]);
+export const prefixes = {
+	[Loglevels.Debug]: "DEBUG",
+	[Loglevels.Info]: "INFO",
+	[Loglevels.Error]: "ERROR",
+};
 
 export const noColor: (str: string) => string = (msg) => msg;
-export const colorFunctions = new Map<Loglevels, (str: string) => string>([
-	[Loglevels.Debug, gray],
-	[Loglevels.Info, cyan],
-	[Loglevels.Error, (str: string) => red(str)],
-]);
+export const colorFunctions = {
+	[Loglevels.Debug]: gray,
+	[Loglevels.Info]: cyan,
+	[Loglevels.Error]: (str: string) => red(str),
+};
 
 export class Logger extends BaseLogger {
-	// public declare pino: BaseLogger
+	constructor(env: env) {
+		super(env);
+	}
 
 	private formatMessage(level: Loglevels, message: string, ...args: string[]): string {
-		let color = colorFunctions.get(level);
-		if (!color) color = noColor;
+		let color = colorFunctions[level] ?? noColor;
 
 		const date = new Date();
-		const log = [`[${date.toLocaleDateString()} ${date.toLocaleTimeString()}]`, `: ${message} ${args.join(" ")}`];
+		const log = [
+			`[${date.toLocaleDateString()} ${date.toLocaleTimeString()}]`,
+			` ${color(prefixes[level] ?? "")}`,
+			`: ${message} ${args.join(" ")}`,
+		];
 		return log.join(" ");
 	}
 
