@@ -11,6 +11,7 @@ import {
 	APIEmbed,
 } from "discord.js";
 import { eq, sql } from "drizzle-orm";
+import { formatNumber } from "@sleepymaid/shared";
 
 const emojis = ["🍎", "🍊", "🍐", "🍋", "🍉", "🍇", "🍓", "🍒"];
 
@@ -76,7 +77,7 @@ export default class GamblingCommand extends SlashCommand<SleepyMaidClient> {
 
 		let multiplier = -1;
 		// x4
-		if (uniqueSlots === 2) multiplier += 5;
+		if (uniqueSlots === 2) multiplier += 3;
 		// x10
 		else if (uniqueSlots === 1) multiplier += 11;
 
@@ -90,8 +91,8 @@ export default class GamblingCommand extends SlashCommand<SleepyMaidClient> {
 
 		const resultMessage =
 			multiplier > 0
-				? `You won ${this.container.manager.formatNumber(amount * multiplier)} coins! 🎉`
-				: `You lost ${this.container.manager.formatNumber(amount)} coins 😢`;
+				? `You won ${formatNumber(amount * multiplier)} coins! 🎉`
+				: `You lost ${formatNumber(amount)} coins 😢`;
 
 		const embed: APIEmbed = {
 			author: {
@@ -100,7 +101,7 @@ export default class GamblingCommand extends SlashCommand<SleepyMaidClient> {
 					"https://cdn.discordapp.com/attachments/434861245846519828/1303519924777521282/1c4bba02f0519e1417e2.png",
 			},
 			color: Colors.Gold,
-			description: `# ${slots.join(" ")} \n${resultMessage}\nYou now have ${this.container.manager.formatNumber(
+			description: `# ${slots.join(" ")} \n${resultMessage}\nYou now have ${formatNumber(
 				returning[0]?.currency ?? 0,
 			)} coins.`,
 			timestamp: new Date().toISOString(),

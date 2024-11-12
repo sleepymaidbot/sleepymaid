@@ -16,6 +16,7 @@ import { APIEmbed, ApplicationCommandOptionType } from "discord-api-types/v10";
 import { userData } from "@sleepymaid/db";
 import { desc, eq } from "drizzle-orm";
 import DBCheckPrecondtion from "../../../preconditions/dbCheck";
+import { formatNumber } from "@sleepymaid/shared";
 
 const rewards = {
 	daily: 1000,
@@ -161,7 +162,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			embeds: [
 				{
 					...getBaseEmbed(interaction),
-					description: `${user} has ${this.container.manager.formatNumber(balance?.currency ?? 0)} coins`,
+					description: `${user} has ${formatNumber(balance?.currency ?? 0)} coins`,
 				},
 			],
 		});
@@ -199,7 +200,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 								const displayIndex = index + (page - 1) * 10;
 								const name = user.displayName ?? user.userName;
 								const prefix = medals[displayIndex as keyof typeof medals] ?? `${displayIndex + 1}.`;
-								return `${prefix} **${name}**: ${this.container.manager.formatNumber(user.currency)}`;
+								return `${prefix} **${name}**: ${formatNumber(user.currency)}`;
 							})
 							.join("\n")}`,
 						footer: {
