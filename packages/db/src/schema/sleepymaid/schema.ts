@@ -3,7 +3,7 @@ import { pgTable, text, boolean, bigint, timestamp, integer, serial } from "driz
 import { randomBitrate } from "../helper/randombitrate";
 import { roleMenu } from "./rolemenu";
 import { quickMessage } from "./quickMessage";
-import { Permission, permissionKeys } from "@sleepymaid/shared";
+import { Permission } from "@sleepymaid/shared";
 
 export const guildSettings = pgTable("guild_settings", {
 	// Basic Information
