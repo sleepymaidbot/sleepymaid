@@ -10,7 +10,7 @@ import {
 } from "discord.js";
 import DBCheckPrecondtion from "../../../preconditions/dbCheck";
 import { rolePermissions } from "@sleepymaid/db";
-import { AutocompleteChoices, getAutocompleteResults, permissionList } from "@sleepymaid/shared";
+import { AutocompleteChoices, getAutocompleteResults, permissionKeys, permissionList } from "@sleepymaid/shared";
 import { and, eq } from "drizzle-orm";
 import { Result } from "@sapphire/result";
 
@@ -45,6 +45,7 @@ export default class extends SlashCommand<SleepyMaidClient> {
 										name: "permission",
 										description: "The permission to set",
 										type: ApplicationCommandOptionType.String,
+										required: true,
 										autocomplete: true,
 									},
 									{
@@ -134,6 +135,11 @@ export default class extends SlashCommand<SleepyMaidClient> {
 		const permission = interaction.options.getString("permission", true);
 		const value = interaction.options.getBoolean("value") ?? true;
 
+		if (!permissionKeys.includes(permission))
+			return interaction.editReply({
+				content: "Invalid permission",
+			});
+
 		const exist = await this.container.drizzle.query.rolePermissions.findFirst({
 			where: and(
 				eq(rolePermissions.guildId, interaction.guildId),
@@ -145,32 +151,31 @@ export default class extends SlashCommand<SleepyMaidClient> {
 
 		if (exist)
 			return interaction.editReply({
-				content: `Role ${role.name} already has permission ${permission} set to ${value ? "true" : "false"}`,
+				content: `Role \`\`${role.name}\`\` already has permission \`\`${permissionList[permission]!.name}\`\` set to \`\`${
+					value ? "true" : "false"
+				}\`\``,
 			});
 
-		await this.container.drizzle
-			.insert(rolePermissions)
-			.values({
-				guildId: interaction.guildId,
-				roleId: role.id,
-				permission,
-				value,
-			})
-			.onConflictDoUpdate({
-				target: [rolePermissions.guildId, rolePermissions.roleId, rolePermissions.permission],
-				set: {
-					value,
-				},
-			});
+		await this.container.drizzle.insert(rolePermissions).values({
+			guildId: interaction.guildId,
+			roleId: role.id,
+			permission,
+			value,
+		});
 
 		return interaction.editReply({
-			content: `Set role ${role.name} permission ${permission} to ${value ? "true" : "false"}`,
+			content: `Set role \`\`${role.name}\`\` permission \`\`${permissionList[permission]!.name}\`\` to \`\`${value ? "true" : "false"}\`\``,
 		});
 	}
 
 	private async roleRemove(interaction: ChatInputCommandInteraction<"cached">) {
 		const role = interaction.options.getRole("role", true);
 		const permission = interaction.options.getString("permission", true);
+
+		if (!permissionKeys.includes(permission))
+			return interaction.editReply({
+				content: "Invalid permission",
+			});
 
 		const result = await Result.fromAsync(
 			await this.container.drizzle
@@ -184,7 +189,7 @@ export default class extends SlashCommand<SleepyMaidClient> {
 			});
 
 		return await interaction.editReply({
-			content: `Removed role ${role.name} permission ${permission}`,
+			content: `Removed role \`\`${role.name}\`\` permission \`\`${permissionList[permission]!.name}\`\``,
 		});
 	}
 
@@ -196,8 +201,10 @@ export default class extends SlashCommand<SleepyMaidClient> {
 		});
 
 		return interaction.editReply({
-			content: `List of permissions for role ${role.name}:\n${permissions
-				.map((p) => `${permissionList[p.permission]!.name ?? "Invalid"} - ${p.value ? "true" : "false"}`)
+			content: `### List of permissions for role \`\`${role.name}\`\`:\n${permissions
+				.map(
+					(p) => `\`\`${permissionList[p.permission]!.name ?? "Invalid"}\`\` - \`\`${p.value ? "true" : "false"}\`\``,
+				)
 				.join("\n")}`,
 		});
 	}
