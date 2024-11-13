@@ -7,6 +7,7 @@ import {
 	AutocompleteInteraction,
 	ChatInputCommandInteraction,
 	InteractionContextType,
+	PermissionFlagsBits,
 } from "discord.js";
 import DBCheckPrecondtion from "../../../preconditions/dbCheck";
 import { rolePermissions } from "@sleepymaid/db";
@@ -24,6 +25,7 @@ export default class extends SlashCommand<SleepyMaidClient> {
 				type: ApplicationCommandType.ChatInput,
 				integrationTypes: [ApplicationIntegrationType.GuildInstall],
 				contexts: [InteractionContextType.Guild],
+				defaultMemberPermissions: [PermissionFlagsBits.Administrator],
 				options: [
 					{
 						name: "roles",
