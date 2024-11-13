@@ -1,9 +1,9 @@
-export type Permission = {
+export type PermissionObject = {
 	name: string;
 	description: string;
 };
 
-export const permissions: Record<string, Permission> = {
+export const permissionList: Record<string, PermissionObject> = {
 	"sleepymaid.admin": {
 		name: "SleepyMaid Admin",
 		description: "Administrator of SleepyMaid (Gives all permissions)",
@@ -17,4 +17,6 @@ export const permissions: Record<string, Permission> = {
 	},
 };
 
-export const permissionKeys = Object.keys(permissions);
+export const permissionKeys = Object.keys(permissionList);
+
+export type Permission = (typeof permissionKeys)[number];

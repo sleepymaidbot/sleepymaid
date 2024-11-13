@@ -10,7 +10,7 @@ import {
 } from "discord.js";
 import DBCheckPrecondtion from "../../../preconditions/dbCheck";
 import { rolePermissions } from "@sleepymaid/db";
-import { AutocompleteChoices, getAutocompleteResults, permissions } from "@sleepymaid/shared";
+import { AutocompleteChoices, getAutocompleteResults, permissionList } from "@sleepymaid/shared";
 import { and, eq } from "drizzle-orm";
 import { Result } from "@sapphire/result";
 
@@ -182,7 +182,7 @@ export default class extends SlashCommand<SleepyMaidClient> {
 
 		return interaction.editReply({
 			content: `List of permissions for role ${role.name}:\n${permissions
-				.map((p) => `${p.permission} - ${p.value ? "true" : "false"}`)
+				.map((p) => `${permissionList[p.permission]!.name ?? "Invalid"} - ${p.value ? "true" : "false"}`)
 				.join("\n")}`,
 		});
 	}
@@ -192,7 +192,7 @@ export default class extends SlashCommand<SleepyMaidClient> {
 
 		const choices: AutocompleteChoices = [];
 
-		for (const [key, value] of Object.entries(permissions)) {
+		for (const [key, value] of Object.entries(permissionList)) {
 			choices.push({
 				value: key,
 				name: `${value.name} - ${value.description}`,
