@@ -12,5 +12,14 @@
 	"files.exclude": {
 		"**/node_modules": true
 	},
-	"typescript.tsdk": "node_modules\\typescript\\lib"
+	"typescript.tsdk": "node_modules\\typescript\\lib",
+	"typescript.preferences.autoImportFileExcludePatterns": [
+		"drizzle-orm/mysql-core",
+		"drizzle-orm/sqlite-core",
+		"drizzle-orm/pg-schema-inspector",
+		"vm",
+		"node:vm",
+		"vm2",
+		"node:vm2"
+	]
 }
