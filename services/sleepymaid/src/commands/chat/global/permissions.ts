@@ -83,6 +83,7 @@ export default class extends SlashCommand<SleepyMaidClient> {
 										name: "role",
 										description: "The role to list the permissions for",
 										type: ApplicationCommandOptionType.Role,
+										required: true,
 									},
 								],
 							},
@@ -131,7 +132,21 @@ export default class extends SlashCommand<SleepyMaidClient> {
 	private async roleSet(interaction: ChatInputCommandInteraction<"cached">) {
 		const role = interaction.options.getRole("role", true);
 		const permission = interaction.options.getString("permission", true);
-		const value = interaction.options.getBoolean("value", true);
+		const value = interaction.options.getBoolean("value") ?? true;
+
+		const exist = await this.container.drizzle.query.rolePermissions.findFirst({
+			where: and(
+				eq(rolePermissions.guildId, interaction.guildId),
+				eq(rolePermissions.roleId, role.id),
+				eq(rolePermissions.permission, permission),
+				eq(rolePermissions.value, value),
+			),
+		});
+
+		if (exist)
+			return interaction.editReply({
+				content: `Role ${role.name} already has permission ${permission} set to ${value ? "true" : "false"}`,
+			});
 
 		await this.container.drizzle
 			.insert(rolePermissions)
