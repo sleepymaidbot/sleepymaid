@@ -46,7 +46,7 @@ async function checkAndInstantiateListener(
 	}
 }
 
-export class ListenerManager extends BaseManager {
+export class ListenerManager<Client extends HandlerClient> extends BaseManager<Client> {
 	public async startAll(options: ListenerManagerStartAllOptionsType): Promise<void> {
 		await this.loadListeners(options.folder);
 	}

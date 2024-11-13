@@ -17,8 +17,8 @@ export type HandlerClientOptions = {
 	logger?: Logger;
 };
 
-export type loadHandlersOptions = {
-	commands?: CommandManagerStartAllOptionsType;
+export type loadHandlersOptions<Client extends HandlerClient> = {
+	commands?: CommandManagerStartAllOptionsType<Client>;
 	listeners?: ListenerManagerStartAllOptionsType;
 	tasks?: TaskManagerStartAllOptionsType;
 	// TODO: Add modules
@@ -45,11 +45,11 @@ export class HandlerClient extends Client {
 
 	public declare env: env;
 
-	public declare commandManager: CommandManager;
+	public declare commandManager?: CommandManager<this>;
 
-	public declare listenerManager: ListenerManager;
+	public declare listenerManager?: ListenerManager<this>;
 
-	public declare taskManager: TaskManager;
+	public declare taskManager?: TaskManager<this>;
 
 	public declare container: BaseContainer<this>;
 
@@ -60,26 +60,26 @@ export class HandlerClient extends Client {
 
 		this.env = env ?? "dev";
 		this.logger = options.logger ?? (new BaseLogger(this.env) as Logger);
-		this.commandManager = new CommandManager(this);
-		this.listenerManager = new ListenerManager(this);
-		this.taskManager = new TaskManager(this);
 		this.container = this.container ?? new BaseContainer(this);
 	}
 
-	public loadHandlers(options: loadHandlersOptions): void {
+	public loadHandlers(options: loadHandlersOptions<this>): void {
 		// listeners
 		if (options.listeners) {
+			this.listenerManager = new ListenerManager(this);
 			void this.listenerManager.startAll(options.listeners);
 		}
 
 		this.once("ready", () => {
 			// commands
 			if (options.commands) {
+				this.commandManager = new CommandManager(this);
 				void this.commandManager.startAll(options.commands);
 			}
 
 			// tasks
 			if (options.tasks) {
+				this.taskManager = new TaskManager(this);
 				void this.taskManager.startAll(options.tasks);
 			}
 		});

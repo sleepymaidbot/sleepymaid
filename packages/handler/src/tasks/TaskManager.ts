@@ -46,7 +46,7 @@ async function checkAndInstantiateTask(
 	}
 }
 
-export class TaskManager extends BaseManager {
+export class TaskManager<Client extends HandlerClient> extends BaseManager<Client> {
 	public async startAll(options: TaskManagerStartAllOptionsType): Promise<void> {
 		await this.loadTasks(options.folder);
 	}
