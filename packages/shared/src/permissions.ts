@@ -1,12 +1,14 @@
 export type PermissionObject = {
 	name: string;
 	description: string;
+	default: boolean;
 };
 
 export const permissionList: Record<string, PermissionObject> = {
 	"sleepymaid.admin": {
 		name: "SleepyMaid Admin",
 		description: "Administrator of SleepyMaid (Gives all permissions)",
+		default: false,
 	},
 	/*
 		Permissions
@@ -14,6 +16,7 @@ export const permissionList: Record<string, PermissionObject> = {
 	"sleepymaid.permissions.roles.manage": {
 		name: "Manage Role Permissions",
 		description: "Manage role permissions",
+		default: false,
 	},
 };
 
