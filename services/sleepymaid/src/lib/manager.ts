@@ -1,7 +1,7 @@
 import { DrizzleInstance, reminders, rolePermissions, userData } from "@sleepymaid/db";
 import { SleepyMaidClient } from "./SleepyMaidClient";
 import { and, eq, sql } from "drizzle-orm";
-import { permissionKeys } from "@sleepymaid/shared";
+import { Permission, permissionList } from "@sleepymaid/shared";
 import { GuildMember, PermissionFlagsBits } from "discord.js";
 
 export default class Manager {
@@ -18,12 +18,10 @@ export default class Manager {
 		Permissions
 	*/
 
-	public async permissionQuery(
-		member: GuildMember,
-		permission: (typeof permissionKeys)[number],
-		value: boolean = true,
-	): Promise<boolean> {
+	public async permissionQuery(member: GuildMember, permission: Permission, value: boolean = true): Promise<boolean> {
 		if (member.permissions.has([PermissionFlagsBits.Administrator])) return value;
+
+		if (!permissionList[permission]) return false;
 
 		const guildId = member.guild.id;
 		const permissions = await this.drizzle.query.rolePermissions.findMany({
@@ -33,6 +31,8 @@ export default class Manager {
 				eq(rolePermissions.value, value),
 			),
 		});
+
+		if (permissions.length === 0) return permissionList[permission].default;
 
 		return permissions.some((p) => member.roles.cache.has(p.roleId));
 	}

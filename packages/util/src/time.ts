@@ -17,6 +17,11 @@ const fullUnits: Record<keyof Duration, keyof Duration> = {
 	weeks: "weeks",
 };
 
+/**
+ * Parses a time string into a duration object
+ * @param input The time string to parse
+ * @returns The duration object
+ */
 export function getTimeTable(input: string): Duration {
 	const response: Duration = {};
 

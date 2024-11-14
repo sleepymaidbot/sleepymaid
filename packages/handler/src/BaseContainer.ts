@@ -6,11 +6,11 @@ import type { TaskManager } from "./tasks/TaskManager";
 export class BaseContainer<Client extends HandlerClient> {
 	public client: Client;
 
-	public commandManager: CommandManager;
+	public commandManager?: CommandManager<Client>;
 
-	public listenerManager: ListenerManager;
+	public listenerManager?: ListenerManager<Client>;
 
-	public taskManager: TaskManager;
+	public taskManager?: TaskManager<Client>;
 
 	public logger: Client["logger"];
 

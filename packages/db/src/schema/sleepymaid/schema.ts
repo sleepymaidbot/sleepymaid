@@ -3,7 +3,7 @@ import { pgTable, text, boolean, bigint, timestamp, integer, serial } from "driz
 import { randomBitrate } from "../helper/randombitrate";
 import { roleMenu } from "./rolemenu";
 import { quickMessage } from "./quickMessage";
-import { permissionKeys } from "@sleepymaid/shared";
+import { Permission } from "@sleepymaid/shared";
 
 export const guildSettings = pgTable("guild_settings", {
 	// Basic Information
@@ -27,7 +27,7 @@ export const rolePermissions = pgTable("role_permissions", {
 		.notNull()
 		.references(() => guildSettings.guildId, { onDelete: "cascade" }),
 	roleId: text("role_id").notNull(),
-	permission: text("permission").notNull().$type<(typeof permissionKeys)[number]>(),
+	permission: text("permission").notNull().$type<Permission>(),
 	value: boolean("value").notNull().default(false),
 });
 

@@ -16,9 +16,11 @@ import { MessageCommand } from "./MessageCommand";
 import { SlashCommand } from "./SlashCommand";
 import { UserCommand } from "./UserCommand";
 import { pathToFileURL } from "node:url";
+import { Precondition } from "../preconditions/Precondition";
 
-export type CommandManagerStartAllOptionsType = {
+export type CommandManagerStartAllOptionsType<Client extends HandlerClient> = {
 	folder: string;
+	preconditions?: (typeof Precondition<Client>)[];
 };
 
 export type GuildCommandsType = {
@@ -77,13 +79,18 @@ async function checkAndInstantiateCommand(
 	}
 }
 
-export class CommandManager extends BaseManager {
+export class CommandManager<Client extends HandlerClient> extends BaseManager<Client> {
 	private _commands: Collection<string, Commands> = new Collection<string, Commands>();
 
 	private _tempCommands: Collection<string, Commands> = new Collection<string, Commands>();
 
-	public async startAll(options: CommandManagerStartAllOptionsType): Promise<void> {
+	private _preconditions: (typeof Precondition<Client>)[] = [];
+
+	public async startAll(options: CommandManagerStartAllOptionsType<typeof this.client>): Promise<void> {
 		if (!options.folder) throw new Error("No folder path provided!");
+		if (options.preconditions) {
+			this._preconditions = options.preconditions;
+		}
 		await this.loadCommand(options.folder);
 		this.client.on("interactionCreate", (interaction: Interaction) => {
 			if (interaction.type === InteractionType.ApplicationCommand) {
@@ -257,7 +264,7 @@ export class CommandManager extends BaseManager {
 			if (!cmd) return;
 
 			if (cmd.preconditions) {
-				for (const precondition of cmd.preconditions) {
+				for (const precondition of [...this._preconditions, ...cmd.preconditions]) {
 					const cond = new precondition(context);
 					const preconditionResult = await cond.CommandRun!(interaction as never);
 					if (preconditionResult === false) return;
@@ -268,7 +275,9 @@ export class CommandManager extends BaseManager {
 				}
 			}
 
-			await cmd.execute!(interaction as never);
+			if (!cmd.execute) return this.client.logger.error("Command has no execute method!");
+
+			await cmd.execute(interaction as never);
 		} catch (error) {
 			this.client.logger.error(error as Error);
 			try {
