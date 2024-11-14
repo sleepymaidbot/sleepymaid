@@ -35,7 +35,14 @@ export default class LeaderboardTask extends Task<HelperClient> {
 		for (const [_, member] of members) {
 			if (leaderboard.find((user) => user.userId === member.id)) {
 				const index = leaderboard.findIndex((user) => user.userId === member.id);
-				await member.roles.add([roles[index as keyof typeof roles], role], "Leaderboard roles update");
+				const rolesSet = new Set(member.roles.cache.map((r) => r.id));
+				for (const roleId of Object.values(roles)) {
+					rolesSet.delete(roleId);
+				}
+				rolesSet.add(roles[index as keyof typeof roles]);
+				rolesSet.add(role);
+
+				await member.roles.set(Array.from(rolesSet), "Leaderboard roles update");
 			} else {
 				await member.roles.remove([role, ...Object.values(roles)], "Leaderboard roles update");
 			}
