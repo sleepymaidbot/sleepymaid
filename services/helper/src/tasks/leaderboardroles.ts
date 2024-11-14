@@ -25,7 +25,7 @@ export default class LeaderboardTask extends Task<HelperClient> {
 
 		const leaderboard = await client.drizzle.query.userData.findMany({
 			orderBy: desc(userData.currency),
-			limit: 3,
+			limit: 5,
 		});
 
 		const guild = await client.guilds.fetch("862103656852619304");
@@ -39,7 +39,7 @@ export default class LeaderboardTask extends Task<HelperClient> {
 				for (const roleId of Object.values(roles)) {
 					rolesSet.delete(roleId);
 				}
-				rolesSet.add(roles[index as keyof typeof roles]);
+				if (roles[index as keyof typeof roles]) rolesSet.add(roles[index as keyof typeof roles]);
 				rolesSet.add(role);
 
 				await member.roles.set(Array.from(rolesSet), "Leaderboard roles update");
