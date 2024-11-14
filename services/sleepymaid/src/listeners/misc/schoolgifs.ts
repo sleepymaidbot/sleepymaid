@@ -57,18 +57,18 @@ export default class extends Listener<"messageCreate", SleepyMaidClient> {
 
 		if (users[userId]) {
 			if (Date.now() > users[userId]) {
-				users[userId] = add(Date.now(), { minutes: 3 }).getTime();
+				users[userId] = add(Date.now(), { minutes: 1 }).getTime();
 			} else {
 				message.delete();
 				const warning = await message.channel.send(
-					`<@${userId}> Merci d'attendre 3 minutes avant d'envoyer un autre gif. Si vous voulez envoyez des gifs, c'est <#1300509988917350471>.`,
+					`<@${userId}> Merci d'attendre 1 minutes avant d'envoyer un autre gif. Si vous voulez envoyez des gifs, c'est <#1300509988917350471>.`,
 				);
 				setTimeout(() => {
 					warning.delete();
 				}, 10_000);
 			}
 		} else {
-			users[userId] = add(Date.now(), { minutes: 3 }).getTime();
+			users[userId] = add(Date.now(), { minutes: 1 }).getTime();
 		}
 	}
 }
