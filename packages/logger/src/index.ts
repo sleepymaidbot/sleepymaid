@@ -101,12 +101,19 @@ export class Logger extends BaseLogger {
 	}
 
 	private formatEmbed(level: Loglevels, message: string, ...args: string[]): APIEmbed {
+		let color: ColorResolvable;
+		if (level === Loglevels.Error) {
+			color = resolveColor("#ff0000");
+		} else {
+			color = resolveColor(this.webhookOptions.color ?? "#d4bdf9");
+		}
+
 		return {
 			author: {
-				name: this.webhookOptions.name ?? "Bot",
+				name: this.webhookOptions.name ?? "Bot" + " - " + prefixes[level],
 				icon_url: this.webhookOptions.iconURL,
 			},
-			color: resolveColor(this.webhookOptions.color ?? "#d4bdf9"),
+			color,
 			description: this.formatEmbedMessage(level, message, ...args),
 		};
 	}
