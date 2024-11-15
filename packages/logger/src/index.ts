@@ -2,6 +2,10 @@ import { BaseLogger, type env } from "@sleepymaid/handler";
 import { gray, red, cyan } from "ansi-colors";
 import { APIEmbed, ColorResolvable, resolveColor, WebhookClient } from "discord.js";
 
+const removeAnsiCodes = (str: string): string => {
+	return str.replace(/\x1b\[[0-9;]*m/g, "");
+};
+
 export enum Loglevels {
 	Debug,
 	Info,
@@ -76,7 +80,7 @@ export class Logger extends BaseLogger {
 			` ${prefixes[level] ?? ""}`,
 			`: ${message} ${args.join(" ")}`,
 		];
-		return `\`\`\`${log.join(" ")}\`\`\``;
+		return `\`\`\`${removeAnsiCodes(log.join(" "))}\`\`\``;
 	}
 
 	private addEmbed(embed: APIEmbed): void {
