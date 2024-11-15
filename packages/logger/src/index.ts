@@ -119,25 +119,16 @@ export class Logger extends BaseLogger {
 	}
 
 	public override debug(message: string, ...args: string[]): void {
-		// this.pino.debug(this.formatMessage(Loglevels.Debug, gray(message), ...args))
 		console.debug(this.formatMessage(Loglevels.Debug, gray(message), ...args));
 	}
 
 	public override info(message: string, ...args: string[]): void {
-		// this.pino.info(this.formatMessage(Loglevels.Info, blue(message), ...args))
 		console.info(this.formatMessage(Loglevels.Info, cyan(message), ...args));
 
 		this.addEmbed(this.formatEmbed(Loglevels.Info, cyan(message), ...args));
 	}
 
 	public override error(error: Error | string, ...args: string[]): void {
-		/* this.pino.error(
-			this.formatMessage(
-				Loglevels.Error,
-				red(error.stack ?? error.message),
-				...args
-			)
-		)*/
 		if (error instanceof Error) {
 			try {
 				console.error(this.formatMessage(Loglevels.Error, red(error.stack ?? error.message), ...args));
