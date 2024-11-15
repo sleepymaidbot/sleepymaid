@@ -27,6 +27,8 @@ export class SleepyMaidClient extends HandlerClient {
 
 	public declare container: BaseContainer<this> & SleepyMaidContainer;
 
+	public declare logger: Logger;
+
 	public constructor() {
 		super(
 			{
@@ -49,7 +51,7 @@ export class SleepyMaidClient extends HandlerClient {
 	public async start(): Promise<void> {
 		this.config = initConfig();
 		this.env = this.config.nodeEnv;
-		this.logger = new Logger(this.env);
+		this.logger = new Logger(this.env, this.config.discordWebhookUrl);
 
 		this.drizzle = createDrizzleInstance(process.env.DATABASE_URL as string);
 

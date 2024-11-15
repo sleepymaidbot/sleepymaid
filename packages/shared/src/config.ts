@@ -12,6 +12,7 @@ export type Config = {
 	rabbitMQUrl: string;
 	redisUrl: string;
 	apiSecret: string;
+	discordWebhookUrl: string;
 };
 
 export const initConfig = () => {
@@ -25,6 +26,7 @@ export const initConfig = () => {
 		redisUrl: process.env.REDIS_URL!,
 		nodeEnv: (process.env.NODE_ENV as NodeEnv) ?? "dev",
 		apiSecret: process.env.API_SECRET!,
+		discordWebhookUrl: process.env.DISCORD_WEBHOOK_URL!,
 	};
 	return config;
 };

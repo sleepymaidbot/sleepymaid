@@ -16,5 +16,12 @@ export default class ReadyListener extends Listener<"ready", SleepyMaidClient> {
 		client.logger.info(
 			`Logged in as ${this.container.client.user!.tag} | ${this.container.client.guilds.cache.size} servers`,
 		);
+
+		client.logger.setWebhook({
+			webhookURL: client.config.discordWebhookUrl,
+			name: client.user?.username,
+			iconURL: client.user?.displayAvatarURL(),
+			color: "#d4bdf9",
+		});
 	}
 }

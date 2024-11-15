@@ -15,6 +15,8 @@ export class WatcherClient extends HandlerClient {
 
 	public declare config: Config;
 
+	public declare logger: Logger;
+
 	public constructor() {
 		super(
 			{
@@ -34,7 +36,7 @@ export class WatcherClient extends HandlerClient {
 
 	public async start(): Promise<void> {
 		this.config = initConfig();
-		this.logger = new Logger(this.env);
+		this.logger = new Logger(this.env, this.config.discordWebhookUrl);
 		this.env = this.config.nodeEnv;
 
 		this.drizzle = createDrizzleInstance(process.env.DATABASE_URL as string);

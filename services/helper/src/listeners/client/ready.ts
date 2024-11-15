@@ -19,5 +19,12 @@ export default class ReadyListener extends Listener<"ready", HelperClient> {
 
 			await guild.members.fetch().catch((error) => client.logger.error(error));
 		}
+
+		client.logger.setWebhook({
+			webhookURL: client.config.discordWebhookUrl,
+			name: client.user?.username,
+			iconURL: client.user?.displayAvatarURL(),
+			color: "#5664f0",
+		});
 	}
 }
