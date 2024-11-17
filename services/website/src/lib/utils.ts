@@ -7,6 +7,10 @@ export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
 
+export function formatNumber(number: number): string {
+	return new Intl.NumberFormat("en-US", { useGrouping: true }).format(number);
+}
+
 type FlyAndScaleParams = {
 	y?: number;
 	x?: number;

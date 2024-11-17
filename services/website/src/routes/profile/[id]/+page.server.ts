@@ -9,22 +9,28 @@ export const load: PageServerLoad = async (event) => {
 	if (!id) {
 		return redirect(302, "/login");
 	}
-	if (event.locals.user?.userId !== id) {
-		const profile = await db
-			.select({
-				userId: userData.userId,
-				userName: userData.userName,
-				displayName: userData.displayName,
-				avatarHash: userData.avatarHash,
-				currency: userData.currency,
-			})
-			.from(userData)
-			.where(eq(userData.userId, id));
-		if (profile.length < 1) {
-			return redirect(302, "/login");
-		}
-		return { profile: profile[0], user: event.locals.user };
+	const [user] = await db.select().from(userData).where(eq(userData.userId, id));
+	if (!user) {
+		return redirect(302, "/login");
 	}
-	const profile = await db.select().from(userData).where(eq(userData.userId, id));
-	return { profile: profile[0], user: event.locals.user };
+
+	const partialProfile = {
+		userId: user.userId,
+		userName: user.userName,
+		displayName: user.displayName,
+		avatarHash: user.avatarHash,
+		currency: user.currency,
+	};
+
+	if (event.locals.user?.userId !== id) {
+		return {
+			profile: partialProfile,
+			user: event.locals.user,
+		};
+	}
+	return {
+		profile: partialProfile,
+		fullProfile: user,
+		user: event.locals.user,
+	};
 };
