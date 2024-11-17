@@ -38,6 +38,9 @@ export default class MessageCreateEconomyListener extends Listener<"messageCreat
 			.onConflictDoUpdate({
 				target: userData.userId,
 				set: {
+					userName: message.author.username,
+					displayName: message.author.displayName,
+					avatarHash: message.author.avatar,
 					currency: sql`${userData.currency} + ${reward}`,
 				},
 			});
