@@ -13,6 +13,8 @@ export type Config = {
 	redisUrl: string;
 	apiSecret: string;
 	discordWebhookUrl: string;
+	databaseUrl: string;
+	discordRedirectUri: string;
 };
 
 export const initConfig = () => {
@@ -27,6 +29,8 @@ export const initConfig = () => {
 		nodeEnv: (process.env.NODE_ENV as NodeEnv) ?? "dev",
 		apiSecret: process.env.API_SECRET!,
 		discordWebhookUrl: process.env.DISCORD_WEBHOOK_URL!,
+		databaseUrl: process.env.DATABASE_URL!,
+		discordRedirectUri: process.env.DISCORD_REDIRECT_URI!,
 	};
 	return config;
 };

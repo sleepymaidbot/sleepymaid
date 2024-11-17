@@ -1,4 +1,4 @@
-import { relations, sql } from "drizzle-orm";
+import { InferSelectModel, relations, sql } from "drizzle-orm";
 import { pgTable, text, boolean, bigint, timestamp, integer, serial } from "drizzle-orm/pg-core";
 import { randomBitrate } from "../helper/randombitrate";
 import { roleMenu } from "./rolemenu";
@@ -61,7 +61,7 @@ export const userData = pgTable("user_data", {
 	userId: text("user_id").notNull().primaryKey(),
 	userName: text("user_name").notNull(),
 	displayName: text("display_name"),
-	userAvatar: text("user_avatar"),
+	avatarHash: text("avatar_hash"),
 
 	// Economy
 	currency: bigint({ mode: "number" }).default(0).notNull(),
@@ -84,3 +84,19 @@ export const reminders = pgTable("reminders", {
 	reminderName: text("reminder_name").notNull(),
 	reminderTime: timestamp("reminder_time").notNull(),
 });
+
+export const sessionTable = pgTable("session", {
+	id: text("id").primaryKey(),
+	userId: text("user_id")
+		.notNull()
+		.references(() => userData.userId),
+	accessToken: text("access_token").notNull(),
+	expiresAt: timestamp("expires_at", {
+		withTimezone: true,
+		mode: "date",
+	}).notNull(),
+	refreshToken: text("refresh_token").notNull(),
+});
+
+export type User = InferSelectModel<typeof userData>;
+export type Session = InferSelectModel<typeof sessionTable>;

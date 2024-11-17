@@ -8,7 +8,6 @@ import * as mondecorte from "./schema/sleepymaid/mondecorte";
 import * as quickMessage from "./schema/sleepymaid/quickMessage";
 import * as roleMenu from "./schema/sleepymaid/rolemenu";
 import * as schemas from "./schema/sleepymaid/schema";
-import * as website from "./schema/sleepymaid/website";
 import * as watcher from "./schema/watcher/watcher";
 
 // Schema object
@@ -22,7 +21,6 @@ export const schema = {
 	...roleMenu,
 	...schemas,
 	...watcher,
-	...website,
 };
 
 export function createDrizzleInstance(connectionString: string) {
@@ -40,5 +38,4 @@ export * from "./schema/sleepymaid/mondecorte";
 export * from "./schema/sleepymaid/quickMessage";
 export * from "./schema/sleepymaid/rolemenu";
 export * from "./schema/sleepymaid/schema";
-export * from "./schema/sleepymaid/website";
 export * from "./schema/watcher/watcher";

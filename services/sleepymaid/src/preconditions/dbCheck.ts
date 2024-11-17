@@ -51,15 +51,15 @@ export default class DBCheckPrecondtion extends Precondition<SleepyMaidClient> {
 				userId: user.id,
 				userName: user.username,
 				displayName: user.displayName,
-				userAvatar: user.avatarURL(),
+				avatarHash: user.avatar,
 			});
 		} else {
 			const updates: Partial<typeof userData.$inferInsert> = {};
 			if (userDatas.userName !== user.username) {
 				updates.userName = user.username;
 			}
-			if (userDatas.userAvatar !== (user.avatarURL() || "")) {
-				updates.userAvatar = user.avatarURL() || "";
+			if (userDatas.avatarHash !== (user.avatar || "")) {
+				updates.avatarHash = user.avatar || "";
 			}
 			if (userDatas.displayName !== user.displayName) {
 				updates.displayName = user.displayName;

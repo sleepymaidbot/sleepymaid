@@ -32,7 +32,7 @@ export default class MessageCreateEconomyListener extends Listener<"messageCreat
 				userId: message.author.id,
 				userName: message.author.username,
 				displayName: message.author.displayName,
-				userAvatar: message.author.avatarURL() ?? null,
+				avatarHash: message.author.avatar,
 				currency: reward,
 			})
 			.onConflictDoUpdate({
