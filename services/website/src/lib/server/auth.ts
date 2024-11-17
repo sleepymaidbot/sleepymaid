@@ -58,17 +58,10 @@ export async function validateSessionToken(token: string): Promise<SessionValida
 		return { session: null, user: null };
 	}
 	if (Date.now() >= session.expiresAt.getTime()) {
-		await db.delete(sessionTable).where(eq(sessionTable.id, session.id));
-		return { session: null, user: null };
-	}
-	if (Date.now() >= session.expiresAt.getTime() - 1000 * 60 * 60 * 24 * 15) {
-		session.expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30);
-		await db
-			.update(sessionTable)
-			.set({
-				expiresAt: session.expiresAt,
-			})
-			.where(eq(sessionTable.id, session.id));
+		const tokens = await discord.refreshAccessToken(session.refreshToken);
+		const accessToken = tokens.accessToken();
+		const expiresAt = tokens.accessTokenExpiresAt();
+		await db.update(sessionTable).set({ accessToken, expiresAt }).where(eq(sessionTable.id, session.id));
 	}
 	return { session, user };
 }
