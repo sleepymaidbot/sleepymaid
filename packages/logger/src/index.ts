@@ -91,12 +91,15 @@ export class Logger extends BaseLogger {
 
 	private sendWebhookQueue(): void {
 		if (!this.webhook) return;
+		const hasError = this.webhookQueue.some((embed) => embed.author?.name?.includes(prefixes[Loglevels.Error]));
+
 		this.webhook.send({
 			username: this.webhookOptions.name,
 			avatarURL: this.webhookOptions.iconURL,
 			embeds: this.webhookQueue,
-			flags: MessageFlags.SuppressNotifications,
+			flags: hasError ? undefined : MessageFlags.SuppressNotifications,
 		});
+
 		this.webhookQueue = [];
 		this.webhookTime = Date.now();
 	}
