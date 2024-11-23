@@ -1,6 +1,6 @@
 import { BaseLogger, type env } from "@sleepymaid/handler";
 import { gray, red, cyan } from "ansi-colors";
-import { APIEmbed, ColorResolvable, resolveColor, WebhookClient } from "discord.js";
+import { APIEmbed, ColorResolvable, MessageFlags, resolveColor, WebhookClient } from "discord.js";
 
 const removeAnsiCodes = (str: string): string => {
 	return str.replace(/\x1b\[[0-9;]*m/g, "");
@@ -95,6 +95,7 @@ export class Logger extends BaseLogger {
 			username: this.webhookOptions.name,
 			avatarURL: this.webhookOptions.iconURL,
 			embeds: this.webhookQueue,
+			flags: MessageFlags.SuppressNotifications,
 		});
 		this.webhookQueue = [];
 		this.webhookTime = Date.now();
