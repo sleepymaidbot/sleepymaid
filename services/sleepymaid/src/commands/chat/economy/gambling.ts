@@ -12,12 +12,14 @@ import {
 } from "discord.js";
 import { eq, sql } from "drizzle-orm";
 import { formatNumber } from "@sleepymaid/shared";
+import DBCheckPrecondtion from "../../../preconditions/dbCheck";
 
 const emojis = ["🍎", "🍊", "🍐", "🍋", "🍉", "🍇", "🍓", "🍒"];
 
 export default class GamblingCommand extends SlashCommand<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
 		super(context, {
+			preconditions: [DBCheckPrecondtion],
 			data: {
 				name: "gambling",
 				description: "Play the gambling games",
