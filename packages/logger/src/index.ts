@@ -35,7 +35,7 @@ export type WebhookOptions = {
 export class Logger extends BaseLogger {
 	private webhook?: WebhookClient;
 
-	private webhookQueue: APIEmbed[] = [];
+	private webhookQueue: { level: Loglevels; embed: APIEmbed }[] = [];
 
 	private webhookTime: number = 0;
 
@@ -83,20 +83,20 @@ export class Logger extends BaseLogger {
 		return `\`\`\`${removeAnsiCodes(log.join(" "))}\`\`\``;
 	}
 
-	private addEmbed(embed: APIEmbed): void {
+	private addEmbed(level: Loglevels, embed: APIEmbed): void {
 		if (!this.webhook) return;
-		this.webhookQueue.push(embed);
+		this.webhookQueue.push({ level, embed });
 		if (this.webhookQueue.length >= 10 || Date.now() - this.webhookTime >= 10000) this.sendWebhookQueue();
 	}
 
 	private sendWebhookQueue(): void {
 		if (!this.webhook) return;
-		const hasError = this.webhookQueue.some((embed) => embed.author?.name?.includes(prefixes[Loglevels.Error]));
+		const hasError = this.webhookQueue.some((embed) => embed.level === Loglevels.Error);
 
 		this.webhook.send({
 			username: this.webhookOptions.name,
 			avatarURL: this.webhookOptions.iconURL,
-			embeds: this.webhookQueue,
+			embeds: this.webhookQueue.map((embed) => embed.embed),
 			flags: hasError ? undefined : MessageFlags.SuppressNotifications,
 		});
 
@@ -114,7 +114,7 @@ export class Logger extends BaseLogger {
 
 		return {
 			author: {
-				name: this.webhookOptions.name ?? "Bot" + " - " + prefixes[level],
+				name: `${this.webhookOptions.name ?? "Bot"} - ${prefixes[level]}`,
 				icon_url: this.webhookOptions.iconURL,
 			},
 			color,
@@ -129,7 +129,7 @@ export class Logger extends BaseLogger {
 	public override info(message: string, ...args: string[]): void {
 		console.info(this.formatMessage(Loglevels.Info, cyan(message), ...args));
 
-		this.addEmbed(this.formatEmbed(Loglevels.Info, cyan(message), ...args));
+		this.addEmbed(Loglevels.Info, this.formatEmbed(Loglevels.Info, cyan(message), ...args));
 	}
 
 	public override error(error: Error | string, ...args: string[]): void {
@@ -137,7 +137,7 @@ export class Logger extends BaseLogger {
 			try {
 				console.error(this.formatMessage(Loglevels.Error, red(error.stack ?? error.message), ...args));
 
-				this.addEmbed(this.formatEmbed(Loglevels.Error, red(error.stack ?? error.message), ...args));
+				this.addEmbed(Loglevels.Error, this.formatEmbed(Loglevels.Error, red(error.stack ?? error.message), ...args));
 			} catch {
 				console.error(error);
 			}
@@ -145,7 +145,7 @@ export class Logger extends BaseLogger {
 			try {
 				console.error(this.formatMessage(Loglevels.Error, red(error), ...args));
 
-				this.addEmbed(this.formatEmbed(Loglevels.Error, red(error), ...args));
+				this.addEmbed(Loglevels.Error, this.formatEmbed(Loglevels.Error, red(error), ...args));
 			} catch {
 				console.error(error);
 			}
