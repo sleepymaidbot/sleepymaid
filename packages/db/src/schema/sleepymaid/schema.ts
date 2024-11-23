@@ -9,7 +9,7 @@ export const guildSettings = pgTable("guild_settings", {
 	// Basic Information
 	guildId: text("guild_id").primaryKey().notNull(),
 	guildName: text("guild_name").notNull(),
-	guildIcon: text("icon"),
+	iconHash: text("icon_hash"),
 
 	// Premium config
 	premiumLevel: integer("premium_level").default(0).notNull(),

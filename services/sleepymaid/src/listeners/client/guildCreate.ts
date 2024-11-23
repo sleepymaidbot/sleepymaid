@@ -19,6 +19,6 @@ export default class GuildCreateListener extends Listener<"guildCreate", SleepyM
 
 		return this.container.client.drizzle
 			.insert(guildSettings)
-			.values({ guildId: guild.id, guildName: guild.name, guildIcon: guild.iconURL() });
+			.values({ guildId: guild.id, guildName: guild.name, iconHash: guild.icon });
 	}
 }

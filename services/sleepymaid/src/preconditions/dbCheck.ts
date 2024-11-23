@@ -14,13 +14,13 @@ export default class DBCheckPrecondtion extends Precondition<SleepyMaidClient> {
 					.values({
 						guildId: interaction.guild.id,
 						guildName: interaction.guild.name,
-						guildIcon: interaction.guild.iconURL(),
+						iconHash: interaction.guild.icon,
 					})
 					.onConflictDoUpdate({
 						target: [guildSettings.guildId],
 						set: {
 							guildName: interaction.guild.name,
-							guildIcon: interaction.guild.iconURL(),
+							iconHash: interaction.guild.icon,
 						},
 					});
 
