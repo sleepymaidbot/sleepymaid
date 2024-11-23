@@ -100,3 +100,11 @@ export const sessionTable = pgTable("session", {
 
 export type User = InferSelectModel<typeof userData>;
 export type Session = InferSelectModel<typeof sessionTable>;
+
+export const roleConnections = pgTable("role_connections", {
+	guildId: text("guild_id")
+		.notNull()
+		.references(() => guildSettings.guildId, { onDelete: "cascade" }),
+	parentRoleId: text("parent_role_id").notNull(),
+	childRoleId: text("child_role_id").notNull(),
+});
