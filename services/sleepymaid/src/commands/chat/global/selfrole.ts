@@ -4,7 +4,9 @@ import type { ApplicationCommandOptionChoiceData, ChatInputCommandInteraction } 
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
+	ApplicationIntegrationType,
 	ComponentType,
+	InteractionContextType,
 	PermissionFlagsBits,
 	PermissionsBitField,
 } from "discord.js";
@@ -48,6 +50,8 @@ export default class SelfRoleCommand extends SlashCommand<SleepyMaidClient> {
 				description: "[Admin only] Allow you to post a simple self role message.",
 				type: ApplicationCommandType.ChatInput,
 				defaultMemberPermissions: new PermissionsBitField([PermissionFlagsBits.ManageRoles]),
+				integrationTypes: [ApplicationIntegrationType.GuildInstall],
+				contexts: [InteractionContextType.Guild],
 				options: [
 					{
 						name: "role",
