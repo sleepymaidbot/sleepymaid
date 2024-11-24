@@ -246,11 +246,11 @@ export class CommandManager<Client extends HandlerClient> extends BaseManager<Cl
 
 	private async HandleApplicationCommands(interaction: CommandInteraction) {
 		if (interaction.guild) {
-			this.client.logger.info(
+			this.client.logger.debug(
 				`${interaction.guild?.name} (${interaction.guild?.id}) > ${interaction.user.username} (${interaction.user.id}) > /${interaction.commandName} (${interaction.commandId})`,
 			);
 		} else {
-			this.client.logger.info(
+			this.client.logger.debug(
 				`${interaction.user.username} (${interaction.user.id}) > /${interaction.commandName} (${interaction.commandId})`,
 			);
 		}

@@ -45,7 +45,7 @@ export default class MessageCreateEconomyListener extends Listener<"messageCreat
 				},
 			});
 
-		this.container.client.logger.info(
+		this.container.client.logger.debug(
 			`${message.author.username} (${message.author.id}) earned ${reward} coins for sending a message!`,
 		);
 	}

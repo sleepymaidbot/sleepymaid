@@ -109,7 +109,7 @@ export default class GamblingCommand extends SlashCommand<SleepyMaidClient> {
 			timestamp: new Date().toISOString(),
 		};
 
-		this.container.client.logger.info(
+		this.container.client.logger.debug(
 			`${interaction.user.username} played slot machine and got ${amount * multiplier} coins`,
 		);
 

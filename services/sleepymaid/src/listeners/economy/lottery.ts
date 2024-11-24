@@ -48,7 +48,7 @@ export default class extends Listener<Events.InteractionCreate, SleepyMaidClient
 			})
 			.onConflictDoNothing();
 
-		this.container.logger.info(`${interaction.user.username} has entered the lottery!`);
+		this.container.logger.debug(`${interaction.user.username} has entered the lottery!`);
 
 		await interaction.reply({
 			content: `You have entered the lottery!`,
