@@ -1,6 +1,12 @@
 import { Context, SlashCommand } from "@sleepymaid/handler";
 import { SleepyMaidClient } from "../../../lib/SleepyMaidClient";
-import { ApplicationCommandOptionType, AutocompleteInteraction, ChatInputCommandInteraction } from "discord.js";
+import {
+	ApplicationCommandOptionType,
+	ApplicationIntegrationType,
+	AutocompleteInteraction,
+	ChatInputCommandInteraction,
+	InteractionContextType,
+} from "discord.js";
 import DBCheckPrecondtion from "../../../preconditions/dbCheck";
 import { getAutocompleteResults } from "@sleepymaid/shared";
 import { add, getUnixTime, isBefore } from "date-fns";
@@ -15,6 +21,8 @@ export default class Reminders extends SlashCommand<SleepyMaidClient> {
 			data: {
 				name: "reminder",
 				description: "Base reminder command",
+				integrationTypes: [ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall],
+				contexts: [InteractionContextType.BotDM, InteractionContextType.Guild, InteractionContextType.PrivateChannel],
 				options: [
 					{
 						name: "add",

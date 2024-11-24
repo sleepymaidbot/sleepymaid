@@ -6,9 +6,11 @@ import {
 	APIEmbed,
 	APIEmbedField,
 	ApplicationCommandOptionType,
+	ApplicationIntegrationType,
 	ChatInputCommandInteraction,
 	Colors,
 	version as discordJSVersion,
+	InteractionContextType,
 } from "discord.js";
 import { prettyBytes, shell } from "@sleepymaid/util";
 import i18next from "i18next";
@@ -19,6 +21,8 @@ export default class extends SlashCommand<SleepyMaidClient> {
 			data: {
 				name: "about",
 				description: "About SleepyMaid",
+				integrationTypes: [ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall],
+				contexts: [InteractionContextType.BotDM, InteractionContextType.Guild, InteractionContextType.PrivateChannel],
 				options: [
 					// Discord Info
 					{
