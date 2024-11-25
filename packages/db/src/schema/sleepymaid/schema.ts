@@ -100,6 +100,7 @@ export const sessionTable = pgTable("session", {
 
 export type User = InferSelectModel<typeof userData>;
 export type Session = InferSelectModel<typeof sessionTable>;
+export type Reminder = InferSelectModel<typeof reminders>;
 
 export const roleConnections = pgTable("role_connections", {
 	guildId: text("guild_id")

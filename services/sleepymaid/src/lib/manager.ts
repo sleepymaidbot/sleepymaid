@@ -3,6 +3,7 @@ import { SleepyMaidClient } from "./SleepyMaidClient";
 import { and, eq, sql } from "drizzle-orm";
 import { Permission, permissionList } from "@sleepymaid/shared";
 import { GuildMember, PermissionFlagsBits } from "discord.js";
+import { downloadVideo } from "./downloader";
 
 export default class Manager {
 	private declare client: SleepyMaidClient;
@@ -12,6 +13,14 @@ export default class Manager {
 	constructor(client: SleepyMaidClient) {
 		this.client = client;
 		this.drizzle = client.drizzle;
+	}
+
+	/*
+		Downloader
+	*/
+
+	public async downloadVideo(url: string, callback: (fileName: string) => Promise<void>) {
+		return downloadVideo(this.client, url, callback);
 	}
 
 	/*
