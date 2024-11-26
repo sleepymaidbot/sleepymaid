@@ -1,43 +1,122 @@
-import { boolean, pgEnum, pgTable, serial, text } from "drizzle-orm/pg-core";
+import { jsonb, pgEnum, pgTable, serial, text } from "drizzle-orm/pg-core";
 import { guildSettings } from "../sleepymaid/schema";
 
 export const logChannelType = pgEnum("Log_channel_type", ["server", "mod"]);
 export const caseType = pgEnum("case_type", ["untimeout", "timeout", "kick", "unban", "ban"]);
 
+export const types = {
+	moderationEvents: {
+		timeout: "Timeout",
+		untimeout: "Untimeout",
+		kick: "Kick",
+		ban: "Ban",
+		unban: "Unban",
+	},
+	memberEvents: {
+		join: "Join",
+		leave: "Leave",
+		nicknameChange: "Nickname Change",
+		roleChange: "Role Change",
+		avatarChange: "Avatar Change",
+		usernameChange: "Username Change",
+		voiceStateUpdate: "Voice State Update",
+	},
+	messageEvents: {
+		edit: "Message Edit",
+		delete: "Message Delete",
+	},
+	roleEvents: {
+		create: "Role Create",
+		delete: "Role Delete",
+		update: "Role Update",
+	},
+	channelEvents: {
+		create: "Channel Create",
+		delete: "Channel Delete",
+		update: "Channel Update",
+	},
+	emojiEvents: {
+		create: "Emoji Create",
+		delete: "Emoji Delete",
+		update: "Emoji Update",
+	},
+	inviteEvents: {
+		create: "Invite Create",
+		delete: "Invite Delete",
+	},
+};
+
 export const logChannel = pgTable("log_channel", {
+	id: serial("id").primaryKey().notNull(),
 	guildId: text("guild_id")
 		.notNull()
 		.references(() => guildSettings.guildId, { onDelete: "cascade" }),
-	channelId: text("channel_id").primaryKey().notNull(),
-	type: logChannelType("type").notNull(),
-	webhookId: text("webhookId").notNull(),
+	channelId: text("channel_id").notNull(),
+	type: logChannelType("type").notNull().default("server"),
+	webhookId: text("webhook_id").notNull(),
 	webhookToken: text("webhook_token").notNull(),
 	threadId: text("thread_id"),
-	timeout: boolean("timeout").default(false).notNull(),
-	untimeout: boolean("untimeout").default(false).notNull(),
-	kick: boolean("kick").default(false).notNull(),
-	ban: boolean("ban").default(false).notNull(),
-	unban: boolean("unban").default(false).notNull(),
-	messageEdit: boolean("messageEdit").default(false).notNull(),
-	messageDelete: boolean("messageDelete").default(false).notNull(),
-	memberJoin: boolean("memberJoin").default(false).notNull(),
-	memberLeave: boolean("memberLeave").default(false).notNull(),
-	memberNicknameChange: boolean("memberNicknameChange").default(false).notNull(),
-	memberRoleChange: boolean("memberRoleChange").default(false).notNull(),
-	memberAvatarChange: boolean("memberAvatarChange").default(false).notNull(),
-	memberUsernameChange: boolean("memberUsernameChange").default(false).notNull(),
-	memberVoiceStateUpdate: boolean("memberVoiceStateUpdate").default(false).notNull(),
-	roleCreate: boolean("roleCreate").default(false).notNull(),
-	roleDelete: boolean("roleDelete").default(false).notNull(),
-	roleUpdate: boolean("roleUpdate").default(false).notNull(),
-	channelCreate: boolean("channelCreate").default(false).notNull(),
-	channelDelete: boolean("channelDelete").default(false).notNull(),
-	channelUpdate: boolean("channelUpdate").default(false).notNull(),
-	emojiCreate: boolean("emojiCreate").default(false).notNull(),
-	emojiDelete: boolean("emojiDelete").default(false).notNull(),
-	emojiUpdate: boolean("emojiUpdate").default(false).notNull(),
-	inviteCreate: boolean("inviteCreate").default(false).notNull(),
-	inviteDelete: boolean("inviteDelete").default(false).notNull(),
+
+	moderationEvents: jsonb("moderation_events")
+		.default({
+			timeout: false,
+			untimeout: false,
+			kick: false,
+			ban: false,
+			unban: false,
+		})
+		.notNull()
+		.$type<Record<keyof typeof types.moderationEvents, boolean>>(),
+	memberEvents: jsonb("member_events")
+		.default({
+			join: false,
+			leave: false,
+			nicknameChange: false,
+			roleChange: false,
+			avatarChange: false,
+			usernameChange: false,
+			voiceStateUpdate: false,
+		})
+		.notNull()
+		.$type<Record<keyof typeof types.memberEvents, boolean>>(),
+	messageEvents: jsonb("message_events")
+		.default({
+			edit: false,
+			delete: false,
+		})
+		.notNull()
+		.$type<Record<keyof typeof types.messageEvents, boolean>>(),
+	roleEvents: jsonb("role_events")
+		.default({
+			create: false,
+			delete: false,
+			update: false,
+		})
+		.notNull()
+		.$type<Record<keyof typeof types.roleEvents, boolean>>(),
+	channelEvents: jsonb("channel_events")
+		.default({
+			create: false,
+			delete: false,
+			update: false,
+		})
+		.notNull()
+		.$type<Record<keyof typeof types.channelEvents, boolean>>(),
+	emojiEvents: jsonb("emoji_events")
+		.default({
+			create: false,
+			delete: false,
+			update: false,
+		})
+		.notNull()
+		.$type<Record<keyof typeof types.emojiEvents, boolean>>(),
+	inviteEvents: jsonb("invite_events")
+		.default({
+			create: false,
+			delete: false,
+		})
+		.notNull()
+		.$type<Record<keyof typeof types.inviteEvents, boolean>>(),
 });
 
 export const modCase = pgTable("case", {

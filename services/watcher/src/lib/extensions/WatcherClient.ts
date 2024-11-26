@@ -2,13 +2,15 @@
 import { resolve } from "node:path";
 import process from "node:process";
 import { createDrizzleInstance, DrizzleInstance } from "@sleepymaid/db";
-import { HandlerClient } from "@sleepymaid/handler";
+import { BaseContainer, HandlerClient } from "@sleepymaid/handler";
 import { Logger } from "@sleepymaid/logger";
 import type { Config } from "@sleepymaid/shared";
 import { initConfig, supportedLngs } from "@sleepymaid/shared";
 import { GatewayIntentBits } from "discord-api-types/v10";
 import i18next from "i18next";
 import FsBackend from "i18next-fs-backend";
+import WatcherContainer from "./WatcherContainer";
+import { Redis } from "iovalkey";
 
 export class WatcherClient extends HandlerClient {
 	public declare drizzle: DrizzleInstance;
@@ -16,6 +18,10 @@ export class WatcherClient extends HandlerClient {
 	public declare config: Config;
 
 	public declare logger: Logger;
+
+	public declare container: BaseContainer<this> & WatcherContainer;
+
+	public declare redis: Redis;
 
 	public constructor() {
 		super(
@@ -28,6 +34,15 @@ export class WatcherClient extends HandlerClient {
 					GatewayIntentBits.GuildMembers,
 					GatewayIntentBits.GuildMessages,
 					GatewayIntentBits.GuildVoiceStates,
+					GatewayIntentBits.GuildWebhooks,
+					GatewayIntentBits.MessageContent,
+					GatewayIntentBits.GuildMessageReactions,
+					GatewayIntentBits.GuildEmojisAndStickers,
+					GatewayIntentBits.GuildInvites,
+					// GatewayIntentBits.GuildScheduledEvents,
+					// GatewayIntentBits.GuildPresences,
+					GatewayIntentBits.GuildModeration,
+					GatewayIntentBits.GuildIntegrations,
 				],
 				allowedMentions: { parse: ["users", "roles"], repliedUser: false },
 			},
@@ -39,7 +54,8 @@ export class WatcherClient extends HandlerClient {
 		this.logger = new Logger(this.env, this.config.discordWebhookUrl);
 		this.env = this.config.nodeEnv;
 
-		this.drizzle = createDrizzleInstance(process.env.DATABASE_URL as string);
+		this.drizzle = createDrizzleInstance(this.config.databaseUrl);
+		this.redis = new Redis(this.config.redisUrl);
 
 		await i18next.use(FsBackend).init({
 			// debug: this.config.environment === 'development',
@@ -53,6 +69,9 @@ export class WatcherClient extends HandlerClient {
 			defaultNS: "translation",
 			ns: "translation",
 		});
+
+		// Override container type
+		this.container = new WatcherContainer(this) as BaseContainer<this> & WatcherContainer;
 
 		this.loadHandlers({
 			commands: {
