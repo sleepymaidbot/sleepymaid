@@ -26,6 +26,7 @@ export default class extends Listener<"messageDelete", WatcherClient> {
 			webhook.send({
 				username: `${this.container.client.user?.displayName}`,
 				avatarURL: this.container.client.user?.displayAvatarURL(),
+				threadId: channel.threadId ?? undefined,
 				embeds: [
 					{
 						title: "Message Deleted",
