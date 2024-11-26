@@ -205,9 +205,6 @@ importers:
       "@sleepymaid/handler":
         specifier: workspace:^
         version: link:../handler
-      amqplib:
-        specifier: ^0.10.4
-        version: 0.10.4
       discord.js:
         specifier: ^14.16.3
         version: 14.16.3
@@ -227,9 +224,6 @@ importers:
       "@swc/core":
         specifier: ^1.9.2
         version: 1.9.2(@swc/helpers@0.5.13)
-      "@types/amqplib":
-        specifier: ^0.10.5
-        version: 0.10.5
       "@types/module-alias":
         specifier: ^2.0.4
         version: 2.0.4
@@ -413,9 +407,6 @@ importers:
       "@sleepymaid/util":
         specifier: workspace:^
         version: link:../../packages/util
-      amqplib:
-        specifier: ^0.10.4
-        version: 0.10.4
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
@@ -562,6 +553,9 @@ importers:
       i18next-fs-backend:
         specifier: ^2.3.2
         version: 2.3.2
+      iovalkey:
+        specifier: ^0.2.1
+        version: 0.2.1
       module-alias:
         specifier: ^2.2.3
         version: 2.2.3
@@ -671,11 +665,6 @@ importers:
         version: 5.2.13(@types/node@22.9.0)(stylus@0.51.1)
 
 packages:
-  "@acuminous/bitsyntax@0.1.2":
-    resolution:
-      { integrity: sha512-29lUK80d1muEQqiUsSo+3A0yP6CdspgC95EnKBMi22Xlwt79i/En4Vr67+cXhU+cZjbti3TgGGC5wy1stIywVQ== }
-    engines: { node: ">=0.8" }
-
   "@aero/sanitizer@1.3.2":
     resolution:
       { integrity: sha512-JHYEuSHB7j8x6yPczQJ0bk5yVnaVdsBxWScSCcvykwD2eX6jIU6eJPKcEc7OqLzh5uesOzKYVTvNqLfGSMb7hw== }
@@ -1834,6 +1823,10 @@ packages:
     resolution:
       { integrity: sha512-jLxQjefH9VI5P9UQuqB6qNKnvFt1Ky1TPIzHGsIlCi7sZZoMR8SdYbBGRvM0y+Jtb+ez4ieBzmiAUcpmPYpyOw== }
 
+  "@ioredis/commands@1.2.0":
+    resolution:
+      { integrity: sha512-Sx1pU8EM64o2BrqNpEO1CNLtKQwyhuXuqyfH7oGKCk+1a33d2r5saW8zNwm3j6BTExtjrv2BxTgzzkMwts6vGg== }
+
   "@isaacs/cliui@8.0.2":
     resolution:
       { integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA== }
@@ -2431,10 +2424,6 @@ packages:
     resolution:
       { integrity: sha512-veQTnWP+1D/xbxVrPC3zHnCZRjSrKfhbMUlEA43iMZLu7EsnTtkJklIuwrCPbOi8YkvDQAiW05VQQFvvz9oieQ== }
 
-  "@types/amqplib@0.10.5":
-    resolution:
-      { integrity: sha512-/cSykxROY7BWwDoi4Y4/jLAuZTshZxd8Ey1QYa/VaXriMotBDoou7V/twJiOSHzU6t1Kp1AHAUXGCgqq+6DNeg== }
-
   "@types/concat-stream@2.0.3":
     resolution:
       { integrity: sha512-3qe4oQAPNwVNwK4C9c8u+VJqv9kez+2MR4qJpoPFfXtgxxif1QbFusvXzK0/Wra2VX07smostI2VMmJNSpZjuQ== }
@@ -2842,11 +2831,6 @@ packages:
       { integrity: sha512-S2Hw0TtNkMJhIabBwIojKL9YHO5T0n5eNqWJ7Lrlel/zDbftQpxpapi8tZs3X1HWa+u+QeydGmzzNU0m09+Rcg== }
     engines: { node: ">=0.4.2" }
 
-  amqplib@0.10.4:
-    resolution:
-      { integrity: sha512-DMZ4eCEjAVdX1II2TfIUpJhfKAuoCeDIo/YyETbfAqehHTXxxs7WOOd+N1Xxr4cKhx12y23zk8/os98FxlZHrw== }
-    engines: { node: ">=10" }
-
   ansi-colors@4.1.3:
     resolution:
       { integrity: sha512-/6w/C21Pm1A7aZitlI5Ni/2J6FFQN8i1Cvz3kHABAAbw93v/NlvKdVOqz7CCWz/3iv/JplRSEEZ83XION15ovw== }
@@ -3100,10 +3084,6 @@ packages:
     resolution:
       { integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ== }
 
-  buffer-more-ints@1.0.0:
-    resolution:
-      { integrity: sha512-EMetuGFz5SLsT0QTnXzINh4Ksr+oo4i+UGTXEshiGCQWnsgSs7ZhJ8fzlwQ+OzEMs0MpDAMr1hxnblp5a4vcHg== }
-
   builtin-modules@3.3.0:
     resolution:
       { integrity: sha512-zhaCDicdLuWN5UbN5IMnFqNMhNfo919sH85y2/ea+5Yg9TsTkeZxpL+JLbp6cgYFS4sRLp3YV4S6yDuqVWHYOw== }
@@ -3291,6 +3271,11 @@ packages:
     resolution:
       { integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA== }
     engines: { node: ">=6" }
+
+  cluster-key-slot@1.1.2:
+    resolution:
+      { integrity: sha512-RMr0FhtfXemyinomL4hrWcYJxmX6deFdCxpJzhDttxgO1+bcCnkk+9drydLVDmAMG7NE6aN/fl4F7ucU/90gAA== }
+    engines: { node: ">=0.10.0" }
 
   color-convert@1.9.3:
     resolution:
@@ -3513,16 +3498,6 @@ packages:
       supports-color:
         optional: true
 
-  debug@4.3.5:
-    resolution:
-      { integrity: sha512-pt0bNEmneDIvdL1Xsd9oDQ/wrQRkXDT4AUWlNZNPKvW5x/jyO9VFXkJUP07vQ2upmw5PlaITaPKc31jK13V+jg== }
-    engines: { node: ">=6.0" }
-    peerDependencies:
-      supports-color: "*"
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-
   debug@4.3.6:
     resolution:
       { integrity: sha512-O/09Bd4Z1fBrU4VzkhFqVgpPzaGbw6Sm9FEkBT1A/YBXQFGuuSxa1dN2nxgxS34JmKXqYx8CZAwEVoJFImUXIg== }
@@ -3590,6 +3565,11 @@ packages:
     resolution:
       { integrity: sha512-8QmQKqEASLd5nx0U1B1okLElbUuuttJ/AnYmRXbbbGDWh6uS208EjD4Xqq/I9wK7u0v6O08XhTWnt5XtEbR6Dg== }
     engines: { node: ">= 0.4" }
+
+  denque@2.1.0:
+    resolution:
+      { integrity: sha512-HVQE3AAb/pxF8fQAoiqpvg9i3evqug3hoiwakOyZAwJm+6vZehbkYXZ0l4JxS+I3QxM97v5aaRNhj8v5oBhekw== }
+    engines: { node: ">=0.10" }
 
   dequal@2.0.3:
     resolution:
@@ -4838,6 +4818,11 @@ packages:
     resolution:
       { integrity: sha512-xnOhtonBuNA5lcWD6yxNC6ezoF5zAOZAgVXXofDwdHKiBEuTP87PVcCq1epXXAdhTVWRy1slpkQvJydqAQjpsw== }
 
+  iovalkey@0.2.1:
+    resolution:
+      { integrity: sha512-uHwgaumQRkSb6jHA5Xpo5IKzvjQjZxRMoGuYaCv77Uu3mOM5RsogO2NZaGriIpbCoeSM0lSF6XlcAKu95l+vxw== }
+    engines: { node: ">=12.22.0" }
+
   ip-address@9.0.5:
     resolution:
       { integrity: sha512-zHtQzGojZXTwZTHQqra+ETKd4Sn3vgi7uBmlPoXVWZqYvuKmtI0l/VZTjqGmJY9x88GGOaZ9+G9ES8hC4T4X8g== }
@@ -5330,6 +5315,14 @@ packages:
   lodash.castarray@4.4.0:
     resolution:
       { integrity: sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q== }
+
+  lodash.defaults@4.2.0:
+    resolution:
+      { integrity: sha512-qjxPLHd3r5DnsdGacqOMU6pb/avJzdh9tFX2ymgoZE27BmjXrNy/y4LoaiTeAb+O3gL8AfpJGtqfX/ae2leYYQ== }
+
+  lodash.isarguments@3.1.0:
+    resolution:
+      { integrity: sha512-chi4NHZlZqZD18a0imDHnZPrDeBbTtVN7GXMwuGdRH9qotxAjYs3aVLKc7zNOG9eddR5Ksd8rvFEBc9SsggPpg== }
 
   lodash.isplainobject@4.0.6:
     resolution:
@@ -6502,10 +6495,6 @@ packages:
       { integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg== }
     engines: { node: ">=6" }
 
-  querystringify@2.2.0:
-    resolution:
-      { integrity: sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ== }
-
   queue-microtask@1.2.3:
     resolution:
       { integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A== }
@@ -6576,6 +6565,16 @@ packages:
       { integrity: sha512-yDMz9g+VaZkqBYS/ozoBJwaBhTbZo3UNYQHNRw1D3UFQB8oHB4uS/tAODO+ZLjGWmUbKnIlOWO+aaIiAxrUWHA== }
     engines: { node: ">= 14.16.0" }
 
+  redis-errors@1.2.0:
+    resolution:
+      { integrity: sha512-1qny3OExCf0UvUV/5wpYKf2YwPcOqXzkwKKSmKHiE6ZMQs5heeE/c8eXK+PNllPvmjgAbfnsbpkGZWy8cBpn9w== }
+    engines: { node: ">=4" }
+
+  redis-parser@3.0.0:
+    resolution:
+      { integrity: sha512-DJnGAeenTdpMEH6uAJRK/uiyEIH9WVsUmoLwzudwGJUwZPp80PDBWPHXSAGNPwNvIXAbe7MSUB1zQFugFml66A== }
+    engines: { node: ">=4" }
+
   reflect-metadata@0.2.2:
     resolution:
       { integrity: sha512-urBwgfrvVP/eAyXx4hluJivBKzuEbSQs9rKWCrCkbSxNv8mxPcUZKeuoF3Uy4mJl3Lwprp6yy5/39VWigZ4K6Q== }
@@ -6634,10 +6633,6 @@ packages:
     resolution:
       { integrity: sha512-L9jEkOi3ASd9PYit2cwRfyppc9NoABujTP8/5gFcbERmo5jUoAKovIC3fsF17pkTnGsrByysqX+Kxd2OTNI1ww== }
     engines: { node: ">=0.10.5" }
-
-  requires-port@1.0.0:
-    resolution:
-      { integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ== }
 
   resolve-alpn@1.2.1:
     resolution:
@@ -6955,6 +6950,10 @@ packages:
   stackback@0.0.2:
     resolution:
       { integrity: sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw== }
+
+  standard-as-callback@2.1.0:
+    resolution:
+      { integrity: sha512-qoRRSyROncaz1z0mvYqIE4lCd9p2R90i6GxW3uZv5ucSu8tU7B5HXUP1gG8pVZsYNVaXjk8ClXHPttLyxAL48A== }
 
   std-env@3.8.0:
     resolution:
@@ -7557,10 +7556,6 @@ packages:
     resolution:
       { integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg== }
 
-  url-parse@1.5.10:
-    resolution:
-      { integrity: sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ== }
-
   user-home@1.1.1:
     resolution:
       { integrity: sha512-aggiKfEEubv3UwRNqTzLInZpAOmKzwdHqEBmW/hBA/mt99eg+b4VrX6i+IRLxU8+WJYfa33rGwRseg4eElUgsQ== }
@@ -7855,14 +7850,6 @@ packages:
       { integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A== }
 
 snapshots:
-  "@acuminous/bitsyntax@0.1.2":
-    dependencies:
-      buffer-more-ints: 1.0.0
-      debug: 4.3.5
-      safe-buffer: 5.1.2
-    transitivePeerDependencies:
-      - supports-color
-
   "@aero/sanitizer@1.3.2":
     dependencies:
       latinize: 0.4.1
@@ -8643,6 +8630,8 @@ snapshots:
     dependencies:
       "@swc/helpers": 0.5.13
 
+  "@ioredis/commands@1.2.0": {}
+
   "@isaacs/cliui@8.0.2":
     dependencies:
       string-width: 5.1.2
@@ -9078,10 +9067,6 @@ snapshots:
     dependencies:
       "@types/estree": 1.0.6
 
-  "@types/amqplib@0.10.5":
-    dependencies:
-      "@types/node": 22.9.0
-
   "@types/concat-stream@2.0.3":
     dependencies:
       "@types/node": 22.9.0
@@ -9497,15 +9482,6 @@ snapshots:
   amdefine@1.0.1:
     optional: true
 
-  amqplib@0.10.4:
-    dependencies:
-      "@acuminous/bitsyntax": 0.1.2
-      buffer-more-ints: 1.0.0
-      readable-stream: 1.1.14
-      url-parse: 1.5.10
-    transitivePeerDependencies:
-      - supports-color
-
   ansi-colors@4.1.3: {}
 
   ansi-escapes@7.0.0:
@@ -9741,8 +9717,6 @@ snapshots:
 
   buffer-from@1.1.2: {}
 
-  buffer-more-ints@1.0.0: {}
-
   builtin-modules@3.3.0: {}
 
   bundle-require@5.0.0(esbuild@0.24.0):
@@ -9913,6 +9887,8 @@ snapshots:
 
   clsx@2.1.1: {}
 
+  cluster-key-slot@1.1.2: {}
+
   color-convert@1.9.3:
     dependencies:
       color-name: 1.1.3
@@ -10078,10 +10054,6 @@ snapshots:
     dependencies:
       ms: 2.1.3
 
-  debug@4.3.5:
-    dependencies:
-      ms: 2.1.2
-
   debug@4.3.6:
     dependencies:
       ms: 2.1.2
@@ -10140,6 +10112,8 @@ snapshots:
       define-data-property: 1.1.4
       has-property-descriptors: 1.0.2
       object-keys: 1.1.1
+
+  denque@2.1.0: {}
 
   dequal@2.0.3: {}
 
@@ -11558,6 +11532,20 @@ snapshots:
   interpret@0.5.2:
     optional: true
 
+  iovalkey@0.2.1:
+    dependencies:
+      "@ioredis/commands": 1.2.0
+      cluster-key-slot: 1.1.2
+      debug: 4.3.7
+      denque: 2.1.0
+      lodash.defaults: 4.2.0
+      lodash.isarguments: 3.1.0
+      redis-errors: 1.2.0
+      redis-parser: 3.0.0
+      standard-as-callback: 2.1.0
+    transitivePeerDependencies:
+      - supports-color
+
   ip-address@9.0.5:
     dependencies:
       jsbn: 1.1.0
@@ -11923,6 +11911,10 @@ snapshots:
   lodash.camelcase@4.3.0: {}
 
   lodash.castarray@4.4.0: {}
+
+  lodash.defaults@4.2.0: {}
+
+  lodash.isarguments@3.1.0: {}
 
   lodash.isplainobject@4.0.6: {}
 
@@ -12965,8 +12957,6 @@ snapshots:
 
   punycode@2.3.1: {}
 
-  querystringify@2.2.0: {}
-
   queue-microtask@1.2.3: {}
 
   quick-lru@5.1.1: {}
@@ -13018,6 +13008,7 @@ snapshots:
       inherits: 2.0.4
       isarray: 0.0.1
       string_decoder: 0.10.31
+    optional: true
 
   readable-stream@2.3.8:
     dependencies:
@@ -13040,6 +13031,12 @@ snapshots:
       picomatch: 2.3.1
 
   readdirp@4.0.2: {}
+
+  redis-errors@1.2.0: {}
+
+  redis-parser@3.0.0:
+    dependencies:
+      redis-errors: 1.2.0
 
   reflect-metadata@0.2.2: {}
 
@@ -13097,8 +13094,6 @@ snapshots:
   require-from-string@2.0.2: {}
 
   requireindex@1.2.0: {}
-
-  requires-port@1.0.0: {}
 
   resolve-alpn@1.2.1: {}
 
@@ -13393,6 +13388,8 @@ snapshots:
   stable-hash@0.0.4: {}
 
   stackback@0.0.2: {}
+
+  standard-as-callback@2.1.0: {}
 
   std-env@3.8.0: {}
 
@@ -13967,11 +13964,6 @@ snapshots:
   uri-js@4.4.1:
     dependencies:
       punycode: 2.3.1
-
-  url-parse@1.5.10:
-    dependencies:
-      querystringify: 2.2.0
-      requires-port: 1.0.0
 
   user-home@1.1.1:
     optional: true
