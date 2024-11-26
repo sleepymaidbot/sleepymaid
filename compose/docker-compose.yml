@@ -21,18 +21,6 @@ services:
       interval: 10s
       timeout: 5s
 
-  rabbitmq:
-    image: rabbitmq:management-alpine
-    restart: unless-stopped
-    expose:
-      - "5672"
-    ports:
-      - "5672:5672"
-    healthcheck:
-      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
-      interval: 60s
-      timeout: 5s
-
   ghost:
     image: ghost:5-alpine
     restart: unless-stopped
@@ -58,7 +46,6 @@ services:
     restart: unless-stopped
     depends_on:
       - "postgres"
-      - "rabbitmq"
 
   helper:
     container_name: sleepymaid_helper

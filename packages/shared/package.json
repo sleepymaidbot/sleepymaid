@@ -26,7 +26,6 @@
 	"license": "MIT",
 	"devDependencies": {
 		"@swc/core": "^1.9.2",
-		"@types/amqplib": "^0.10.5",
 		"@types/module-alias": "^2.0.4",
 		"@types/node": "^22.9.0",
 		"rimraf": "^6.0.1",
@@ -37,7 +36,6 @@
 	"dependencies": {
 		"@paralleldrive/cuid2": "^2.2.2",
 		"@sleepymaid/handler": "workspace:^",
-		"amqplib": "^0.10.4",
 		"discord.js": "^14.16.3",
 		"drizzle-orm": "^0.36.1",
 		"fuse.js": "^7.0.0",

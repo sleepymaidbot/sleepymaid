@@ -1,20 +1,16 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable n/prefer-global/process */
 /* eslint-disable unicorn/prefer-module */
-import { Buffer } from "node:buffer";
 import { resolve } from "node:path";
-import { createDrizzleInstance, DrizzleInstance, guildSettings } from "@sleepymaid/db";
+import { createDrizzleInstance, DrizzleInstance } from "@sleepymaid/db";
 import { BaseContainer, HandlerClient } from "@sleepymaid/handler";
 import { Logger } from "@sleepymaid/logger";
-import type { Config, RequestType, ResponseType } from "@sleepymaid/shared";
-import { initConfig, supportedLngs, Queue, RabbitMQConnection } from "@sleepymaid/shared";
 import type { Channel, Connection } from "amqplib";
 import { GatewayIntentBits } from "discord-api-types/v10";
-import { MessagePayload, PermissionFlagsBits } from "discord.js";
 import i18next from "i18next";
 import FsBackend from "i18next-fs-backend";
-import { eq } from "drizzle-orm";
 import SleepyMaidContainer from "./SleepyMaidContainer";
+import { Config, initConfig, supportedLngs } from "@sleepymaid/shared";
 
 export class SleepyMaidClient extends HandlerClient {
 	public declare drizzle: DrizzleInstance;
@@ -55,11 +51,6 @@ export class SleepyMaidClient extends HandlerClient {
 
 		this.drizzle = createDrizzleInstance(process.env.DATABASE_URL as string);
 
-		const con = RabbitMQConnection.getInstance();
-		await con.connect(this.config.rabbitMQUrl);
-		this.mqConnection = con.connection;
-		if (con.rabbitMQConnected) this.channel = con.channel;
-
 		await i18next.use(FsBackend).init({
 			// debug: this.config.environment === 'development',
 			supportedLngs,
@@ -90,217 +81,8 @@ export class SleepyMaidClient extends HandlerClient {
 
 		void this.login(this.config.discordToken);
 
-		if (con.rabbitMQConnected) await this.startRPCListeners();
-
 		process.on("unhandledRejection", (error: Error) => {
 			this.logger.error(error);
-		});
-	}
-
-	private async startRPCListeners(): Promise<void> {
-		this.logger.info("Starting RPC listeners");
-		await this.channel.assertQueue(Queue.CheckGuildInformation, { durable: false });
-		void this.channel.consume(Queue.CheckGuildInformation, async (msg) => {
-			if (!msg) {
-				return;
-			}
-
-			const baseResponse: ResponseType[Queue.CheckGuildInformation] = {
-				hasBot: false,
-				botNickname: "",
-				hasPermission: false,
-				userPermissions: "0",
-				roles: [],
-				channels: [],
-				emojis: [],
-			};
-
-			const message: RequestType[Queue.CheckGuildInformation] = JSON.parse(msg.content.toString());
-
-			const guild = await this.guilds.fetch(message.guildId);
-			const member = await guild.members.fetch(message.userId);
-			if (!member || !guild || !this.user) {
-				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
-					correlationId: msg.properties.correlationId,
-				});
-			}
-
-			await member.fetch();
-			let hasPermission = false;
-			if (guild.ownerId === member.id || member.permissions.any(PermissionFlagsBits.ManageGuild, true)) {
-				hasPermission = true;
-			} else {
-				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
-					correlationId: msg.properties.correlationId,
-				});
-			}
-
-			const botMember = await guild.members.fetch(this.user.id);
-
-			const response: ResponseType[Queue.CheckGuildInformation] = {
-				hasBot: true,
-				hasPermission,
-				userPermissions: member.permissions.bitfield.toString(),
-				botNickname: botMember?.nickname ?? this.user.username,
-				roles: guild.roles.cache.map((role) => ({
-					color: role.color.toString(16),
-					id: role.id,
-					name: role.name,
-					position: role.position,
-				})),
-				channels: guild.channels.cache.map((channel) => ({
-					id: channel.id,
-					name: channel.name,
-				})),
-				emojis: guild.emojis.cache
-					.map((emoji) => ({
-						id: emoji.id,
-						name: emoji.name ?? "",
-					}))
-					.filter((emoji) => emoji.name !== ""),
-			};
-
-			return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(response)), {
-				correlationId: msg.properties.correlationId,
-			});
-		});
-
-		await this.channel.assertQueue(Queue.CheckUserGuildPermissions, { durable: false });
-		void this.channel.consume(Queue.CheckUserGuildPermissions, async (msg) => {
-			if (!msg) {
-				return;
-			}
-
-			const baseResponse: ResponseType[Queue.CheckUserGuildPermissions] = {
-				userPermissions: "0",
-			};
-
-			const message: RequestType[Queue.CheckUserGuildPermissions] = JSON.parse(msg.content.toString());
-
-			const guild = await this.guilds.fetch(message.guildId);
-			const member = await guild.members.fetch(message.userId);
-			if (!member || !guild || !this.user) {
-				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
-					correlationId: msg.properties.correlationId,
-				});
-			}
-
-			await member.fetch();
-
-			if (guild.ownerId === member.id) {
-				return this.channel.sendToQueue(
-					msg.properties.replyTo,
-					Buffer.from(
-						JSON.stringify({
-							userPermissions: member.permissions.bitfield.toString(),
-						}),
-					),
-					{
-						correlationId: msg.properties.correlationId,
-					},
-				);
-			}
-
-			const guildSetting = await this.drizzle.query.guildSettings.findFirst({
-				where: eq(guildSettings.guildId, message.guildId),
-			});
-			if (!guildSetting || !guildSetting.guildId) {
-				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
-					correlationId: msg.properties.correlationId,
-				});
-			}
-
-			const response: ResponseType[Queue.CheckUserGuildPermissions] = {
-				userPermissions: member.permissions.bitfield.toString(),
-			};
-
-			return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(response)), {
-				correlationId: msg.properties.correlationId,
-			});
-		});
-
-		await this.channel.assertQueue(Queue.SendQuickMessage, { durable: false });
-		void this.channel.consume(Queue.SendQuickMessage, async (msg) => {
-			if (!msg) {
-				return;
-			}
-
-			const baseResponse: ResponseType[Queue.SendQuickMessage] = {
-				messageId: "",
-			};
-
-			const message: RequestType[Queue.SendQuickMessage] = JSON.parse(msg.content.toString());
-			const messageJson: MessagePayload = JSON.parse(message.messageJson);
-
-			const guild = await this.guilds.fetch(message.guildId);
-			if (!guild || !this.user) {
-				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
-					correlationId: msg.properties.correlationId,
-				});
-			}
-
-			// Check user permissions
-			const member = await guild.members.fetch(message.userId);
-			if (!member || !guild || !this.user) {
-				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
-					correlationId: msg.properties.correlationId,
-				});
-			}
-
-			const guildSetting = await this.drizzle.query.guildSettings.findFirst({
-				where: eq(guildSettings.guildId, message.guildId),
-			});
-			if (!guildSetting || !guildSetting.guildId) {
-				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
-					correlationId: msg.properties.correlationId,
-				});
-			}
-
-			await member.fetch();
-			let hasPermission = false;
-
-			if (guild.ownerId === member.id) {
-				hasPermission = true;
-			} else if (member.permissions.any(PermissionFlagsBits.ManageGuild, true)) {
-				hasPermission = true;
-			}
-
-			if (!hasPermission) {
-				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
-					correlationId: msg.properties.correlationId,
-				});
-			}
-
-			const channel = guild.channels.cache.get(message.channelId);
-			if (!channel || !channel.isTextBased()) {
-				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
-					correlationId: msg.properties.correlationId,
-				});
-			}
-
-			if (message.messageId) {
-				const messageToEdit = await channel.messages.fetch(message.messageId);
-				if (!messageToEdit) {
-					return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
-						correlationId: msg.properties.correlationId,
-					});
-				}
-
-				await messageToEdit.edit(messageJson);
-				return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(baseResponse)), {
-					correlationId: msg.properties.correlationId,
-				});
-			}
-
-			const messageId = await (await channel.send(messageJson)).id;
-
-			const response: ResponseType[Queue.SendQuickMessage] = {
-				messageId,
-			};
-
-			return this.channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(response)), {
-				correlationId: msg.properties.correlationId,
-			});
 		});
 	}
 }
