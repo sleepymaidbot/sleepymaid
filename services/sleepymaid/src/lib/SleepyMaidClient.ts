@@ -5,7 +5,6 @@ import { resolve } from "node:path";
 import { createDrizzleInstance, DrizzleInstance } from "@sleepymaid/db";
 import { BaseContainer, HandlerClient } from "@sleepymaid/handler";
 import { Logger } from "@sleepymaid/logger";
-import type { Channel, Connection } from "amqplib";
 import { GatewayIntentBits } from "discord-api-types/v10";
 import i18next from "i18next";
 import FsBackend from "i18next-fs-backend";
@@ -14,10 +13,6 @@ import { Config, initConfig, supportedLngs } from "@sleepymaid/shared";
 
 export class SleepyMaidClient extends HandlerClient {
 	public declare drizzle: DrizzleInstance;
-
-	public declare mqConnection: Connection;
-
-	public declare channel: Channel;
 
 	public declare config: Config;
 
