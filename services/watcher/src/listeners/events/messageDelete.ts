@@ -25,43 +25,47 @@ export default class extends Listener<"messageDelete", WatcherClient> {
 
 			const content = message.content ? `\`\`\`${message.content}\`\`\`` : "No content";
 
-			webhook.send({
-				username: `${this.container.client.user?.displayName}`,
-				avatarURL: this.container.client.user?.displayAvatarURL(),
-				threadId: channel.threadId ?? undefined,
-				embeds: [
-					{
-						title: "Message Deleted",
-						fields: [
-							{
-								name: "Author",
-								value: `${message.author.displayName} (${message.author.id})`,
-								inline: true,
-							},
-							{
-								name: "Channel",
-								value: `<#${message.channel.id}>`,
-								inline: true,
-							},
-							{
-								name: "Content",
-								value: content,
-								inline: false,
-							},
-							{
-								name: "Attachments",
-								value: message.attachments.map((a) => a.url).join("\n"),
-								inline: false,
-							},
-							{
-								name: "Stickers",
-								value: message.stickers.map((s) => s.name).join("\n"),
-								inline: false,
-							},
-						],
-					},
-				],
-			});
+			webhook
+				.send({
+					username: `${this.container.client.user?.displayName}`,
+					avatarURL: this.container.client.user?.displayAvatarURL(),
+					threadId: channel.threadId ?? undefined,
+					embeds: [
+						{
+							title: "Message Deleted",
+							fields: [
+								{
+									name: "Author",
+									value: `${message.author.displayName} (${message.author.id})`,
+									inline: true,
+								},
+								{
+									name: "Channel",
+									value: `<#${message.channel.id}>`,
+									inline: true,
+								},
+								{
+									name: "Content",
+									value: content,
+									inline: false,
+								},
+								{
+									name: "Attachments",
+									value: message.attachments.map((a) => a.url).join("\n"),
+									inline: false,
+								},
+								{
+									name: "Stickers",
+									value: message.stickers.map((s) => s.name).join("\n"),
+									inline: false,
+								},
+							],
+						},
+					],
+				})
+				.catch(() => {
+					this.container.logger.error(`Failed to send message delete log to ${channel.id} (${channel.channelId})`);
+				});
 		}
 	}
 }

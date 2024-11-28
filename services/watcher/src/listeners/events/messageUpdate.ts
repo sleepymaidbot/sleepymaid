@@ -25,38 +25,42 @@ export default class extends Listener<"messageUpdate", WatcherClient> {
 					token: channel.webhookToken,
 				});
 
-				webhook.send({
-					username: `${this.container.client.user?.displayName}`,
-					avatarURL: this.container.client.user?.displayAvatarURL(),
-					threadId: channel.threadId ?? undefined,
-					embeds: [
-						{
-							title: "Message Edited",
-							fields: [
-								{
-									name: "Author",
-									value: `<@${oldMessage.author.id}>`,
-									inline: true,
-								},
-								{
-									name: "Channel",
-									value: `<#${oldMessage.channel.id}>`,
-									inline: true,
-								},
-								{
-									name: "Old Content",
-									value: `\`\`\`${oldMessage.content}\`\`\``,
-									inline: false,
-								},
-								{
-									name: "New Content",
-									value: `\`\`\`${newMessage.content}\`\`\``,
-									inline: false,
-								},
-							],
-						},
-					],
-				});
+				webhook
+					.send({
+						username: `${this.container.client.user?.displayName}`,
+						avatarURL: this.container.client.user?.displayAvatarURL(),
+						threadId: channel.threadId ?? undefined,
+						embeds: [
+							{
+								title: "Message Edited",
+								fields: [
+									{
+										name: "Author",
+										value: `<@${oldMessage.author.id}>`,
+										inline: true,
+									},
+									{
+										name: "Channel",
+										value: `<#${oldMessage.channel.id}>`,
+										inline: true,
+									},
+									{
+										name: "Old Content",
+										value: `\`\`\`${oldMessage.content}\`\`\``,
+										inline: false,
+									},
+									{
+										name: "New Content",
+										value: `\`\`\`${newMessage.content}\`\`\``,
+										inline: false,
+									},
+								],
+							},
+						],
+					})
+					.catch(() => {
+						this.container.logger.error(`Failed to send message edit log to ${channel.id} (${channel.channelId})`);
+					});
 			}
 		}
 	}

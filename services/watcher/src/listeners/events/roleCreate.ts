@@ -23,42 +23,46 @@ export default class extends Listener<"roleCreate", WatcherClient> {
 				token: channel.webhookToken,
 			});
 
-			webhook.send({
-				username: `${this.container.client.user?.displayName}`,
-				avatarURL: this.container.client.user?.displayAvatarURL(),
-				threadId: channel.threadId ?? undefined,
-				embeds: [
-					{
-						title: "Role Created",
-						fields: [
-							{
-								name: "Role",
-								value: `${role.name} (${role.id})`,
-							},
-							{
-								name: "Color",
-								value: `${role.hexColor}`,
-							},
-							{
-								name: "Permissions",
-								value: `${role.permissions.toArray().join(", ")}`,
-							},
-							{
-								name: "Mentionable",
-								value: `${role.mentionable ? "Yes" : "No"}`,
-							},
-							{
-								name: "Hoisted",
-								value: `${role.hoist ? "Yes" : "No"}`,
-							},
-							{
-								name: "Position",
-								value: `${role.position}`,
-							},
-						],
-					},
-				],
-			});
+			webhook
+				.send({
+					username: `${this.container.client.user?.displayName}`,
+					avatarURL: this.container.client.user?.displayAvatarURL(),
+					threadId: channel.threadId ?? undefined,
+					embeds: [
+						{
+							title: "Role Created",
+							fields: [
+								{
+									name: "Role",
+									value: `${role.name} (${role.id})`,
+								},
+								{
+									name: "Color",
+									value: `${role.hexColor}`,
+								},
+								{
+									name: "Permissions",
+									value: `${role.permissions.toArray().join(", ")}`,
+								},
+								{
+									name: "Mentionable",
+									value: `${role.mentionable ? "Yes" : "No"}`,
+								},
+								{
+									name: "Hoisted",
+									value: `${role.hoist ? "Yes" : "No"}`,
+								},
+								{
+									name: "Position",
+									value: `${role.position}`,
+								},
+							],
+						},
+					],
+				})
+				.catch(() => {
+					this.container.logger.error(`Failed to send role create log to ${channel.id} (${channel.channelId})`);
+				});
 		}
 	}
 }
