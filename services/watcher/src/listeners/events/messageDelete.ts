@@ -48,6 +48,16 @@ export default class extends Listener<"messageDelete", WatcherClient> {
 								value: content,
 								inline: false,
 							},
+							{
+								name: "Attachments",
+								value: message.attachments.map((a) => a.url).join("\n"),
+								inline: false,
+							},
+							{
+								name: "Stickers",
+								value: message.stickers.map((s) => s.name).join("\n"),
+								inline: false,
+							},
 						],
 					},
 				],
