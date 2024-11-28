@@ -12,6 +12,7 @@ services:
       DEV_IDS: ${DEV_IDS}
       DATABASE_URL: ${DATABASE_URL}
       RABBITMQ_URL: ${RABBITMQ_URL}
+      REDIS_URL: ${REDIS_URL}
   helper:
     environment:
       NODE_ENV: "prod"
@@ -22,6 +23,7 @@ services:
       DEV_IDS: ${DEV_IDS}
       DATABASE_URL: ${DATABASE_URL}
       RABBITMQ_URL: ${RABBITMQ_URL}
+      REDIS_URL: ${REDIS_URL}
   watcher:
     environment:
       NODE_ENV: "prod"
@@ -32,6 +34,7 @@ services:
       DEV_IDS: ${DEV_IDS}
       DATABASE_URL: ${DATABASE_URL}
       RABBITMQ_URL: ${RABBITMQ_URL}
+      REDIS_URL: ${REDIS_URL}
   #website:
   #  environment:
   #    NODE_ENV: "production"
