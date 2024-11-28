@@ -1,6 +1,6 @@
 import { Context, Listener } from "@sleepymaid/handler";
 import { WatcherClient } from "../../lib/extensions/WatcherClient";
-import { Message, WebhookClient } from "discord.js";
+import { Colors, Message } from "discord.js";
 
 export default class extends Listener<"messageUpdate", WatcherClient> {
 	constructor(context: Context<WatcherClient>) {
@@ -20,47 +20,34 @@ export default class extends Listener<"messageUpdate", WatcherClient> {
 			for (const channel of channels) {
 				if (!channel.messageEvents.edit) continue;
 
-				const webhook = new WebhookClient({
-					id: channel.webhookId,
-					token: channel.webhookToken,
-				});
-
-				webhook
-					.send({
-						username: `${this.container.client.user?.displayName}`,
-						avatarURL: this.container.client.user?.displayAvatarURL(),
-						threadId: channel.threadId ?? undefined,
-						embeds: [
+				await this.container.manager.sendLog(channel, [
+					{
+						title: "Message Edited",
+						color: Colors.Blurple,
+						fields: [
 							{
-								title: "Message Edited",
-								fields: [
-									{
-										name: "Author",
-										value: `<@${oldMessage.author.id}>`,
-										inline: true,
-									},
-									{
-										name: "Channel",
-										value: `<#${oldMessage.channel.id}>`,
-										inline: true,
-									},
-									{
-										name: "Old Content",
-										value: `\`\`\`${oldMessage.content}\`\`\``,
-										inline: false,
-									},
-									{
-										name: "New Content",
-										value: `\`\`\`${newMessage.content}\`\`\``,
-										inline: false,
-									},
-								],
+								name: "Author",
+								value: `<@${oldMessage.author.id}>`,
+								inline: true,
+							},
+							{
+								name: "Channel",
+								value: `<#${oldMessage.channel.id}>`,
+								inline: true,
+							},
+							{
+								name: "Old Content",
+								value: `\`\`\`${oldMessage.content}\`\`\``,
+								inline: false,
+							},
+							{
+								name: "New Content",
+								value: `\`\`\`${newMessage.content}\`\`\``,
+								inline: false,
 							},
 						],
-					})
-					.catch(() => {
-						this.container.logger.error(`Failed to send message edit log to ${channel.id} (${channel.channelId})`);
-					});
+					},
+				]);
 			}
 		}
 	}

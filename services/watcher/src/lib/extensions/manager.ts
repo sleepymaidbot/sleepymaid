@@ -2,6 +2,8 @@ import { DrizzleInstance, logChannel } from "@sleepymaid/db";
 import { WatcherClient } from "./WatcherClient";
 import { Redis } from "iovalkey";
 import { eq, InferSelectModel } from "drizzle-orm";
+import { WebhookClient } from "discord.js";
+import { APIEmbed } from "discord.js";
 
 export default class Manager {
 	private declare client: WatcherClient;
@@ -38,5 +40,24 @@ export default class Manager {
 
 		await this.redis.set(`logChannel:${guildId}`, JSON.stringify(channels));
 		await this.redis.expire(`logChannel:${guildId}`, 3600);
+	}
+
+	public async sendLog(channel: InferSelectModel<typeof logChannel>, embeds: APIEmbed[]) {
+		const webhook = new WebhookClient({
+			id: channel.webhookId,
+			token: channel.webhookToken,
+		});
+
+		webhook
+			.send({
+				username: `${this.client.user?.displayName}`,
+				avatarURL: this.client.user?.displayAvatarURL(),
+				threadId: channel.threadId ?? undefined,
+				embeds,
+			})
+			.catch(() => {
+				this.client.logger.error(`Failed to send log to ${channel.id} (${channel.channelId})`);
+				// TODO: Fetch webhooks or delete the log channel
+			});
 	}
 }
