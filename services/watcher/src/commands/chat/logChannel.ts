@@ -374,7 +374,7 @@ export default class extends SlashCommand<WatcherClient> {
 		}
 
 		return interaction.reply({
-			content: `**Log Channel Info**\nID: \`\`${channel.id}\`\`\nType: \`\`${channel.type}\`\`\n\n${text.join("\n")}`,
+			content: `**Log Channel Info**\nID: \`\`${channel.id}\`\`\n\n${text.join("\n")}`,
 			ephemeral: true,
 		});
 	}
