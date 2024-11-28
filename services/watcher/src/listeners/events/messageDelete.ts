@@ -26,19 +26,17 @@ export default class extends Listener<"messageDelete", WatcherClient> {
 					value: `${message.author.displayName} (${message.author.id})`,
 					inline: true,
 				},
+				{
+					name: "Channel",
+					value: `${message.channel}`,
+					inline: true,
+				},
+				{
+					name: "Content",
+					value: content,
+					inline: false,
+				},
 			];
-
-			fields.push({
-				name: "Channel",
-				value: `${message.channel}`,
-				inline: true,
-			});
-
-			fields.push({
-				name: "Content",
-				value: content,
-				inline: false,
-			});
 
 			if (message.attachments.size > 0) {
 				fields.push({
