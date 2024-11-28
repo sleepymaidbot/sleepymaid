@@ -26,26 +26,32 @@ export default class extends Listener<"roleCreate", WatcherClient> {
 						{
 							name: "Role",
 							value: `${role.name} (${role.id})`,
+							inline: true,
 						},
 						{
 							name: "Color",
 							value: `${role.hexColor}`,
+							inline: true,
 						},
 						{
 							name: "Permissions",
 							value: `${role.permissions.toArray().join(", ")}`,
+							inline: true,
 						},
 						{
 							name: "Mentionable",
 							value: `${role.mentionable ? "Yes" : "No"}`,
+							inline: true,
 						},
 						{
 							name: "Hoisted",
 							value: `${role.hoist ? "Yes" : "No"}`,
+							inline: true,
 						},
 						{
 							name: "Position",
 							value: `${role.position}`,
+							inline: true,
 						},
 					],
 				},
