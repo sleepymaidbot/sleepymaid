@@ -12,7 +12,7 @@ import {
 	PermissionFlagsBits,
 	InteractionContextType,
 } from "discord.js";
-import { logChannel, types } from "@sleepymaid/db";
+import { guildSettings, logChannel, types } from "@sleepymaid/db";
 import { and, eq } from "drizzle-orm";
 import { AutocompleteChoices, getAutocompleteResults } from "@sleepymaid/shared";
 
@@ -33,16 +33,6 @@ export default class extends SlashCommand<WatcherClient> {
 						description: "Create a log channel",
 						type: ApplicationCommandOptionType.Subcommand,
 						options: [
-							{
-								name: "type",
-								description: "The type of log channel",
-								type: ApplicationCommandOptionType.String,
-								required: true,
-								choices: [
-									{ name: "server", value: "server" },
-									{ name: "mod", value: "mod" },
-								],
-							},
 							{
 								name: "channel",
 								description: "The channel to send the log to",
@@ -153,7 +143,6 @@ export default class extends SlashCommand<WatcherClient> {
 	}
 
 	private async create(interaction: ChatInputCommandInteraction<"cached">) {
-		const type = interaction.options.getString("type", true);
 		const channel = interaction.options.getChannel("channel") ?? interaction.channel;
 		const thread = interaction.options.getChannel("thread");
 
@@ -163,6 +152,15 @@ export default class extends SlashCommand<WatcherClient> {
 		const existingChannel = await this.container.client.drizzle.query.logChannel.findMany({
 			where: eq(logChannel.guildId, interaction.guild.id),
 		});
+
+		const guildSetting = await this.container.client.drizzle.query.guildSettings.findFirst({
+			where: eq(guildSettings.guildId, interaction.guild.id),
+		});
+
+		if (!guildSetting) return interaction.reply({ content: "Guild settings not found", ephemeral: true });
+
+		if (existingChannel.length >= 10 && guildSetting.premiumLevel <= 1)
+			return interaction.reply({ content: "You have reached the maximum number of log channels", ephemeral: true });
 
 		if (
 			existingChannel.some((c) => {
@@ -188,7 +186,6 @@ export default class extends SlashCommand<WatcherClient> {
 			.values({
 				guildId: interaction.guild.id,
 				channelId: channel.id,
-				type: type as "server" | "mod",
 				webhookId: webhook.id,
 				webhookToken: webhook.token ?? "",
 				threadId: thread ? thread.id : null,
