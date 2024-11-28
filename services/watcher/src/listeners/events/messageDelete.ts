@@ -23,6 +23,8 @@ export default class extends Listener<"messageDelete", WatcherClient> {
 				token: channel.webhookToken,
 			});
 
+			const content = message.content ? `\`\`\`${message.content}\`\`\`` : "No content";
+
 			webhook.send({
 				username: `${this.container.client.user?.displayName}`,
 				avatarURL: this.container.client.user?.displayAvatarURL(),
@@ -43,7 +45,7 @@ export default class extends Listener<"messageDelete", WatcherClient> {
 							},
 							{
 								name: "Content",
-								value: "```" + message.content + "```",
+								value: content,
 								inline: false,
 							},
 						],
