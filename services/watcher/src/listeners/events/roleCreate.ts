@@ -11,13 +11,10 @@ export default class extends Listener<"roleCreate", WatcherClient> {
 	}
 
 	public override async execute(role: Role) {
-		const channels = await this.container.manager.getLogChannel(role.guild.id);
-
-		if (!channels) return;
+		const channels = (await this.container.manager.getLogChannel(role.guild.id))?.filter((c) => c.roleEvents.create);
+		if (!channels || channels.length === 0) return;
 
 		for (const channel of channels) {
-			if (!channel.roleEvents.create) continue;
-
 			await this.container.manager.sendLog(channel, [
 				{
 					title: "Role Created",

@@ -14,12 +14,12 @@ export default class extends Listener<"messageUpdate", WatcherClient> {
 		if (!oldMessage.guild) return;
 
 		if (oldMessage.content !== newMessage.content) {
-			const channels = await this.container.manager.getLogChannel(oldMessage.guild.id);
-			if (!channels) return;
+			const channels = (await this.container.manager.getLogChannel(oldMessage.guild.id))?.filter(
+				(c) => c.messageEvents.edit,
+			);
+			if (!channels || channels.length === 0) return;
 
 			for (const channel of channels) {
-				if (!channel.messageEvents.edit) continue;
-
 				await this.container.manager.sendLog(channel, [
 					{
 						title: "Message Edited",

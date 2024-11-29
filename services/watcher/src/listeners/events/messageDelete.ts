@@ -12,10 +12,12 @@ export default class extends Listener<"messageDelete", WatcherClient> {
 
 	public override async execute(message: Message<true>) {
 		if (!message.guild) return;
-		const channels = await this.container.manager.getLogChannel(message.guild.id);
-		if (!channels) return;
+		const channels = (await this.container.manager.getLogChannel(message.guild.id))?.filter(
+			(c) => c.messageEvents.delete,
+		);
+		if (!channels || channels.length === 0) return;
 
-		const content = message.content ? `\`\`\`${message.content}\`\`\`` : "No content";
+		const content = message.content === "" ? "No content" : `\`\`\`${message.content}\`\`\``;
 
 		const fields: APIEmbedField[] = [
 			{
@@ -52,12 +54,10 @@ export default class extends Listener<"messageDelete", WatcherClient> {
 		}
 
 		for (const channel of channels) {
-			if (!channel.messageEvents.delete) continue;
-
 			await this.container.manager.sendLog(channel, [
 				{
 					title: "Message Deleted",
-					color: Colors.Blurple,
+					color: Colors.Red,
 					fields,
 				},
 			]);

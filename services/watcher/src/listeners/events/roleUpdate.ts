@@ -12,8 +12,8 @@ export default class extends Listener<"roleUpdate", WatcherClient> {
 	}
 
 	public override async execute(oldRole: Role, newRole: Role) {
-		const channels = await this.container.manager.getLogChannel(newRole.guild.id);
-		if (!channels) return;
+		const channels = (await this.container.manager.getLogChannel(newRole.guild.id))?.filter((c) => c.roleEvents.update);
+		if (!channels || channels.length === 0) return;
 
 		const fields: APIEmbedField[] = [
 			{
@@ -74,8 +74,6 @@ export default class extends Listener<"roleUpdate", WatcherClient> {
 		if (fields.length === 1) return;
 
 		for (const channel of channels) {
-			if (!channel.roleEvents.update) continue;
-
 			await this.container.manager.sendLog(channel, [
 				{
 					title: "Role Updated",
