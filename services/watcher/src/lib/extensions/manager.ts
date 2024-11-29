@@ -48,16 +48,19 @@ export default class Manager {
 			token: channel.webhookToken,
 		});
 
-		webhook
+		await webhook
 			.send({
 				username: `${this.client.user?.displayName}`,
 				avatarURL: this.client.user?.displayAvatarURL(),
 				threadId: channel.threadId ?? undefined,
 				embeds,
 			})
-			.catch(() => {
+			.catch((e) => {
+				this.client.logger.error(e);
 				this.client.logger.error(`Failed to send log to ${channel.id} (${channel.channelId})`);
 				// TODO: Fetch webhooks or delete the log channel
 			});
+
+		webhook.destroy();
 	}
 }
