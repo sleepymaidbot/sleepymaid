@@ -79,6 +79,7 @@ export default class extends Listener<"roleUpdate", WatcherClient> {
 					title: "Role Updated",
 					color: newRole.color,
 					fields,
+					timestamp: new Date().toISOString(),
 				},
 			]);
 		}

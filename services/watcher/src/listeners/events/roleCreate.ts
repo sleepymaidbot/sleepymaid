@@ -51,6 +51,7 @@ export default class extends Listener<"roleCreate", WatcherClient> {
 							inline: true,
 						},
 					],
+					timestamp: new Date().toISOString(),
 				},
 			]);
 		}

@@ -59,6 +59,7 @@ export default class extends Listener<"messageDelete", WatcherClient> {
 					title: "Message Deleted",
 					color: Colors.Red,
 					fields,
+					timestamp: new Date().toISOString(),
 				},
 			]);
 		}

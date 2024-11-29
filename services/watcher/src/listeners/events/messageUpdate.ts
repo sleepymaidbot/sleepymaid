@@ -46,6 +46,7 @@ export default class extends Listener<"messageUpdate", WatcherClient> {
 								inline: false,
 							},
 						],
+						timestamp: new Date().toISOString(),
 					},
 				]);
 			}

@@ -52,6 +52,7 @@ export default class extends Listener<"roleDelete", WatcherClient> {
 							inline: true,
 						},
 					],
+					timestamp: new Date().toISOString(),
 				},
 			]);
 		}
