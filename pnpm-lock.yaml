@@ -547,6 +547,9 @@ importers:
       "@sleepymaid/shared":
         specifier: workspace:^
         version: link:../../packages/shared
+      "@sleepymaid/util":
+        specifier: workspace:^
+        version: link:../../packages/util
       discord.js:
         specifier: ^14.16.3
         version: 14.16.3
