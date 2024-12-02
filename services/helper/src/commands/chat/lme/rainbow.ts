@@ -48,7 +48,12 @@ export default class extends SlashCommand<HelperClient> {
 				embeds: [
 					{
 						color: role.color,
-						description: `La commande est en cooldown. Tu peux la réutiliser dans ${formatDistanceToNow(cooldown.getTime() - Date.now())}`,
+						description: `La commande est en cooldown. Tu peux la réutiliser dans ${formatDistanceToNow(
+							cooldown.getTime(),
+							{
+								includeSeconds: true,
+							},
+						)}`,
 					},
 				],
 				ephemeral: true,
