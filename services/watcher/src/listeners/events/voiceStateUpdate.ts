@@ -33,6 +33,11 @@ export default class extends Listener<"voiceStateUpdate", WatcherClient> {
 					value: `<#${newState.channel?.id}>`,
 					inline: true,
 				},
+				{
+					name: "Users",
+					value: `${newState.channel.members.size} / ${newState.channel.userLimit ?? "0"}`,
+					inline: true,
+				},
 			];
 		}
 
@@ -51,11 +56,16 @@ export default class extends Listener<"voiceStateUpdate", WatcherClient> {
 					value: `<#${oldState.channel?.id}>`,
 					inline: true,
 				},
+				{
+					name: "Users",
+					value: `${oldState.channel.members.size} / ${oldState.channel.userLimit ?? "0"}`,
+					inline: true,
+				},
 			];
 		}
 
 		// Change Channel
-		else if (oldState.channel?.id !== newState.channel?.id) {
+		else if (oldState.channel !== newState.channel) {
 			embed.title = "User switched voice channel";
 			embed.color = Colors.Blurple;
 			embed.fields = [
@@ -72,6 +82,11 @@ export default class extends Listener<"voiceStateUpdate", WatcherClient> {
 				{
 					name: "New Channel",
 					value: `<#${newState.channel?.id}>`,
+					inline: true,
+				},
+				{
+					name: "Users",
+					value: `${newState.channel?.members.size ?? 0} / ${newState.channel?.userLimit ?? 0}`,
 					inline: true,
 				},
 			];
