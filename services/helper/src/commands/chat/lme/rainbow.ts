@@ -1,7 +1,8 @@
 import { Context, SlashCommand } from "@sleepymaid/handler";
-import { add } from "date-fns";
+import { add, formatDistanceToNow } from "date-fns";
 import { ChatInputCommandInteraction, resolveColor, ColorResolvable, Snowflake } from "discord.js";
 import { HelperClient } from "../../../lib/extensions/HelperClient";
+import { intToHexColor } from "@sleepymaid/util";
 
 const cooldowns: Record<Snowflake, Date> = {};
 const roles = {
@@ -47,7 +48,7 @@ export default class extends SlashCommand<HelperClient> {
 				embeds: [
 					{
 						color: role.color,
-						description: "La commande est en cooldown.",
+						description: `La commande est en cooldown. Tu peux la réutiliser dans ${formatDistanceToNow(cooldown.getTime() - Date.now())}`,
 					},
 				],
 				ephemeral: true,
@@ -63,7 +64,7 @@ export default class extends SlashCommand<HelperClient> {
 			embeds: [
 				{
 					color: color,
-					description: `La couleur du rôle <@&${roleID}> a été changée en #${color}.`,
+					description: `La couleur du rôle <@&${roleID}> a été changée en ${intToHexColor(color)}`,
 				},
 			],
 		});
