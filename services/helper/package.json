@@ -26,6 +26,7 @@
 		"@sleepymaid/handler": "workspace:^",
 		"@sleepymaid/logger": "workspace:^",
 		"@sleepymaid/shared": "workspace:^",
+		"@sleepymaid/util": "workspace:^",
 		"date-fns": "^4.1.0",
 		"discord.js": "^14.16.3",
 		"drizzle-orm": "^0.36.1",
