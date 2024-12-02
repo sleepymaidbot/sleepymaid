@@ -79,7 +79,7 @@ export default class extends Listener<"voiceStateUpdate", WatcherClient> {
 
 		if (!embed.title) return;
 
-		embed.image = {
+		embed.thumbnail = {
 			url: oldState.member?.avatarURL() ?? "",
 		};
 
