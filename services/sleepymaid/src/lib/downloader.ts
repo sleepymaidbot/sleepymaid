@@ -2,6 +2,7 @@ import { Result } from "@sapphire/result";
 import { SleepyMaidClient } from "./SleepyMaidClient";
 import { shell } from "@sleepymaid/util";
 import { join } from "node:path";
+import { unlink } from "node:fs/promises";
 
 export const sites = [
 	"tiktok.com",
@@ -31,11 +32,7 @@ export const sitesDelEmbed = [
 	"instagram.com",
 ];
 
-export async function downloadVideo(
-	client: SleepyMaidClient,
-	url: string,
-	callback: (fileName: string) => Promise<void>,
-) {
+export async function downloadVideo(client: SleepyMaidClient, url: string): Promise<DownloadedFile | null> {
 	url = url.replaceAll("fxtwitter.com", "twitter.com");
 	url = url.replaceAll("x.com", "twitter.com");
 	url = url.replaceAll("fixupx.com", "twitter.com");
@@ -50,7 +47,7 @@ export async function downloadVideo(
 		);
 		if (nameReturn.isErr()) {
 			client.logger.error(nameReturn.unwrapErr() as Error);
-			return;
+			return null;
 		}
 
 		const fileName = nameReturn.unwrap().stdout.trim();
@@ -59,22 +56,32 @@ export async function downloadVideo(
 		);
 		if (dlReturn.isErr()) {
 			client.logger.error(dlReturn.unwrapErr() as Error);
-			return;
+			return null;
 		}
 
-		const filePath = join(__dirname, `../../../downloads/${fileName}`);
-
-		const callbackResult = await Result.fromAsync(async () => await callback(filePath));
-		if (callbackResult.isErr()) {
-			client.logger.error(callbackResult.unwrapErr() as Error);
-			return unlink(filePath);
-		}
-
-		return unlink(filePath);
+		return new DownloadedFile(fileName);
 	}
 	return null;
 }
 
-async function unlink(fileName: string) {
-	return await unlink(join(__dirname, fileName));
+export class DownloadedFile {
+	private filePath: string;
+	private fileName: string;
+
+	constructor(fileName: string) {
+		this.fileName = fileName;
+		this.filePath = join(__dirname, `../../../downloads/${fileName}`);
+	}
+
+	public async delete() {
+		return await unlink(this.filePath);
+	}
+
+	public async getFilePath() {
+		return this.filePath;
+	}
+
+	public async getFileName() {
+		return this.fileName;
+	}
 }
