@@ -1,6 +1,6 @@
 import { Context, Listener } from "@sleepymaid/handler";
 import { WatcherClient } from "../../lib/extensions/WatcherClient";
-import { APIEmbedField, Colors, Message } from "discord.js";
+import { APIEmbed, APIEmbedField, AuditLogEvent, Colors, Message } from "discord.js";
 
 export default class extends Listener<"messageDelete", WatcherClient> {
 	constructor(context: Context<WatcherClient>) {
@@ -53,15 +53,28 @@ export default class extends Listener<"messageDelete", WatcherClient> {
 			});
 		}
 
+		const embed: APIEmbed = {
+			title: "Message Deleted",
+			color: Colors.Red,
+			fields,
+			timestamp: new Date().toISOString(),
+		};
+
+		const author = await message.guild.fetchAuditLogs({
+			type: AuditLogEvent.MessageDelete,
+			limit: 1,
+		});
+		const log = author.entries.first();
+
+		if (log && log.executor && log.executorId !== message.author.id && log.target.id === message.author.id) {
+			embed.footer = {
+				text: `${log.executor.displayName} (${log.executorId})`,
+				icon_url: log.executor.displayAvatarURL(),
+			};
+		}
+
 		for (const channel of channels) {
-			await this.container.manager.sendLog(channel, [
-				{
-					title: "Message Deleted",
-					color: Colors.Red,
-					fields,
-					timestamp: new Date().toISOString(),
-				},
-			]);
+			await this.container.manager.sendLog(channel, [embed]);
 		}
 	}
 }

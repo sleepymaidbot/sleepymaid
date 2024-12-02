@@ -1,6 +1,6 @@
 import { Context, Listener } from "@sleepymaid/handler";
 import { WatcherClient } from "../../lib/extensions/WatcherClient";
-import { APIEmbed, Colors, VoiceState } from "discord.js";
+import { APIEmbed, AuditLogEvent, Colors, VoiceState } from "discord.js";
 
 export default class extends Listener<"voiceStateUpdate", WatcherClient> {
 	constructor(context: Context<WatcherClient>) {
@@ -35,7 +35,7 @@ export default class extends Listener<"voiceStateUpdate", WatcherClient> {
 				},
 				{
 					name: "Users",
-					value: `${newState.channel.members.size} / ${newState.channel.userLimit ?? "0"}`,
+					value: `${newState.channel.members.size} / ${newState.channel.userLimit}`,
 					inline: true,
 				},
 			];
@@ -58,14 +58,29 @@ export default class extends Listener<"voiceStateUpdate", WatcherClient> {
 				},
 				{
 					name: "Users",
-					value: `${oldState.channel.members.size} / ${oldState.channel.userLimit ?? "0"}`,
+					value: `${oldState.channel.members.size} / ${oldState.channel.userLimit}`,
 					inline: true,
 				},
 			];
+
+			const author = await oldState.channel.guild.fetchAuditLogs({
+				type: AuditLogEvent.MemberDisconnect,
+				limit: 1,
+			});
+			const log = author.entries.first();
+
+			if (log && log.executor && log.executorId !== newState.member?.id) {
+				if (log.createdAt > new Date(Date.now() - 1000 * 10)) {
+					embed.footer = {
+						text: `${log.executor.displayName} (${log.executorId})`,
+						icon_url: log.executor.displayAvatarURL(),
+					};
+				}
+			}
 		}
 
 		// Change Channel
-		else if (oldState.channel !== newState.channel) {
+		else if (oldState.channel !== newState.channel && newState.channel && oldState.channel) {
 			embed.title = "User switched voice channel";
 			embed.color = Colors.Blurple;
 			embed.fields = [
@@ -86,10 +101,26 @@ export default class extends Listener<"voiceStateUpdate", WatcherClient> {
 				},
 				{
 					name: "Users",
-					value: `${newState.channel?.members.size ?? 0} / ${newState.channel?.userLimit ?? 0}`,
+					value: `${newState.channel.members.size} / ${newState.channel.userLimit}`,
 					inline: true,
 				},
 			];
+
+			const author = await newState.channel.guild.fetchAuditLogs({
+				type: AuditLogEvent.MemberMove,
+				limit: 1,
+			});
+
+			const log = author.entries.first();
+
+			if (log && log.executor && log.executorId !== newState.member?.id) {
+				if (log.createdAt > new Date(Date.now() - 1000 * 10)) {
+					embed.footer = {
+						text: `${log.executor.displayName} (${log.executorId})`,
+						icon_url: log.executor.displayAvatarURL(),
+					};
+				}
+			}
 		}
 
 		if (!embed.title) return;

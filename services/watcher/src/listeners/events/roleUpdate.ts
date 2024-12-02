@@ -1,6 +1,6 @@
 import { Context, Listener } from "@sleepymaid/handler";
 import { WatcherClient } from "../../lib/extensions/WatcherClient";
-import { APIEmbedField, Role } from "discord.js";
+import { APIEmbed, APIEmbedField, AuditLogEvent, Role } from "discord.js";
 import { intToHexColor } from "@sleepymaid/util";
 
 export default class extends Listener<"roleUpdate", WatcherClient> {
@@ -73,15 +73,28 @@ export default class extends Listener<"roleUpdate", WatcherClient> {
 
 		if (fields.length === 1) return;
 
+		const embed: APIEmbed = {
+			title: "Role Updated",
+			color: newRole.color,
+			fields,
+			timestamp: new Date().toISOString(),
+		};
+
+		const author = await newRole.guild.fetchAuditLogs({
+			type: AuditLogEvent.RoleUpdate,
+			limit: 1,
+		});
+		const log = author.entries.first();
+
+		if (log && log.executor && log.target && log.executorId !== newRole.id && log.target.id === newRole.id) {
+			embed.footer = {
+				text: `${log.executor.displayName} (${log.executorId})`,
+				icon_url: log.executor.displayAvatarURL(),
+			};
+		}
+
 		for (const channel of channels) {
-			await this.container.manager.sendLog(channel, [
-				{
-					title: "Role Updated",
-					color: newRole.color,
-					fields,
-					timestamp: new Date().toISOString(),
-				},
-			]);
+			await this.container.manager.sendLog(channel, [embed]);
 		}
 	}
 }
