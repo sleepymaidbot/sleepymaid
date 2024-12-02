@@ -67,7 +67,7 @@ export default class extends Listener<"roleDelete", WatcherClient> {
 		}
 
 		for (const channel of channels) {
-			await this.container.manager.sendLog(channel, [embed]);
+			await this.container.manager.sendLog(channel, { embeds: [embed] });
 		}
 	}
 }

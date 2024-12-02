@@ -20,35 +20,37 @@ export default class extends Listener<"messageUpdate", WatcherClient> {
 			if (!channels || channels.length === 0) return;
 
 			for (const channel of channels) {
-				await this.container.manager.sendLog(channel, [
-					{
-						title: "Message Edited",
-						color: Colors.Blurple,
-						fields: [
-							{
-								name: "Author",
-								value: `<@${oldMessage.author.id}>`,
-								inline: true,
-							},
-							{
-								name: "Channel",
-								value: `<#${oldMessage.channel.id}>`,
-								inline: true,
-							},
-							{
-								name: "Old Content",
-								value: `\`\`\`${oldMessage.content}\`\`\``,
-								inline: false,
-							},
-							{
-								name: "New Content",
-								value: `\`\`\`${newMessage.content}\`\`\``,
-								inline: false,
-							},
-						],
-						timestamp: new Date().toISOString(),
-					},
-				]);
+				await this.container.manager.sendLog(channel, {
+					embeds: [
+						{
+							title: "Message Edited",
+							color: Colors.Blurple,
+							fields: [
+								{
+									name: "Author",
+									value: `<@${oldMessage.author.id}>`,
+									inline: true,
+								},
+								{
+									name: "Channel",
+									value: `<#${oldMessage.channel.id}>`,
+									inline: true,
+								},
+								{
+									name: "Old Content",
+									value: `\`\`\`${oldMessage.content}\`\`\``,
+									inline: false,
+								},
+								{
+									name: "New Content",
+									value: `\`\`\`${newMessage.content}\`\`\``,
+									inline: false,
+								},
+							],
+							timestamp: new Date().toISOString(),
+						},
+					],
+				});
 			}
 		}
 	}

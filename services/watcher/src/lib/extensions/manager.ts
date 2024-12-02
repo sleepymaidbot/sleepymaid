@@ -2,8 +2,7 @@ import { DrizzleInstance, logChannel } from "@sleepymaid/db";
 import { WatcherClient } from "./WatcherClient";
 import { Redis } from "iovalkey";
 import { eq, InferSelectModel } from "drizzle-orm";
-import { WebhookClient } from "discord.js";
-import { APIEmbed } from "discord.js";
+import { WebhookClient, WebhookMessageCreateOptions } from "discord.js";
 
 export default class Manager {
 	private declare client: WatcherClient;
@@ -42,7 +41,7 @@ export default class Manager {
 		await this.redis.expire(`logChannel:${guildId}`, 3600);
 	}
 
-	public async sendLog(channel: InferSelectModel<typeof logChannel>, embeds: APIEmbed[]) {
+	public async sendLog(channel: InferSelectModel<typeof logChannel>, message: WebhookMessageCreateOptions) {
 		const webhook = new WebhookClient({
 			id: channel.webhookId,
 			token: channel.webhookToken,
@@ -53,7 +52,7 @@ export default class Manager {
 				username: `${this.client.user?.displayName}`,
 				avatarURL: this.client.user?.displayAvatarURL(),
 				threadId: channel.threadId ?? undefined,
-				embeds,
+				...message,
 			})
 			.catch((e) => {
 				this.client.logger.error(e);

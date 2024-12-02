@@ -34,6 +34,7 @@
 		"typescript": "^5.6.3"
 	},
 	"dependencies": {
+		"@napi-rs/canvas": "^0.1.65",
 		"@paralleldrive/cuid2": "^2.2.2",
 		"@sleepymaid/handler": "workspace:^",
 		"discord.js": "^14.16.3",
