@@ -12,6 +12,7 @@ export default class extends Listener<"messageDelete", WatcherClient> {
 
 	public override async execute(message: Message<true>) {
 		if (!message.guild) return;
+		if (message.webhookId) return;
 		const channels = (await this.container.manager.getLogChannel(message.guild.id))?.filter(
 			(c) => c.messageEvents.delete,
 		);
@@ -62,11 +63,13 @@ export default class extends Listener<"messageDelete", WatcherClient> {
 
 		const author = await message.guild.fetchAuditLogs({
 			type: AuditLogEvent.MessageDelete,
-			limit: 1,
 		});
-		const log = author.entries.first();
+		const log = author.entries
+			.filter((l) => l.target.id === message.author.id)
+			.sort((a, b) => a.createdTimestamp - b.createdTimestamp)
+			.first();
 
-		if (log && log.executor && log.executorId !== message.author.id && log.target.id === message.author.id) {
+		if (log && log.executor && log.executorId !== message.author.id) {
 			embed.footer = {
 				text: `${log.executor.displayName} (${log.executorId})`,
 				icon_url: log.executor.displayAvatarURL(),
