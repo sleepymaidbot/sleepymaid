@@ -65,11 +65,16 @@ export default class extends Listener<"messageDelete", WatcherClient> {
 			type: AuditLogEvent.MessageDelete,
 		});
 		const log = author.entries
-			.filter((l) => l.target.id === message.author.id)
-			.sort((a, b) => a.createdTimestamp - b.createdTimestamp)
+			.filter(
+				(l) =>
+					l.target.id === message.author.id &&
+					l.createdTimestamp > Date.now() - 1000 * 60 * 5 &&
+					l.executorId !== message.author.id,
+			)
+			.sort((a, b) => b.createdTimestamp - a.createdTimestamp)
 			.first();
 
-		if (log && log.executor && log.executorId !== message.author.id) {
+		if (log && log.executor) {
 			embed.footer = {
 				text: `${log.executor.displayName} (${log.executorId})`,
 				icon_url: log.executor.displayAvatarURL(),
