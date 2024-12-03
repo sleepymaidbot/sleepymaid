@@ -219,8 +219,8 @@ importers:
         specifier: ^7.0.0
         version: 7.0.0
       i18next:
-        specifier: ^24.0.2
-        version: 24.0.2(typescript@5.7.2)
+        specifier: ^24.0.5
+        version: 24.0.5(typescript@5.7.2)
       module-alias:
         specifier: ^2.2.3
         version: 2.2.3
@@ -351,8 +351,8 @@ importers:
         specifier: ^0.36.4
         version: 0.36.4(@types/pg@8.11.10)(@types/react@18.3.12)(knex@0.8.6)(pg@8.13.1)(postgres@3.4.5)(react@18.3.1)
       i18next:
-        specifier: ^24.0.2
-        version: 24.0.2(typescript@5.7.2)
+        specifier: ^24.0.5
+        version: 24.0.5(typescript@5.7.2)
       i18next-fs-backend:
         specifier: ^2.6.0
         version: 2.6.0
@@ -433,8 +433,8 @@ importers:
         specifier: ^5.1.4
         version: 5.1.4
       i18next:
-        specifier: ^24.0.2
-        version: 24.0.2(typescript@5.7.2)
+        specifier: ^24.0.5
+        version: 24.0.5(typescript@5.7.2)
       i18next-fs-backend:
         specifier: ^2.6.0
         version: 2.6.0
@@ -503,8 +503,8 @@ importers:
         specifier: ^0.36.4
         version: 0.36.4(@types/pg@8.11.10)(@types/react@18.3.12)(knex@0.8.6)(pg@8.13.1)(postgres@3.4.5)(react@18.3.1)
       i18next:
-        specifier: ^24.0.2
-        version: 24.0.2(typescript@5.7.2)
+        specifier: ^24.0.5
+        version: 24.0.5(typescript@5.7.2)
       i18next-fs-backend:
         specifier: ^2.6.0
         version: 2.6.0
@@ -561,8 +561,8 @@ importers:
         specifier: ^0.36.4
         version: 0.36.4(@types/pg@8.11.10)(@types/react@18.3.12)(knex@0.8.6)(pg@8.13.1)(postgres@3.4.5)(react@18.3.1)
       i18next:
-        specifier: ^24.0.2
-        version: 24.0.2(typescript@5.7.2)
+        specifier: ^24.0.5
+        version: 24.0.5(typescript@5.7.2)
       i18next-fs-backend:
         specifier: ^2.6.0
         version: 2.6.0
@@ -4865,8 +4865,8 @@ packages:
   i18next@21.10.0:
     resolution: {integrity: sha512-YeuIBmFsGjUfO3qBmMOc0rQaun4mIpGKET5WDwvu8lU7gvwpcariZLNtL0Fzj+zazcHUrlXHiptcFhBMFaxzfg==}
 
-  i18next@24.0.2:
-    resolution: {integrity: sha512-D88xyIGcWAKwBTAs4RSqASi8NXR/NhCVSTM4LDbdoU8qb/5dcEZjNCLDhtQBB7Epw/Cp1w2vH/3ujoTbqLSs5g==}
+  i18next@24.0.5:
+    resolution: {integrity: sha512-1jSdEzgFPGLZRsQwydoMFCBBaV+PmrVEO5WhANllZPX4y2JSGTxUjJ+xVklHIsiS95uR8gYc/y0hYZWevucNjg==}
     peerDependencies:
       typescript: ^5
     peerDependenciesMeta:
@@ -12159,7 +12159,7 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.24.7
 
-  i18next@24.0.2(typescript@5.7.2):
+  i18next@24.0.5(typescript@5.7.2):
     dependencies:
       '@babel/runtime': 7.24.7
     optionalDependencies:
