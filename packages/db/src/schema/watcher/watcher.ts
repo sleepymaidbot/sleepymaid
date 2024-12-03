@@ -1,7 +1,6 @@
 import { jsonb, pgEnum, pgTable, serial, text } from "drizzle-orm/pg-core";
 import { guildSettings } from "../sleepymaid/schema";
 
-export const logChannelType = pgEnum("Log_channel_type", ["server", "mod"]);
 export const caseType = pgEnum("case_type", ["untimeout", "timeout", "kick", "unban", "ban"]);
 
 export const types = {
@@ -52,7 +51,6 @@ export const logChannel = pgTable("log_channel", {
 		.notNull()
 		.references(() => guildSettings.guildId, { onDelete: "cascade" }),
 	channelId: text("channel_id").notNull(),
-	type: logChannelType("type").notNull().default("server"),
 	webhookId: text("webhook_id").notNull(),
 	webhookToken: text("webhook_token").notNull(),
 	threadId: text("thread_id"),

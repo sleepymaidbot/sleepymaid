@@ -1,6 +1,6 @@
 import { Context, Listener } from "@sleepymaid/handler";
 import { WatcherClient } from "../../lib/extensions/WatcherClient";
-import { Message, WebhookClient } from "discord.js";
+import { Colors, Message } from "discord.js";
 
 export default class extends Listener<"messageUpdate", WatcherClient> {
 	constructor(context: Context<WatcherClient>) {
@@ -14,24 +14,17 @@ export default class extends Listener<"messageUpdate", WatcherClient> {
 		if (!oldMessage.guild) return;
 
 		if (oldMessage.content !== newMessage.content) {
-			const channels = await this.container.manager.getLogChannel(oldMessage.guild.id);
-			if (!channels) return;
+			const channels = (await this.container.manager.getLogChannel(oldMessage.guild.id))?.filter(
+				(c) => c.messageEvents.edit,
+			);
+			if (!channels || channels.length === 0) return;
 
 			for (const channel of channels) {
-				if (!channel.messageEvents.edit) continue;
-
-				const webhook = new WebhookClient({
-					id: channel.webhookId,
-					token: channel.webhookToken,
-				});
-
-				webhook.send({
-					username: `${this.container.client.user?.displayName}`,
-					avatarURL: this.container.client.user?.displayAvatarURL(),
-					threadId: channel.threadId ?? undefined,
+				await this.container.manager.sendLog(channel, {
 					embeds: [
 						{
 							title: "Message Edited",
+							color: Colors.Blurple,
 							fields: [
 								{
 									name: "Author",
@@ -54,6 +47,7 @@ export default class extends Listener<"messageUpdate", WatcherClient> {
 									inline: false,
 								},
 							],
+							timestamp: new Date().toISOString(),
 						},
 					],
 				});

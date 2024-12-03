@@ -23,26 +23,26 @@ export default class VidListener extends Listener<"messageCreate", SleepyMaidCli
 		const args = message.content.split(" ");
 
 		for (let arg of args) {
-			await this.container.manager.downloadVideo(arg, async (fileName) => {
-				const messageReturn = await Result.fromAsync(async () =>
-					message
-						.reply({
-							files: [
-								{
-									attachment: fileName,
-									name: fileName,
-								},
-							],
-						})
-						.then(() => {
-							if (sitesDelEmbed.some((a) => arg.includes(a))) message.suppressEmbeds(true).catch(console.error);
-						}),
-				);
-				if (messageReturn.isErr()) {
-					client.logger.error(messageReturn.unwrapErr() as Error);
-					return;
-				}
-			});
+			const file = await this.container.manager.downloadVideo(arg);
+			if (file === null) continue;
+
+			const messageReturn = await Result.fromAsync(async () =>
+				message.reply({
+					files: [
+						{
+							attachment: await file.getFilePath(),
+							name: await file.getFileName(),
+						},
+					],
+				}),
+			);
+			if (messageReturn.isOk()) {
+				if (sitesDelEmbed.some((a) => arg.includes(a))) message.suppressEmbeds(true).catch(console.error);
+				await file.delete();
+			} else if (messageReturn.isErr()) {
+				client.logger.error(messageReturn.unwrapErr() as Error);
+				return;
+			}
 		}
 	}
 }

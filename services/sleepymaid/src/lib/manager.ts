@@ -19,8 +19,8 @@ export default class Manager {
 		Downloader
 	*/
 
-	public async downloadVideo(url: string, callback: (fileName: string) => Promise<void>) {
-		return downloadVideo(this.client, url, callback);
+	public async downloadVideo(url: string) {
+		return downloadVideo(this.client, url);
 	}
 
 	/*
