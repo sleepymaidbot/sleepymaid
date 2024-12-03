@@ -274,10 +274,18 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			);
 			return;
 		}
-		const reward = rewards.daily + (data.dailyStreak ?? 0) * 10;
+
+		// DEBUGGING
+		const currentStreak = data.dailyStreak ?? 0;
+		const newStreak = currentStreak + 1;
+		this.container.client.logger.debug(
+			`Current streak: ${currentStreak}, new streak: ${newStreak} for ${interaction.user.username} (${interaction.user.id})`,
+		);
+
+		const reward = rewards.daily + currentStreak * 10;
 		await this.container.manager.addBalance(interaction.user.id, reward, {
 			dailyTimestamp: new Date(),
-			dailyStreak: data.dailyStreak ?? 0 + 1,
+			dailyStreak: newStreak,
 		});
 
 		this.container.client.logger.info(
