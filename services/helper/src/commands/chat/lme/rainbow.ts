@@ -8,6 +8,7 @@ const cooldowns: Record<Snowflake, Date> = {};
 const roles = {
 	"324284116021542922": "944706938946609232",
 	"796534493535928320": "1312956443850178560",
+	"1150780245151068332": "1311052913552130118",
 };
 
 export default class extends SlashCommand<HelperClient> {
