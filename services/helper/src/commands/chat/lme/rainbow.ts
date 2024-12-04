@@ -71,6 +71,7 @@ export default class extends SlashCommand<HelperClient> {
 				ephemeral: true,
 			});
 
+		const oldColor = role.color;
 		const color = resolveColor(getRandomColor());
 
 		const buffer = await generateSplitImage(role.color, color);
@@ -85,8 +86,13 @@ export default class extends SlashCommand<HelperClient> {
 		return await interaction.reply({
 			embeds: [
 				{
+					title: "Rainbow",
+					author: {
+						name: interaction.user.tag,
+						icon_url: interaction.user.displayAvatarURL(),
+					},
 					color: color,
-					description: `La couleur du rôle <@&${roleID}> a été changée en ${intToHexColor(color)}`,
+					description: `La couleur du rôle <@&${roleID}> a été changée de **${intToHexColor(oldColor)}** à **${intToHexColor(color)}**`,
 					thumbnail: {
 						url: `attachment://${attachmentName}`,
 					},
