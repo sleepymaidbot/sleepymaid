@@ -1,6 +1,6 @@
 import { Context, SlashCommand } from "@sleepymaid/handler";
 import { WatcherClient } from "../../lib/extensions/WatcherClient";
-import { APIEmbed, ChatInputCommandInteraction } from "discord.js";
+import { APIEmbed, ChatInputCommandInteraction, MessageFlags } from "discord.js";
 
 export default class extends SlashCommand<WatcherClient> {
 	constructor(context: Context<WatcherClient>) {
@@ -15,7 +15,7 @@ export default class extends SlashCommand<WatcherClient> {
 	public override async execute(interaction: ChatInputCommandInteraction) {
 		const client = this.container.client;
 		const timestamp1 = interaction.createdTimestamp;
-		await interaction.reply("Pong!");
+		await interaction.reply({ content: "Pong!", flags: MessageFlags.Ephemeral });
 		const timestamp2 = (await interaction.fetchReply()).createdTimestamp;
 		const botLatency = `\`\`\`\n ${Math.floor(timestamp2 - timestamp1)}ms \`\`\``;
 		const apiLatency = `\`\`\`\n ${Math.round(client.ws.ping)}ms \`\`\``;
