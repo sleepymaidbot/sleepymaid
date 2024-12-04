@@ -27,7 +27,10 @@ export default class extends SlashCommand<HelperClient> {
 		if (!roleID) return;
 		const role = interaction.guild.roles.cache.get(roleID);
 		if (!role) return;
-		if (!interaction.member.roles.cache.has(roleID))
+		if (
+			!interaction.member.roles.cache.has(roleID) &&
+			!interaction.member.permissions.has(PermissionsBitField.Flags.ManageRoles)
+		)
 			return interaction.reply({
 				content: "Tu doit avoir le rôle <@&" + roleID + "> pour utiliser cette commande.",
 				ephemeral: true,
