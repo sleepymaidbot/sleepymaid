@@ -1,8 +1,16 @@
 import { Context, SlashCommand } from "@sleepymaid/handler";
 import { add, formatDistanceToNow } from "date-fns";
-import { ChatInputCommandInteraction, resolveColor, ColorResolvable, Snowflake } from "discord.js";
+import {
+	ChatInputCommandInteraction,
+	resolveColor,
+	ColorResolvable,
+	Snowflake,
+	AttachmentBuilder,
+	PermissionsBitField,
+} from "discord.js";
 import { HelperClient } from "../../../lib/extensions/HelperClient";
 import { intToHexColor } from "@sleepymaid/util";
+import { generateSplitImage } from "@sleepymaid/shared";
 
 const cooldowns: Record<Snowflake, Date> = {};
 const roles = {
@@ -36,13 +44,13 @@ export default class extends SlashCommand<HelperClient> {
 				ephemeral: true,
 			});
 
-		const getRandomColor = () => {
+		const getRandomColor = (): ColorResolvable => {
 			const letters = "0123456789ABCDEF";
 			let color = "#";
 			for (let i = 0; i < 6; i++) {
 				color += letters[Math.floor(Math.random() * 16)];
 			}
-			return color;
+			return color as ColorResolvable;
 		};
 
 		const cooldown = cooldowns[interaction.guild.id];
@@ -63,7 +71,12 @@ export default class extends SlashCommand<HelperClient> {
 				ephemeral: true,
 			});
 
-		const color = resolveColor(getRandomColor() as ColorResolvable);
+		const color = resolveColor(getRandomColor());
+
+		const buffer = await generateSplitImage(role.color, color);
+
+		const attachmentName = `${role.id}-${color}.png`;
+		const attachment = new AttachmentBuilder(buffer, { name: attachmentName });
 
 		await role.setColor(color, "Changed by: " + interaction.user.tag).then(() => {
 			cooldowns[interaction.guild.id] = add(new Date(), { minutes: 5 });
@@ -74,8 +87,12 @@ export default class extends SlashCommand<HelperClient> {
 				{
 					color: color,
 					description: `La couleur du rôle <@&${roleID}> a été changée en ${intToHexColor(color)}`,
+					thumbnail: {
+						url: `attachment://${attachmentName}`,
+					},
 				},
 			],
+			files: [attachment],
 		});
 	}
 }
