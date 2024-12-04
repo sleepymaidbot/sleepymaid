@@ -30,7 +30,7 @@ export type GuildCommandsType = {
 type Commands = {
 	data: ApplicationCommandData;
 	file: string;
-	guildId: Snowflake | null;
+	guildIds: Snowflake[] | null;
 	id: Snowflake | null;
 	name: string;
 };
@@ -143,25 +143,13 @@ export class CommandManager<Client extends HandlerClient> extends BaseManager<Cl
 			const cmd_ = await checkAndInstantiateCommand(file, context);
 			if (!cmd_) continue;
 
-			if (cmd_.guildIds) {
-				for (const id of cmd_.guildIds) {
-					this._tempCommands.set(cmd_.data.name, {
-						name: cmd_.data.name,
-						file,
-						id: null,
-						guildId: id,
-						data: cmd_.data,
-					});
-				}
-			} else {
-				this._tempCommands.set(cmd_.data.name, {
-					name: cmd_.data.name,
-					file,
-					id: null,
-					guildId: null,
-					data: cmd_.data,
-				});
-			}
+			this._tempCommands.set(cmd_.data.name, {
+				name: cmd_.data.name,
+				file,
+				id: null,
+				guildIds: cmd_.guildIds ?? null,
+				data: cmd_.data,
+			});
 
 			this.client.logger.info(`Command Handler: -> Command loaded -> ${cmd_.data.name}`);
 		}
@@ -170,7 +158,7 @@ export class CommandManager<Client extends HandlerClient> extends BaseManager<Cl
 	}
 
 	private async RegisterGlobalApplicationCommands() {
-		const globalCommands = Array.from(this._tempCommands.values()).filter((cmd) => cmd.guildId === null);
+		const globalCommands = Array.from(this._tempCommands.values()).filter((cmd) => cmd.guildIds === null);
 
 		await this.client.application?.commands
 			.set(globalCommands.map((cmd) => cmd.data))
@@ -182,7 +170,7 @@ export class CommandManager<Client extends HandlerClient> extends BaseManager<Cl
 							id: cmd.id,
 							name: current.name,
 							file: current.file,
-							guildId: null,
+							guildIds: null,
 							data: current.data,
 						});
 					}
@@ -196,17 +184,14 @@ export class CommandManager<Client extends HandlerClient> extends BaseManager<Cl
 	}
 
 	private async RegisterGuildApplicationCommands() {
-		const guildCommands = this._tempCommands.filter((cmd) => cmd.guildId !== null);
-
-		const guildIdsArray = Array.from(guildCommands.values())
-			.map((command) => command.guildId)
-			.filter((guildId, index, array) => guildId !== null && array.indexOf(guildId) === index);
+		const guildCommands = Array.from(this._tempCommands.filter((cmd) => cmd.guildIds !== null).values());
+		const guildIdsArray = [...new Set(guildCommands.flatMap((command) => command.guildIds ?? []))];
 
 		await this.client.guilds.fetch();
 
 		for (const guildId of guildIdsArray) {
-			const guildCmds = guildCommands.filter((cmd) => cmd.guildId === guildId);
-			const guild = this.client.guilds.cache.get(guildId!);
+			const guildCmds = guildCommands.filter((cmd) => cmd.guildIds?.includes(guildId));
+			const guild = this.client.guilds.cache.get(guildId);
 			if (!guild) {
 				this.client.logger.error(`Command Handler: -> Guild ${guildId} not found!`);
 				continue;
@@ -221,7 +206,7 @@ export class CommandManager<Client extends HandlerClient> extends BaseManager<Cl
 						id: cmd.id,
 						name: current.name,
 						file: current.file,
-						guildId: current.guildId,
+						guildIds: current.guildIds,
 						data: current.data,
 					});
 				}

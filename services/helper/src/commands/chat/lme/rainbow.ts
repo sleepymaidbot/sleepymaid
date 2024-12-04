@@ -15,6 +15,7 @@ import { generateSplitImage } from "@sleepymaid/shared";
 const cooldowns: Record<Snowflake, Date> = {};
 const roles = {
 	"324284116021542922": "944706938946609232", // LME
+	"821717486217986098": "1313988788439093348", // Test
 	"796534493535928320": "1312956443850178560", // Fil
 	"1150780245151068332": "1311052913552130118", // Mamayo
 };
@@ -22,7 +23,7 @@ const roles = {
 export default class extends SlashCommand<HelperClient> {
 	constructor(context: Context<HelperClient>) {
 		super(context, {
-			guildIds: ["324284116021542922", "796534493535928320", "1150780245151068332"],
+			guildIds: Object.keys(roles),
 			data: {
 				name: "rainbow",
 				description: "Change la couleur du rôle rainbow.",
