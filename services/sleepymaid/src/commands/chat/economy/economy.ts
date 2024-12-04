@@ -14,15 +14,17 @@ import {
 } from "discord.js";
 import { APIEmbed, ApplicationCommandOptionType } from "discord-api-types/v10";
 import { userData } from "@sleepymaid/db";
-import { desc, eq } from "drizzle-orm";
+import { desc, eq, sql } from "drizzle-orm";
 import DBCheckPrecondtion from "../../../preconditions/dbCheck";
 import { formatNumber } from "@sleepymaid/shared";
 
-const rewards = {
-	daily: 1000,
-	weekly: 5000,
-	monthly: 10000,
-	work: 100,
+const rewards: Record<"daily" | "weekly" | "monthly" | "work", () => number> = {
+	daily: () => 1000,
+	weekly: () => 5000,
+	monthly: () => 10000,
+	work: () => {
+		return Math.floor(Math.random() * 101) + 50;
+	},
 };
 
 const baseEmbed: APIEmbed = {
@@ -275,18 +277,16 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			return;
 		}
 
-		// DEBUGGING
-		const currentStreak = data.dailyStreak ?? 0;
-		const newStreak = currentStreak + 1;
-		this.container.client.logger.debug(
-			`Current streak: ${currentStreak}, new streak: ${newStreak} for ${interaction.user.username} (${interaction.user.id})`,
-		);
+		const reward = rewards.daily() + (data.dailyStreak ?? 0) * 10;
 
-		const reward = rewards.daily + currentStreak * 10;
-		await this.container.manager.addBalance(interaction.user.id, reward, {
-			dailyTimestamp: new Date(),
-			dailyStreak: newStreak,
-		});
+		await this.container.client.drizzle
+			.update(userData)
+			.set({
+				dailyTimestamp: new Date(),
+				currency: sql`${userData.currency} + ${reward}`,
+				dailyStreak: sql`${userData.dailyStreak} + 1`,
+			})
+			.where(eq(userData.userId, interaction.user.id));
 
 		this.container.client.logger.info(
 			`${interaction.user.username} (${interaction.user.id}) claimed their daily reward of ${reward} coins!`,
@@ -317,11 +317,16 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			);
 			return;
 		}
-		const reward = rewards.weekly + (data.weeklyStreak ?? 0) * 10;
-		await this.container.manager.addBalance(interaction.user.id, reward, {
-			weeklyTimestamp: new Date(),
-			weeklyStreak: data.weeklyStreak ?? 0 + 1,
-		});
+		const reward = rewards.weekly() + (data.weeklyStreak ?? 0) * 10;
+
+		await this.container.client.drizzle
+			.update(userData)
+			.set({
+				currency: sql`${userData.currency} + ${reward}`,
+				weeklyStreak: sql`${userData.weeklyStreak} + 1`,
+				weeklyTimestamp: new Date(),
+			})
+			.where(eq(userData.userId, interaction.user.id));
 
 		this.container.client.logger.info(
 			`${interaction.user.username} (${interaction.user.id}) claimed their weekly reward of ${reward} coins!`,
@@ -352,11 +357,16 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			);
 			return;
 		}
-		const reward = rewards.monthly + (data.monthlyStreak ?? 0) * 10;
-		await this.container.manager.addBalance(interaction.user.id, reward, {
-			monthlyTimestamp: new Date(),
-			monthlyStreak: data.monthlyStreak ?? 0 + 1,
-		});
+		const reward = rewards.monthly() + (data.monthlyStreak ?? 0) * 10;
+
+		await this.container.client.drizzle
+			.update(userData)
+			.set({
+				currency: sql`${userData.currency} + ${reward}`,
+				monthlyStreak: sql`${userData.monthlyStreak} + 1`,
+				monthlyTimestamp: new Date(),
+			})
+			.where(eq(userData.userId, interaction.user.id));
 
 		this.container.client.logger.info(
 			`${interaction.user.username} (${interaction.user.id}) claimed their monthly reward of ${reward} coins!`,
@@ -387,10 +397,15 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			);
 			return;
 		}
-		const reward = rewards.work;
-		await this.container.manager.addBalance(interaction.user.id, reward, {
-			workTimestamp: new Date(),
-		});
+		const reward = rewards.work();
+
+		await this.container.client.drizzle
+			.update(userData)
+			.set({
+				currency: sql`${userData.currency} + ${reward}`,
+				workTimestamp: new Date(),
+			})
+			.where(eq(userData.userId, interaction.user.id));
 
 		this.container.client.logger.info(
 			`${interaction.user.username} (${interaction.user.id}) worked for ${reward} coins!`,
