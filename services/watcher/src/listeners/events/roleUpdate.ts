@@ -102,7 +102,10 @@ export default class extends Listener<"roleUpdate", WatcherClient> {
 				text: `${log.executor.displayName} (${log.executorId})`,
 				icon_url: log.executor.displayAvatarURL(),
 			};
+		} else if (fields.some((f) => f.name === "Position")) {
+			return;
 		}
+
 		for (const channel of channels) {
 			await this.container.manager.sendLog(channel, { embeds: [embed], files: attachment ? [attachment] : undefined });
 		}
