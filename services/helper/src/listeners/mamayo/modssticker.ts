@@ -1,12 +1,12 @@
 import { Context, Listener } from "@sleepymaid/handler";
-import { SleepyMaidClient } from "../../lib/SleepyMaidClient";
 import { Message } from "discord.js";
 import { add } from "date-fns";
+import { HelperClient } from "../../lib/extensions/HelperClient";
 
 let time = 0;
 
-export default class ModStickerListener extends Listener<"messageCreate", SleepyMaidClient> {
-	constructor(context: Context<SleepyMaidClient>) {
+export default class ModStickerListener extends Listener<"messageCreate", HelperClient> {
+	constructor(context: Context<HelperClient>) {
 		super(context, {
 			name: "messageCreate",
 			once: false,

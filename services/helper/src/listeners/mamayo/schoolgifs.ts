@@ -1,7 +1,7 @@
 import { Context, Listener } from "@sleepymaid/handler";
-import { SleepyMaidClient } from "../../lib/SleepyMaidClient";
 import { Message } from "discord.js";
 import { add } from "date-fns";
+import { HelperClient } from "../../lib/extensions/HelperClient";
 
 const gifsDomains = ["https://tenor.com", "https://giphy.com", "https://media.tenor.com"];
 
@@ -21,8 +21,8 @@ const roleWhitelist = [
 
 const minutes = 2;
 
-export default class extends Listener<"messageCreate", SleepyMaidClient> {
-	constructor(context: Context<SleepyMaidClient>) {
+export default class extends Listener<"messageCreate", HelperClient> {
+	constructor(context: Context<HelperClient>) {
 		super(context, {
 			name: "messageCreate",
 			once: false,
