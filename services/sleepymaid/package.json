@@ -34,7 +34,7 @@
 		"date-fns": "^4.1.0",
 		"discord-api-types": "^0.37.98",
 		"discord.js": "^14.16.3",
-		"drizzle-orm": "^0.36.4",
+		"drizzle-orm": "^0.37.0",
 		"gamedig": "^5.1.4",
 		"i18next": "^24.0.5",
 		"i18next-fs-backend": "^2.6.0",
