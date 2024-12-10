@@ -69,7 +69,12 @@ export default class extends Listener<"messageDelete", WatcherClient> {
 			.sort((a, b) => b.createdTimestamp - a.createdTimestamp)
 			.first();
 
-		if (log && log.executor && log.executorId !== message.author.id) {
+		if (
+			log &&
+			log.executor &&
+			log.executorId !== message.author.id &&
+			log.createdTimestamp > Date.now() - 1000 * 60 * 2
+		) {
 			embed.footer = {
 				text: `${log.executor.displayName} (${log.executorId})`,
 				icon_url: log.executor.displayAvatarURL(),
