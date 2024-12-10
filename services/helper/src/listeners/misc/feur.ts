@@ -10,7 +10,7 @@ export default class extends Listener<"messageCreate", HelperClient> {
 		});
 	}
 
-	public async run(message: Message) {
+	public override async execute(message: Message) {
 		if (message.author.id !== "577856714347511828") return;
 		if (!message.content.includes("feur")) return;
 
