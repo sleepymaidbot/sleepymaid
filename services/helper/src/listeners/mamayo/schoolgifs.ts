@@ -62,12 +62,13 @@ export default class extends Listener<"messageCreate", HelperClient> {
 				users[userId] = add(Date.now(), { minutes }).getTime();
 			} else {
 				message.delete();
+				const timeLeft = Math.floor(users[userId] / 1000);
 				const warning = await message.channel.send(
-					`<@${userId}> Merci d'attendre ${minutes} minutes avant d'envoyer un autre gif. Si vous voulez envoyez des gifs, c'est <#1300509988917350471>.`,
+					`<@${userId}> Merci d'attendre ${minutes} minutes avant d'envoyer un autre gif.\nVous pouvez envoyer un autre gif <t:${timeLeft}:R>.\nSi vous voulez envoyez des gifs, c'est <#1300509988917350471>.`,
 				);
 				setTimeout(() => {
 					warning.delete();
-				}, 10_000);
+				}, 15_000);
 			}
 		} else {
 			users[userId] = add(Date.now(), { minutes }).getTime();
