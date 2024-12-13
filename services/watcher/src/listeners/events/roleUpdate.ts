@@ -79,6 +79,14 @@ export default class extends Listener<"roleUpdate", WatcherClient> {
 			}
 		}
 
+		if (oldRole.icon !== newRole.icon) {
+			fields.push({
+				name: "Icon",
+				value: `${oldRole.icon} -> ${newRole.icon}`,
+				inline: true,
+			});
+		}
+
 		if (oldRole.hoist !== newRole.hoist) {
 			fields.push({
 				name: "Hoist",
