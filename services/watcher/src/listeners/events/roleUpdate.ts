@@ -28,7 +28,7 @@ export default class extends Listener<"roleUpdate", WatcherClient> {
 			{
 				name: "Role",
 				value: `${newRole.name} (${newRole.id})`,
-				inline: true,
+				inline: false,
 			},
 		];
 
@@ -57,11 +57,26 @@ export default class extends Listener<"roleUpdate", WatcherClient> {
 		}
 
 		if (oldRole.permissions.bitfield !== newRole.permissions.bitfield) {
-			fields.push({
-				name: "Permissions",
-				value: `${oldRole.permissions.toArray().join(", ")} -> ${newRole.permissions.toArray().join(", ")}`,
-				inline: true,
-			});
+			const addedPermissions = newRole.permissions.toArray().filter((p) => !oldRole.permissions.toArray().includes(p));
+			const removedPermissions = oldRole.permissions
+				.toArray()
+				.filter((p) => !newRole.permissions.toArray().includes(p));
+
+			if (addedPermissions.length > 0) {
+				fields.push({
+					name: "Added Permissions",
+					value: addedPermissions.map((p) => `<:add:807723944236285972> ${p}`).join("\n"),
+					inline: true,
+				});
+			}
+
+			if (removedPermissions.length > 0) {
+				fields.push({
+					name: "Removed Permissions",
+					value: removedPermissions.map((p) => `<:remove:807723917925941268> ${p}`).join("\n"),
+					inline: true,
+				});
+			}
 		}
 
 		if (oldRole.hoist !== newRole.hoist) {
