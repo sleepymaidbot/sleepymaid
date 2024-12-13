@@ -11,7 +11,7 @@ export default class extends Listener<"guildMemberRemove", WatcherClient> {
 	}
 
 	public override async execute(member: GuildMember) {
-		const channels = (await this.container.manager.getLogChannel(member.guild.id))?.filter((c) => c.memberEvents.join);
+		const channels = (await this.container.manager.getLogChannel(member.guild.id))?.filter((c) => c.memberEvents.leave);
 		if (!channels || channels.length === 0) return;
 
 		const embed: APIEmbed = {
