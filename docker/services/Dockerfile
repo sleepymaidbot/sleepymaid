@@ -13,6 +13,7 @@ RUN apk add --no-cache \
     libjpeg-turbo-dev \
     ttf-dejavu \
     fontconfig \
+    yt-dlp \
     && apk add --no-cache --virtual .build-deps \
     curl git python3 alpine-sdk libc6-compat openssl-dev yt-dlp \
     && apk del .build-deps
