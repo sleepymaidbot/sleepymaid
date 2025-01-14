@@ -28,14 +28,14 @@ const serversData = {
 	},
 };
 
-export default class QCGServersCommand extends SlashCommand<SleepyMaidClient> {
+export default class ServersCommand extends SlashCommand<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
 		super(context, {
 			data: {
 				// ...getLocalizedProp("name", "commands.ping.name"),
 				// ...getLocalizedProp("description", "commands.ping.description"),
-				name: "qcgservers",
-				description: "Query a Québec Game server",
+				name: "servers",
+				description: "Query from a list of game servers",
 				type: ApplicationCommandType.ChatInput,
 				integrationTypes: [ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall],
 				contexts: [InteractionContextType.BotDM, InteractionContextType.Guild, InteractionContextType.PrivateChannel],
