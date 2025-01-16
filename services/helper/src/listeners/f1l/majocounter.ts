@@ -13,7 +13,7 @@ export default class extends Listener<"voiceStateUpdate", HelperClient> {
 	public override async execute(oldState: VoiceState, newState: VoiceState) {
 		if (oldState.guild.id !== "796534493535928320") return;
 		if (!oldState.member) return;
-		if (oldState.member.id !== "523915165545136141") return;
+		// if (oldState.member.id !== "523915165545136141") return;
 		if (oldState.channel !== null && newState.channel == null) {
 			const auditLog = await oldState.guild.fetchAuditLogs({ type: AuditLogEvent.MemberDisconnect });
 			const entry = auditLog.entries.filter((entry) => Date.now() - entry.createdTimestamp < 10_000).first();
