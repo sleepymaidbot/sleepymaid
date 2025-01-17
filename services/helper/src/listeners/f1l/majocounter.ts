@@ -29,9 +29,9 @@ export default class extends Listener<"voiceStateUpdate", HelperClient> {
 				const currentCount = userDisconnectCounter[entry.executor.id] ?? 0;
 				const newCount = entry.extra.count;
 
-				if (currentCount === newCount) continue;
-
 				userDisconnectCounter[entry.executor.id] = newCount;
+
+				if (currentCount === newCount) continue;
 
 				valid = true;
 			}
