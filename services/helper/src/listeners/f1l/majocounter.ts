@@ -23,19 +23,8 @@ export default class extends Listener<"voiceStateUpdate", HelperClient> {
 		if (oldState.member.user.bot) return;
 		if (oldState.channel !== null && newState.channel == null) {
 			const auditLog = await oldState.guild.fetchAuditLogs({ type: AuditLogEvent.MemberDisconnect });
-			let valid = false;
-			for (const entry of auditLog.entries.values()) {
-				if (!entry.executor) continue;
-				const currentCount = userDisconnectCounter[entry.executor.id] ?? 0;
-				const newCount = entry.extra.count;
-
-				userDisconnectCounter[entry.executor.id] = newCount;
-
-				if (currentCount === newCount) continue;
-
-				valid = true;
-			}
-			if (!valid) return;
+			const entry = auditLog.entries.filter((entry) => Date.now() - entry.createdTimestamp < 10_000).first();
+			if (!entry) return;
 
 			const user = await this.container.client.drizzle
 				.insert(disconnectCounter)
