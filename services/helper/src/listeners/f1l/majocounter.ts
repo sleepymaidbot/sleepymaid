@@ -1,10 +1,8 @@
 import { Context, Listener } from "@sleepymaid/handler";
-import { AuditLogEvent, Snowflake, VoiceState } from "discord.js";
+import { AuditLogEvent, VoiceState } from "discord.js";
 import { HelperClient } from "../../lib/extensions/HelperClient";
 import { sql } from "drizzle-orm";
 import { disconnectCounter } from "@sleepymaid/db";
-
-const userDisconnectCounter: Record<Snowflake, number> = {};
 
 export default class extends Listener<"voiceStateUpdate", HelperClient> {
 	constructor(context: Context<HelperClient>) {
