@@ -1,6 +1,6 @@
 import { InferSelectModel, relations, sql } from "drizzle-orm";
 import { pgTable, text, boolean, bigint, timestamp, integer, serial } from "drizzle-orm/pg-core";
-import { randomBitrate } from "../helper/randombitrate";
+import { randomBitrate } from "../helper/helper";
 import { roleMenu } from "./rolemenu";
 import { quickMessage } from "./quickMessage";
 import { Permission } from "@sleepymaid/shared";
