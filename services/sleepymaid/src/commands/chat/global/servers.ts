@@ -1,5 +1,10 @@
 import { SlashCommand, type Context } from "@sleepymaid/handler";
-import type { ChatInputCommandInteraction } from "discord.js";
+import type {
+	APIActionRowComponent,
+	APIEmbed,
+	APIMessageActionRowComponent,
+	ChatInputCommandInteraction,
+} from "discord.js";
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
@@ -10,21 +15,81 @@ import {
 	InteractionContextType,
 } from "discord.js";
 import type { SleepyMaidClient } from "../../../lib/SleepyMaidClient";
-import { GameDig } from "gamedig";
+import { GameDig, QueryResult } from "gamedig";
 import { getUnixTime, sub } from "date-fns";
 
-const serversData = {
+enum Game {
+	GarrysMod = "garrysmod",
+}
+
+type ServerData = {
+	ip: string;
+	port: number;
+	fancyName: string;
+	url?: string;
+	game: Game;
+};
+
+const serversData: Record<string, ServerData> = {
 	ma: {
 		ip: "15.235.112.50",
 		port: 27016,
 		fancyName: "Murderer's Arena",
 		url: "https://www.qcgames.org/english/index.php?t=servers",
+		game: Game.GarrysMod,
 	},
 	qc: {
 		ip: "15.235.112.50",
 		port: 27015,
 		fancyName: "Québec Murder",
 		url: "https://www.qcgames.org/french/index.php?t=servers",
+		game: Game.GarrysMod,
+	},
+};
+
+const gamesFormat: Record<Game, (data: ServerData, query: QueryResult) => APIEmbed> = {
+	[Game.GarrysMod]: (data, query) => {
+		return {
+			title: data.fancyName,
+			description: query.name,
+			color: Colors.Blue,
+			fields: [
+				{
+					name: "Player Count",
+					value: query.players.length.toString() + "/" + query.maxplayers.toString(),
+					inline: true,
+				},
+				{
+					name: "Map",
+					value: query.map,
+					inline: true,
+				},
+				{
+					name: "Players Online",
+					value: (() => {
+						let string = "";
+						for (const player of query.players) {
+							if (player.name === "") continue;
+
+							if (player.raw !== null) {
+								// @ts-expect-error - GameDig raw type are a mess
+								const raw: { score: number | null; time: number | null } = player.raw;
+								const timestamp = getUnixTime(
+									sub(new Date(), {
+										seconds: raw.time ?? 0,
+									}),
+								);
+								string += `${player.name} (${raw.score ?? "0"} / <t:${timestamp}:R>)\n`;
+							} else {
+								string += `${player.name}\n`;
+							}
+						}
+						return string;
+					})(),
+					inline: false,
+				},
+			],
+		};
 	},
 };
 
@@ -45,16 +110,10 @@ export default class ServersCommand extends SlashCommand<SleepyMaidClient> {
 						description: "The server to query",
 						type: ApplicationCommandOptionType.String,
 						required: true,
-						choices: [
-							{
-								name: "Murderer's Arena",
-								value: "ma",
-							},
-							{
-								name: "Québec Murder",
-								value: "qc",
-							},
-						],
+						choices: Object.keys(serversData).map((key) => ({
+							name: serversData[key as keyof typeof serversData]!.fancyName,
+							value: key,
+						})),
 					},
 				],
 			},
@@ -66,74 +125,40 @@ export default class ServersCommand extends SlashCommand<SleepyMaidClient> {
 
 		if (!server) return;
 
-		const data = serversData[server];
+		const data: ServerData | undefined = serversData[server];
+
+		if (!data) return;
 
 		const query = await GameDig.query({
-			type: "garrysmod",
+			type: data.game,
 			host: data.ip,
 			port: data.port,
 			givenPortOnly: true,
-			maxRetries: 3,
+			maxRetries: 10,
+			requestRules: true,
 		});
 
-		return await interaction.reply({
-			embeds: [
-				{
-					title: data.fancyName,
-					description: query.name,
-					color: Colors.Blue,
-					fields: [
-						{
-							name: "Player Count",
-							value: query.players.length.toString() + "/" + query.maxplayers.toString(),
-							inline: true,
-						},
-						{
-							name: "Map",
-							value: query.map,
-							inline: true,
-						},
-						{
-							name: "Players Online",
-							value: (() => {
-								let string = "";
-								for (const player of query.players) {
-									if (player.name === "") continue;
+		const func = gamesFormat[data.game];
+		const embed = func(data, query);
+		const components: APIActionRowComponent<APIMessageActionRowComponent>[] = [];
+		if (data.url) {
+			components.push({
+				type: ComponentType.ActionRow,
+				components: [
+					{
+						type: ComponentType.Button,
+						style: ButtonStyle.Link,
+						label: "Click here to view the server list.",
+						url: data.url,
+						emoji: { name: "🔗" },
+					},
+				],
+			});
+		}
 
-									if (player.raw !== null) {
-										// @ts-expect-error - GameDig raw type are a mess
-										const raw: { score: number | null; time: number | null } = player.raw;
-										const timestamp = getUnixTime(
-											sub(new Date(), {
-												seconds: raw.time ?? 0,
-											}),
-										);
-										string += `${player.name} (${raw.score ?? "0"} / <t:${timestamp}:R>)\n`;
-									} else {
-										string += `${player.name}\n`;
-									}
-								}
-								return string;
-							})(),
-							inline: false,
-						},
-					],
-				},
-			],
-			components: [
-				{
-					type: 1,
-					components: [
-						{
-							type: ComponentType.Button,
-							style: ButtonStyle.Link,
-							label: "Click here to view the server list.",
-							url: data.url,
-							emoji: { name: "🔗" },
-						},
-					],
-				},
-			],
+		return await interaction.reply({
+			embeds: [embed],
+			components,
 		});
 	}
 }
