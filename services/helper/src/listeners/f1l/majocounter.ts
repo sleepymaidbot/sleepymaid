@@ -1,8 +1,10 @@
 import { Context, Listener } from "@sleepymaid/handler";
-import { AuditLogEvent, VoiceState } from "discord.js";
+import { AuditLogEvent, Snowflake, VoiceState } from "discord.js";
 import { HelperClient } from "../../lib/extensions/HelperClient";
 import { sql } from "drizzle-orm";
 import { disconnectCounter } from "@sleepymaid/db";
+
+const userDisconnectCounter: Record<Snowflake, number> = {};
 
 export default class extends Listener<"voiceStateUpdate", HelperClient> {
 	constructor(context: Context<HelperClient>) {
@@ -21,8 +23,20 @@ export default class extends Listener<"voiceStateUpdate", HelperClient> {
 		if (oldState.member.user.bot) return;
 		if (oldState.channel !== null && newState.channel == null) {
 			const auditLog = await oldState.guild.fetchAuditLogs({ type: AuditLogEvent.MemberDisconnect });
-			const entry = auditLog.entries.filter((entry) => Date.now() - entry.createdTimestamp < 30_000).first();
-			if (!entry) return;
+			let valid = false;
+			for (const entry of auditLog.entries.values()) {
+				if (!entry.executor) continue;
+				const currentCount = userDisconnectCounter[entry.executor.id] ?? 0;
+				const newCount = entry.extra.count;
+
+				if (currentCount === newCount) continue;
+
+				userDisconnectCounter[entry.executor.id] = newCount;
+
+				valid = true;
+			}
+			if (!valid) return;
+
 			const user = await this.container.client.drizzle
 				.insert(disconnectCounter)
 				.values({
@@ -40,7 +54,9 @@ export default class extends Listener<"voiceStateUpdate", HelperClient> {
 				});
 			if (!user || !user[0]) return;
 
-			const newNickname = `[${user[0].count}] ${oldState.member.nickname ?? oldState.member.user.displayName}`;
+			const currentName = oldState.member.nickname ?? oldState.member.user.displayName;
+			const baseNickname = currentName.replace(/^\[\d+\]\s+/, "");
+			const newNickname = `[${user[0].count}] ${baseNickname}`;
 
 			await oldState.member.setNickname(newNickname);
 		}
