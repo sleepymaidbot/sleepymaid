@@ -21,6 +21,7 @@ import { Precondition } from "../preconditions/Precondition";
 export type CommandManagerStartAllOptionsType<Client extends HandlerClient> = {
 	folder: string;
 	preconditions?: (typeof Precondition<Client>)[];
+	commandRunContext?: (callback: () => Promise<unknown>, interaction: CommandInteraction) => Promise<void>;
 };
 
 export type GuildCommandsType = {
@@ -86,11 +87,16 @@ export class CommandManager<Client extends HandlerClient> extends BaseManager<Cl
 
 	private _preconditions: (typeof Precondition<Client>)[] = [];
 
+	private _commandRunContext: (callback: () => Promise<unknown>, interaction: CommandInteraction) => Promise<void> =
+		async (callback, _interaction) => {
+			await callback();
+		};
+
 	public async startAll(options: CommandManagerStartAllOptionsType<typeof this.client>): Promise<void> {
 		if (!options.folder) throw new Error("No folder path provided!");
-		if (options.preconditions) {
-			this._preconditions = options.preconditions;
-		}
+		this._preconditions = options.preconditions ?? [];
+		if (options.commandRunContext) this._commandRunContext = options.commandRunContext;
+
 		await this.loadCommand(options.folder);
 		this.client.on("interactionCreate", (interaction: Interaction) => {
 			if (interaction.type === InteractionType.ApplicationCommand) {
@@ -229,6 +235,10 @@ export class CommandManager<Client extends HandlerClient> extends BaseManager<Cl
 		await this.RegisterGuildApplicationCommands();
 	}
 
+	private async commandRunContext(callback: () => Promise<unknown>, interaction: CommandInteraction) {
+		await this._commandRunContext(callback, interaction);
+	}
+
 	private async HandleApplicationCommands(interaction: CommandInteraction) {
 		if (interaction.guild) {
 			this.client.logger.debug(
@@ -262,7 +272,7 @@ export class CommandManager<Client extends HandlerClient> extends BaseManager<Cl
 
 			if (!cmd.execute) return this.client.logger.error("Command has no execute method!");
 
-			await cmd.execute(interaction as never);
+			await this.commandRunContext(async () => cmd.execute!(interaction as never), interaction);
 		} catch (error) {
 			this.client.logger.error(error as Error);
 			try {

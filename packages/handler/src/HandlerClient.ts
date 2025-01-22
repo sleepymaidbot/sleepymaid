@@ -41,17 +41,17 @@ export type LogFn = (message: string, ...args: string[]) => void;
 export type ErrorLogFn = (error: Error | string, ...args: string[]) => void;
 
 export class HandlerClient extends Client {
-	public declare logger: Logger;
+	declare public logger: Logger;
 
-	public declare env: env;
+	declare public env: env;
 
-	public declare commandManager?: CommandManager<this>;
+	declare public commandManager?: CommandManager<this>;
 
-	public declare listenerManager?: ListenerManager<this>;
+	declare public listenerManager?: ListenerManager<this>;
 
-	public declare taskManager?: TaskManager<this>;
+	declare public taskManager?: TaskManager<this>;
 
-	public declare container: BaseContainer<this>;
+	declare public container: BaseContainer<this>;
 
 	public constructor(options: HandlerClientOptions, djsOptions: ClientOptions) {
 		super(djsOptions);

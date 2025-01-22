@@ -1,7 +1,7 @@
 import type { env } from "./HandlerClient";
 
 export class BaseLogger {
-	public declare env: env;
+	declare public env: env;
 	constructor(env: env) {
 		this.env = env;
 	}

@@ -5,7 +5,7 @@ import type { CommandOptions } from "./Command";
 import { Command } from "./Command";
 
 export class UserCommand<Client extends HandlerClient> extends Command<Client> {
-	public declare data: UserApplicationCommandData;
+	declare public data: UserApplicationCommandData;
 
 	public constructor(context: Context<Client>, options: UserCommandOptions<Client>) {
 		super(context, options);

@@ -10,7 +10,7 @@ import type { CommandOptions } from "./Command";
 import { Command } from "./Command";
 
 export class SlashCommand<Client extends HandlerClient> extends Command<Client> {
-	public declare data: ChatInputApplicationCommandData;
+	declare public data: ChatInputApplicationCommandData;
 
 	public constructor(context: Context<Client>, options: SlashCommandOptions<Client>) {
 		super(context, options);
