@@ -340,6 +340,12 @@ importers:
       discord-player:
         specifier: ^7.1.0
         version: 7.1.0(@discord-player/extractor@7.1.0(encoding@0.1.13))(@swc/core@1.9.3(@swc/helpers@0.5.13))(jiti@1.21.6)(mediaplex@1.0.0)(postcss@8.4.49)(yaml@2.5.0)
+      discord-player-deezer:
+        specifier: ^2.1.0
+        version: 2.1.0
+      discord-player-tidal:
+        specifier: ^0.1.0
+        version: 0.1.0(undici@6.19.8)
       discord-player-youtubei:
         specifier: ^1.4.1
         version: 1.4.1
@@ -367,6 +373,9 @@ importers:
       tsyringe:
         specifier: ^4.8.0
         version: 4.8.0
+      tts-extractor:
+        specifier: ^1.0.4
+        version: 1.0.4
     devDependencies:
       "@types/i18next-fs-backend":
         specifier: ^1.1.5
@@ -2746,6 +2755,10 @@ packages:
     resolution:
       { integrity: sha512-HZpPoABogPvjeJOdzCOSJsXeL/SMCBgBZMVC3X3d7YYp2gf31MfxhUoYUNwf1ERPJOnQc0wkFn9trqI6ZEdZuA== }
 
+  "@mithron/deezer-music-metadata@1.0.3":
+    resolution:
+      { integrity: sha512-/RwhXUp7pfGRNoWOODOTA+ZtSCD0MnY6MDRRCbXXynMIGCOJUBUXXhCtuw6Z+2f785ggoSqwNSi1U6bsbJWBvw== }
+
   "@napi-rs/canvas-android-arm64@0.1.65":
     resolution:
       { integrity: sha512-ZYwqFYEKcT5Zr8lbiaJNJj/poLaeK2TncolY914r+gD2TJNeP7ZqvE7A2SX/1C9MB4E3DQEwm3YhL3WEf0x3MQ== }
@@ -3818,6 +3831,11 @@ packages:
       { integrity: sha512-H0TSyFNDMomMNJQBn8wFV5YC/2eJ+VXECwOadZJT554xP6cODZHPX3H9QMQECxvrgiSOP1pHjy1sMWQVYJOUOA== }
     engines: { node: ">= 14" }
 
+  agent-base@7.1.3:
+    resolution:
+      { integrity: sha512-jRR5wdylq8CkOe6hei19GGZnxM6rBGwFl3Bg0YItGDimvjGtAvdZk4Pu6Cl4u4Igsws4a1fd1Vq3ezrhn4KmFw== }
+    engines: { node: ">= 14" }
+
   ajv@6.12.6:
     resolution:
       { integrity: sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g== }
@@ -3985,6 +4003,10 @@ packages:
     peerDependencies:
       "@astrojs/compiler": ">=0.27.0"
 
+  asynckit@0.4.0:
+    resolution:
+      { integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q== }
+
   autoprefixer@10.4.20:
     resolution:
       { integrity: sha512-XY25y5xSv/wEoqzDyXXME4AFfkZI0P23z6Fs3YgymDnKJkCGOnkL0iTxCa85UTqaSgfcqyf3UA6+c7wUvx/16g== }
@@ -4002,6 +4024,10 @@ packages:
     resolution:
       { integrity: sha512-Mr2ZakwQ7XUAjp7pAwQWRhhK8mQQ6JAaNWSjmjxil0R8BPioMtQsTLOolGYkji1rcL++3dCqZA3zWqpT+9Ew6g== }
     engines: { node: ">=4" }
+
+  axios@0.27.2:
+    resolution:
+      { integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ== }
 
   axobject-query@4.1.0:
     resolution:
@@ -4056,6 +4082,10 @@ packages:
       { integrity: sha512-XFZ7/bK7j/K+5iktxX/ZpmoFHjYjpPzP5EOO/4bWiaFg5TG1iMcfjDhlBTQnJxD6BoVoHuqeZPHZvaTgF4Iv3Q== }
     peerDependencies:
       svelte: ^4.0.0 || ^5.0.0-next.118
+
+  blowfish-node@1.1.4:
+    resolution:
+      { integrity: sha512-Iahpxc/cutT0M0tgwV5goklB+EzDuiYLgwJg050AmUG2jSIOpViWMLdnRgBxzZuNfswAgHSUiIdvmNdgL2v6DA== }
 
   bluebird@2.11.0:
     resolution:
@@ -4315,6 +4345,11 @@ packages:
   colorette@2.0.20:
     resolution:
       { integrity: sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w== }
+
+  combined-stream@1.0.8:
+    resolution:
+      { integrity: sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg== }
+    engines: { node: ">= 0.8" }
 
   commander@12.1.0:
     resolution:
@@ -4588,6 +4623,11 @@ packages:
       { integrity: sha512-8QmQKqEASLd5nx0U1B1okLElbUuuttJ/AnYmRXbbbGDWh6uS208EjD4Xqq/I9wK7u0v6O08XhTWnt5XtEbR6Dg== }
     engines: { node: ">= 0.4" }
 
+  delayed-stream@1.0.0:
+    resolution:
+      { integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ== }
+    engines: { node: ">=0.4.0" }
+
   denque@2.1.0:
     resolution:
       { integrity: sha512-HVQE3AAb/pxF8fQAoiqpvg9i3evqug3hoiwakOyZAwJm+6vZehbkYXZ0l4JxS+I3QxM97v5aaRNhj8v5oBhekw== }
@@ -4640,6 +4680,14 @@ packages:
   discord-api-types@0.37.98:
     resolution:
       { integrity: sha512-xsH4UwmnCQl4KjAf01/p9ck9s+/vDqzHbUxPOBzo8fcVUa/hQG6qInD7Cr44KAuCM+xCxGJFSAUx450pBrX0+g== }
+
+  discord-player-deezer@2.1.0:
+    resolution:
+      { integrity: sha512-v527rOwxLQQ50tMHh10QUdX6fSVcvY2TiRdq9n+lGuJTudTTVt8jdF23YHVKSdVSxYQq3TNhx4vTCEptpPnB1w== }
+
+  discord-player-tidal@0.1.0:
+    resolution:
+      { integrity: sha512-jyzsGf7hAY5zT/nWoEjQ0uxqKQdmHefyeQQrGnqCrjdoMtHNmFy32IJ/l+AN3jkTS7IQfNmLX5eOK3WKpPr79w== }
 
   discord-player-youtubei@1.4.1:
     resolution:
@@ -5507,6 +5555,16 @@ packages:
     resolution:
       { integrity: sha512-9FhUxK1hVju2+AiQIDJ5Dd//9R2n2RAfJ0qfhF4IHGHgcoEUTMpbTeG/zbEuwaiYXfuAH6XE0/aCyxDdRM+W5w== }
 
+  follow-redirects@1.15.9:
+    resolution:
+      { integrity: sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ== }
+    engines: { node: ">=4.0" }
+    peerDependencies:
+      debug: "*"
+    peerDependenciesMeta:
+      debug:
+        optional: true
+
   for-each@0.3.3:
     resolution:
       { integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw== }
@@ -5520,6 +5578,11 @@ packages:
     resolution:
       { integrity: sha512-yDYSgNMraqvnxiEXO4hi88+YZxaHC6QKzb5N84iRCTDeRO7ZALpir/lVmf/uXUhnwUr2O4HU8s/n6x+yNjQkHw== }
     engines: { node: ">= 14.17" }
+
+  form-data@4.0.1:
+    resolution:
+      { integrity: sha512-tzN8e4TX8+kkxGPK8D5u0FNmjPUjw3lwC9lSLxxoB/+GtsJG91CO8bSWy73APlgAZzZbXEYZJuxjkHH2w+Ezhw== }
+    engines: { node: ">= 6" }
 
   formdata-polyfill@4.0.10:
     resolution:
@@ -5843,6 +5906,17 @@ packages:
   http-cache-semantics@4.1.1:
     resolution:
       { integrity: sha512-er295DKPVsV82j5kw1Gjt+ADA/XYHsajl82cGNQG2eyoPkvgUhX+nDIyelzhIWbbsXP39EHcI6l5tYs2FYqYXQ== }
+
+  http-cookie-agent@6.0.8:
+    resolution:
+      { integrity: sha512-qnYh3yLSr2jBsTYkw11elq+T361uKAJaZ2dR4cfYZChw1dt9uL5t3zSUwehoqqVb4oldk1BpkXKm2oat8zV+oA== }
+    engines: { node: ">=18.0.0" }
+    peerDependencies:
+      tough-cookie: ^4.0.0 || ^5.0.0
+      undici: ^5.11.0 || ^6.0.0
+    peerDependenciesMeta:
+      undici:
+        optional: true
 
   http-proxy-agent@7.0.2:
     resolution:
@@ -6244,6 +6318,10 @@ packages:
     resolution:
       { integrity: sha512-FW5iMbeQ6rBGm/oKgzq2aW4KvAGpxPzYES8N4g4xNXUKpL1mclMvOe+76AcLDTvD+Ze+sOpVhgdAQEKF4L9iGQ== }
     engines: { node: ">= 0.4" }
+
+  itty-fetcher@0.9.4:
+    resolution:
+      { integrity: sha512-o5YpTmov46EbzTrrVpeR9sRK3itWa32VsV9Fv04CzzDm1ZvAXG0RoOGjT9ECOwyipheNf4eLTkstfbRtG8Epgg== }
 
   jackspeak@3.4.0:
     resolution:
@@ -6896,6 +6974,16 @@ packages:
     resolution:
       { integrity: sha512-PXwfBhYu0hBCPw8Dn0E+WDYb7af3dSLVWKi3HGv84IdF4TyFoC0ysxFd0Goxw7nSv4T/PzEJQxsYsEiFCKo2BA== }
     engines: { node: ">=8.6" }
+
+  mime-db@1.52.0:
+    resolution:
+      { integrity: sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg== }
+    engines: { node: ">= 0.6" }
+
+  mime-types@2.1.35:
+    resolution:
+      { integrity: sha512-ZDY+bPm5zTTF+YpCrAU9nK0UgICYPT0QtT1NZWFv4s++TNkcgVaT0g6+4R2uI4MjQjzysHB1zxuWL50hzaeXiw== }
+    engines: { node: ">= 0.6" }
 
   mimic-fn@4.0.0:
     resolution:
@@ -7805,10 +7893,18 @@ packages:
     resolution:
       { integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg== }
 
+  psl@1.15.0:
+    resolution:
+      { integrity: sha512-JZd3gMVBAVQkSs6HdNZo9Sdo0LNcQeMNP3CozBJb3JYC/QUYZTnKxP+f8oWRX4rHP5EurWxqAHTSwUCjlNKa1w== }
+
   punycode@2.3.1:
     resolution:
       { integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg== }
     engines: { node: ">=6" }
+
+  querystringify@2.2.0:
+    resolution:
+      { integrity: sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ== }
 
   queue-microtask@1.2.3:
     resolution:
@@ -7990,6 +8086,10 @@ packages:
     resolution:
       { integrity: sha512-L9jEkOi3ASd9PYit2cwRfyppc9NoABujTP8/5gFcbERmo5jUoAKovIC3fsF17pkTnGsrByysqX+Kxd2OTNI1ww== }
     engines: { node: ">=0.10.5" }
+
+  requires-port@1.0.0:
+    resolution:
+      { integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ== }
 
   resolve-alpn@1.2.1:
     resolution:
@@ -8589,6 +8689,10 @@ packages:
     resolution:
       { integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg== }
 
+  tidal-music-api@1.2.1:
+    resolution:
+      { integrity: sha512-7Gu0ncHWIX2VJQYgLw9oNywkMC0JmVTjDpTQJU3mgfrf9ZqhoQwajhYKYmwsVcDiJcMUZx7UQDIFM3LgEw0MHw== }
+
   tildify@1.0.0:
     resolution:
       { integrity: sha512-3Tu0EzUZpMeGRxUrajQPKBhYrpQLIA42RtQsaIaJ75zvaAov6d0ArxVEKoz+ZYSVOa7XnEvbjkzJDSawIntYIA== }
@@ -8648,6 +8752,11 @@ packages:
   totalist@3.0.1:
     resolution:
       { integrity: sha512-sf4i37nQ2LBx4m3wB74y+ubopq6W/dIzXg0FDGjsYnZHVa1Da8FH853wlL2gtUhg+xJXjfk3kUZS3BRoQeoQBQ== }
+    engines: { node: ">=6" }
+
+  tough-cookie@4.1.4:
+    resolution:
+      { integrity: sha512-Loo5UUvLD9ScZ6jh8beX1T6sO1w2/MpCRpEP7V280GKMVUQ0Jzar2U3UJPsrdbziLEMMhu3Ujnq//rhiFuIeag== }
     engines: { node: ">=6" }
 
   tr46@0.0.3:
@@ -8733,6 +8842,10 @@ packages:
     resolution:
       { integrity: sha512-YB1FG+axdxADa3ncEtRnQCFq/M0lALGLxSZeVNbTU8NqhOVc51nnv2CISTcvc1kyv6EGPtXVr0v6lWeDxiijOA== }
     engines: { node: ">= 6.0.0" }
+
+  tts-extractor@1.0.4:
+    resolution:
+      { integrity: sha512-ww24I9eZnNw650seVQZEAOeFTDBQ+kufBFFxc1HCc6ScS+8l8jAIGYIR2G7eSOv/YXn30/aWgZjNOikht7YzMw== }
 
   turbo-darwin-64@2.0.11:
     resolution:
@@ -8967,6 +9080,11 @@ packages:
     resolution:
       { integrity: sha512-0JCqzSKnStlRRQfCdowvqy3cy0Dvtlb8xecj/H8JFZuCze4rwjPZQOgvFvn0Ws/usCHQFGpyr+pB9adaGwXn4Q== }
 
+  universalify@0.2.0:
+    resolution:
+      { integrity: sha512-CJ1QgKmNg3CwvAv/kOFmtnEN05f0D/cn9QntgNOQlQF9dgvVTHj3t+8JPdjqawCHk7V/KA+fbUqzZ9XWhcqPUg== }
+    engines: { node: ">= 4.0.0" }
+
   unorm@1.6.0:
     resolution:
       { integrity: sha512-b2/KCUlYZUeA7JFUuRJZPUtr4gZvBh7tavtv4fvk4+KV9pfGiR6CQAQAWl49ZpR3ts2dk4FYkP7EIgDJoiOLDA== }
@@ -8982,6 +9100,10 @@ packages:
   uri-js@4.4.1:
     resolution:
       { integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg== }
+
+  url-parse@1.5.10:
+    resolution:
+      { integrity: sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ== }
 
   user-home@1.1.1:
     resolution:
@@ -9021,6 +9143,10 @@ packages:
     resolution:
       { integrity: sha512-d7KLgL1LD3U3fgnvWEY1cQXoO/q6EQ1BSz48Sa149V/5zVTAbgmZIpyI8TRi6U9/JNyeYLlTKsEMPtLC27RFUg== }
     engines: { node: ^18.17.0 || >=20.5.0 }
+
+  valuesaver@1.9.3:
+    resolution:
+      { integrity: sha512-zShKAYZnnNgmNHsiHpes7dQHcFMTf0howTnjBBZkLQN8GMcUMw41Nji+0dNFDQ7EZ5mdIx8QIFIm3FVmVVKZ3w== }
 
   varint@6.0.0:
     resolution:
@@ -9326,9 +9452,17 @@ packages:
       { integrity: sha512-GQHQqAopRhwU8Kt1DDM8NjibDXHC8eoh1erhGAJPEyveY9qqVeXvVikNKrDz69sHowPMorbPUrH/mx8c50eiBQ== }
     engines: { node: ">=18" }
 
+  youtube-sr@4.3.11:
+    resolution:
+      { integrity: sha512-3oHiS2x7PpMiDRW7Cq8nz1bkAIBOJHoOwkPl/oncM/+A9/3xxMDgMLGW2dsBEP1DHFyRXYTVABgfbdwHF8sXXQ== }
+
   youtubei.js@12.2.0:
     resolution:
       { integrity: sha512-G+50qrbJCToMYhu8jbaHiS3Vf+RRul+CcDbz3hEGwHkGPh+zLiWwD6SS+YhYF+2/op4ZU5zDYQJrGqJ+wKh7Gw== }
+
+  yt-stream@1.7.4:
+    resolution:
+      { integrity: sha512-vvRIgBtXTitd9uyyQzRiRaL6xnrKof0w6IvoPFIbv7Dbude03s/3OyW6wSIU/zisg//3u4sCj9R2GGb+cvtEyA== }
 
   zimmerframe@1.1.2:
     resolution:
@@ -11015,6 +11149,13 @@ snapshots:
 
   "@microsoft/tsdoc@0.15.0": {}
 
+  "@mithron/deezer-music-metadata@1.0.3":
+    dependencies:
+      axios: 0.27.2
+      cheerio: 1.0.0-rc.12
+    transitivePeerDependencies:
+      - debug
+
   "@napi-rs/canvas-android-arm64@0.1.65":
     optional: true
 
@@ -11895,6 +12036,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  agent-base@7.1.3: {}
+
   ajv@6.12.6:
     dependencies:
       fast-deep-equal: 3.1.3
@@ -12067,6 +12210,8 @@ snapshots:
       "@astrojs/compiler": 2.8.0
       synckit: 0.9.1
 
+  asynckit@0.4.0: {}
+
   autoprefixer@10.4.20(postcss@8.4.49):
     dependencies:
       browserslist: 4.24.2
@@ -12082,6 +12227,13 @@ snapshots:
       possible-typed-array-names: 1.0.0
 
   axe-core@4.10.0: {}
+
+  axios@0.27.2:
+    dependencies:
+      follow-redirects: 1.15.9
+      form-data: 4.0.1
+    transitivePeerDependencies:
+      - debug
 
   axobject-query@4.1.0: {}
 
@@ -12133,6 +12285,8 @@ snapshots:
       "@melt-ui/svelte": 0.76.2(svelte@5.4.0)
       nanoid: 5.0.8
       svelte: 5.4.0
+
+  blowfish-node@1.1.4: {}
 
   bluebird@2.11.0:
     optional: true
@@ -12361,6 +12515,10 @@ snapshots:
 
   colorette@2.0.20: {}
 
+  combined-stream@1.0.8:
+    dependencies:
+      delayed-stream: 1.0.0
+
   commander@12.1.0: {}
 
   commander@2.20.3:
@@ -12567,6 +12725,8 @@ snapshots:
       has-property-descriptors: 1.0.2
       object-keys: 1.1.1
 
+  delayed-stream@1.0.0: {}
+
   denque@2.1.0: {}
 
   dequal@2.0.3: {}
@@ -12595,6 +12755,22 @@ snapshots:
   discord-api-types@0.37.97: {}
 
   discord-api-types@0.37.98: {}
+
+  discord-player-deezer@2.1.0:
+    dependencies:
+      "@mithron/deezer-music-metadata": 1.0.3
+      blowfish-node: 1.1.4
+    transitivePeerDependencies:
+      - debug
+
+  discord-player-tidal@0.1.0(undici@6.19.8):
+    dependencies:
+      soundcloud.ts: 0.5.5
+      tidal-music-api: 1.2.1
+      youtube-sr: 4.3.11
+      yt-stream: 1.7.4(undici@6.19.8)
+    transitivePeerDependencies:
+      - undici
 
   discord-player-youtubei@1.4.1:
     dependencies:
@@ -13823,6 +13999,8 @@ snapshots:
     dependencies:
       tabbable: 6.2.0
 
+  follow-redirects@1.15.9: {}
+
   for-each@0.3.3:
     dependencies:
       is-callable: 1.2.7
@@ -13833,6 +14011,12 @@ snapshots:
       signal-exit: 4.1.0
 
   form-data-encoder@2.1.4: {}
+
+  form-data@4.0.1:
+    dependencies:
+      asynckit: 0.4.0
+      combined-stream: 1.0.8
+      mime-types: 2.1.35
 
   formdata-polyfill@4.0.10:
     dependencies:
@@ -14105,6 +14289,13 @@ snapshots:
       entities: 4.5.0
 
   http-cache-semantics@4.1.1: {}
+
+  http-cookie-agent@6.0.8(tough-cookie@4.1.4)(undici@6.19.8):
+    dependencies:
+      agent-base: 7.1.3
+      tough-cookie: 4.1.4
+    optionalDependencies:
+      undici: 6.19.8
 
   http-proxy-agent@7.0.2:
     dependencies:
@@ -14399,6 +14590,8 @@ snapshots:
       has-symbols: 1.0.3
       reflect.getprototypeof: 1.0.6
       set-function-name: 2.0.2
+
+  itty-fetcher@0.9.4: {}
 
   jackspeak@3.4.0:
     dependencies:
@@ -15063,6 +15256,12 @@ snapshots:
       braces: 3.0.3
       picomatch: 2.3.1
 
+  mime-db@1.52.0: {}
+
+  mime-types@2.1.35:
+    dependencies:
+      mime-db: 1.52.0
+
   mimic-fn@4.0.0: {}
 
   mimic-function@5.0.1: {}
@@ -15720,7 +15919,13 @@ snapshots:
       object-assign: 4.1.1
       react-is: 16.13.1
 
+  psl@1.15.0:
+    dependencies:
+      punycode: 2.3.1
+
   punycode@2.3.1: {}
+
+  querystringify@2.2.0: {}
 
   queue-microtask@1.2.3: {}
 
@@ -15897,6 +16102,8 @@ snapshots:
   require-from-string@2.0.2: {}
 
   requireindex@1.2.0: {}
+
+  requires-port@1.0.0: {}
 
   resolve-alpn@1.2.1: {}
 
@@ -16484,6 +16691,10 @@ snapshots:
 
   through@2.3.8: {}
 
+  tidal-music-api@1.2.1:
+    dependencies:
+      itty-fetcher: 0.9.4
+
   tildify@1.0.0:
     dependencies:
       user-home: 1.1.1
@@ -16523,6 +16734,13 @@ snapshots:
       ieee754: 1.2.1
 
   totalist@3.0.1: {}
+
+  tough-cookie@4.1.4:
+    dependencies:
+      psl: 1.15.0
+      punycode: 2.3.1
+      universalify: 0.2.0
+      url-parse: 1.5.10
 
   tr46@0.0.3: {}
 
@@ -16600,6 +16818,8 @@ snapshots:
   tsyringe@4.8.0:
     dependencies:
       tslib: 1.14.1
+
+  tts-extractor@1.0.4: {}
 
   turbo-darwin-64@2.0.11:
     optional: true
@@ -16809,6 +17029,8 @@ snapshots:
 
   universal-user-agent@7.0.2: {}
 
+  universalify@0.2.0: {}
+
   unorm@1.6.0: {}
 
   update-browserslist-db@1.1.1(browserslist@4.24.2):
@@ -16820,6 +17042,11 @@ snapshots:
   uri-js@4.4.1:
     dependencies:
       punycode: 2.3.1
+
+  url-parse@1.5.10:
+    dependencies:
+      querystringify: 2.2.0
+      requires-port: 1.0.0
 
   user-home@1.1.1:
     optional: true
@@ -16850,6 +17077,10 @@ snapshots:
       spdx-expression-parse: 3.0.1
 
   validate-npm-package-name@6.0.0: {}
+
+  valuesaver@1.9.3:
+    dependencies:
+      path: 0.12.7
 
   varint@6.0.0: {}
 
@@ -17104,12 +17335,22 @@ snapshots:
 
   yoctocolors@2.1.1: {}
 
+  youtube-sr@4.3.11: {}
+
   youtubei.js@12.2.0:
     dependencies:
       "@bufbuild/protobuf": 2.2.3
       jintr: 3.2.0
       tslib: 2.8.1
       undici: 5.28.5
+
+  yt-stream@1.7.4(undici@6.19.8):
+    dependencies:
+      http-cookie-agent: 6.0.8(tough-cookie@4.1.4)(undici@6.19.8)
+      tough-cookie: 4.1.4
+      valuesaver: 1.9.3
+    transitivePeerDependencies:
+      - undici
 
   zimmerframe@1.1.2: {}
 
