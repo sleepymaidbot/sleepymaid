@@ -1,14 +1,13 @@
 import { ClarityClient } from "./ClarityClient";
-
-import { DrizzleInstance } from "@sleepymaid/db";
+// import { DrizzleInstance } from "@sleepymaid/db";
 
 export default class Manager {
 	declare private client: ClarityClient;
 
-	declare private drizzle: DrizzleInstance;
+	// declare private drizzle: DrizzleInstance;
 
 	constructor(client: ClarityClient) {
 		this.client = client;
-		this.drizzle = client.drizzle;
+		// this.drizzle = client.drizzle;
 	}
 }

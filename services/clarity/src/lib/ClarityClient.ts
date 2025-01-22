@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/prefer-module */
 import { resolve } from "node:path";
 import process from "node:process";
-import { createDrizzleInstance, DrizzleInstance } from "@sleepymaid/db";
+// import { createDrizzleInstance, DrizzleInstance } from "@sleepymaid/db";
 import { BaseContainer, HandlerClient } from "@sleepymaid/handler";
 import { Logger } from "@sleepymaid/logger";
 import type { Config } from "@sleepymaid/shared";
@@ -17,7 +17,7 @@ import { TTSExtractor } from "tts-extractor";
 import { DeezerExtractor } from "discord-player-deezer";
 
 export class ClarityClient extends HandlerClient {
-	declare public drizzle: DrizzleInstance;
+	// declare public drizzle: DrizzleInstance;
 
 	declare public config: Config;
 
@@ -45,7 +45,7 @@ export class ClarityClient extends HandlerClient {
 		this.logger = new Logger(this.env);
 		this.env = this.config.nodeEnv;
 
-		this.drizzle = createDrizzleInstance(process.env.DATABASE_URL as string);
+		// this.drizzle = createDrizzleInstance(process.env.DATABASE_URL as string);
 
 		// await i18next.use(FsBackend).init({
 		// 	// debug: this.config.environment === 'development',
