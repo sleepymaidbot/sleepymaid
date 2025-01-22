@@ -1,4 +1,3 @@
-import "reflect-metadata";
 import { guildSettings } from "@sleepymaid/db";
 import type { Context } from "@sleepymaid/handler";
 import { SlashCommand } from "@sleepymaid/handler";
