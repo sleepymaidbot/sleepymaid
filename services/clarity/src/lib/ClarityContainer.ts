@@ -1,14 +1,14 @@
 import { BaseContainer } from "@sleepymaid/handler";
-import { SleepyMaidClient } from "./SleepyMaidClient";
+import { ClarityClient } from "./ClarityClient";
 import Manager from "./manager";
 import { DrizzleInstance } from "@sleepymaid/db";
 
-export default class SleepyMaidContainer extends BaseContainer<SleepyMaidClient> {
+export default class ClarityContainer extends BaseContainer<ClarityClient> {
 	declare public drizzle: DrizzleInstance;
 
 	declare public manager: Manager;
 
-	constructor(client: SleepyMaidClient) {
+	constructor(client: ClarityClient) {
 		super(client);
 		this.drizzle = client.drizzle;
 		this.manager = new Manager(client);

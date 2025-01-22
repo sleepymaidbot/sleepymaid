@@ -11,9 +11,9 @@ import i18next from "i18next";
 import FsBackend from "i18next-fs-backend";
 
 export class TestClient extends HandlerClient {
-	public declare drizzle: DrizzleInstance;
+	declare public drizzle: DrizzleInstance;
 
-	public declare config: Config;
+	declare public config: Config;
 
 	public constructor() {
 		super(

@@ -3,7 +3,7 @@ import { HelperClient } from "../extensions/HelperClient";
 
 @singleton()
 export class baseManager {
-	public declare client: HelperClient;
+	declare public client: HelperClient;
 	constructor(client: HelperClient) {
 		this.client = client;
 	}

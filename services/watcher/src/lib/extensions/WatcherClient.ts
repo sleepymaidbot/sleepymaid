@@ -13,15 +13,15 @@ import WatcherContainer from "./WatcherContainer";
 import { Redis } from "iovalkey";
 
 export class WatcherClient extends HandlerClient {
-	public declare drizzle: DrizzleInstance;
+	declare public drizzle: DrizzleInstance;
 
-	public declare config: Config;
+	declare public config: Config;
 
-	public declare logger: Logger;
+	declare public logger: Logger;
 
-	public declare container: BaseContainer<this> & WatcherContainer;
+	declare public container: BaseContainer<this> & WatcherContainer;
 
-	public declare redis: Redis;
+	declare public redis: Redis;
 
 	public constructor() {
 		super(

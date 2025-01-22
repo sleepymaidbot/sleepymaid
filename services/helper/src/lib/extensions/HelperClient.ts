@@ -12,11 +12,11 @@ import i18next from "i18next";
 import FsBackend from "i18next-fs-backend";
 
 export class HelperClient extends HandlerClient {
-	public declare drizzle: DrizzleInstance;
+	declare public drizzle: DrizzleInstance;
 
-	public declare config: Config;
+	declare public config: Config;
 
-	public declare logger: Logger;
+	declare public logger: Logger;
 
 	public constructor() {
 		super(

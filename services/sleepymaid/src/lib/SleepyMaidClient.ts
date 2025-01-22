@@ -12,13 +12,13 @@ import SleepyMaidContainer from "./SleepyMaidContainer";
 import { Config, initConfig, supportedLngs } from "@sleepymaid/shared";
 
 export class SleepyMaidClient extends HandlerClient {
-	public declare drizzle: DrizzleInstance;
+	declare public drizzle: DrizzleInstance;
 
-	public declare config: Config;
+	declare public config: Config;
 
-	public declare container: BaseContainer<this> & SleepyMaidContainer;
+	declare public container: BaseContainer<this> & SleepyMaidContainer;
 
-	public declare logger: Logger;
+	declare public logger: Logger;
 
 	public constructor() {
 		super(

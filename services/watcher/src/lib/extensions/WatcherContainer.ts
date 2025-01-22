@@ -5,11 +5,11 @@ import { BaseContainer } from "@sleepymaid/handler";
 import { Redis } from "iovalkey";
 
 export default class WatcherContainer extends BaseContainer<WatcherClient> {
-	public declare drizzle: DrizzleInstance;
+	declare public drizzle: DrizzleInstance;
 
-	public declare manager: Manager;
+	declare public manager: Manager;
 
-	public declare redis: Redis;
+	declare public redis: Redis;
 
 	constructor(client: WatcherClient) {
 		super(client);

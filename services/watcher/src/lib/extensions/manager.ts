@@ -5,11 +5,11 @@ import { eq, InferSelectModel } from "drizzle-orm";
 import { WebhookClient, WebhookMessageCreateOptions } from "discord.js";
 
 export default class Manager {
-	private declare client: WatcherClient;
+	declare private client: WatcherClient;
 
-	private declare drizzle: DrizzleInstance;
+	declare private drizzle: DrizzleInstance;
 
-	private declare redis: Redis;
+	declare private redis: Redis;
 
 	constructor(client: WatcherClient) {
 		this.client = client;

@@ -1,0 +1,39 @@
+{
+	"name": "@sleepymaid/clarity",
+	"version": "0.0.0",
+	"description": "",
+	"private": true,
+	"main": "dist/index.js",
+	"scripts": {
+		"build": "pnpm rimraf dist/ && pnpm tsc",
+		"check": "pnpm tsc --noEmit --pretty --skipLibCheck",
+		"start": "pnpm build && node --trace-warnings -r source-map-support/register dist/index.js",
+		"dev": "pnpm build && node --trace-warnings -r source-map-support/register --env-file .env dist/index.js"
+	},
+	"author": "Ecorte",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/i18next-fs-backend": "^1.1.5",
+		"@types/node": "^22.10.1",
+		"rimraf": "^6.0.1",
+		"source-map-support": "0.5.21",
+		"typescript": "^5.7.2"
+	},
+	"dependencies": {
+		"@discord-player/extractor": "^7.1.0",
+		"@sleepymaid/db": "workspace:^",
+		"@sleepymaid/handler": "workspace:^",
+		"@sleepymaid/logger": "workspace:^",
+		"@sleepymaid/shared": "workspace:^",
+		"discord-player": "^7.1.0",
+		"discord-player-youtubei": "^1.4.1",
+		"discord.js": "^14.16.3",
+		"drizzle-orm": "^0.36.4",
+		"i18next": "^24.0.5",
+		"i18next-fs-backend": "^2.6.0",
+		"module-alias": "^2.2.3",
+		"path": "0.12.7",
+		"reflect-metadata": "^0.2.1",
+		"tsyringe": "^4.8.0"
+	}
+}

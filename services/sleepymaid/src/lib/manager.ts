@@ -6,9 +6,9 @@ import { GuildMember, PermissionFlagsBits } from "discord.js";
 import { downloadVideo } from "./downloader";
 
 export default class Manager {
-	private declare client: SleepyMaidClient;
+	declare private client: SleepyMaidClient;
 
-	private declare drizzle: DrizzleInstance;
+	declare private drizzle: DrizzleInstance;
 
 	constructor(client: SleepyMaidClient) {
 		this.client = client;
