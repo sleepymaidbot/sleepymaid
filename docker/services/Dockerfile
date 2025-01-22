@@ -14,6 +14,7 @@ RUN apk add --no-cache \
     ttf-dejavu \
     fontconfig \
     yt-dlp \
+    git \
     && apk add --no-cache --virtual .build-deps \
     curl git python3 alpine-sdk libc6-compat openssl-dev yt-dlp \
     && apk del .build-deps
