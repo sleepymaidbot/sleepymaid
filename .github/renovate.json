@@ -1,6 +1,10 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": ["config:base", "helpers:pinGitHubActionDigests", "group:allNonMajor"],
+	"extends": [
+		"config:recommended",
+		"helpers:pinGitHubActionDigests",
+		"group:allNonMajor"
+	],
 	"labels": ["Dependencies"],
 	"ignoreDeps": ["turbo", "turbo-linux-64", "discord-api-types"],
 	"npm": {
@@ -12,8 +16,8 @@
 				"automerge": true
 			},
 			{
-				"matchPackagePatterns": ["@sleepymaid"],
-				"groupName": "Sleepymaid Dependencies"
+				"groupName": "Sleepymaid Dependencies",
+				"matchPackageNames": ["/@sleepymaid/"]
 			},
 			{
 				"matchDepTypes": ["engines"],
