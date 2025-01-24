@@ -1,6 +1,7 @@
 packages:
   - "packages/*"
   - "services/api/"
+  - "services/clarity/"
   - "services/sleepymaid/"
   - "services/helper/"
   - "services/watcher/"
