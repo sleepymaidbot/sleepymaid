@@ -68,6 +68,14 @@ services:
       - "postgres"
       - "valkey"
 
+  clarity:
+    container_name: sleepymaid_clarity
+    build:
+      context: ../
+      dockerfile: ./docker/services/Dockerfile
+    command: node --trace-warnings -r source-map-support/register services/clarity/dist/index.js
+    restart: unless-stopped
+
   api:
     container_name: sleepymaid_api
     build:

@@ -2,6 +2,7 @@ services:
   ghost:
     environment:
       NODE_ENV: "production"
+
   sleepymaid:
     environment:
       NODE_ENV: "prod"
@@ -13,6 +14,7 @@ services:
       DATABASE_URL: ${DATABASE_URL}
       RABBITMQ_URL: ${RABBITMQ_URL}
       REDIS_URL: ${REDIS_URL}
+
   helper:
     environment:
       NODE_ENV: "prod"
@@ -24,6 +26,7 @@ services:
       DATABASE_URL: ${DATABASE_URL}
       RABBITMQ_URL: ${RABBITMQ_URL}
       REDIS_URL: ${REDIS_URL}
+
   watcher:
     environment:
       NODE_ENV: "prod"
@@ -35,6 +38,19 @@ services:
       DATABASE_URL: ${DATABASE_URL}
       RABBITMQ_URL: ${RABBITMQ_URL}
       REDIS_URL: ${REDIS_URL}
+
+  clarity:
+    environment:
+      NODE_ENV: "prod"
+      API_SECRET: ${API_SECRET}
+      DISCORD_CLIENT_ID: ${PRODUCTION_CLARITY_CLIENT_ID}
+      DISCORD_TOKEN: ${PRODUCTION_CLARITY_TOKEN}
+      DISCORD_WEBHOOK_URL: ${PRODUCTION_CLARITY_WEBHOOK_URL}
+      DEV_IDS: ${DEV_IDS}
+      DATABASE_URL: ${DATABASE_URL}
+      RABBITMQ_URL: ${RABBITMQ_URL}
+      REDIS_URL: ${REDIS_URL}
+
   #website:
   #  environment:
   #    NODE_ENV: "production"
@@ -44,6 +60,7 @@ services:
   #    NEXTAUTH_URL: ${PRODUCTION_NEXTAUTH_URL}
   #    DATABASE_URL: ${DATABASE_URL}
   #    RABBITMQ_URL: ${RABBITMQ_URL}
+
   api:
     environment:
       NODE_ENV: "production"
