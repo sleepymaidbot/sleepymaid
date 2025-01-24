@@ -20,6 +20,7 @@
 		"typescript": "^5.7.3"
 	},
 	"dependencies": {
+		"@discord-player/equalizer": "^7.1.0",
 		"@discord-player/extractor": "^7.1.0",
 		"@sleepymaid/db": "workspace:^",
 		"@sleepymaid/handler": "workspace:^",
