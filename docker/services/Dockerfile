@@ -31,6 +31,7 @@ COPY packages/shared ./packages/shared
 COPY packages/util ./packages/util
 
 COPY services/api ./services/api
+COPY services/clarity ./services/clarity
 COPY services/sleepymaid ./services/sleepymaid
 COPY services/helper/ ./services/helper
 COPY services/watcher ./services/watcher
