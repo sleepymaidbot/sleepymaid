@@ -102,6 +102,14 @@
 		},
 		"raw_content": {
 			"name": "Contenu Brut"
+		},
+		"rainbow": {
+			"name": "rainbow",
+			"description": "Change la couleur du rôle rainbow.",
+			"norole": "Tu doit avoir le rôle <@&{{role}}> pour utiliser cette commande.",
+			"failure": "La commande a échoué. Le rôle a maintenant perdu sa couleur.",
+			"cooldown": "La commande est en cooldown. Tu peux la réutiliser dans {{time}}.",
+			"changed": "Le rôle <@&{{role}}> a été changé de **{{oldColor}}** à **{{newColor}}**"
 		}
 	}
 }

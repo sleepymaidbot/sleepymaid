@@ -7,10 +7,12 @@ import {
 	Snowflake,
 	AttachmentBuilder,
 	PermissionsBitField,
+	Colors,
 } from "discord.js";
 import { HelperClient } from "../../../lib/extensions/HelperClient";
 import { intToHexColor } from "@sleepymaid/util";
-import { generateSplitImage } from "@sleepymaid/shared";
+import { generateSplitImage, getLocalizedProp } from "@sleepymaid/shared";
+import i18next from "i18next";
 
 const cooldowns: Record<Snowflake, Date> = {};
 const roles = {
@@ -20,13 +22,18 @@ const roles = {
 	"1150780245151068332": "1311052913552130118", // Mamayo
 };
 
+const canFail: Record<Snowflake, number> = {
+	// "821717486217986098": 0.5, // Test
+	"1150780245151068332": 0.5, // Mamayo
+};
+
 export default class extends SlashCommand<HelperClient> {
 	constructor(context: Context<HelperClient>) {
 		super(context, {
 			guildIds: Object.keys(roles),
 			data: {
-				name: "rainbow",
-				description: "Change la couleur du rôle rainbow.",
+				...getLocalizedProp("name", "commands.rainbow.name"),
+				...getLocalizedProp("description", "commands.rainbow.description"),
 			},
 		});
 	}
@@ -41,9 +48,48 @@ export default class extends SlashCommand<HelperClient> {
 			!interaction.member.permissions.has(PermissionsBitField.Flags.ManageRoles)
 		)
 			return interaction.reply({
-				content: "Tu doit avoir le rôle <@&" + roleID + "> pour utiliser cette commande.",
+				content: i18next.t("commands.rainbow.norole", {
+					lng: interaction.locale,
+					role: roleID,
+				}),
 				ephemeral: true,
 			});
+
+		const cooldown = cooldowns[interaction.guild.id];
+
+		if (cooldown && cooldown.getTime() > Date.now())
+			return interaction.reply({
+				embeds: [
+					{
+						color: role.color,
+						description: i18next.t("commands.rainbow.cooldown", {
+							lng: interaction.locale,
+							time: formatDistanceToNow(cooldown.getTime(), {
+								includeSeconds: true,
+							}),
+						}),
+					},
+				],
+				ephemeral: true,
+			});
+
+		await interaction.deferReply();
+
+		if (canFail[interaction.guild.id]) {
+			if (Math.random() < canFail[interaction.guild.id]!) {
+				await role.setColor(0, "Failed by: " + interaction.user.tag);
+				return interaction.editReply({
+					embeds: [
+						{
+							color: Colors.Greyple,
+							description: i18next.t("commands.rainbow.failure", {
+								lng: interaction.locale,
+							}),
+						},
+					],
+				});
+			}
+		}
 
 		const getRandomColor = (): ColorResolvable => {
 			const letters = "0123456789ABCDEF";
@@ -53,24 +99,6 @@ export default class extends SlashCommand<HelperClient> {
 			}
 			return color as ColorResolvable;
 		};
-
-		const cooldown = cooldowns[interaction.guild.id];
-
-		if (cooldown && cooldown.getTime() > Date.now())
-			return interaction.reply({
-				embeds: [
-					{
-						color: role.color,
-						description: `La commande est en cooldown. Tu peux la réutiliser dans ${formatDistanceToNow(
-							cooldown.getTime(),
-							{
-								includeSeconds: true,
-							},
-						)}`,
-					},
-				],
-				ephemeral: true,
-			});
 
 		const oldColor = role.color;
 		const color = resolveColor(getRandomColor());
@@ -84,7 +112,7 @@ export default class extends SlashCommand<HelperClient> {
 			cooldowns[interaction.guild.id] = add(new Date(), { minutes: 5 });
 		});
 
-		return await interaction.reply({
+		return await interaction.editReply({
 			embeds: [
 				{
 					title: "Rainbow",
@@ -93,7 +121,12 @@ export default class extends SlashCommand<HelperClient> {
 						icon_url: interaction.user.displayAvatarURL(),
 					},
 					color: color,
-					description: `La couleur du rôle <@&${roleID}> a été changée de **${intToHexColor(oldColor)}** à **${intToHexColor(color)}**`,
+					description: i18next.t("commands.rainbow.changed", {
+						lng: interaction.locale,
+						role: roleID,
+						oldColor: intToHexColor(oldColor),
+						newColor: intToHexColor(color),
+					}),
 					thumbnail: {
 						url: `attachment://${attachmentName}`,
 					},
