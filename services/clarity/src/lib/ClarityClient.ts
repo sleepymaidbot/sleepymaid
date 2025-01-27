@@ -23,6 +23,8 @@ export class ClarityClient extends HandlerClient {
 
 	declare public container: BaseContainer<this> & ClarityContainer;
 
+	declare public logger: Logger;
+
 	public constructor() {
 		super(
 			{
@@ -42,7 +44,7 @@ export class ClarityClient extends HandlerClient {
 
 	public async start(): Promise<void> {
 		this.config = initConfig();
-		this.logger = new Logger(this.env);
+		this.logger = new Logger(this.env, this.config.discordWebhookUrl);
 		this.env = this.config.nodeEnv;
 
 		// this.drizzle = createDrizzleInstance(process.env.DATABASE_URL as string);
@@ -64,7 +66,6 @@ export class ClarityClient extends HandlerClient {
 
 		const player = new Player(this);
 
-		await player.extractors.loadMulti(DefaultExtractors);
 		await player.extractors.register(DeezerExtractor, {});
 		await player.extractors.register(YoutubeiExtractor, {});
 		await player.extractors.register(TidalExtractor, {});
@@ -72,6 +73,7 @@ export class ClarityClient extends HandlerClient {
 			language: "en",
 			slow: false,
 		});
+		await player.extractors.loadMulti(DefaultExtractors);
 
 		this.loadHandlers({
 			commands: {
