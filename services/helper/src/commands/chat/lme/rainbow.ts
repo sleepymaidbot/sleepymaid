@@ -23,7 +23,7 @@ const roles = {
 };
 
 const canFail: Record<Snowflake, number> = {
-	// "821717486217986098": 0.5, // Test
+	"821717486217986098": 0.5, // Test
 	"1150780245151068332": 0.5, // Mamayo
 };
 
@@ -103,7 +103,7 @@ export default class extends SlashCommand<HelperClient> {
 		const oldColor = role.color;
 		const color = resolveColor(getRandomColor());
 
-		const buffer = await generateSplitImage(role.color, color);
+		const buffer = await generateSplitImage(role.color === 0 ? Colors.Greyple : role.color, color);
 
 		const attachmentName = `${role.id}-${color}.png`;
 		const attachment = new AttachmentBuilder(buffer, { name: attachmentName });

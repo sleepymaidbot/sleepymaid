@@ -1,6 +1,6 @@
 import { Context, Listener } from "@sleepymaid/handler";
 import { WatcherClient } from "../../lib/extensions/WatcherClient";
-import { APIEmbed, APIEmbedField, AttachmentBuilder, AuditLogEvent, Role } from "discord.js";
+import { APIEmbed, APIEmbedField, AttachmentBuilder, AuditLogEvent, Colors, Role } from "discord.js";
 import { intToHexColor } from "@sleepymaid/util";
 import { generateSplitImage } from "@sleepymaid/shared";
 
@@ -46,7 +46,7 @@ export default class extends Listener<"roleUpdate", WatcherClient> {
 				value: `${intToHexColor(oldRole.color)} -> ${intToHexColor(newRole.color)}`,
 				inline: true,
 			});
-			const buffer = await generateSplitImage(oldRole.color, newRole.color);
+			const buffer = await generateSplitImage(oldRole.color === 0 ? Colors.Greyple : oldRole.color, newRole.color);
 
 			const attachmentName = `${oldRole.id}-${newRole.id}.png`;
 			attachment = new AttachmentBuilder(buffer, { name: attachmentName });
