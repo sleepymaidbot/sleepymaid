@@ -159,7 +159,7 @@ export default class extends SlashCommand<WatcherClient> {
 
 		if (!guildSetting) return interaction.reply({ content: "Guild settings not found", ephemeral: true });
 
-		if (existingChannel.length >= 10 && guildSetting.premiumLevel <= 1)
+		if (existingChannel.length >= 3 && guildSetting.premiumLevel <= 1)
 			return interaction.reply({ content: "You have reached the maximum number of log channels", ephemeral: true });
 
 		if (
