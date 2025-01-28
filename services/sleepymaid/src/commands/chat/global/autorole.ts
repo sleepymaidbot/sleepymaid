@@ -58,7 +58,7 @@ export default class AutoRoleCommand extends SlashCommand<SleepyMaidClient> {
 
 	public override async execute(interaction: ChatInputCommandInteraction) {
 		if (!interaction.inCachedGuild()) return;
-		await interaction.deferReply({ ephemeral: true });
+		await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 		const subcommand = interaction.options.getSubcommand();
 		switch (subcommand) {
 			case "add":

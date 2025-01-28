@@ -110,17 +110,23 @@ export default class extends SlashCommand<SleepyMaidClient> {
 		if (!guildSetting) return this.container.logger.error("Guild setting not found");
 
 		if (guildConnections.length >= 50 && guildSetting.premiumLevel < 2)
-			return interaction.reply({ content: "You can only have up to 50 role connections per guild", ephemeral: true });
+			return interaction.reply({
+				content: "You can only have up to 50 role connections per guild",
+				flags: MessageFlags.Ephemeral,
+			});
 
 		const parentRole = interaction.options.getRole("parent", true);
 		const childRole = interaction.options.getRole("child", true);
 
 		if (parentRole.id === childRole.id)
-			return interaction.reply({ content: "A role cannot be connected to itself", ephemeral: true });
+			return interaction.reply({ content: "A role cannot be connected to itself", flags: MessageFlags.Ephemeral });
 		if (guildConnections.some((connection) => connection.childRoleId === childRole.id))
-			return interaction.reply({ content: "This role is already connected to another role", ephemeral: true });
+			return interaction.reply({
+				content: "This role is already connected to another role",
+				flags: MessageFlags.Ephemeral,
+			});
 		if (guildConnections.some((connection) => connection.parentRoleId === childRole.id))
-			return interaction.reply({ content: "This role is already a parent role", ephemeral: true });
+			return interaction.reply({ content: "This role is already a parent role", flags: MessageFlags.Ephemeral });
 
 		await this.container.drizzle.insert(roleConnections).values({
 			guildId: interaction.guild.id,
@@ -130,7 +136,7 @@ export default class extends SlashCommand<SleepyMaidClient> {
 
 		return interaction.reply({
 			content: `Successfully connected ${parentRole} to ${childRole}`,
-			ephemeral: true,
+			flags: MessageFlags.Ephemeral,
 		});
 	}
 
@@ -142,13 +148,16 @@ export default class extends SlashCommand<SleepyMaidClient> {
 		const parentRole = interaction.options.getRole("parent", true);
 
 		if (!guildConnections.some((connection) => connection.parentRoleId === parentRole.id))
-			return interaction.reply({ content: "This role is not connected to any other role", ephemeral: true });
+			return interaction.reply({
+				content: "This role is not connected to any other role",
+				flags: MessageFlags.Ephemeral,
+			});
 
 		await this.container.drizzle.delete(roleConnections).where(eq(roleConnections.parentRoleId, parentRole.id));
 
 		return interaction.reply({
 			content: `Successfully removed the connection between ${parentRole} and its children`,
-			ephemeral: true,
+			flags: MessageFlags.Ephemeral,
 		});
 	}
 
@@ -160,7 +169,7 @@ export default class extends SlashCommand<SleepyMaidClient> {
 
 		return interaction.reply({
 			content: `List of role connections:\n${guildConnections.map((connection) => `<@&${connection.parentRoleId}> -> <@&${connection.childRoleId}>`).join("\n")}`,
-			ephemeral: true,
+			flags: MessageFlags.Ephemeral,
 		});
 	}
 
@@ -169,7 +178,7 @@ export default class extends SlashCommand<SleepyMaidClient> {
 
 		await interaction.reply({
 			content: "Are you sure you want to clear all role connections?",
-			ephemeral: true,
+			flags: MessageFlags.Ephemeral,
 			components: [
 				{
 					type: ComponentType.ActionRow,

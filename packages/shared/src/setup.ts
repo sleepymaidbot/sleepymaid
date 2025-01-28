@@ -1,5 +1,10 @@
 import type { HandlerClient } from "@sleepymaid/handler";
-import type { ChatInputCommandInteraction, MessageCreateOptions, MessageEditOptions } from "discord.js";
+import {
+	MessageFlags,
+	type ChatInputCommandInteraction,
+	type MessageCreateOptions,
+	type MessageEditOptions,
+} from "discord.js";
 
 export type MessagesType = {
 	[key: string]: MessageType;
@@ -45,7 +50,7 @@ export const setupInteraction = async (
 							description: "<:redX:948606748334358559> Message not found.",
 						},
 					],
-					ephemeral: true,
+					flags: MessageFlags.Ephemeral,
 				})
 				.catch(client.logger.error);
 		}
@@ -62,7 +67,7 @@ export const setupInteraction = async (
 								description: "<:redX:948606748334358559> Message too big.",
 							},
 						],
-						ephemeral: true,
+						flags: MessageFlags.Ephemeral,
 					})
 					.catch(client.logger.error);
 		} else {
@@ -74,7 +79,7 @@ export const setupInteraction = async (
 							description: "<:redX:948606748334358559> You can only edit messages sent by the bot.",
 						},
 					],
-					ephemeral: true,
+					flags: MessageFlags.Ephemeral,
 				})
 				.catch(client.logger.error);
 		}
@@ -93,7 +98,7 @@ export const setupInteraction = async (
 					description: "<:greenTick:948620600144982026> Done!",
 				},
 			],
-			ephemeral: true,
+			flags: MessageFlags.Ephemeral,
 		})
 		.catch(client.logger.error);
 };

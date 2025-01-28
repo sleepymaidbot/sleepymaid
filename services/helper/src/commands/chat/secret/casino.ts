@@ -2,7 +2,7 @@
 import type { Context } from "@sleepymaid/handler";
 import { SlashCommand } from "@sleepymaid/handler";
 import type { ChatInputCommandInteraction } from "discord.js";
-import { ApplicationCommandType, ApplicationCommandOptionType, resolveColor } from "discord.js";
+import { ApplicationCommandType, ApplicationCommandOptionType, resolveColor, MessageFlags } from "discord.js";
 import type { HelperClient } from "../../../lib/extensions/HelperClient";
 
 export default class SecretCasinoCommand extends SlashCommand<HelperClient> {
@@ -82,7 +82,7 @@ export default class SecretCasinoCommand extends SlashCommand<HelperClient> {
 			default:
 				return interaction.reply({
 					content: "Invalid subcommand.",
-					ephemeral: true,
+					flags: MessageFlags.Ephemeral,
 				});
 		}
 	}
@@ -101,7 +101,7 @@ export default class SecretCasinoCommand extends SlashCommand<HelperClient> {
 						color: resolveColor("#2f3136"),
 					},
 				],
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 			});
 	}
 }

@@ -61,7 +61,7 @@ export default class LotteryCommand extends SlashCommand<SleepyMaidClient> {
 	}
 
 	private async start(interaction: ChatInputCommandInteraction) {
-		await interaction.deferReply({ ephemeral: true });
+		await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 		const time = interaction.options.getString("time", true);
 		const date = add(new Date(), getTimeTable(time));
 		const amount = interaction.options.getInteger("amount", true);

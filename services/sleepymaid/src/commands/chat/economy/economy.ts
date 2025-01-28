@@ -150,7 +150,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 				await this.give(interaction);
 				break;
 			default:
-				await interaction.reply({ content: "Invalid subcommand", ephemeral: true });
+				await interaction.reply({ content: "Invalid subcommand", flags: MessageFlags.Ephemeral });
 				break;
 		}
 	}
@@ -253,7 +253,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 					const page = parseInt(i.customId.split("_")[2] ?? "1");
 					await i.update(await getEmbed(page));
 				} else {
-					await i.reply({ content: "This is not your interaction", ephemeral: true });
+					await i.reply({ content: "This is not your interaction", flags: MessageFlags.Ephemeral });
 				}
 			})
 			.on("end", () => {
@@ -429,11 +429,11 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			return;
 		}
 		if (target.id === interaction.user.id) {
-			await interaction.reply({ content: "You can't give money to yourself", ephemeral: true });
+			await interaction.reply({ content: "You can't give money to yourself", flags: MessageFlags.Ephemeral });
 			return;
 		}
 		if (amount <= 0) {
-			await interaction.reply({ content: "Amount must be greater than 0", ephemeral: true });
+			await interaction.reply({ content: "Amount must be greater than 0", flags: MessageFlags.Ephemeral });
 			return;
 		}
 		const data = await this.container.client.drizzle.query.userData.findFirst({
@@ -442,12 +442,12 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 		if (!data) {
 			await interaction.reply({
 				content: "An error occurred while fetching your data, please try again later.",
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 			});
 			return;
 		}
 		if (data.currency < amount) {
-			await interaction.reply({ content: "You don't have enough coins to give", ephemeral: true });
+			await interaction.reply({ content: "You don't have enough coins to give", flags: MessageFlags.Ephemeral });
 			return;
 		}
 		// Remove

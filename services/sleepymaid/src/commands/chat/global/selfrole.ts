@@ -7,6 +7,7 @@ import {
 	ApplicationIntegrationType,
 	ComponentType,
 	InteractionContextType,
+	MessageFlags,
 	PermissionFlagsBits,
 	PermissionsBitField,
 } from "discord.js";
@@ -94,7 +95,7 @@ export default class SelfRoleCommand extends SlashCommand<SleepyMaidClient> {
 		)
 			return interaction.reply({
 				content: "You cannot use this command on an admin role.",
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 				allowedMentions: { parse: [] },
 			});
 		if (!client.user) return;
@@ -104,19 +105,19 @@ export default class SelfRoleCommand extends SlashCommand<SleepyMaidClient> {
 		if (role.position >= bot.roles.highest.position)
 			return interaction.reply({
 				content: "You cannot use this command on a role higher than the bot.",
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 				allowedMentions: { parse: [] },
 			});
 		if (role.position >= interaction.member.roles.highest.position && interaction.user.id !== interaction.guild.ownerId)
 			return interaction.reply({
 				content: "You cannot use this command on a role higher than yours.",
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 				allowedMentions: { parse: [] },
 			});
 		if (!interaction.channel) return;
 		await interaction.reply({
 			content: "Self role message created!",
-			ephemeral: true,
+			flags: MessageFlags.Ephemeral,
 			allowedMentions: { parse: [] },
 		});
 		await interaction.channel.send({

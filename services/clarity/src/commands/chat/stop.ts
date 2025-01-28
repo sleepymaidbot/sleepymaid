@@ -14,7 +14,7 @@ export default class extends SlashCommand<ClarityClient> {
 		});
 	}
 
-	public override async execute(interaction: ChatInputCommandInteraction<"cached">) {
+	public override async execute(interaction: ChatInputCommandInteraction) {
 		const queue = useQueue();
 
 		if (!queue) {

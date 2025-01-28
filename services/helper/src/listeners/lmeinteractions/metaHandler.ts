@@ -2,7 +2,7 @@ import { ButtonBuilder, ActionRowBuilder, SelectMenuBuilder, SelectMenuOptionBui
 import type { Context } from "@sleepymaid/handler";
 import { Listener } from "@sleepymaid/handler";
 import { pingRoleIds, colorRoleIds } from "@sleepymaid/shared";
-import type { ButtonInteraction, SelectMenuInteraction } from "discord.js";
+import { MessageFlags, type ButtonInteraction, type SelectMenuInteraction } from "discord.js";
 import type { HelperClient } from "../../lib/extensions/HelperClient";
 
 export default class MetahandlerListener extends Listener<"interactionCreate", HelperClient> {
@@ -18,7 +18,7 @@ export default class MetahandlerListener extends Listener<"interactionCreate", H
 		if (!interaction.inCachedGuild()) return;
 		const Ids = interaction.customId.split(":");
 		if (Ids[0] !== "lmeMeta") return;
-		await interaction.deferReply({ ephemeral: true });
+		await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 		if (Ids[1] === "bienvenue") {
 			if (Ids[2] === "init") {
 				switch (Ids[3]) {

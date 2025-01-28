@@ -20,7 +20,7 @@ export default class RatioUserCommand extends MessageCommand<SleepyMaidClient> {
 	public override async execute(interaction: MessageContextMenuCommandInteraction) {
 		await interaction.reply({
 			content: "```" + interaction.targetMessage.content + "```",
-			ephemeral: true,
+			flags: MessageFlags.Ephemeral,
 		});
 	}
 }

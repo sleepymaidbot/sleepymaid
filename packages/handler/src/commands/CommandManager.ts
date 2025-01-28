@@ -8,7 +8,7 @@ import type {
 	Interaction,
 	Snowflake,
 } from "discord.js";
-import { Collection, InteractionType } from "discord.js";
+import { Collection, InteractionType, MessageFlags } from "discord.js";
 import { BaseContainer, Context } from "../BaseContainer";
 import { BaseManager } from "../BaseManager";
 import type { HandlerClient } from "../HandlerClient";
@@ -278,7 +278,7 @@ export class CommandManager<Client extends HandlerClient> extends BaseManager<Cl
 			try {
 				await interaction.reply({
 					content: "There was an error while executing this command!",
-					ephemeral: true,
+					flags: MessageFlags.Ephemeral,
 				});
 			} catch {
 				try {

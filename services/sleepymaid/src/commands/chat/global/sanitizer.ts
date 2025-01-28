@@ -90,7 +90,7 @@ export default class SanitizerConfigCommand extends SlashCommand<SleepyMaidClien
 			if (guildSetting.sanitizerEnabled === state) {
 				return interaction.reply({
 					content: `Username sanitizer is already ${state ? "enabled" : "disabled"}.`,
-					ephemeral: true,
+					flags: MessageFlags.Ephemeral,
 				});
 			}
 
@@ -100,7 +100,7 @@ export default class SanitizerConfigCommand extends SlashCommand<SleepyMaidClien
 				.where(eq(guildSettings.guildId, interaction.guildId));
 			return interaction.reply({
 				content: `Username sanitizer has been ${state ? "enabled" : "disabled"}.`,
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 			});
 		} else if (interaction.options.getSubcommandGroup() === "ignoredroles") {
 			if (interaction.options.getSubcommand() === "add") {
@@ -108,7 +108,7 @@ export default class SanitizerConfigCommand extends SlashCommand<SleepyMaidClien
 				if (guildSetting.sanitizerIgnoredRoles.includes(role.id)) {
 					return interaction.reply({
 						content: "That role is already ignored.",
-						ephemeral: true,
+						flags: MessageFlags.Ephemeral,
 					});
 				}
 
@@ -118,14 +118,14 @@ export default class SanitizerConfigCommand extends SlashCommand<SleepyMaidClien
 					.where(eq(guildSettings.guildId, interaction.guildId));
 				return interaction.reply({
 					content: "Role has been added to the ignored roles.",
-					ephemeral: true,
+					flags: MessageFlags.Ephemeral,
 				});
 			} else if (interaction.options.getSubcommand() === "remove") {
 				const role = interaction.options.getRole("role", true);
 				if (!guildSetting.sanitizerIgnoredRoles.includes(role.id)) {
 					return interaction.reply({
 						content: "That role is not ignored.",
-						ephemeral: true,
+						flags: MessageFlags.Ephemeral,
 					});
 				}
 
@@ -138,13 +138,13 @@ export default class SanitizerConfigCommand extends SlashCommand<SleepyMaidClien
 
 				return interaction.reply({
 					content: "Role has been removed from the ignored roles.",
-					ephemeral: true,
+					flags: MessageFlags.Ephemeral,
 				});
 			} else if (interaction.options.getSubcommand() === "list") {
 				if (guildSetting.sanitizerIgnoredRoles.length === 0) {
 					return interaction.reply({
 						content: "There are no ignored roles.",
-						ephemeral: true,
+						flags: MessageFlags.Ephemeral,
 					});
 				}
 
@@ -169,7 +169,7 @@ export default class SanitizerConfigCommand extends SlashCommand<SleepyMaidClien
 
 				return interaction.reply({
 					content: `Ignored roles: ${ignoredRoles.join(", ")}`,
-					ephemeral: true,
+					flags: MessageFlags.Ephemeral,
 				});
 			}
 		}

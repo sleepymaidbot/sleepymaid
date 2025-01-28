@@ -83,7 +83,7 @@ export default class Reminders extends SlashCommand<SleepyMaidClient> {
 			case "clear":
 				return this.clear(interaction);
 			default:
-				return interaction.reply({ content: "Invalid subcommand", ephemeral: true });
+				return interaction.reply({ content: "Invalid subcommand", flags: MessageFlags.Ephemeral });
 		}
 	}
 
@@ -95,7 +95,7 @@ export default class Reminders extends SlashCommand<SleepyMaidClient> {
 		if (reminders.length >= 10) {
 			return interaction.reply({
 				content: "You have too many reminders, please remove some before adding more",
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 			});
 		}
 
@@ -105,7 +105,7 @@ export default class Reminders extends SlashCommand<SleepyMaidClient> {
 		if (isBefore(date, now)) {
 			return interaction.reply({
 				content: "You must specify a time in the future",
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 			});
 		}
 
@@ -115,7 +115,7 @@ export default class Reminders extends SlashCommand<SleepyMaidClient> {
 
 		return await interaction.reply({
 			content: `Reminder added for \`\`${message}\`\` <t:${timestamp}:R>`,
-			ephemeral: true,
+			flags: MessageFlags.Ephemeral,
 		});
 	}
 
@@ -129,14 +129,17 @@ export default class Reminders extends SlashCommand<SleepyMaidClient> {
 		});
 
 		if (!reminder) {
-			return await interaction.reply({ content: "Reminder not found", ephemeral: true });
+			return await interaction.reply({ content: "Reminder not found", flags: MessageFlags.Ephemeral });
 		}
 
 		if (reminder.userId !== interaction.user.id) {
-			return await interaction.reply({ content: "You don't have permission to remove this reminder", ephemeral: true });
+			return await interaction.reply({
+				content: "You don't have permission to remove this reminder",
+				flags: MessageFlags.Ephemeral,
+			});
 		}
 
-		return await interaction.reply({ content: "Reminder removed", ephemeral: true });
+		return await interaction.reply({ content: "Reminder removed", flags: MessageFlags.Ephemeral });
 	}
 
 	private async list(interaction: ChatInputCommandInteraction) {
@@ -149,14 +152,14 @@ export default class Reminders extends SlashCommand<SleepyMaidClient> {
 						`**${reminder.reminderName}** (ID: ${reminder.reminderId}) <t:${getUnixTime(reminder.reminderTime)}:R>`,
 				)
 				.join("\n")}`,
-			ephemeral: true,
+			flags: MessageFlags.Ephemeral,
 		});
 	}
 
 	private async clear(interaction: ChatInputCommandInteraction) {
 		await this.container.manager.clearReminders(interaction.user.id);
 
-		return await interaction.reply({ content: "All your reminders have been cleared", ephemeral: true });
+		return await interaction.reply({ content: "All your reminders have been cleared", flags: MessageFlags.Ephemeral });
 	}
 
 	public override async autocomplete(interaction: AutocompleteInteraction) {

@@ -102,7 +102,7 @@ export default class extends SlashCommand<SleepyMaidClient> {
 		const subcommandGroup = interaction.options.getSubcommandGroup();
 		const subcommand = interaction.options.getSubcommand();
 
-		await interaction.deferReply({ ephemeral: true });
+		await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
 		switch (subcommandGroup) {
 			case "roles":

@@ -11,7 +11,7 @@ export default class OwnerOnlyPrecondtion extends Precondition<SleepyMaidClient>
 		if (!owners.includes(interaction.user.id)) {
 			await interaction.reply({
 				content: "You are not the owner of this bot",
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 			});
 			return false;
 		}

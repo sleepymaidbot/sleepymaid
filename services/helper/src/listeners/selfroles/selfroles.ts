@@ -1,6 +1,6 @@
 import type { Context } from "@sleepymaid/handler";
 import { Listener } from "@sleepymaid/handler";
-import type { BaseInteraction } from "discord.js";
+import { MessageFlags, type BaseInteraction } from "discord.js";
 import type { HelperClient } from "../../lib/extensions/HelperClient";
 
 export default class SelfRoleListener extends Listener<"interactionCreate", HelperClient> {
@@ -15,7 +15,7 @@ export default class SelfRoleListener extends Listener<"interactionCreate", Help
 		if (!interaction.inCachedGuild()) return;
 		if (!interaction.isButton()) return;
 		if (!interaction.customId.startsWith("selfrole:")) return;
-		await interaction.deferReply({ ephemeral: true });
+		await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 		const roleId = interaction.customId.split(":")[1];
 		if (!roleId) return interaction.editReply({ content: "Something went wrong." });
 		const role = interaction.guild?.roles.cache.get(roleId);

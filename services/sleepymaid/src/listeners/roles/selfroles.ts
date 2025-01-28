@@ -15,7 +15,7 @@ export default class SelfRoleListener extends Listener<"interactionCreate", Slee
 		if (!interaction.inCachedGuild()) return;
 		if (!interaction.isButton()) return;
 		if (!interaction.customId.startsWith("selfrole:")) return;
-		await interaction.deferReply({ ephemeral: true });
+		await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 		const [_, roleId, action] = interaction.customId.split(":");
 		if (!roleId || !action) return interaction.editReply({ content: "Something went wrong." });
 		const role = interaction.guild?.roles.cache.get(roleId);

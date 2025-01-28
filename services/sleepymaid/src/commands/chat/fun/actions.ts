@@ -185,10 +185,10 @@ export default class ActionsCommand extends SlashCommand<SleepyMaidClient> {
 		const actionData = actionsObj[action];
 		if (!actionData) return;
 		if (user.bot) {
-			return interaction.reply({ content: "You can't do that with a bot.", ephemeral: true });
+			return interaction.reply({ content: "You can't do that with a bot.", flags: MessageFlags.Ephemeral });
 		}
 		if (userId === targetId) {
-			return interaction.reply({ content: "You can't do that with yourself.", ephemeral: true });
+			return interaction.reply({ content: "You can't do that with yourself.", flags: MessageFlags.Ephemeral });
 		}
 
 		await interaction.deferReply();

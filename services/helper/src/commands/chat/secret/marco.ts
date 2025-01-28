@@ -1,7 +1,7 @@
 import type { Context } from "@sleepymaid/handler";
 import { SlashCommand } from "@sleepymaid/handler";
 import type { ChatInputCommandInteraction } from "discord.js";
-import { ApplicationCommandType } from "discord.js";
+import { ApplicationCommandType, MessageFlags } from "discord.js";
 import type { HelperClient } from "../../../lib/extensions/HelperClient";
 
 export default class MarcoCommand extends SlashCommand<HelperClient> {
@@ -22,20 +22,20 @@ export default class MarcoCommand extends SlashCommand<HelperClient> {
 		if (!role)
 			return interaction.reply({
 				content: "Role not found.",
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 			});
 
 		if (interaction.member.roles.cache.has(role.id))
 			return interaction.reply({
 				content: "You already have the role.",
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 			});
 
 		await interaction.member.roles.add(role.id);
 
 		return interaction.reply({
 			content: `<:greenTick:948620600144982026> You have the role.`,
-			ephemeral: true,
+			flags: MessageFlags.Ephemeral,
 		});
 	}
 }

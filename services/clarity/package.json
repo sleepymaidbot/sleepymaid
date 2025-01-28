@@ -30,7 +30,7 @@
 		"discord-player-deezer": "^2.1.0",
 		"discord-player-tidal": "^0.1.0",
 		"discord-player-youtubei": "^1.4.1",
-		"discord.js": "^14.17.3",
+		"discord.js": "14.17.3",
 		"drizzle-orm": "^0.38.4",
 		"i18next": "^24.2.1",
 		"i18next-fs-backend": "^2.6.0",

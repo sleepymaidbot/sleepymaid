@@ -8,6 +8,7 @@ import {
 	AttachmentBuilder,
 	PermissionsBitField,
 	Colors,
+	MessageFlags,
 } from "discord.js";
 import { HelperClient } from "../../../lib/extensions/HelperClient";
 import { intToHexColor } from "@sleepymaid/util";
@@ -52,7 +53,7 @@ export default class extends SlashCommand<HelperClient> {
 					lng: interaction.locale,
 					role: roleID,
 				}),
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 			});
 
 		const cooldown = cooldowns[interaction.guild.id];
@@ -70,7 +71,7 @@ export default class extends SlashCommand<HelperClient> {
 						}),
 					},
 				],
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 			});
 
 		await interaction.deferReply();

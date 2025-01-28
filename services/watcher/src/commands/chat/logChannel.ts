@@ -11,6 +11,7 @@ import {
 	ComponentType,
 	PermissionFlagsBits,
 	InteractionContextType,
+	MessageFlags,
 } from "discord.js";
 import { guildSettings, logChannel, types } from "@sleepymaid/db";
 import { and, eq } from "drizzle-orm";
@@ -82,12 +83,6 @@ export default class extends SlashCommand<WatcherClient> {
 						type: ApplicationCommandOptionType.Subcommand,
 						options: [
 							{
-								name: "id",
-								description: "The id of the log channel",
-								type: ApplicationCommandOptionType.String,
-								required: true,
-							},
-							{
 								name: "type",
 								description: "The type of logs to send",
 								type: ApplicationCommandOptionType.String,
@@ -98,6 +93,21 @@ export default class extends SlashCommand<WatcherClient> {
 								name: "enabled",
 								description: "Whether the type of logs is enabled",
 								type: ApplicationCommandOptionType.Boolean,
+								required: true,
+							},
+							{
+								name: "channel",
+								description: "The channel to set the types for",
+								type: ApplicationCommandOptionType.Channel,
+								channelTypes: [ChannelType.GuildText],
+								required: false,
+							},
+							{
+								name: "thread",
+								description: "The thread to set the types for",
+								type: ApplicationCommandOptionType.Channel,
+								channelTypes: [ChannelType.PublicThread],
+								required: false,
 							},
 						],
 					},
@@ -138,7 +148,7 @@ export default class extends SlashCommand<WatcherClient> {
 			case "info":
 				return this.info(interaction);
 			default:
-				return interaction.reply({ content: "Invalid subcommand", ephemeral: true });
+				return interaction.reply({ content: "Invalid subcommand", flags: MessageFlags.Ephemeral });
 		}
 	}
 
@@ -147,7 +157,7 @@ export default class extends SlashCommand<WatcherClient> {
 		const thread = interaction.options.getChannel("thread");
 
 		if (!channel || !channel.isTextBased() || !("createWebhook" in channel))
-			return interaction.reply({ content: "Channel not found", ephemeral: true });
+			return interaction.reply({ content: "Channel not found", flags: MessageFlags.Ephemeral });
 
 		const existingChannel = await this.container.client.drizzle.query.logChannel.findMany({
 			where: eq(logChannel.guildId, interaction.guild.id),
@@ -157,10 +167,13 @@ export default class extends SlashCommand<WatcherClient> {
 			where: eq(guildSettings.guildId, interaction.guild.id),
 		});
 
-		if (!guildSetting) return interaction.reply({ content: "Guild settings not found", ephemeral: true });
+		if (!guildSetting) return interaction.reply({ content: "Guild settings not found", flags: MessageFlags.Ephemeral });
 
 		if (existingChannel.length >= 3 && guildSetting.premiumLevel <= 1)
-			return interaction.reply({ content: "You have reached the maximum number of log channels", ephemeral: true });
+			return interaction.reply({
+				content: "You have reached the maximum number of log channels",
+				flags: MessageFlags.Ephemeral,
+			});
 
 		if (
 			existingChannel.some((c) => {
@@ -169,7 +182,7 @@ export default class extends SlashCommand<WatcherClient> {
 				return false;
 			})
 		)
-			return interaction.reply({ content: "Channel already has is a log channel", ephemeral: true });
+			return interaction.reply({ content: "Channel already has is a log channel", flags: MessageFlags.Ephemeral });
 
 		const webhook = await channel
 			.createWebhook({
@@ -179,7 +192,7 @@ export default class extends SlashCommand<WatcherClient> {
 			})
 			.catch(() => null);
 
-		if (!webhook) return interaction.reply({ content: "Failed to create webhook", ephemeral: true });
+		if (!webhook) return interaction.reply({ content: "Failed to create webhook", flags: MessageFlags.Ephemeral });
 
 		const [returning] = await this.container.client.drizzle
 			.insert(logChannel)
@@ -194,7 +207,7 @@ export default class extends SlashCommand<WatcherClient> {
 
 		return interaction.reply({
 			content: `Log channel created successfully. ID: \`\`${returning?.id}\`\``,
-			ephemeral: true,
+			flags: MessageFlags.Ephemeral,
 		});
 	}
 
@@ -202,7 +215,8 @@ export default class extends SlashCommand<WatcherClient> {
 		const channel = interaction.options.getChannel("channel") ?? interaction.channel;
 		const thread = interaction.options.getChannel("thread");
 
-		if (!channel || !channel.isTextBased()) return interaction.reply({ content: "Channel not found", ephemeral: true });
+		if (!channel || !channel.isTextBased())
+			return interaction.reply({ content: "Channel not found", flags: MessageFlags.Ephemeral });
 
 		if (thread) {
 			await this.container.client.drizzle
@@ -212,7 +226,7 @@ export default class extends SlashCommand<WatcherClient> {
 			await this.container.client.drizzle.delete(logChannel).where(eq(logChannel.channelId, channel.id));
 		}
 
-		return interaction.reply({ content: "Log channel deleted successfully", ephemeral: true });
+		return interaction.reply({ content: "Log channel deleted successfully", flags: MessageFlags.Ephemeral });
 	}
 
 	private async list(interaction: ChatInputCommandInteraction<"cached">) {
@@ -222,7 +236,7 @@ export default class extends SlashCommand<WatcherClient> {
 
 		return interaction.reply({
 			content: `**Log Channels**\n${channels.map((c) => `\`\`${c.id}\`\` <#${c.channelId}>`).join("\n")}`,
-			ephemeral: true,
+			flags: MessageFlags.Ephemeral,
 		});
 	}
 
@@ -231,7 +245,7 @@ export default class extends SlashCommand<WatcherClient> {
 
 		await interaction.reply({
 			content: "Are you sure you want to clear all log channels?",
-			ephemeral: true,
+			flags: MessageFlags.Ephemeral,
 			components: [
 				{
 					type: ComponentType.ActionRow,
@@ -277,18 +291,26 @@ export default class extends SlashCommand<WatcherClient> {
 	}
 
 	private async types(interaction: ChatInputCommandInteraction<"cached">) {
-		const id = interaction.options.getString("id", true);
-		const enabled = interaction.options.getBoolean("enabled") ?? true;
+		const chan = interaction.options.getChannel("channel") ?? interaction.channel;
+		const thread = interaction.options.getChannel("thread");
+		const enabled = interaction.options.getBoolean("enabled", true);
+
+		if (!chan) return interaction.reply({ content: "Channel not found", flags: MessageFlags.Ephemeral });
+
+		const conditions = [eq(logChannel.guildId, interaction.guild.id), eq(logChannel.channelId, chan.id)];
+
+		if (thread) conditions.push(eq(logChannel.threadId, thread.id));
 
 		const channel = await this.container.client.drizzle.query.logChannel.findFirst({
-			where: and(eq(logChannel.guildId, interaction.guild.id), eq(logChannel.id, Number(id))),
+			where: and(...conditions),
 		});
 
-		if (!channel) return interaction.reply({ content: "Log channel not found", ephemeral: true });
+		if (!channel) return interaction.reply({ content: "Log channel not found", flags: MessageFlags.Ephemeral });
 
 		const type = interaction.options.getString("type", true);
 
-		if (!options.some((o) => o.value === type)) return interaction.reply({ content: "Invalid type", ephemeral: true });
+		if (!options.some((o) => o.value === type))
+			return interaction.reply({ content: "Invalid type", flags: MessageFlags.Ephemeral });
 
 		if (type === "all") {
 			await this.container.client.drizzle
@@ -338,7 +360,8 @@ export default class extends SlashCommand<WatcherClient> {
 		} else {
 			const [firstType, secondType] = type.split(".");
 
-			if (!firstType || !secondType) return interaction.reply({ content: "Invalid type", ephemeral: true });
+			if (!firstType || !secondType)
+				return interaction.reply({ content: "Invalid type", flags: MessageFlags.Ephemeral });
 
 			await this.container.client.drizzle
 				.update(logChannel)
@@ -350,7 +373,7 @@ export default class extends SlashCommand<WatcherClient> {
 
 		await this.container.manager.updateLogChannels(interaction.guild.id);
 
-		return interaction.reply({ content: "Log channel types updated successfully", ephemeral: true });
+		return interaction.reply({ content: "Log channel types updated successfully", flags: MessageFlags.Ephemeral });
 	}
 
 	private async info(interaction: ChatInputCommandInteraction<"cached">) {
@@ -360,7 +383,7 @@ export default class extends SlashCommand<WatcherClient> {
 			where: and(eq(logChannel.guildId, interaction.guild.id), eq(logChannel.id, Number(id))),
 		});
 
-		if (!channel) return interaction.reply({ content: "Log channel not found", ephemeral: true });
+		if (!channel) return interaction.reply({ content: "Log channel not found", flags: MessageFlags.Ephemeral });
 
 		const text = [];
 
@@ -375,7 +398,7 @@ export default class extends SlashCommand<WatcherClient> {
 
 		return interaction.reply({
 			content: `**Log Channel Info**\nID: \`\`${channel.id}\`\`\n\n${text.join("\n")}`,
-			ephemeral: true,
+			flags: MessageFlags.Ephemeral,
 		});
 	}
 

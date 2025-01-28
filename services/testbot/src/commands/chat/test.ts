@@ -1,6 +1,6 @@
 import type { Context } from "@sleepymaid/handler";
 import { SlashCommand } from "@sleepymaid/handler";
-import type { ChatInputCommandInteraction } from "discord.js";
+import { MessageFlags, type ChatInputCommandInteraction } from "discord.js";
 import type { TestClient } from "../../lib/extensions/TestClient";
 
 export default class ReasonCommand extends SlashCommand<TestClient> {
@@ -14,6 +14,6 @@ export default class ReasonCommand extends SlashCommand<TestClient> {
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction<"cached">) {
-		await interaction.reply({ content: "This command is not yet implemented", ephemeral: true });
+		await interaction.reply({ content: "This command is not yet implemented", flags: MessageFlags.Ephemeral });
 	}
 }

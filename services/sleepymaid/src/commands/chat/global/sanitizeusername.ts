@@ -41,10 +41,13 @@ export default class SanitizerUserCommand extends SlashCommand<SleepyMaidClient>
 	public override async execute(interaction: ChatInputCommandInteraction) {
 		if (!interaction.inCachedGuild()) return;
 		const member = interaction.options.getMember("user");
-		if (!member) return interaction.reply({ content: "User not found.", ephemeral: true });
+		if (!member) return interaction.reply({ content: "User not found.", flags: MessageFlags.Ephemeral });
 		const name = member.nickname ?? member.user.username;
 		const sanitized = sanitize(name);
 		if (name !== sanitized) await member.setNickname(sanitized, "Sanitizer");
-		return interaction.reply({ content: `Sanitized <@${member.id}> to \`\`${sanitized}\`\``, ephemeral: true });
+		return interaction.reply({
+			content: `Sanitized <@${member.id}> to \`\`${sanitized}\`\``,
+			flags: MessageFlags.Ephemeral,
+		});
 	}
 }

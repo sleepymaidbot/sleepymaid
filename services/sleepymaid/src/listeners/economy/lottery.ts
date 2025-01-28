@@ -26,7 +26,7 @@ export default class extends Listener<Events.InteractionCreate, SleepyMaidClient
 		if (!data) {
 			await interaction.reply({
 				content: "You don't have any money in your wallet!",
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 			});
 			return;
 		}
@@ -36,7 +36,7 @@ export default class extends Listener<Events.InteractionCreate, SleepyMaidClient
 		if (userLottery) {
 			await interaction.reply({
 				content: "You have already entered the lottery!",
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 			});
 			return;
 		}
@@ -52,7 +52,7 @@ export default class extends Listener<Events.InteractionCreate, SleepyMaidClient
 
 		await interaction.reply({
 			content: `You have entered the lottery!`,
-			ephemeral: true,
+			flags: MessageFlags.Ephemeral,
 		});
 	}
 }

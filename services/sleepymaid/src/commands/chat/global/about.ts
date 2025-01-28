@@ -137,7 +137,7 @@ export default class extends SlashCommand<SleepyMaidClient> {
 						color: Colors.DarkPurple,
 					},
 				],
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 			});
 		}
 
@@ -169,7 +169,7 @@ export default class extends SlashCommand<SleepyMaidClient> {
 		if (!interaction.inCachedGuild() || !interaction.inGuild())
 			return interaction.reply({
 				content: "This command can only be used in a server",
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 			});
 
 		const role = interaction.options.getRole("role", true);
@@ -232,13 +232,13 @@ export default class extends SlashCommand<SleepyMaidClient> {
 		if (!guild)
 			return interaction.reply({
 				content: "This command can only be used in a server",
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 			});
 
 		if (!interaction.inCachedGuild() || !interaction.inGuild())
 			return interaction.reply({
 				content: "This command can only be used in a server",
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 			});
 
 		const embed: APIEmbed = {
@@ -383,7 +383,7 @@ export default class extends SlashCommand<SleepyMaidClient> {
 	private async support(interaction: ChatInputCommandInteraction) {
 		return interaction.reply({
 			content: "[Click Here](https://discord.gg/UexTYbVFM3)",
-			ephemeral: true,
+			flags: MessageFlags.Ephemeral,
 		});
 	}
 

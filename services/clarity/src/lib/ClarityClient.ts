@@ -78,13 +78,13 @@ export class ClarityClient extends HandlerClient {
 		this.loadHandlers({
 			commands: {
 				folder: resolve(__dirname, "..", "commands"),
-				commandRunContext: async (callback, interaction) => {
-					const data = {
-						guild: interaction.guild!,
-					};
+				// commandRunContext: async (callback, interaction) => {
+				// 	const data = {
+				// 		guild: interaction.guild!,
+				// 	};
 
-					await player.context.provide(data, callback);
-				},
+				// 	await player.context.provide(data, callback);
+				// },
 			},
 			listeners: {
 				folder: resolve(__dirname, "..", "listeners"),
