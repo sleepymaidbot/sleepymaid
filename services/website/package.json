@@ -34,7 +34,7 @@
 		"@tailwindcss/container-queries": "^0.1.1",
 		"@tailwindcss/forms": "^0.5.10",
 		"@tailwindcss/typography": "^0.5.16",
-		"arctic": "^2.3.4",
+		"arctic": "^3.2.1",
 		"discord-api-types": "^0.37.98",
 		"drizzle-orm": "^0.38.4"
 	}
