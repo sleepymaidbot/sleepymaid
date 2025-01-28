@@ -17,7 +17,6 @@ export default class extends Listener<"voiceStateUpdate", HelperClient> {
 		if (!oldState.member) return;
 		// if (oldState.member.id !== "523915165545136141") return;
 		if (!oldState.guild.members.me?.permissions.has("ManageNicknames")) return;
-		if (!oldState.member.manageable) return;
 		if (oldState.member.user.bot) return;
 		if (oldState.channel !== null && newState.channel == null) {
 			const auditLog = await oldState.guild.fetchAuditLogs({ type: AuditLogEvent.MemberDisconnect });
@@ -40,6 +39,7 @@ export default class extends Listener<"voiceStateUpdate", HelperClient> {
 					count: disconnectCounter.count,
 				});
 			if (!user || !user[0]) return;
+			if (!oldState.member.manageable) return;
 
 			const currentName = oldState.member.nickname ?? oldState.member.user.displayName;
 			const baseNickname = currentName.replace(/^\[\d+\]\s+/, "");
