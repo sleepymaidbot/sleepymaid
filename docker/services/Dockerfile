@@ -22,6 +22,9 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
+# WORKAROUND FOR pnpm/pnpm/issues/9029
+RUN corepack prepare pnpm@10.0.0 --activate
+
 COPY tsup.config.js turbo.json package.json tsconfig.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 
 COPY packages/db ./packages/db
