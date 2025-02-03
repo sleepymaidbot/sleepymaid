@@ -11,6 +11,7 @@ import {
 	InteractionReplyOptions,
 	InteractionUpdateOptions,
 	MessageComponentInteraction,
+	MessageFlags,
 } from "discord.js";
 import { APIEmbed, ApplicationCommandOptionType } from "discord-api-types/v10";
 import { userData } from "@sleepymaid/db";

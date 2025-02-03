@@ -11,6 +11,7 @@ import {
 	Colors,
 	version as discordJSVersion,
 	InteractionContextType,
+	MessageFlags,
 } from "discord.js";
 import { prettyBytes, shell } from "@sleepymaid/util";
 import i18next from "i18next";

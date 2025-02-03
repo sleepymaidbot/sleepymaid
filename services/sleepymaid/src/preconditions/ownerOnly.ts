@@ -1,3 +1,4 @@
+import { MessageFlags } from "discord.js";
 import { SleepyMaidClient } from "../lib/SleepyMaidClient";
 import { Context, Precondition, type CommandInteractionTypeUnion } from "@sleepymaid/handler";
 

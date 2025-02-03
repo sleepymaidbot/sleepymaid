@@ -1,6 +1,6 @@
 import { Context, Listener } from "@sleepymaid/handler";
 import { SleepyMaidClient } from "../../lib/SleepyMaidClient";
-import { Events, Interaction } from "discord.js";
+import { Events, Interaction, MessageFlags } from "discord.js";
 import { lotteries, userData, userLotteries } from "@sleepymaid/db";
 import { and, eq } from "drizzle-orm";
 

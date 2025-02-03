@@ -3,7 +3,7 @@ import type { Context } from "@sleepymaid/handler";
 import { SlashCommand } from "@sleepymaid/handler";
 import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from "discord-api-types/v10";
 import type { ChatInputCommandInteraction } from "discord.js";
-import { ApplicationIntegrationType, InteractionContextType, PermissionsBitField } from "discord.js";
+import { ApplicationIntegrationType, InteractionContextType, MessageFlags, PermissionsBitField } from "discord.js";
 import { eq } from "drizzle-orm";
 import type { SleepyMaidClient } from "../../../lib/SleepyMaidClient";
 import DBCheckPrecondtion from "../../../preconditions/dbCheck";

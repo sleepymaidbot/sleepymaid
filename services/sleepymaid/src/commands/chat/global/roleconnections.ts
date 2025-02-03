@@ -9,6 +9,7 @@ import {
 	ComponentType,
 	InteractionContextType,
 	MessageComponentInteraction,
+	MessageFlags,
 	PermissionFlagsBits,
 } from "discord.js";
 import { guildSettings, roleConnections } from "@sleepymaid/db";

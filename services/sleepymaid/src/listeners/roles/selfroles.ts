@@ -2,6 +2,7 @@ import type { Context } from "@sleepymaid/handler";
 import { Listener } from "@sleepymaid/handler";
 import type { BaseInteraction } from "discord.js";
 import { SleepyMaidClient } from "../../lib/SleepyMaidClient";
+import { MessageFlags } from "discord-api-types/v10";
 
 export default class SelfRoleListener extends Listener<"interactionCreate", SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {

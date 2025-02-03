@@ -6,6 +6,7 @@ import {
 	AutocompleteInteraction,
 	ChatInputCommandInteraction,
 	InteractionContextType,
+	MessageFlags,
 } from "discord.js";
 import DBCheckPrecondtion from "../../../preconditions/dbCheck";
 import { getAutocompleteResults } from "@sleepymaid/shared";

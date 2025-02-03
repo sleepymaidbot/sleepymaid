@@ -7,6 +7,7 @@ import {
 	AutocompleteInteraction,
 	ChatInputCommandInteraction,
 	InteractionContextType,
+	MessageFlags,
 	PermissionFlagsBits,
 } from "discord.js";
 import DBCheckPrecondtion from "../../../preconditions/dbCheck";

@@ -5,6 +5,7 @@ import {
 	ApplicationIntegrationType,
 	ChatInputCommandInteraction,
 	InteractionContextType,
+	MessageFlags,
 	PermissionFlagsBits,
 	PermissionsBitField,
 } from "discord.js";
