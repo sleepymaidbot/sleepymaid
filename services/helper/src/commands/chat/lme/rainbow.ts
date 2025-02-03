@@ -24,7 +24,7 @@ const roles = {
 };
 
 const canFail: Record<Snowflake, number> = {
-	"821717486217986098": 0.5, // Test
+	"821717486217986098": 0.9, // Test
 	"1150780245151068332": 0.5, // Mamayo
 };
 
@@ -76,9 +76,11 @@ export default class extends SlashCommand<HelperClient> {
 
 		await interaction.deferReply();
 
-		if (canFail[interaction.guild.id]) {
+		if (canFail[interaction.guild.id] && role.color !== 0) {
 			if (Math.random() < canFail[interaction.guild.id]!) {
-				await role.setColor(0, "Failed by: " + interaction.user.tag);
+				await role.setColor(0, "Failed by: " + interaction.user.tag).then(() => {
+					cooldowns[interaction.guild.id] = add(new Date(), { minutes: 5 });
+				});
 				return interaction.editReply({
 					embeds: [
 						{
