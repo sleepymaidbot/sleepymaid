@@ -12,9 +12,12 @@ export default class MemberJoinListener extends Listener<"guildMemberAdd", Sleep
 	}
 
 	public override async execute(member: GuildMember) {
+		if (member.user.bot) return;
 		const roles = await this.container.drizzle.query.autoRoles.findMany({
 			where: eq(autoRoles.guildId, member.guild.id),
 		});
+
+		if (roles.length === 0) return;
 
 		await member.guild.roles.fetch();
 
@@ -29,6 +32,8 @@ export default class MemberJoinListener extends Listener<"guildMemberAdd", Sleep
 			}
 			list.push(role.id);
 		}
+
+		this.container.logger.debug(`Adding roles ${list} to ${member.user.username}`);
 
 		await member.roles.add(list);
 	}
