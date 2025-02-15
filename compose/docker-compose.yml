@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgres:15.10-alpine
+    image: postgres:15.11-alpine
     environment:
       POSTGRES_DB: "sleepymaid"
     volumes:
