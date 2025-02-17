@@ -1,10 +1,6 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": [
-		"config:recommended",
-		"helpers:pinGitHubActionDigests",
-		"group:allNonMajor"
-	],
+	"extends": ["config:recommended", "helpers:pinGitHubActionDigests", "group:allNonMajor"],
 	"labels": ["Dependencies"],
 	"ignoreDeps": ["turbo", "turbo-linux-64", "discord-api-types"],
 	"npm": {

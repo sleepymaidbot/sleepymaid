@@ -1,38 +1,72 @@
-# sv
+# Welcome to TanStack.com!
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+This site is built with TanStack Router!
 
-## Creating a project
+- [TanStack Router Docs](https://tanstack.com/router)
 
-If you're seeing this, you've probably already done this step. Congrats!
+It's deployed automagically with Netlify!
 
-```bash
-# create a new project in the current directory
-npx sv create
+- [Netlify](https://netlify.com/)
 
-# create a new project in my-app
-npx sv create my-app
+## Development
+
+From your terminal:
+
+```sh
+pnpm install
+pnpm dev
 ```
 
-## Developing
+This starts your app in development mode, rebuilding assets on file changes.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Editing and previewing the docs of TanStack projects locally
 
-```bash
-npm run dev
+The documentations for all TanStack projects except for `React Charts` are hosted on [https://tanstack.com](https://tanstack.com), powered by this TanStack Router app.
+In production, the markdown doc pages are fetched from the GitHub repos of the projects, but in development they are read from the local file system.
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+Follow these steps if you want to edit the doc pages of a project (in these steps we'll assume it's [`TanStack/form`](https://github.com/tanstack/form)) and preview them locally :
+
+1. Create a new directory called `tanstack`.
+
+```sh
+mkdir tanstack
 ```
 
-## Building
+2. Enter the directory and clone this repo and the repo of the project there.
 
-To create a production version of your app:
-
-```bash
-npm run build
+```sh
+cd tanstack
+git clone git@github.com:TanStack/tanstack.com.git
+git clone git@github.com:TanStack/form.git
 ```
 
-You can preview the production build with `npm run preview`.
+> [!NOTE]
+> Your `tanstack` directory should look like this:
+>
+> ```
+> tanstack/
+>    |
+>    +-- form/
+>    |
+>    +-- tanstack.com/
+> ```
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+> [!WARNING]
+> Make sure the name of the directory in your local file system matches the name of the project's repo. For example, `tanstack/form` must be cloned into `form` (this is the default) instead of `some-other-name`, because that way, the doc pages won't be found.
+
+3. Enter the `tanstack/tanstack.com` directory, install the dependencies and run the app in dev mode:
+
+```sh
+cd tanstack.com
+pnpm i
+# The app will run on https://localhost:3000 by default
+pnpm dev
+```
+
+4. Now you can visit http://localhost:3000/form/latest/docs/overview in the browser and see the changes you make in `tanstack/form/docs`.
+
+> [!NOTE]
+> The updated pages need to be manually reloaded in the browser.
+
+> [!WARNING]
+> You will need to update the `docs/config.json` file (in the project's repo) if you add a new doc page!

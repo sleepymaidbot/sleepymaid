@@ -1,7 +1,8 @@
 {
 	"search.exclude": {
 		"**/.yarn": true,
-		"**/.pnp.*": true
+		"**/.pnp.*": true,
+		"**/routeTree.gen.ts": true
 	},
 	"typescript.enablePromptUseWorkspaceTsdk": true,
 	"editor.formatOnSave": true,
@@ -21,5 +22,11 @@
 		"node:vm",
 		"vm2",
 		"node:vm2"
-	]
+	],
+	"files.watcherExclude": {
+		"**/routeTree.gen.ts": true
+	},
+	"files.readonlyInclude": {
+		"**/routeTree.gen.ts": true
+	}
 }
