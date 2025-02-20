@@ -19,7 +19,13 @@ export default class extends Listener<"guildMemberUpdate", SleepyMaidClient> {
 			where: eq(roleConnections.guildId, newMember.guild.id),
 		});
 
+		this.container.logger.debug(`Found ${guildConnections.length} role connections for guild ${newMember.guild.id}`);
+
 		if (guildConnections.length === 0) return;
+
+		this.container.logger.debug(
+			`Processing ${guildConnections.length} role connections for guild ${newMember.guild.id} on member ${newMember.user.username} (${newMember.id})`,
+		);
 
 		const connections: Record<Snowflake, Snowflake[]> = {};
 
