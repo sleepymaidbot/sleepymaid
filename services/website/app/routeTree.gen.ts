@@ -14,6 +14,7 @@ import { Route as rootRoute } from "./routes/__root";
 import { Route as UsersImport } from "./routes/users";
 import { Route as RedirectImport } from "./routes/redirect";
 import { Route as PostsImport } from "./routes/posts";
+import { Route as LogoutImport } from "./routes/logout";
 import { Route as LoginImport } from "./routes/login";
 import { Route as DeferredImport } from "./routes/deferred";
 import { Route as DashboardImport } from "./routes/dashboard";
@@ -46,6 +47,12 @@ const RedirectRoute = RedirectImport.update({
 const PostsRoute = PostsImport.update({
 	id: "/posts",
 	path: "/posts",
+	getParentRoute: () => rootRoute,
+} as any);
+
+const LogoutRoute = LogoutImport.update({
+	id: "/logout",
+	path: "/logout",
 	getParentRoute: () => rootRoute,
 } as any);
 
@@ -168,6 +175,13 @@ declare module "@tanstack/react-router" {
 			path: "/login";
 			fullPath: "/login";
 			preLoaderRoute: typeof LoginImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/logout": {
+			id: "/logout";
+			path: "/logout";
+			fullPath: "/logout";
+			preLoaderRoute: typeof LogoutImport;
 			parentRoute: typeof rootRoute;
 		};
 		"/posts": {
@@ -311,6 +325,7 @@ export interface FileRoutesByFullPath {
 	"/dashboard": typeof DashboardRoute;
 	"/deferred": typeof DeferredRoute;
 	"/login": typeof LoginRoute;
+	"/logout": typeof LogoutRoute;
 	"/posts": typeof PostsRouteWithChildren;
 	"/redirect": typeof RedirectRoute;
 	"/users": typeof UsersRouteWithChildren;
@@ -330,6 +345,7 @@ export interface FileRoutesByTo {
 	"/dashboard": typeof DashboardRoute;
 	"/deferred": typeof DeferredRoute;
 	"/login": typeof LoginRoute;
+	"/logout": typeof LogoutRoute;
 	"/redirect": typeof RedirectRoute;
 	"/auth/callback": typeof AuthCallbackRoute;
 	"/posts/$postId": typeof PostsPostIdRoute;
@@ -348,6 +364,7 @@ export interface FileRoutesById {
 	"/dashboard": typeof DashboardRoute;
 	"/deferred": typeof DeferredRoute;
 	"/login": typeof LoginRoute;
+	"/logout": typeof LogoutRoute;
 	"/posts": typeof PostsRouteWithChildren;
 	"/redirect": typeof RedirectRoute;
 	"/users": typeof UsersRouteWithChildren;
@@ -370,6 +387,7 @@ export interface FileRouteTypes {
 		| "/dashboard"
 		| "/deferred"
 		| "/login"
+		| "/logout"
 		| "/posts"
 		| "/redirect"
 		| "/users"
@@ -388,6 +406,7 @@ export interface FileRouteTypes {
 		| "/dashboard"
 		| "/deferred"
 		| "/login"
+		| "/logout"
 		| "/redirect"
 		| "/auth/callback"
 		| "/posts/$postId"
@@ -404,6 +423,7 @@ export interface FileRouteTypes {
 		| "/dashboard"
 		| "/deferred"
 		| "/login"
+		| "/logout"
 		| "/posts"
 		| "/redirect"
 		| "/users"
@@ -425,6 +445,7 @@ export interface RootRouteChildren {
 	DashboardRoute: typeof DashboardRoute;
 	DeferredRoute: typeof DeferredRoute;
 	LoginRoute: typeof LoginRoute;
+	LogoutRoute: typeof LogoutRoute;
 	PostsRoute: typeof PostsRouteWithChildren;
 	RedirectRoute: typeof RedirectRoute;
 	UsersRoute: typeof UsersRouteWithChildren;
@@ -438,6 +459,7 @@ const rootRouteChildren: RootRouteChildren = {
 	DashboardRoute: DashboardRoute,
 	DeferredRoute: DeferredRoute,
 	LoginRoute: LoginRoute,
+	LogoutRoute: LogoutRoute,
 	PostsRoute: PostsRouteWithChildren,
 	RedirectRoute: RedirectRoute,
 	UsersRoute: UsersRouteWithChildren,
@@ -458,6 +480,7 @@ export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileT
         "/dashboard",
         "/deferred",
         "/login",
+        "/logout",
         "/posts",
         "/redirect",
         "/users",
@@ -482,6 +505,9 @@ export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileT
     },
     "/login": {
       "filePath": "login.tsx"
+    },
+    "/logout": {
+      "filePath": "logout.tsx"
     },
     "/posts": {
       "filePath": "posts.tsx",

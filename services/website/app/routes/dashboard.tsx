@@ -7,32 +7,39 @@ import authMiddleware from "~/utils/middleware/auth";
 import axios from "redaxios";
 import { eq } from "drizzle-orm";
 import { useQuery } from "@tanstack/react-query";
+import { APIPartialGuild } from "discord-api-types/v10";
 
 const getUserGuilds = createServerFn({ method: "GET" })
 	.middleware([authMiddleware])
-	.handler(async (ctx) => {
+	.handler(async () => {
 		const session = await useSession();
-		const user = session.data.user;
+		const sessionData = session.data;
 
-		if (!user) {
+		if (!sessionData) {
 			throw new Error("Not authenticated");
 		}
 
 		const userSession = await db.query.sessionTable.findFirst({
-			where: eq(sessionTable.id, session.data.sessionId),
+			where: eq(sessionTable.id, sessionData.sessionId),
 		});
 
 		if (!userSession) {
 			throw new Error("User session not found");
 		}
 
-		const guilds = await axios.get("https://discord.com/api/v10/users/@me/guilds", {
+		const guildsResponse = await axios.get("https://discord.com/api/v10/users/@me/guilds", {
 			headers: {
 				Authorization: `Bearer ${userSession.accessToken}`,
 			},
 		});
 
-		return guilds.data;
+		const guilds: APIPartialGuild[] = guildsResponse.data;
+
+		return guilds.map((guild) => ({
+			id: guild.id,
+			name: guild.name,
+			icon: guild.icon,
+		}));
 	});
 
 export const Route = createFileRoute("/dashboard")({
@@ -52,12 +59,18 @@ export const Route = createFileRoute("/dashboard")({
 });
 
 function DashboardComponent() {
-	// const { user } = Route.useRouteContext()
-
-	const { data: guilds } = useQuery({
+	const query = useQuery({
 		queryKey: ["guilds"],
 		queryFn: () => getUserGuilds(),
 	});
 
-	return <div>Hello "/dashboard"! {JSON.stringify(guilds)}</div>;
+	if (query.isLoading) {
+		return <div>Loading...</div>;
+	}
+
+	if (query.isError) {
+		return <div>Error: {query.error.message}</div>;
+	}
+
+	return <div>Hello "/dashboard"! {JSON.stringify(query.data)}</div>;
 }

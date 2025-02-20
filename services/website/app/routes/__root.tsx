@@ -113,7 +113,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<Meta />
 			</head>
 			<body>
-				<div className="flex gap-2 p-2 pb-4 text-lg">
+				<div className="flex gap-2 p-2 py-4 text-lg">
 					<Link
 						to="/"
 						activeProps={{
@@ -168,7 +168,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 						{user ? (
 							<>
 								<span className="mr-2">{user.userId}</span>
-								{/* @ts-expect-error */}
 								<Link to="/logout">Logout</Link>
 							</>
 						) : (
