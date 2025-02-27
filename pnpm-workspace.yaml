@@ -7,9 +7,3 @@ packages:
   - services/watcher/
   - services/website/
   - services/testbot/
-
-onlyBuiltDependencies:
-  - "@parcel/watcher"
-  - "@swc/core"
-  - esbuild
-  - sharp

@@ -43,8 +43,9 @@ export default class Manager {
 
 		this.logger.debug(`Updating user metadata for ${userId}`);
 
+		const apiUrl = process.env.API_URL ?? "https://api.ecorte.xyz";
 		const apiKey = process.env.API_SECRET ?? "";
-		const data = await fetch(`${process.env.API_URL}/update-metadata?userId=${userId}`, {
+		const data = await fetch(`${apiUrl}/update-metadata?userId=${userId}`, {
 			method: "POST",
 			headers: {
 				Authorization: apiKey,
