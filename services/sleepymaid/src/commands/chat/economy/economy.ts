@@ -154,6 +154,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 				await interaction.reply({ content: "Invalid subcommand", flags: MessageFlags.Ephemeral });
 				break;
 		}
+		await this.container.manager.updateUserMetadata(interaction.user.id);
 	}
 
 	private async balance(interaction: ChatInputCommandInteraction) {

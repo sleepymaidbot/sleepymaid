@@ -4,15 +4,21 @@ import { and, eq, sql } from "drizzle-orm";
 import { Permission, permissionList } from "@sleepymaid/shared";
 import { GuildMember, PermissionFlagsBits } from "discord.js";
 import { downloadVideo } from "./downloader";
+import { Logger } from "@sleepymaid/logger";
+
+const MetadataCoolDown = new Map<string, number>();
 
 export default class Manager {
 	declare private client: SleepyMaidClient;
 
 	declare private drizzle: DrizzleInstance;
 
+	declare private logger: Logger;
+
 	constructor(client: SleepyMaidClient) {
 		this.client = client;
 		this.drizzle = client.drizzle;
+		this.logger = client.logger;
 	}
 
 	/*
@@ -21,6 +27,33 @@ export default class Manager {
 
 	public async downloadVideo(url: string) {
 		return downloadVideo(this.client, url);
+	}
+
+	/*
+		Linked Roles
+	*/
+
+	public async updateUserMetadata(userId: string) {
+		this.logger.debug(`Trying to update user metadata for ${userId}`);
+		if (MetadataCoolDown.has(userId)) {
+			if (MetadataCoolDown.get(userId)! > Date.now()) return;
+		}
+
+		MetadataCoolDown.set(userId, Date.now() + 1000 * 60 * 10);
+
+		this.logger.debug(`Updating user metadata for ${userId}`);
+
+		const apiKey = process.env.API_SECRET ?? "";
+		const data = await fetch(`${process.env.API_URL}/update-metadata?userId=${userId}`, {
+			method: "POST",
+			headers: {
+				Authorization: apiKey,
+			},
+		});
+
+		this.logger.info(`Updated user metadata for ${userId}`);
+
+		return data.json();
 	}
 
 	/*

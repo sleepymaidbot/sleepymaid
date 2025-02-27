@@ -1,9 +1,15 @@
 packages:
-  - "packages/*"
-  - "services/api/"
-  - "services/clarity/"
-  - "services/sleepymaid/"
-  - "services/helper/"
-  - "services/watcher/"
-  - "services/website/"
-  - "services/testbot/"
+  - packages/*
+  - services/api/
+  - services/clarity/
+  - services/sleepymaid/
+  - services/helper/
+  - services/watcher/
+  - services/website/
+  - services/testbot/
+
+onlyBuiltDependencies:
+  - "@parcel/watcher"
+  - "@swc/core"
+  - esbuild
+  - sharp

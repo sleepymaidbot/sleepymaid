@@ -74,6 +74,12 @@ export const userData = pgTable("user_data", {
 	monthlyTimestamp: timestamp("monthly_timestamp"),
 	monthlyStreak: integer("monthly_streak").default(0),
 	workTimestamp: timestamp("work_timestamp"),
+
+	// Linked roles
+	// { access_token: string, refresh_token: string, expires_at: number }
+	linkedRolesAccessTokens: text("linked_roles_access_tokens"),
+	linkedRolesRefreshTokens: text("linked_roles_refresh_tokens"),
+	linkedRolesExpiresAt: timestamp("linked_roles_expires_at"),
 });
 
 export const reminders = pgTable("reminders", {
