@@ -13,8 +13,8 @@
 		"@oslojs/encoding": "^1.1.0",
 		"@radix-ui/react-slot": "^1.1.2",
 		"@sapphire/result": "^2.7.2",
-		"@tailwindcss/postcss": "^4.0.10",
-		"@tailwindcss/vite": "^4.0.10",
+		"@tailwindcss/postcss": "^4.0.11",
+		"@tailwindcss/vite": "^4.0.11",
 		"@tanstack/react-query": "^5.67.1",
 		"@tanstack/react-query-devtools": "^5.67.1",
 		"@tanstack/react-router": "^1.112.17",
@@ -42,7 +42,7 @@
 		"@types/react-dom": "^19.0.4",
 		"autoprefixer": "^10.4.20",
 		"postcss": "^8.5.3",
-		"tailwindcss": "^4.0.10",
+		"tailwindcss": "^4.0.11",
 		"typescript": "^5.8.2",
 		"vite-tsconfig-paths": "^5.1.4"
 	}
