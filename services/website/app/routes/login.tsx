@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { createFileRoute, Link, redirect } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
 import { Loading } from "~/components/Loading";
 import { getLoginRedirectURL } from "~/utils/server/loginurl";
 
@@ -12,11 +13,22 @@ export const Route = createFileRoute("/login")({
 	component: LoginComponent,
 });
 
-async function LoginComponent() {
+function LoginComponent() {
+	const [isLoading, setIsLoading] = useState(false);
+
 	const query = useQuery({
 		queryKey: ["login"],
 		queryFn: () => getLoginRedirectURL(),
+		staleTime: Infinity,
+		retry: false,
+		enabled: !isLoading,
 	});
+
+	useEffect(() => {
+		if (query.isLoading && !isLoading) {
+			setIsLoading(true);
+		}
+	}, [query.isLoading, isLoading]);
 
 	if (query.isLoading) {
 		return <Loading />;
@@ -30,7 +42,14 @@ async function LoginComponent() {
 	if (!data) {
 		return <div>Error: No data</div>;
 	}
-	window.location.href = data;
 
-	return <button onClick={() => (window.location.href = data)}>Login with Discord</button>;
+	const { url } = data;
+
+	useEffect(() => {
+		if (url) {
+			window.location.href = url;
+		}
+	}, [url]);
+
+	return <button onClick={() => (window.location.href = url)}>Login with Discord</button>;
 }

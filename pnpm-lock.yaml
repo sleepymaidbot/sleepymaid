@@ -652,6 +652,9 @@ importers:
       '@sapphire/result':
         specifier: ^2.7.2
         version: 2.7.2
+      '@sleepymaid/db':
+        specifier: workspace:^
+        version: link:../../packages/db
       '@tailwindcss/postcss':
         specifier: ^4.0.11
         version: 4.0.11

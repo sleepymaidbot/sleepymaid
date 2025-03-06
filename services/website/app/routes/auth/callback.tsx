@@ -2,48 +2,68 @@ import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, redirect, useRouter } from "@tanstack/react-router";
 import { loginFn } from "~/utils/server/login";
 import { Loading } from "~/components/Loading";
+import { useState, useEffect } from "react";
+
 export const Route = createFileRoute("/auth/callback")({
 	component: AuthCallbackComponent,
 });
 
 function AuthCallbackComponent() {
-	console.log(window.location.search);
-	const searchParams = new URLSearchParams(window.location.search);
-	const code = searchParams.get("code");
-	const state = searchParams.get("state");
+	const router = useRouter();
+	const [isLoading, setIsLoading] = useState(false);
+	const [authParams, setAuthParams] = useState<{ code: string | null; state: string | null }>({
+		code: null,
+		state: null,
+	});
 
-	searchParams.delete("code");
-	searchParams.delete("state");
-	window.history.replaceState(
-		{},
-		"",
-		`${window.location.pathname}${searchParams.toString() ? `?${searchParams.toString()}` : ""}`,
-	);
-	if (!code || !state) {
-		redirect({ to: "/" });
-	}
+	useEffect(() => {
+		const searchParams = new URLSearchParams(window.location.search);
+		setAuthParams({
+			code: searchParams.get("code"),
+			state: searchParams.get("state"),
+		});
+	}, []);
 
-	console.log("Code", code);
-	console.log("State", state);
+	const { code, state } = authParams;
 
 	const query = useQuery({
-		queryKey: ["auth-callback", code],
+		queryKey: ["auth-callback", code ?? ""],
 		queryFn: () => loginFn({ data: { code: code!, state: state! } }),
 		staleTime: Infinity,
-		enabled: !!code && !!state,
+		enabled: !isLoading && !!code && !!state,
 		retry: false,
 	});
+
+	useEffect(() => {
+		if (query.isLoading && !isLoading) {
+			setIsLoading(true);
+		}
+	}, [query.isLoading, isLoading]);
+
+	useEffect(() => {
+		if (query.isSuccess) {
+			console.log("Login successful, attempting navigation");
+			try {
+				router.invalidate();
+				window.location.href = "/dashboard";
+			} catch (error) {
+				console.error("Navigation error:", error);
+			}
+		}
+	}, [query.isSuccess, router]);
+
+	if (!code || !state) {
+		return <Loading />;
+	}
 
 	if (query.isLoading) {
 		return <Loading />;
 	}
 
 	if (query.isError) {
+		console.error("Login error:", query.error);
 		return <div>Error: {query.error.message} </div>;
 	}
 
-	const router = useRouter();
-
-	router.invalidate();
-	router.navigate({ to: "/dashboard" });
+	return <Loading />;
 }
