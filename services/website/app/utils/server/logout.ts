@@ -12,5 +12,5 @@ export const logoutFn = createServerFn({ method: "GET" }).handler(async () => {
 
 	await session.clear();
 
-	throw redirect({ to: "/" });
+	return { success: true };
 });

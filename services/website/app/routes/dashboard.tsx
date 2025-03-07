@@ -1,5 +1,5 @@
 import { sessionTable } from "@sleepymaid/db";
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/start";
 import { useSession } from "~/hooks/useSession";
 import { db } from "~/utils/db";
@@ -8,6 +8,11 @@ import axios from "redaxios";
 import { eq } from "drizzle-orm";
 import { useQuery } from "@tanstack/react-query";
 import { APIPartialGuild } from "discord-api-types/v10";
+import { ScrollArea } from "~/components/ui/scroll-area";
+import { Avatar, AvatarImage, AvatarFallback } from "~/components/ui/avatar";
+import { Input } from "~/components/ui/input";
+import { useState } from "react";
+import { Button } from "~/components/ui/button";
 
 const getUserGuilds = createServerFn({ method: "GET" })
 	.middleware([authMiddleware])
@@ -63,6 +68,7 @@ function DashboardComponent() {
 		queryKey: ["guilds"],
 		queryFn: () => getUserGuilds(),
 	});
+	const [searchTerm, setSearchTerm] = useState("");
 
 	if (query.isLoading) {
 		return <div>Loading...</div>;
@@ -72,5 +78,42 @@ function DashboardComponent() {
 		return <div>Error: {query.error.message}</div>;
 	}
 
-	return <div>Hello "/dashboard"! {JSON.stringify(query.data)}</div>;
+	const guilds = query.data ?? [];
+	const filteredGuilds = guilds.filter((guild) => guild.name.toLowerCase().includes(searchTerm.toLowerCase()));
+
+	return (
+		<div className="p-4">
+			<div className="pb-4 text-2xl font-bold">Select a server!</div>
+			<Input
+				type="text"
+				placeholder="Search servers..."
+				value={searchTerm}
+				onChange={(e) => setSearchTerm(e.target.value)}
+				className="mb-4"
+			/>
+			<ScrollArea className="h-[500px] rounded-md border p-4">
+				<div className="flex flex-col gap-2">
+					{filteredGuilds.map((guild) => (
+						<Link
+							key={guild.id}
+							to="/dashboard/$guildId"
+							params={{
+								guildId: guild.id,
+							}}
+						>
+							<Button variant="outline" className="w-full justify-start">
+								<div className="flex items-center gap-2 py-2">
+									<Avatar className="h-10 w-10">
+										<AvatarImage src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`} />
+										<AvatarFallback>{guild.name.slice(0, 2)}</AvatarFallback>
+									</Avatar>
+									<div>{guild.name}</div>
+								</div>
+							</Button>
+						</Link>
+					))}
+				</div>
+			</ScrollArea>
+		</div>
+	);
 }

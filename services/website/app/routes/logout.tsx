@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { logoutFn } from "~/utils/server/logout";
 
 export const Route = createFileRoute("/logout")({
@@ -18,16 +18,26 @@ function LogoutComponent() {
 		enabled: !isLoading,
 	});
 
+	useEffect(() => {
+		if (logout.isLoading && !isLoading) {
+			setIsLoading(true);
+		}
+	}, [logout.isLoading, isLoading]);
+
+	useEffect(() => {
+		if (logout.isSuccess) {
+			console.log("Logout successful, redirecting to home");
+			window.location.href = "/";
+		}
+	}, [logout.isSuccess]);
+
 	if (logout.isLoading) {
-		setIsLoading(true);
 		return <div>Logging out...</div>;
 	}
 
 	if (logout.isError) {
-		return <div>Error logging out</div>;
+		return <div>Error logging out: {logout.error.message}</div>;
 	}
 
-	window.location.href = "/";
-
-	return <div>Logged out</div>;
+	return <div>Logging out...</div>;
 }

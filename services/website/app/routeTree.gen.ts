@@ -24,6 +24,7 @@ import { Route as UsersIndexImport } from "./routes/users.index";
 import { Route as PostsIndexImport } from "./routes/posts.index";
 import { Route as UsersUserIdImport } from "./routes/users.$userId";
 import { Route as PostsPostIdImport } from "./routes/posts.$postId";
+import { Route as DashboardGuildIdImport } from "./routes/dashboard.$guildId";
 import { Route as AuthCallbackImport } from "./routes/auth/callback";
 import { Route as LayoutLayout2Import } from "./routes/_layout/_layout-2";
 import { Route as PostsPostIdDeepImport } from "./routes/posts_.$postId.deep";
@@ -107,6 +108,12 @@ const PostsPostIdRoute = PostsPostIdImport.update({
 	id: "/$postId",
 	path: "/$postId",
 	getParentRoute: () => PostsRoute,
+} as any);
+
+const DashboardGuildIdRoute = DashboardGuildIdImport.update({
+	id: "/$guildId",
+	path: "/$guildId",
+	getParentRoute: () => DashboardRoute,
 } as any);
 
 const AuthCallbackRoute = AuthCallbackImport.update({
@@ -219,6 +226,13 @@ declare module "@tanstack/react-router" {
 			preLoaderRoute: typeof AuthCallbackImport;
 			parentRoute: typeof rootRoute;
 		};
+		"/dashboard/$guildId": {
+			id: "/dashboard/$guildId";
+			path: "/$guildId";
+			fullPath: "/dashboard/$guildId";
+			preLoaderRoute: typeof DashboardGuildIdImport;
+			parentRoute: typeof DashboardImport;
+		};
 		"/posts/$postId": {
 			id: "/posts/$postId";
 			path: "/$postId";
@@ -295,6 +309,16 @@ const LayoutRouteChildren: LayoutRouteChildren = {
 
 const LayoutRouteWithChildren = LayoutRoute._addFileChildren(LayoutRouteChildren);
 
+interface DashboardRouteChildren {
+	DashboardGuildIdRoute: typeof DashboardGuildIdRoute;
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+	DashboardGuildIdRoute: DashboardGuildIdRoute,
+};
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(DashboardRouteChildren);
+
 interface PostsRouteChildren {
 	PostsPostIdRoute: typeof PostsPostIdRoute;
 	PostsIndexRoute: typeof PostsIndexRoute;
@@ -322,7 +346,7 @@ const UsersRouteWithChildren = UsersRoute._addFileChildren(UsersRouteChildren);
 export interface FileRoutesByFullPath {
 	"/": typeof IndexRoute;
 	"": typeof LayoutLayout2RouteWithChildren;
-	"/dashboard": typeof DashboardRoute;
+	"/dashboard": typeof DashboardRouteWithChildren;
 	"/deferred": typeof DeferredRoute;
 	"/login": typeof LoginRoute;
 	"/logout": typeof LogoutRoute;
@@ -330,6 +354,7 @@ export interface FileRoutesByFullPath {
 	"/redirect": typeof RedirectRoute;
 	"/users": typeof UsersRouteWithChildren;
 	"/auth/callback": typeof AuthCallbackRoute;
+	"/dashboard/$guildId": typeof DashboardGuildIdRoute;
 	"/posts/$postId": typeof PostsPostIdRoute;
 	"/users/$userId": typeof UsersUserIdRoute;
 	"/posts/": typeof PostsIndexRoute;
@@ -342,12 +367,13 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
 	"/": typeof IndexRoute;
 	"": typeof LayoutLayout2RouteWithChildren;
-	"/dashboard": typeof DashboardRoute;
+	"/dashboard": typeof DashboardRouteWithChildren;
 	"/deferred": typeof DeferredRoute;
 	"/login": typeof LoginRoute;
 	"/logout": typeof LogoutRoute;
 	"/redirect": typeof RedirectRoute;
 	"/auth/callback": typeof AuthCallbackRoute;
+	"/dashboard/$guildId": typeof DashboardGuildIdRoute;
 	"/posts/$postId": typeof PostsPostIdRoute;
 	"/users/$userId": typeof UsersUserIdRoute;
 	"/posts": typeof PostsIndexRoute;
@@ -361,7 +387,7 @@ export interface FileRoutesById {
 	__root__: typeof rootRoute;
 	"/": typeof IndexRoute;
 	"/_layout": typeof LayoutRouteWithChildren;
-	"/dashboard": typeof DashboardRoute;
+	"/dashboard": typeof DashboardRouteWithChildren;
 	"/deferred": typeof DeferredRoute;
 	"/login": typeof LoginRoute;
 	"/logout": typeof LogoutRoute;
@@ -370,6 +396,7 @@ export interface FileRoutesById {
 	"/users": typeof UsersRouteWithChildren;
 	"/_layout/_layout-2": typeof LayoutLayout2RouteWithChildren;
 	"/auth/callback": typeof AuthCallbackRoute;
+	"/dashboard/$guildId": typeof DashboardGuildIdRoute;
 	"/posts/$postId": typeof PostsPostIdRoute;
 	"/users/$userId": typeof UsersUserIdRoute;
 	"/posts/": typeof PostsIndexRoute;
@@ -392,6 +419,7 @@ export interface FileRouteTypes {
 		| "/redirect"
 		| "/users"
 		| "/auth/callback"
+		| "/dashboard/$guildId"
 		| "/posts/$postId"
 		| "/users/$userId"
 		| "/posts/"
@@ -409,6 +437,7 @@ export interface FileRouteTypes {
 		| "/logout"
 		| "/redirect"
 		| "/auth/callback"
+		| "/dashboard/$guildId"
 		| "/posts/$postId"
 		| "/users/$userId"
 		| "/posts"
@@ -429,6 +458,7 @@ export interface FileRouteTypes {
 		| "/users"
 		| "/_layout/_layout-2"
 		| "/auth/callback"
+		| "/dashboard/$guildId"
 		| "/posts/$postId"
 		| "/users/$userId"
 		| "/posts/"
@@ -442,7 +472,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
 	IndexRoute: typeof IndexRoute;
 	LayoutRoute: typeof LayoutRouteWithChildren;
-	DashboardRoute: typeof DashboardRoute;
+	DashboardRoute: typeof DashboardRouteWithChildren;
 	DeferredRoute: typeof DeferredRoute;
 	LoginRoute: typeof LoginRoute;
 	LogoutRoute: typeof LogoutRoute;
@@ -456,7 +486,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
 	IndexRoute: IndexRoute,
 	LayoutRoute: LayoutRouteWithChildren,
-	DashboardRoute: DashboardRoute,
+	DashboardRoute: DashboardRouteWithChildren,
 	DeferredRoute: DeferredRoute,
 	LoginRoute: LoginRoute,
 	LogoutRoute: LogoutRoute,
@@ -498,7 +528,10 @@ export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileT
       ]
     },
     "/dashboard": {
-      "filePath": "dashboard.tsx"
+      "filePath": "dashboard.tsx",
+      "children": [
+        "/dashboard/$guildId"
+      ]
     },
     "/deferred": {
       "filePath": "deferred.tsx"
@@ -536,6 +569,10 @@ export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileT
     },
     "/auth/callback": {
       "filePath": "auth/callback.tsx"
+    },
+    "/dashboard/$guildId": {
+      "filePath": "dashboard.$guildId.tsx",
+      "parent": "/dashboard"
     },
     "/posts/$postId": {
       "filePath": "posts.$postId.tsx",

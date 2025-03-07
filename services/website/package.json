@@ -9,9 +9,10 @@
 		"start": "vinxi start"
 	},
 	"dependencies": {
-		"@sleepymaid/db": "workspace:^",
 		"@oslojs/crypto": "^1.0.1",
 		"@oslojs/encoding": "^1.1.0",
+		"@radix-ui/react-avatar": "^1.1.3",
+		"@radix-ui/react-scroll-area": "^1.2.3",
 		"@radix-ui/react-slot": "^1.1.2",
 		"@sapphire/result": "^2.7.2",
 		"@tailwindcss/postcss": "^4.0.11",
@@ -24,6 +25,7 @@
 		"@tanstack/start": "^1.112.17",
 		"arctic": "^3.5.0",
 		"babel-plugin-react-compiler": "19.0.0-beta-40c6c23-20250301",
+		"@sleepymaid/db": "workspace:^",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
 		"discord-api-types": "^0.37.98",
