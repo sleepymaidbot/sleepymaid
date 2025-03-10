@@ -34,8 +34,8 @@
 	"devDependencies": {
 		"@favware/cliff-jumper": "^6.0.0",
 		"@sleepymaid/util": "workspace:^",
-		"@swc/core": "^1.11.7",
-		"@types/node": "^22.13.9",
+		"@swc/core": "^1.11.8",
+		"@types/node": "^22.13.10",
 		"@types/node-cron": "^3.0.11",
 		"rimraf": "^6.0.1",
 		"source-map-support": "0.5.21",
