@@ -19,7 +19,7 @@ const roleWhitelist = [
 	"1305968449100451961", // Responsable
 ];
 
-const minutes = 2;
+const minutes = 1;
 
 export default class extends Listener<"messageCreate", HelperClient> {
 	constructor(context: Context<HelperClient>) {
@@ -64,7 +64,7 @@ export default class extends Listener<"messageCreate", HelperClient> {
 				message.delete();
 				const timeLeft = Math.floor(users[userId] / 1000);
 				const warning = await message.channel.send(
-					`<@${userId}> Merci d'attendre ${minutes} minutes avant d'envoyer un autre gif.\nVous pouvez envoyer un autre gif <t:${timeLeft}:R>.\nSi vous voulez envoyez des gifs, c'est <#1300509988917350471>.`,
+					`<@${userId}> Merci d'attendre ${minutes} minutes avant d'envoyer un autre gif.\nVous pouvez envoyer un autre gif <t:${timeLeft}:R>.\nSi vous voulez envoyer des gifs, c'est <#1150785784119566406>.`,
 				);
 				setTimeout(() => {
 					warning.delete();
