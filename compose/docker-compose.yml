@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgres:15.12-alpine
+    image: postgres:15.10-alpine
     environment:
       POSTGRES_DB: "sleepymaid"
     volumes:
@@ -12,7 +12,7 @@ services:
       timeout: 5s
 
   valkey:
-    image: valkey/valkey:8.1-alpine
+    image: valkey/valkey:8.0-alpine
     volumes:
       - valkey-data:/data
     restart: unless-stopped
@@ -103,7 +103,7 @@ services:
   #    NEXTAUTH_URL: 'http://localhost:3000'
 
   zipline:
-    image: ghcr.io/diced/zipline
+    image: ghcr.io/diced/zipline:latest
     ports:
       - "3002:3002"
     restart: unless-stopped
