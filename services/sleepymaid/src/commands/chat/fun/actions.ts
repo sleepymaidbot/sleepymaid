@@ -195,7 +195,7 @@ export default class ActionsCommand extends SlashCommand<SleepyMaidClient> {
 		await interaction.deferReply();
 
 		const actionsData = await this.container.client.drizzle.query.userActions.findFirst({
-			where: (actions, { eq }) => and(eq(actions.userId, userId), eq(actions.targetId, targetId)),
+			where: and(eq(userActions.userId, userId), eq(userActions.targetId, targetId)),
 		});
 
 		let count: number = 0;

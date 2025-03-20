@@ -14,8 +14,8 @@
 		"noUncheckedIndexedAccess": true,
 
 		// Modules
-		"module": "CommonJS",
-		"moduleResolution": "node",
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
 		"resolveJsonModule": true,
 
 		// Emit
