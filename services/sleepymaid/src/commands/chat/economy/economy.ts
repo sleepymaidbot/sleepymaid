@@ -301,6 +301,19 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 					description: `You claimed your daily reward of ${reward} coins! Your current streak is ${(data.dailyStreak ?? 0) + 1} days.`,
 				},
 			],
+			components: [
+				{
+					type: ComponentType.ActionRow,
+					components: [
+						{
+							type: ComponentType.Button,
+							customId: "reminder:in:1440:daily:" + interaction.user.id,
+							label: "Set a reminder for 1 day",
+							style: ButtonStyle.Success,
+						},
+					],
+				},
+			],
 		});
 	}
 
@@ -339,6 +352,19 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 				{
 					...getBaseEmbed(interaction),
 					description: `You claimed your weekly reward of ${reward} coins! Your current streak is ${(data.weeklyStreak ?? 0) + 1} weeks.`,
+				},
+			],
+			components: [
+				{
+					type: ComponentType.ActionRow,
+					components: [
+						{
+							type: ComponentType.Button,
+							customId: "reminder:in:10080:weekly:" + interaction.user.id,
+							label: "Set a reminder for 1 week",
+							style: ButtonStyle.Success,
+						},
+					],
 				},
 			],
 		});
@@ -381,6 +407,19 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 					description: `You claimed your monthly reward of ${reward} coins! Your current streak is ${(data.monthlyStreak ?? 0) + 1} months.`,
 				},
 			],
+			components: [
+				{
+					type: ComponentType.ActionRow,
+					components: [
+						{
+							type: ComponentType.Button,
+							customId: "reminder:in:43200:monthly:" + interaction.user.id,
+							label: "Set a reminder for 1 month",
+							style: ButtonStyle.Success,
+						},
+					],
+				},
+			],
 		});
 	}
 
@@ -418,6 +457,19 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 				{
 					...getBaseEmbed(interaction),
 					description: `You worked for ${reward} coins!`,
+				},
+			],
+			components: [
+				{
+					type: ComponentType.ActionRow,
+					components: [
+						{
+							type: ComponentType.Button,
+							customId: "reminder:in:10:work:" + interaction.user.id,
+							label: "Set a reminder for 10 minutes",
+							style: ButtonStyle.Success,
+						},
+					],
 				},
 			],
 		});

@@ -50,7 +50,12 @@ export default class Manager {
 			headers: {
 				Authorization: apiKey,
 			},
+		}).catch((err) => {
+			this.logger.error(`Failed to update user metadata for ${userId}: ${err}`);
+			return null;
 		});
+
+		if (!data) return;
 
 		this.logger.info(`Updated user metadata for ${userId}`);
 
