@@ -25,7 +25,7 @@ const roles = {
 
 const canFail: Record<Snowflake, number> = {
 	"821717486217986098": 0.9, // Test
-	"1150780245151068332": 0.5, // Mamayo
+	"1150780245151068332": 0.15, // Mamayo
 };
 
 export default class extends SlashCommand<HelperClient> {
