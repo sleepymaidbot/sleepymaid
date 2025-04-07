@@ -1,5 +1,5 @@
 import { Context, Listener } from "@sleepymaid/handler";
-import { WatcherClient } from "../../lib/extensions/WatcherClient";
+import { WatcherClient } from "../../../lib/extensions/WatcherClient";
 import { intToHexColor } from "@sleepymaid/util";
 import { APIEmbed, AuditLogEvent, Role } from "discord.js";
 

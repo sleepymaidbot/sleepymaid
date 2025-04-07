@@ -1,5 +1,5 @@
 import { Context, Listener } from "@sleepymaid/handler";
-import { WatcherClient } from "../../lib/extensions/WatcherClient";
+import { WatcherClient } from "../../../lib/extensions/WatcherClient";
 import { GuildMember, Colors, APIEmbed } from "discord.js";
 
 export default class extends Listener<"guildMemberAdd", WatcherClient> {

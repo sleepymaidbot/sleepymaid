@@ -1,5 +1,5 @@
 import { Context, Listener } from "@sleepymaid/handler";
-import { WatcherClient } from "../../lib/extensions/WatcherClient";
+import { WatcherClient } from "../../../lib/extensions/WatcherClient";
 import { APIEmbed, APIEmbedField, AttachmentBuilder, AuditLogEvent, Colors, Role } from "discord.js";
 import { intToHexColor } from "@sleepymaid/util";
 import { generateSplitImage } from "@sleepymaid/shared";
