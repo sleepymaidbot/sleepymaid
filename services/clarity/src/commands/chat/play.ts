@@ -3,7 +3,6 @@ import { SlashCommand } from "@sleepymaid/handler";
 import { ApplicationCommandOptionType, type ChatInputCommandInteraction } from "discord.js";
 import { ClarityClient } from "../../lib/ClarityClient";
 import { QueryType, useMainPlayer } from "discord-player";
-import TidalExtractor from "discord-player-tidal";
 
 const searchUrls: Record<string | QueryType, string[]> = {
 	[QueryType.YOUTUBE_VIDEO]: ["https://www.youtube.com/watch?v=", "https://www.youtube.com/results?search_query="],
@@ -19,7 +18,6 @@ const searchUrls: Record<string | QueryType, string[]> = {
 	[QueryType.SPOTIFY_SONG]: ["https://open.spotify.com/song/"],
 	[QueryType.SPOTIFY_SEARCH]: ["https://open.spotify.com/search?q="],
 	[QueryType.SPOTIFY_PLAYLIST]: ["https://open.spotify.com/playlist/"],
-	[`ext:${TidalExtractor.identifier}`]: ["https://tidal.com/browse/search?q="],
 };
 
 export default class extends SlashCommand<ClarityClient> {
