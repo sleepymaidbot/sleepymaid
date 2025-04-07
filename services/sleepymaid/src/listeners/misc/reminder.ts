@@ -13,7 +13,7 @@ const cleanNames: Record<string, string> = {
 	monthly: "Monthly Reward",
 };
 
-export default class VidListener extends Listener<"interactionCreate", SleepyMaidClient> {
+export default class extends Listener<"interactionCreate", SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
 		super(context, {
 			name: "interactionCreate",
