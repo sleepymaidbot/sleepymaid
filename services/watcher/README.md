@@ -35,9 +35,9 @@
 
 ### Channel Events
 
-- [ ] Channel Create
-- [ ] Channel Delete
-- [ ] Channel Update
+- [x] Channel Create
+- [x] Channel Delete
+- [x] Channel Update
 
 ### Emoji Events
 
