@@ -15,6 +15,7 @@ import { YoutubeiExtractor } from "discord-player-youtubei";
 import TidalExtractor from "discord-player-tidal";
 import { TTSExtractor } from "tts-extractor";
 import { DeezerExtractor } from "discord-player-deezer";
+import { load } from "@extractorpack/extractorpack";
 
 export class ClarityClient extends HandlerClient {
 	// declare public drizzle: DrizzleInstance;
@@ -66,13 +67,7 @@ export class ClarityClient extends HandlerClient {
 
 		const player = new Player(this);
 
-		await player.extractors.register(DeezerExtractor, {});
-		await player.extractors.register(YoutubeiExtractor, {});
-		await player.extractors.register(TidalExtractor, {});
-		await player.extractors.register(TTSExtractor, {
-			language: "en",
-			slow: false,
-		});
+		await load(player);
 		await player.extractors.loadMulti(DefaultExtractors);
 
 		this.loadHandlers({
