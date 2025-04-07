@@ -50,13 +50,13 @@ export default class extends Listener<"interactionCreate", SleepyMaidClient> {
 
 			const timestamp = getUnixTime(date);
 
-			await interaction.update({
-				components: [],
-			});
-
-			return await interaction.reply({
+			await interaction.reply({
 				content: `Reminder added for \`\`${reminderName}\`\` <t:${timestamp}:R>`,
 				flags: MessageFlags.Ephemeral,
+			});
+
+			await interaction.message.edit({
+				components: [],
 			});
 		}
 		return;
