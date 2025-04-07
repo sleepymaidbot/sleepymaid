@@ -11,10 +11,6 @@ import { Player } from "discord-player";
 import { DefaultExtractors } from "@discord-player/extractor";
 import { setupPlayerEvents } from "./playerEvents";
 import ClarityContainer from "./ClarityContainer";
-import { YoutubeiExtractor } from "discord-player-youtubei";
-import TidalExtractor from "discord-player-tidal";
-import { TTSExtractor } from "tts-extractor";
-import { DeezerExtractor } from "discord-player-deezer";
 import { load } from "@extractorpack/extractorpack";
 
 export class ClarityClient extends HandlerClient {
