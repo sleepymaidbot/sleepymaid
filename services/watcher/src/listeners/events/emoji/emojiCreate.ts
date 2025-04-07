@@ -38,7 +38,7 @@ export default class extends Listener<"emojiCreate", WatcherClient> {
 				},
 				{
 					name: "Emoji URL",
-					value: `${emoji.url}`,
+					value: `${emoji.imageURL()}`,
 					inline: true,
 				},
 				{
