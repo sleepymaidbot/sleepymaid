@@ -45,13 +45,13 @@ export default class extends Listener<"emojiUpdate", WatcherClient> {
 
 		const embed: APIEmbed = {
 			title: "Emoji Updated",
-			color: Colors.Green,
+			color: Colors.Blurple,
 			fields,
 			timestamp: new Date().toISOString(),
 		};
 
 		const author = await oldEmoji.guild.fetchAuditLogs({
-			type: AuditLogEvent.EmojiCreate,
+			type: AuditLogEvent.EmojiUpdate,
 		});
 		const log = author.entries
 			.filter((l) => l.target && "id" in l.target && l.target.id === oldEmoji.id)
