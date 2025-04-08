@@ -191,6 +191,8 @@ export default class extends Listener<"channelUpdate", WatcherClient> {
 			}
 		}
 
+		if (fields.length <= 1) return;
+
 		const embed: APIEmbed = {
 			title: "Channel Updated",
 			color: Colors.Blurple,
