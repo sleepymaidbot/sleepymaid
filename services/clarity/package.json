@@ -13,12 +13,12 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
-		"@extractorpack/extractorpack": "^0.0.3",
+		"@extractorpack/extractorpack": "^0.0.5",
 		"@types/i18next-fs-backend": "^1.2.0",
-		"@types/node": "^22.13.9",
+		"@types/node": "^22.14.1",
 		"rimraf": "^6.0.1",
 		"source-map-support": "0.5.21",
-		"typescript": "^5.8.2"
+		"typescript": "^5.8.3"
 	},
 	"dependencies": {
 		"@discord-player/equalizer": "^7.1.0",
@@ -31,8 +31,8 @@
 		"discord-player-deezer": "^2.5.0",
 		"discord-player-youtubei": "^1.4.5",
 		"discord.js": "14.18.0",
-		"drizzle-orm": "^0.40.0",
-		"i18next": "^24.2.2",
+		"drizzle-orm": "^0.42.0",
+		"i18next": "^24.2.3",
 		"i18next-fs-backend": "^2.6.0",
 		"path": "0.12.7",
 		"tts-extractor": "^1.0.4"
