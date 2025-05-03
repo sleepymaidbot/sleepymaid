@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgres:15.10-alpine
+    image: postgres:15.12-alpine
     environment:
       POSTGRES_DB: "sleepymaid"
     volumes:
@@ -12,7 +12,7 @@ services:
       timeout: 5s
 
   valkey:
-    image: valkey/valkey:8.0-alpine
+    image: valkey/valkey:8.1-alpine
     volumes:
       - valkey-data:/data
     restart: unless-stopped
