@@ -65,7 +65,7 @@ export default class extends Listener<"messageDelete", WatcherClient> {
 			type: AuditLogEvent.MessageDelete,
 		});
 		const log = author.entries
-			.filter((l) => l.target.id === message.author.id)
+			.filter((l) => l.target && l.target.id === message.author.id)
 			.sort((a, b) => b.createdTimestamp - a.createdTimestamp)
 			.first();
 
