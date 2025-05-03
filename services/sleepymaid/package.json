@@ -36,7 +36,7 @@
 		"discord.js": "^14.19.3",
 		"drizzle-orm": "^0.43.1",
 		"gamedig": "^5.3.0",
-		"i18next": "^24.2.3",
+		"i18next": "^25.0.2",
 		"i18next-fs-backend": "^2.6.0",
 		"murmurhash-v3": "^1.0.2",
 		"path": "0.12.7",
