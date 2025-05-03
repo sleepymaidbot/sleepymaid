@@ -28,7 +28,7 @@
 		"@sleepymaid/util": "workspace:^",
 		"discord.js": "^14.19.3",
 		"drizzle-orm": "^0.43.1",
-		"i18next": "^24.2.3",
+		"i18next": "^25.0.2",
 		"i18next-fs-backend": "^2.6.0",
 		"iovalkey": "^0.3.1",
 		"module-alias": "^2.2.3",
