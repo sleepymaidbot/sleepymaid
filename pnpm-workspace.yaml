@@ -7,3 +7,7 @@ packages:
   - services/watcher/
   - services/website/
   - services/testbot/
+onlyBuiltDependencies:
+  - "@swc/core"
+  - esbuild
+  - unrs-resolver

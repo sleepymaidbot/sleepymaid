@@ -1,19 +1,22 @@
 import { Context, SlashCommand } from "@sleepymaid/handler";
 import { SleepyMaidClient } from "../../../lib/SleepyMaidClient";
 import {
+	ActionRowBuilder,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
+	ButtonBuilder,
 	ChatInputCommandInteraction,
-	Colors,
-	ComponentType,
 	InteractionContextType,
 	InteractionReplyOptions,
 	InteractionUpdateOptions,
 	MessageComponentInteraction,
-	MessageFlags,
+	SectionBuilder,
+	SeparatorBuilder,
+	TextDisplayBuilder,
+	ThumbnailBuilder,
 } from "discord.js";
-import { APIEmbed, ApplicationCommandOptionType } from "discord-api-types/v10";
+import { ApplicationCommandOptionType, MessageFlags, SeparatorSpacingSize } from "discord-api-types/v10";
 import { userData } from "@sleepymaid/db";
 import { desc, eq, sql } from "drizzle-orm";
 import DBCheckPrecondtion from "../../../preconditions/dbCheck";
@@ -26,22 +29,6 @@ const rewards: Record<"daily" | "weekly" | "monthly" | "work", () => number> = {
 	work: () => {
 		return Math.floor(Math.random() * 101) + 50;
 	},
-};
-
-const baseEmbed: APIEmbed = {
-	color: Colors.Blurple,
-	title: "Sleepy Maid Economy",
-};
-
-const getBaseEmbed = (interaction: ChatInputCommandInteraction) => {
-	return {
-		...baseEmbed,
-		author: {
-			name: interaction.user.username,
-			icon_url: interaction.user.avatarURL() ?? interaction.client.user.avatarURL() ?? undefined,
-		},
-		timestamp: new Date().toISOString(),
-	} satisfies APIEmbed;
 };
 
 export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
@@ -162,12 +149,30 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 		const balance = await this.container.client.drizzle.query.userData.findFirst({
 			where: eq(userData.userId, user.id),
 		});
+
+		const leaderboardPosition = await this.container.client.drizzle.query.userData.findMany({
+			where: sql`${userData.currency} > ${balance?.currency ?? 0}`,
+			columns: {
+				userId: true,
+			},
+		});
+
+		const position = leaderboardPosition.length + 1;
+
 		await interaction.reply({
-			embeds: [
-				{
-					...getBaseEmbed(interaction),
-					description: `${user} has ${formatNumber(balance?.currency ?? 0)} coins`,
-				},
+			flags: [MessageFlags.IsComponentsV2],
+			components: [
+				new SectionBuilder()
+					.setThumbnailAccessory(
+						new ThumbnailBuilder().setURL(user.avatarURL() ?? interaction.client.user.avatarURL() ?? ""),
+					)
+					.addTextDisplayComponents(
+						new TextDisplayBuilder().setContent(
+							`# 👤 Viewing profile of ${user.displayName}
+🪙 ${formatNumber(balance?.currency ?? 0)} coins
+🏆 ${position}th on the currency leaderboard`,
+						),
+					),
 			],
 		});
 	}
@@ -195,54 +200,51 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 				limit: 10,
 				offset: (page - 1) * 10,
 			});
+
 			return {
-				embeds: [
-					{
-						...getBaseEmbed(interaction),
-						description: `### Leaderboard:\n${leaderboard
-							.map((user, index) => {
-								const displayIndex = index + (page - 1) * 10;
-								const name = user.displayName ?? user.userName;
-								const prefix = medals[displayIndex as keyof typeof medals] ?? `${displayIndex + 1}.`;
-								return `${prefix} **${name}**: ${formatNumber(user.currency)}`;
-							})
-							.join("\n")}`,
-						footer: {
-							text: `Page ${page}`,
-						},
-					},
-				],
 				components: [
-					{
-						type: ComponentType.ActionRow,
-						components: [
-							{
-								type: ComponentType.Button,
-								customId: page === 1 ? "none_prev" : `economy_leaderboard_${page - 1}`,
-								style: ButtonStyle.Primary,
-								emoji: "◀️",
-								disabled: page === 1,
-							},
-							{
-								type: ComponentType.Button,
-								customId: page === 1 ? `economy_leaderboard_reset` : "none_current",
-								label: `${page}`,
-								style: ButtonStyle.Primary,
-								disabled: page === 1,
-							},
-							{
-								type: ComponentType.Button,
-								customId: leaderboard.length < 10 ? "none_next" : `economy_leaderboard_${page + 1}`,
-								style: ButtonStyle.Primary,
-								emoji: "▶️",
-								disabled: leaderboard.length < 10,
-							},
-						],
-					},
+					...leaderboard
+						.map((user, index) => {
+							const displayIndex = index + (page - 1) * 10;
+							const name = user.displayName ?? user.userName;
+							const prefix = medals[displayIndex as keyof typeof medals] ?? `${displayIndex + 1}.`;
+							return [
+								new SectionBuilder()
+									.addTextDisplayComponents(
+										new TextDisplayBuilder().setContent(`${prefix} **${name}**: ${formatNumber(user.currency)}`),
+									)
+									.setThumbnailAccessory(
+										new ThumbnailBuilder().setURL(
+											user.avatarHash ? `https://cdn.discordapp.com/avatars/${user.userId}/${user.avatarHash}.png` : "",
+										),
+									),
+								...(index < leaderboard.length - 1
+									? [new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small).setDivider(true)]
+									: []),
+							];
+						})
+						.flat(),
+					new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small).setDivider(true),
+					new ActionRowBuilder<ButtonBuilder>().addComponents(
+						new ButtonBuilder()
+							.setCustomId(page === 1 ? "none_prev" : `economy_leaderboard_${page - 1}`)
+							.setEmoji("⬅️")
+							.setStyle(ButtonStyle.Primary)
+							.setDisabled(page === 1),
+						new ButtonBuilder()
+							.setCustomId(page === 1 ? `economy_leaderboard_reset` : "none_current")
+							.setLabel(page.toString())
+							.setStyle(ButtonStyle.Primary)
+							.setDisabled(page === 1),
+						new ButtonBuilder()
+							.setCustomId(page === 10 ? "none_next" : `economy_leaderboard_${page + 1}`)
+							.setEmoji("➡️")
+							.setStyle(ButtonStyle.Primary),
+					),
 				],
 			};
 		};
-		const message = await interaction.editReply(await getEmbed(page));
+		const message = await interaction.editReply({ ...(await getEmbed(page)), flags: [MessageFlags.IsComponentsV2] });
 		message
 			.createMessageComponentCollector({
 				time: 1000 * 60 * 5,
@@ -295,24 +297,26 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 		);
 
 		await interaction.reply({
-			embeds: [
-				{
-					...getBaseEmbed(interaction),
-					description: `You claimed your daily reward of ${reward} coins! Your current streak is ${(data.dailyStreak ?? 0) + 1} days.`,
-				},
-			],
+			flags: [MessageFlags.IsComponentsV2],
 			components: [
-				{
-					type: ComponentType.ActionRow,
-					components: [
-						{
-							type: ComponentType.Button,
-							customId: "reminder:in:1440:daily:" + interaction.user.id,
-							label: "Set a reminder for 1 day",
-							style: ButtonStyle.Success,
-						},
-					],
-				},
+				new SectionBuilder()
+					.addTextDisplayComponents(
+						new TextDisplayBuilder().setContent(
+							`# 💰 Daily Reward\n🪙 You claimed your daily reward of ${reward} coins!
+🔢 Your current streak is ${(data.dailyStreak ?? 0) + 1} days.`,
+						),
+					)
+					.setThumbnailAccessory(
+						new ThumbnailBuilder().setURL(interaction.user.avatarURL() ?? interaction.client.user.avatarURL() ?? ""),
+					),
+				new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small).setDivider(true),
+				new ActionRowBuilder<ButtonBuilder>().addComponents(
+					new ButtonBuilder()
+						.setCustomId("reminder:in:1440:daily:" + interaction.user.id)
+						.setEmoji("⏰")
+						.setLabel("Set a reminder for 1 day")
+						.setStyle(ButtonStyle.Success),
+				),
 			],
 		});
 	}
@@ -348,24 +352,26 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 		);
 
 		await interaction.reply({
-			embeds: [
-				{
-					...getBaseEmbed(interaction),
-					description: `You claimed your weekly reward of ${reward} coins! Your current streak is ${(data.weeklyStreak ?? 0) + 1} weeks.`,
-				},
-			],
+			flags: [MessageFlags.IsComponentsV2],
 			components: [
-				{
-					type: ComponentType.ActionRow,
-					components: [
-						{
-							type: ComponentType.Button,
-							customId: "reminder:in:10080:weekly:" + interaction.user.id,
-							label: "Set a reminder for 1 week",
-							style: ButtonStyle.Success,
-						},
-					],
-				},
+				new SectionBuilder()
+					.addTextDisplayComponents(
+						new TextDisplayBuilder().setContent(
+							`# 💰 Weekly Reward\n🪙 You claimed your weekly reward of ${reward} coins!
+🔢 Your current streak is ${(data.weeklyStreak ?? 0) + 1} weeks.`,
+						),
+					)
+					.setThumbnailAccessory(
+						new ThumbnailBuilder().setURL(interaction.user.avatarURL() ?? interaction.client.user.avatarURL() ?? ""),
+					),
+				new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small).setDivider(true),
+				new ActionRowBuilder<ButtonBuilder>().addComponents(
+					new ButtonBuilder()
+						.setCustomId("reminder:in:10080:weekly:" + interaction.user.id)
+						.setEmoji("⏰")
+						.setLabel("Set a reminder for 1 week")
+						.setStyle(ButtonStyle.Success),
+				),
 			],
 		});
 	}
@@ -401,24 +407,26 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 		);
 
 		await interaction.reply({
-			embeds: [
-				{
-					...getBaseEmbed(interaction),
-					description: `You claimed your monthly reward of ${reward} coins! Your current streak is ${(data.monthlyStreak ?? 0) + 1} months.`,
-				},
-			],
+			flags: [MessageFlags.IsComponentsV2],
 			components: [
-				{
-					type: ComponentType.ActionRow,
-					components: [
-						{
-							type: ComponentType.Button,
-							customId: "reminder:in:43200:monthly:" + interaction.user.id,
-							label: "Set a reminder for 1 month",
-							style: ButtonStyle.Success,
-						},
-					],
-				},
+				new SectionBuilder()
+					.addTextDisplayComponents(
+						new TextDisplayBuilder().setContent(
+							`# 💰 Monthly Reward\n🪙 You claimed your monthly reward of ${reward} coins!
+🔢 Your current streak is ${(data.monthlyStreak ?? 0) + 1} months.`,
+						),
+					)
+					.setThumbnailAccessory(
+						new ThumbnailBuilder().setURL(interaction.user.avatarURL() ?? interaction.client.user.avatarURL() ?? ""),
+					),
+				new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small).setDivider(true),
+				new ActionRowBuilder<ButtonBuilder>().addComponents(
+					new ButtonBuilder()
+						.setCustomId("reminder:in:43200:monthly:" + interaction.user.id)
+						.setEmoji("⏰")
+						.setLabel("Set a reminder for 1 month")
+						.setStyle(ButtonStyle.Success),
+				),
 			],
 		});
 	}
@@ -453,24 +461,25 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 		);
 
 		await interaction.reply({
-			embeds: [
-				{
-					...getBaseEmbed(interaction),
-					description: `You worked for ${reward} coins!`,
-				},
-			],
+			flags: [MessageFlags.IsComponentsV2],
 			components: [
-				{
-					type: ComponentType.ActionRow,
-					components: [
-						{
-							type: ComponentType.Button,
-							customId: "reminder:in:10:work:" + interaction.user.id,
-							label: "Set a reminder for 10 minutes",
-							style: ButtonStyle.Success,
-						},
-					],
-				},
+				new SectionBuilder()
+					.addTextDisplayComponents(
+						new TextDisplayBuilder().setContent(
+							`# 💰 Work Reward\n🪙 You worked for ${reward} coins!\n🔢 You can work again in 10 minutes.`,
+						),
+					)
+					.setThumbnailAccessory(
+						new ThumbnailBuilder().setURL(interaction.user.avatarURL() ?? interaction.client.user.avatarURL() ?? ""),
+					),
+				new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small).setDivider(true),
+				new ActionRowBuilder<ButtonBuilder>().addComponents(
+					new ButtonBuilder()
+						.setCustomId("reminder:in:10:work:" + interaction.user.id)
+						.setEmoji("⏰")
+						.setLabel("Set a reminder for 10 minutes")
+						.setStyle(ButtonStyle.Success),
+				),
 			],
 		});
 	}
@@ -514,11 +523,15 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 		);
 
 		await interaction.reply({
-			embeds: [
-				{
-					...getBaseEmbed(interaction),
-					description: `You gave ${amount} coins to ${target.username}`,
-				},
+			flags: [MessageFlags.IsComponentsV2],
+			components: [
+				new SectionBuilder()
+					.addTextDisplayComponents(
+						new TextDisplayBuilder().setContent(`# 💰 Give Money\n🪙 You gave ${amount} coins to ${target.username}`),
+					)
+					.setThumbnailAccessory(
+						new ThumbnailBuilder().setURL(interaction.user.avatarURL() ?? interaction.client.user.avatarURL() ?? ""),
+					),
 			],
 		});
 	}

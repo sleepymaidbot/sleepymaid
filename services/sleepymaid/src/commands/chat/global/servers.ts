@@ -1,10 +1,5 @@
 import { SlashCommand, type Context } from "@sleepymaid/handler";
-import type {
-	APIActionRowComponent,
-	APIEmbed,
-	APIMessageActionRowComponent,
-	ChatInputCommandInteraction,
-} from "discord.js";
+import type { APIActionRowComponent, APIEmbed, ChatInputCommandInteraction, APIComponentInActionRow } from "discord.js";
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
@@ -140,7 +135,7 @@ export default class ServersCommand extends SlashCommand<SleepyMaidClient> {
 
 		const func = gamesFormat[data.game];
 		const embed = func(data, query);
-		const components: APIActionRowComponent<APIMessageActionRowComponent>[] = [];
+		const components: APIActionRowComponent<APIComponentInActionRow>[] = [];
 		if (data.url) {
 			components.push({
 				type: ComponentType.ActionRow,
