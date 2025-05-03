@@ -194,18 +194,18 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 		const page = interaction.options.getInteger("page") ?? 1;
 
 		const getEmbed = async (page: number): Promise<InteractionReplyOptions & InteractionUpdateOptions> => {
-			page = Math.min(10, page);
+			page = Math.min(20, page);
 			const leaderboard = await this.container.client.drizzle.query.userData.findMany({
 				orderBy: desc(userData.currency),
-				limit: 10,
-				offset: (page - 1) * 10,
+				limit: 5,
+				offset: (page - 1) * 5,
 			});
 
 			return {
 				components: [
 					...leaderboard
 						.map((user, index) => {
-							const displayIndex = index + (page - 1) * 10;
+							const displayIndex = index + (page - 1) * 5;
 							const name = user.displayName ?? user.userName;
 							const prefix = medals[displayIndex as keyof typeof medals] ?? `${displayIndex + 1}.`;
 							return [
@@ -237,7 +237,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 							.setStyle(ButtonStyle.Primary)
 							.setDisabled(page === 1),
 						new ButtonBuilder()
-							.setCustomId(page === 10 ? "none_next" : `economy_leaderboard_${page + 1}`)
+							.setCustomId(page === 20 ? "none_next" : `economy_leaderboard_${page + 1}`)
 							.setEmoji("➡️")
 							.setStyle(ButtonStyle.Primary),
 					),
