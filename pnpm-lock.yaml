@@ -54,8 +54,8 @@ importers:
         specifier: ^9.1.7
         version: 9.1.7
       lint-staged:
-        specifier: ^15.5.2
-        version: 15.5.2
+        specifier: ^16.1.0
+        version: 16.1.0
       prettier:
         specifier: ^3.5.3
         version: 3.5.3
@@ -67,7 +67,7 @@ importers:
         version: 6.0.1
       tsup:
         specifier: ^8.5.0
-        version: 8.5.0(@swc/core@1.11.31)(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.7.0)
+        version: 8.5.0(@swc/core@1.11.31)(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.8.0)
       turbo:
         specifier: ^2.0.11
         version: 2.0.11
@@ -119,7 +119,7 @@ importers:
         version: 0.5.21
       tsup:
         specifier: ^8.5.0
-        version: 8.5.0(@swc/core@1.11.31)(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.7.0)
+        version: 8.5.0(@swc/core@1.11.31)(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.8.0)
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -159,7 +159,7 @@ importers:
         version: 0.5.21
       tsup:
         specifier: ^8.5.0
-        version: 8.5.0(@swc/core@1.11.31)(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.7.0)
+        version: 8.5.0(@swc/core@1.11.31)(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.8.0)
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -193,7 +193,7 @@ importers:
         version: 0.5.21
       tsup:
         specifier: ^8.5.0
-        version: 8.5.0(@swc/core@1.11.31)(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.7.0)
+        version: 8.5.0(@swc/core@1.11.31)(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.8.0)
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -242,7 +242,7 @@ importers:
         version: 0.5.21
       tsup:
         specifier: ^8.5.0
-        version: 8.5.0(@swc/core@1.11.31)(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.7.0)
+        version: 8.5.0(@swc/core@1.11.31)(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.8.0)
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -270,13 +270,13 @@ importers:
         version: 0.5.21
       tsup:
         specifier: ^8.5.0
-        version: 8.5.0(@swc/core@1.11.31)(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.7.0)
+        version: 8.5.0(@swc/core@1.11.31)(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.8.0)
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
       vitest:
         specifier: ^3.2.3
-        version: 3.2.3(@types/debug@4.1.12)(@types/node@22.15.31)(jiti@2.4.2)(jsdom@26.1.0)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+        version: 3.2.3(@types/debug@4.1.12)(@types/node@22.15.31)(jiti@2.4.2)(jsdom@26.1.0)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
 
   services/api:
     dependencies:
@@ -343,7 +343,7 @@ importers:
         version: link:../../packages/shared
       discord-player:
         specifier: ^7.1.0
-        version: 7.1.0(@discord-player/extractor@7.1.0(encoding@0.1.13))(@swc/core@1.11.31)(jiti@2.4.2)(mediaplex@1.0.0)(postcss@8.5.4)(tsx@4.19.2)(yaml@2.7.0)
+        version: 7.1.0(@discord-player/extractor@7.1.0(encoding@0.1.13))(@swc/core@1.11.31)(jiti@2.4.2)(mediaplex@1.0.0)(postcss@8.5.4)(tsx@4.19.2)(yaml@2.8.0)
       discord-player-deezer:
         specifier: ^2.5.0
         version: 2.5.0
@@ -666,7 +666,7 @@ importers:
         version: 4.1.8
       '@tailwindcss/vite':
         specifier: ^4.1.8
-        version: 4.1.8(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0))
+        version: 4.1.8(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0))
       '@tanstack/react-query':
         specifier: ^5.80.6
         version: 5.80.6(react@19.1.0)
@@ -684,7 +684,7 @@ importers:
         version: 1.120.20(@tanstack/react-router@1.120.20(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@tanstack/router-core@1.120.19)(csstype@3.1.3)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tiny-invariant@1.3.3)
       '@tanstack/start':
         specifier: ^1.120.20
-        version: 1.120.20(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0))(yaml@2.7.0)
+        version: 1.120.20(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0))(yaml@2.8.0)
       arctic:
         specifier: ^3.7.0
         version: 3.7.0
@@ -720,10 +720,10 @@ importers:
         version: 1.0.7(tailwindcss@4.1.8)
       vinxi:
         specifier: 0.5.7
-        version: 0.5.7(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+        version: 0.5.7(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
       vite-plugin-babel:
         specifier: ^1.3.1
-        version: 1.3.1(@babel/core@7.26.8)(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0))
+        version: 1.3.1(@babel/core@7.26.8)(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0))
       zod:
         specifier: ^3.25.57
         version: 3.25.57
@@ -751,7 +751,7 @@ importers:
         version: 5.8.3
       vite-tsconfig-paths:
         specifier: ^5.1.4
-        version: 5.1.4(typescript@5.8.3)(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0))
+        version: 5.1.4(typescript@5.8.3)(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0))
 
 packages:
 
@@ -4415,6 +4415,10 @@ packages:
     resolution: {integrity: sha512-/rFeCpNJQbhSZjGVwO9RFV3xPqbnERS8MmIQzCtD/zl6gpJuV/bMLuN92oG3F7d8oDEHHRrujSXNUr8fpjntKw==}
     engines: {node: '>=18'}
 
+  commander@14.0.0:
+    resolution: {integrity: sha512-2uM9rYjPvyq39NwLRqaiLtWHyDC1FvryJDa2ATTVims5YAS4PupsEQsDvP14FqhFr0P49CYDugi59xaxJlTXRA==}
+    engines: {node: '>=20'}
+
   commander@2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
 
@@ -6811,17 +6815,17 @@ packages:
     resolution: {integrity: sha512-wM1+Z03eypVAVUCE7QdSqpVIvelbOakn1M0bPDoA4SGWPx3sNDVUiMo3L6To6WWGClB7VyXnhQ4Sn7gxiJbE6A==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
-  lint-staged@15.5.2:
-    resolution: {integrity: sha512-YUSOLq9VeRNAo/CTaVmhGDKG+LBtA8KF1X4K5+ykMSwWST1vDxJRB2kv2COgLb1fvpCo+A/y9A0G0znNVmdx4w==}
-    engines: {node: '>=18.12.0'}
+  lint-staged@16.1.0:
+    resolution: {integrity: sha512-HkpQh69XHxgCjObjejBT3s2ILwNjFx8M3nw+tJ/ssBauDlIpkx2RpqWSi1fBgkXLSSXnbR3iEq1NkVtpvV+FLQ==}
+    engines: {node: '>=20.17'}
     hasBin: true
 
   listhen@1.9.0:
     resolution: {integrity: sha512-I8oW2+QL5KJo8zXNWX046M134WchxsXC7SawLPvRQpogCbkyQIaFxPE89A2HiwR7vAK2Dm2ERBAmyjTYGYEpBg==}
     hasBin: true
 
-  listr2@8.2.5:
-    resolution: {integrity: sha512-iyAZCeyD+c1gPyE9qpFu8af0Y+MRtmKOncdGoA2S5EY8iFq99dmmvkNnHiWo+pj0s7yH7l3KPIgee77tKpXPWQ==}
+  listr2@8.3.3:
+    resolution: {integrity: sha512-LWzX2KsqcB1wqQ4AHgYb4RsDXauQiqhjLk+6hjbaeHG4zpjjVAB6wC/gz6X0l+Du1cN3pUB5ZlrvTbhGSNnUQQ==}
     engines: {node: '>=18.0.0'}
 
   load-plugin@6.0.3:
@@ -7384,13 +7388,12 @@ packages:
   mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
 
+  nano-spawn@1.0.2:
+    resolution: {integrity: sha512-21t+ozMQDAL/UGgQVBbZ/xXvNO10++ZPuTmKRO8k9V3AClVRht49ahtDjfY8l1q6nSHOrE5ASfthzH3ol6R/hg==}
+    engines: {node: '>=20.17'}
+
   nanoid@3.3.11:
     resolution: {integrity: sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w==}
-    engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
-    hasBin: true
-
-  nanoid@3.3.8:
-    resolution: {integrity: sha512-WNLf5Sd8oZxOm+TzppcYk8gVOgP+l58xNy58D0nbUnOxOWRWvlcCV4kUF7ltmI6PsrLl/BgKEyS4mqsGChFN0w==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
@@ -9787,6 +9790,11 @@ packages:
     engines: {node: '>= 14'}
     hasBin: true
 
+  yaml@2.8.0:
+    resolution: {integrity: sha512-4lLa/EcQCB0cJkyts+FpIRx5G/llPxfP6VQU5KByHEhLxY3IJCH0f0Hy1MHI8sClTvsIb8qwRJ6R/ZdlDJ/leQ==}
+    engines: {node: '>= 14.6'}
+    hasBin: true
+
   yargs-parser@21.1.1:
     resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
     engines: {node: '>=12'}
@@ -10027,7 +10035,7 @@ snapshots:
       '@babel/parser': 7.26.8
       '@babel/template': 7.26.8
       '@babel/types': 7.26.10
-      debug: 4.4.0
+      debug: 4.4.1
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -11811,14 +11819,14 @@ snapshots:
       postcss: 8.5.4
       tailwindcss: 4.1.8
 
-  '@tailwindcss/vite@4.1.8(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0))':
+  '@tailwindcss/vite@4.1.8(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0))':
     dependencies:
       '@tailwindcss/node': 4.1.8
       '@tailwindcss/oxide': 4.1.8
       tailwindcss: 4.1.8
-      vite: 6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      vite: 6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
 
-  '@tanstack/directive-functions-plugin@1.120.17(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)':
+  '@tanstack/directive-functions-plugin@1.120.17(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)':
     dependencies:
       '@babel/code-frame': 7.26.2
       '@babel/core': 7.26.8
@@ -11831,7 +11839,7 @@ snapshots:
       babel-dead-code-elimination: 1.0.10
       dedent: 1.5.3
       tiny-invariant: 1.3.3
-      vite: 6.1.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      vite: 6.1.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -11895,7 +11903,7 @@ snapshots:
       tiny-invariant: 1.3.3
       tiny-warning: 1.0.3
 
-  '@tanstack/react-start-client@1.120.20(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)':
+  '@tanstack/react-start-client@1.120.20(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)':
     dependencies:
       '@tanstack/react-router': 1.120.20(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@tanstack/router-core': 1.120.19
@@ -11906,7 +11914,7 @@ snapshots:
       react-dom: 19.1.0(react@19.1.0)
       tiny-invariant: 1.3.3
       tiny-warning: 1.0.3
-      vinxi: 0.5.7(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      vinxi: 0.5.7(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -11949,7 +11957,7 @@ snapshots:
       - xml2js
       - yaml
 
-  '@tanstack/react-start-plugin@1.120.17(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)':
+  '@tanstack/react-start-plugin@1.120.17(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)':
     dependencies:
       '@babel/code-frame': 7.26.2
       '@babel/core': 7.26.8
@@ -11961,7 +11969,7 @@ snapshots:
       '@tanstack/router-utils': 1.120.17
       babel-dead-code-elimination: 1.0.10
       tiny-invariant: 1.3.3
-      vite: 6.1.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      vite: 6.1.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
     transitivePeerDependencies:
       - '@types/node'
       - jiti
@@ -11976,11 +11984,11 @@ snapshots:
       - tsx
       - yaml
 
-  '@tanstack/react-start-router-manifest@1.120.19(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)':
+  '@tanstack/react-start-router-manifest@1.120.19(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)':
     dependencies:
       '@tanstack/router-core': 1.120.19
       tiny-invariant: 1.3.3
-      vinxi: 0.5.3(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      vinxi: 0.5.3(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -12084,7 +12092,7 @@ snapshots:
     optionalDependencies:
       '@tanstack/react-router': 1.120.20(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
 
-  '@tanstack/router-plugin@1.120.20(@tanstack/react-router@1.120.20(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0))':
+  '@tanstack/router-plugin@1.120.20(@tanstack/react-router@1.120.20(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0))':
     dependencies:
       '@babel/core': 7.26.8
       '@babel/plugin-syntax-jsx': 7.25.9(@babel/core@7.26.8)
@@ -12105,7 +12113,7 @@ snapshots:
       zod: 3.25.57
     optionalDependencies:
       '@tanstack/react-router': 1.120.20(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      vite: 6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      vite: 6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -12116,7 +12124,7 @@ snapshots:
       ansis: 3.12.0
       diff: 7.0.0
 
-  '@tanstack/server-functions-plugin@1.120.17(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)':
+  '@tanstack/server-functions-plugin@1.120.17(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)':
     dependencies:
       '@babel/code-frame': 7.26.2
       '@babel/core': 7.26.8
@@ -12125,7 +12133,7 @@ snapshots:
       '@babel/template': 7.26.8
       '@babel/traverse': 7.26.8
       '@babel/types': 7.26.10
-      '@tanstack/directive-functions-plugin': 1.120.17(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      '@tanstack/directive-functions-plugin': 1.120.17(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
       babel-dead-code-elimination: 1.0.10
       dedent: 1.5.3
       tiny-invariant: 1.3.3
@@ -12144,11 +12152,11 @@ snapshots:
       - tsx
       - yaml
 
-  '@tanstack/start-api-routes@1.120.19(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)':
+  '@tanstack/start-api-routes@1.120.19(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)':
     dependencies:
       '@tanstack/router-core': 1.120.19
       '@tanstack/start-server-core': 1.120.19
-      vinxi: 0.5.3(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      vinxi: 0.5.3(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -12198,22 +12206,22 @@ snapshots:
       tiny-invariant: 1.3.3
       tiny-warning: 1.0.3
 
-  '@tanstack/start-config@1.120.20(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0))(yaml@2.7.0)':
+  '@tanstack/start-config@1.120.20(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0))(yaml@2.8.0)':
     dependencies:
       '@tanstack/react-router': 1.120.20(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@tanstack/react-start-plugin': 1.120.17(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      '@tanstack/react-start-plugin': 1.120.17(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
       '@tanstack/router-generator': 1.120.20(@tanstack/react-router@1.120.20(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
-      '@tanstack/router-plugin': 1.120.20(@tanstack/react-router@1.120.20(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0))
-      '@tanstack/server-functions-plugin': 1.120.17(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      '@tanstack/router-plugin': 1.120.20(@tanstack/react-router@1.120.20(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0))
+      '@tanstack/server-functions-plugin': 1.120.17(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
       '@tanstack/start-server-functions-handler': 1.120.19
-      '@vitejs/plugin-react': 4.3.4(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0))
+      '@vitejs/plugin-react': 4.3.4(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0))
       import-meta-resolve: 4.1.0
       nitropack: 2.11.11(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)
       ofetch: 1.4.1
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
-      vinxi: 0.5.3(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
-      vite: 6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      vinxi: 0.5.3(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
+      vite: 6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
       zod: 3.25.57
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -12272,9 +12280,9 @@ snapshots:
       tiny-warning: 1.0.3
       unctx: 2.4.1
 
-  '@tanstack/start-server-functions-client@1.120.19(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)':
+  '@tanstack/start-server-functions-client@1.120.19(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)':
     dependencies:
-      '@tanstack/server-functions-plugin': 1.120.17(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      '@tanstack/server-functions-plugin': 1.120.17(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
       '@tanstack/start-server-functions-fetcher': 1.120.19
     transitivePeerDependencies:
       - '@types/node'
@@ -12303,9 +12311,9 @@ snapshots:
       '@tanstack/start-server-core': 1.120.19
       tiny-invariant: 1.3.3
 
-  '@tanstack/start-server-functions-server@1.120.17(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)':
+  '@tanstack/start-server-functions-server@1.120.17(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)':
     dependencies:
-      '@tanstack/server-functions-plugin': 1.120.17(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      '@tanstack/server-functions-plugin': 1.120.17(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
       tiny-invariant: 1.3.3
     transitivePeerDependencies:
       - '@types/node'
@@ -12322,9 +12330,9 @@ snapshots:
       - tsx
       - yaml
 
-  '@tanstack/start-server-functions-ssr@1.120.19(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)':
+  '@tanstack/start-server-functions-ssr@1.120.19(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)':
     dependencies:
-      '@tanstack/server-functions-plugin': 1.120.17(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      '@tanstack/server-functions-plugin': 1.120.17(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
       '@tanstack/start-client-core': 1.120.19
       '@tanstack/start-server-core': 1.120.19
       '@tanstack/start-server-functions-fetcher': 1.120.19
@@ -12344,17 +12352,17 @@ snapshots:
       - tsx
       - yaml
 
-  '@tanstack/start@1.120.20(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0))(yaml@2.7.0)':
+  '@tanstack/start@1.120.20(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0))(yaml@2.8.0)':
     dependencies:
-      '@tanstack/react-start-client': 1.120.20(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
-      '@tanstack/react-start-router-manifest': 1.120.19(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      '@tanstack/react-start-client': 1.120.20(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
+      '@tanstack/react-start-router-manifest': 1.120.19(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
       '@tanstack/react-start-server': 1.120.20(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@tanstack/start-api-routes': 1.120.19(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
-      '@tanstack/start-config': 1.120.20(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0))(yaml@2.7.0)
-      '@tanstack/start-server-functions-client': 1.120.19(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      '@tanstack/start-api-routes': 1.120.19(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
+      '@tanstack/start-config': 1.120.20(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0))(yaml@2.8.0)
+      '@tanstack/start-server-functions-client': 1.120.19(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
       '@tanstack/start-server-functions-handler': 1.120.19
-      '@tanstack/start-server-functions-server': 1.120.17(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
-      '@tanstack/start-server-functions-ssr': 1.120.19(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      '@tanstack/start-server-functions-server': 1.120.17(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
+      '@tanstack/start-server-functions-ssr': 1.120.19(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -12616,7 +12624,7 @@ snapshots:
       '@typescript-eslint/types': 8.31.1
       '@typescript-eslint/typescript-estree': 8.31.1(typescript@5.8.3)
       '@typescript-eslint/visitor-keys': 8.31.1
-      debug: 4.4.0
+      debug: 4.4.1
       eslint: 8.57.1
       typescript: 5.8.3
     transitivePeerDependencies:
@@ -12638,7 +12646,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/tsconfig-utils': 8.34.0(typescript@5.8.3)
       '@typescript-eslint/types': 8.34.0
-      debug: 4.4.0
+      debug: 4.4.1
       typescript: 5.8.3
     transitivePeerDependencies:
       - supports-color
@@ -12666,7 +12674,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/typescript-estree': 8.31.1(typescript@5.8.3)
       '@typescript-eslint/utils': 8.31.1(eslint@8.57.1)(typescript@5.8.3)
-      debug: 4.4.0
+      debug: 4.4.1
       eslint: 8.57.1
       ts-api-utils: 2.0.1(typescript@5.8.3)
       typescript: 5.8.3
@@ -12696,7 +12704,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 5.62.0
       '@typescript-eslint/visitor-keys': 5.62.0
-      debug: 4.4.0
+      debug: 4.4.1
       globby: 11.1.0
       is-glob: 4.0.3
       semver: 7.7.1
@@ -12710,7 +12718,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 8.31.1
       '@typescript-eslint/visitor-keys': 8.31.1
-      debug: 4.4.0
+      debug: 4.4.1
       fast-glob: 3.3.3
       is-glob: 4.0.3
       minimatch: 9.0.5
@@ -12901,14 +12909,14 @@ snapshots:
       untun: 0.1.3
       uqr: 0.1.2
 
-  '@vitejs/plugin-react@4.3.4(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0))':
+  '@vitejs/plugin-react@4.3.4(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0))':
     dependencies:
       '@babel/core': 7.26.8
       '@babel/plugin-transform-react-jsx-self': 7.25.9(@babel/core@7.26.8)
       '@babel/plugin-transform-react-jsx-source': 7.25.9(@babel/core@7.26.8)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      vite: 6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -12920,13 +12928,13 @@ snapshots:
       chai: 5.2.0
       tinyrainbow: 2.0.0
 
-  '@vitest/mocker@3.2.3(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0))':
+  '@vitest/mocker@3.2.3(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0))':
     dependencies:
       '@vitest/spy': 3.2.3
       estree-walker: 3.0.3
       magic-string: 0.30.17
     optionalDependencies:
-      vite: 6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      vite: 6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
 
   '@vitest/pretty-format@3.2.3':
     dependencies:
@@ -13023,7 +13031,7 @@ snapshots:
 
   agent-base@6.0.2:
     dependencies:
-      debug: 4.4.0
+      debug: 4.4.1
     transitivePeerDependencies:
       - supports-color
 
@@ -13705,6 +13713,8 @@ snapshots:
 
   commander@13.1.0: {}
 
+  commander@14.0.0: {}
+
   commander@2.20.3: {}
 
   commander@4.1.1: {}
@@ -14102,14 +14112,14 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  discord-player@7.1.0(@discord-player/extractor@7.1.0(encoding@0.1.13))(@swc/core@1.11.31)(jiti@2.4.2)(mediaplex@1.0.0)(postcss@8.5.4)(tsx@4.19.2)(yaml@2.7.0):
+  discord-player@7.1.0(@discord-player/extractor@7.1.0(encoding@0.1.13))(@swc/core@1.11.31)(jiti@2.4.2)(mediaplex@1.0.0)(postcss@8.5.4)(tsx@4.19.2)(yaml@2.8.0):
     dependencies:
       '@discord-player/equalizer': 7.1.0
       '@discord-player/extractor': 7.1.0(encoding@0.1.13)
       '@discord-player/ffmpeg': 7.1.0
       '@discord-player/utils': 7.1.0
       '@web-scrobbler/metadata-filter': 3.2.0
-      discord-voip: 7.1.0(@swc/core@1.11.31)(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(yaml@2.7.0)
+      discord-voip: 7.1.0(@swc/core@1.11.31)(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(yaml@2.8.0)
       libsodium-wrappers: 0.7.15
       mediaplex: 1.0.0
     transitivePeerDependencies:
@@ -14121,13 +14131,13 @@ snapshots:
       - tsx
       - yaml
 
-  discord-voip@7.1.0(@swc/core@1.11.31)(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(yaml@2.7.0):
+  discord-voip@7.1.0(@swc/core@1.11.31)(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(yaml@2.8.0):
     dependencies:
       '@discord-player/ffmpeg': 7.1.0
       '@discord-player/opus': 7.1.0
       '@discord-player/utils': 7.1.0
       '@types/ws': 8.5.10
-      tsup: 8.5.0(@swc/core@1.11.31)(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.7.0)
+      tsup: 8.5.0(@swc/core@1.11.31)(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.8.0)
       typescript: 5.8.3
     transitivePeerDependencies:
       - '@microsoft/api-extractor'
@@ -15272,7 +15282,7 @@ snapshots:
 
   extract-zip@2.0.1:
     dependencies:
-      debug: 4.4.0
+      debug: 4.4.1
       get-stream: 5.2.0
       yauzl: 2.10.0
     optionalDependencies:
@@ -15502,7 +15512,7 @@ snapshots:
   gel@2.0.0:
     dependencies:
       '@petamoriken/float16': 3.9.1
-      debug: 4.4.0
+      debug: 4.4.1
       env-paths: 3.0.0
       semver: 7.7.1
       shell-quote: 1.8.2
@@ -15858,7 +15868,7 @@ snapshots:
   http-proxy-agent@7.0.2:
     dependencies:
       agent-base: 7.1.3
-      debug: 4.4.0
+      debug: 4.4.1
     transitivePeerDependencies:
       - supports-color
 
@@ -15880,14 +15890,14 @@ snapshots:
   https-proxy-agent@5.0.1:
     dependencies:
       agent-base: 6.0.2
-      debug: 4.4.0
+      debug: 4.4.1
     transitivePeerDependencies:
       - supports-color
 
   https-proxy-agent@7.0.6:
     dependencies:
       agent-base: 7.1.3
-      debug: 4.4.0
+      debug: 4.4.1
     transitivePeerDependencies:
       - supports-color
 
@@ -15968,7 +15978,7 @@ snapshots:
     dependencies:
       '@ioredis/commands': 1.2.0
       cluster-key-slot: 1.1.2
-      debug: 4.4.0
+      debug: 4.4.1
       denque: 2.1.0
       lodash.defaults: 4.2.0
       lodash.isarguments: 3.1.0
@@ -16515,18 +16525,18 @@ snapshots:
 
   lines-and-columns@2.0.4: {}
 
-  lint-staged@15.5.2:
+  lint-staged@16.1.0:
     dependencies:
       chalk: 5.4.1
-      commander: 13.1.0
-      debug: 4.4.0
-      execa: 8.0.1
+      commander: 14.0.0
+      debug: 4.4.1
       lilconfig: 3.1.3
-      listr2: 8.2.5
+      listr2: 8.3.3
       micromatch: 4.0.8
+      nano-spawn: 1.0.2
       pidtree: 0.6.0
       string-argv: 0.3.2
-      yaml: 2.7.0
+      yaml: 2.8.0
     transitivePeerDependencies:
       - supports-color
 
@@ -16551,7 +16561,7 @@ snapshots:
       untun: 0.1.3
       uqr: 0.1.2
 
-  listr2@8.2.5:
+  listr2@8.3.3:
     dependencies:
       cli-truncate: 4.0.0
       colorette: 2.0.20
@@ -17066,7 +17076,7 @@ snapshots:
   micromark@4.0.0:
     dependencies:
       '@types/debug': 4.1.12
-      debug: 4.4.0
+      debug: 4.4.1
       decode-named-character-reference: 1.0.2
       devlop: 1.1.0
       micromark-core-commonmark: 2.0.1
@@ -17236,9 +17246,9 @@ snapshots:
       object-assign: 4.1.1
       thenify-all: 1.6.0
 
-  nanoid@3.3.11: {}
+  nano-spawn@1.0.2: {}
 
-  nanoid@3.3.8: {}
+  nanoid@3.3.11: {}
 
   napi-postinstall@0.2.3: {}
 
@@ -17863,14 +17873,14 @@ snapshots:
 
   possible-typed-array-names@1.0.0: {}
 
-  postcss-load-config@6.0.1(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(yaml@2.7.0):
+  postcss-load-config@6.0.1(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(yaml@2.8.0):
     dependencies:
       lilconfig: 3.1.3
     optionalDependencies:
       jiti: 2.4.2
       postcss: 8.5.4
       tsx: 4.19.2
-      yaml: 2.7.0
+      yaml: 2.8.0
 
   postcss-selector-parser@6.1.2:
     dependencies:
@@ -17893,7 +17903,7 @@ snapshots:
 
   postcss@8.4.31:
     dependencies:
-      nanoid: 3.3.8
+      nanoid: 3.3.11
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
@@ -18413,7 +18423,7 @@ snapshots:
 
   send@1.2.0:
     dependencies:
-      debug: 4.4.0
+      debug: 4.4.1
       encodeurl: 2.0.0
       escape-html: 1.0.3
       etag: 1.8.1
@@ -18488,7 +18498,7 @@ snapshots:
   sharp@0.33.5:
     dependencies:
       color: 4.2.3
-      detect-libc: 2.0.3
+      detect-libc: 2.0.4
       semver: 7.7.1
     optionalDependencies:
       '@img/sharp-darwin-arm64': 0.33.5
@@ -18597,7 +18607,7 @@ snapshots:
   socks-proxy-agent@8.0.4:
     dependencies:
       agent-base: 7.1.3
-      debug: 4.4.0
+      debug: 4.4.1
       socks: 2.8.3
     transitivePeerDependencies:
       - supports-color
@@ -18845,7 +18855,7 @@ snapshots:
   stylus@0.51.1:
     dependencies:
       css-parse: 1.7.0
-      debug: 4.4.0
+      debug: 4.4.1
       glob: 3.2.11
       mkdirp: 0.3.5
       sax: 0.5.8
@@ -19096,7 +19106,7 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  tsup@8.5.0(@swc/core@1.11.31)(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.7.0):
+  tsup@8.5.0(@swc/core@1.11.31)(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.8.0):
     dependencies:
       bundle-require: 5.1.0(esbuild@0.25.3)
       cac: 6.7.14
@@ -19107,7 +19117,7 @@ snapshots:
       fix-dts-default-cjs-exports: 1.0.1
       joycon: 3.1.1
       picocolors: 1.1.1
-      postcss-load-config: 6.0.1(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(yaml@2.7.0)
+      postcss-load-config: 6.0.1(jiti@2.4.2)(postcss@8.5.4)(tsx@4.19.2)(yaml@2.8.0)
       resolve-from: 5.0.0
       rollup: 4.40.1
       source-map: 0.8.0-beta.0
@@ -19337,7 +19347,7 @@ snapshots:
       '@types/node': 22.15.31
       '@types/unist': 3.0.2
       concat-stream: 2.0.0
-      debug: 4.4.0
+      debug: 4.4.1
       extend: 3.0.2
       glob: 10.4.5
       ignore: 6.0.2
@@ -19590,7 +19600,7 @@ snapshots:
       '@types/unist': 3.0.2
       vfile-message: 4.0.2
 
-  vinxi@0.5.3(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0):
+  vinxi@0.5.3(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0):
     dependencies:
       '@babel/core': 7.26.8
       '@babel/plugin-syntax-jsx': 7.25.9(@babel/core@7.26.8)
@@ -19624,7 +19634,7 @@ snapshots:
       unctx: 2.4.1
       unenv: 1.10.0
       unstorage: 1.16.0(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(ioredis@5.6.1)
-      vite: 6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      vite: 6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
       zod: 3.25.57
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -19668,7 +19678,7 @@ snapshots:
       - xml2js
       - yaml
 
-  vinxi@0.5.7(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0):
+  vinxi@0.5.7(@types/node@22.15.31)(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7))(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0):
     dependencies:
       '@babel/core': 7.26.8
       '@babel/plugin-syntax-jsx': 7.25.9(@babel/core@7.26.8)
@@ -19702,7 +19712,7 @@ snapshots:
       unctx: 2.4.1
       unenv: 1.10.0
       unstorage: 1.16.0(db0@0.3.2(drizzle-orm@0.44.2(@types/pg@8.15.4)(gel@2.0.0)(knex@0.8.6)(pg@8.16.0)(postgres@3.4.7)))(ioredis@5.6.1)
-      vite: 6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      vite: 6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
       zod: 3.25.57
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -19746,13 +19756,13 @@ snapshots:
       - xml2js
       - yaml
 
-  vite-node@3.2.3(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0):
+  vite-node@3.2.3(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0):
     dependencies:
       cac: 6.7.14
       debug: 4.4.1
       es-module-lexer: 1.7.0
       pathe: 2.0.3
-      vite: 6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      vite: 6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
     transitivePeerDependencies:
       - '@types/node'
       - jiti
@@ -19767,23 +19777,23 @@ snapshots:
       - tsx
       - yaml
 
-  vite-plugin-babel@1.3.1(@babel/core@7.26.8)(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)):
+  vite-plugin-babel@1.3.1(@babel/core@7.26.8)(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)):
     dependencies:
       '@babel/core': 7.26.8
-      vite: 6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      vite: 6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
 
-  vite-tsconfig-paths@5.1.4(typescript@5.8.3)(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)):
+  vite-tsconfig-paths@5.1.4(typescript@5.8.3)(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)):
     dependencies:
       debug: 4.4.0
       globrex: 0.1.2
       tsconfck: 3.1.5(typescript@5.8.3)
     optionalDependencies:
-      vite: 6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      vite: 6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
     transitivePeerDependencies:
       - supports-color
       - typescript
 
-  vite@6.1.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0):
+  vite@6.1.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0):
     dependencies:
       esbuild: 0.24.2
       postcss: 8.5.4
@@ -19796,9 +19806,9 @@ snapshots:
       stylus: 0.51.1
       terser: 5.38.2
       tsx: 4.19.2
-      yaml: 2.7.0
+      yaml: 2.8.0
 
-  vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0):
+  vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0):
     dependencies:
       esbuild: 0.25.3
       fdir: 6.4.4(picomatch@4.0.2)
@@ -19814,13 +19824,13 @@ snapshots:
       stylus: 0.51.1
       terser: 5.38.2
       tsx: 4.19.2
-      yaml: 2.7.0
+      yaml: 2.8.0
 
-  vitest@3.2.3(@types/debug@4.1.12)(@types/node@22.15.31)(jiti@2.4.2)(jsdom@26.1.0)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0):
+  vitest@3.2.3(@types/debug@4.1.12)(@types/node@22.15.31)(jiti@2.4.2)(jsdom@26.1.0)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0):
     dependencies:
       '@types/chai': 5.2.2
       '@vitest/expect': 3.2.3
-      '@vitest/mocker': 3.2.3(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0))
+      '@vitest/mocker': 3.2.3(vite@6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0))
       '@vitest/pretty-format': 3.2.3
       '@vitest/runner': 3.2.3
       '@vitest/snapshot': 3.2.3
@@ -19838,8 +19848,8 @@ snapshots:
       tinyglobby: 0.2.14
       tinypool: 1.1.0
       tinyrainbow: 2.0.0
-      vite: 6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
-      vite-node: 3.2.3(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.7.0)
+      vite: 6.3.4(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
+      vite-node: 3.2.3(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(stylus@0.51.1)(terser@5.38.2)(tsx@4.19.2)(yaml@2.8.0)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/debug': 4.1.12
@@ -20084,6 +20094,8 @@ snapshots:
   yallist@5.0.0: {}
 
   yaml@2.7.0: {}
+
+  yaml@2.8.0: {}
 
   yargs-parser@21.1.1: {}
 
