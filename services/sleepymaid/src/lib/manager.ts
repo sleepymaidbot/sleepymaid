@@ -57,7 +57,7 @@ export default class Manager {
 
 		if (!data) return;
 
-		this.logger.info(`Updated user metadata for ${userId}`);
+		this.logger.debug(`Updated user metadata for ${userId}`);
 
 		return data.json();
 	}
