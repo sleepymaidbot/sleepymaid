@@ -41,10 +41,26 @@ export default class RemindersTask extends Task<SleepyMaidClient> {
 			const user = await this.container.client.users.fetch(reminder.userId);
 			if (!user) continue;
 
-			await user.send({ content: `Reminder: ${reminder.reminderName}` });
+			try {
+				await user.send({ content: `Reminder: ${reminder.reminderName}` });
 
-			await this.container.drizzle.delete(reminders).where(eq(reminders.reminderId, reminder.reminderId));
-			this.cachedReminders = this.cachedReminders.filter((r) => r.reminderId !== reminder.reminderId);
+				await this.container.drizzle.delete(reminders).where(eq(reminders.reminderId, reminder.reminderId));
+				this.cachedReminders = this.cachedReminders.filter((r) => r.reminderId !== reminder.reminderId);
+			} catch (error: any) {
+				if (error.code === 50007) {
+					this.container.logger.info(
+						`Cannot send reminder ${reminder.reminderId} to user ${reminder.userId} - user has DMs disabled`,
+					);
+
+					await this.container.drizzle.delete(reminders).where(eq(reminders.reminderId, reminder.reminderId));
+					this.cachedReminders = this.cachedReminders.filter((r) => r.reminderId !== reminder.reminderId);
+				} else {
+					this.container.logger.error(
+						`Failed to send reminder ${reminder.reminderId} to user ${reminder.userId}:`,
+						error,
+					);
+				}
+			}
 		}
 	}
 }
