@@ -1,4 +1,10 @@
-export const ratioGuildIds = ["324284116021542922", "860721584373497887", "821717486217986098", "796534493535928320"];
+export const ratioGuildIds = [
+	"821717486217986098", // Ecorte test
+	"324284116021542922", // LME
+	"862103656852619304", // Sleepymaid
+	"796534493535928320", // Just_Fil
+	"1150780245151068332", // Mamayo
+];
 
 export const colorRole = ["Maya", "Mikado", "Rose", "Lavender", "Coral", "Cantaloupe", "Mint", "Smoked", "Weed"];
 

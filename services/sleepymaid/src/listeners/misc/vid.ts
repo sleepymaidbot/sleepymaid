@@ -4,6 +4,7 @@ import { Listener } from "@sleepymaid/handler";
 import type { Message } from "discord.js";
 import type { SleepyMaidClient } from "../../lib/SleepyMaidClient";
 import { sitesDelEmbed } from "../../lib/downloader";
+import { ratioGuildIds } from "@sleepymaid/shared";
 
 const enabled = true;
 
@@ -18,6 +19,7 @@ export default class VidListener extends Listener<"messageCreate", SleepyMaidCli
 	public override async execute(message: Message) {
 		if (!enabled) return;
 		if (message.author.bot) return;
+		if (!message.guildId || !ratioGuildIds.includes(message.guildId)) return;
 		const client = this.container.client;
 
 		const args = message.content.split(" ");
