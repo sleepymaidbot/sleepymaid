@@ -6,7 +6,6 @@ import {
 	InteractionContextType,
 	ApplicationCommandOptionType,
 	ChatInputCommandInteraction,
-	MessageFlags,
 } from "discord.js";
 
 export default class UrbanCommand extends SlashCommand<SleepyMaidClient> {
