@@ -6,6 +6,7 @@ import {
 	InteractionContextType,
 	ApplicationCommandOptionType,
 	ChatInputCommandInteraction,
+	MessageFlags,
 } from "discord.js";
 
 export default class UrbanCommand extends SlashCommand<SleepyMaidClient> {
@@ -34,7 +35,12 @@ export default class UrbanCommand extends SlashCommand<SleepyMaidClient> {
 		const word = interaction.options.getString("word");
 		const response = await fetch(`https://api.urbandictionary.com/v0/define?term=${word}`);
 		const data = (await response.json()) as any;
-		await interaction.editReply({
+		if (!data || !data.list || data.list.length === 0) {
+			return interaction.editReply({
+				content: `🎲 The word **${word}** is not in the urban dictionary.`,
+			});
+		}
+		return await interaction.editReply({
 			content: `🎲 The definition of **${word}** is:\`\`\`${data.list[0].definition}\`\`\``,
 		});
 	}
