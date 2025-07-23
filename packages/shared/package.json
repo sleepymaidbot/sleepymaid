@@ -31,7 +31,7 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
-		"@swc/core": "^1.13.1",
+		"@swc/core": "^1.13.2",
 		"@types/module-alias": "^2.0.4",
 		"@types/node": "^22.16.5",
 		"rimraf": "^6.0.1",
