@@ -31,20 +31,20 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"devDependencies": {
-		"@swc/core": "^1.13.2",
+		"@swc/core": "^1.13.3",
 		"@types/module-alias": "^2.0.4",
-		"@types/node": "^22.16.5",
+		"@types/node": "^22.17.1",
 		"rimraf": "^6.0.1",
 		"source-map-support": "0.5.21",
 		"tsup": "^8.5.0",
-		"typescript": "^5.8.3"
+		"typescript": "^5.9.2"
 	},
 	"dependencies": {
-		"@napi-rs/canvas": "^0.1.74",
+		"@napi-rs/canvas": "^0.1.77",
 		"@paralleldrive/cuid2": "^2.2.2",
 		"@sleepymaid/handler": "workspace:^",
 		"discord.js": "^14.21.0",
-		"drizzle-orm": "^0.44.3",
+		"drizzle-orm": "^0.44.4",
 		"fuse.js": "^7.1.0",
 		"i18next": "^25.3.2",
 		"module-alias": "^2.2.3"
