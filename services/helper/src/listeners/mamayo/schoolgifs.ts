@@ -17,6 +17,7 @@ const roleWhitelist = [
 	"1301593179216412842", // Mod
 	"1293983018104656023", // Admin
 	"1305968449100451961", // Responsable
+	"1150822312199852102", // Booster
 ];
 
 const minutes = 1;
