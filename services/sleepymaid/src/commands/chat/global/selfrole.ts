@@ -115,6 +115,14 @@ export default class SelfRoleCommand extends SlashCommand<SleepyMaidClient> {
 				allowedMentions: { parse: [] },
 			});
 		if (!interaction.channel) return;
+
+		if (!interaction.appPermissions?.has(PermissionFlagsBits.SendMessages))
+			return interaction.reply({
+				content: "I don't have permission to send messages in this channel.",
+				flags: MessageFlags.Ephemeral,
+				allowedMentions: { parse: [] },
+			});
+
 		await interaction.reply({
 			content: "Self role message created!",
 			flags: MessageFlags.Ephemeral,
