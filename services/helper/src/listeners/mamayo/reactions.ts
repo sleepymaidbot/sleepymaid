@@ -21,7 +21,7 @@ export default class extends Listener<"messageCreate", HelperClient> {
 		if (message.guild.id !== "1150780245151068332") return;
 
 		for (const [reaction, emoji] of Object.entries(reactions)) {
-			if (message.content.toLocaleLowerCase().includes(reaction)) {
+			if (message.content.toLocaleLowerCase() === reaction) {
 				await message.react(emoji);
 			}
 		}
