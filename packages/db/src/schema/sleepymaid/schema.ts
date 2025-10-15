@@ -115,3 +115,14 @@ export const roleConnections = pgTable("role_connections", {
 	parentRoleId: text("parent_role_id").notNull(),
 	childRoleId: text("child_role_id").notNull(),
 });
+
+export const autoReactions = pgTable("auto_reactions", {
+	guildId: text("guild_id")
+		.notNull()
+		.references(() => guildSettings.guildId, { onDelete: "cascade" }),
+	reactionId: text("reaction_id"),
+	reactionName: text("reaction_name").notNull(),
+	channelId: text("channel_id").notNull(),
+	priority: integer("priority").default(0).notNull(),
+	enabled: boolean("enabled").default(true).notNull(),
+});
