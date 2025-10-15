@@ -32,7 +32,6 @@ export class SleepyMaidClient extends HandlerClient {
 					GatewayIntentBits.GuildModeration,
 					GatewayIntentBits.GuildVoiceStates,
 					GatewayIntentBits.GuildMessages,
-					GatewayIntentBits.MessageContent,
 				],
 				allowedMentions: { parse: ["users", "roles"], repliedUser: false },
 			},
