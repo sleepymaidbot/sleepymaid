@@ -1,7 +1,7 @@
-import { Context, Listener } from "@sleepymaid/handler";
-import { AuditLogEvent, VoiceState } from "discord.js";
-import { HelperClient } from "../../lib/extensions/HelperClient";
+import { AuditLogEvent, type VoiceState } from "discord.js";
+import type { HelperClient } from "../../lib/extensions/HelperClient";
 import { sql } from "drizzle-orm";
+import { Listener, type Context } from "@sleepymaid/handler";
 import { disconnectCounter } from "@sleepymaid/db";
 
 export default class extends Listener<"voiceStateUpdate", HelperClient> {
@@ -23,16 +23,27 @@ export default class extends Listener<"voiceStateUpdate", HelperClient> {
 			const entry = auditLog.entries.filter((entry) => Date.now() - entry.createdTimestamp < 10_000).first();
 			if (!entry) return;
 
+			let amount = 1;
+
+			switch (oldState.member.presence?.status) {
+				case "offline":
+					amount = 15;
+					break;
+				case "dnd":
+					amount = 3;
+					break;
+			}
+
 			const user = await this.container.client.drizzle
 				.insert(disconnectCounter)
 				.values({
 					userId: oldState.member.id,
-					count: 1,
+					count: amount,
 				})
 				.onConflictDoUpdate({
 					target: [disconnectCounter.userId],
 					set: {
-						count: sql`${disconnectCounter.count} + 1`,
+						count: sql`${disconnectCounter.count} + ${amount}`,
 					},
 				})
 				.returning({
