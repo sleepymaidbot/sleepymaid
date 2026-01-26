@@ -16,15 +16,15 @@
 	"devDependencies": {
 		"@types/gamedig": "^5.0.3",
 		"@types/i18next-fs-backend": "^1.2.0",
-		"@types/node": "^22.16.5",
-		"@types/pg": "^8.15.4",
-		"rimraf": "^6.0.1",
+		"@types/node": "^22.19.7",
+		"@types/pg": "^8.16.0",
+		"rimraf": "^6.1.2",
 		"source-map-support": "0.5.21",
-		"typescript": "^5.8.3"
+		"typescript": "^5.9.3"
 	},
 	"dependencies": {
 		"@aero/sanitizer": "^1.3.2",
-		"@sapphire/result": "^2.7.2",
+		"@sapphire/result": "^2.8.0",
 		"@sapphire/stopwatch": "1.5.4",
 		"@sleepymaid/db": "workspace:^",
 		"@sleepymaid/handler": "workspace:^",
@@ -33,14 +33,14 @@
 		"@sleepymaid/util": "workspace:^",
 		"date-fns": "^4.1.0",
 		"discord-api-types": "^0.38.2",
-		"discord.js": "^14.21.0",
-		"drizzle-orm": "^0.44.3",
-		"gamedig": "^5.3.1",
-		"i18next": "^25.3.2",
-		"i18next-fs-backend": "^2.6.0",
+		"discord.js": "^14.25.1",
+		"drizzle-orm": "^0.45.1",
+		"gamedig": "^5.3.2",
+		"i18next": "^25.8.0",
+		"i18next-fs-backend": "^2.6.1",
 		"murmurhash-v3": "^1.0.2",
 		"path": "0.12.7",
-		"pg": "^8.16.3",
+		"pg": "^8.17.2",
 		"tslib": "^2.8.1"
 	}
 }
