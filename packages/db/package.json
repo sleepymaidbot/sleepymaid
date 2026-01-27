@@ -36,20 +36,20 @@
 	"devDependencies": {
 		"@favware/cliff-jumper": "^6.0.0",
 		"@sleepymaid/shared": "workspace:^",
-		"@swc/core": "^1.13.2",
-		"@types/node": "^22.16.5",
-		"@types/pg": "^8.15.4",
-		"drizzle-kit": "0.31.4",
-		"next-auth": "^4.24.11",
-		"rimraf": "^6.0.1",
+		"@swc/core": "^1.15.10",
+		"@types/node": "^22.19.7",
+		"@types/pg": "^8.16.0",
+		"drizzle-kit": "0.31.8",
+		"next-auth": "^4.24.13",
+		"rimraf": "^6.1.2",
 		"source-map-support": "0.5.21",
-		"tsup": "^8.5.0",
-		"typescript": "^5.8.3"
+		"tsup": "^8.5.1",
+		"typescript": "^5.9.3"
 	},
 	"dependencies": {
-		"@paralleldrive/cuid2": "^2.2.2",
-		"drizzle-orm": "^0.44.3",
-		"pg": "^8.16.3",
-		"postgres": "^3.4.7"
+		"@paralleldrive/cuid2": "^2.3.1",
+		"drizzle-orm": "^0.45.1",
+		"pg": "^8.17.2",
+		"postgres": "^3.4.8"
 	}
 }
