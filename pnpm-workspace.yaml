@@ -7,7 +7,11 @@ packages:
   - services/watcher/
   - services/website/
   - services/testbot/
+
 onlyBuiltDependencies:
-  - "@swc/core"
+  - '@parcel/watcher'
+  - '@swc/core'
+  - '@tailwindcss/oxide'
   - esbuild
+  - sharp
   - unrs-resolver
