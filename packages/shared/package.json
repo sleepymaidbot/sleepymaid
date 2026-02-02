@@ -39,7 +39,7 @@
 	"dependencies": {
 		"discord-api-types": "^0.38.2",
 		"@napi-rs/canvas": "^0.1.74",
-		"@paralleldrive/cuid2": "^2.2.2",
+		"@paralleldrive/cuid2": "^3.0.0",
 		"@sleepymaid/handler": "workspace:^",
 		"discord.js": "^14.25.1",
 		"drizzle-orm": "^0.45.0",

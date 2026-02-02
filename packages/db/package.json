@@ -44,7 +44,7 @@
 	},
 	"dependencies": {
 		"discord-api-types": "^0.38.2",
-		"@paralleldrive/cuid2": "^2.2.2",
+		"@paralleldrive/cuid2": "^3.0.0",
 		"drizzle-orm": "^0.45.0"
 	}
 }
