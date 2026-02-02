@@ -70,7 +70,7 @@ export class HandlerClient extends Client {
 			void this.listenerManager.startAll(options.listeners)
 		}
 
-		this.once("ready", () => {
+		this.once("clientReady", () => {
 			// commands
 			if (options.commands) {
 				this.commandManager = new CommandManager(this)

@@ -3,10 +3,10 @@ import { Listener } from "@sleepymaid/handler"
 import type { Client } from "discord.js"
 import type { ClarityClient } from "../../lib/ClarityClient"
 
-export default class ReadyListener extends Listener<"ready", ClarityClient> {
+export default class ReadyListener extends Listener<"clientReady", ClarityClient> {
 	public constructor(context: Context<ClarityClient>) {
 		super(context, {
-			name: "ready",
+			name: "clientReady",
 			once: true,
 		})
 	}

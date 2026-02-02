@@ -1,10 +1,10 @@
 import { type Context, Listener } from "@sleepymaid/handler"
 import type { WatcherClient } from "../../lib/extensions/WatcherClient"
 
-export default class ReadyListener extends Listener<"ready", WatcherClient> {
+export default class ReadyListener extends Listener<"clientReady", WatcherClient> {
 	public constructor(context: Context<WatcherClient>) {
 		super(context, {
-			name: "ready",
+			name: "clientReady",
 			once: true,
 		})
 	}
