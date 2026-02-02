@@ -1,7 +1,5 @@
 {
 	"search.exclude": {
-		"**/.yarn": true,
-		"**/.pnp.*": true,
 		"**/routeTree.gen.ts": true
 	},
 	"typescript.enablePromptUseWorkspaceTsdk": true,
