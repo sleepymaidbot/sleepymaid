@@ -34,7 +34,7 @@
 		"@favware/cliff-jumper": "^6.0.0",
 		"@sleepymaid/shared": "workspace:^",
 		"@swc/core": "^1.13.2",
-		"@types/node": "^22.16.5",
+		"@types/node": "^24.10.9",
 		"@types/pg": "^8.15.4",
 		"drizzle-kit": "0.31.4",
 		"next-auth": "^4.24.11",
