@@ -21,22 +21,6 @@ services:
       interval: 10s
       timeout: 5s
 
-  ghost:
-    image: ghost:5-alpine
-    restart: unless-stopped
-    expose:
-      - 2368
-    ports:
-      - "2368:2368"
-    environment:
-      url: "https://blog.ecorte.xyz"
-      database__client: "sqlite3"
-      database__connection__filename: "/var/lib/ghost/content/data/ghost.db"
-      mail__transport: "SMTP"
-      mail__options__service: "Mailgun"
-    volumes:
-      - ghost-data:/var/lib/ghost/content
-
   sleepymaid:
     container_name: sleepymaid_sleepymaid
     build:
@@ -124,7 +108,4 @@ volumes:
     external: true
   postgres-data:
     name: "sleepymaid-postgres-data"
-    external: true
-  ghost-data:
-    name: "sleepymaid-ghost-data"
     external: true
