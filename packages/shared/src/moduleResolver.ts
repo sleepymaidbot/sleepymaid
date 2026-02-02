@@ -1,4 +1,4 @@
-import { join } from "path"
+import { join } from "node:path"
 
 /**
  * Configures module aliases for path resolution.

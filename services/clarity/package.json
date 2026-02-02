@@ -17,7 +17,6 @@
 		"@types/i18next-fs-backend": "^1.2.0",
 		"@types/node": "^22.16.5",
 		"rimraf": "^6.0.1",
-		"source-map-support": "0.5.21",
 		"typescript": "^5.8.3"
 	},
 	"dependencies": {
@@ -36,7 +35,6 @@
 		"drizzle-orm": "^0.44.3",
 		"i18next": "^25.3.2",
 		"i18next-fs-backend": "^2.6.0",
-		"path": "0.12.7",
 		"tts-extractor": "^1.0.4"
 	}
 }

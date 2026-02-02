@@ -1,5 +1,5 @@
 {
-	"*": "prettier --ignore-unknown --write",
-	"{src/**,__tests__/**}.{mjs,js,cjs,ts,tsx,astro}": "eslint --ext .mjs,.js,.cjs,.ts,.tsx,.astro --fix",
+	"*": "biome format --write",
+	"{src/**,__tests__/**}.{mjs,js,cjs,ts,tsx,astro}": "biome lint --apply --files-ignore-unknown=true",
 	"src/**.ts": "vitest related --run --config ../../vitest.config.ts"
 }

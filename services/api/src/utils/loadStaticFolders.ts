@@ -1,5 +1,5 @@
+import { join } from "node:path"
 import { readdirSync } from "fs"
-import { join } from "path"
 
 /**
  * Loads all folder names from the ./static/images directory

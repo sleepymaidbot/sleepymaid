@@ -38,9 +38,7 @@
 		"@types/node": "^22.16.5",
 		"@types/pg": "^8.15.4",
 		"drizzle-kit": "0.31.4",
-		"next-auth": "^4.24.11",
 		"rimraf": "^6.0.1",
-		"source-map-support": "0.5.21",
 		"tsup": "^8.5.0",
 		"typescript": "^5.8.3"
 	},
