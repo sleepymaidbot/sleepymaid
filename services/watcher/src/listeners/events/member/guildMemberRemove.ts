@@ -1,18 +1,18 @@
-import { Context, Listener } from "@sleepymaid/handler";
-import { WatcherClient } from "../../../lib/extensions/WatcherClient";
-import { GuildMember, Colors, APIEmbed } from "discord.js";
+import { Context, Listener } from "@sleepymaid/handler"
+import { APIEmbed, Colors, GuildMember } from "discord.js"
+import { WatcherClient } from "../../../lib/extensions/WatcherClient"
 
 export default class extends Listener<"guildMemberRemove", WatcherClient> {
 	public constructor(context: Context<WatcherClient>) {
 		super(context, {
 			name: "guildMemberRemove",
 			once: false,
-		});
+		})
 	}
 
 	public override async execute(member: GuildMember) {
-		const channels = (await this.container.manager.getLogChannel(member.guild.id))?.filter((c) => c.memberEvents.leave);
-		if (!channels || channels.length === 0) return;
+		const channels = (await this.container.manager.getLogChannel(member.guild.id))?.filter((c) => c.memberEvents.leave)
+		if (!channels || channels.length === 0) return
 
 		const embed: APIEmbed = {
 			title: "Member Left",
@@ -28,10 +28,10 @@ export default class extends Listener<"guildMemberRemove", WatcherClient> {
 				},
 			],
 			timestamp: new Date().toISOString(),
-		};
+		}
 
 		for (const channel of channels) {
-			await this.container.manager.sendLog(channel, { embeds: [embed] });
+			await this.container.manager.sendLog(channel, { embeds: [embed] })
 		}
 	}
 }

@@ -1,5 +1,6 @@
-import { SlashCommand, type Context } from "@sleepymaid/handler";
-import type { APIActionRowComponent, APIEmbed, ChatInputCommandInteraction, APIComponentInActionRow } from "discord.js";
+import { type Context, SlashCommand } from "@sleepymaid/handler"
+import { getUnixTime, sub } from "date-fns"
+import type { APIActionRowComponent, APIComponentInActionRow, APIEmbed, ChatInputCommandInteraction } from "discord.js"
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
@@ -8,22 +9,21 @@ import {
 	Colors,
 	ComponentType,
 	InteractionContextType,
-} from "discord.js";
-import type { SleepyMaidClient } from "../../../lib/SleepyMaidClient";
-import { GameDig, QueryResult } from "gamedig";
-import { getUnixTime, sub } from "date-fns";
+} from "discord.js"
+import { GameDig, QueryResult } from "gamedig"
+import type { SleepyMaidClient } from "../../../lib/SleepyMaidClient"
 
 enum Game {
 	GarrysMod = "garrysmod",
 }
 
 type ServerData = {
-	ip: string;
-	port: number;
-	fancyName: string;
-	url?: string;
-	game: Game;
-};
+	ip: string
+	port: number
+	fancyName: string
+	url?: string
+	game: Game
+}
 
 const serversData: Record<string, ServerData> = {
 	ma: {
@@ -40,7 +40,7 @@ const serversData: Record<string, ServerData> = {
 		url: "https://www.qcgames.org/french/index.php?t=servers",
 		game: Game.GarrysMod,
 	},
-};
+}
 
 const gamesFormat: Record<Game, (data: ServerData, query: QueryResult) => APIEmbed> = {
 	[Game.GarrysMod]: (data, query) => {
@@ -62,31 +62,31 @@ const gamesFormat: Record<Game, (data: ServerData, query: QueryResult) => APIEmb
 				{
 					name: "Players Online",
 					value: (() => {
-						let string = "";
+						let string = ""
 						for (const player of query.players) {
-							if (player.name === "") continue;
+							if (player.name === "") continue
 
 							if (player.raw !== null) {
 								// @ts-expect-error - GameDig raw type are a mess
-								const raw: { score: number | null; time: number | null } = player.raw;
+								const raw: { score: number | null; time: number | null } = player.raw
 								const timestamp = getUnixTime(
 									sub(new Date(), {
 										seconds: raw.time ?? 0,
 									}),
-								);
-								string += `${player.name} (${raw.score ?? "0"} / <t:${timestamp}:R>)\n`;
+								)
+								string += `${player.name} (${raw.score ?? "0"} / <t:${timestamp}:R>)\n`
 							} else {
-								string += `${player.name}\n`;
+								string += `${player.name}\n`
 							}
 						}
-						return string;
+						return string
 					})(),
 					inline: false,
 				},
 			],
-		};
+		}
 	},
-};
+}
 
 export default class ServersCommand extends SlashCommand<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
@@ -112,17 +112,17 @@ export default class ServersCommand extends SlashCommand<SleepyMaidClient> {
 					},
 				],
 			},
-		});
+		})
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction) {
-		const server = interaction.options.getString("server") as keyof typeof serversData;
+		const server = interaction.options.getString("server") as keyof typeof serversData
 
-		if (!server) return;
+		if (!server) return
 
-		const data: ServerData | undefined = serversData[server];
+		const data: ServerData | undefined = serversData[server]
 
-		if (!data) return;
+		if (!data) return
 
 		const query = await GameDig.query({
 			type: data.game,
@@ -131,11 +131,11 @@ export default class ServersCommand extends SlashCommand<SleepyMaidClient> {
 			givenPortOnly: true,
 			maxRetries: 10,
 			requestRules: true,
-		});
+		})
 
-		const func = gamesFormat[data.game];
-		const embed = func(data, query);
-		const components: APIActionRowComponent<APIComponentInActionRow>[] = [];
+		const func = gamesFormat[data.game]
+		const embed = func(data, query)
+		const components: APIActionRowComponent<APIComponentInActionRow>[] = []
 		if (data.url) {
 			components.push({
 				type: ComponentType.ActionRow,
@@ -148,12 +148,12 @@ export default class ServersCommand extends SlashCommand<SleepyMaidClient> {
 						emoji: { name: "🔗" },
 					},
 				],
-			});
+			})
 		}
 
 		return await interaction.reply({
 			embeds: [embed],
 			components,
-		});
+		})
 	}
 }

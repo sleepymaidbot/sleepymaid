@@ -1,5 +1,8 @@
-import { Context, SlashCommand } from "@sleepymaid/handler";
-import { SleepyMaidClient } from "../../../lib/SleepyMaidClient";
+import { lotteries } from "@sleepymaid/db"
+import { Context, SlashCommand } from "@sleepymaid/handler"
+import { formatNumber } from "@sleepymaid/shared"
+import { getTimeTable } from "@sleepymaid/util"
+import { add, getUnixTime } from "date-fns"
 import {
 	ApplicationCommandOptionType,
 	ButtonStyle,
@@ -8,13 +11,10 @@ import {
 	ComponentType,
 	MessageFlags,
 	PermissionFlagsBits,
-} from "discord.js";
-import { add, getUnixTime } from "date-fns";
-import { getTimeTable } from "@sleepymaid/util";
-import { lotteries } from "@sleepymaid/db";
-import DBCheckPrecondtion from "../../../preconditions/dbCheck";
-import OwnerOnlyPrecondtion from "../../../preconditions/ownerOnly";
-import { formatNumber } from "@sleepymaid/shared";
+} from "discord.js"
+import { SleepyMaidClient } from "../../../lib/SleepyMaidClient"
+import DBCheckPrecondtion from "../../../preconditions/dbCheck"
+import OwnerOnlyPrecondtion from "../../../preconditions/ownerOnly"
 
 export default class LotteryCommand extends SlashCommand<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
@@ -47,27 +47,27 @@ export default class LotteryCommand extends SlashCommand<SleepyMaidClient> {
 					},
 				],
 			},
-		});
+		})
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction) {
 		switch (interaction.options.getSubcommand()) {
 			case "start":
-				await this.start(interaction);
-				break;
+				await this.start(interaction)
+				break
 			default:
-				await interaction.editReply("Invalid subcommand");
-				break;
+				await interaction.editReply("Invalid subcommand")
+				break
 		}
 	}
 
 	private async start(interaction: ChatInputCommandInteraction) {
-		await interaction.deferReply({ flags: MessageFlags.Ephemeral });
-		const time = interaction.options.getString("time", true);
-		const date = add(new Date(), getTimeTable(time));
-		const amount = interaction.options.getInteger("amount", true);
-		if (!interaction.channel?.isSendable()) return;
-		if (!interaction.guild) return;
+		await interaction.deferReply({ flags: MessageFlags.Ephemeral })
+		const time = interaction.options.getString("time", true)
+		const date = add(new Date(), getTimeTable(time))
+		const amount = interaction.options.getInteger("amount", true)
+		if (!interaction.channel?.isSendable()) return
+		if (!interaction.guild) return
 
 		const message = await interaction.channel.send({
 			embeds: [
@@ -83,7 +83,7 @@ export default class LotteryCommand extends SlashCommand<SleepyMaidClient> {
 					color: Colors.Green,
 				},
 			],
-		});
+		})
 
 		const [lottery] = await this.container.drizzle
 			.insert(lotteries)
@@ -95,13 +95,13 @@ export default class LotteryCommand extends SlashCommand<SleepyMaidClient> {
 				effectiveTime: new Date(),
 				expiredTime: date,
 			})
-			.returning();
+			.returning()
 
-		if (!lottery) return;
+		if (!lottery) return
 
 		await interaction.editReply({
 			content: `Lottery started!`,
-		});
+		})
 
 		await message.edit({
 			components: [
@@ -117,6 +117,6 @@ export default class LotteryCommand extends SlashCommand<SleepyMaidClient> {
 					],
 				},
 			],
-		});
+		})
 	}
 }

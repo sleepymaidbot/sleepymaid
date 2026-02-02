@@ -1,39 +1,39 @@
-import { Context, SlashCommand } from "@sleepymaid/handler";
-import { SleepyMaidClient } from "../../../lib/SleepyMaidClient";
+import { userData } from "@sleepymaid/db"
+import { Context, SlashCommand } from "@sleepymaid/handler"
+import { formatNumber } from "@sleepymaid/shared"
+import { add } from "date-fns"
 import {
 	ActionRowBuilder,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ButtonStyle,
 	ButtonBuilder,
+	ButtonStyle,
 	ChatInputCommandInteraction,
+	ComponentBuilder,
+	Interaction,
 	InteractionContextType,
 	InteractionReplyOptions,
+	InteractionResponse,
 	InteractionUpdateOptions,
 	MessageComponentInteraction,
 	SectionBuilder,
 	SeparatorBuilder,
 	TextDisplayBuilder,
 	ThumbnailBuilder,
-	InteractionResponse,
-	ComponentBuilder,
-	Interaction,
-} from "discord.js";
-import { ApplicationCommandOptionType, MessageFlags, SeparatorSpacingSize } from "discord-api-types/v10";
-import { userData } from "@sleepymaid/db";
-import { desc, eq, sql } from "drizzle-orm";
-import DBCheckPrecondtion from "../../../preconditions/dbCheck";
-import { formatNumber } from "@sleepymaid/shared";
-import { add } from "date-fns";
+} from "discord.js"
+import { ApplicationCommandOptionType, MessageFlags, SeparatorSpacingSize } from "discord-api-types/v10"
+import { desc, eq, sql } from "drizzle-orm"
+import { SleepyMaidClient } from "../../../lib/SleepyMaidClient"
+import DBCheckPrecondtion from "../../../preconditions/dbCheck"
 
 const rewards: Record<"daily" | "weekly" | "monthly" | "work", () => number> = {
 	daily: () => 1000,
 	weekly: () => 5000,
 	monthly: () => 10000,
 	work: () => {
-		return Math.floor(Math.random() * 101) + 50;
+		return Math.floor(Math.random() * 101) + 50
 	},
-};
+}
 
 export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
@@ -114,54 +114,54 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 					},
 				],
 			},
-		});
+		})
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction) {
-		const subcommand = interaction.options.getSubcommand();
+		const subcommand = interaction.options.getSubcommand()
 		switch (subcommand) {
 			case "balance":
-				await this.balance(interaction);
-				break;
+				await this.balance(interaction)
+				break
 			case "leaderboard":
-				await this.leaderboard(interaction);
-				break;
+				await this.leaderboard(interaction)
+				break
 			case "daily":
-				await this.daily(interaction);
-				break;
+				await this.daily(interaction)
+				break
 			case "weekly":
-				await this.weekly(interaction);
-				break;
+				await this.weekly(interaction)
+				break
 			case "monthly":
-				await this.monthly(interaction);
-				break;
+				await this.monthly(interaction)
+				break
 			case "work":
-				await this.work(interaction);
-				break;
+				await this.work(interaction)
+				break
 			case "give":
-				await this.give(interaction);
-				break;
+				await this.give(interaction)
+				break
 			default:
-				await interaction.reply({ content: "Invalid subcommand", flags: MessageFlags.Ephemeral });
-				break;
+				await interaction.reply({ content: "Invalid subcommand", flags: MessageFlags.Ephemeral })
+				break
 		}
-		await this.container.manager.updateUserMetadata(interaction.user.id);
+		await this.container.manager.updateUserMetadata(interaction.user.id)
 	}
 
 	private async balance(interaction: ChatInputCommandInteraction) {
-		const user = interaction.options.getUser("user") ?? interaction.user;
+		const user = interaction.options.getUser("user") ?? interaction.user
 		const balance = await this.container.client.drizzle.query.userData.findFirst({
 			where: eq(userData.userId, user.id),
-		});
+		})
 
 		const leaderboardPosition = await this.container.client.drizzle.query.userData.findMany({
 			where: sql`${userData.currency} > ${balance?.currency ?? 0}`,
 			columns: {
 				userId: true,
 			},
-		});
+		})
 
-		const position = leaderboardPosition.length + 1;
+		const position = leaderboardPosition.length + 1
 
 		await interaction.reply({
 			flags: [MessageFlags.IsComponentsV2],
@@ -178,11 +178,11 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 						),
 					),
 			],
-		});
+		})
 	}
 
 	private async leaderboard(interaction: ChatInputCommandInteraction) {
-		await interaction.deferReply();
+		await interaction.deferReply()
 		const medals = {
 			0: "🥇",
 			1: "🥈",
@@ -194,16 +194,16 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			7: "8️⃣",
 			8: "9️⃣",
 			9: "🔟",
-		};
-		const page = interaction.options.getInteger("page") ?? 1;
+		}
+		const page = interaction.options.getInteger("page") ?? 1
 
 		const getEmbed = async (page: number): Promise<InteractionReplyOptions & InteractionUpdateOptions> => {
-			page = Math.min(20, page);
+			page = Math.min(20, page)
 			const leaderboard = await this.container.client.drizzle.query.userData.findMany({
 				orderBy: desc(userData.currency),
 				limit: 5,
 				offset: (page - 1) * 5,
-			});
+			})
 
 			return {
 				components: [
@@ -211,9 +211,9 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 					new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small).setDivider(true),
 					...leaderboard
 						.map((user, index) => {
-							const displayIndex = index + (page - 1) * 5;
-							const name = user.displayName ?? user.userName;
-							const prefix = medals[displayIndex as keyof typeof medals] ?? `${displayIndex + 1}.`;
+							const displayIndex = index + (page - 1) * 5
+							const name = user.displayName ?? user.userName
+							const prefix = medals[displayIndex as keyof typeof medals] ?? `${displayIndex + 1}.`
 							return [
 								new SectionBuilder()
 									.addTextDisplayComponents(
@@ -229,7 +229,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 								...(index < leaderboard.length - 1
 									? [new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small).setDivider(true)]
 									: []),
-							];
+							]
 						})
 						.flat(),
 					new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small).setDivider(true),
@@ -251,27 +251,27 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 							.setDisabled(page === 20),
 					),
 				],
-			};
-		};
-		const message = await interaction.editReply({ ...(await getEmbed(page)), flags: [MessageFlags.IsComponentsV2] });
+			}
+		}
+		const message = await interaction.editReply({ ...(await getEmbed(page)), flags: [MessageFlags.IsComponentsV2] })
 		message
 			.createMessageComponentCollector({
 				time: 1000 * 60 * 5,
 				filter: (i: MessageComponentInteraction) => {
-					return i.customId.startsWith("economy_leaderboard_");
+					return i.customId.startsWith("economy_leaderboard_")
 				},
 			})
 			.on("collect", async (i: MessageComponentInteraction) => {
 				if (i.user.id === interaction.user.id) {
-					const page = parseInt(i.customId.split("_")[2] ?? "1");
-					await i.update(await getEmbed(page));
+					const page = parseInt(i.customId.split("_")[2] ?? "1")
+					await i.update(await getEmbed(page))
 				} else {
-					await i.reply({ content: "This is not your interaction", flags: MessageFlags.Ephemeral });
+					await i.reply({ content: "This is not your interaction", flags: MessageFlags.Ephemeral })
 				}
 			})
 			.on("end", () => {
-				interaction.editReply({ components: [] });
-			});
+				interaction.editReply({ components: [] })
+			})
 	}
 
 	private async setReminderCollector(
@@ -286,49 +286,49 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			.createMessageComponentCollector({
 				time: 1000 * 60 * 5,
 				filter: (i: MessageComponentInteraction) => {
-					return i.customId.startsWith("economyremind:" + interaction.id);
+					return i.customId.startsWith("economyremind:" + interaction.id)
 				},
 			})
 			.on("collect", async (i: MessageComponentInteraction) => {
 				if (i.user.id === userId) {
-					const now = new Date();
+					const now = new Date()
 					const date = add(now, {
 						minutes: time,
-					});
+					})
 
-					await this.container.manager.addReminder(userId, type + "Reward", date);
+					await this.container.manager.addReminder(userId, type + "Reward", date)
 
-					await i.reply({ content: "Reminder set", flags: MessageFlags.Ephemeral });
-					await message.edit({ components: [...originalComponents.map((c) => c.toJSON())] });
+					await i.reply({ content: "Reminder set", flags: MessageFlags.Ephemeral })
+					await message.edit({ components: [...originalComponents.map((c) => c.toJSON())] })
 				} else {
 					await i.reply({
 						content: "This button is for another user. Please use the command yourself to interact with it.",
 						flags: MessageFlags.Ephemeral,
-					});
+					})
 				}
 			})
 			.on("end", () => {
-				message.edit({ components: [...originalComponents.map((c) => c.toJSON())] });
-			});
+				message.edit({ components: [...originalComponents.map((c) => c.toJSON())] })
+			})
 	}
 
 	private async daily(interaction: ChatInputCommandInteraction) {
 		const data = await this.container.client.drizzle.query.userData.findFirst({
 			where: eq(userData.userId, interaction.user.id),
-		});
+		})
 		if (!data) {
-			await interaction.reply("An error occurred while fetching your data, please try again later.");
-			return;
+			await interaction.reply("An error occurred while fetching your data, please try again later.")
+			return
 		}
 		if (data.dailyTimestamp && Date.now() - data.dailyTimestamp.getTime() < 24 * 60 * 60 * 1000) {
-			const timeLeft = new Date(data.dailyTimestamp.getTime() + 24 * 60 * 60 * 1000 - Date.now());
+			const timeLeft = new Date(data.dailyTimestamp.getTime() + 24 * 60 * 60 * 1000 - Date.now())
 			await interaction.reply(
 				`You have already claimed your daily reward. Come back in ${timeLeft.getUTCHours()}h ${timeLeft.getUTCMinutes()}m.`,
-			);
-			return;
+			)
+			return
 		}
 
-		const reward = rewards.daily() + (data.dailyStreak ?? 0) * 10;
+		const reward = rewards.daily() + (data.dailyStreak ?? 0) * 10
 
 		await this.container.client.drizzle
 			.update(userData)
@@ -337,11 +337,11 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 				currency: sql`${userData.currency} + ${reward}`,
 				dailyStreak: sql`${userData.dailyStreak} + 1`,
 			})
-			.where(eq(userData.userId, interaction.user.id));
+			.where(eq(userData.userId, interaction.user.id))
 
 		this.container.client.logger.debug(
 			`${interaction.user.username} (${interaction.user.id}) claimed their daily reward of ${reward} coins!`,
-		);
+		)
 
 		const components = [
 			new SectionBuilder()
@@ -354,7 +354,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 				.setThumbnailAccessory(
 					new ThumbnailBuilder().setURL(interaction.user.avatarURL() ?? interaction.client.user.avatarURL() ?? ""),
 				),
-		];
+		]
 
 		const message = await interaction.reply({
 			flags: [MessageFlags.IsComponentsV2],
@@ -369,27 +369,27 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 						.setStyle(ButtonStyle.Success),
 				),
 			],
-		});
+		})
 
-		this.setReminderCollector(interaction, message, components, 1440, "Daily", interaction.user.id);
+		this.setReminderCollector(interaction, message, components, 1440, "Daily", interaction.user.id)
 	}
 
 	private async weekly(interaction: ChatInputCommandInteraction) {
 		const data = await this.container.client.drizzle.query.userData.findFirst({
 			where: eq(userData.userId, interaction.user.id),
-		});
+		})
 		if (!data) {
-			await interaction.reply("An error occurred while fetching your data, please try again later.");
-			return;
+			await interaction.reply("An error occurred while fetching your data, please try again later.")
+			return
 		}
 		if (data.weeklyTimestamp && Date.now() - data.weeklyTimestamp.getTime() < 7 * 24 * 60 * 60 * 1000) {
-			const timeLeft = new Date(data.weeklyTimestamp.getTime() + 7 * 24 * 60 * 60 * 1000 - Date.now());
+			const timeLeft = new Date(data.weeklyTimestamp.getTime() + 7 * 24 * 60 * 60 * 1000 - Date.now())
 			await interaction.reply(
 				`You have already claimed your weekly reward. Come back in ${timeLeft.getUTCDate() - 1}d ${timeLeft.getUTCHours()}h ${timeLeft.getUTCMinutes()}m.`,
-			);
-			return;
+			)
+			return
 		}
-		const reward = rewards.weekly() + (data.weeklyStreak ?? 0) * 10;
+		const reward = rewards.weekly() + (data.weeklyStreak ?? 0) * 10
 
 		await this.container.client.drizzle
 			.update(userData)
@@ -398,11 +398,11 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 				weeklyStreak: sql`${userData.weeklyStreak} + 1`,
 				weeklyTimestamp: new Date(),
 			})
-			.where(eq(userData.userId, interaction.user.id));
+			.where(eq(userData.userId, interaction.user.id))
 
 		this.container.client.logger.debug(
 			`${interaction.user.username} (${interaction.user.id}) claimed their weekly reward of ${reward} coins!`,
-		);
+		)
 
 		const components = [
 			new SectionBuilder()
@@ -415,7 +415,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 				.setThumbnailAccessory(
 					new ThumbnailBuilder().setURL(interaction.user.avatarURL() ?? interaction.client.user.avatarURL() ?? ""),
 				),
-		];
+		]
 
 		const message = await interaction.reply({
 			flags: [MessageFlags.IsComponentsV2],
@@ -429,27 +429,27 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 						.setStyle(ButtonStyle.Success),
 				),
 			],
-		});
+		})
 
-		this.setReminderCollector(interaction, message, components, 10080, "Weekly", interaction.user.id);
+		this.setReminderCollector(interaction, message, components, 10080, "Weekly", interaction.user.id)
 	}
 
 	private async monthly(interaction: ChatInputCommandInteraction) {
 		const data = await this.container.client.drizzle.query.userData.findFirst({
 			where: eq(userData.userId, interaction.user.id),
-		});
+		})
 		if (!data) {
-			await interaction.reply("An error occurred while fetching your data, please try again later.");
-			return;
+			await interaction.reply("An error occurred while fetching your data, please try again later.")
+			return
 		}
 		if (data.monthlyTimestamp && Date.now() - data.monthlyTimestamp.getTime() < 30 * 24 * 60 * 60 * 1000) {
-			const timeLeft = new Date(data.monthlyTimestamp.getTime() + 30 * 24 * 60 * 60 * 1000 - Date.now());
+			const timeLeft = new Date(data.monthlyTimestamp.getTime() + 30 * 24 * 60 * 60 * 1000 - Date.now())
 			await interaction.reply(
 				`You have already claimed your monthly reward. Come back in ${timeLeft.getUTCDate() - 1}d ${timeLeft.getUTCHours()}h ${timeLeft.getUTCMinutes()}m.`,
-			);
-			return;
+			)
+			return
 		}
-		const reward = rewards.monthly() + (data.monthlyStreak ?? 0) * 10;
+		const reward = rewards.monthly() + (data.monthlyStreak ?? 0) * 10
 
 		await this.container.client.drizzle
 			.update(userData)
@@ -458,11 +458,11 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 				monthlyStreak: sql`${userData.monthlyStreak} + 1`,
 				monthlyTimestamp: new Date(),
 			})
-			.where(eq(userData.userId, interaction.user.id));
+			.where(eq(userData.userId, interaction.user.id))
 
 		this.container.client.logger.debug(
 			`${interaction.user.username} (${interaction.user.id}) claimed their monthly reward of ${reward} coins!`,
-		);
+		)
 
 		const components = [
 			new SectionBuilder()
@@ -475,7 +475,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 				.setThumbnailAccessory(
 					new ThumbnailBuilder().setURL(interaction.user.avatarURL() ?? interaction.client.user.avatarURL() ?? ""),
 				),
-		];
+		]
 
 		const message = await interaction.reply({
 			flags: [MessageFlags.IsComponentsV2],
@@ -490,27 +490,27 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 						.setStyle(ButtonStyle.Success),
 				),
 			],
-		});
+		})
 
-		this.setReminderCollector(interaction, message, components, 43200, "Monthly", interaction.user.id);
+		this.setReminderCollector(interaction, message, components, 43200, "Monthly", interaction.user.id)
 	}
 
 	private async work(interaction: ChatInputCommandInteraction) {
 		const data = await this.container.client.drizzle.query.userData.findFirst({
 			where: eq(userData.userId, interaction.user.id),
-		});
+		})
 		if (!data) {
-			await interaction.reply("An error occurred while fetching your data, please try again later.");
-			return;
+			await interaction.reply("An error occurred while fetching your data, please try again later.")
+			return
 		}
 		if (data.workTimestamp && Date.now() - data.workTimestamp.getTime() < 10 * 60 * 1000) {
-			const timeLeft = new Date(data.workTimestamp.getTime() + 10 * 60 * 1000 - Date.now());
+			const timeLeft = new Date(data.workTimestamp.getTime() + 10 * 60 * 1000 - Date.now())
 			await interaction.reply(
 				`You're on cooldown. Come back in ${timeLeft.getUTCMinutes()}m ${timeLeft.getUTCSeconds()}s.`,
-			);
-			return;
+			)
+			return
 		}
-		const reward = rewards.work();
+		const reward = rewards.work()
 
 		await this.container.client.drizzle
 			.update(userData)
@@ -518,11 +518,11 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 				currency: sql`${userData.currency} + ${reward}`,
 				workTimestamp: new Date(),
 			})
-			.where(eq(userData.userId, interaction.user.id));
+			.where(eq(userData.userId, interaction.user.id))
 
 		this.container.client.logger.debug(
 			`${interaction.user.username} (${interaction.user.id}) worked for ${reward} coins!`,
-		);
+		)
 
 		await interaction.reply({
 			flags: [MessageFlags.IsComponentsV2],
@@ -537,46 +537,46 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 						new ThumbnailBuilder().setURL(interaction.user.avatarURL() ?? interaction.client.user.avatarURL() ?? ""),
 					),
 			],
-		});
+		})
 	}
 
 	private async give(interaction: ChatInputCommandInteraction) {
-		const target = interaction.options.getUser("user");
-		const amount = interaction.options.getInteger("amount");
+		const target = interaction.options.getUser("user")
+		const amount = interaction.options.getInteger("amount")
 		if (!target || !amount) {
-			await interaction.reply("Invalid user or amount");
-			return;
+			await interaction.reply("Invalid user or amount")
+			return
 		}
 		if (target.id === interaction.user.id) {
-			await interaction.reply({ content: "You can't give money to yourself", flags: MessageFlags.Ephemeral });
-			return;
+			await interaction.reply({ content: "You can't give money to yourself", flags: MessageFlags.Ephemeral })
+			return
 		}
 		if (amount <= 0) {
-			await interaction.reply({ content: "Amount must be greater than 0", flags: MessageFlags.Ephemeral });
-			return;
+			await interaction.reply({ content: "Amount must be greater than 0", flags: MessageFlags.Ephemeral })
+			return
 		}
 		const data = await this.container.client.drizzle.query.userData.findFirst({
 			where: eq(userData.userId, interaction.user.id),
-		});
+		})
 		if (!data) {
 			await interaction.reply({
 				content: "An error occurred while fetching your data, please try again later.",
 				flags: MessageFlags.Ephemeral,
-			});
-			return;
+			})
+			return
 		}
 		if (data.currency < amount) {
-			await interaction.reply({ content: "You don't have enough coins to give", flags: MessageFlags.Ephemeral });
-			return;
+			await interaction.reply({ content: "You don't have enough coins to give", flags: MessageFlags.Ephemeral })
+			return
 		}
 		// Remove
-		await this.container.manager.removeBalance(interaction.user.id, amount);
+		await this.container.manager.removeBalance(interaction.user.id, amount)
 		// Add
-		await this.container.manager.addBalance(target.id, amount);
+		await this.container.manager.addBalance(target.id, amount)
 
 		this.container.client.logger.info(
 			`${interaction.user.username} (${interaction.user.id}) gave ${amount} coins to ${target.username} (${target.id})`,
-		);
+		)
 
 		await interaction.reply({
 			flags: [MessageFlags.IsComponentsV2],
@@ -589,6 +589,6 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 						new ThumbnailBuilder().setURL(interaction.user.avatarURL() ?? interaction.client.user.avatarURL() ?? ""),
 					),
 			],
-		});
+		})
 	}
 }

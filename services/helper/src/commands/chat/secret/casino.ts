@@ -1,9 +1,9 @@
 /* eslint-disable radix */
-import type { Context } from "@sleepymaid/handler";
-import { SlashCommand } from "@sleepymaid/handler";
-import type { ChatInputCommandInteraction } from "discord.js";
-import { ApplicationCommandType, ApplicationCommandOptionType, resolveColor, MessageFlags } from "discord.js";
-import type { HelperClient } from "../../../lib/extensions/HelperClient";
+import type { Context } from "@sleepymaid/handler"
+import { SlashCommand } from "@sleepymaid/handler"
+import type { ChatInputCommandInteraction } from "discord.js"
+import { ApplicationCommandOptionType, ApplicationCommandType, MessageFlags, resolveColor } from "discord.js"
+import type { HelperClient } from "../../../lib/extensions/HelperClient"
 
 export default class SecretCasinoCommand extends SlashCommand<HelperClient> {
 	public constructor(context: Context<HelperClient>) {
@@ -39,32 +39,32 @@ export default class SecretCasinoCommand extends SlashCommand<HelperClient> {
 					},
 				],
 			},
-		});
+		})
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction<"cached">) {
 		switch (interaction.options.getSubcommand()) {
 			case "getbuttonorder": {
-				const iroomNumber = interaction.options.getInteger("control");
-				if (!iroomNumber) return;
-				await this.checkNumber(interaction, iroomNumber);
-				const imidNumber = interaction.options.getInteger("mid");
-				if (!imidNumber) return;
-				await this.checkNumber(interaction, imidNumber);
+				const iroomNumber = interaction.options.getInteger("control")
+				if (!iroomNumber) return
+				await this.checkNumber(interaction, iroomNumber)
+				const imidNumber = interaction.options.getInteger("mid")
+				if (!imidNumber) return
+				await this.checkNumber(interaction, imidNumber)
 
-				const roomNumbers = String(iroomNumber).split("");
-				const midNumbers = String(imidNumber).split("");
+				const roomNumbers = String(iroomNumber).split("")
+				const midNumbers = String(imidNumber).split("")
 
-				const finalOrder = [0, 0, 0, 0];
+				const finalOrder = [0, 0, 0, 0]
 				for (let ii = 0; ii < 4; ii++) {
-					const int = Number.parseInt(midNumbers[ii]!);
-					const pos = Number.parseInt(roomNumbers[ii]!) - 1;
-					finalOrder[pos] = int;
+					const int = Number.parseInt(midNumbers[ii]!)
+					const pos = Number.parseInt(roomNumbers[ii]!) - 1
+					finalOrder[pos] = int
 				}
 
-				if (!interaction.channel) return;
+				if (!interaction.channel) return
 
-				const ephemeral = interaction.channel.id !== "1250961898120413325";
+				const ephemeral = interaction.channel.id !== "1250961898120413325"
 
 				return interaction.reply({
 					embeds: [
@@ -76,14 +76,14 @@ export default class SecretCasinoCommand extends SlashCommand<HelperClient> {
 						},
 					],
 					ephemeral,
-				});
+				})
 			}
 
 			default:
 				return interaction.reply({
 					content: "Invalid subcommand.",
 					flags: MessageFlags.Ephemeral,
-				});
+				})
 		}
 	}
 
@@ -91,8 +91,8 @@ export default class SecretCasinoCommand extends SlashCommand<HelperClient> {
 		const validNumbers = [
 			1_234, 1_243, 1_324, 1_342, 1_423, 1_432, 2_134, 2_143, 2_314, 2_341, 2_413, 2_431, 3_124, 3_142, 3_214, 3_241,
 			3_412, 3_421, 4_123, 4_132, 4_213, 4_231, 4_321, 4_312,
-		];
-		if (validNumbers.includes(number)) return true;
+		]
+		if (validNumbers.includes(number)) return true
 		else
 			return interaction.reply({
 				embeds: [
@@ -102,6 +102,6 @@ export default class SecretCasinoCommand extends SlashCommand<HelperClient> {
 					},
 				],
 				flags: MessageFlags.Ephemeral,
-			});
+			})
 	}
 }

@@ -1,8 +1,8 @@
 export type PermissionObject = {
-	name: string;
-	description: string;
-	default: boolean;
-};
+	name: string
+	description: string
+	default: boolean
+}
 
 export const permissionList: Record<string, PermissionObject> = {
 	"sleepymaid.admin": {
@@ -18,8 +18,8 @@ export const permissionList: Record<string, PermissionObject> = {
 		description: "Manage role permissions",
 		default: false,
 	},
-};
+}
 
-export const permissionKeys = Object.keys(permissionList);
+export const permissionKeys = Object.keys(permissionList)
 
-export type Permission = (typeof permissionKeys)[number];
+export type Permission = (typeof permissionKeys)[number]

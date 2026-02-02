@@ -1,15 +1,15 @@
-import { Listener, type Context } from "@sleepymaid/handler";
-import type { WatcherClient } from "../../lib/extensions/WatcherClient";
+import { type Context, Listener } from "@sleepymaid/handler"
+import type { WatcherClient } from "../../lib/extensions/WatcherClient"
 
 export default class WarnListener extends Listener<"warn", WatcherClient> {
 	public constructor(context: Context<WatcherClient>) {
 		super(context, {
 			name: "warn",
 			once: true,
-		});
+		})
 	}
 
 	public override async execute(warn: string) {
-		this.container.client.logger.debug(warn);
+		this.container.client.logger.debug(warn)
 	}
 }

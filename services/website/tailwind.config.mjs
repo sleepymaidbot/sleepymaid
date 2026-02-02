@@ -2,7 +2,7 @@
 export default {
 	darkMode: ["class"],
 	content: ["./app/**/*.{js,jsx,ts,tsx}"],
-	plugins: [require("tailwindcss-animate")],
+	plugins: [import("tailwindcss-animate")],
 	theme: {
 		extend: {
 			borderRadius: {
@@ -54,4 +54,4 @@ export default {
 			},
 		},
 	},
-};
+}

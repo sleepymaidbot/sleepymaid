@@ -1,26 +1,26 @@
 /* eslint-disable unicorn/prefer-module */
-import { resolve } from "node:path";
-import process from "node:process";
+import { resolve } from "node:path"
+import process from "node:process"
+import { DefaultExtractors } from "@discord-player/extractor"
+import { load } from "@extractorpack/extractorpack"
 // import { createDrizzleInstance, DrizzleInstance } from "@sleepymaid/db";
-import { BaseContainer, HandlerClient } from "@sleepymaid/handler";
-import { Logger } from "@sleepymaid/logger";
-import type { Config } from "@sleepymaid/shared";
-import { initConfig } from "@sleepymaid/shared";
-import { GatewayIntentBits } from "discord-api-types/v10";
-import { Player } from "discord-player";
-import { DefaultExtractors } from "@discord-player/extractor";
-import { setupPlayerEvents } from "./playerEvents";
-import ClarityContainer from "./ClarityContainer";
-import { load } from "@extractorpack/extractorpack";
+import { BaseContainer, HandlerClient } from "@sleepymaid/handler"
+import { Logger } from "@sleepymaid/logger"
+import type { Config } from "@sleepymaid/shared"
+import { initConfig } from "@sleepymaid/shared"
+import { GatewayIntentBits } from "discord-api-types/v10"
+import { Player } from "discord-player"
+import ClarityContainer from "./ClarityContainer"
+import { setupPlayerEvents } from "./playerEvents"
 
 export class ClarityClient extends HandlerClient {
 	// declare public drizzle: DrizzleInstance;
 
-	declare public config: Config;
+	public declare config: Config
 
-	declare public container: BaseContainer<this> & ClarityContainer;
+	public declare container: BaseContainer<this> & ClarityContainer
 
-	declare public logger: Logger;
+	public declare logger: Logger
 
 	public constructor() {
 		super(
@@ -36,13 +36,13 @@ export class ClarityClient extends HandlerClient {
 				],
 				allowedMentions: { parse: ["users", "roles"], repliedUser: false },
 			},
-		);
+		)
 	}
 
 	public async start(): Promise<void> {
-		this.config = initConfig();
-		this.logger = new Logger(this.env, this.config.discordWebhookUrl);
-		this.env = this.config.nodeEnv;
+		this.config = initConfig()
+		this.logger = new Logger(this.env, this.config.discordWebhookUrl)
+		this.env = this.config.nodeEnv
 
 		// this.drizzle = createDrizzleInstance(process.env.DATABASE_URL as string);
 
@@ -59,12 +59,12 @@ export class ClarityClient extends HandlerClient {
 		// 	ns: "translation",
 		// });
 
-		this.container = new ClarityContainer(this) as BaseContainer<this> & ClarityContainer;
+		this.container = new ClarityContainer(this) as BaseContainer<this> & ClarityContainer
 
-		const player = new Player(this);
+		const player = new Player(this)
 
-		await load(player);
-		await player.extractors.loadMulti(DefaultExtractors);
+		await load(player)
+		await player.extractors.loadMulti(DefaultExtractors)
 
 		this.loadHandlers({
 			commands: {
@@ -83,14 +83,14 @@ export class ClarityClient extends HandlerClient {
 			// tasks: {
 			// 	folder: resolve(__dirname, "..", "tasks"),
 			// },
-		});
+		})
 
-		setupPlayerEvents(this);
+		setupPlayerEvents(this)
 
-		void this.login(this.config.discordToken);
+		void this.login(this.config.discordToken)
 
 		process.on("unhandledRejection", (error: Error) => {
-			this.logger.error(error);
-		});
+			this.logger.error(error)
+		})
 	}
 }

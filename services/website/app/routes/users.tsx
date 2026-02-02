@@ -1,16 +1,16 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
-import { usersQueryOptions } from "../utils/server/users";
+import { useSuspenseQuery } from "@tanstack/react-query"
+import { createFileRoute, Link, Outlet } from "@tanstack/react-router"
+import { usersQueryOptions } from "../utils/server/users"
 
 export const Route = createFileRoute("/users")({
 	loader: async ({ context }) => {
-		await context.queryClient.ensureQueryData(usersQueryOptions());
+		await context.queryClient.ensureQueryData(usersQueryOptions())
 	},
 	component: UsersComponent,
-});
+})
 
 function UsersComponent() {
-	const usersQuery = useSuspenseQuery(usersQueryOptions());
+	const usersQuery = useSuspenseQuery(usersQueryOptions())
 
 	return (
 		<div className="flex gap-2 p-2">
@@ -29,11 +29,11 @@ function UsersComponent() {
 								<div>{user.name}</div>
 							</Link>
 						</li>
-					);
+					)
 				})}
 			</ul>
 			<hr />
 			<Outlet />
 		</div>
-	);
+	)
 }

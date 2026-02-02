@@ -183,3 +183,4 @@ compose/*/
 *.ignore
 compose/cookies.json
 packages/db/env.js
+.DS_Store

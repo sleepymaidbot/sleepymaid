@@ -1,8 +1,8 @@
-import type { Context } from "@sleepymaid/handler";
-import { SlashCommand } from "@sleepymaid/handler";
-import { ApplicationCommandOptionType, type ChatInputCommandInteraction } from "discord.js";
-import { ClarityClient } from "../../lib/ClarityClient";
-import { QueryType, useMainPlayer } from "discord-player";
+import type { Context } from "@sleepymaid/handler"
+import { SlashCommand } from "@sleepymaid/handler"
+import { ApplicationCommandOptionType, type ChatInputCommandInteraction } from "discord.js"
+import { QueryType, useMainPlayer } from "discord-player"
+import { ClarityClient } from "../../lib/ClarityClient"
 
 const searchUrls: Record<string | QueryType, string[]> = {
 	[QueryType.YOUTUBE_VIDEO]: ["https://www.youtube.com/watch?v=", "https://www.youtube.com/results?search_query="],
@@ -18,7 +18,7 @@ const searchUrls: Record<string | QueryType, string[]> = {
 	[QueryType.SPOTIFY_SONG]: ["https://open.spotify.com/song/"],
 	[QueryType.SPOTIFY_SEARCH]: ["https://open.spotify.com/search?q="],
 	[QueryType.SPOTIFY_PLAYLIST]: ["https://open.spotify.com/playlist/"],
-};
+}
 
 export default class extends SlashCommand<ClarityClient> {
 	public constructor(context: Context<ClarityClient>) {
@@ -35,23 +35,23 @@ export default class extends SlashCommand<ClarityClient> {
 					},
 				],
 			},
-		});
+		})
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction<"cached">) {
-		const player = useMainPlayer();
-		const channel = interaction.member.voice.channel;
-		if (!channel) return interaction.reply("You are not connected to a voice channel!");
-		const query = interaction.options.getString("query", true);
+		const player = useMainPlayer()
+		const channel = interaction.member.voice.channel
+		if (!channel) return interaction.reply("You are not connected to a voice channel!")
+		const query = interaction.options.getString("query", true)
 
-		await interaction.deferReply();
+		await interaction.deferReply()
 
 		// Get from searchUrls
 		const queryType = Object.entries(searchUrls).find(([_, urls]) =>
 			urls.some((url) => query.toLowerCase().startsWith(url.toLowerCase())),
-		)?.[0];
+		)?.[0]
 
-		console.log(queryType);
+		console.log(queryType)
 
 		try {
 			const { track } = await player.play(channel, query, {
@@ -59,11 +59,11 @@ export default class extends SlashCommand<ClarityClient> {
 					metadata: interaction,
 				},
 				...(queryType && { searchEngine: queryType as QueryType }),
-			});
+			})
 
-			return interaction.followUp(`**${track.title}** enqueued!`);
+			return interaction.followUp(`**${track.title}** enqueued!`)
 		} catch (e) {
-			return interaction.followUp(`Something went wrong: ${e}`);
+			return interaction.followUp(`Something went wrong: ${e}`)
 		}
 	}
 }

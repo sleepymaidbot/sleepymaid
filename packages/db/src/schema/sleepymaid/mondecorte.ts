@@ -1,4 +1,4 @@
-import { integer, pgTable, text, uniqueIndex } from "drizzle-orm/pg-core";
+import { integer, pgTable, text, uniqueIndex } from "drizzle-orm/pg-core"
 
 export const mondecorte = pgTable(
 	"monde_ecorte",
@@ -12,6 +12,6 @@ export const mondecorte = pgTable(
 	(table) => {
 		return {
 			userIdKey: uniqueIndex("monde_ecorte_user_id_key").on(table.userId),
-		};
+		}
 	},
-);
+)

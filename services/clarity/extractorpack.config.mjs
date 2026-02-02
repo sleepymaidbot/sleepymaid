@@ -1,4 +1,4 @@
-import { defineConfig } from "extractorpack";
+import { defineConfig } from "extractorpack"
 
 export default defineConfig({
 	"discord-player-deezer": {
@@ -14,4 +14,4 @@ export default defineConfig({
 			apiKey: process.env.YOUTUBE_API_KEY,
 		},
 	},
-});
+})

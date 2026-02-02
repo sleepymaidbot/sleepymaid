@@ -1,6 +1,7 @@
-import moduleAlias from "module-alias";
-moduleAlias.addAlias("punycode", "punycode/");
+import moduleAlias from "module-alias"
 
-import { SleepyMaidClient } from "./lib/SleepyMaidClient";
+moduleAlias.addAlias("punycode", "punycode/")
 
-void new SleepyMaidClient().start();
+import { SleepyMaidClient } from "./lib/SleepyMaidClient"
+
+void new SleepyMaidClient().start()

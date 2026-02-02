@@ -1,20 +1,20 @@
-import { DrizzleInstance } from "@sleepymaid/db";
-import { WatcherClient } from "./WatcherClient";
-import Manager from "./manager";
-import { BaseContainer } from "@sleepymaid/handler";
-import { Redis } from "iovalkey";
+import { DrizzleInstance } from "@sleepymaid/db"
+import { BaseContainer } from "@sleepymaid/handler"
+import { Redis } from "iovalkey"
+import Manager from "./manager"
+import { WatcherClient } from "./WatcherClient"
 
 export default class WatcherContainer extends BaseContainer<WatcherClient> {
-	declare public drizzle: DrizzleInstance;
+	public declare drizzle: DrizzleInstance
 
-	declare public manager: Manager;
+	public declare manager: Manager
 
-	declare public redis: Redis;
+	public declare redis: Redis
 
 	constructor(client: WatcherClient) {
-		super(client);
-		this.drizzle = client.drizzle;
-		this.manager = new Manager(client);
-		this.redis = client.redis;
+		super(client)
+		this.drizzle = client.drizzle
+		this.manager = new Manager(client)
+		this.redis = client.redis
 	}
 }

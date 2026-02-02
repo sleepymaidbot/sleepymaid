@@ -1,20 +1,20 @@
-import { Link, Outlet, createRootRouteWithContext } from "@tanstack/react-router";
-import { createServerFn, Meta, Scripts } from "@tanstack/start";
-import * as React from "react";
-import type { QueryClient } from "@tanstack/react-query";
-import { DefaultCatchBoundary } from "~/components/DefaultCatchBoundary";
-import { NotFound } from "~/components/NotFound";
-import appCss from "~/styles/app.css?url";
-import { seo } from "~/utils/seo";
-import { useSession } from "~/hooks/useSession";
-import NavBar from "~/components/NavBar";
-import { User } from "~/utils/types";
+import type { QueryClient } from "@tanstack/react-query"
+import { createRootRouteWithContext, Link, Outlet } from "@tanstack/react-router"
+import { createServerFn, Meta, Scripts } from "@tanstack/start"
+import * as React from "react"
+import { DefaultCatchBoundary } from "~/components/DefaultCatchBoundary"
+import NavBar from "~/components/NavBar"
+import { NotFound } from "~/components/NotFound"
+import { useSession } from "~/hooks/useSession"
+import appCss from "~/styles/app.css?url"
+import { seo } from "~/utils/seo"
+import { User } from "~/utils/types"
 
 const fetchUser = createServerFn({ method: "GET" }).handler(async () => {
-	const session = await useSession();
+	const session = await useSession()
 
 	if (!session.data.sessionId) {
-		return null;
+		return null
 	}
 
 	return {
@@ -22,11 +22,11 @@ const fetchUser = createServerFn({ method: "GET" }).handler(async () => {
 		userId: session.data.userId,
 		username: session.data.username,
 		avatar: session.data.avatar,
-	} as User;
-});
+	} as User
+})
 
 export const Route = createRootRouteWithContext<{
-	queryClient: QueryClient;
+	queryClient: QueryClient
 }>()({
 	head: () => ({
 		meta: [
@@ -66,29 +66,29 @@ export const Route = createRootRouteWithContext<{
 		],
 	}),
 	beforeLoad: async () => {
-		const user = await fetchUser();
+		const user = await fetchUser()
 
 		return {
 			user,
-		};
+		}
 	},
 	errorComponent: (props) => {
 		return (
 			<RootDocument>
 				<DefaultCatchBoundary {...props} />
 			</RootDocument>
-		);
+		)
 	},
 	notFoundComponent: () => <NotFound />,
 	component: RootComponent,
-});
+})
 
 function RootComponent() {
 	return (
 		<RootDocument>
 			<Outlet />
 		</RootDocument>
-	);
+	)
 }
 
 const TanStackRouterDevtools =
@@ -98,7 +98,7 @@ const TanStackRouterDevtools =
 				import("@tanstack/router-devtools").then((res) => ({
 					default: res.TanStackRouterDevtools,
 				})),
-			);
+			)
 
 const ReactQueryDevtools =
 	process.env.NODE_ENV === "production"
@@ -107,10 +107,10 @@ const ReactQueryDevtools =
 				import("@tanstack/react-query-devtools").then((res) => ({
 					default: res.ReactQueryDevtools,
 				})),
-			);
+			)
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-	const { user } = Route.useRouteContext();
+	const { user } = Route.useRouteContext()
 	return (
 		<html>
 			<head>
@@ -124,5 +124,5 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<Scripts />
 			</body>
 		</html>
-	);
+	)
 }

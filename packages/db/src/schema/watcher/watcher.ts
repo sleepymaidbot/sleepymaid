@@ -1,7 +1,7 @@
-import { jsonb, pgEnum, pgTable, serial, text } from "drizzle-orm/pg-core";
-import { guildSettings } from "../sleepymaid/schema";
+import { jsonb, pgEnum, pgTable, serial, text } from "drizzle-orm/pg-core"
+import { guildSettings } from "../sleepymaid/schema"
 
-export const caseType = pgEnum("case_type", ["untimeout", "timeout", "kick", "unban", "ban"]);
+export const caseType = pgEnum("case_type", ["untimeout", "timeout", "kick", "unban", "ban"])
 
 export const types = {
 	moderationEvents: {
@@ -43,7 +43,7 @@ export const types = {
 		create: "Invite Create",
 		delete: "Invite Delete",
 	},
-};
+}
 
 export const logChannel = pgTable("log_channel", {
 	id: serial("id").primaryKey().notNull(),
@@ -115,7 +115,7 @@ export const logChannel = pgTable("log_channel", {
 		})
 		.notNull()
 		.$type<Record<keyof typeof types.inviteEvents, boolean>>(),
-});
+})
 
 export const modCase = pgTable("case", {
 	guildId: text("guild_id")
@@ -127,4 +127,4 @@ export const modCase = pgTable("case", {
 	reason: text("reason"),
 	type: caseType("type").notNull(),
 	modId: text("mod_id"),
-});
+})

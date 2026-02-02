@@ -1,62 +1,51 @@
-import { AuditLogEvent, type VoiceState } from "discord.js";
-import type { HelperClient } from "../../lib/extensions/HelperClient";
-import { sql } from "drizzle-orm";
-import { Listener, type Context } from "@sleepymaid/handler";
-import { disconnectCounter } from "@sleepymaid/db";
+import { disconnectCounter } from "@sleepymaid/db"
+import { Context, Listener } from "@sleepymaid/handler"
+import { AuditLogEvent, VoiceState } from "discord.js"
+import { sql } from "drizzle-orm"
+import { HelperClient } from "../../lib/extensions/HelperClient"
 
 export default class extends Listener<"voiceStateUpdate", HelperClient> {
 	constructor(context: Context<HelperClient>) {
 		super(context, {
 			name: "voiceStateUpdate",
 			once: false,
-		});
+		})
 	}
 
 	public override async execute(oldState: VoiceState, newState: VoiceState) {
-		if (oldState.guild.id !== "796534493535928320") return;
-		if (!oldState.member) return;
+		if (oldState.guild.id !== "796534493535928320") return
+		if (!oldState.member) return
 		// if (oldState.member.id !== "523915165545136141") return;
-		if (!oldState.guild.members.me?.permissions.has("ManageNicknames")) return;
-		if (oldState.member.user.bot) return;
+		if (!oldState.guild.members.me?.permissions.has("ManageNicknames")) return
+		if (oldState.member.user.bot) return
 		if (oldState.channel !== null && newState.channel == null) {
-			const auditLog = await oldState.guild.fetchAuditLogs({ type: AuditLogEvent.MemberDisconnect });
-			const entry = auditLog.entries.filter((entry) => Date.now() - entry.createdTimestamp < 10_000).first();
-			if (!entry) return;
-
-			let amount = 1;
-
-			switch (oldState.member.presence?.status) {
-				case "offline":
-					amount = 15;
-					break;
-				case "dnd":
-					amount = 3;
-					break;
-			}
+			const auditLog = await oldState.guild.fetchAuditLogs({ type: AuditLogEvent.MemberDisconnect })
+			const entry = auditLog.entries.filter((entry) => Date.now() - entry.createdTimestamp < 10_000).first()
+			if (!entry) return
 
 			const user = await this.container.client.drizzle
 				.insert(disconnectCounter)
 				.values({
 					userId: oldState.member.id,
-					count: amount,
+					count: 1,
 				})
 				.onConflictDoUpdate({
 					target: [disconnectCounter.userId],
 					set: {
-						count: sql`${disconnectCounter.count} + ${amount}`,
+						count: sql`${disconnectCounter.count} + 1`,
 					},
 				})
 				.returning({
 					count: disconnectCounter.count,
-				});
-			if (!user || !user[0]) return;
-			if (!oldState.member.manageable) return;
+				})
+			if (!user || !user[0]) return
+			if (!oldState.member.manageable) return
 
-			const currentName = oldState.member.nickname ?? oldState.member.user.displayName;
-			const baseNickname = currentName.replace(/^\[\d+\]\s+/, "");
-			const newNickname = `[${user[0].count}] ${baseNickname}`;
+			const currentName = oldState.member.nickname ?? oldState.member.user.displayName
+			const baseNickname = currentName.replace(/^\[\d+\]\s+/, "")
+			const newNickname = `[${user[0].count}] ${baseNickname}`
 
-			await oldState.member.setNickname(newNickname);
+			await oldState.member.setNickname(newNickname)
 		}
 	}
 }

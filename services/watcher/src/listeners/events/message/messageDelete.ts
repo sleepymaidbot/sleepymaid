@@ -1,24 +1,24 @@
-import { Context, Listener } from "@sleepymaid/handler";
-import { WatcherClient } from "../../../lib/extensions/WatcherClient";
-import { APIEmbed, APIEmbedField, AuditLogEvent, Colors, Message } from "discord.js";
+import { Context, Listener } from "@sleepymaid/handler"
+import { APIEmbed, APIEmbedField, AuditLogEvent, Colors, Message } from "discord.js"
+import { WatcherClient } from "../../../lib/extensions/WatcherClient"
 
 export default class extends Listener<"messageDelete", WatcherClient> {
 	constructor(context: Context<WatcherClient>) {
 		super(context, {
 			name: "messageDelete",
 			once: false,
-		});
+		})
 	}
 
 	public override async execute(message: Message<true>) {
-		if (!message.guild) return;
-		if (message.webhookId) return;
+		if (!message.guild) return
+		if (message.webhookId) return
 		const channels = (await this.container.manager.getLogChannel(message.guild.id))?.filter(
 			(c) => c.messageEvents.delete,
-		);
-		if (!channels || channels.length === 0) return;
+		)
+		if (!channels || channels.length === 0) return
 
-		const content = message.content === "" ? "No content" : `\`\`\`${message.content}\`\`\``;
+		const content = message.content === "" ? "No content" : `\`\`\`${message.content}\`\`\``
 
 		const fields: APIEmbedField[] = [
 			{
@@ -36,14 +36,14 @@ export default class extends Listener<"messageDelete", WatcherClient> {
 				value: content,
 				inline: false,
 			},
-		];
+		]
 
 		if (message.attachments.size > 0) {
 			fields.push({
 				name: "Attachments",
 				value: message.attachments.map((a) => a.url).join("\n"),
 				inline: false,
-			});
+			})
 		}
 
 		if (message.stickers.size > 0) {
@@ -51,7 +51,7 @@ export default class extends Listener<"messageDelete", WatcherClient> {
 				name: "Stickers",
 				value: message.stickers.map((s) => s.name).join("\n"),
 				inline: false,
-			});
+			})
 		}
 
 		const embed: APIEmbed = {
@@ -59,15 +59,15 @@ export default class extends Listener<"messageDelete", WatcherClient> {
 			color: Colors.Red,
 			fields,
 			timestamp: new Date().toISOString(),
-		};
+		}
 
 		const author = await message.guild.fetchAuditLogs({
 			type: AuditLogEvent.MessageDelete,
-		});
+		})
 		const log = author.entries
 			.filter((l) => l.target && l.target.id === message.author.id)
 			.sort((a, b) => b.createdTimestamp - a.createdTimestamp)
-			.first();
+			.first()
 
 		if (
 			log &&
@@ -78,11 +78,11 @@ export default class extends Listener<"messageDelete", WatcherClient> {
 			embed.footer = {
 				text: `${log.executor.displayName} (${log.executorId})`,
 				icon_url: log.executor.displayAvatarURL(),
-			};
+			}
 		}
 
 		for (const channel of channels) {
-			await this.container.manager.sendLog(channel, { embeds: [embed] });
+			await this.container.manager.sendLog(channel, { embeds: [embed] })
 		}
 	}
 }

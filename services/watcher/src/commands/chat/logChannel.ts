@@ -1,5 +1,6 @@
-import { Context, SlashCommand } from "@sleepymaid/handler";
-import { WatcherClient } from "../../lib/extensions/WatcherClient";
+import { guildSettings, logChannel, types } from "@sleepymaid/db"
+import { Context, SlashCommand } from "@sleepymaid/handler"
+import { AutocompleteChoices, getAutocompleteResults } from "@sleepymaid/shared"
 import {
 	ApplicationCommandOptionType,
 	ApplicationIntegrationType,
@@ -7,17 +8,16 @@ import {
 	ButtonStyle,
 	ChannelType,
 	ChatInputCommandInteraction,
-	MessageComponentInteraction,
 	ComponentType,
-	PermissionFlagsBits,
 	InteractionContextType,
+	MessageComponentInteraction,
 	MessageFlags,
-} from "discord.js";
-import { guildSettings, logChannel, types } from "@sleepymaid/db";
-import { and, eq } from "drizzle-orm";
-import { AutocompleteChoices, getAutocompleteResults } from "@sleepymaid/shared";
+	PermissionFlagsBits,
+} from "discord.js"
+import { and, eq } from "drizzle-orm"
+import { WatcherClient } from "../../lib/extensions/WatcherClient"
 
-const options: AutocompleteChoices = [];
+const options: AutocompleteChoices = []
 
 export default class extends SlashCommand<WatcherClient> {
 	constructor(context: Context<WatcherClient>) {
@@ -126,63 +126,63 @@ export default class extends SlashCommand<WatcherClient> {
 					},
 				],
 			},
-		});
+		})
 	}
 
 	public override execute(interaction: ChatInputCommandInteraction) {
-		if (!interaction.inCachedGuild()) return;
+		if (!interaction.inCachedGuild()) return
 
-		const subcommand = interaction.options.getSubcommand();
+		const subcommand = interaction.options.getSubcommand()
 
 		switch (subcommand) {
 			case "create":
-				return this.create(interaction);
+				return this.create(interaction)
 			case "delete":
-				return this.delete(interaction);
+				return this.delete(interaction)
 			case "list":
-				return this.list(interaction);
+				return this.list(interaction)
 			case "clear":
-				return this.clear(interaction);
+				return this.clear(interaction)
 			case "types":
-				return this.types(interaction);
+				return this.types(interaction)
 			case "info":
-				return this.info(interaction);
+				return this.info(interaction)
 			default:
-				return interaction.reply({ content: "Invalid subcommand", flags: MessageFlags.Ephemeral });
+				return interaction.reply({ content: "Invalid subcommand", flags: MessageFlags.Ephemeral })
 		}
 	}
 
 	private async create(interaction: ChatInputCommandInteraction<"cached">) {
-		const channel = interaction.options.getChannel("channel") ?? interaction.channel;
-		const thread = interaction.options.getChannel("thread");
+		const channel = interaction.options.getChannel("channel") ?? interaction.channel
+		const thread = interaction.options.getChannel("thread")
 
 		if (!channel || !channel.isTextBased() || !("createWebhook" in channel))
-			return interaction.reply({ content: "Channel not found", flags: MessageFlags.Ephemeral });
+			return interaction.reply({ content: "Channel not found", flags: MessageFlags.Ephemeral })
 
 		const existingChannel = await this.container.client.drizzle.query.logChannel.findMany({
 			where: eq(logChannel.guildId, interaction.guild.id),
-		});
+		})
 
 		const guildSetting = await this.container.client.drizzle.query.guildSettings.findFirst({
 			where: eq(guildSettings.guildId, interaction.guild.id),
-		});
+		})
 
-		if (!guildSetting) return interaction.reply({ content: "Guild settings not found", flags: MessageFlags.Ephemeral });
+		if (!guildSetting) return interaction.reply({ content: "Guild settings not found", flags: MessageFlags.Ephemeral })
 
 		if (existingChannel.length >= 3 && guildSetting.premiumLevel <= 1)
 			return interaction.reply({
 				content: "You have reached the maximum number of log channels",
 				flags: MessageFlags.Ephemeral,
-			});
+			})
 
 		if (
 			existingChannel.some((c) => {
-				if (c.channelId === channel.id) return true;
-				if (c.threadId === thread?.id) return true;
-				return false;
+				if (c.channelId === channel.id) return true
+				if (c.threadId === thread?.id) return true
+				return false
 			})
 		)
-			return interaction.reply({ content: "Channel already has is a log channel", flags: MessageFlags.Ephemeral });
+			return interaction.reply({ content: "Channel already has is a log channel", flags: MessageFlags.Ephemeral })
 
 		const webhook = await channel
 			.createWebhook({
@@ -190,9 +190,9 @@ export default class extends SlashCommand<WatcherClient> {
 				avatar: this.container.client.user!.displayAvatarURL() ?? "",
 				reason: `New log channel created by ${interaction.user.tag}`,
 			})
-			.catch(() => null);
+			.catch(() => null)
 
-		if (!webhook) return interaction.reply({ content: "Failed to create webhook", flags: MessageFlags.Ephemeral });
+		if (!webhook) return interaction.reply({ content: "Failed to create webhook", flags: MessageFlags.Ephemeral })
 
 		const [returning] = await this.container.client.drizzle
 			.insert(logChannel)
@@ -203,45 +203,45 @@ export default class extends SlashCommand<WatcherClient> {
 				webhookToken: webhook.token ?? "",
 				threadId: thread ? thread.id : null,
 			})
-			.returning();
+			.returning()
 
 		return interaction.reply({
 			content: `Log channel created successfully. ID: \`\`${returning?.id}\`\``,
 			flags: MessageFlags.Ephemeral,
-		});
+		})
 	}
 
 	private async delete(interaction: ChatInputCommandInteraction<"cached">) {
-		const channel = interaction.options.getChannel("channel") ?? interaction.channel;
-		const thread = interaction.options.getChannel("thread");
+		const channel = interaction.options.getChannel("channel") ?? interaction.channel
+		const thread = interaction.options.getChannel("thread")
 
 		if (!channel || !channel.isTextBased())
-			return interaction.reply({ content: "Channel not found", flags: MessageFlags.Ephemeral });
+			return interaction.reply({ content: "Channel not found", flags: MessageFlags.Ephemeral })
 
 		if (thread) {
 			await this.container.client.drizzle
 				.delete(logChannel)
-				.where(and(eq(logChannel.guildId, interaction.guild.id), eq(logChannel.threadId, thread.id)));
+				.where(and(eq(logChannel.guildId, interaction.guild.id), eq(logChannel.threadId, thread.id)))
 		} else {
-			await this.container.client.drizzle.delete(logChannel).where(eq(logChannel.channelId, channel.id));
+			await this.container.client.drizzle.delete(logChannel).where(eq(logChannel.channelId, channel.id))
 		}
 
-		return interaction.reply({ content: "Log channel deleted successfully", flags: MessageFlags.Ephemeral });
+		return interaction.reply({ content: "Log channel deleted successfully", flags: MessageFlags.Ephemeral })
 	}
 
 	private async list(interaction: ChatInputCommandInteraction<"cached">) {
 		const channels = await this.container.client.drizzle.query.logChannel.findMany({
 			where: eq(logChannel.guildId, interaction.guild.id),
-		});
+		})
 
 		return interaction.reply({
 			content: `**Log Channels**\n${channels.map((c) => `\`\`${c.id}\`\` <#${c.channelId}>`).join("\n")}`,
 			flags: MessageFlags.Ephemeral,
-		});
+		})
 	}
 
 	private async clear(interaction: ChatInputCommandInteraction<"cached">) {
-		if (!interaction.channel) return;
+		if (!interaction.channel) return
 
 		await interaction.reply({
 			content: "Are you sure you want to clear all log channels?",
@@ -265,7 +265,7 @@ export default class extends SlashCommand<WatcherClient> {
 					],
 				},
 			],
-		});
+		})
 
 		interaction.channel
 			.createMessageComponentCollector({
@@ -273,44 +273,44 @@ export default class extends SlashCommand<WatcherClient> {
 				time: 15000,
 			})
 			.on("collect", async (i: MessageComponentInteraction) => {
-				if (i.user.id !== interaction.user.id) return;
+				if (i.user.id !== interaction.user.id) return
 
 				if (i.customId.startsWith("logchannel:clear:confirm")) {
-					await this.container.client.drizzle.delete(logChannel).where(eq(logChannel.guildId, interaction.guild.id));
+					await this.container.client.drizzle.delete(logChannel).where(eq(logChannel.guildId, interaction.guild.id))
 
-					await interaction.editReply({ content: "Successfully cleared all log channels", components: [] });
-					return await i.deferUpdate();
+					await interaction.editReply({ content: "Successfully cleared all log channels", components: [] })
+					return await i.deferUpdate()
 				} else {
-					await interaction.editReply({ components: [] });
-					return await i.deferUpdate();
+					await interaction.editReply({ components: [] })
+					return await i.deferUpdate()
 				}
 			})
 			.on("end", () => {
-				interaction.editReply({ components: [] });
-			});
+				interaction.editReply({ components: [] })
+			})
 	}
 
 	private async types(interaction: ChatInputCommandInteraction<"cached">) {
-		const chan = interaction.options.getChannel("channel") ?? interaction.channel;
-		const thread = interaction.options.getChannel("thread");
-		const enabled = interaction.options.getBoolean("enabled", true);
+		const chan = interaction.options.getChannel("channel") ?? interaction.channel
+		const thread = interaction.options.getChannel("thread")
+		const enabled = interaction.options.getBoolean("enabled", true)
 
-		if (!chan) return interaction.reply({ content: "Channel not found", flags: MessageFlags.Ephemeral });
+		if (!chan) return interaction.reply({ content: "Channel not found", flags: MessageFlags.Ephemeral })
 
-		const conditions = [eq(logChannel.guildId, interaction.guild.id), eq(logChannel.channelId, chan.id)];
+		const conditions = [eq(logChannel.guildId, interaction.guild.id), eq(logChannel.channelId, chan.id)]
 
-		if (thread) conditions.push(eq(logChannel.threadId, thread.id));
+		if (thread) conditions.push(eq(logChannel.threadId, thread.id))
 
 		const channel = await this.container.client.drizzle.query.logChannel.findFirst({
 			where: and(...conditions),
-		});
+		})
 
-		if (!channel) return interaction.reply({ content: "Log channel not found", flags: MessageFlags.Ephemeral });
+		if (!channel) return interaction.reply({ content: "Log channel not found", flags: MessageFlags.Ephemeral })
 
-		const type = interaction.options.getString("type", true);
+		const type = interaction.options.getString("type", true)
 
 		if (!options.some((o) => o.value === type))
-			return interaction.reply({ content: "Invalid type", flags: MessageFlags.Ephemeral });
+			return interaction.reply({ content: "Invalid type", flags: MessageFlags.Ephemeral })
 
 		if (type === "all") {
 			await this.container.client.drizzle
@@ -356,66 +356,66 @@ export default class extends SlashCommand<WatcherClient> {
 						delete: enabled,
 					},
 				})
-				.where(eq(logChannel.id, channel.id));
+				.where(eq(logChannel.id, channel.id))
 		} else {
-			const [firstType, secondType] = type.split(".");
+			const [firstType, secondType] = type.split(".")
 
 			if (!firstType || !secondType)
-				return interaction.reply({ content: "Invalid type", flags: MessageFlags.Ephemeral });
+				return interaction.reply({ content: "Invalid type", flags: MessageFlags.Ephemeral })
 
 			await this.container.client.drizzle
 				.update(logChannel)
 				.set({
 					[firstType]: { [secondType]: enabled },
 				})
-				.where(eq(logChannel.id, channel.id));
+				.where(eq(logChannel.id, channel.id))
 		}
 
-		await this.container.manager.updateLogChannels(interaction.guild.id);
+		await this.container.manager.updateLogChannels(interaction.guild.id)
 
-		return interaction.reply({ content: "Log channel types updated successfully", flags: MessageFlags.Ephemeral });
+		return interaction.reply({ content: "Log channel types updated successfully", flags: MessageFlags.Ephemeral })
 	}
 
 	private async info(interaction: ChatInputCommandInteraction<"cached">) {
-		const id = interaction.options.getString("id", true);
+		const id = interaction.options.getString("id", true)
 
 		const channel = await this.container.client.drizzle.query.logChannel.findFirst({
 			where: and(eq(logChannel.guildId, interaction.guild.id), eq(logChannel.id, Number(id))),
-		});
+		})
 
-		if (!channel) return interaction.reply({ content: "Log channel not found", flags: MessageFlags.Ephemeral });
+		if (!channel) return interaction.reply({ content: "Log channel not found", flags: MessageFlags.Ephemeral })
 
-		const text = [];
+		const text = []
 
 		for (const [key, value] of Object.entries(types)) {
-			const data = channel[key as keyof typeof channel];
-			if (!data) continue;
+			const data = channel[key as keyof typeof channel]
+			if (!data) continue
 			for (const [subkey, subvalue] of Object.entries(value)) {
-				const value = data[subkey as keyof typeof data];
-				text.push(`**${subvalue}:** ${value ? "Enabled" : "Disabled"}`);
+				const value = data[subkey as keyof typeof data]
+				text.push(`**${subvalue}:** ${value ? "Enabled" : "Disabled"}`)
 			}
 		}
 
 		return interaction.reply({
 			content: `**Log Channel Info**\nID: \`\`${channel.id}\`\`\n\n${text.join("\n")}`,
 			flags: MessageFlags.Ephemeral,
-		});
+		})
 	}
 
 	public override autocomplete(interaction: AutocompleteInteraction) {
 		if (options.length === 0) {
-			const op: AutocompleteChoices = [];
+			const op: AutocompleteChoices = []
 			for (const [key, value] of Object.entries(types)) {
 				for (const [subkey, subvalue] of Object.entries(value)) {
-					op.push({ name: subvalue, value: `${key}.${subkey}` });
+					op.push({ name: subvalue, value: `${key}.${subkey}` })
 				}
 			}
-			op.push({ name: "All", value: "all" });
-			options.push(...op);
+			op.push({ name: "All", value: "all" })
+			options.push(...op)
 		}
 
-		const results = getAutocompleteResults(options, interaction.options.getFocused());
+		const results = getAutocompleteResults(options, interaction.options.getFocused())
 
-		interaction.respond(results);
+		interaction.respond(results)
 	}
 }

@@ -1,19 +1,19 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
-import { postsQueryOptions } from "../utils/server/posts";
+import { useSuspenseQuery } from "@tanstack/react-query"
+import { createFileRoute, Link, Outlet } from "@tanstack/react-router"
+import { postsQueryOptions } from "../utils/server/posts"
 
 export const Route = createFileRoute("/posts")({
 	loader: async ({ context }) => {
-		await context.queryClient.ensureQueryData(postsQueryOptions());
+		await context.queryClient.ensureQueryData(postsQueryOptions())
 	},
 	head: () => ({
 		meta: [{ title: "Posts" }],
 	}),
 	component: PostsComponent,
-});
+})
 
 function PostsComponent() {
-	const postsQuery = useSuspenseQuery(postsQueryOptions());
+	const postsQuery = useSuspenseQuery(postsQueryOptions())
 
 	return (
 		<div className="flex gap-2 p-2">
@@ -32,11 +32,11 @@ function PostsComponent() {
 								<div>{post.title.substring(0, 20)}</div>
 							</Link>
 						</li>
-					);
+					)
 				})}
 			</ul>
 			<hr />
 			<Outlet />
 		</div>
-	);
+	)
 }

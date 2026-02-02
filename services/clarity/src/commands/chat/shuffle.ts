@@ -1,8 +1,8 @@
-import type { Context } from "@sleepymaid/handler";
-import { SlashCommand } from "@sleepymaid/handler";
-import { type ChatInputCommandInteraction } from "discord.js";
-import { ClarityClient } from "../../lib/ClarityClient";
-import { useQueue } from "discord-player";
+import type { Context } from "@sleepymaid/handler"
+import { SlashCommand } from "@sleepymaid/handler"
+import { type ChatInputCommandInteraction } from "discord.js"
+import { useQueue } from "discord-player"
+import { ClarityClient } from "../../lib/ClarityClient"
 
 export default class extends SlashCommand<ClarityClient> {
 	public constructor(context: Context<ClarityClient>) {
@@ -11,20 +11,20 @@ export default class extends SlashCommand<ClarityClient> {
 				name: "shuffle",
 				description: "Shuffle the current queue",
 			},
-		});
+		})
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction<"cached">) {
-		const queue = useQueue();
+		const queue = useQueue()
 
 		if (!queue) {
-			return interaction.reply("This server does not have an active player session.");
+			return interaction.reply("This server does not have an active player session.")
 		}
 
-		if (queue.tracks.size < 2) return interaction.reply("There are not enough tracks in the queue to shuffle.");
+		if (queue.tracks.size < 2) return interaction.reply("There are not enough tracks in the queue to shuffle.")
 
-		queue.tracks.shuffle();
+		queue.tracks.shuffle()
 
-		return interaction.reply(`Shuffled ${queue.tracks.size} tracks.`);
+		return interaction.reply(`Shuffled ${queue.tracks.size} tracks.`)
 	}
 }

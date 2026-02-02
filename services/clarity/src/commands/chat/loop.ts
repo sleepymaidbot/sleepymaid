@@ -1,8 +1,8 @@
-import type { Context } from "@sleepymaid/handler";
-import { SlashCommand } from "@sleepymaid/handler";
-import { ApplicationCommandOptionType, type ChatInputCommandInteraction } from "discord.js";
-import { ClarityClient } from "../../lib/ClarityClient";
-import { QueueRepeatMode, useQueue } from "discord-player";
+import type { Context } from "@sleepymaid/handler"
+import { SlashCommand } from "@sleepymaid/handler"
+import { ApplicationCommandOptionType, type ChatInputCommandInteraction } from "discord.js"
+import { QueueRepeatMode, useQueue } from "discord-player"
+import { ClarityClient } from "../../lib/ClarityClient"
 
 export default class extends SlashCommand<ClarityClient> {
 	public constructor(context: Context<ClarityClient>) {
@@ -37,27 +37,27 @@ export default class extends SlashCommand<ClarityClient> {
 					},
 				],
 			},
-		});
+		})
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction<"cached">) {
-		const queue = useQueue();
+		const queue = useQueue()
 
 		if (!queue) {
-			return interaction.reply("This server does not have an active player session.");
+			return interaction.reply("This server does not have an active player session.")
 		}
 
-		const loopMode = interaction.options.getNumber("mode", true) as QueueRepeatMode;
+		const loopMode = interaction.options.getNumber("mode", true) as QueueRepeatMode
 
-		queue.setRepeatMode(loopMode);
+		queue.setRepeatMode(loopMode)
 
 		const modeName = {
 			[QueueRepeatMode.OFF]: "Off",
 			[QueueRepeatMode.TRACK]: "Track",
 			[QueueRepeatMode.QUEUE]: "Queue",
 			[QueueRepeatMode.AUTOPLAY]: "Autoplay",
-		};
+		}
 
-		return interaction.reply(`Loop mode set to ${modeName[loopMode]}`);
+		return interaction.reply(`Loop mode set to ${modeName[loopMode]}`)
 	}
 }

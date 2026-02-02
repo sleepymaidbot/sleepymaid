@@ -1,6 +1,7 @@
-import moduleAlias from "module-alias";
-moduleAlias.addAlias("punycode", "punycode/");
+import moduleAlias from "module-alias"
 
-import { ClarityClient } from "./lib/ClarityClient";
+moduleAlias.addAlias("punycode", "punycode/")
 
-void new ClarityClient().start();
+import { ClarityClient } from "./lib/ClarityClient"
+
+void new ClarityClient().start()

@@ -1,24 +1,24 @@
-import { DrizzleInstance, reminders, rolePermissions, userData } from "@sleepymaid/db";
-import { SleepyMaidClient } from "./SleepyMaidClient";
-import { and, eq, sql } from "drizzle-orm";
-import { Permission, permissionList } from "@sleepymaid/shared";
-import { GuildMember, PermissionFlagsBits } from "discord.js";
-import { downloadVideo } from "./downloader";
-import { Logger } from "@sleepymaid/logger";
+import { DrizzleInstance, reminders, rolePermissions, userData } from "@sleepymaid/db"
+import { Logger } from "@sleepymaid/logger"
+import { Permission, permissionList } from "@sleepymaid/shared"
+import { GuildMember, PermissionFlagsBits } from "discord.js"
+import { and, eq, sql } from "drizzle-orm"
+import { downloadVideo } from "./downloader"
+import { SleepyMaidClient } from "./SleepyMaidClient"
 
-const MetadataCoolDown = new Map<string, number>();
+const MetadataCoolDown = new Map<string, number>()
 
 export default class Manager {
-	declare private client: SleepyMaidClient;
+	private declare client: SleepyMaidClient
 
-	declare private drizzle: DrizzleInstance;
+	private declare drizzle: DrizzleInstance
 
-	declare private logger: Logger;
+	private declare logger: Logger
 
 	constructor(client: SleepyMaidClient) {
-		this.client = client;
-		this.drizzle = client.drizzle;
-		this.logger = client.logger;
+		this.client = client
+		this.drizzle = client.drizzle
+		this.logger = client.logger
 	}
 
 	/*
@@ -26,7 +26,7 @@ export default class Manager {
 	*/
 
 	public async downloadVideo(url: string) {
-		return downloadVideo(this.client, url);
+		return downloadVideo(this.client, url)
 	}
 
 	/*
@@ -34,32 +34,32 @@ export default class Manager {
 	*/
 
 	public async updateUserMetadata(userId: string) {
-		this.logger.debug(`Trying to update user metadata for ${userId}`);
+		this.logger.debug(`Trying to update user metadata for ${userId}`)
 		if (MetadataCoolDown.has(userId)) {
-			if (MetadataCoolDown.get(userId)! > Date.now()) return;
+			if (MetadataCoolDown.get(userId)! > Date.now()) return
 		}
 
-		MetadataCoolDown.set(userId, Date.now() + 1000 * 60 * 10);
+		MetadataCoolDown.set(userId, Date.now() + 1000 * 60 * 10)
 
-		this.logger.debug(`Updating user metadata for ${userId}`);
+		this.logger.debug(`Updating user metadata for ${userId}`)
 
-		const apiUrl = process.env.API_URL ?? "https://api.ecorte.xyz";
-		const apiKey = process.env.API_SECRET ?? "";
+		const apiUrl = process.env.API_URL ?? "https://api.ecorte.xyz"
+		const apiKey = process.env.API_SECRET ?? ""
 		const data = await fetch(`${apiUrl}/update-metadata?userId=${userId}`, {
 			method: "POST",
 			headers: {
 				Authorization: apiKey,
 			},
 		}).catch((err) => {
-			this.logger.error(`Failed to update user metadata for ${userId}: ${err}`);
-			return null;
-		});
+			this.logger.error(`Failed to update user metadata for ${userId}: ${err}`)
+			return null
+		})
 
-		if (!data) return;
+		if (!data) return
 
-		this.logger.debug(`Updated user metadata for ${userId}`);
+		this.logger.debug(`Updated user metadata for ${userId}`)
 
-		return data.json();
+		return data.json()
 	}
 
 	/*
@@ -67,22 +67,22 @@ export default class Manager {
 	*/
 
 	public async permissionQuery(member: GuildMember, permission: Permission, value: boolean = true): Promise<boolean> {
-		if (member.permissions.has([PermissionFlagsBits.Administrator])) return value;
+		if (member.permissions.has([PermissionFlagsBits.Administrator])) return value
 
-		if (!permissionList[permission]) return false;
+		if (!permissionList[permission]) return false
 
-		const guildId = member.guild.id;
+		const guildId = member.guild.id
 		const permissions = await this.drizzle.query.rolePermissions.findMany({
 			where: and(
 				eq(rolePermissions.guildId, guildId),
 				eq(rolePermissions.permission, permission),
 				eq(rolePermissions.value, value),
 			),
-		});
+		})
 
-		if (permissions.length === 0) return permissionList[permission].default;
+		if (permissions.length === 0) return permissionList[permission].default
 
-		return permissions.some((p) => member.roles.cache.has(p.roleId));
+		return permissions.some((p) => member.roles.cache.has(p.roleId))
 	}
 
 	/*
@@ -97,7 +97,7 @@ export default class Manager {
 				...extra,
 			})
 			.where(eq(userData.userId, userId))
-			.returning();
+			.returning()
 	}
 
 	public async removeBalance(userId: string, amount: number, extra?: Partial<typeof userData.$inferInsert>) {
@@ -108,7 +108,7 @@ export default class Manager {
 				...extra,
 			})
 			.where(eq(userData.userId, userId))
-			.returning();
+			.returning()
 	}
 
 	public async modifyBalance(
@@ -117,8 +117,8 @@ export default class Manager {
 		operation: "add" | "remove",
 		extra?: Partial<typeof userData.$inferInsert>,
 	) {
-		if (operation === "add") return await this.addBalance(userId, amount, extra);
-		else return await this.removeBalance(userId, amount, extra);
+		if (operation === "add") return await this.addBalance(userId, amount, extra)
+		else return await this.removeBalance(userId, amount, extra)
 	}
 
 	/*
@@ -126,18 +126,18 @@ export default class Manager {
 	*/
 
 	public async getReminders(userId: string) {
-		return await this.drizzle.query.reminders.findMany({ where: eq(reminders.userId, userId) });
+		return await this.drizzle.query.reminders.findMany({ where: eq(reminders.userId, userId) })
 	}
 
 	public async addReminder(userId: string, name: string, time: Date) {
-		return await this.drizzle.insert(reminders).values({ userId, reminderName: name, reminderTime: time });
+		return await this.drizzle.insert(reminders).values({ userId, reminderName: name, reminderTime: time })
 	}
 
 	public async removeReminder(userId: string, id: number) {
-		return await this.drizzle.delete(reminders).where(and(eq(reminders.userId, userId), eq(reminders.reminderId, id)));
+		return await this.drizzle.delete(reminders).where(and(eq(reminders.userId, userId), eq(reminders.reminderId, id)))
 	}
 
 	public async clearReminders(userId: string) {
-		return await this.drizzle.delete(reminders).where(eq(reminders.userId, userId));
+		return await this.drizzle.delete(reminders).where(eq(reminders.userId, userId))
 	}
 }

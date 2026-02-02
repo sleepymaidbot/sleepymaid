@@ -1,11 +1,11 @@
-import type { Context } from "@sleepymaid/handler";
-import { SlashCommand } from "@sleepymaid/handler";
-import type { MessagesType } from "@sleepymaid/shared";
-import { setupInteraction, getChoices } from "@sleepymaid/shared";
-import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from "discord-api-types/v10";
-import type { ChatInputCommandInteraction } from "discord.js";
-import { PermissionsBitField } from "discord.js";
-import type { HelperClient } from "../../../lib/extensions/HelperClient";
+import type { Context } from "@sleepymaid/handler"
+import { SlashCommand } from "@sleepymaid/handler"
+import type { MessagesType } from "@sleepymaid/shared"
+import { getChoices, setupInteraction } from "@sleepymaid/shared"
+import type { ChatInputCommandInteraction } from "discord.js"
+import { PermissionsBitField } from "discord.js"
+import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from "discord-api-types/v10"
+import type { HelperClient } from "../../../lib/extensions/HelperClient"
 
 const messages: MessagesType = {
 	setupWelcome: {
@@ -35,12 +35,12 @@ This server is made to help and contribute to the completion of the secret on th
 Guides » <https://qcgsecret.ecorte.xyz/>
 Permanent invite link » <https://discord.gg/h65PAkZgru>
 Québec Games Discord » <https://discord.gg/qcgames>
-			`;
+			`
 
-			return [{ content: msg1 }];
+			return [{ content: msg1 }]
 		},
 	},
-};
+}
 
 export default class QCGSecretSetupCommand extends SlashCommand<HelperClient> {
 	public constructor(context: Context<HelperClient>) {
@@ -67,12 +67,12 @@ export default class QCGSecretSetupCommand extends SlashCommand<HelperClient> {
 					},
 				],
 			},
-		});
+		})
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction) {
-		if (!interaction.inCachedGuild()) return;
-		if (!interaction.memberPermissions.has(PermissionFlagsBits.Administrator)) return;
-		await setupInteraction(interaction, this.container.client, messages);
+		if (!interaction.inCachedGuild()) return
+		if (!interaction.memberPermissions.has(PermissionFlagsBits.Administrator)) return
+		await setupInteraction(interaction, this.container.client, messages)
 	}
 }

@@ -1,12 +1,12 @@
-import { SleepyMaidClient } from "../../../lib/SleepyMaidClient";
-import { Context, SlashCommand } from "@sleepymaid/handler";
+import { Context, SlashCommand } from "@sleepymaid/handler"
 import {
-	ApplicationCommandType,
 	ApplicationCommandOptionType,
+	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType,
 	ChatInputCommandInteraction,
-} from "discord.js";
+	InteractionContextType,
+} from "discord.js"
+import { SleepyMaidClient } from "../../../lib/SleepyMaidClient"
 
 const choices = [
 	"It is certain",
@@ -29,7 +29,7 @@ const choices = [
 	"My sources say no",
 	"Outlook not so good",
 	"Very doubtful",
-];
+]
 
 export default class EightBallCommand extends SlashCommand<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
@@ -49,12 +49,12 @@ export default class EightBallCommand extends SlashCommand<SleepyMaidClient> {
 					},
 				],
 			},
-		});
+		})
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction) {
-		const question = interaction.options.getString("question");
-		const answer = choices[Math.floor(Math.random() * choices.length)];
-		await interaction.reply({ content: `🎱 ${question}\n\n${answer}` });
+		const question = interaction.options.getString("question")
+		const answer = choices[Math.floor(Math.random() * choices.length)]
+		await interaction.reply({ content: `🎱 ${question}\n\n${answer}` })
 	}
 }

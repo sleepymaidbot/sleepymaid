@@ -1,28 +1,28 @@
-import { Context, Listener } from "@sleepymaid/handler";
-import { WatcherClient } from "../../../lib/extensions/WatcherClient";
-import { APIEmbed, APIEmbedField, AttachmentBuilder, AuditLogEvent, Colors, Role } from "discord.js";
-import { intToHexColor } from "@sleepymaid/util";
-import { generateSplitImage } from "@sleepymaid/shared";
+import { Context, Listener } from "@sleepymaid/handler"
+import { generateSplitImage } from "@sleepymaid/shared"
+import { intToHexColor } from "@sleepymaid/util"
+import { APIEmbed, APIEmbedField, AttachmentBuilder, AuditLogEvent, Colors, Role } from "discord.js"
+import { WatcherClient } from "../../../lib/extensions/WatcherClient"
 
 export default class extends Listener<"roleUpdate", WatcherClient> {
 	public constructor(context: Context<WatcherClient>) {
 		super(context, {
 			name: "roleUpdate",
 			once: false,
-		});
+		})
 	}
 
 	public override async execute(oldRole: Role, newRole: Role) {
-		const channels = (await this.container.manager.getLogChannel(newRole.guild.id))?.filter((c) => c.roleEvents.update);
-		if (!channels || channels.length === 0) return;
+		const channels = (await this.container.manager.getLogChannel(newRole.guild.id))?.filter((c) => c.roleEvents.update)
+		if (!channels || channels.length === 0) return
 
 		const embed: APIEmbed = {
 			title: "Role Updated",
 			color: newRole.color,
 			timestamp: new Date().toISOString(),
-		};
+		}
 
-		let attachment: AttachmentBuilder | null = null;
+		let attachment: AttachmentBuilder | null = null
 
 		const fields: APIEmbedField[] = [
 			{
@@ -30,14 +30,14 @@ export default class extends Listener<"roleUpdate", WatcherClient> {
 				value: `${newRole.name} (${newRole.id})`,
 				inline: false,
 			},
-		];
+		]
 
 		if (oldRole.name !== newRole.name) {
 			fields.push({
 				name: "Name",
 				value: `${oldRole.name} -> ${newRole.name}`,
 				inline: true,
-			});
+			})
 		}
 
 		if (oldRole.color !== newRole.color) {
@@ -45,29 +45,27 @@ export default class extends Listener<"roleUpdate", WatcherClient> {
 				name: "Color",
 				value: `${intToHexColor(oldRole.color)} -> ${intToHexColor(newRole.color)}`,
 				inline: true,
-			});
-			const buffer = await generateSplitImage(oldRole.color === 0 ? Colors.Greyple : oldRole.color, newRole.color);
+			})
+			const buffer = await generateSplitImage(oldRole.color === 0 ? Colors.Greyple : oldRole.color, newRole.color)
 
-			const attachmentName = `${oldRole.id}-${newRole.id}.png`;
-			attachment = new AttachmentBuilder(buffer, { name: attachmentName });
+			const attachmentName = `${oldRole.id}-${newRole.id}.png`
+			attachment = new AttachmentBuilder(buffer, { name: attachmentName })
 
 			embed.thumbnail = {
 				url: `attachment://${attachmentName}`,
-			};
+			}
 		}
 
 		if (oldRole.permissions.bitfield !== newRole.permissions.bitfield) {
-			const addedPermissions = newRole.permissions.toArray().filter((p) => !oldRole.permissions.toArray().includes(p));
-			const removedPermissions = oldRole.permissions
-				.toArray()
-				.filter((p) => !newRole.permissions.toArray().includes(p));
+			const addedPermissions = newRole.permissions.toArray().filter((p) => !oldRole.permissions.toArray().includes(p))
+			const removedPermissions = oldRole.permissions.toArray().filter((p) => !newRole.permissions.toArray().includes(p))
 
 			if (addedPermissions.length > 0) {
 				fields.push({
 					name: "Added Permissions",
 					value: addedPermissions.map((p) => `<:add:807723944236285972> ${p}`).join("\n"),
 					inline: true,
-				});
+				})
 			}
 
 			if (removedPermissions.length > 0) {
@@ -75,7 +73,7 @@ export default class extends Listener<"roleUpdate", WatcherClient> {
 					name: "Removed Permissions",
 					value: removedPermissions.map((p) => `<:remove:807723917925941268> ${p}`).join("\n"),
 					inline: true,
-				});
+				})
 			}
 		}
 
@@ -84,7 +82,7 @@ export default class extends Listener<"roleUpdate", WatcherClient> {
 				name: "Icon",
 				value: `${oldRole.icon} -> ${newRole.icon}`,
 				inline: true,
-			});
+			})
 		}
 
 		if (oldRole.hoist !== newRole.hoist) {
@@ -92,7 +90,7 @@ export default class extends Listener<"roleUpdate", WatcherClient> {
 				name: "Hoist",
 				value: `${oldRole.hoist} -> ${newRole.hoist}`,
 				inline: true,
-			});
+			})
 		}
 
 		if (oldRole.mentionable !== newRole.mentionable) {
@@ -100,7 +98,7 @@ export default class extends Listener<"roleUpdate", WatcherClient> {
 				name: "Mentionable",
 				value: `${oldRole.mentionable} -> ${newRole.mentionable}`,
 				inline: true,
-			});
+			})
 		}
 
 		if (oldRole.position !== newRole.position) {
@@ -108,29 +106,29 @@ export default class extends Listener<"roleUpdate", WatcherClient> {
 				name: "Position",
 				value: `${oldRole.position} -> ${newRole.position}`,
 				inline: true,
-			});
+			})
 		}
 
-		if (fields.length === 1) return;
-		embed.fields = fields;
+		if (fields.length === 1) return
+		embed.fields = fields
 
 		const author = await newRole.guild.fetchAuditLogs({
 			type: AuditLogEvent.RoleUpdate,
 			limit: 1,
-		});
-		const log = author.entries.first();
+		})
+		const log = author.entries.first()
 
 		if (log && log.executor && log.target && log.executorId !== newRole.id && log.target.id === newRole.id) {
 			embed.footer = {
 				text: `${log.executor.displayName} (${log.executorId})`,
 				icon_url: log.executor.displayAvatarURL(),
-			};
+			}
 		} else if (fields.some((f) => f.name === "Position")) {
-			return;
+			return
 		}
 
 		for (const channel of channels) {
-			await this.container.manager.sendLog(channel, { embeds: [embed], files: attachment ? [attachment] : undefined });
+			await this.container.manager.sendLog(channel, { embeds: [embed], files: attachment ? [attachment] : undefined })
 		}
 	}
 }

@@ -1,12 +1,12 @@
-import { guildSettings } from "@sleepymaid/db";
-import type { Context } from "@sleepymaid/handler";
-import { SlashCommand } from "@sleepymaid/handler";
-import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from "discord-api-types/v10";
-import type { ChatInputCommandInteraction } from "discord.js";
-import { ApplicationIntegrationType, InteractionContextType, MessageFlags, PermissionsBitField } from "discord.js";
-import { eq } from "drizzle-orm";
-import type { SleepyMaidClient } from "../../../lib/SleepyMaidClient";
-import DBCheckPrecondtion from "../../../preconditions/dbCheck";
+import { guildSettings } from "@sleepymaid/db"
+import type { Context } from "@sleepymaid/handler"
+import { SlashCommand } from "@sleepymaid/handler"
+import type { ChatInputCommandInteraction } from "discord.js"
+import { ApplicationIntegrationType, InteractionContextType, MessageFlags, PermissionsBitField } from "discord.js"
+import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from "discord-api-types/v10"
+import { eq } from "drizzle-orm"
+import type { SleepyMaidClient } from "../../../lib/SleepyMaidClient"
+import DBCheckPrecondtion from "../../../preconditions/dbCheck"
 
 export default class SanitizerConfigCommand extends SlashCommand<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
@@ -75,58 +75,58 @@ export default class SanitizerConfigCommand extends SlashCommand<SleepyMaidClien
 				],
 			},
 			preconditions: [DBCheckPrecondtion],
-		});
+		})
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction) {
-		if (!interaction.inCachedGuild()) return;
-		const client = this.container.client;
+		if (!interaction.inCachedGuild()) return
+		const client = this.container.client
 		const guildSetting = await client.drizzle.query.guildSettings.findFirst({
 			where: eq(guildSettings.guildId, interaction.guildId),
-		});
-		if (!guildSetting) return;
+		})
+		if (!guildSetting) return
 		if (interaction.options.getSubcommand() === "toggle") {
-			const state = interaction.options.getBoolean("state", true);
+			const state = interaction.options.getBoolean("state", true)
 			if (guildSetting.sanitizerEnabled === state) {
 				return interaction.reply({
 					content: `Username sanitizer is already ${state ? "enabled" : "disabled"}.`,
 					flags: MessageFlags.Ephemeral,
-				});
+				})
 			}
 
 			await client.drizzle
 				.update(guildSettings)
 				.set({ sanitizerEnabled: state })
-				.where(eq(guildSettings.guildId, interaction.guildId));
+				.where(eq(guildSettings.guildId, interaction.guildId))
 			return interaction.reply({
 				content: `Username sanitizer has been ${state ? "enabled" : "disabled"}.`,
 				flags: MessageFlags.Ephemeral,
-			});
+			})
 		} else if (interaction.options.getSubcommandGroup() === "ignoredroles") {
 			if (interaction.options.getSubcommand() === "add") {
-				const role = interaction.options.getRole("role", true);
+				const role = interaction.options.getRole("role", true)
 				if (guildSetting.sanitizerIgnoredRoles.includes(role.id)) {
 					return interaction.reply({
 						content: "That role is already ignored.",
 						flags: MessageFlags.Ephemeral,
-					});
+					})
 				}
 
 				await client.drizzle
 					.update(guildSettings)
 					.set({ sanitizerIgnoredRoles: [...guildSetting.sanitizerIgnoredRoles, role.id] })
-					.where(eq(guildSettings.guildId, interaction.guildId));
+					.where(eq(guildSettings.guildId, interaction.guildId))
 				return interaction.reply({
 					content: "Role has been added to the ignored roles.",
 					flags: MessageFlags.Ephemeral,
-				});
+				})
 			} else if (interaction.options.getSubcommand() === "remove") {
-				const role = interaction.options.getRole("role", true);
+				const role = interaction.options.getRole("role", true)
 				if (!guildSetting.sanitizerIgnoredRoles.includes(role.id)) {
 					return interaction.reply({
 						content: "That role is not ignored.",
 						flags: MessageFlags.Ephemeral,
-					});
+					})
 				}
 
 				await client.drizzle
@@ -134,29 +134,29 @@ export default class SanitizerConfigCommand extends SlashCommand<SleepyMaidClien
 					.set({
 						sanitizerIgnoredRoles: guildSetting.sanitizerIgnoredRoles.filter((r) => r !== role.id),
 					})
-					.where(eq(guildSettings.guildId, interaction.guildId));
+					.where(eq(guildSettings.guildId, interaction.guildId))
 
 				return interaction.reply({
 					content: "Role has been removed from the ignored roles.",
 					flags: MessageFlags.Ephemeral,
-				});
+				})
 			} else if (interaction.options.getSubcommand() === "list") {
 				if (guildSetting.sanitizerIgnoredRoles.length === 0) {
 					return interaction.reply({
 						content: "There are no ignored roles.",
 						flags: MessageFlags.Ephemeral,
-					});
+					})
 				}
 
-				const roles = await interaction.guild.roles.fetch();
-				const deletedRoles: string[] = [];
+				const roles = await interaction.guild.roles.fetch()
+				const deletedRoles: string[] = []
 				const ignoredRoles = guildSetting.sanitizerIgnoredRoles
 					.map((r) => {
-						const role = roles.get(r);
-						if (role === undefined) return deletedRoles.push(r);
-						return "<@&" + r + ">";
+						const role = roles.get(r)
+						if (role === undefined) return deletedRoles.push(r)
+						return "<@&" + r + ">"
 					})
-					.filter((r) => r !== undefined);
+					.filter((r) => r !== undefined)
 
 				await client.drizzle
 					.update(guildSettings)
@@ -165,15 +165,15 @@ export default class SanitizerConfigCommand extends SlashCommand<SleepyMaidClien
 							...new Set(guildSetting.sanitizerIgnoredRoles.filter((r) => !deletedRoles.includes(r))),
 						],
 					})
-					.where(eq(guildSettings.guildId, interaction.guildId));
+					.where(eq(guildSettings.guildId, interaction.guildId))
 
 				return interaction.reply({
 					content: `Ignored roles: ${ignoredRoles.join(", ")}`,
 					flags: MessageFlags.Ephemeral,
-				});
+				})
 			}
 		}
 
-		return null;
+		return null
 	}
 }

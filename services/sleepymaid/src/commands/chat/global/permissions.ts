@@ -1,5 +1,7 @@
-import { Context, SlashCommand } from "@sleepymaid/handler";
-import { SleepyMaidClient } from "../../../lib/SleepyMaidClient";
+import { Result } from "@sapphire/result"
+import { rolePermissions } from "@sleepymaid/db"
+import { Context, SlashCommand } from "@sleepymaid/handler"
+import { AutocompleteChoices, getAutocompleteResults, permissionKeys, permissionList } from "@sleepymaid/shared"
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
@@ -9,12 +11,10 @@ import {
 	InteractionContextType,
 	MessageFlags,
 	PermissionFlagsBits,
-} from "discord.js";
-import DBCheckPrecondtion from "../../../preconditions/dbCheck";
-import { rolePermissions } from "@sleepymaid/db";
-import { AutocompleteChoices, getAutocompleteResults, permissionKeys, permissionList } from "@sleepymaid/shared";
-import { and, eq } from "drizzle-orm";
-import { Result } from "@sapphire/result";
+} from "discord.js"
+import { and, eq } from "drizzle-orm"
+import { SleepyMaidClient } from "../../../lib/SleepyMaidClient"
+import DBCheckPrecondtion from "../../../preconditions/dbCheck"
 
 export default class extends SlashCommand<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
@@ -95,53 +95,53 @@ export default class extends SlashCommand<SleepyMaidClient> {
 					},
 				],
 			},
-		});
+		})
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction) {
-		if (!interaction.inCachedGuild()) return;
-		const subcommandGroup = interaction.options.getSubcommandGroup();
-		const subcommand = interaction.options.getSubcommand();
+		if (!interaction.inCachedGuild()) return
+		const subcommandGroup = interaction.options.getSubcommandGroup()
+		const subcommand = interaction.options.getSubcommand()
 
-		await interaction.deferReply({ flags: MessageFlags.Ephemeral });
+		await interaction.deferReply({ flags: MessageFlags.Ephemeral })
 
 		switch (subcommandGroup) {
 			case "roles":
 				if (!(await this.container.manager.permissionQuery(interaction.member, "sleepymaid.permissions.roles.manage")))
 					return interaction.editReply({
 						content: "You do not have permission to manage role permissions",
-					});
+					})
 
 				switch (subcommand) {
 					case "set":
-						await this.roleSet(interaction);
-						break;
+						await this.roleSet(interaction)
+						break
 					case "remove":
-						await this.roleRemove(interaction);
-						break;
+						await this.roleRemove(interaction)
+						break
 					case "list":
-						await this.roleList(interaction);
-						break;
+						await this.roleList(interaction)
+						break
 					default:
-						break;
+						break
 				}
-				break;
+				break
 			default:
-				break;
+				break
 		}
 
-		return;
+		return
 	}
 
 	private async roleSet(interaction: ChatInputCommandInteraction<"cached">) {
-		const role = interaction.options.getRole("role", true);
-		const permission = interaction.options.getString("permission", true);
-		const value = interaction.options.getBoolean("value") ?? true;
+		const role = interaction.options.getRole("role", true)
+		const permission = interaction.options.getString("permission", true)
+		const value = interaction.options.getBoolean("value") ?? true
 
 		if (!permissionKeys.includes(permission))
 			return interaction.editReply({
 				content: "Invalid permission",
-			});
+			})
 
 		const exist = await this.container.drizzle.query.rolePermissions.findFirst({
 			where: and(
@@ -150,58 +150,58 @@ export default class extends SlashCommand<SleepyMaidClient> {
 				eq(rolePermissions.permission, permission),
 				eq(rolePermissions.value, value),
 			),
-		});
+		})
 
 		if (exist)
 			return interaction.editReply({
 				content: `Role \`\`${role.name}\`\` already has permission \`\`${permissionList[permission]!.name}\`\` set to \`\`${
 					value ? "true" : "false"
 				}\`\``,
-			});
+			})
 
 		await this.container.drizzle.insert(rolePermissions).values({
 			guildId: interaction.guildId,
 			roleId: role.id,
 			permission,
 			value,
-		});
+		})
 
 		return interaction.editReply({
 			content: `Set role \`\`${role.name}\`\` permission \`\`${permissionList[permission]!.name}\`\` to \`\`${value ? "true" : "false"}\`\``,
-		});
+		})
 	}
 
 	private async roleRemove(interaction: ChatInputCommandInteraction<"cached">) {
-		const role = interaction.options.getRole("role", true);
-		const permission = interaction.options.getString("permission", true);
+		const role = interaction.options.getRole("role", true)
+		const permission = interaction.options.getString("permission", true)
 
 		if (!permissionKeys.includes(permission))
 			return interaction.editReply({
 				content: "Invalid permission",
-			});
+			})
 
 		const result = await Result.fromAsync(
 			await this.container.drizzle
 				.delete(rolePermissions)
 				.where(and(eq(rolePermissions.roleId, role.id), eq(rolePermissions.permission, permission))),
-		);
+		)
 
 		if (result.isErr())
 			return await interaction.editReply({
 				content: "Failed to remove role permission",
-			});
+			})
 
 		return await interaction.editReply({
 			content: `Removed role \`\`${role.name}\`\` permission \`\`${permissionList[permission]!.name}\`\``,
-		});
+		})
 	}
 
 	private async roleList(interaction: ChatInputCommandInteraction<"cached">) {
-		const role = interaction.options.getRole("role", true);
+		const role = interaction.options.getRole("role", true)
 
 		const permissions = await this.container.drizzle.query.rolePermissions.findMany({
 			where: eq(rolePermissions.roleId, role.id),
-		});
+		})
 
 		return interaction.editReply({
 			content: `### List of permissions for role \`\`${role.name}\`\`:\n${permissions
@@ -209,21 +209,21 @@ export default class extends SlashCommand<SleepyMaidClient> {
 					(p) => `\`\`${permissionList[p.permission]!.name ?? "Invalid"}\`\` - \`\`${p.value ? "true" : "false"}\`\``,
 				)
 				.join("\n")}`,
-		});
+		})
 	}
 
 	public override async autocomplete(interaction: AutocompleteInteraction) {
-		const focusedValue = interaction.options.getFocused();
+		const focusedValue = interaction.options.getFocused()
 
-		const choices: AutocompleteChoices = [];
+		const choices: AutocompleteChoices = []
 
 		for (const [key, value] of Object.entries(permissionList)) {
 			choices.push({
 				value: key,
 				name: `${value.name} - ${value.description}`,
-			});
+			})
 		}
 
-		await interaction.respond(getAutocompleteResults(choices, focusedValue));
+		await interaction.respond(getAutocompleteResults(choices, focusedValue))
 	}
 }

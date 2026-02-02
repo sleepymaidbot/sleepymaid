@@ -1,20 +1,20 @@
-import { userData } from "@sleepymaid/db";
-import { SleepyMaidClient } from "../../../lib/SleepyMaidClient";
-import { Context, SlashCommand } from "@sleepymaid/handler";
+import { userData } from "@sleepymaid/db"
+import { Context, SlashCommand } from "@sleepymaid/handler"
+import { formatNumber } from "@sleepymaid/shared"
 import {
+	APIEmbed,
+	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType,
 	ChatInputCommandInteraction,
-	ApplicationCommandOptionType,
 	Colors,
-	APIEmbed,
-} from "discord.js";
-import { eq, sql } from "drizzle-orm";
-import { formatNumber } from "@sleepymaid/shared";
-import DBCheckPrecondtion from "../../../preconditions/dbCheck";
+	InteractionContextType,
+} from "discord.js"
+import { eq, sql } from "drizzle-orm"
+import { SleepyMaidClient } from "../../../lib/SleepyMaidClient"
+import DBCheckPrecondtion from "../../../preconditions/dbCheck"
 
-const emojis = ["🍎", "🍊", "🍐", "🍋", "🍉", "🍇", "🍓", "🍒"];
+const emojis = ["🍎", "🍊", "🍐", "🍋", "🍉", "🍇", "🍓", "🍒"]
 
 export default class GamblingCommand extends SlashCommand<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
@@ -42,46 +42,46 @@ export default class GamblingCommand extends SlashCommand<SleepyMaidClient> {
 					},
 				],
 			},
-		});
+		})
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction) {
-		await interaction.deferReply();
-		const subcommand = interaction.options.getSubcommand();
+		await interaction.deferReply()
+		const subcommand = interaction.options.getSubcommand()
 		switch (subcommand) {
 			case "slot":
-				return this.slot(interaction);
+				return this.slot(interaction)
 			default:
-				return interaction.editReply({ content: "Invalid subcommand" });
+				return interaction.editReply({ content: "Invalid subcommand" })
 		}
 	}
 
 	private async slot(interaction: ChatInputCommandInteraction) {
-		const amount = interaction.options.getInteger("amount");
-		const slots = Array.from({ length: 3 }, () => emojis[Math.floor(Math.random() * emojis.length)]);
-		const uniqueSlots = new Set(slots).size;
+		const amount = interaction.options.getInteger("amount")
+		const slots = Array.from({ length: 3 }, () => emojis[Math.floor(Math.random() * emojis.length)])
+		const uniqueSlots = new Set(slots).size
 
 		if (!amount || amount <= 0) {
-			let result;
-			if (uniqueSlots === 1) result = "All matching, you won! 🎉";
-			else if (uniqueSlots === 2) result = "2 in a row, you won! 🎉";
-			else result = "No match, you lost 😢";
+			let result
+			if (uniqueSlots === 1) result = "All matching, you won! 🎉"
+			else if (uniqueSlots === 2) result = "2 in a row, you won! 🎉"
+			else result = "No match, you lost 😢"
 
-			await interaction.editReply({ content: `${slots.join(" ")} ${result}` });
-			return;
+			await interaction.editReply({ content: `${slots.join(" ")} ${result}` })
+			return
 		}
 
 		const data = await this.container.client.drizzle.query.userData.findFirst({
 			where: eq(userData.userId, interaction.user.id),
-		});
-		if (!data) return;
-		if (data.currency < amount) return interaction.editReply({ content: "You don't have enough money to bet" });
+		})
+		if (!data) return
+		if (data.currency < amount) return interaction.editReply({ content: "You don't have enough money to bet" })
 
-		let multiplier = -1;
+		let multiplier = -1
 		// x4
-		if (uniqueSlots === 2) multiplier += 3;
+		if (uniqueSlots === 2) multiplier += 3
 		// x10
-		else if (uniqueSlots === 1) multiplier += 11;
+		else if (uniqueSlots === 1) multiplier += 11
 
 		const returning = await this.container.client.drizzle
 			.update(userData)
@@ -89,12 +89,12 @@ export default class GamblingCommand extends SlashCommand<SleepyMaidClient> {
 				currency: sql`${userData.currency} + ${amount * multiplier}`,
 			})
 			.where(eq(userData.userId, interaction.user.id))
-			.returning({ currency: userData.currency });
+			.returning({ currency: userData.currency })
 
 		const resultMessage =
 			multiplier > 0
 				? `You won ${formatNumber(amount * multiplier)} coins! 🎉`
-				: `You lost ${formatNumber(amount)} coins 😢`;
+				: `You lost ${formatNumber(amount)} coins 😢`
 
 		const embed: APIEmbed = {
 			author: {
@@ -107,12 +107,12 @@ export default class GamblingCommand extends SlashCommand<SleepyMaidClient> {
 				returning[0]?.currency ?? 0,
 			)} coins.`,
 			timestamp: new Date().toISOString(),
-		};
+		}
 
 		this.container.client.logger.debug(
 			`${interaction.user.username} played slot machine and got ${amount * multiplier} coins`,
-		);
+		)
 
-		return await interaction.editReply({ embeds: [embed] });
+		return await interaction.editReply({ embeds: [embed] })
 	}
 }

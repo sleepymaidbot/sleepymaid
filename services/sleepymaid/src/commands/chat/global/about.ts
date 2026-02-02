@@ -1,7 +1,7 @@
-import * as os from "node:os";
-import process from "node:process";
-import { Context, SlashCommand } from "@sleepymaid/handler";
-import { SleepyMaidClient } from "../../../lib/SleepyMaidClient";
+import * as os from "node:os"
+import process from "node:process"
+import { Context, SlashCommand } from "@sleepymaid/handler"
+import { prettyBytes, shell } from "@sleepymaid/util"
 import {
 	APIEmbed,
 	APIEmbedField,
@@ -12,9 +12,9 @@ import {
 	version as discordJSVersion,
 	InteractionContextType,
 	MessageFlags,
-} from "discord.js";
-import { prettyBytes, shell } from "@sleepymaid/util";
-import i18next from "i18next";
+} from "discord.js"
+import i18next from "i18next"
+import { SleepyMaidClient } from "../../../lib/SleepyMaidClient"
 
 export default class extends SlashCommand<SleepyMaidClient> {
 	constructor(context: Context<SleepyMaidClient>) {
@@ -75,30 +75,30 @@ export default class extends SlashCommand<SleepyMaidClient> {
 					},
 				],
 			},
-		});
+		})
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction) {
-		const subcommand = interaction.options.getSubcommand();
+		const subcommand = interaction.options.getSubcommand()
 		switch (subcommand) {
 			case "user":
-				return this.user(interaction);
+				return this.user(interaction)
 			case "role":
-				return this.role(interaction);
+				return this.role(interaction)
 			case "server":
-				return this.server(interaction);
+				return this.server(interaction)
 			case "info":
-				return this.info(interaction);
+				return this.info(interaction)
 			case "support":
-				return this.support(interaction);
+				return this.support(interaction)
 			case "ping":
-				return this.ping(interaction);
+				return this.ping(interaction)
 		}
 	}
 
 	private async user(interaction: ChatInputCommandInteraction) {
-		const user = interaction.options.getUser("user") ?? interaction.user;
-		const member = await interaction.guild?.members.fetch(user).catch(() => null);
+		const user = interaction.options.getUser("user") ?? interaction.user
+		const member = await interaction.guild?.members.fetch(user).catch(() => null)
 
 		const embed: APIEmbed = {
 			title: "User Info",
@@ -128,7 +128,7 @@ export default class extends SlashCommand<SleepyMaidClient> {
 					inline: true,
 				},
 			],
-		};
+		}
 
 		if (!member) {
 			return interaction.reply({
@@ -139,7 +139,7 @@ export default class extends SlashCommand<SleepyMaidClient> {
 					},
 				],
 				flags: MessageFlags.Ephemeral,
-			});
+			})
 		}
 
 		const memberFields: APIEmbedField[] = [
@@ -153,7 +153,7 @@ export default class extends SlashCommand<SleepyMaidClient> {
 				value: member.roles.cache.map((role) => `<@&${role.id}>`).join(", "),
 				inline: true,
 			},
-		];
+		]
 
 		return interaction.reply({
 			embeds: [
@@ -163,7 +163,7 @@ export default class extends SlashCommand<SleepyMaidClient> {
 					color: member.displayColor,
 				},
 			],
-		});
+		})
 	}
 
 	private async role(interaction: ChatInputCommandInteraction) {
@@ -171,9 +171,9 @@ export default class extends SlashCommand<SleepyMaidClient> {
 			return interaction.reply({
 				content: "This command can only be used in a server",
 				flags: MessageFlags.Ephemeral,
-			});
+			})
 
-		const role = interaction.options.getRole("role", true);
+		const role = interaction.options.getRole("role", true)
 
 		const embed: APIEmbed = {
 			title: "Role Info",
@@ -216,7 +216,7 @@ export default class extends SlashCommand<SleepyMaidClient> {
 					inline: true,
 				},
 			],
-		};
+		}
 
 		return interaction.reply({
 			embeds: [
@@ -225,22 +225,22 @@ export default class extends SlashCommand<SleepyMaidClient> {
 					color: role.color,
 				},
 			],
-		});
+		})
 	}
 
 	private async server(interaction: ChatInputCommandInteraction) {
-		const guild = interaction.guild;
+		const guild = interaction.guild
 		if (!guild)
 			return interaction.reply({
 				content: "This command can only be used in a server",
 				flags: MessageFlags.Ephemeral,
-			});
+			})
 
 		if (!interaction.inCachedGuild() || !interaction.inGuild())
 			return interaction.reply({
 				content: "This command can only be used in a server",
 				flags: MessageFlags.Ephemeral,
-			});
+			})
 
 		const embed: APIEmbed = {
 			title: "Server Info",
@@ -301,21 +301,21 @@ export default class extends SlashCommand<SleepyMaidClient> {
 					inline: true,
 				},
 			],
-		};
+		}
 
 		return interaction.reply({
 			embeds: [embed],
-		});
+		})
 	}
 
 	private async info(interaction: ChatInputCommandInteraction) {
-		const client = this.container.client;
-		const currentCommit = (await shell("git rev-parse HEAD")).stdout.replace("\n", "") || "unknown";
-		let repoUrl = (await shell("git remote get-url origin")).stdout.replace("\n", "") || "unknown";
-		if (repoUrl.includes(".git")) repoUrl = repoUrl.slice(0, Math.max(0, repoUrl.length - 4));
+		const client = this.container.client
+		const currentCommit = (await shell("git rev-parse HEAD")).stdout.replace("\n", "") || "unknown"
+		let repoUrl = (await shell("git remote get-url origin")).stdout.replace("\n", "") || "unknown"
+		if (repoUrl.includes(".git")) repoUrl = repoUrl.slice(0, Math.max(0, repoUrl.length - 4))
 
-		const uptime = Date.now() - client.uptime!;
-		const formatUptime = Math.floor(uptime / 1_000);
+		const uptime = Date.now() - client.uptime!
+		const formatUptime = Math.floor(uptime / 1_000)
 
 		await interaction.reply({
 			embeds: [
@@ -378,23 +378,23 @@ export default class extends SlashCommand<SleepyMaidClient> {
 					],
 				},
 			],
-		});
+		})
 	}
 
 	private async support(interaction: ChatInputCommandInteraction) {
 		return interaction.reply({
 			content: "[Click Here](https://discord.gg/UexTYbVFM3)",
 			flags: MessageFlags.Ephemeral,
-		});
+		})
 	}
 
 	private async ping(interaction: ChatInputCommandInteraction) {
-		const client = this.container.client;
-		const timestamp1 = interaction.createdTimestamp;
-		await interaction.reply("Pong!");
-		const timestamp2 = (await interaction.fetchReply()).createdTimestamp;
-		const botLatency = `\`\`\`\n ${Math.floor(timestamp2 - timestamp1)}ms \`\`\``;
-		const apiLatency = `\`\`\`\n ${Math.round(client.ws.ping)}ms \`\`\``;
+		const client = this.container.client
+		const timestamp1 = interaction.createdTimestamp
+		await interaction.reply("Pong!")
+		const timestamp2 = (await interaction.fetchReply()).createdTimestamp
+		const botLatency = `\`\`\`\n ${Math.floor(timestamp2 - timestamp1)}ms \`\`\``
+		const apiLatency = `\`\`\`\n ${Math.round(client.ws.ping)}ms \`\`\``
 		const embed: APIEmbed = {
 			title: "Pong!  🏓",
 			fields: [
@@ -418,10 +418,10 @@ export default class extends SlashCommand<SleepyMaidClient> {
 				icon_url: interaction.user.displayAvatarURL(),
 			},
 			timestamp: new Date(Date.now()).toISOString(),
-		};
+		}
 		await interaction.editReply({
 			content: null,
 			embeds: [embed],
-		});
+		})
 	}
 }

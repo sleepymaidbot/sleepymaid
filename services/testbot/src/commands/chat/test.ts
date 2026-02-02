@@ -1,7 +1,7 @@
-import type { Context } from "@sleepymaid/handler";
-import { SlashCommand } from "@sleepymaid/handler";
-import { MessageFlags, type ChatInputCommandInteraction } from "discord.js";
-import type { TestClient } from "../../lib/extensions/TestClient";
+import type { Context } from "@sleepymaid/handler"
+import { SlashCommand } from "@sleepymaid/handler"
+import { type ChatInputCommandInteraction, MessageFlags } from "discord.js"
+import type { TestClient } from "../../lib/extensions/TestClient"
 
 export default class ReasonCommand extends SlashCommand<TestClient> {
 	public constructor(context: Context<TestClient>) {
@@ -10,10 +10,10 @@ export default class ReasonCommand extends SlashCommand<TestClient> {
 				name: "test",
 				description: "Test",
 			},
-		});
+		})
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction<"cached">) {
-		await interaction.reply({ content: "This command is not yet implemented", flags: MessageFlags.Ephemeral });
+		await interaction.reply({ content: "This command is not yet implemented", flags: MessageFlags.Ephemeral })
 	}
 }

@@ -1,6 +1,5 @@
-import { Context } from "@sleepymaid/handler";
-import { SleepyMaidClient } from "../../../lib/SleepyMaidClient";
-import { SlashCommand } from "@sleepymaid/handler";
+import { guildSettings, roleConnections } from "@sleepymaid/db"
+import { Context, SlashCommand } from "@sleepymaid/handler"
 import {
 	ApplicationCommandOptionType,
 	ApplicationIntegrationType,
@@ -11,10 +10,10 @@ import {
 	MessageComponentInteraction,
 	MessageFlags,
 	PermissionFlagsBits,
-} from "discord.js";
-import { guildSettings, roleConnections } from "@sleepymaid/db";
-import { and, eq } from "drizzle-orm";
-import DBCheckPrecondtion from "../../../preconditions/dbCheck";
+} from "discord.js"
+import { and, eq } from "drizzle-orm"
+import { SleepyMaidClient } from "../../../lib/SleepyMaidClient"
+import DBCheckPrecondtion from "../../../preconditions/dbCheck"
 
 export default class extends SlashCommand<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
@@ -79,103 +78,103 @@ export default class extends SlashCommand<SleepyMaidClient> {
 					},
 				],
 			},
-		});
+		})
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction) {
-		if (!interaction.inCachedGuild()) return interaction.reply("This command must be used in a guild");
-		const subcommand = interaction.options.getSubcommand();
+		if (!interaction.inCachedGuild()) return interaction.reply("This command must be used in a guild")
+		const subcommand = interaction.options.getSubcommand()
 		switch (subcommand) {
 			case "add":
-				return this.add(interaction);
+				return this.add(interaction)
 			case "remove":
-				return this.remove(interaction);
+				return this.remove(interaction)
 			case "list":
-				return this.list(interaction);
+				return this.list(interaction)
 			case "clear":
-				return this.clear(interaction);
+				return this.clear(interaction)
 			default:
-				return interaction.reply("Invalid subcommand");
+				return interaction.reply("Invalid subcommand")
 		}
 	}
 
 	private async add(interaction: ChatInputCommandInteraction<"cached">) {
 		const guildConnections = await this.container.drizzle.query.roleConnections.findMany({
 			where: eq(roleConnections.guildId, interaction.guild.id),
-		});
+		})
 
 		const guildSetting = await this.container.drizzle.query.guildSettings.findFirst({
 			where: eq(guildSettings.guildId, interaction.guild.id),
-		});
+		})
 
-		if (!guildSetting) return this.container.logger.error("Guild setting not found");
+		if (!guildSetting) return this.container.logger.error("Guild setting not found")
 
 		if (guildConnections.length >= 50 && guildSetting.premiumLevel < 2)
 			return interaction.reply({
 				content: "You can only have up to 50 role connections per guild",
 				flags: MessageFlags.Ephemeral,
-			});
+			})
 
-		const parentRole = interaction.options.getRole("parent", true);
-		const childRole = interaction.options.getRole("child", true);
+		const parentRole = interaction.options.getRole("parent", true)
+		const childRole = interaction.options.getRole("child", true)
 
 		if (parentRole.id === childRole.id)
-			return interaction.reply({ content: "A role cannot be connected to itself", flags: MessageFlags.Ephemeral });
+			return interaction.reply({ content: "A role cannot be connected to itself", flags: MessageFlags.Ephemeral })
 		if (guildConnections.some((connection) => connection.childRoleId === childRole.id))
 			return interaction.reply({
 				content: "This role is already connected to another role",
 				flags: MessageFlags.Ephemeral,
-			});
+			})
 		if (guildConnections.some((connection) => connection.parentRoleId === childRole.id))
-			return interaction.reply({ content: "This role is already a parent role", flags: MessageFlags.Ephemeral });
+			return interaction.reply({ content: "This role is already a parent role", flags: MessageFlags.Ephemeral })
 
 		await this.container.drizzle.insert(roleConnections).values({
 			guildId: interaction.guild.id,
 			parentRoleId: parentRole.id,
 			childRoleId: childRole.id,
-		});
+		})
 
 		return interaction.reply({
 			content: `Successfully connected ${parentRole} to ${childRole}`,
 			flags: MessageFlags.Ephemeral,
-		});
+		})
 	}
 
 	private async remove(interaction: ChatInputCommandInteraction<"cached">) {
 		const guildConnections = await this.container.drizzle.query.roleConnections.findMany({
 			where: eq(roleConnections.guildId, interaction.guild.id),
-		});
+		})
 
-		const parentRole = interaction.options.getRole("parent", true);
+		const parentRole = interaction.options.getRole("parent", true)
 
 		if (!guildConnections.some((connection) => connection.parentRoleId === parentRole.id))
 			return interaction.reply({
 				content: "This role is not connected to any other role",
 				flags: MessageFlags.Ephemeral,
-			});
+			})
 
-		await this.container.drizzle.delete(roleConnections).where(eq(roleConnections.parentRoleId, parentRole.id));
+		await this.container.drizzle.delete(roleConnections).where(eq(roleConnections.parentRoleId, parentRole.id))
 
 		return interaction.reply({
 			content: `Successfully removed the connection between ${parentRole} and its children`,
 			flags: MessageFlags.Ephemeral,
-		});
+		})
 	}
 
 	private async list(interaction: ChatInputCommandInteraction<"cached">) {
-		const parentRole = interaction.options.getRole("parent", true);
+		const parentRole = interaction.options.getRole("parent", true)
 		const guildConnections = await this.container.drizzle.query.roleConnections.findMany({
 			where: and(eq(roleConnections.guildId, interaction.guild.id), eq(roleConnections.parentRoleId, parentRole.id)),
-		});
+		})
 
 		return interaction.reply({
 			content: `List of role connections:\n${guildConnections.map((connection) => `<@&${connection.parentRoleId}> -> <@&${connection.childRoleId}>`).join("\n")}`,
 			flags: MessageFlags.Ephemeral,
-		});
+		})
 	}
 
 	private async clear(interaction: ChatInputCommandInteraction<"cached">) {
-		if (!interaction.channel) return;
+		if (!interaction.channel) return
 
 		await interaction.reply({
 			content: "Are you sure you want to clear all role connections?",
@@ -199,7 +198,7 @@ export default class extends SlashCommand<SleepyMaidClient> {
 					],
 				},
 			],
-		});
+		})
 
 		await interaction.channel
 			.createMessageComponentCollector({
@@ -207,20 +206,20 @@ export default class extends SlashCommand<SleepyMaidClient> {
 				time: 15000,
 			})
 			.on("collect", async (i: MessageComponentInteraction) => {
-				if (i.user.id !== interaction.user.id) return;
+				if (i.user.id !== interaction.user.id) return
 
 				if (i.customId.startsWith("roleconnections:clear:confirm")) {
-					await this.container.drizzle.delete(roleConnections).where(eq(roleConnections.guildId, interaction.guild.id));
+					await this.container.drizzle.delete(roleConnections).where(eq(roleConnections.guildId, interaction.guild.id))
 
-					await interaction.editReply({ content: "Successfully cleared all role connections", components: [] });
-					return await i.deferUpdate();
+					await interaction.editReply({ content: "Successfully cleared all role connections", components: [] })
+					return await i.deferUpdate()
 				} else {
-					await interaction.editReply({ components: [] });
-					return await i.deferUpdate();
+					await interaction.editReply({ components: [] })
+					return await i.deferUpdate()
 				}
 			})
 			.on("end", () => {
-				interaction.editReply({ components: [] });
-			});
+				interaction.editReply({ components: [] })
+			})
 	}
 }

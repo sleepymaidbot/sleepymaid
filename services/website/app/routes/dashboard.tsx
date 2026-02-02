@@ -1,85 +1,85 @@
-import { sessionTable } from "@sleepymaid/db";
-import { createFileRoute, Link, redirect } from "@tanstack/react-router";
-import { createServerFn } from "@tanstack/start";
-import { useSession } from "~/hooks/useSession";
-import { db } from "~/utils/db";
-import authMiddleware from "~/utils/middleware/auth";
-import axios from "redaxios";
-import { eq } from "drizzle-orm";
-import { useQuery } from "@tanstack/react-query";
-import { APIPartialGuild } from "discord-api-types/v10";
-import { ScrollArea } from "~/components/ui/scroll-area";
-import { Avatar, AvatarImage, AvatarFallback } from "~/components/ui/avatar";
-import { Input } from "~/components/ui/input";
-import { useState } from "react";
-import { Button } from "~/components/ui/button";
+import { sessionTable } from "@sleepymaid/db"
+import { useQuery } from "@tanstack/react-query"
+import { createFileRoute, Link, redirect } from "@tanstack/react-router"
+import { createServerFn } from "@tanstack/start"
+import { APIPartialGuild } from "discord-api-types/v10"
+import { eq } from "drizzle-orm"
+import { useState } from "react"
+import axios from "redaxios"
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar"
+import { Button } from "~/components/ui/button"
+import { Input } from "~/components/ui/input"
+import { ScrollArea } from "~/components/ui/scroll-area"
+import { useSession } from "~/hooks/useSession"
+import { db } from "~/utils/db"
+import authMiddleware from "~/utils/middleware/auth"
 
 const getUserGuilds = createServerFn({ method: "GET" })
 	.middleware([authMiddleware])
 	.handler(async () => {
-		const session = await useSession();
-		const sessionData = session.data;
+		const session = await useSession()
+		const sessionData = session.data
 
 		if (!sessionData) {
-			throw new Error("Not authenticated");
+			throw new Error("Not authenticated")
 		}
 
 		const userSession = await db.query.sessionTable.findFirst({
 			where: eq(sessionTable.id, sessionData.sessionId),
-		});
+		})
 
 		if (!userSession) {
-			throw new Error("User session not found");
+			throw new Error("User session not found")
 		}
 
 		const guildsResponse = await axios.get("https://discord.com/api/v10/users/@me/guilds", {
 			headers: {
 				Authorization: `Bearer ${userSession.accessToken}`,
 			},
-		});
+		})
 
-		const guilds: APIPartialGuild[] = guildsResponse.data;
+		const guilds: APIPartialGuild[] = guildsResponse.data
 
 		return guilds.map((guild) => ({
 			id: guild.id,
 			name: guild.name,
 			icon: guild.icon,
-		}));
-	});
+		}))
+	})
 
 export const Route = createFileRoute("/dashboard")({
 	beforeLoad: async ({ context }) => {
 		if (!context.user?.userId) {
-			throw new Error("Not authenticated");
+			throw new Error("Not authenticated")
 		}
 	},
 	errorComponent: ({ error }) => {
 		if (error.message === "Not authenticated") {
-			return redirect({ to: "/login" });
+			return redirect({ to: "/login" })
 		}
 
-		return <div>Error: {error.message}</div>;
+		return <div>Error: {error.message}</div>
 	},
 	component: DashboardComponent,
-});
+})
 
 function DashboardComponent() {
 	const query = useQuery({
 		queryKey: ["guilds"],
 		queryFn: () => getUserGuilds(),
-	});
-	const [searchTerm, setSearchTerm] = useState("");
+	})
+	const [searchTerm, setSearchTerm] = useState("")
 
 	if (query.isLoading) {
-		return <div>Loading...</div>;
+		return <div>Loading...</div>
 	}
 
 	if (query.isError) {
-		return <div>Error: {query.error.message}</div>;
+		return <div>Error: {query.error.message}</div>
 	}
 
-	const guilds = query.data ?? [];
-	const filteredGuilds = guilds.filter((guild) => guild.name.toLowerCase().includes(searchTerm.toLowerCase()));
+	const guilds = query.data ?? []
+	const filteredGuilds = guilds.filter((guild) => guild.name.toLowerCase().includes(searchTerm.toLowerCase()))
 
 	return (
 		<div className="p-4">
@@ -115,5 +115,5 @@ function DashboardComponent() {
 				</div>
 			</ScrollArea>
 		</div>
-	);
+	)
 }

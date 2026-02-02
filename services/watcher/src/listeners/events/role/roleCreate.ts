@@ -1,18 +1,18 @@
-import { Context, Listener } from "@sleepymaid/handler";
-import { WatcherClient } from "../../../lib/extensions/WatcherClient";
-import { APIEmbed, AuditLogEvent, Colors, Role } from "discord.js";
+import { Context, Listener } from "@sleepymaid/handler"
+import { APIEmbed, AuditLogEvent, Colors, Role } from "discord.js"
+import { WatcherClient } from "../../../lib/extensions/WatcherClient"
 
 export default class extends Listener<"roleCreate", WatcherClient> {
 	constructor(context: Context<WatcherClient>) {
 		super(context, {
 			name: "roleCreate",
 			once: false,
-		});
+		})
 	}
 
 	public override async execute(role: Role) {
-		const channels = (await this.container.manager.getLogChannel(role.guild.id))?.filter((c) => c.roleEvents.create);
-		if (!channels || channels.length === 0) return;
+		const channels = (await this.container.manager.getLogChannel(role.guild.id))?.filter((c) => c.roleEvents.create)
+		if (!channels || channels.length === 0) return
 
 		const embed: APIEmbed = {
 			title: "Role Created",
@@ -50,23 +50,23 @@ export default class extends Listener<"roleCreate", WatcherClient> {
 				},
 			],
 			timestamp: new Date().toISOString(),
-		};
+		}
 
 		const author = await role.guild.fetchAuditLogs({
 			type: AuditLogEvent.RoleCreate,
 			limit: 1,
-		});
-		const log = author.entries.first();
+		})
+		const log = author.entries.first()
 
 		if (log && log.executor && log.target && log.executorId !== role.id && log.target.id === role.id) {
 			embed.footer = {
 				text: `${log.executor.displayName} (${log.executorId})`,
 				icon_url: log.executor.displayAvatarURL(),
-			};
+			}
 		}
 
 		for (const channel of channels) {
-			await this.container.manager.sendLog(channel, { embeds: [embed] });
+			await this.container.manager.sendLog(channel, { embeds: [embed] })
 		}
 	}
 }

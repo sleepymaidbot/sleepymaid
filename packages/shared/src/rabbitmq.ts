@@ -6,47 +6,47 @@ export enum Queue {
 
 export type RequestType = {
 	[Queue.CheckGuildInformation]: {
-		guildId: string;
-		userId: string;
-	};
+		guildId: string
+		userId: string
+	}
 	[Queue.CheckUserGuildPermissions]: {
-		guildId: string;
-		userId: string;
-	};
+		guildId: string
+		userId: string
+	}
 	[Queue.SendQuickMessage]: {
-		userId: string;
-		guildId: string;
-		channelId: string;
-		messageId?: string;
-		messageJson: string;
-	};
-};
+		userId: string
+		guildId: string
+		channelId: string
+		messageId?: string
+		messageJson: string
+	}
+}
 
 export type ResponseType = {
 	[Queue.CheckGuildInformation]: {
-		botNickname: string;
+		botNickname: string
 		channels: {
-			id: string;
-			name: string;
-		}[];
+			id: string
+			name: string
+		}[]
 		emojis: {
-			id: string;
-			name: string;
-		}[];
-		hasBot: boolean;
-		hasPermission: boolean;
+			id: string
+			name: string
+		}[]
+		hasBot: boolean
+		hasPermission: boolean
 		roles: {
-			color: string;
-			id: string;
-			name: string;
-			position: number;
-		}[];
-		userPermissions: string;
-	};
+			color: string
+			id: string
+			name: string
+			position: number
+		}[]
+		userPermissions: string
+	}
 	[Queue.CheckUserGuildPermissions]: {
-		userPermissions: string;
-	};
+		userPermissions: string
+	}
 	[Queue.SendQuickMessage]: {
-		messageId: string;
-	};
-};
+		messageId: string
+	}
+}

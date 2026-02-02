@@ -1,5 +1,5 @@
-import { bigint, pgTable, serial, timestamp, text, integer } from "drizzle-orm/pg-core";
-import { guildSettings, userData } from "./schema";
+import { bigint, integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core"
+import { guildSettings, userData } from "./schema"
 
 export const lotteries = pgTable("lottery", {
 	lotteryId: serial("lottery_id").primaryKey(),
@@ -11,7 +11,7 @@ export const lotteries = pgTable("lottery", {
 	lotteryAmount: bigint("lottery_amount", { mode: "number" }).notNull(),
 	effectiveTime: timestamp("effective_time").notNull(),
 	expiredTime: timestamp("expired_time").notNull(),
-});
+})
 
 export const userLotteries = pgTable("user_lottery", {
 	userId: text("user_id")
@@ -20,4 +20,4 @@ export const userLotteries = pgTable("user_lottery", {
 	lotteryId: integer("lottery_id")
 		.notNull()
 		.references(() => lotteries.lotteryId, { onDelete: "cascade" }),
-});
+})

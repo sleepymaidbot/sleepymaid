@@ -1,20 +1,20 @@
-import { SleepyMaidClient } from "../../../lib/SleepyMaidClient";
-import { Context, SlashCommand } from "@sleepymaid/handler";
+import { userActions } from "@sleepymaid/db"
+import { Context, SlashCommand } from "@sleepymaid/handler"
 import {
+	ApplicationCommandOptionData,
+	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType,
-	ApplicationCommandOptionType,
 	ChatInputCommandInteraction,
-	ApplicationCommandOptionData,
-	resolveColor,
 	ColorResolvable,
 	Colors,
+	InteractionContextType,
 	MessageFlags,
-} from "discord.js";
-import { and, eq } from "drizzle-orm";
-import { userActions } from "@sleepymaid/db";
-import DBCheckPrecondtion from "../../../preconditions/dbCheck";
+	resolveColor,
+} from "discord.js"
+import { and, eq } from "drizzle-orm"
+import { SleepyMaidClient } from "../../../lib/SleepyMaidClient"
+import DBCheckPrecondtion from "../../../preconditions/dbCheck"
 
 const actionsObj: { [key: string]: { short: string; past: string; desc: string } } = {
 	hug: {
@@ -142,11 +142,11 @@ const actionsObj: { [key: string]: { short: string; past: string; desc: string }
 		past: "cried with",
 		desc: "Cry with someone",
 	},
-};
+}
 
 export default class ActionsCommand extends SlashCommand<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
-		const options: ApplicationCommandOptionData[] = [];
+		const options: ApplicationCommandOptionData[] = []
 
 		for (const [k, v] of Object.entries(actionsObj)) {
 			options.push({
@@ -161,7 +161,7 @@ export default class ActionsCommand extends SlashCommand<SleepyMaidClient> {
 						required: true,
 					},
 				],
-			});
+			})
 		}
 
 		super(context, {
@@ -174,55 +174,55 @@ export default class ActionsCommand extends SlashCommand<SleepyMaidClient> {
 				contexts: [InteractionContextType.BotDM, InteractionContextType.Guild, InteractionContextType.PrivateChannel],
 				options,
 			},
-		});
+		})
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction) {
-		const userId = interaction.user.id;
-		const action = interaction.options.getSubcommand() as keyof typeof actionsObj;
-		if (!action || typeof action !== "string") return;
-		const user = interaction.options.getUser("user", true);
-		const targetId = user.id;
-		const actionData = actionsObj[action];
-		if (!actionData) return;
+		const userId = interaction.user.id
+		const action = interaction.options.getSubcommand() as keyof typeof actionsObj
+		if (!action || typeof action !== "string") return
+		const user = interaction.options.getUser("user", true)
+		const targetId = user.id
+		const actionData = actionsObj[action]
+		if (!actionData) return
 		if (user.bot) {
-			return interaction.reply({ content: "You can't do that with a bot.", flags: MessageFlags.Ephemeral });
+			return interaction.reply({ content: "You can't do that with a bot.", flags: MessageFlags.Ephemeral })
 		}
 		if (userId === targetId) {
-			return interaction.reply({ content: "You can't do that with yourself.", flags: MessageFlags.Ephemeral });
+			return interaction.reply({ content: "You can't do that with yourself.", flags: MessageFlags.Ephemeral })
 		}
 
-		await interaction.deferReply();
+		await interaction.deferReply()
 
 		const actionsData = await this.container.client.drizzle.query.userActions.findFirst({
 			where: and(eq(userActions.userId, userId), eq(userActions.targetId, targetId)),
-		});
+		})
 
-		let count: number = 0;
+		let count: number = 0
 		if (actionsData) {
-			const _count = actionsData[action as keyof typeof actionsData] ?? 0;
-			if (typeof count !== "number") return interaction.editReply({ content: "An error occured." });
-			count = _count as number;
+			const _count = actionsData[action as keyof typeof actionsData] ?? 0
+			if (typeof count !== "number") return interaction.editReply({ content: "An error occured." })
+			count = _count as number
 		}
 
-		const number = count + 1;
+		const number = count + 1
 
-		let color: ColorResolvable = Colors.Aqua;
+		let color: ColorResolvable = Colors.Aqua
 		if (interaction.member! && interaction.inCachedGuild()) {
-			color = interaction.member!.displayHexColor;
+			color = interaction.member!.displayHexColor
 		}
 
-		const apiUrl = process.env.API_URL ?? "https://api.ecorte.xyz";
-		const apiKey = process.env.API_SECRET ?? "";
+		const apiUrl = process.env.API_URL ?? "https://api.ecorte.xyz"
+		const apiKey = process.env.API_SECRET ?? ""
 		const response = await fetch(`${apiUrl}/images/${action}`, {
 			headers: {
 				Authorization: apiKey,
 			},
-		});
-		const data = (await response.json()) as { status: string; image: string };
-		let url: string = "";
+		})
+		const data = (await response.json()) as { status: string; image: string }
+		let url: string = ""
 		if (data.status === "success" && data.image) {
-			url = `${apiUrl}/${data.image}`;
+			url = `${apiUrl}/${data.image}`
 		}
 
 		await interaction.editReply({
@@ -238,21 +238,21 @@ export default class ActionsCommand extends SlashCommand<SleepyMaidClient> {
 					color: resolveColor(color),
 				},
 			],
-		});
+		})
 
 		if (!actionsData) {
 			await this.container.client.drizzle.insert(userActions).values({
 				userId,
 				targetId,
 				[action]: number,
-			});
-			return;
+			})
+			return
 		}
 		await this.container.client.drizzle
 			.update(userActions)
 			.set({ [action]: number })
-			.where(and(eq(userActions.userId, userId), eq(userActions.targetId, targetId)));
+			.where(and(eq(userActions.userId, userId), eq(userActions.targetId, targetId)))
 
-		return;
+		return
 	}
 }

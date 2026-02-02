@@ -20,9 +20,7 @@
 	"directories": {
 		"lib": "src"
 	},
-	"files": [
-		"dist"
-	],
+	"files": ["dist"],
 	"scripts": {
 		"build": "pnpm rimraf dist/ && pnpm tsup",
 		"check": "pnpm tsc --noEmit --pretty --skipLibCheck",
@@ -34,15 +32,15 @@
 	"devDependencies": {
 		"@favware/cliff-jumper": "^6.0.0",
 		"@sleepymaid/handler": "workspace:^",
-		"@swc/core": "^1.15.10",
-		"@types/node": "^22.19.7",
-		"rimraf": "^6.1.2",
+		"@swc/core": "^1.13.2",
+		"@types/node": "^22.16.5",
+		"rimraf": "^6.0.1",
 		"source-map-support": "0.5.21",
-		"tsup": "^8.5.1",
-		"typescript": "^5.9.3"
+		"tsup": "^8.5.0",
+		"typescript": "^5.8.3"
 	},
 	"dependencies": {
 		"ansi-colors": "4.1.3",
-		"discord.js": "^14.25.1"
+		"discord.js": "^14.21.0"
 	}
 }

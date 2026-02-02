@@ -1,18 +1,18 @@
-import type { Config } from "drizzle-kit";
-import connectionString from "./env";
+import type { Config } from "drizzle-kit"
+import connectionString from "./env"
 
 function getConnectionString(): string {
-	if (typeof process.env.DATABASE_URL === "string") return process.env.DATABASE_URL;
-	else return connectionString;
+	if (typeof process.env.DATABASE_URL === "string") return process.env.DATABASE_URL
+	else return connectionString
 }
 
 function getEnv(): string {
-	if (typeof process.env.NODE_ENV === "string") return process.env.NODE_ENV;
-	else return "development";
+	if (typeof process.env.NODE_ENV === "string") return process.env.NODE_ENV
+	else return "development"
 }
 
 function isDev(): boolean {
-	return getEnv() === "development";
+	return getEnv() === "development"
 }
 
 export default {
@@ -29,4 +29,4 @@ export default {
 	},
 	strict: !isDev(),
 	verbose: isDev(),
-} satisfies Config;
+} satisfies Config

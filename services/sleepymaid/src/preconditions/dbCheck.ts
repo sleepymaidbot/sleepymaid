@@ -1,9 +1,9 @@
-import { SleepyMaidClient } from "../lib/SleepyMaidClient";
-import { guildSettings, userData } from "@sleepymaid/db";
-import { Context, Precondition, type CommandInteractionTypeUnion } from "@sleepymaid/handler";
+import { guildSettings, userData } from "@sleepymaid/db"
+import { type CommandInteractionTypeUnion, Context, Precondition } from "@sleepymaid/handler"
+import { SleepyMaidClient } from "../lib/SleepyMaidClient"
 export default class DBCheckPrecondtion extends Precondition<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
-		super(context);
+		super(context)
 	}
 
 	public override async CommandRun(interaction: CommandInteractionTypeUnion) {
@@ -22,7 +22,7 @@ export default class DBCheckPrecondtion extends Precondition<SleepyMaidClient> {
 							guildName: interaction.guild.name,
 							iconHash: interaction.guild.icon,
 						},
-					});
+					})
 
 			await tx
 				.insert(userData)
@@ -39,7 +39,7 @@ export default class DBCheckPrecondtion extends Precondition<SleepyMaidClient> {
 						displayName: interaction.user.displayName,
 						avatarHash: interaction.user.avatar,
 					},
-				});
-		});
+				})
+		})
 	}
 }

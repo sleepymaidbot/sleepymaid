@@ -4,9 +4,9 @@ export const ratioGuildIds = [
 	"862103656852619304", // Sleepymaid
 	"796534493535928320", // Just_Fil
 	"1150780245151068332", // Mamayo
-];
+]
 
-export const colorRole = ["Maya", "Mikado", "Rose", "Lavender", "Coral", "Cantaloupe", "Mint", "Smoked", "Weed"];
+export const colorRole = ["Maya", "Mikado", "Rose", "Lavender", "Coral", "Cantaloupe", "Mint", "Smoked", "Weed"]
 
 export const colorRoleIds = [
 	"857372101748719656", // Maya
@@ -18,10 +18,10 @@ export const colorRoleIds = [
 	"857372929598947368", // Mint
 	"857431586202189835", // Smoked
 	"857432207534981151", // Weed
-];
+]
 
 export const pingRoleIds = [
 	"879465272669528098", // Annonce
 	"879465303795466240", // Free Stuff
 	"879465436922642462", // Giveaway
-];
+]

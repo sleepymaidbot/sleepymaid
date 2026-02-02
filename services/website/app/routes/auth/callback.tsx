@@ -1,30 +1,30 @@
-import { useQuery } from "@tanstack/react-query";
-import { createFileRoute, redirect, useRouter } from "@tanstack/react-router";
-import { loginFn } from "~/utils/server/login";
-import { Loading } from "~/components/Loading";
-import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query"
+import { createFileRoute, redirect, useRouter } from "@tanstack/react-router"
+import { useEffect, useState } from "react"
+import { Loading } from "~/components/Loading"
+import { loginFn } from "~/utils/server/login"
 
 export const Route = createFileRoute("/auth/callback")({
 	component: AuthCallbackComponent,
-});
+})
 
 function AuthCallbackComponent() {
-	const router = useRouter();
-	const [isLoading, setIsLoading] = useState(false);
+	const router = useRouter()
+	const [isLoading, setIsLoading] = useState(false)
 	const [authParams, setAuthParams] = useState<{ code: string | null; state: string | null }>({
 		code: null,
 		state: null,
-	});
+	})
 
 	useEffect(() => {
-		const searchParams = new URLSearchParams(window.location.search);
+		const searchParams = new URLSearchParams(window.location.search)
 		setAuthParams({
 			code: searchParams.get("code"),
 			state: searchParams.get("state"),
-		});
-	}, []);
+		})
+	}, [])
 
-	const { code, state } = authParams;
+	const { code, state } = authParams
 
 	const query = useQuery({
 		queryKey: ["auth-callback", code ?? ""],
@@ -32,38 +32,38 @@ function AuthCallbackComponent() {
 		staleTime: Infinity,
 		enabled: !isLoading && !!code && !!state,
 		retry: false,
-	});
+	})
 
 	useEffect(() => {
 		if (query.isLoading && !isLoading) {
-			setIsLoading(true);
+			setIsLoading(true)
 		}
-	}, [query.isLoading, isLoading]);
+	}, [query.isLoading, isLoading])
 
 	useEffect(() => {
 		if (query.isSuccess) {
-			console.log("Login successful, attempting navigation");
+			console.log("Login successful, attempting navigation")
 			try {
-				router.invalidate();
-				window.location.href = "/dashboard";
+				router.invalidate()
+				window.location.href = "/dashboard"
 			} catch (error) {
-				console.error("Navigation error:", error);
+				console.error("Navigation error:", error)
 			}
 		}
-	}, [query.isSuccess, router]);
+	}, [query.isSuccess, router])
 
 	if (!code || !state) {
-		return <Loading />;
+		return <Loading />
 	}
 
 	if (query.isLoading) {
-		return <Loading />;
+		return <Loading />
 	}
 
 	if (query.isError) {
-		console.error("Login error:", query.error);
-		return <div>Error: {query.error.message} </div>;
+		console.error("Login error:", query.error)
+		return <div>Error: {query.error.message} </div>
 	}
 
-	return <Loading />;
+	return <Loading />
 }

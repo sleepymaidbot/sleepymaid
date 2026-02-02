@@ -1,12 +1,12 @@
-import { SleepyMaidClient } from "../../../lib/SleepyMaidClient";
-import { Context, SlashCommand } from "@sleepymaid/handler";
+import { Context, SlashCommand } from "@sleepymaid/handler"
 import {
+	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType,
-	ApplicationCommandOptionType,
 	ChatInputCommandInteraction,
-} from "discord.js";
+	InteractionContextType,
+} from "discord.js"
+import { SleepyMaidClient } from "../../../lib/SleepyMaidClient"
 
 export default class RandomMathCommand extends SlashCommand<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
@@ -30,13 +30,13 @@ export default class RandomMathCommand extends SlashCommand<SleepyMaidClient> {
 					},
 				],
 			},
-		});
+		})
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction) {
-		const min = interaction.options.getInteger("min") || 0;
-		const max = interaction.options.getInteger("max") || 100;
-		const random = Math.floor(Math.random() * (max - min + 1) + min);
-		await interaction.reply({ content: `🎲 The random number is ${random}` });
+		const min = interaction.options.getInteger("min") || 0
+		const max = interaction.options.getInteger("max") || 100
+		const random = Math.floor(Math.random() * (max - min + 1) + min)
+		await interaction.reply({ content: `🎲 The random number is ${random}` })
 	}
 }

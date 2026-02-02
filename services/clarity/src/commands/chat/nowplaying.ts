@@ -1,8 +1,7 @@
-import { SlashCommand } from "@sleepymaid/handler";
-import { type Context } from "@sleepymaid/handler";
-import { ClarityClient } from "../../lib/ClarityClient";
-import { useQueue } from "discord-player";
-import { ChatInputCommandInteraction } from "discord.js";
+import { type Context, SlashCommand } from "@sleepymaid/handler"
+import { ChatInputCommandInteraction } from "discord.js"
+import { useQueue } from "discord-player"
+import { ClarityClient } from "../../lib/ClarityClient"
 
 export default class extends SlashCommand<ClarityClient> {
 	public constructor(context: Context<ClarityClient>) {
@@ -11,22 +10,22 @@ export default class extends SlashCommand<ClarityClient> {
 				name: "nowplaying",
 				description: "Get the current song playing",
 			},
-		});
+		})
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction<"cached">) {
-		const queue = useQueue();
+		const queue = useQueue()
 
 		if (!queue) {
-			return interaction.reply("This server does not have an active player session.");
+			return interaction.reply("This server does not have an active player session.")
 		}
 
-		const currentSong = queue.currentTrack;
+		const currentSong = queue.currentTrack
 
 		if (!currentSong) {
-			return interaction.reply("No song is currently playing.");
+			return interaction.reply("No song is currently playing.")
 		}
 
-		return interaction.reply(`Now playing: ${currentSong.title}`);
+		return interaction.reply(`Now playing: ${currentSong.title}`)
 	}
 }

@@ -1,6 +1,7 @@
-import moduleAlias from "module-alias";
-moduleAlias.addAlias("punycode", "punycode/");
+import moduleAlias from "module-alias"
 
-import { HelperClient } from "./lib/extensions/HelperClient";
+moduleAlias.addAlias("punycode", "punycode/")
 
-void new HelperClient().start();
+import { HelperClient } from "./lib/extensions/HelperClient"
+
+void new HelperClient().start()

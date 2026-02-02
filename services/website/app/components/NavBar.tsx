@@ -1,5 +1,5 @@
-import { Link, Route } from "@tanstack/react-router";
-import { User } from "~/utils/types";
+import { Link, Route } from "@tanstack/react-router"
+import { User } from "~/utils/types"
 
 export default function NavBar({ user }: { user: User | null }) {
 	return (
@@ -65,5 +65,5 @@ export default function NavBar({ user }: { user: User | null }) {
 				)}
 			</div>
 		</div>
-	);
+	)
 }

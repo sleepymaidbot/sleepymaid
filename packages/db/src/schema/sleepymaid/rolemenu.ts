@@ -1,17 +1,17 @@
-import { createId } from "@paralleldrive/cuid2";
-import { relations, sql } from "drizzle-orm";
-import { text, boolean, pgTable, pgEnum, jsonb, integer } from "drizzle-orm/pg-core";
-import { guildSettings } from "./schema";
+import { createId } from "@paralleldrive/cuid2"
+import { relations, sql } from "drizzle-orm"
+import { boolean, integer, jsonb, pgEnum, pgTable, text } from "drizzle-orm/pg-core"
+import { guildSettings } from "./schema"
 
-export const roleMenuType = pgEnum("role_menu_type", ["buttons", "select"]);
+export const roleMenuType = pgEnum("role_menu_type", ["buttons", "select"])
 
 export type roleMenuValuesType = {
-	description: string | undefined;
-	emoji: string | undefined;
-	label: string;
-	roleId: string;
-	style: number;
-};
+	description: string | undefined
+	emoji: string | undefined
+	label: string
+	roleId: string
+	style: number
+}
 
 export const roleMenu = pgTable("role_menu", {
 	guildId: text("server_id").references(() => guildSettings.guildId, { onDelete: "cascade" }),
@@ -25,11 +25,8 @@ export const roleMenu = pgTable("role_menu", {
 	type: roleMenuType("type").notNull(),
 	maxRoles: integer("max_roles").default(1).notNull(),
 	minRoles: integer("min_roles").default(0).notNull(),
-	values: jsonb("values")
-		.notNull()
-		.$type<roleMenuValuesType[]>()
-		.default(sql`'[]'`),
-});
+	values: jsonb("values").notNull().$type<roleMenuValuesType[]>().default(sql`'[]'`),
+})
 
 export const roleMenuRelations = relations(roleMenu, ({ one }) => ({
 	guildsSettings: one(guildSettings, {
@@ -37,4 +34,4 @@ export const roleMenuRelations = relations(roleMenu, ({ one }) => ({
 		references: [guildSettings.guildId],
 		relationName: "roleMenus",
 	}),
-}));
+}))

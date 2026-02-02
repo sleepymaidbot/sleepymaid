@@ -1,12 +1,12 @@
-import { SleepyMaidClient } from "../../../lib/SleepyMaidClient";
-import { Context, SlashCommand } from "@sleepymaid/handler";
+import { Context, SlashCommand } from "@sleepymaid/handler"
 import {
+	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType,
-	ApplicationCommandOptionType,
 	ChatInputCommandInteraction,
-} from "discord.js";
+	InteractionContextType,
+} from "discord.js"
+import { SleepyMaidClient } from "../../../lib/SleepyMaidClient"
 
 export default class ReverseCommand extends SlashCommand<SleepyMaidClient> {
 	public constructor(context: Context<SleepyMaidClient>) {
@@ -26,11 +26,11 @@ export default class ReverseCommand extends SlashCommand<SleepyMaidClient> {
 					},
 				],
 			},
-		});
+		})
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction) {
-		const string = interaction.options.getString("string", true);
-		await interaction.reply({ content: `🔁 ${string.split("").reverse().join("")}` });
+		const string = interaction.options.getString("string", true)
+		await interaction.reply({ content: `🔁 ${string.split("").reverse().join("")}` })
 	}
 }

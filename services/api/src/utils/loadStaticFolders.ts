@@ -1,5 +1,5 @@
-import { readdirSync } from "fs";
-import { join } from "path";
+import { readdirSync } from "fs"
+import { join } from "path"
 
 /**
  * Loads all folder names from the ./static/images directory
@@ -8,17 +8,17 @@ import { join } from "path";
  */
 function loadImageFolders(): string[] {
 	try {
-		const imagesPath = join(process.cwd(), "static", "images");
-		const items = readdirSync(imagesPath, { withFileTypes: true });
+		const imagesPath = join(process.cwd(), "static", "images")
+		const items = readdirSync(imagesPath, { withFileTypes: true })
 
 		// Filter only directories and return their names
-		return items.filter((item) => item.isDirectory()).map((dir) => dir.name);
+		return items.filter((item) => item.isDirectory()).map((dir) => dir.name)
 	} catch (error) {
 		if (error instanceof Error) {
-			throw new Error(`Failed to load image folders: ${error.message}`);
+			throw new Error(`Failed to load image folders: ${error.message}`)
 		}
-		throw error;
+		throw error
 	}
 }
 
-export default loadImageFolders;
+export default loadImageFolders

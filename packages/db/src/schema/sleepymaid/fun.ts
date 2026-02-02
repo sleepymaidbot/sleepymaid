@@ -1,5 +1,5 @@
-import { pgTable, text, integer, index, serial } from "drizzle-orm/pg-core";
-import { userData } from "./schema";
+import { index, integer, pgTable, serial, text } from "drizzle-orm/pg-core"
+import { userData } from "./schema"
 
 export const userActions = pgTable(
 	"user_action",
@@ -39,6 +39,6 @@ export const userActions = pgTable(
 		return {
 			userIdx: index("actions_user_idx").on(table.userId),
 			targetIdx: index("actions_target_idx").on(table.targetId),
-		};
+		}
 	},
-);
+)
