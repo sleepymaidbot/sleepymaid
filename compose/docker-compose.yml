@@ -22,7 +22,7 @@ services:
       timeout: 5s
 
   ghost:
-    image: ghost:5-alpine
+    image: ghost:6-alpine
     restart: unless-stopped
     expose:
       - 2368
