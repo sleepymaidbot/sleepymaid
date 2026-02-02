@@ -5,11 +5,11 @@
 	"private": true,
 	"main": "dist/index.js",
 	"scripts": {
-		"build": "pnpm rimraf dist/ && pnpm tsc",
-		"check": "pnpm tsc --noEmit --pretty --skipLibCheck",
-		"start": "pnpm build && node --trace-warnings -r source-map-support/register dist/index.js",
-		"dev": "pnpm build && node --trace-warnings -r source-map-support/register --env-file .env dist/index.js",
-		"metadata": "pnpm build && node --trace-warnings -r source-map-support/register --env-file .env dist/linkeddata.js"
+		"build": "bunx rimraf dist/ && bunx tsc",
+		"check": "bunx tsc --noEmit --pretty --skipLibCheck",
+		"start": "bun run src/index.ts",
+		"dev": "bun run --watch src/index.ts",
+		"metadata": "bun run src/linkeddata.ts"
 	},
 	"author": "Ecorte",
 	"license": "MIT",
@@ -23,6 +23,8 @@
 		"typescript": "^5.8.3"
 	},
 	"dependencies": {
+		"@discordjs/builders": "^1.13.0",
+		"@discordjs/rest": "^2.6.0",
 		"@aero/sanitizer": "^1.3.2",
 		"@sapphire/result": "^2.7.2",
 		"@sapphire/stopwatch": "1.5.4",

@@ -1,4 +1,4 @@
-FROM node:22-alpine
+FROM oven/bun:1-alpine
 
 WORKDIR /opt/build
 
@@ -18,14 +18,8 @@ RUN apk add --no-cache \
     && apk add --no-cache --virtual .build-deps \
     curl git python3 alpine-sdk libc6-compat openssl-dev yt-dlp \
     && apk del .build-deps
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
 
-# WORKAROUND FOR pnpm/pnpm/issues/9029
-RUN corepack prepare pnpm@10.0.0 --activate
-
-COPY tsup.config.js turbo.json package.json tsconfig.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
+COPY tsup.config.js turbo.json package.json tsconfig.json bun.lock .npmrc ./
 
 COPY packages/db ./packages/db
 COPY packages/handler ./packages/handler
@@ -39,10 +33,10 @@ COPY services/sleepymaid ./services/sleepymaid
 COPY services/helper/ ./services/helper
 COPY services/watcher ./services/watcher
 
-RUN pnpm install --frozen-lockfile --ignore-scripts
+RUN bun install --frozen-lockfile --ignore-scripts
 COPY locales/ ./locales
 COPY .git/ ./.git
-RUN pnpm turbo run build
+RUN bun run turbo run build --filter=./packages/*
 
 COPY locales/ ./locales
 COPY services/helper/banners ./services/helper/banners

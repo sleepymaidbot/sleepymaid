@@ -18,7 +18,7 @@ export function getLocalizedProp<Prop extends string>(prop: Prop, key: string) {
 	return {
 		[prop]: i18next.t(key),
 		[`${prop}_localizations`]: Object.fromEntries(
-			Object.values(Locale)
+			(Object.values(Locale) as Locale[])
 				.filter((locale) => supportedLngs.includes(locale))
 				.map((locale) => [locale, i18next.t(key, { lng: locale })]),
 		),

@@ -28,7 +28,7 @@ import { Routes } from "discord-api-types/v10"
 		.put(Routes.applicationRoleConnectionMetadata(process.env.DISCORD_CLIENT_ID!), {
 			body: metaData,
 		})
-		.catch((err) => {
+		.catch((err: unknown) => {
 			console.error(err)
 		})
 

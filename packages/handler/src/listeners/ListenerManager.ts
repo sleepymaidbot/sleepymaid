@@ -54,7 +54,7 @@ export class ListenerManager<Client extends HandlerClient> extends BaseManager<C
 
 	private async loadListeners(folderPath: string): Promise<void> {
 		let count = 0
-		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith(".js"))) {
+		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith(".js") || filePath.endsWith(".ts"))) {
 			try {
 				const container = this.client.container
 				const context = new Context<HandlerClient>(container)

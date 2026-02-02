@@ -143,7 +143,7 @@ export class CommandManager<Client extends HandlerClient> extends BaseManager<Cl
 	}
 
 	private async loadCommands(folderPath: string): Promise<boolean> {
-		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith(".js"))) {
+		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith(".js") || filePath.endsWith(".ts"))) {
 			const container = new BaseContainer<HandlerClient>(this.client)
 			const context = new Context<HandlerClient>(container)
 

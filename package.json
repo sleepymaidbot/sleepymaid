@@ -5,17 +5,28 @@
 	"author": "Ecorte",
 	"license": "MIT",
 	"private": true,
-	"packageManager": "pnpm@10.13.1",
+	"packageManager": "bun@1.3.8",
+	"workspaces": [
+		"packages/*",
+		"services/api",
+		"services/clarity",
+		"services/sleepymaid",
+		"services/helper",
+		"services/watcher",
+		"services/website",
+		"services/testbot"
+	],
 	"scripts": {
-		"build": "pnpm turbo run build",
-		"check": "pnpm turbo run check",
-		"test": "pnpm turbo run test --parallel",
-		"lint": "pnpm biome lint --write",
-		"format": "pnpm biome format --write",
-		"prepare": "pnpm husky"
+		"build": "bun run turbo run build",
+		"check": "bun run turbo run check",
+		"test": "bun run turbo run test --parallel",
+		"lint": "bun run biome lint --write",
+		"format": "bun run biome format --write",
+		"prepare": "bun run husky"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.3.13",
+		"vitest": "^3.2.4",
 		"@commitlint/cli": "^19.8.1",
 		"@commitlint/config-angular": "^19.8.1",
 		"@favware/cliff-jumper": "^6.0.0",

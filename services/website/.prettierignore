@@ -1,4 +1,5 @@
 **/build
 **/public
-pnpm-lock.yaml
+bun.lock
+bun.lockb
 routeTree.gen.ts

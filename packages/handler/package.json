@@ -22,8 +22,8 @@
 	},
 	"files": ["dist"],
 	"scripts": {
-		"build": "pnpm rimraf dist/ && pnpm tsup",
-		"check": "pnpm tsc --noEmit --pretty --skipLibCheck",
+		"build": "bunx rimraf dist/ && bunx tsup",
+		"check": "bunx tsc --noEmit --pretty --skipLibCheck",
 		"changelog": "git cliff --prepend ./CHANGELOG.md -u -c ./cliff.toml -r ../../ --include-path 'packages/handlers/*'",
 		"release": "cliff-jumper"
 	},
@@ -32,6 +32,7 @@
 	"devDependencies": {
 		"@favware/cliff-jumper": "^6.0.0",
 		"@sleepymaid/util": "workspace:^",
+		"tslib": "^2.8.1",
 		"@swc/core": "^1.13.2",
 		"@types/node": "^22.16.5",
 		"@types/node-cron": "^3.0.11",

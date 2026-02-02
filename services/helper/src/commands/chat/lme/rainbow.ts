@@ -1,32 +1,35 @@
-import { Context, SlashCommand } from "@sleepymaid/handler"
-import { generateSplitImage, getLocalizedProp } from "@sleepymaid/shared"
-import { intToHexColor } from "@sleepymaid/util"
-import { add, formatDistanceToNow } from "date-fns"
+import { Context, SlashCommand } from "@sleepymaid/handler";
+import { add, formatDistanceToNow } from "date-fns";
 import {
-	AttachmentBuilder,
 	ChatInputCommandInteraction,
+	resolveColor,
 	ColorResolvable,
+	Snowflake,
+	AttachmentBuilder,
+	PermissionsBitField,
 	Colors,
 	MessageFlags,
-	PermissionsBitField,
-	resolveColor,
-	Snowflake,
-} from "discord.js"
-import i18next from "i18next"
-import { HelperClient } from "../../../lib/extensions/HelperClient"
+	GuildFeature,
+	RoleColorsResolvable,
+	Constants,
+} from "discord.js";
+import { HelperClient } from "../../../lib/extensions/HelperClient";
+import { intToHexColor } from "@sleepymaid/util";
+import { generateSplitImage, getLocalizedProp } from "@sleepymaid/shared";
+import i18next from "i18next";
 
-const cooldowns: Record<Snowflake, Date> = {}
+const cooldowns: Record<Snowflake, Date> = {};
 const roles = {
 	"324284116021542922": "944706938946609232", // LME
 	"821717486217986098": "1313988788439093348", // Test
 	"796534493535928320": "1312956443850178560", // Fil
 	"1150780245151068332": "1311052913552130118", // Mamayo
-}
+};
 
 const canFail: Record<Snowflake, number> = {
 	"821717486217986098": 0.9, // Test
 	"1150780245151068332": 0.15, // Mamayo
-}
+};
 
 export default class extends SlashCommand<HelperClient> {
 	constructor(context: Context<HelperClient>) {
@@ -36,14 +39,14 @@ export default class extends SlashCommand<HelperClient> {
 				...getLocalizedProp("name", "commands.rainbow.name"),
 				...getLocalizedProp("description", "commands.rainbow.description"),
 			},
-		})
+		});
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction<"cached">) {
-		const roleID = roles[interaction.guild.id as keyof typeof roles]
-		if (!roleID) return
-		const role = interaction.guild.roles.cache.get(roleID)
-		if (!role) return
+		const roleID = roles[interaction.guild.id as keyof typeof roles];
+		if (!roleID) return;
+		const role = await interaction.guild.roles.fetch(roleID);
+		if (!role) return;
 		if (
 			!interaction.member.roles.cache.has(roleID) &&
 			!interaction.member.permissions.has(PermissionsBitField.Flags.ManageRoles)
@@ -54,9 +57,9 @@ export default class extends SlashCommand<HelperClient> {
 					role: roleID,
 				}),
 				flags: MessageFlags.Ephemeral,
-			})
+			});
 
-		const cooldown = cooldowns[interaction.guild.id]
+		const cooldown = cooldowns[interaction.guild.id];
 
 		if (cooldown && cooldown.getTime() > Date.now())
 			return interaction.reply({
@@ -72,15 +75,15 @@ export default class extends SlashCommand<HelperClient> {
 					},
 				],
 				flags: MessageFlags.Ephemeral,
-			})
+			});
 
-		await interaction.deferReply()
+		await interaction.deferReply();
 
 		if (canFail[interaction.guild.id] && role.color !== 0) {
 			if (Math.random() < canFail[interaction.guild.id]!) {
-				await role.setColor(0, "Failed by: " + interaction.user.tag).then(() => {
-					cooldowns[interaction.guild.id] = add(new Date(), { minutes: 5 })
-				})
+				await role.setColors({ primaryColor: 0 }, "Failed by: " + interaction.user.tag).then(() => {
+					cooldowns[interaction.guild.id] = add(new Date(), { minutes: 5 });
+				});
 				return interaction.editReply({
 					embeds: [
 						{
@@ -90,30 +93,57 @@ export default class extends SlashCommand<HelperClient> {
 							}),
 						},
 					],
-				})
+				});
 			}
 		}
 
 		const getRandomColor = (): ColorResolvable => {
-			const letters = "0123456789ABCDEF"
-			let color = "#"
+			const letters = "0123456789ABCDEF";
+			let color = "#";
 			for (let i = 0; i < 6; i++) {
-				color += letters[Math.floor(Math.random() * 16)]
+				color += letters[Math.floor(Math.random() * 16)];
 			}
-			return color as ColorResolvable
+			return color as ColorResolvable;
+		};
+
+		const oldColor = role.colors;
+		const hasEnhancedColors = interaction.guild.features.includes(GuildFeature.EnhancedRoleColors);
+
+		const primaryColorNum = resolveColor(getRandomColor());
+		let color: RoleColorsResolvable = {
+			primaryColor: primaryColorNum,
+		};
+
+		if (hasEnhancedColors) {
+			const odds = Math.floor(Math.random() * 10) + 1;
+			if (odds === 1) {
+				color = {
+					primaryColor: Constants.HolographicStyle.Primary,
+					secondaryColor: Constants.HolographicStyle.Secondary,
+					tertiaryColor: Constants.HolographicStyle.Tertiary,
+				};
+			} else {
+				color = {
+					primaryColor: primaryColorNum,
+					secondaryColor: resolveColor(getRandomColor()),
+					...(odds === 1 && { tertiaryColor: resolveColor(getRandomColor()) }),
+				};
+			}
 		}
 
-		const oldColor = role.color
-		const color = resolveColor(getRandomColor())
+		const buffer = await generateSplitImage(
+			role.colors.primaryColor === 0 ? Colors.Greyple : role.colors.primaryColor,
+			primaryColorNum,
+		);
 
-		const buffer = await generateSplitImage(role.color === 0 ? Colors.Greyple : role.color, color)
+		const attachmentName = `${role.id}-${color}.png`;
+		const attachment = new AttachmentBuilder(buffer, { name: attachmentName });
 
-		const attachmentName = `${role.id}-${color}.png`
-		const attachment = new AttachmentBuilder(buffer, { name: attachmentName })
+		await role.setColors(color, `Changed by: ${interaction.user.tag}`).then(() => {
+			cooldowns[interaction.guild.id] = add(new Date(), { minutes: 5 });
+		});
 
-		await role.setColor(color, "Changed by: " + interaction.user.tag).then(() => {
-			cooldowns[interaction.guild.id] = add(new Date(), { minutes: 5 })
-		})
+		const embedColor = color.primaryColor as number;
 
 		return await interaction.editReply({
 			embeds: [
@@ -123,12 +153,12 @@ export default class extends SlashCommand<HelperClient> {
 						name: interaction.user.tag,
 						icon_url: interaction.user.displayAvatarURL(),
 					},
-					color: color,
+					color: embedColor,
 					description: i18next.t("commands.rainbow.changed", {
 						lng: interaction.locale,
 						role: roleID,
-						oldColor: intToHexColor(oldColor),
-						newColor: intToHexColor(color),
+						oldColor: intToHexColor(oldColor.primaryColor),
+						newColor: intToHexColor(embedColor),
 					}),
 					thumbnail: {
 						url: `attachment://${attachmentName}`,
@@ -136,6 +166,6 @@ export default class extends SlashCommand<HelperClient> {
 				},
 			],
 			files: [attachment],
-		})
+		});
 	}
 }

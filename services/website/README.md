@@ -13,8 +13,8 @@ It's deployed automagically with Netlify!
 From your terminal:
 
 ```sh
-pnpm install
-pnpm dev
+bun install
+bun run dev
 ```
 
 This starts your app in development mode, rebuilding assets on file changes.
@@ -58,9 +58,9 @@ git clone git@github.com:TanStack/form.git
 
 ```sh
 cd tanstack.com
-pnpm i
+bun install
 # The app will run on https://localhost:3000 by default
-pnpm dev
+bun run dev
 ```
 
 4. Now you can visit http://localhost:3000/form/latest/docs/overview in the browser and see the changes you make in `tanstack/form/docs`.

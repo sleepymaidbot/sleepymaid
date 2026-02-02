@@ -23,8 +23,8 @@
 	},
 	"files": ["dist", "drizzle"],
 	"scripts": {
-		"build": "pnpm rimraf dist/ && pnpm tsup",
-		"check": "pnpm tsc --noEmit --pretty --skipLibCheck",
+		"build": "bunx rimraf dist/ && bunx tsup",
+		"check": "bunx tsc --noEmit --pretty --skipLibCheck",
 		"generate": "drizzle-kit generate:pg",
 		"push": "drizzle-kit push"
 	},
@@ -33,6 +33,7 @@
 	"devDependencies": {
 		"@favware/cliff-jumper": "^6.0.0",
 		"@sleepymaid/shared": "workspace:^",
+		"tslib": "^2.8.1",
 		"@swc/core": "^1.13.2",
 		"@types/node": "^22.16.5",
 		"@types/pg": "^8.15.4",
@@ -44,6 +45,7 @@
 		"typescript": "^5.8.3"
 	},
 	"dependencies": {
+		"discord-api-types": "^0.38.2",
 		"@paralleldrive/cuid2": "^2.2.2",
 		"drizzle-orm": "^0.44.3",
 		"pg": "^8.16.3",

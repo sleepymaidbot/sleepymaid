@@ -42,7 +42,7 @@ services:
     build:
       context: ../
       dockerfile: ./docker/services/Dockerfile
-    command: node --trace-warnings -r source-map-support/register services/sleepymaid/dist/index.js
+    command: bun services/sleepymaid/src/index.ts
     restart: unless-stopped
     depends_on:
       - "postgres"
@@ -52,7 +52,7 @@ services:
     build:
       context: ../
       dockerfile: ./docker/services/Dockerfile
-    command: node --trace-warnings -r source-map-support/register services/helper/dist/index.js
+    command: bun services/helper/src/index.ts
     restart: unless-stopped
     depends_on:
       - "postgres"
@@ -62,7 +62,7 @@ services:
     build:
       context: ../
       dockerfile: ./docker/services/Dockerfile
-    command: node --trace-warnings -r source-map-support/register services/watcher/dist/index.js
+    command: bun services/watcher/src/index.ts
     restart: unless-stopped
     depends_on:
       - "postgres"
@@ -73,7 +73,7 @@ services:
   #   build:
   #     context: ../
   #     dockerfile: ./docker/services/Dockerfile
-  #   command: node --trace-warnings -r source-map-support/register services/clarity/dist/index.js
+  #   command: bun services/clarity/src/index.ts
   #   restart: unless-stopped
 
   api:
@@ -81,7 +81,7 @@ services:
     build:
       context: ../
       dockerfile: ./docker/services/Dockerfile
-    command: node --trace-warnings -r source-map-support/register services/api/dist/index.js
+    command: bun services/api/src/index.ts
     restart: unless-stopped
     depends_on:
       - "postgres"

@@ -4,32 +4,26 @@ jobs:
   build:
     name: Quality Check
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [22]
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
+          bun-version: latest
+
       - name: Install dependencies
-        run: pnpm install
+        run: bun install --frozen-lockfile
 
       - name: Build
-        run: SKIP_ENV_VALIDATION=true pnpm build --filter=!@sleepymaid/website
+        run: SKIP_ENV_VALIDATION=true bun run build --filter='!@sleepymaid/website'
 
       - name: Check Build
-        run: pnpm check --filter=!@sleepymaid/website
+        run: bun run check --filter='!@sleepymaid/website'
 
       - name: Test
-        run: pnpm test
+        run: bun run test
 
-      - name: ESLint
-        run: pnpm lint
+      - name: Lint
+        run: bun run lint
 
-      - name: Prettier
-        run: pnpm format
+      - name: Format
+        run: bun run format
