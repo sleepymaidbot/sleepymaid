@@ -15,7 +15,7 @@
 	"devDependencies": {
 		"@types/gamedig": "^5.0.3",
 		"@types/i18next-fs-backend": "^1.2.0",
-		"@types/node": "^22.19.7",
+		"@types/node": "^25.0.0",
 		"@types/pg": "^8.16.0",
 		"rimraf": "^6.1.2",
 		"typescript": "^5.9.3"
