@@ -36,7 +36,7 @@
 		"tslib": "^2.8.1",
 		"@swc/core": "^1.13.2",
 		"@types/node": "^22.16.5",
-		"drizzle-kit": "0.31.4",
+		"drizzle-kit": "0.31.8",
 		"pg": "^8.16.3",
 		"rimraf": "^6.0.1",
 		"tsup": "^8.5.0",
@@ -45,6 +45,6 @@
 	"dependencies": {
 		"discord-api-types": "^0.38.2",
 		"@paralleldrive/cuid2": "^2.2.2",
-		"drizzle-orm": "^0.44.3"
+		"drizzle-orm": "^0.45.0"
 	}
 }

@@ -32,7 +32,7 @@
 		"discord-player-deezer": "^2.5.0",
 		"discord-player-youtubei": "^1.5.0",
 		"discord.js": "^14.25.1",
-		"drizzle-orm": "^0.44.3",
+		"drizzle-orm": "^0.45.0",
 		"i18next": "^25.3.2",
 		"i18next-fs-backend": "^2.6.0",
 		"tts-extractor": "^1.0.4"
