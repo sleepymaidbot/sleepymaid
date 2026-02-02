@@ -1,5 +1,5 @@
 {
-	"*": "biome format --write",
+	"**/*.{json,jsonc,md,mjs,js,cjs,ts,tsx,astro,css,html}": "biome format --write",
 	"{src/**,__tests__/**}.{mjs,js,cjs,ts,tsx,astro}": "biome lint --apply --files-ignore-unknown=true",
 	"src/**.ts": "vitest related --run --config ../../vitest.config.ts"
 }
