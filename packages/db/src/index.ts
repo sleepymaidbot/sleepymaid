@@ -1,4 +1,4 @@
-import { drizzle } from "drizzle-orm/node-postgres"
+import { drizzle } from "drizzle-orm/bun-sql"
 // Schema imports
 import * as helper from "./schema/helper/helper"
 import * as economy from "./schema/sleepymaid/economy"
@@ -24,7 +24,7 @@ export const schema = {
 }
 
 export function createDrizzleInstance(connectionString: string) {
-	return drizzle({ schema, connection: { connectionString } })
+	return drizzle(connectionString, { schema })
 }
 
 export type DrizzleInstance = ReturnType<typeof createDrizzleInstance>
