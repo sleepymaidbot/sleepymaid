@@ -2,7 +2,7 @@ import { type Context, Task } from "@sleepymaid/handler"
 import { ChannelType } from "discord.js"
 import type { HelperClient } from "../lib/extensions/HelperClient"
 
-export default class BannerTask extends Task<HelperClient> {
+export default class extends Task<HelperClient> {
 	public constructor(context: Context<HelperClient>) {
 		super(context, {
 			interval: "* * * * *",

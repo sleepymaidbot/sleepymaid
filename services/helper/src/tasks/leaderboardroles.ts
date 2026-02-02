@@ -11,7 +11,7 @@ const roles = {
 
 const role = "1305566315603300382"
 
-export default class LeaderboardTask extends Task<HelperClient> {
+export default class extends Task<HelperClient> {
 	public constructor(context: Context<HelperClient>) {
 		super(context, {
 			interval: "*/5 * * * *",

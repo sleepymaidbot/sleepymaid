@@ -10,7 +10,7 @@ function isForumChannel(channel: Channel): channel is ForumChannel {
 	return channel.type === ChannelType.GuildForum
 }
 
-export default class BannerTask extends Task<HelperClient> {
+export default class extends Task<HelperClient> {
 	public constructor(context: Context<HelperClient>) {
 		super(context, {
 			interval: "0 * * * *",
