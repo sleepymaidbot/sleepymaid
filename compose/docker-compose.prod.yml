@@ -1,8 +1,4 @@
 services:
-  ghost:
-    environment:
-      NODE_ENV: "production"
-
   sleepymaid:
     environment:
       NODE_ENV: "prod"

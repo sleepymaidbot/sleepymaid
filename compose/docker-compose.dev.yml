@@ -1,7 +1,4 @@
 services:
-  ghost:
-    environment:
-      NODE_ENV: "development"
   sleepymaid:
     environment:
       NODE_ENV: "dev"
