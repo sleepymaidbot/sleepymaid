@@ -32,6 +32,8 @@ COPY services/clarity ./services/clarity
 COPY services/sleepymaid ./services/sleepymaid
 COPY services/helper/ ./services/helper
 COPY services/watcher ./services/watcher
+COPY services/website ./services/website
+COPY services/testbot ./services/testbot
 
 RUN bun install --frozen-lockfile --ignore-scripts
 COPY locales/ ./locales
