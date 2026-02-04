@@ -1,7 +1,16 @@
 import { Context, Listener } from "@sleepymaid/handler"
 import { add } from "date-fns"
-import { Message } from "discord.js"
+import {
+	ButtonStyle,
+	ComponentType,
+	MessageComponentInteraction,
+	MessageFlags,
+	type Message,
+	type MessageCreateOptions,
+} from "discord.js"
 import { HelperClient } from "../../lib/extensions/HelperClient"
+import { eq, sql } from "drizzle-orm"
+import { userData } from "@sleepymaid/db"
 
 const gifsDomains = ["https://tenor.com", "https://giphy.com", "https://media.tenor.com"]
 
@@ -69,12 +78,60 @@ export default class extends Listener<"messageCreate", HelperClient> {
 				users[userId] = add(Date.now(), { minutes: userMinutes }).getTime()
 			} else {
 				message.delete()
-				const timeLeft = Math.floor(users[userId] / 1000)
-				const warning = await message.channel.send(
-					`<@${userId}> Merci d'attendre ${userMinutes} minutes avant d'envoyer un autre gif.\nVous pouvez envoyer un autre gif <t:${timeLeft}:R>.\nSi vous voulez envoyer des gifs, c'est <#1150785784119566406>.`,
-				)
+				const expiryMs = users[userId]
+				const timeLeft = Math.floor(expiryMs / 1000)
+				const minutesLeft = Math.ceil((expiryMs - Date.now()) / (60 * 1000))
+
+				const messageContent: MessageCreateOptions = {
+					content: `<@${userId}> Merci d'attendre ${minutesLeft} minute${minutesLeft > 1 ? "s" : ""} avant d'envoyer un autre gif.\nVous pouvez envoyer un autre gif <t:${timeLeft}:R>.\nSi vous voulez envoyer des gifs, c'est <#1150785784119566406>.`,
+				}
+				const userProfile = await this.container.client.drizzle.query.userData.findFirst({
+					where: eq(userData.userId, userId),
+				})
+				if (userProfile && userProfile.currency >= 10_000) {
+					messageContent.content += `\n\nSi vous voulez envoyer un gif maintenant, vous pouvez réinitialiser votre cooldown en payant 10000 coins <@613040835684073506>.`
+					messageContent.components = [
+						{
+							type: ComponentType.ActionRow,
+							components: [
+								{
+									type: ComponentType.Button,
+									style: ButtonStyle.Success,
+									label: "Payer pour réinitialiser le cooldown",
+									customId: `reset-cooldown-${userId}`,
+									emoji: { name: "💸" },
+								},
+							],
+						},
+					]
+				}
+				const warning = await message.channel.send(messageContent)
+				const collector = warning.createMessageComponentCollector({
+					filter: (i: MessageComponentInteraction) => i.customId === `reset-cooldown-${userId}`,
+					time: 15_000,
+				})
+
+				collector.on("collect", async (i: MessageComponentInteraction) => {
+					if (i.user.id !== userId) return await i.deferUpdate()
+					await i.deferReply({ flags: MessageFlags.Ephemeral })
+					await this.container.client.drizzle
+						.update(userData)
+						.set({
+							currency: sql`${userData.currency} - 10000`,
+						})
+						.where(eq(userData.userId, userId))
+
+					users[userId] = 0
+					await i.editReply({
+						content: `<@${userId}> Cooldown réinitialisé. Vous pouvez envoyer un autre gif maintenant.`,
+					})
+					await collector.stop()
+					await warning.delete()
+					return
+				})
 				setTimeout(() => {
 					warning.delete()
+					collector.stop()
 				}, 15_000)
 			}
 		} else {
