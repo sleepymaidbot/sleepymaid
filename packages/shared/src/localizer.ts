@@ -14,7 +14,6 @@ type PropAsIndexSignatureLocalizations<T extends string> = {
 type LocalizedProp<T extends string> = PropAsIndexSignature<T> & PropAsIndexSignatureLocalizations<T>
 
 export function getLocalizedProp<Prop extends string>(prop: Prop, key: string) {
-	// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
 	return {
 		[prop]: i18next.t(key),
 		[`${prop}_localizations`]: Object.fromEntries(

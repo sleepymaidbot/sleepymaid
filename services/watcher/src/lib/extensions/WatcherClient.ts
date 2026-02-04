@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/prefer-module */
 import { resolve } from "node:path"
 import process from "node:process"
 import { createDrizzleInstance, DrizzleInstance } from "@sleepymaid/db"

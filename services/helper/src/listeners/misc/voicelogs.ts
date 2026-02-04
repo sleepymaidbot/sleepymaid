@@ -29,7 +29,6 @@ function returnCurentTime() {
 }
 
 function isForumChannel(channel: GuildBasedChannel): channel is ForumChannel {
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
 	return channel.type === ChannelType.GuildForum
 }
 

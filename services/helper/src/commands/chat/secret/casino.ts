@@ -1,4 +1,3 @@
-/* eslint-disable radix */
 import type { Context } from "@sleepymaid/handler"
 import { SlashCommand } from "@sleepymaid/handler"
 import type { ChatInputCommandInteraction } from "discord.js"

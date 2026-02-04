@@ -1,4 +1,3 @@
-/* eslint-disable id-length */
 import type { Context } from "@sleepymaid/handler"
 import { Listener } from "@sleepymaid/handler"
 import type { SleepyMaidClient } from "../../lib/SleepyMaidClient"

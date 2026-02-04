@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import process from "node:process"
 
 export type NodeEnv = "dev" | "prod"

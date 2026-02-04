@@ -1,6 +1,3 @@
-/* eslint-disable no-restricted-globals */
-/* eslint-disable n/prefer-global/process */
-/* eslint-disable unicorn/prefer-module */
 import { resolve } from "node:path"
 import { createDrizzleInstance, DrizzleInstance } from "@sleepymaid/db"
 import { BaseContainer, HandlerClient } from "@sleepymaid/handler"

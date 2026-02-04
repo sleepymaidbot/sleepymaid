@@ -25,7 +25,6 @@ export default class extends Task<HelperClient> {
 		if (guild.premiumSubscriptionCount < 7) return
 		client.logger.debug("Banner task started")
 		try {
-			// eslint-disable-next-line unicorn/prefer-module
 			const dir = await opendir(join(__dirname, "../../banners"))
 			const banners = []
 			for await (const dirent of dir) {
@@ -33,7 +32,6 @@ export default class extends Task<HelperClient> {
 			}
 
 			const banner = banners[Math.floor(Math.random() * banners.length)]
-			// eslint-disable-next-line unicorn/prefer-module
 			await guild?.setBanner(join(__dirname, `../../banners/${banner}`), `Changed banner to ${banner}`)
 
 			const channel = guild?.channels.cache.get("1024444544407834675")

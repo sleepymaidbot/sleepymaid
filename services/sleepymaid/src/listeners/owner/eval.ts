@@ -40,7 +40,6 @@ export default class EvalCommandListener extends Listener<"messageCreate", Sleep
 			])
 
 			try {
-				// eslint-disable-next-line no-eval
 				const output = await eval(`(async () => {${codetoeval}})()`)
 				if (inspect(output).includes(client.config.discordToken || "message.channel.delete()")) {
 					return await channel.send(`no`)

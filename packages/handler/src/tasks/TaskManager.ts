@@ -54,7 +54,10 @@ export class TaskManager<Client extends HandlerClient> extends BaseManager<Clien
 
 	public async loadTasks(folderPath: string): Promise<void> {
 		let count = 0
-		for await (const file of findFilesRecursively(folderPath, (filePath: string) => filePath.endsWith(".js") || filePath.endsWith(".ts"))) {
+		for await (const file of findFilesRecursively(
+			folderPath,
+			(filePath: string) => filePath.endsWith(".js") || filePath.endsWith(".ts"),
+		)) {
 			const container = this.client.container
 			const context = new Context<HandlerClient>(container)
 

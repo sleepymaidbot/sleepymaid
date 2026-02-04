@@ -11,7 +11,6 @@ export default class ReadyListener extends Listener<"clientReady", TestClient> {
 		})
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	public override execute(_client: Client<true>) {
 		const client = this.container.client
 		client.logger.info(`Logged in as ${client.user!.tag} | ${client.guilds.cache.size} servers`)
