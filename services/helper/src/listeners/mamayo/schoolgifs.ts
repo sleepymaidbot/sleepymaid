@@ -56,23 +56,29 @@ export default class extends Listener<"messageCreate", HelperClient> {
 		if (!hasGifLink) return
 		if (!message.channel.isSendable()) return
 
+		const member = message.member
+		if (!member) return
 		const userId = message.author.id
+
+		let userMinutes = minutes
+
+		if (member.presence?.status === "offline") userMinutes = 30
 
 		if (users[userId]) {
 			if (Date.now() > users[userId]) {
-				users[userId] = add(Date.now(), { minutes }).getTime()
+				users[userId] = add(Date.now(), { minutes: userMinutes }).getTime()
 			} else {
 				message.delete()
 				const timeLeft = Math.floor(users[userId] / 1000)
 				const warning = await message.channel.send(
-					`<@${userId}> Merci d'attendre ${minutes} minutes avant d'envoyer un autre gif.\nVous pouvez envoyer un autre gif <t:${timeLeft}:R>.\nSi vous voulez envoyer des gifs, c'est <#1150785784119566406>.`,
+					`<@${userId}> Merci d'attendre ${userMinutes} minutes avant d'envoyer un autre gif.\nVous pouvez envoyer un autre gif <t:${timeLeft}:R>.\nSi vous voulez envoyer des gifs, c'est <#1150785784119566406>.`,
 				)
 				setTimeout(() => {
 					warning.delete()
 				}, 15_000)
 			}
 		} else {
-			users[userId] = add(Date.now(), { minutes }).getTime()
+			users[userId] = add(Date.now(), { minutes: userMinutes }).getTime()
 		}
 	}
 }
