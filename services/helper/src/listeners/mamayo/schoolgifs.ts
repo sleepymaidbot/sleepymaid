@@ -114,6 +114,13 @@ export default class extends Listener<"messageCreate", HelperClient> {
 				collector.on("collect", async (i: MessageComponentInteraction) => {
 					if (i.user.id !== userId) return await i.deferUpdate()
 					await i.deferReply({ flags: MessageFlags.Ephemeral })
+
+					const userProfile = await this.container.client.drizzle.query.userData.findFirst({
+						where: eq(userData.userId, userId),
+					})
+					if (!userProfile) return await i.editReply({ content: "Something went wrong." })
+					if (userProfile.currency < 10000) return await i.editReply({ content: "You don't have enough coins." })
+
 					await this.container.client.drizzle
 						.update(userData)
 						.set({
