@@ -118,6 +118,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction) {
+		const message = await interaction.deferReply()
 		const subcommand = interaction.options.getSubcommand()
 		switch (subcommand) {
 			case "balance":
@@ -127,13 +128,13 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 				await this.leaderboard(interaction)
 				break
 			case "daily":
-				await this.daily(interaction)
+				await this.daily(interaction, message)
 				break
 			case "weekly":
-				await this.weekly(interaction)
+				await this.weekly(interaction, message)
 				break
 			case "monthly":
-				await this.monthly(interaction)
+				await this.monthly(interaction, message)
 				break
 			case "work":
 				await this.work(interaction)
@@ -142,7 +143,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 				await this.give(interaction)
 				break
 			default:
-				await interaction.reply({ content: "Invalid subcommand", flags: MessageFlags.Ephemeral })
+				await interaction.editReply({ content: "Invalid subcommand" })
 				break
 		}
 		await this.container.manager.updateUserMetadata(interaction.user.id)
@@ -163,7 +164,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 
 		const position = leaderboardPosition.length + 1
 
-		await interaction.reply({
+		await interaction.editReply({
 			flags: [MessageFlags.IsComponentsV2],
 			components: [
 				new SectionBuilder()
@@ -182,7 +183,6 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 	}
 
 	private async leaderboard(interaction: ChatInputCommandInteraction) {
-		await interaction.deferReply()
 		const medals = {
 			0: "🥇",
 			1: "🥈",
@@ -290,6 +290,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 				},
 			})
 			.on("collect", async (i: MessageComponentInteraction) => {
+				await i.deferReply({ flags: MessageFlags.Ephemeral })
 				if (i.user.id === userId) {
 					const now = new Date()
 					const date = add(now, {
@@ -298,12 +299,11 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 
 					await this.container.manager.addReminder(userId, type + "Reward", date)
 
-					await i.reply({ content: "Reminder set", flags: MessageFlags.Ephemeral })
+					await i.editReply({ content: "Reminder set" })
 					await message.edit({ components: [...originalComponents.map((c) => c.toJSON())] })
 				} else {
-					await i.reply({
+					await i.editReply({
 						content: "This button is for another user. Please use the command yourself to interact with it.",
-						flags: MessageFlags.Ephemeral,
 					})
 				}
 			})
@@ -312,17 +312,17 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			})
 	}
 
-	private async daily(interaction: ChatInputCommandInteraction) {
+	private async daily(interaction: ChatInputCommandInteraction, message: InteractionResponse) {
 		const data = await this.container.client.drizzle.query.userData.findFirst({
 			where: eq(userData.userId, interaction.user.id),
 		})
 		if (!data) {
-			await interaction.reply("An error occurred while fetching your data, please try again later.")
+			await interaction.editReply("An error occurred while fetching your data, please try again later.")
 			return
 		}
 		if (data.dailyTimestamp && Date.now() - data.dailyTimestamp.getTime() < 24 * 60 * 60 * 1000) {
 			const timeLeft = new Date(data.dailyTimestamp.getTime() + 24 * 60 * 60 * 1000 - Date.now())
-			await interaction.reply(
+			await interaction.editReply(
 				`You have already claimed your daily reward. Come back in ${timeLeft.getUTCHours()}h ${timeLeft.getUTCMinutes()}m.`,
 			)
 			return
@@ -356,7 +356,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 				),
 		]
 
-		const message = await interaction.reply({
+		await interaction.editReply({
 			flags: [MessageFlags.IsComponentsV2],
 			components: [
 				...components,
@@ -374,17 +374,17 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 		this.setReminderCollector(interaction, message, components, 1440, "Daily", interaction.user.id)
 	}
 
-	private async weekly(interaction: ChatInputCommandInteraction) {
+	private async weekly(interaction: ChatInputCommandInteraction, message: InteractionResponse) {
 		const data = await this.container.client.drizzle.query.userData.findFirst({
 			where: eq(userData.userId, interaction.user.id),
 		})
 		if (!data) {
-			await interaction.reply("An error occurred while fetching your data, please try again later.")
+			await interaction.editReply("An error occurred while fetching your data, please try again later.")
 			return
 		}
 		if (data.weeklyTimestamp && Date.now() - data.weeklyTimestamp.getTime() < 7 * 24 * 60 * 60 * 1000) {
 			const timeLeft = new Date(data.weeklyTimestamp.getTime() + 7 * 24 * 60 * 60 * 1000 - Date.now())
-			await interaction.reply(
+			await interaction.editReply(
 				`You have already claimed your weekly reward. Come back in ${timeLeft.getUTCDate() - 1}d ${timeLeft.getUTCHours()}h ${timeLeft.getUTCMinutes()}m.`,
 			)
 			return
@@ -417,7 +417,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 				),
 		]
 
-		const message = await interaction.reply({
+		await interaction.editReply({
 			flags: [MessageFlags.IsComponentsV2],
 			components: [
 				...components,
@@ -434,17 +434,17 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 		this.setReminderCollector(interaction, message, components, 10080, "Weekly", interaction.user.id)
 	}
 
-	private async monthly(interaction: ChatInputCommandInteraction) {
+	private async monthly(interaction: ChatInputCommandInteraction, message: InteractionResponse) {
 		const data = await this.container.client.drizzle.query.userData.findFirst({
 			where: eq(userData.userId, interaction.user.id),
 		})
 		if (!data) {
-			await interaction.reply("An error occurred while fetching your data, please try again later.")
+			await interaction.editReply("An error occurred while fetching your data, please try again later.")
 			return
 		}
 		if (data.monthlyTimestamp && Date.now() - data.monthlyTimestamp.getTime() < 30 * 24 * 60 * 60 * 1000) {
 			const timeLeft = new Date(data.monthlyTimestamp.getTime() + 30 * 24 * 60 * 60 * 1000 - Date.now())
-			await interaction.reply(
+			await interaction.editReply(
 				`You have already claimed your monthly reward. Come back in ${timeLeft.getUTCDate() - 1}d ${timeLeft.getUTCHours()}h ${timeLeft.getUTCMinutes()}m.`,
 			)
 			return
@@ -477,7 +477,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 				),
 		]
 
-		const message = await interaction.reply({
+		await interaction.editReply({
 			flags: [MessageFlags.IsComponentsV2],
 			components: [
 				...components,
@@ -500,12 +500,12 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			where: eq(userData.userId, interaction.user.id),
 		})
 		if (!data) {
-			await interaction.reply("An error occurred while fetching your data, please try again later.")
+			await interaction.editReply("An error occurred while fetching your data, please try again later.")
 			return
 		}
 		if (data.workTimestamp && Date.now() - data.workTimestamp.getTime() < 10 * 60 * 1000) {
 			const timeLeft = new Date(data.workTimestamp.getTime() + 10 * 60 * 1000 - Date.now())
-			await interaction.reply(
+			await interaction.editReply(
 				`You're on cooldown. Come back in ${timeLeft.getUTCMinutes()}m ${timeLeft.getUTCSeconds()}s.`,
 			)
 			return
@@ -524,7 +524,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			`${interaction.user.username} (${interaction.user.id}) worked for ${reward} coins!`,
 		)
 
-		await interaction.reply({
+		await interaction.editReply({
 			flags: [MessageFlags.IsComponentsV2],
 			components: [
 				new SectionBuilder()
@@ -544,29 +544,28 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 		const target = interaction.options.getUser("user")
 		const amount = interaction.options.getInteger("amount")
 		if (!target || !amount) {
-			await interaction.reply("Invalid user or amount")
+			await interaction.editReply("Invalid user or amount")
 			return
 		}
 		if (target.id === interaction.user.id) {
-			await interaction.reply({ content: "You can't give money to yourself", flags: MessageFlags.Ephemeral })
+			await interaction.editReply({ content: "You can't give money to yourself" })
 			return
 		}
 		if (amount <= 0) {
-			await interaction.reply({ content: "Amount must be greater than 0", flags: MessageFlags.Ephemeral })
+			await interaction.editReply({ content: "Amount must be greater than 0" })
 			return
 		}
 		const data = await this.container.client.drizzle.query.userData.findFirst({
 			where: eq(userData.userId, interaction.user.id),
 		})
 		if (!data) {
-			await interaction.reply({
+			await interaction.editReply({
 				content: "An error occurred while fetching your data, please try again later.",
-				flags: MessageFlags.Ephemeral,
 			})
 			return
 		}
 		if (data.currency < amount) {
-			await interaction.reply({ content: "You don't have enough coins to give", flags: MessageFlags.Ephemeral })
+			await interaction.editReply({ content: "You don't have enough coins to give" })
 			return
 		}
 		// Remove
@@ -578,7 +577,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			`${interaction.user.username} (${interaction.user.id}) gave ${amount} coins to ${target.username} (${target.id})`,
 		)
 
-		await interaction.reply({
+		await interaction.editReply({
 			flags: [MessageFlags.IsComponentsV2],
 			components: [
 				new SectionBuilder()
