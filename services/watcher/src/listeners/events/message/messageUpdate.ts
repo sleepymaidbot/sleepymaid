@@ -19,6 +19,8 @@ export default class extends Listener<"messageUpdate", WatcherClient> {
 			)
 			if (!channels || channels.length === 0) return
 
+			if (oldMessage.content === "" && oldMessage.author.bot) return
+
 			for (const channel of channels) {
 				await this.container.manager.sendLog(channel, {
 					embeds: [
