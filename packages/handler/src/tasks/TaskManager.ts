@@ -11,13 +11,16 @@ export type TaskManagerStartAllOptionsType = {
 	folder: string
 }
 
-async function checkAndInstantiateTask(
-	file: string,
-	context: Context<HandlerClient>,
-): Promise<Task<HandlerClient> | null> {
+type TaskClass = new (context: Context<HandlerClient>) => Task<HandlerClient>
+
+const taskClassCache = new Map<string, TaskClass>()
+
+async function getTaskClass(file: string): Promise<TaskClass | null> {
+	const cached = taskClassCache.get(file)
+	if (cached) return cached
+
 	try {
 		let importedModule
-
 		try {
 			const fileUrl = pathToFileURL(file).toString()
 			importedModule = await import(fileUrl)
@@ -36,7 +39,8 @@ async function checkAndInstantiateTask(
 		const TaskClass = importedModule?.default?.default || importedModule?.default || importedModule
 
 		if (typeof TaskClass === "function" && TaskClass.prototype instanceof Task) {
-			return new TaskClass(context)
+			taskClassCache.set(file, TaskClass as TaskClass)
+			return TaskClass as TaskClass
 		}
 
 		console.log("No valid task class found in:", file)
@@ -45,6 +49,10 @@ async function checkAndInstantiateTask(
 		console.error("Error instantiating task from:", file, error)
 		return null
 	}
+}
+
+function instantiateTask(TaskClass: TaskClass, context: Context<HandlerClient>): Task<HandlerClient> {
+	return new TaskClass(context)
 }
 
 export class TaskManager<Client extends HandlerClient> extends BaseManager<Client> {
@@ -61,9 +69,9 @@ export class TaskManager<Client extends HandlerClient> extends BaseManager<Clien
 			const container = this.client.container
 			const context = new Context<HandlerClient>(container)
 
-			const task = await checkAndInstantiateTask(file, context)
-
-			if (!task) continue
+			const TaskClass = await getTaskClass(file)
+			if (!TaskClass) continue
+			const task = instantiateTask(TaskClass, context)
 
 			try {
 				schedule(task.interval, () => task.execute!())

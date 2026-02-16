@@ -36,13 +36,18 @@ type Commands = {
 	name: string
 }
 
-async function checkAndInstantiateCommand(
-	file: string,
+type CommandClass = new (
 	context: Context<HandlerClient>,
-): Promise<MessageCommand<HandlerClient> | SlashCommand<HandlerClient> | UserCommand<HandlerClient> | null> {
+) => MessageCommand<HandlerClient> | SlashCommand<HandlerClient> | UserCommand<HandlerClient>
+
+const commandClassCache = new Map<string, CommandClass>()
+
+async function getCommandClass(file: string): Promise<CommandClass | null> {
+	const cached = commandClassCache.get(file)
+	if (cached) return cached
+
 	try {
 		let importedModule
-
 		try {
 			const fileUrl = pathToFileURL(file).toString()
 			importedModule = await import(fileUrl)
@@ -66,11 +71,16 @@ async function checkAndInstantiateCommand(
 		}
 
 		if (CommandClass.prototype instanceof MessageCommand) {
-			return new CommandClass(context) as MessageCommand<HandlerClient>
-		} else if (CommandClass.prototype instanceof SlashCommand) {
-			return new CommandClass(context) as SlashCommand<HandlerClient>
-		} else if (CommandClass.prototype instanceof UserCommand) {
-			return new CommandClass(context) as UserCommand<HandlerClient>
+			commandClassCache.set(file, CommandClass as CommandClass)
+			return CommandClass as CommandClass
+		}
+		if (CommandClass.prototype instanceof SlashCommand) {
+			commandClassCache.set(file, CommandClass as CommandClass)
+			return CommandClass as CommandClass
+		}
+		if (CommandClass.prototype instanceof UserCommand) {
+			commandClassCache.set(file, CommandClass as CommandClass)
+			return CommandClass as CommandClass
 		}
 
 		console.log("Command class does not extend any known command type:", file)
@@ -79,6 +89,13 @@ async function checkAndInstantiateCommand(
 		console.error("Error instantiating command from:", file, error)
 		return null
 	}
+}
+
+function instantiateCommand(
+	CommandClass: CommandClass,
+	context: Context<HandlerClient>,
+): MessageCommand<HandlerClient> | SlashCommand<HandlerClient> | UserCommand<HandlerClient> {
+	return new CommandClass(context)
 }
 
 export class CommandManager<Client extends HandlerClient> extends BaseManager<Client> {
@@ -150,8 +167,9 @@ export class CommandManager<Client extends HandlerClient> extends BaseManager<Cl
 			const container = new BaseContainer<HandlerClient>(this.client)
 			const context = new Context<HandlerClient>(container)
 
-			const cmd_ = await checkAndInstantiateCommand(file, context)
-			if (!cmd_) continue
+			const CommandClass = await getCommandClass(file)
+			if (!CommandClass) continue
+			const cmd_ = instantiateCommand(CommandClass, context)
 
 			this._tempCommands.set(cmd_.data.name, {
 				name: cmd_.data.name,
@@ -257,8 +275,9 @@ export class CommandManager<Client extends HandlerClient> extends BaseManager<Cl
 
 			const container = this.client.container
 			const context = new Context<HandlerClient>(container)
-			const cmd = await checkAndInstantiateCommand(file.file, context)
-			if (!cmd) return
+			const CommandClass = await getCommandClass(file.file)
+			if (!CommandClass) return
+			const cmd = instantiateCommand(CommandClass, context)
 
 			if (cmd.preconditions) {
 				for (const precondition of [...this._preconditions, ...cmd.preconditions]) {
@@ -301,8 +320,9 @@ export class CommandManager<Client extends HandlerClient> extends BaseManager<Cl
 
 			const container = this.client.container
 			const context = new Context<HandlerClient>(container)
-			const cmd = (await checkAndInstantiateCommand(file.file, context)) as SlashCommand<HandlerClient>
-			if (!cmd) return
+			const CommandClass = await getCommandClass(file.file)
+			if (!CommandClass) return
+			const cmd = instantiateCommand(CommandClass, context) as SlashCommand<HandlerClient>
 
 			if (!cmd.autocomplete) return
 			await cmd.autocomplete(interaction)

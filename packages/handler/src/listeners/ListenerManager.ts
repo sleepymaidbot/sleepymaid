@@ -11,13 +11,16 @@ export type ListenerManagerStartAllOptionsType = {
 	folder: string
 }
 
-async function checkAndInstantiateListener(
-	file: string,
-	context: Context<HandlerClient>,
-): Promise<Listener<keyof ClientEvents, HandlerClient> | null> {
+type ListenerClass = new (context: Context<HandlerClient>) => Listener<keyof ClientEvents, HandlerClient>
+
+const listenerClassCache = new Map<string, ListenerClass>()
+
+async function getListenerClass(file: string): Promise<ListenerClass | null> {
+	const cached = listenerClassCache.get(file)
+	if (cached) return cached
+
 	try {
 		let importedModule
-
 		try {
 			const fileUrl = pathToFileURL(file).toString()
 			importedModule = await import(fileUrl)
@@ -36,7 +39,8 @@ async function checkAndInstantiateListener(
 		const ListenerClass = importedModule?.default?.default || importedModule?.default || importedModule
 
 		if (typeof ListenerClass === "function" && ListenerClass.prototype instanceof Listener) {
-			return new ListenerClass(context)
+			listenerClassCache.set(file, ListenerClass as ListenerClass)
+			return ListenerClass as ListenerClass
 		}
 
 		console.log("No valid listener class found in:", file)
@@ -45,6 +49,13 @@ async function checkAndInstantiateListener(
 		console.error("Error instantiating listener from:", file, error)
 		return null
 	}
+}
+
+function instantiateListener(
+	ListenerClass: ListenerClass,
+	context: Context<HandlerClient>,
+): Listener<keyof ClientEvents, HandlerClient> {
+	return new ListenerClass(context)
 }
 
 export class ListenerManager<Client extends HandlerClient> extends BaseManager<Client> {
@@ -62,9 +73,9 @@ export class ListenerManager<Client extends HandlerClient> extends BaseManager<C
 				const container = this.client.container
 				const context = new Context<HandlerClient>(container)
 
-				const listener = await checkAndInstantiateListener(file, context)
-
-				if (!listener) continue
+				const ListenerClass = await getListenerClass(file)
+				if (!ListenerClass) continue
+				const listener = instantiateListener(ListenerClass, context)
 
 				if (listener.once) {
 					this.client.once(listener.name, async (...args: ClientEvents[typeof listener.name]) => {
