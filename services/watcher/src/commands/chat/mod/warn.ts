@@ -33,6 +33,12 @@ export default class extends SlashCommand<WatcherClient> {
 						type: ApplicationCommandOptionType.String,
 						required: true,
 					},
+					{
+						name: "silent",
+						description: "Whether to respond with an ephemeral message",
+						type: ApplicationCommandOptionType.Boolean,
+						required: false,
+					},
 				],
 			},
 		})
@@ -56,6 +62,7 @@ export default class extends SlashCommand<WatcherClient> {
 
 		const drizzle = this.container.client.drizzle
 		const userId = member.id
+		const silent = interaction.options.getBoolean("silent") ?? false
 
 		try {
 			const { weight1: moderatorWeight, weight2: targetWeight } = await this.container.manager.compareUserWeight(
@@ -117,20 +124,17 @@ export default class extends SlashCommand<WatcherClient> {
 				})
 			}
 		} catch (error) {
-			const errorMessage = error instanceof Error ? error.message : String(error)
-			const errorStack = error instanceof Error ? error.stack : undefined
 			this.container.client.logger.error(
-				new Error(`Failed to warn user ${userId}: ${errorMessage}${errorStack ? `\n${errorStack}` : ""}`),
+				new Error(`Failed to warn user ${userId}: ${error instanceof Error ? error.message : String(error)}`),
 			)
-			console.error("Warn command error:", error)
 			try {
 				if (interaction.replied || interaction.deferred) {
 					await interaction.editReply({
-						content: `❌ An error occurred while warning the user: ${errorMessage}. Please try again.`,
+						content: "❌ An error occurred while warning the user. Please try again.",
 					})
 				} else {
 					await interaction.reply({
-						content: `❌ An error occurred while warning the user: ${errorMessage}. Please try again.`,
+						content: "❌ An error occurred while warning the user. Please try again.",
 						flags: MessageFlags.Ephemeral,
 					})
 				}
