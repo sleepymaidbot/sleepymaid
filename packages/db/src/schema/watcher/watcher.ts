@@ -1,7 +1,7 @@
-import { jsonb, pgEnum, pgTable, serial, text } from "drizzle-orm/pg-core"
+import { integer, jsonb, pgEnum, pgTable, primaryKey, serial, text, timestamp } from "drizzle-orm/pg-core"
 import { guildSettings } from "../sleepymaid/schema"
 
-export const caseType = pgEnum("case_type", ["untimeout", "timeout", "kick", "unban", "ban"])
+export const caseType = pgEnum("case_type", ["untimeout", "timeout", "kick", "unban", "ban", "warn", "unmute", "mute"])
 
 export const types = {
 	moderationEvents: {
@@ -10,6 +10,9 @@ export const types = {
 		kick: "Kick",
 		ban: "Ban",
 		unban: "Unban",
+		warn: "Warn",
+		unmute: "Unmute",
+		mute: "Mute",
 	},
 	memberEvents: {
 		join: "Join",
@@ -62,6 +65,9 @@ export const logChannel = pgTable("log_channel", {
 			kick: false,
 			ban: false,
 			unban: false,
+			warn: false,
+			unmute: false,
+			mute: false,
 		})
 		.notNull()
 		.$type<Record<keyof typeof types.moderationEvents, boolean>>(),
@@ -117,14 +123,33 @@ export const logChannel = pgTable("log_channel", {
 		.$type<Record<keyof typeof types.inviteEvents, boolean>>(),
 })
 
-export const modCase = pgTable("case", {
-	guildId: text("guild_id")
-		.notNull()
-		.references(() => guildSettings.guildId, { onDelete: "cascade" }),
-	caseNumber: serial("case_number").primaryKey().notNull(),
-	messageId: text("message_id").notNull(),
-	userId: text("user_id").notNull(),
-	reason: text("reason"),
-	type: caseType("type").notNull(),
-	modId: text("mod_id"),
-})
+export const roleWeight = pgTable(
+	"role_weight",
+	{
+		guildId: text("guild_id")
+			.notNull()
+			.references(() => guildSettings.guildId, { onDelete: "cascade" }),
+		roleId: text("role_id").notNull(),
+		weight: integer("weight").notNull().default(0),
+	},
+	(table) => [primaryKey({ columns: [table.guildId, table.roleId] })],
+)
+
+export const modCase = pgTable(
+	"case",
+	{
+		guildId: text("guild_id")
+			.notNull()
+			.references(() => guildSettings.guildId, { onDelete: "cascade" }),
+		caseNumber: integer("case_number").notNull(),
+		messageId: text("message_id").notNull(),
+		userId: text("user_id").notNull(),
+		reason: text("reason"),
+		type: caseType("type").notNull(),
+		modId: text("mod_id"),
+		createdAt: timestamp("created_at").notNull().defaultNow(),
+		expiresAt: timestamp("expires_at"),
+		resolvedAt: timestamp("resolved_at"),
+	},
+	(table) => [primaryKey({ columns: [table.guildId, table.caseNumber] })],
+)

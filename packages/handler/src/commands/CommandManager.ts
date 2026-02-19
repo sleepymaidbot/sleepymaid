@@ -259,6 +259,22 @@ export class CommandManager<Client extends HandlerClient> extends BaseManager<Cl
 		await this._commandRunContext(callback, interaction)
 	}
 
+	private async safeRespond(interaction: CommandInteraction, content: string): Promise<void> {
+		try {
+			if (interaction.replied || interaction.deferred) {
+				await interaction.editReply({ content })
+			} else {
+				await interaction.reply({ content, flags: MessageFlags.Ephemeral })
+			}
+		} catch (error) {
+			this.client.logger.error(
+				new Error(
+					`Failed to respond to interaction ${interaction.id}: ${error instanceof Error ? error.message : String(error)}`,
+				),
+			)
+		}
+	}
+
 	private async HandleApplicationCommands(interaction: CommandInteraction) {
 		if (interaction.guild) {
 			this.client.logger.debug(
@@ -271,45 +287,48 @@ export class CommandManager<Client extends HandlerClient> extends BaseManager<Cl
 		}
 		try {
 			const file = this._commands.get(interaction.commandId)
-			if (!file) return
+			if (!file) {
+				this.client.logger.error(new Error(`Command file not found for command ID: ${interaction.commandId}`))
+				await this.safeRespond(interaction, "Command not found. Please try again later.")
+				return
+			}
 
 			const container = this.client.container
 			const context = new Context<HandlerClient>(container)
 			const CommandClass = await getCommandClass(file.file)
-			if (!CommandClass) return
+			if (!CommandClass) {
+				this.client.logger.error(`Failed to load command class from file: ${file.file}`)
+				await this.safeRespond(interaction, "There was an error while loading this command!")
+				return
+			}
 			const cmd = instantiateCommand(CommandClass, context)
 
 			if (cmd.preconditions) {
 				for (const precondition of [...this._preconditions, ...cmd.preconditions]) {
 					const cond = new precondition(context)
 					const preconditionResult = await cond.CommandRun!(interaction as never)
-					if (preconditionResult === false) return
+					if (preconditionResult === false) {
+						await this.safeRespond(interaction, "You do not have permission to use this command.")
+						return
+					}
 					if (preconditionResult instanceof Error) {
 						this.client.logger.error(preconditionResult as Error)
+						await this.safeRespond(interaction, "There was an error while checking command permissions.")
 						return
 					}
 				}
 			}
 
-			if (!cmd.execute) return this.client.logger.error("Command has no execute method!")
+			if (!cmd.execute) {
+				this.client.logger.error(`Command has no execute method: ${file.file}`)
+				await this.safeRespond(interaction, "This command is not properly configured.")
+				return
+			}
 
 			await this.commandRunContext(async () => cmd.execute!(interaction as never), interaction)
 		} catch (error) {
 			this.client.logger.error(error as Error)
-			try {
-				await interaction.reply({
-					content: "There was an error while executing this command!",
-					flags: MessageFlags.Ephemeral,
-				})
-			} catch {
-				try {
-					await interaction.editReply({
-						content: "There was an error while executing this command!",
-					})
-				} catch (error) {
-					this.client.logger.error(error as Error)
-				}
-			}
+			await this.safeRespond(interaction, "There was an error while executing this command!")
 		}
 	}
 

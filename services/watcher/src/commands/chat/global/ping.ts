@@ -1,6 +1,6 @@
 import { Context, SlashCommand } from "@sleepymaid/handler"
 import { APIEmbed, ChatInputCommandInteraction, MessageFlags } from "discord.js"
-import { WatcherClient } from "../../lib/extensions/WatcherClient"
+import { WatcherClient } from "../../../lib/extensions/WatcherClient"
 
 export default class extends SlashCommand<WatcherClient> {
 	constructor(context: Context<WatcherClient>) {

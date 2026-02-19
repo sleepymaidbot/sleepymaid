@@ -15,7 +15,7 @@ import {
 	PermissionFlagsBits,
 } from "discord.js"
 import { and, eq } from "drizzle-orm"
-import { WatcherClient } from "../../lib/extensions/WatcherClient"
+import { WatcherClient } from "../../../lib/extensions/WatcherClient"
 
 const options: AutocompleteChoices = []
 
@@ -322,6 +322,9 @@ export default class extends SlashCommand<WatcherClient> {
 						kick: enabled,
 						ban: enabled,
 						unban: enabled,
+						warn: enabled,
+						unmute: enabled,
+						mute: enabled,
 					},
 					memberEvents: {
 						join: enabled,
