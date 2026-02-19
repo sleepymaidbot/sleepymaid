@@ -52,6 +52,12 @@ export default class extends SlashCommand<WatcherClient> {
 						minValue: 0,
 						maxValue: 7,
 					},
+					{
+						name: "silent",
+						description: "Whether to respond with an ephemeral message",
+						type: ApplicationCommandOptionType.Boolean,
+						required: false,
+					},
 				],
 			},
 		})
@@ -67,6 +73,7 @@ export default class extends SlashCommand<WatcherClient> {
 		const deleteMessageSeconds = Math.min(deleteDays * 86400, 604800)
 		const drizzle = this.container.client.drizzle
 		const userId = targetUser.id
+		const silent = interaction.options.getBoolean("silent") ?? false
 
 		const member = interaction.options.getMember("user")
 		if (member) {
@@ -106,7 +113,11 @@ export default class extends SlashCommand<WatcherClient> {
 				set: { userName: targetUser.username, displayName: targetUser.displayName ?? null },
 			})
 
-		await interaction.reply({ content: "Banning...", withResponse: true })
+		await interaction.reply({
+			content: "Banning...",
+			withResponse: true,
+			flags: silent ? MessageFlags.Ephemeral : undefined,
+		})
 		const reply = await interaction.fetchReply()
 		const caseNumber = await this.container.manager.getNextCaseNumber(interaction.guild.id)
 

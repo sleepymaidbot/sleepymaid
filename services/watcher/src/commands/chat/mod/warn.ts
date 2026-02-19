@@ -79,6 +79,7 @@ export default class extends SlashCommand<WatcherClient> {
 
 			await interaction.reply({
 				content: `✅ ${member} has been warned.`,
+				flags: silent ? MessageFlags.Ephemeral : undefined,
 			})
 
 			const reply = await interaction.fetchReply()

@@ -46,6 +46,12 @@ export default class extends SlashCommand<WatcherClient> {
 						type: ApplicationCommandOptionType.String,
 						required: false,
 					},
+					{
+						name: "silent",
+						description: "Whether to respond with an ephemeral message",
+						type: ApplicationCommandOptionType.Boolean,
+						required: false,
+					},
 				],
 			},
 		})
@@ -69,6 +75,7 @@ export default class extends SlashCommand<WatcherClient> {
 
 		const drizzle = this.container.client.drizzle
 		const userId = member.id
+		const silent = interaction.options.getBoolean("silent") ?? false
 
 		const duration = getTimeTable(durationStr)
 		const durationSeconds = durationToSeconds(duration)
@@ -88,7 +95,11 @@ export default class extends SlashCommand<WatcherClient> {
 
 			await upsertUserData(drizzle, userId, member.user.username, member.displayName)
 
-			await interaction.reply({ content: "Muting...", withResponse: true })
+			await interaction.reply({
+				content: "Muting...",
+				withResponse: true,
+				flags: silent ? MessageFlags.Ephemeral : undefined,
+			})
 			const reply = await interaction.fetchReply()
 			const caseNumber = await this.container.manager.getNextCaseNumber(interaction.guild.id)
 

@@ -33,6 +33,12 @@ export default class extends SlashCommand<WatcherClient> {
 						type: ApplicationCommandOptionType.String,
 						required: false,
 					},
+					{
+						name: "silent",
+						description: "Whether to respond with an ephemeral message",
+						type: ApplicationCommandOptionType.Boolean,
+						required: false,
+					},
 				],
 			},
 		})
@@ -46,6 +52,7 @@ export default class extends SlashCommand<WatcherClient> {
 		const reason = interaction.options.getString("reason") ?? undefined
 		const drizzle = this.container.client.drizzle
 		const userId = member.id
+		const silent = interaction.options.getBoolean("silent") ?? false
 
 		const { weight1: moderatorWeight, weight2: targetWeight } = await this.container.manager.compareUserWeight(
 			interaction.member,
@@ -69,7 +76,11 @@ export default class extends SlashCommand<WatcherClient> {
 				set: { userName: member.user.username, displayName: member.displayName },
 			})
 
-		await interaction.reply({ content: "Kicking...", withResponse: true })
+		await interaction.reply({
+			content: "Kicking...",
+			withResponse: true,
+			flags: silent ? MessageFlags.Ephemeral : undefined,
+		})
 		const reply = await interaction.fetchReply()
 		const caseNumber = await this.container.manager.getNextCaseNumber(interaction.guild.id)
 
