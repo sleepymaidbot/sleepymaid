@@ -54,14 +54,15 @@ export default class extends SlashCommand<WatcherClient> {
 		const userId = member.id
 		const silent = interaction.options.getBoolean("silent") ?? false
 
+		await interaction.deferReply({ flags: silent ? MessageFlags.Ephemeral : undefined })
+
 		const { weight1: moderatorWeight, weight2: targetWeight } = await this.container.manager.compareUserWeight(
 			interaction.member,
 			member,
 		)
 		if (moderatorWeight <= targetWeight)
-			return interaction.reply({
+			return interaction.editReply({
 				content: "You cannot kick this user because they have a higher or equal weight than you.",
-				flags: MessageFlags.Ephemeral,
 			})
 
 		await drizzle
@@ -76,11 +77,6 @@ export default class extends SlashCommand<WatcherClient> {
 				set: { userName: member.user.username, displayName: member.displayName },
 			})
 
-		await interaction.reply({
-			content: "Kicking...",
-			withResponse: true,
-			flags: silent ? MessageFlags.Ephemeral : undefined,
-		})
 		const reply = await interaction.fetchReply()
 		const caseNumber = await this.container.manager.getNextCaseNumber(interaction.guild.id)
 

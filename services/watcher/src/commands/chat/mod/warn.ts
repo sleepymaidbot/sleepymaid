@@ -65,22 +65,18 @@ export default class extends SlashCommand<WatcherClient> {
 		const silent = interaction.options.getBoolean("silent") ?? false
 
 		try {
+			await interaction.deferReply({ flags: silent ? MessageFlags.Ephemeral : undefined })
+
 			const { weight1: moderatorWeight, weight2: targetWeight } = await this.container.manager.compareUserWeight(
 				interaction.member,
 				member,
 			)
 			if (moderatorWeight <= targetWeight)
-				return interaction.reply({
+				return interaction.editReply({
 					content: "You cannot warn this user because they have a higher or equal weight than you.",
-					flags: MessageFlags.Ephemeral,
 				})
 
 			await upsertUserData(drizzle, userId, member.user.username, member.displayName)
-
-			await interaction.reply({
-				content: `✅ ${member} has been warned.`,
-				flags: silent ? MessageFlags.Ephemeral : undefined,
-			})
 
 			const reply = await interaction.fetchReply()
 			const caseNumber = await this.container.manager.getNextCaseNumber(interaction.guild.id)

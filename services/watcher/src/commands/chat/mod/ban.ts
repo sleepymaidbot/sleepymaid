@@ -75,19 +75,6 @@ export default class extends SlashCommand<WatcherClient> {
 		const userId = targetUser.id
 		const silent = interaction.options.getBoolean("silent") ?? false
 
-		const member = interaction.options.getMember("user")
-		if (member) {
-			const { weight1: moderatorWeight, weight2: targetWeight } = await this.container.manager.compareUserWeight(
-				interaction.member,
-				member,
-			)
-			if (moderatorWeight <= targetWeight)
-				return interaction.reply({
-					content: "You cannot ban this user because they have a higher or equal weight than you.",
-					flags: MessageFlags.Ephemeral,
-				})
-		}
-
 		let durationSeconds = 0
 		let expiresAt: Date | null = null
 		if (durationStr) {
@@ -99,6 +86,20 @@ export default class extends SlashCommand<WatcherClient> {
 					flags: MessageFlags.Ephemeral,
 				})
 			expiresAt = new Date(Date.now() + durationSeconds * 1000)
+		}
+
+		await interaction.deferReply({ flags: silent ? MessageFlags.Ephemeral : undefined })
+
+		const member = interaction.options.getMember("user")
+		if (member) {
+			const { weight1: moderatorWeight, weight2: targetWeight } = await this.container.manager.compareUserWeight(
+				interaction.member,
+				member,
+			)
+			if (moderatorWeight <= targetWeight)
+				return interaction.editReply({
+					content: "You cannot ban this user because they have a higher or equal weight than you.",
+				})
 		}
 
 		await drizzle
@@ -113,11 +114,6 @@ export default class extends SlashCommand<WatcherClient> {
 				set: { userName: targetUser.username, displayName: targetUser.displayName ?? null },
 			})
 
-		await interaction.reply({
-			content: "Banning...",
-			withResponse: true,
-			flags: silent ? MessageFlags.Ephemeral : undefined,
-		})
 		const reply = await interaction.fetchReply()
 		const caseNumber = await this.container.manager.getNextCaseNumber(interaction.guild.id)
 
