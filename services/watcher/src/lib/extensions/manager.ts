@@ -1,7 +1,7 @@
-import { DrizzleInstance, logChannel, roleWeight } from "@sleepymaid/db"
+import { DrizzleInstance, logChannel, modCase, roleWeight } from "@sleepymaid/db"
 import type { InferSelectModel } from "drizzle-orm"
 import { GuildMember, User, WebhookClient, WebhookMessageCreateOptions } from "discord.js"
-import { eq, sql } from "drizzle-orm"
+import { eq, max } from "drizzle-orm"
 import { Redis } from "iovalkey"
 import { WatcherClient } from "./WatcherClient"
 
@@ -72,11 +72,11 @@ export default class Manager {
 
 	public async getNextCaseNumber(guildId: string): Promise<number> {
 		return await this.drizzle.transaction(async (tx) => {
-			const result = await tx.execute<{ m: number | null }>(
-				sql`SELECT MAX(case_number) as m FROM "case" WHERE guild_id = ${guildId} FOR UPDATE`,
-			)
-			const maxCase = result[0]?.m ?? null
-			return (typeof maxCase === "number" ? maxCase : 0) + 1
+			const [row] = await tx
+				.select({ m: max(modCase.caseNumber) })
+				.from(modCase)
+				.where(eq(modCase.guildId, guildId))
+			return (row?.m ?? 0) + 1
 		})
 	}
 
