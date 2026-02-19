@@ -117,17 +117,20 @@ export default class extends SlashCommand<WatcherClient> {
 				})
 			}
 		} catch (error) {
+			const errorMessage = error instanceof Error ? error.message : String(error)
+			const errorStack = error instanceof Error ? error.stack : undefined
 			this.container.client.logger.error(
-				new Error(`Failed to warn user ${userId}: ${error instanceof Error ? error.message : String(error)}`),
+				new Error(`Failed to warn user ${userId}: ${errorMessage}${errorStack ? `\n${errorStack}` : ""}`),
 			)
+			console.error("Warn command error:", error)
 			try {
 				if (interaction.replied || interaction.deferred) {
 					await interaction.editReply({
-						content: "❌ An error occurred while warning the user. Please try again.",
+						content: `❌ An error occurred while warning the user: ${errorMessage}. Please try again.`,
 					})
 				} else {
 					await interaction.reply({
-						content: "❌ An error occurred while warning the user. Please try again.",
+						content: `❌ An error occurred while warning the user: ${errorMessage}. Please try again.`,
 						flags: MessageFlags.Ephemeral,
 					})
 				}
