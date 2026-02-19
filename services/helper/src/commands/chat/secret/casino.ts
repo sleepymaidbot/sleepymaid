@@ -7,7 +7,7 @@ import type { HelperClient } from "../../../lib/extensions/HelperClient"
 export default class SecretCasinoCommand extends SlashCommand<HelperClient> {
 	public constructor(context: Context<HelperClient>) {
 		super(context, {
-			guildIds: ["860721584373497887", "324284116021542922", "1131653884377579651"],
+			guildIds: ["324284116021542922", "1131653884377579651"],
 			data: {
 				name: "casino",
 				description: "Base command for the casino secret.",
