@@ -75,6 +75,7 @@ export class WatcherClient extends HandlerClient {
 		this.loadHandlers({
 			commands: {
 				folder: resolve(__dirname, "..", "..", "commands"),
+				deferSlashCommandsImmediately: true,
 			},
 			listeners: {
 				folder: resolve(__dirname, "..", "..", "listeners"),

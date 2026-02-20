@@ -22,6 +22,7 @@ export type CommandManagerStartAllOptionsType<Client extends HandlerClient> = {
 	folder: string
 	preconditions?: (typeof Precondition<Client>)[]
 	commandRunContext?: (callback: () => Promise<unknown>, interaction: CommandInteraction) => Promise<void>
+	deferSlashCommandsImmediately?: boolean
 }
 
 export type GuildCommandsType = {
@@ -105,6 +106,8 @@ export class CommandManager<Client extends HandlerClient> extends BaseManager<Cl
 
 	private _preconditions: (typeof Precondition<Client>)[] = []
 
+	private _deferSlashCommandsImmediately = false
+
 	private _commandRunContext: (callback: () => Promise<unknown>, interaction: CommandInteraction) => Promise<void> =
 		async (callback, _interaction) => {
 			await callback()
@@ -114,6 +117,7 @@ export class CommandManager<Client extends HandlerClient> extends BaseManager<Cl
 		if (!options.folder) throw new Error("No folder path provided!")
 		this._preconditions = options.preconditions ?? []
 		if (options.commandRunContext) this._commandRunContext = options.commandRunContext
+		this._deferSlashCommandsImmediately = options.deferSlashCommandsImmediately ?? false
 
 		await this.loadCommand(options.folder)
 		this.client.on("interactionCreate", (interaction: Interaction) => {
@@ -284,6 +288,14 @@ export class CommandManager<Client extends HandlerClient> extends BaseManager<Cl
 			this.client.logger.debug(
 				`${interaction.user.username} (${interaction.user.id}) > /${interaction.commandName} (${interaction.commandId})`,
 			)
+		}
+		if (
+			this._deferSlashCommandsImmediately &&
+			interaction.isChatInputCommand() &&
+			!interaction.replied &&
+			!interaction.deferred
+		) {
+			await interaction.deferReply()
 		}
 		try {
 			const file = this._commands.get(interaction.commandId)
