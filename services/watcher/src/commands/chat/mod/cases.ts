@@ -151,7 +151,7 @@ export default class extends SlashCommand<WatcherClient> {
 				flags: MessageFlags.Ephemeral,
 			})
 
-		await interaction.deferReply({ flags: MessageFlags.Ephemeral })
+		if (!interaction.deferred) await interaction.deferReply({ flags: MessageFlags.Ephemeral })
 		const payload = await getEmbed(1, filterUser?.id ?? null, filterType)
 		const message = await interaction.editReply(payload)
 
