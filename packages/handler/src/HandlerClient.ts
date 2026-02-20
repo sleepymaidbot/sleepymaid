@@ -71,16 +71,20 @@ export class HandlerClient extends Client {
 		}
 
 		this.once("clientReady", () => {
-			// commands
-			if (options.commands) {
-				this.commandManager = new CommandManager(this)
-				void this.commandManager.startAll(options.commands)
+			const run = () => {
+				if (options.commands) {
+					this.commandManager = new CommandManager(this)
+					void this.commandManager.startAll(options.commands)
+				}
+				if (options.tasks) {
+					this.taskManager = new TaskManager(this)
+					void this.taskManager.startAll(options.tasks)
+				}
 			}
-
-			// tasks
-			if (options.tasks) {
-				this.taskManager = new TaskManager(this)
-				void this.taskManager.startAll(options.tasks)
+			if (this.env === "dev") {
+				setTimeout(run, 3000)
+			} else {
+				run()
 			}
 		})
 	}

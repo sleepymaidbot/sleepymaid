@@ -128,10 +128,15 @@
 		"rainbow": {
 			"name": "rainbow",
 			"description": "Change the color of the role rainbow.",
+			"missingPermissions": "The bot does not have the required permissions to manage roles.",
 			"norole": "You must have the role <@&{{role}}> to use this command.",
 			"failure": "The command failed. The role has now lost its color.",
-			"cooldown": "The command is on cooldown. You can use it again in {{time}}.",
-			"changed": "The role <@&{{role}}> has been changed from **{{oldColor}}** to **{{newColor}}**"
+			"cooldown": "The command is on cooldown. You can use it again {{- time}}.",
+			"changed": "The role <@&{{role}}> has been changed from **{{oldColor}}** to **{{newColor}}**",
+			"changedHolographic": "The role <@&{{role}}> has been changed from **{{oldColor}} & {{oldColor2}}** to **HOLOGRAPHIC!!!**",
+			"changedEnhanced": "The role <@&{{role}}> has been changed from **{{oldColor}} & {{oldColor2}}** to **{{newColor}} & {{newColor2}}**",
+			"changedNewHolographic": "The role <@&{{role}}> has been changed from **{{oldColor}}** to **HOLOGRAPHIC!!!**",
+			"changedNewEnhanced": "The role <@&{{role}}> has been changed from **{{oldColor}}** to **{{newColor}} & {{newColor2}}**"
 		}
 	}
 }
