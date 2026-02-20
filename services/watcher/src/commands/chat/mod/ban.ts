@@ -69,7 +69,7 @@ export default class extends SlashCommand<WatcherClient> {
 		const silent = interaction.options.getBoolean("silent") ?? false
 
 		try {
-			if (!interaction.deferred) await interaction.deferReply({ flags: silent ? MessageFlags.Ephemeral : undefined })
+			await interaction.deferReply({ flags: silent ? MessageFlags.Ephemeral : undefined })
 		} catch (error) {
 			this.container.client.logger.error(
 				new Error(`deferReply failed: ${error instanceof Error ? error.message : String(error)}`),

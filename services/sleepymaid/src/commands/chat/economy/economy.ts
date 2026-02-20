@@ -13,8 +13,8 @@ import {
 	Interaction,
 	InteractionContextType,
 	InteractionReplyOptions,
-	InteractionResponse,
 	InteractionUpdateOptions,
+	Message,
 	MessageComponentInteraction,
 	SectionBuilder,
 	SeparatorBuilder,
@@ -118,7 +118,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction) {
-		const message = await interaction.deferReply()
+		const message = await interaction.deferReply({ fetchReply: true })
 		const subcommand = interaction.options.getSubcommand()
 		switch (subcommand) {
 			case "balance":
@@ -276,7 +276,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 
 	private async setReminderCollector(
 		interaction: Interaction,
-		message: InteractionResponse,
+		message: Message,
 		originalComponents: ComponentBuilder[],
 		time: number,
 		type: "Daily" | "Weekly" | "Monthly",
@@ -312,7 +312,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 			})
 	}
 
-	private async daily(interaction: ChatInputCommandInteraction, message: InteractionResponse) {
+	private async daily(interaction: ChatInputCommandInteraction, message: Message) {
 		const data = await this.container.client.drizzle.query.userData.findFirst({
 			where: eq(userData.userId, interaction.user.id),
 		})
@@ -374,7 +374,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 		this.setReminderCollector(interaction, message, components, 1440, "Daily", interaction.user.id)
 	}
 
-	private async weekly(interaction: ChatInputCommandInteraction, message: InteractionResponse) {
+	private async weekly(interaction: ChatInputCommandInteraction, message: Message) {
 		const data = await this.container.client.drizzle.query.userData.findFirst({
 			where: eq(userData.userId, interaction.user.id),
 		})
@@ -434,7 +434,7 @@ export default class EconomyCommand extends SlashCommand<SleepyMaidClient> {
 		this.setReminderCollector(interaction, message, components, 10080, "Weekly", interaction.user.id)
 	}
 
-	private async monthly(interaction: ChatInputCommandInteraction, message: InteractionResponse) {
+	private async monthly(interaction: ChatInputCommandInteraction, message: Message) {
 		const data = await this.container.client.drizzle.query.userData.findFirst({
 			where: eq(userData.userId, interaction.user.id),
 		})
