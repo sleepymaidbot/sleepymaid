@@ -17,6 +17,7 @@ import { Precondition } from "../preconditions/Precondition"
 import { MessageCommand } from "./MessageCommand"
 import { SlashCommand } from "./SlashCommand"
 import { UserCommand } from "./UserCommand"
+import { DeferType } from "./Command"
 
 export type CommandManagerStartAllOptionsType<Client extends HandlerClient> = {
 	folder: string
@@ -302,6 +303,12 @@ export class CommandManager<Client extends HandlerClient> extends BaseManager<Cl
 				return
 			}
 			const cmd = instantiateCommand(CommandClass, context)
+
+			if (cmd.deferType !== DeferType.None) {
+				await interaction.deferReply({
+					ephemeral: cmd.deferType === DeferType.Ephemeral,
+				})
+			}
 
 			if (cmd.preconditions) {
 				for (const precondition of [...this._preconditions, ...cmd.preconditions]) {

@@ -1,5 +1,5 @@
 import { Context, SlashCommand } from "@sleepymaid/handler"
-import { add, formatDistanceToNow } from "date-fns"
+import { add } from "date-fns"
 import {
 	ChatInputCommandInteraction,
 	resolveColor,
@@ -13,6 +13,7 @@ import {
 	RoleColorsResolvable,
 	Constants,
 } from "discord.js"
+import { ComponentType } from "discord-api-types/v10"
 import { HelperClient } from "../../../lib/extensions/HelperClient"
 import { intToHexColor } from "@sleepymaid/util"
 import { generateSplitImage, getLocalizedProp } from "@sleepymaid/shared"
@@ -27,7 +28,7 @@ const roles = {
 }
 
 const canFail: Record<Snowflake, number> = {
-	"821717486217986098": 0.9, // Test
+	"821717486217986098": 0.1, // Test
 	"1150780245151068332": 0.15, // Mamayo
 }
 
@@ -61,21 +62,16 @@ export default class extends SlashCommand<HelperClient> {
 
 		const cooldown = cooldowns[interaction.guild.id]
 
-		if (cooldown && cooldown.getTime() > Date.now())
-			return interaction.reply({
-				embeds: [
-					{
-						color: role.color,
-						description: i18next.t("commands.rainbow.cooldown", {
-							lng: interaction.locale,
-							time: formatDistanceToNow(cooldown.getTime(), {
-								includeSeconds: true,
-							}),
-						}),
-					},
-				],
-				flags: MessageFlags.Ephemeral,
+		if (cooldown && cooldown.getTime() > Date.now()) {
+			const cooldownText = i18next.t("commands.rainbow.cooldown", {
+				lng: interaction.locale,
+				time: `<t:${Math.floor(cooldown.getTime() / 1000)}:R>`,
 			})
+			return interaction.reply({
+				components: [{ type: ComponentType.TextDisplay, content: cooldownText }],
+				flags: [MessageFlags.Ephemeral, MessageFlags.IsComponentsV2],
+			})
+		}
 
 		await interaction.deferReply()
 
@@ -95,6 +91,19 @@ export default class extends SlashCommand<HelperClient> {
 					],
 				})
 			}
+		}
+
+		if (!interaction.appPermissions.has(PermissionsBitField.Flags.ManageRoles)) {
+			return interaction.editReply({
+				embeds: [
+					{
+						color: Colors.Greyple,
+						description: i18next.t("commands.rainbow.missingPermissions", {
+							lng: interaction.locale,
+						}),
+					},
+				],
+			})
 		}
 
 		const getRandomColor = (): ColorResolvable => {
@@ -143,29 +152,52 @@ export default class extends SlashCommand<HelperClient> {
 			cooldowns[interaction.guild.id] = add(new Date(), { minutes: 5 })
 		})
 
-		const embedColor = color.primaryColor as number
+		const oldEnhanced = oldColor.secondaryColor != null
+		const newHolographic = color.primaryColor === Constants.HolographicStyle.Primary
+		const newEnhanced = color.secondaryColor != null
 
+		let messageKey: string
+		const baseVars = {
+			lng: interaction.locale,
+			role: roleID,
+			oldColor: intToHexColor(oldColor.primaryColor),
+			newColor: intToHexColor(color.primaryColor as number),
+		}
+		if (newHolographic && oldEnhanced) {
+			messageKey = "commands.rainbow.changedHolographic"
+		} else if (newEnhanced && oldEnhanced) {
+			messageKey = "commands.rainbow.changedEnhanced"
+		} else if (newHolographic) {
+			messageKey = "commands.rainbow.changedNewHolographic"
+		} else if (newEnhanced) {
+			messageKey = "commands.rainbow.changedNewEnhanced"
+		} else {
+			messageKey = "commands.rainbow.changed"
+		}
+		const description = i18next.t(messageKey, {
+			...baseVars,
+			oldColor2: oldColor.secondaryColor != null ? intToHexColor(resolveColor(oldColor.secondaryColor)) : "",
+			newColor2: color.secondaryColor != null ? intToHexColor(resolveColor(color.secondaryColor)) : "",
+		})
 		return await interaction.editReply({
-			embeds: [
+			components: [
 				{
-					title: "Rainbow",
-					author: {
-						name: interaction.user.tag,
-						icon_url: interaction.user.displayAvatarURL(),
-					},
-					color: embedColor,
-					description: i18next.t("commands.rainbow.changed", {
-						lng: interaction.locale,
-						role: roleID,
-						oldColor: intToHexColor(oldColor.primaryColor),
-						newColor: intToHexColor(embedColor),
-					}),
-					thumbnail: {
-						url: `attachment://${attachmentName}`,
+					type: ComponentType.Section,
+					components: [
+						{
+							type: ComponentType.TextDisplay,
+							content: `# 🌈 Rainbow\n${description}`,
+						},
+					],
+					accessory: {
+						type: ComponentType.Thumbnail,
+						media: { url: `attachment://${attachmentName}` },
 					},
 				},
 			],
+			allowedMentions: { parse: [] },
 			files: [attachment],
+			flags: [MessageFlags.IsComponentsV2],
 		})
 	}
 }

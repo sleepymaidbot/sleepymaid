@@ -100,16 +100,39 @@
 			},
 			"no_permission": "Tu n'a pas la permission d'utliser cette command. Tu doit avoir la permission ``ADMINISTRATOR`` ou avoir un rôle dans la liste des rôles administrateurs."
 		},
+		"logs": {
+			"name": "logs",
+			"description": "Commande de base pour configurer les logs de ton serveur",
+			"new": {
+				"name": "new",
+				"description": "Créer un nouveau canal de logs",
+				"channel": {
+					"name": "channel",
+					"description": "Le canal dans lequel créer le canal de logs"
+				},
+				"home": {
+					"description": "Veuillez sélectionner où dans <#{{ channel }}> tu veux créer les messages de logs.",
+					"button-here": "Dans ce canal",
+					"button-thread": "Dans un fil de discussion dans ce canal",
+					"button-cancel": "Annuler"
+				}
+			}
+		},
 		"raw_content": {
 			"name": "Contenu Brut"
 		},
 		"rainbow": {
 			"name": "rainbow",
 			"description": "Change la couleur du rôle rainbow.",
+			"missingPermissions": "Le bot n'a pas les permissions requises pour gérer les rôles.",
 			"norole": "Tu doit avoir le rôle <@&{{role}}> pour utiliser cette commande.",
 			"failure": "La commande a échoué. Le rôle a maintenant perdu sa couleur.",
-			"cooldown": "La commande est en cooldown. Tu peux la réutiliser dans {{time}}.",
-			"changed": "Le rôle <@&{{role}}> a été changé de **{{oldColor}}** à **{{newColor}}**"
+			"cooldown": "La commande est en cooldown. Tu peux la réutiliser {{- time}}.",
+			"changed": "Le rôle <@&{{role}}> a été changé de **{{oldColor}}** à **{{newColor}}**",
+			"changedHolographic": "Le rôle <@&{{role}}> a été changé de **{{oldColor}} & {{oldColor2}}** à **HOLOGRAPHIQUE!!!**",
+			"changedEnhanced": "Le rôle <@&{{role}}> a été changé de **{{oldColor}} & {{oldColor2}}** à **{{newColor}} & {{newColor2}}**",
+			"changedNewHolographic": "Le rôle <@&{{role}}> a été changé de **{{oldColor}}** à **HOLOGRAPHIQUE!!!**",
+			"changedNewEnhanced": "Le rôle <@&{{role}}> a été changé de **{{oldColor}}** à **{{newColor}} & {{newColor2}}**"
 		}
 	}
 }
