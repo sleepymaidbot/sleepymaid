@@ -59,13 +59,14 @@ export default class extends Listener<"channelUpdate", WatcherClient> {
 			}
 		}
 
-		if (oldChannel.position !== newChannel.position) {
-			fields.push({
-				name: "Position",
-				value: `${oldChannel.position} -> ${newChannel.position}`,
-				inline: true,
-			})
-		}
+		// Creates a lot of useless logs when moving channels around
+		// if (oldChannel.position !== newChannel.position) {
+		// 	fields.push({
+		// 		name: "Position",
+		// 		value: `${oldChannel.position} -> ${newChannel.position}`,
+		// 		inline: true,
+		// 	})
+		// }
 
 		if (oldChannel.parent !== newChannel.parent) {
 			fields.push({
