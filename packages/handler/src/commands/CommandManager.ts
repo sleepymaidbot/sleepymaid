@@ -1,5 +1,5 @@
 import { readdir } from "node:fs/promises"
-import { join } from "node:path"
+import { join, resolve } from "node:path"
 import { pathToFileURL } from "node:url"
 import { findFilesRecursively } from "@sapphire/node-utilities"
 import type {
@@ -44,20 +44,21 @@ type CommandClass = new (
 const commandClassCache = new Map<string, CommandClass>()
 
 async function getCommandClass(file: string): Promise<CommandClass | null> {
-	const cached = commandClassCache.get(file)
+	const key = resolve(file)
+	const cached = commandClassCache.get(key)
 	if (cached) return cached
 
 	try {
 		let importedModule
 		try {
-			const fileUrl = pathToFileURL(file).toString()
+			const fileUrl = pathToFileURL(key).toString()
 			importedModule = await import(fileUrl)
 		} catch (esmError) {
 			try {
 				// biome-ignore lint/style/noCommonJs: We need to support CommonJS modules
-				importedModule = require(file)
+				importedModule = require(key)
 			} catch (cjsError) {
-				console.error("Failed to import module (both ESM and CommonJS):", file)
+				console.error("Failed to import module (both ESM and CommonJS):", key)
 				console.error("ESM Error:", esmError)
 				console.error("CommonJS Error:", cjsError)
 				return null
@@ -67,27 +68,27 @@ async function getCommandClass(file: string): Promise<CommandClass | null> {
 		const CommandClass = importedModule?.default?.default || importedModule?.default || importedModule
 
 		if (typeof CommandClass !== "function") {
-			console.log("No valid command class found in:", file)
+			console.log("No valid command class found in:", key)
 			return null
 		}
 
 		if (CommandClass.prototype instanceof MessageCommand) {
-			commandClassCache.set(file, CommandClass as CommandClass)
+			commandClassCache.set(key, CommandClass as CommandClass)
 			return CommandClass as CommandClass
 		}
 		if (CommandClass.prototype instanceof SlashCommand) {
-			commandClassCache.set(file, CommandClass as CommandClass)
+			commandClassCache.set(key, CommandClass as CommandClass)
 			return CommandClass as CommandClass
 		}
 		if (CommandClass.prototype instanceof UserCommand) {
-			commandClassCache.set(file, CommandClass as CommandClass)
+			commandClassCache.set(key, CommandClass as CommandClass)
 			return CommandClass as CommandClass
 		}
 
-		console.log("Command class does not extend any known command type:", file)
+		console.log("Command class does not extend any known command type:", key)
 		return null
 	} catch (error) {
-		console.error("Error instantiating command from:", file, error)
+		console.error("Error instantiating command from:", key, error)
 		return null
 	}
 }
@@ -158,6 +159,10 @@ export class CommandManager<Client extends HandlerClient> extends BaseManager<Cl
 			`Command Handler: -> Successfully found ${[...this._tempCommands].length} application commands!`,
 		)
 		await this.RegisterApplicationCommands()
+		const uniqueFiles = [...new Set(this._commands.values().map((c) => c.file))]
+		for (const file of uniqueFiles) {
+			await getCommandClass(file)
+		}
 	}
 
 	private async loadCommands(folderPath: string): Promise<boolean> {
