@@ -74,6 +74,7 @@ export default class Reminders extends SlashCommand<SleepyMaidClient> {
 	}
 
 	public override async execute(interaction: ChatInputCommandInteraction) {
+		await interaction.deferReply({ flags: MessageFlags.Ephemeral })
 		switch (interaction.options.getSubcommand()) {
 			case "add":
 				return this.add(interaction)
@@ -94,9 +95,8 @@ export default class Reminders extends SlashCommand<SleepyMaidClient> {
 		const reminders = await this.container.manager.getReminders(interaction.user.id)
 
 		if (reminders.length >= 10) {
-			return interaction.reply({
+			return interaction.editReply({
 				content: "You have too many reminders, please remove some before adding more",
-				flags: MessageFlags.Ephemeral,
 			})
 		}
 
@@ -104,9 +104,8 @@ export default class Reminders extends SlashCommand<SleepyMaidClient> {
 		const now = new Date()
 		const date = add(now, getTimeTable(time))
 		if (isBefore(date, now)) {
-			return interaction.reply({
+			return interaction.editReply({
 				content: "You must specify a time in the future",
-				flags: MessageFlags.Ephemeral,
 			})
 		}
 
@@ -114,9 +113,8 @@ export default class Reminders extends SlashCommand<SleepyMaidClient> {
 
 		const timestamp = getUnixTime(date)
 
-		return await interaction.reply({
+		return await interaction.editReply({
 			content: `Reminder added for \`\`${message}\`\` <t:${timestamp}:R>`,
-			flags: MessageFlags.Ephemeral,
 		})
 	}
 
@@ -130,7 +128,7 @@ export default class Reminders extends SlashCommand<SleepyMaidClient> {
 		})
 
 		if (!reminder) {
-			return await interaction.reply({ content: "Reminder not found", flags: MessageFlags.Ephemeral })
+			return await interaction.editReply({ content: "Reminder not found" })
 		}
 
 		if (reminder.userId !== interaction.user.id) {
@@ -140,27 +138,26 @@ export default class Reminders extends SlashCommand<SleepyMaidClient> {
 			})
 		}
 
-		return await interaction.reply({ content: "Reminder removed", flags: MessageFlags.Ephemeral })
+		return await interaction.editReply({ content: "Reminder removed" })
 	}
 
 	private async list(interaction: ChatInputCommandInteraction) {
 		const reminders = await this.container.manager.getReminders(interaction.user.id)
 
-		return await interaction.reply({
+		return await interaction.editReply({
 			content: `You have ${reminders.length} reminders:\n${reminders
 				.map(
 					(reminder) =>
 						`**${reminder.reminderName}** (ID: ${reminder.reminderId}) <t:${getUnixTime(reminder.reminderTime)}:R>`,
 				)
 				.join("\n")}`,
-			flags: MessageFlags.Ephemeral,
 		})
 	}
 
 	private async clear(interaction: ChatInputCommandInteraction) {
 		await this.container.manager.clearReminders(interaction.user.id)
 
-		return await interaction.reply({ content: "All your reminders have been cleared", flags: MessageFlags.Ephemeral })
+		return await interaction.editReply({ content: "All your reminders have been cleared" })
 	}
 
 	public override async autocomplete(interaction: AutocompleteInteraction) {
