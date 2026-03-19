@@ -30,7 +30,7 @@ const roleWhitelist = new Set([
 ])
 
 const GUILD_ID = "1150780245151068332"
-const minutes = 1
+const minutes = 2
 
 const userCurrencyCache = new Map<string, { currency: number; timestamp: number }>()
 const CACHE_TTL = 60_000
