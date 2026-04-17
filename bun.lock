@@ -15,7 +15,7 @@
         "rimraf": "^6.1.2",
         "tsup": "^8.5.1",
         "turbo": "^2.8.1",
-        "typescript": "^5.9.3",
+        "typescript": "^6.0.0",
         "vitest": "^4.0.18",
       },
     },
@@ -37,7 +37,7 @@
         "rimraf": "^6.0.1",
         "tslib": "^2.8.1",
         "tsup": "^8.5.0",
-        "typescript": "^5.8.3",
+        "typescript": "^6.0.0",
       },
     },
     "packages/handler": {
@@ -57,7 +57,7 @@
         "rimraf": "^6.0.1",
         "tslib": "^2.8.1",
         "tsup": "^8.5.0",
-        "typescript": "^5.8.3",
+        "typescript": "^6.0.0",
       },
     },
     "packages/logger": {
@@ -75,7 +75,7 @@
         "rimraf": "^6.0.1",
         "tslib": "^2.8.1",
         "tsup": "^8.5.0",
-        "typescript": "^5.8.3",
+        "typescript": "^6.0.0",
       },
     },
     "packages/shared": {
@@ -97,7 +97,7 @@
         "rimraf": "^6.0.1",
         "tslib": "^2.8.1",
         "tsup": "^8.5.0",
-        "typescript": "^5.8.3",
+        "typescript": "^6.0.0",
       },
     },
     "packages/util": {
@@ -113,7 +113,7 @@
         "rimraf": "^6.0.1",
         "tslib": "^2.8.1",
         "tsup": "^8.5.0",
-        "typescript": "^5.8.3",
+        "typescript": "^6.0.0",
         "vitest": "^4.0.0",
       },
     },
@@ -134,7 +134,7 @@
       "devDependencies": {
         "@types/node": "^25.0.0",
         "rimraf": "^6.0.1",
-        "typescript": "^5.8.3",
+        "typescript": "^6.0.0",
       },
     },
     "services/clarity": {
@@ -163,7 +163,7 @@
         "@types/i18next-fs-backend": "^1.2.0",
         "@types/node": "^25.0.0",
         "rimraf": "^6.0.1",
-        "typescript": "^5.8.3",
+        "typescript": "^6.0.0",
       },
     },
     "services/helper": {
@@ -193,7 +193,7 @@
         "@types/node": "^25.0.0",
         "@types/pg": "^8.16.0",
         "rimraf": "^6.1.2",
-        "typescript": "^5.9.3",
+        "typescript": "^6.0.0",
       },
     },
     "services/sleepymaid": {
@@ -227,7 +227,7 @@
         "@types/node": "^25.0.0",
         "@types/pg": "^8.15.4",
         "rimraf": "^6.0.1",
-        "typescript": "^5.8.3",
+        "typescript": "^6.0.0",
       },
     },
     "services/testbot": {
@@ -249,7 +249,7 @@
         "@types/i18next-fs-backend": "^1.2.0",
         "@types/node": "^25.0.0",
         "rimraf": "^6.0.1",
-        "typescript": "^5.8.3",
+        "typescript": "^6.0.0",
       },
     },
     "services/watcher": {
@@ -275,7 +275,7 @@
         "@types/node": "^25.0.0",
         "@types/pg": "^8.15.4",
         "rimraf": "^6.0.1",
-        "typescript": "^5.8.3",
+        "typescript": "^6.0.0",
       },
     },
     "services/website": {
@@ -318,7 +318,7 @@
         "autoprefixer": "^10.4.21",
         "postcss": "^8.5.6",
         "tailwindcss": "^4.1.11",
-        "typescript": "^5.8.3",
+        "typescript": "^6.0.0",
         "vite-tsconfig-paths": "^6.0.0",
       },
     },
@@ -2274,7 +2274,7 @@
 
     "type-fest": ["type-fest@4.41.0", "", {}, "sha512-TeTSQ6H5YHvpqVwBRcnLDCBnDOHWYu7IvGbHT6N8AOymcr9PJGjc1GTtiWZTYg0NCgYwvnYWEkVChQAr9bjfwA=="],
 
-    "typescript": ["typescript@5.9.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="],
+    "typescript": ["typescript@6.0.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw=="],
 
     "ufo": ["ufo@1.6.3", "", {}, "sha512-yDJTmhydvl5lJzBmy/hyOAA0d+aqCBuwl818haVdYCRrWV84o7YyeVm4QlVHStqNrrJSTb6jKuFAVqAFsr+K3Q=="],
 
@@ -2567,6 +2567,8 @@
     "dax-sh/undici-types": ["undici-types@5.28.4", "", {}, "sha512-3OeMF5Lyowe8VW0skf5qaIE7Or3yS9LS7fvMUI0gg4YxpIBVg0L8BxCmROw2CcYhSkpR68Epz7CGc8MPj94Uww=="],
 
     "decompress-response/mimic-response": ["mimic-response@3.1.0", "", {}, "sha512-z0yWI+4FDrrweS8Zmt4Ej5HdJmky15+L2e6Wgn3+iK5fWzb6T3fhNFq2+MeTRb064c6Wr4N/wv0DzQTjNzHNGQ=="],
+
+    "discord-voip/typescript": ["typescript@5.9.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="],
 
     "discord.js/undici": ["undici@6.21.3", "", {}, "sha512-gBLkYIlEnSp8pFbT64yFgGE6UIB9tAkhukC23PmMDCe5Nd+cRqKxSjw5y54MK2AZMgZfJWMaNE4nYUHgi1XEOw=="],
 
