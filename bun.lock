@@ -121,7 +121,7 @@
       "name": "@sleepymaid/api",
       "version": "0.0.0",
       "dependencies": {
-        "@hono/node-server": "^1.17.1",
+        "@hono/node-server": "^2.0.0",
         "@sleepymaid/db": "workspace:^",
         "@sleepymaid/handler": "workspace:^",
         "@sleepymaid/logger": "workspace:^",
@@ -556,7 +556,7 @@
 
     "@favware/npm-deprecate": ["@favware/npm-deprecate@2.0.0", "", { "dependencies": { "@sapphire/fetch": "^3.0.3", "@sapphire/utilities": "^3.17.0", "colorette": "^2.0.20", "commander": "^12.1.0", "js-yaml": "^4.1.0", "npm-package-arg": "^12.0.0", "npm-registry-fetch": "^18.0.2", "picomatch": "^4.0.2" }, "bin": { "nd": "./dist/cli.js", "npm-deprecate": "./dist/cli.js" } }, "sha512-SbaEvcF07FH/ngpyjP4rYSB8EZ33Vwh/GbRHhRz8/aI23W8yrom0xgTkrTbCQHkdSISHF3rpjZVFIl4lma6BUg=="],
 
-    "@hono/node-server": ["@hono/node-server@1.19.9", "", { "peerDependencies": { "hono": "^4" } }, "sha512-vHL6w3ecZsky+8P5MD+eFfaGTyCeOHUIFYMGpQGbrBTSmNNoxv0if69rEZ5giu36weC5saFuznL411gRX7bJDw=="],
+    "@hono/node-server": ["@hono/node-server@2.0.1", "", { "peerDependencies": { "hono": "^4" } }, "sha512-jI9yMDyFpqBeSighf/zlXnQG/nl9AyBc6aAgy4XtxJMyt/CNyJpvPfzDD+bCc2zAOmhhqtF6TnmIaY+xV4mIrw=="],
 
     "@ioredis/commands": ["@ioredis/commands@1.5.0", "", {}, "sha512-eUgLqrMf8nJkZxT24JvVRrQya1vZkQh8BBeYNwGDqa5I0VUi8ACx7uFvAaLxintokpTenkK6DASvo/bvNbBGow=="],
 
