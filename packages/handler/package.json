@@ -38,7 +38,7 @@
 		"@types/node-cron": "^3.0.11",
 		"rimraf": "^6.0.1",
 		"tsup": "^8.5.0",
-		"typescript": "^5.8.3"
+		"typescript": "^6.0.0"
 	},
 	"dependencies": {
 		"@sapphire/node-utilities": "^1.0.2",
