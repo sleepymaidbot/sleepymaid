@@ -31,7 +31,7 @@
 		"drizzle-orm": "^0.45.0",
 		"i18next": "^25.3.2",
 		"i18next-fs-backend": "^2.6.0",
-		"iovalkey": "^0.3.3",
+		"iovalkey": "^0.4.0",
 		"pg": "^8.16.3"
 	}
 }
