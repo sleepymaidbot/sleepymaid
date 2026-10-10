@@ -38,7 +38,7 @@
 	},
 	"dependencies": {
 		"discord-api-types": "^0.38.2",
-		"@napi-rs/canvas": "^0.1.74",
+		"@napi-rs/canvas": "^1.0.0",
 		"@paralleldrive/cuid2": "^3.0.0",
 		"@sleepymaid/handler": "workspace:^",
 		"discord.js": "^14.25.1",
