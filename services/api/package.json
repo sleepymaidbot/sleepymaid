@@ -20,7 +20,7 @@
 	"dependencies": {
 		"discord-api-types": "^0.38.2",
 		"tslib": "^2.8.1",
-		"@hono/node-server": "^1.17.1",
+		"@hono/node-server": "^2.0.0",
 		"@sleepymaid/db": "workspace:^",
 		"@sleepymaid/handler": "workspace:^",
 		"@sleepymaid/logger": "workspace:^",
