@@ -27,8 +27,8 @@
 	"devDependencies": {
 		"@biomejs/biome": "2.4.4",
 		"vitest": "^4.0.18",
-		"@commitlint/cli": "^20.4.1",
-		"@commitlint/config-angular": "^20.4.1",
+		"@commitlint/cli": "^21.0.0",
+		"@commitlint/config-angular": "^21.0.0",
 		"@favware/cliff-jumper": "^6.0.0",
 		"@favware/npm-deprecate": "^2.0.0",
 		"husky": "^9.1.7",
